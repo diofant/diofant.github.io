@@ -1,0 +1,434 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>The Gruntz Algorithm &mdash; Diofant 0.10.0a3.dev8+gf2667d6f31 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Details on the Hypergeometric Function Expansion" href="hyperexpand.html" />
+    <link rel="prev" title="Internals of the Polynomial Manipulation Module" href="polys.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Diofant
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.10.0a3.dev8+gf2667d6f31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/index.html">Reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Internals</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="polys.html">Internals of the Polynomial Manipulation Module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">The Gruntz Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hyperexpand.html">Details on the Hypergeometric Function Expansion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="g-functions.html">Computing Integrals using Meijer G-Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="g-functions.html#the-g-function-integration-theorems">The G-Function Integration Theorems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="g-functions.html#the-inverse-laplace-transform-of-a-g-function">The Inverse Laplace Transform of a G-function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="g-functions.html#implemented-g-function-formulae">Implemented G-Function Formulae</a></li>
+<li class="toctree-l2"><a class="reference internal" href="evalf.html">Numerical evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="numeric-computation.html">Numeric Computation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rewriting.html">Term rewriting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../literature.html">Literature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guide.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../aboutus.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release/index.html">Release Notes</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Diofant</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Internals</a> &raquo;</li>
+        
+      <li>The Gruntz Algorithm</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/internals/gruntz.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <span class="target" id="module-diofant.series.gruntz"></span><div class="section" id="the-gruntz-algorithm">
+<h1>The Gruntz Algorithm<a class="headerlink" href="#the-gruntz-algorithm" title="Permalink to this headline">¶</a></h1>
+<p>This section explains the basics of the algorithm <a class="reference internal" href="../literature.html#gruntz96" id="id1">[Gruntz96]</a> used for computing
+limits.  Most of the time the <a class="reference internal" href="../modules/series.html#diofant.series.limits.limit" title="diofant.series.limits.limit"><code class="xref py py-func docutils literal notranslate"><span class="pre">limit()</span></code></a> function
+should just work.  However it is still useful to keep in mind how it is
+implemented in case something does not work as expected.</p>
+<p>First we define an ordering on functions of single variable <span class="math notranslate nohighlight">\(x\)</span> according
+to how rapidly varying they at infinity.  Any two functions <span class="math notranslate nohighlight">\(f(x)\)</span> and
+<span class="math notranslate nohighlight">\(g(x)\)</span> can be compared using the properties of:</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[L = \lim\limits_{x\to\infty}\frac{\log|f(x)|}{\log|g(x)|}\]</div>
+</div></blockquote>
+<p>We shall say that <span class="math notranslate nohighlight">\(f(x)\)</span> <em>dominates</em> <span class="math notranslate nohighlight">\(g(x)\)</span>, written <span class="math notranslate nohighlight">\(f(x) \succ
+g(x)\)</span>, iff <span class="math notranslate nohighlight">\(L=\pm\infty\)</span>.  We also say that <span class="math notranslate nohighlight">\(f(x)\)</span> and <span class="math notranslate nohighlight">\(g(x)\)</span> are <em>of the
+same comparability class</em> if neither <span class="math notranslate nohighlight">\(f(x) \succ g(x)\)</span> nor <span class="math notranslate nohighlight">\(g(x) \succ
+f(x)\)</span> and shall denote it as <span class="math notranslate nohighlight">\(f(x) \asymp g(x)\)</span>.</p>
+<p>It is easy to show the following examples:</p>
+<ul class="simple">
+<li><span class="math notranslate nohighlight">\(e^{e^x} \succ e^{x^2} \succ e^x \succ x \succ 42\)</span></li>
+<li><span class="math notranslate nohighlight">\(2 \asymp 3 \asymp -5\)</span></li>
+<li><span class="math notranslate nohighlight">\(x \asymp x^2 \asymp x^3 \asymp -x\)</span></li>
+<li><span class="math notranslate nohighlight">\(e^x \asymp e^{-x} \asymp e^{2x} \asymp e^{x + e^{-x}}\)</span></li>
+<li><span class="math notranslate nohighlight">\(f(x) \asymp 1/f(x)\)</span></li>
+</ul>
+<p>Using these definitions yields the following strategy for
+computing <span class="math notranslate nohighlight">\(\lim_{x \to \infty} f(x)\)</span>:</p>
+<ol class="arabic">
+<li><p class="first">Given the function <span class="math notranslate nohighlight">\(f(x)\)</span>, we find the set of <em>most rapidly varying
+subexpressions</em> (MRV set) of it.  All items of this set belongs to the
+same comparability class.  Let’s say it is <span class="math notranslate nohighlight">\(\{e^x, e^{2x}\}\)</span>.</p>
+</li>
+<li><p class="first">Choose an expression <span class="math notranslate nohighlight">\(\omega\)</span> which is positive and tends to zero and
+which is in the same comparability class as any element of the MRV set.
+Such element always exists.  Then we rewrite the MRV set using <span class="math notranslate nohighlight">\(\omega\)</span>,
+in our case <span class="math notranslate nohighlight">\(\{\omega^{-1}, \omega^{-2}\}\)</span>, and substitute it into <span class="math notranslate nohighlight">\(f(x)\)</span>.</p>
+</li>
+<li><p class="first">Let <span class="math notranslate nohighlight">\(f(\omega)\)</span> be the function which is obtained from <span class="math notranslate nohighlight">\(f(x)\)</span> after the
+rewrite step above.  Consider all expressions independent of <span class="math notranslate nohighlight">\(\omega\)</span> as
+constants and compute the leading term of the power series of <span class="math notranslate nohighlight">\(f(\omega)\)</span>
+around <span class="math notranslate nohighlight">\(\omega = 0^+\)</span>:</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[f(\omega) = c_0 \omega^{e_0} + c_1 \omega^{e_1} + \ldots\]</div>
+</div></blockquote>
+<p>where <span class="math notranslate nohighlight">\(e_0 &lt; e_1 &lt; e_2 \ldots\)</span></p>
+</li>
+<li><p class="first">If the leading exponent <span class="math notranslate nohighlight">\(e_0 &gt; 0\)</span> then the limit is <span class="math notranslate nohighlight">\(0\)</span>.  If <span class="math notranslate nohighlight">\(e_0 &lt; 0\)</span>,
+then the answer is <span class="math notranslate nohighlight">\(\pm\infty\)</span> (depends on sign of <span class="math notranslate nohighlight">\(c_0\)</span>).  Finally,
+if <span class="math notranslate nohighlight">\(e_0 = 0\)</span>, the limit is the limit of the leading coefficient <span class="math notranslate nohighlight">\(c_0\)</span>.</p>
+</li>
+</ol>
+<p class="rubric">Notes</p>
+<p>This exposition glossed over several details.  For example, limits could be
+computed recursively (steps 1 and 4).  Please address to the Gruntz thesis <a class="reference internal" href="../literature.html#gruntz96" id="id2">[Gruntz96]</a>
+for proof of the termination (pp. 52-60).</p>
+<dl class="function">
+<dt id="diofant.series.gruntz.compare">
+<code class="descclassname">diofant.series.gruntz.</code><code class="descname">compare</code><span class="sig-paren">(</span><em>a</em>, <em>b</em>, <em>x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/series/gruntz.html#compare"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.series.gruntz.compare" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine order relation between two functons.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><em>{1, 0, -1}</em> – Respectively, if <span class="math notranslate nohighlight">\(a(x) \succ b(x)\)</span>, <span class="math notranslate nohighlight">\(a(x) \asymp b(x)\)</span>
+or <span class="math notranslate nohighlight">\(b(x) \succ a(x)\)</span>.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">positive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">positive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">compare</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">compare</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="n">m</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">compare</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+<span class="go">-1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">compare</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="o">**</span><span class="mi">5</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="diofant.series.gruntz.limitinf">
+<code class="descclassname">diofant.series.gruntz.</code><code class="descname">limitinf</code><span class="sig-paren">(</span><em>e</em>, <em>x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/series/gruntz.html#limitinf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.series.gruntz.limitinf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute limit of the expression at the infinity.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">positive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">limitinf</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span> <span class="o">-</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span> <span class="o">-</span> <span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="p">)),</span> <span class="n">x</span><span class="p">)</span>
+<span class="go">-1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">limitinf</span><span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">))))),</span> <span class="n">x</span><span class="p">)</span>
+<span class="go">oo</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="diofant.series.gruntz.mrv">
+<code class="descclassname">diofant.series.gruntz.</code><code class="descname">mrv</code><span class="sig-paren">(</span><em>e</em>, <em>x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/series/gruntz.html#mrv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.series.gruntz.mrv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the MRV set of expression.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">positive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mrv</span><span class="p">(</span><span class="n">log</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">/</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+<span class="go">{x}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mrv</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">)),</span> <span class="n">x</span><span class="p">)</span>
+<span class="go">{E**(-x), E**(x + E**(-x))}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="diofant.series.gruntz.mrv_leadterm">
+<code class="descclassname">diofant.series.gruntz.</code><code class="descname">mrv_leadterm</code><span class="sig-paren">(</span><em>e</em>, <em>x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/series/gruntz.html#mrv_leadterm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.series.gruntz.mrv_leadterm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the leading term of the series.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><em>tuple</em> – The leading term <span class="math notranslate nohighlight">\(c_0 w^{e_0}\)</span> of the series of <span class="math notranslate nohighlight">\(e\)</span> in terms
+of the most rapidly varying subexpression <span class="math notranslate nohighlight">\(w\)</span> in form of
+the pair <code class="docutils literal notranslate"><span class="pre">(c0,</span> <span class="pre">e0)</span></code> of Expr.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">positive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mrv_leadterm</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span> <span class="o">+</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span> <span class="o">-</span> <span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+<span class="go">(-1, 0)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="diofant.series.gruntz.mrv_max">
+<code class="descclassname">diofant.series.gruntz.</code><code class="descname">mrv_max</code><span class="sig-paren">(</span><em>f</em>, <em>g</em>, <em>x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/series/gruntz.html#mrv_max"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.series.gruntz.mrv_max" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the maximum of two MRV sets.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="diofant.series.gruntz.rewrite">
+<code class="descclassname">diofant.series.gruntz.</code><code class="descname">rewrite</code><span class="sig-paren">(</span><em>e</em>, <em>x</em>, <em>w</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/series/gruntz.html#rewrite"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.series.gruntz.rewrite" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rewrites expression in terms of the most rapidly varying subexpression.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>e</strong> (<em>Expr</em>) – an expression</li>
+<li><strong>x</strong> (<em>Symbol</em>) – variable of the <span class="math notranslate nohighlight">\(e\)</span></li>
+<li><strong>w</strong> (<em>Symbol</em>) – The symbol which is going to be used for substitution in place
+of the most rapidly varying in <span class="math notranslate nohighlight">\(x\)</span> subexpression.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><em>tuple</em> – A pair: rewritten (in <span class="math notranslate nohighlight">\(w\)</span>) expression and <span class="math notranslate nohighlight">\(\log(w)\)</span>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">positive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">positive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rewrite</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+<span class="go">(1/m, -x)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rewrite</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="n">log</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">))),</span> <span class="n">x</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+<span class="go">(log(x)/m, -x)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="diofant.series.gruntz.sign">
+<code class="descclassname">diofant.series.gruntz.</code><code class="descname">sign</code><span class="sig-paren">(</span><em>e</em>, <em>x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/series/gruntz.html#sign"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.series.gruntz.sign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine a sign of an expression at infinity.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><em>{1, 0, -1}</em> – One or minus one, if <span class="math notranslate nohighlight">\(e &gt; 0\)</span> or <span class="math notranslate nohighlight">\(e &lt; 0\)</span> for <span class="math notranslate nohighlight">\(x\)</span> sufficiently
+large and zero if <span class="math notranslate nohighlight">\(e\)</span> is <em>constantly</em> zero for <span class="math notranslate nohighlight">\(x\to\infty\)</span>.<p>The result of this function is currently undefined if <span class="math notranslate nohighlight">\(e\)</span> changes
+sign arbitrarily often at infinity (e.g. <span class="math notranslate nohighlight">\(\sin(x)\)</span>).</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="hyperexpand.html" class="btn btn-neutral float-right" title="Details on the Hypergeometric Function Expansion" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="polys.html" class="btn btn-neutral" title="Internals of the Polynomial Manipulation Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2006-2018 SymPy Development Team, 2013-2018 Sergey B Kirpichev
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

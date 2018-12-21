@@ -1,0 +1,1288 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Combinatorial &mdash; Diofant 0.10.0a3.dev8+gf2667d6f31 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Special" href="special.html" />
+    <link rel="prev" title="Elementary" href="elementary.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Diofant
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.10.0a3.dev8+gf2667d6f31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../combinatorics/index.html">Combinatorics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ntheory.html">Number Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../concrete.html">Concrete Mathematics</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Mathematical Functions</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="elementary.html">Elementary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="elementary.html#diofant-functions-elementary-complexes">diofant.functions.elementary.complexes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="elementary.html#diofant-functions-elementary-trigonometric">diofant.functions.elementary.trigonometric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="elementary.html#trigonometric-functions">Trigonometric Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="elementary.html#trigonometric-inverses">Trigonometric Inverses</a></li>
+<li class="toctree-l3"><a class="reference internal" href="elementary.html#diofant-functions-elementary-hyperbolic">diofant.functions.elementary.hyperbolic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="elementary.html#hyperbolic-functions">Hyperbolic Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="elementary.html#hyperbolic-inverses">Hyperbolic Inverses</a></li>
+<li class="toctree-l3"><a class="reference internal" href="elementary.html#diofant-functions-elementary-integers">diofant.functions.elementary.integers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="elementary.html#diofant-functions-elementary-exponential">diofant.functions.elementary.exponential</a></li>
+<li class="toctree-l3"><a class="reference internal" href="elementary.html#diofant-functions-elementary-piecewise">diofant.functions.elementary.piecewise</a></li>
+<li class="toctree-l3"><a class="reference internal" href="elementary.html#diofant-functions-elementary-miscellaneous">diofant.functions.elementary.miscellaneous</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Combinatorial</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bell">bell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bernoulli">bernoulli</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#binomial">binomial</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#catalan">catalan</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#euler">euler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#factorial">factorial</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#subfactorial">subfactorial</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#factorial2-double-factorial">factorial2 / double factorial</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fallingfactorial">FallingFactorial</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fibonacci">fibonacci</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#harmonic">harmonic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lucas">lucas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#multifactorial">MultiFactorial</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#risingfactorial">RisingFactorial</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#stirling">stirling</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#enumeration">Enumeration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="special.html">Special</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../geometry/index.html">Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../integrals.html">Integrals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../logic.html">Logic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../domains.html">Domains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matrices/index.html">Matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../polys.html">Polynomials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../printing.html">Printing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interactive.html">Interactive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html">Plotting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../series.html">Series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sets.html">Sets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simplify/simplify.html">Simplify</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stats.html">Stats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../solvers/index.html">Solvers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tensor/index.html">Tensors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utilities/index.html">Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../parsing.html">Parsing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../calculus/index.html">Calculus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../diffgeom.html">Differential Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vector/index.html">Vectors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../internals/index.html">Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../literature.html">Literature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guide.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../aboutus.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release/index.html">Release Notes</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Diofant</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Reference</a> &raquo;</li>
+        
+          <li><a href="index.html">Mathematical Functions</a> &raquo;</li>
+        
+      <li>Combinatorial</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/modules/functions/combinatorial.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="combinatorial">
+<h1>Combinatorial<a class="headerlink" href="#combinatorial" title="Permalink to this headline">¶</a></h1>
+<p>This module implements various combinatorial functions.</p>
+<div class="section" id="bell">
+<h2>bell<a class="headerlink" href="#bell" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="diofant.functions.combinatorial.numbers.bell">
+<em class="property">class </em><code class="descclassname">diofant.functions.combinatorial.numbers.</code><code class="descname">bell</code><a class="reference internal" href="../../_modules/diofant/functions/combinatorial/numbers.html#bell"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.functions.combinatorial.numbers.bell" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bell numbers / Bell polynomials</p>
+<p>The Bell numbers satisfy <span class="math notranslate nohighlight">\(B_0 = 1\)</span> and</p>
+<div class="math notranslate nohighlight">
+\[B_n = \sum_{k=0}^{n-1} \binom{n-1}{k} B_k.\]</div>
+<p>They are also given by:</p>
+<div class="math notranslate nohighlight">
+\[B_n = \frac{1}{e} \sum_{k=0}^{\infty} \frac{k^n}{k!}.\]</div>
+<p>The Bell polynomials are given by <span class="math notranslate nohighlight">\(B_0(x) = 1\)</span> and</p>
+<div class="math notranslate nohighlight">
+\[B_n(x) = x \sum_{k=1}^{n-1} \binom{n-1}{k-1} B_{k-1}(x).\]</div>
+<p>The second kind of Bell polynomials (are sometimes called “partial” Bell
+polynomials or incomplete Bell polynomials) are defined as</p>
+<div class="math notranslate nohighlight">
+\[B_{n,k}(x_1, x_2,\dotsc x_{n-k+1}) =
+\sum_{j_1+j_2+j_2+\dotsb=k \atop j_1+2j_2+3j_2+\dotsb=n}
+    \frac{n!}{j_1!j_2!\dotsb j_{n-k+1}!}
+    \left(\frac{x_1}{1!} \right)^{j_1}
+    \left(\frac{x_2}{2!} \right)^{j_2} \dotsb
+    \left(\frac{x_{n-k+1}}{(n-k+1)!} \right) ^{j_{n-k+1}}.\]</div>
+<ul class="simple">
+<li>bell(n) gives the <span class="math notranslate nohighlight">\(n^{th}\)</span> Bell number, <span class="math notranslate nohighlight">\(B_n\)</span>.</li>
+<li>bell(n, x) gives the <span class="math notranslate nohighlight">\(n^{th}\)</span> Bell polynomial, <span class="math notranslate nohighlight">\(B_n(x)\)</span>.</li>
+<li>bell(n, k, (x1, x2, …)) gives Bell polynomials of the second kind,
+<span class="math notranslate nohighlight">\(B_{n,k}(x_1, x_2, \dotsc, x_{n-k+1})\)</span>.</li>
+</ul>
+<p class="rubric">Notes</p>
+<p>Not to be confused with Bernoulli numbers and Bernoulli polynomials,
+which use the same notation.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">bell</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">11</span><span class="p">)]</span>
+<span class="go">[1, 1, 2, 5, 15, 52, 203, 877, 4140, 21147, 115975]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bell</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="go">846749014511809332450147</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bell</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">))</span>
+<span class="go">t**4 + 6*t**3 + 7*t**2 + t</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bell</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x:6&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">:])</span>
+<span class="go">6*x1*x5 + 15*x2*x4 + 10*x3**2</span>
+</pre></div>
+</div>
+<p class="rubric">References</p>
+<ul class="simple">
+<li>https//en.wikipedia.org/wiki/Bell_number</li>
+<li><a class="reference external" href="http://mathworld.wolfram.com/BellNumber.html">http://mathworld.wolfram.com/BellNumber.html</a></li>
+<li><a class="reference external" href="http://mathworld.wolfram.com/BellPolynomial.html">http://mathworld.wolfram.com/BellPolynomial.html</a></li>
+</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#diofant.functions.combinatorial.numbers.bernoulli" title="diofant.functions.combinatorial.numbers.bernoulli"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.numbers.bernoulli</span></code></a>, <a class="reference internal" href="#diofant.functions.combinatorial.numbers.catalan" title="diofant.functions.combinatorial.numbers.catalan"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.numbers.catalan</span></code></a>, <a class="reference internal" href="#diofant.functions.combinatorial.numbers.euler" title="diofant.functions.combinatorial.numbers.euler"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.numbers.euler</span></code></a>, <a class="reference internal" href="#diofant.functions.combinatorial.numbers.fibonacci" title="diofant.functions.combinatorial.numbers.fibonacci"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.numbers.fibonacci</span></code></a>, <a class="reference internal" href="#diofant.functions.combinatorial.numbers.harmonic" title="diofant.functions.combinatorial.numbers.harmonic"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.numbers.harmonic</span></code></a>, <a class="reference internal" href="#diofant.functions.combinatorial.numbers.lucas" title="diofant.functions.combinatorial.numbers.lucas"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.numbers.lucas</span></code></a></p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="bernoulli">
+<h2>bernoulli<a class="headerlink" href="#bernoulli" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="diofant.functions.combinatorial.numbers.bernoulli">
+<em class="property">class </em><code class="descclassname">diofant.functions.combinatorial.numbers.</code><code class="descname">bernoulli</code><a class="reference internal" href="../../_modules/diofant/functions/combinatorial/numbers.html#bernoulli"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.functions.combinatorial.numbers.bernoulli" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bernoulli numbers / Bernoulli polynomials</p>
+<p>The Bernoulli numbers are a sequence of rational numbers
+defined by B_0 = 1 and the recursive relation (n &gt; 0):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>      <span class="n">n</span>
+     <span class="n">___</span>
+    \      <span class="o">/</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span> \
+<span class="mi">0</span> <span class="o">=</span>  <span class="p">)</span>     <span class="o">|</span>       <span class="o">|</span> <span class="o">*</span> <span class="n">B</span> <span class="o">.</span>
+    <span class="o">/</span><span class="n">___</span>   \   <span class="n">k</span>   <span class="o">/</span>    <span class="n">k</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>They are also commonly defined by their exponential generating
+function, which is x/(exp(x) - 1). For odd indices &gt; 1, the
+Bernoulli numbers are zero.</p>
+<p>The Bernoulli polynomials satisfy the analogous formula:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>          <span class="n">n</span>
+         <span class="n">___</span>
+        \      <span class="o">/</span> <span class="n">n</span> \         <span class="n">n</span><span class="o">-</span><span class="n">k</span>
+<span class="n">B</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span>  <span class="p">)</span>     <span class="o">|</span>   <span class="o">|</span> <span class="o">*</span> <span class="n">B</span>  <span class="o">*</span> <span class="n">x</span>   <span class="o">.</span>
+ <span class="n">n</span>      <span class="o">/</span><span class="n">___</span>   \ <span class="n">k</span> <span class="o">/</span>    <span class="n">k</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>Bernoulli numbers and Bernoulli polynomials are related as
+B_n(0) = B_n.</p>
+<p>We compute Bernoulli numbers using Ramanujan’s formula:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>                         <span class="o">/</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">3</span> \
+<span class="n">B</span>   <span class="o">=</span>  <span class="p">(</span><span class="n">A</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">-</span> <span class="n">S</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>  <span class="o">/</span>  <span class="o">|</span>       <span class="o">|</span>
+ <span class="n">n</span>                       \   <span class="n">n</span>   <span class="o">/</span>
+</pre></div>
+</div>
+<p>where A(n) = (n+3)/3 when n = 0 or 2 (mod 6), A(n) = -(n+3)/6
+when n = 4 (mod 6), and:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>       <span class="p">[</span><span class="n">n</span><span class="o">/</span><span class="mi">6</span><span class="p">]</span>
+        <span class="n">___</span>
+       \      <span class="o">/</span>  <span class="n">n</span> <span class="o">+</span> <span class="mi">3</span>  \
+<span class="n">S</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">=</span>  <span class="p">)</span>     <span class="o">|</span>         <span class="o">|</span> <span class="o">*</span> <span class="n">B</span>
+       <span class="o">/</span><span class="n">___</span>   \ <span class="n">n</span> <span class="o">-</span> <span class="mi">6</span><span class="o">*</span><span class="n">k</span> <span class="o">/</span>    <span class="n">n</span><span class="o">-</span><span class="mi">6</span><span class="o">*</span><span class="n">k</span>
+       <span class="n">k</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>This formula is similar to the sum given in the definition, but
+cuts 2/3 of the terms. For Bernoulli polynomials, we use the
+formula in the definition.</p>
+<ul class="simple">
+<li>bernoulli(n) gives the nth Bernoulli number, B_n</li>
+<li>bernoulli(n, x) gives the nth Bernoulli polynomial in x, B_n(x)</li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">bernoulli</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">11</span><span class="p">)]</span>
+<span class="go">[1, -1/2, 1/6, 0, -1/30, 0, 1/42, 0, -1/30, 0, 5/66]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bernoulli</span><span class="p">(</span><span class="mi">1000001</span><span class="p">)</span>
+<span class="go">0</span>
+</pre></div>
+</div>
+<p class="rubric">References</p>
+<ul class="simple">
+<li>https//en.wikipedia.org/wiki/Bernoulli_number</li>
+<li>https//en.wikipedia.org/wiki/Bernoulli_polynomial</li>
+<li><a class="reference external" href="http://mathworld.wolfram.com/BernoulliNumber.html">http://mathworld.wolfram.com/BernoulliNumber.html</a></li>
+<li><a class="reference external" href="http://mathworld.wolfram.com/BernoulliPolynomial.html">http://mathworld.wolfram.com/BernoulliPolynomial.html</a></li>
+</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#diofant.functions.combinatorial.numbers.bell" title="diofant.functions.combinatorial.numbers.bell"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.numbers.bell</span></code></a>, <a class="reference internal" href="#diofant.functions.combinatorial.numbers.catalan" title="diofant.functions.combinatorial.numbers.catalan"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.numbers.catalan</span></code></a>, <a class="reference internal" href="#diofant.functions.combinatorial.numbers.euler" title="diofant.functions.combinatorial.numbers.euler"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.numbers.euler</span></code></a>, <a class="reference internal" href="#diofant.functions.combinatorial.numbers.fibonacci" title="diofant.functions.combinatorial.numbers.fibonacci"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.numbers.fibonacci</span></code></a>, <a class="reference internal" href="#diofant.functions.combinatorial.numbers.harmonic" title="diofant.functions.combinatorial.numbers.harmonic"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.numbers.harmonic</span></code></a>, <a class="reference internal" href="#diofant.functions.combinatorial.numbers.lucas" title="diofant.functions.combinatorial.numbers.lucas"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.numbers.lucas</span></code></a></p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="binomial">
+<h2>binomial<a class="headerlink" href="#binomial" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="diofant.functions.combinatorial.factorials.binomial">
+<em class="property">class </em><code class="descclassname">diofant.functions.combinatorial.factorials.</code><code class="descname">binomial</code><a class="reference internal" href="../../_modules/diofant/functions/combinatorial/factorials.html#binomial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.functions.combinatorial.factorials.binomial" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation of the binomial coefficient. It can be defined
+in two ways depending on its desired interpretation:</p>
+<blockquote>
+<div>C(n,k) = n!/(k!(n-k)!)   or   C(n, k) = ff(n, k)/k!</div></blockquote>
+<p>First, in a strict combinatorial sense it defines the
+number of ways we can choose ‘k’ elements from a set of
+‘n’ elements. In this case both arguments are nonnegative
+integers and binomial is computed using an efficient
+algorithm based on prime factorization.</p>
+<p>The other definition is generalization for arbitrary ‘n’,
+however ‘k’ must also be nonnegative. This case is very
+useful when evaluating summations.</p>
+<p>For the sake of convenience for negative ‘k’ this function
+will return zero no matter what valued is the other argument.</p>
+<p>To expand the binomial when n is a symbol, use either
+expand_func() or expand(func=True). The former will keep the
+polynomial in factored form while the latter will expand the
+polynomial itself. See examples for details.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;n&#39;</span><span class="p">,</span> <span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">positive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">binomial</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<span class="go">6435</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">binomial</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">0</span>
+</pre></div>
+</div>
+<p>Rows of Pascal’s triangle can be generated with the binomial function:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">N</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="p">[</span> <span class="n">binomial</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
+<span class="gp">...</span>
+<span class="go">[1]</span>
+<span class="go">[1, 1]</span>
+<span class="go">[1, 2, 1]</span>
+<span class="go">[1, 3, 3, 1]</span>
+<span class="go">[1, 4, 6, 4, 1]</span>
+<span class="go">[1, 5, 10, 10, 5, 1]</span>
+<span class="go">[1, 6, 15, 20, 15, 6, 1]</span>
+<span class="go">[1, 7, 21, 35, 35, 21, 7, 1]</span>
+</pre></div>
+</div>
+<p>As can a given diagonal, e.g. the 4th diagonal:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">N</span> <span class="o">=</span> <span class="o">-</span><span class="mi">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">binomial</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">N</span><span class="p">)]</span>
+<span class="go">[1, -4, 10, -20, 35]</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">binomial</span><span class="p">(</span><span class="n">Rational</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">-5/128</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">binomial</span><span class="p">(</span><span class="n">Rational</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">-195/128</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">binomial</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">binomial(n, 3)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">binomial</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">n**3/6 - n**2/2 + n/3</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">expand_func</span><span class="p">(</span><span class="n">binomial</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="go">n*(n - 2)*(n - 1)/6</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="catalan">
+<h2>catalan<a class="headerlink" href="#catalan" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="diofant.functions.combinatorial.numbers.catalan">
+<em class="property">class </em><code class="descclassname">diofant.functions.combinatorial.numbers.</code><code class="descname">catalan</code><a class="reference internal" href="../../_modules/diofant/functions/combinatorial/numbers.html#catalan"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.functions.combinatorial.numbers.catalan" title="Permalink to this definition">¶</a></dt>
+<dd><p>Catalan numbers</p>
+<p>The n-th catalan number is given by:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>       <span class="mi">1</span>   <span class="o">/</span> <span class="mi">2</span><span class="o">*</span><span class="n">n</span> \
+<span class="n">C</span>  <span class="o">=</span> <span class="o">-----</span> <span class="o">|</span>     <span class="o">|</span>
+ <span class="n">n</span>   <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span> \  <span class="n">n</span>  <span class="o">/</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>catalan(n) gives the n-th Catalan number, C_n</li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">catalan</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)]</span>
+<span class="go">[1, 2, 5, 14, 42, 132, 429, 1430, 4862]</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">catalan</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="go">catalan(n)</span>
+</pre></div>
+</div>
+<p>Catalan numbers can be transformed into several other, identical
+expressions involving other mathematical functions</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">catalan</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">rewrite</span><span class="p">(</span><span class="n">binomial</span><span class="p">)</span>
+<span class="go">binomial(2*n, n)/(n + 1)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">catalan</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">rewrite</span><span class="p">(</span><span class="n">gamma</span><span class="p">)</span>
+<span class="go">4**n*gamma(n + 1/2)/(sqrt(pi)*gamma(n + 2))</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">catalan</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">rewrite</span><span class="p">(</span><span class="n">hyper</span><span class="p">)</span>
+<span class="go">hyper((-n + 1, -n), (2,), 1)</span>
+</pre></div>
+</div>
+<p>For some non-integer values of n we can get closed form
+expressions by rewriting in terms of gamma functions:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">catalan</span><span class="p">(</span><span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">rewrite</span><span class="p">(</span><span class="n">gamma</span><span class="p">)</span>
+<span class="go">8/(3*pi)</span>
+</pre></div>
+</div>
+<p>We can differentiate the Catalan numbers C(n) interpreted as a
+continuous real function in n:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">diff</span><span class="p">(</span><span class="n">catalan</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">n</span><span class="p">)</span>
+<span class="go">(polygamma(0, n + 1/2) - polygamma(0, n + 2) + log(4))*catalan(n)</span>
+</pre></div>
+</div>
+<p>As a more advanced example consider the following ratio
+between consecutive numbers:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">combsimp</span><span class="p">((</span><span class="n">catalan</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">catalan</span><span class="p">(</span><span class="n">n</span><span class="p">))</span><span class="o">.</span><span class="n">rewrite</span><span class="p">(</span><span class="n">binomial</span><span class="p">))</span>
+<span class="go">2*(2*n + 1)/(n + 2)</span>
+</pre></div>
+</div>
+<p>The Catalan numbers can be generalized to complex numbers:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">catalan</span><span class="p">(</span><span class="n">I</span><span class="p">)</span><span class="o">.</span><span class="n">rewrite</span><span class="p">(</span><span class="n">gamma</span><span class="p">)</span>
+<span class="go">4**I*gamma(1/2 + I)/(sqrt(pi)*gamma(2 + I))</span>
+</pre></div>
+</div>
+<p>and evaluated with arbitrary precision:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">catalan</span><span class="p">(</span><span class="n">I</span><span class="p">)</span><span class="o">.</span><span class="n">evalf</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="go">0.39764993382373624267 - 0.020884341620842555705*I</span>
+</pre></div>
+</div>
+<p class="rubric">References</p>
+<ul class="simple">
+<li>https//en.wikipedia.org/wiki/Catalan_number</li>
+<li><a class="reference external" href="http://mathworld.wolfram.com/CatalanNumber.html">http://mathworld.wolfram.com/CatalanNumber.html</a></li>
+<li><a class="reference external" href="http://functions.wolfram.com/GammaBetaErf/CatalanNumber/">http://functions.wolfram.com/GammaBetaErf/CatalanNumber/</a></li>
+<li><a class="reference external" href="http://geometer.org/mathcircles/catalan.pdf">http://geometer.org/mathcircles/catalan.pdf</a></li>
+</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#diofant.functions.combinatorial.numbers.bell" title="diofant.functions.combinatorial.numbers.bell"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.numbers.bell</span></code></a>, <a class="reference internal" href="#diofant.functions.combinatorial.numbers.bernoulli" title="diofant.functions.combinatorial.numbers.bernoulli"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.numbers.bernoulli</span></code></a>, <a class="reference internal" href="#diofant.functions.combinatorial.numbers.euler" title="diofant.functions.combinatorial.numbers.euler"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.numbers.euler</span></code></a>, <a class="reference internal" href="#diofant.functions.combinatorial.numbers.fibonacci" title="diofant.functions.combinatorial.numbers.fibonacci"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.numbers.fibonacci</span></code></a>, <a class="reference internal" href="#diofant.functions.combinatorial.numbers.harmonic" title="diofant.functions.combinatorial.numbers.harmonic"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.numbers.harmonic</span></code></a>, <a class="reference internal" href="#diofant.functions.combinatorial.numbers.lucas" title="diofant.functions.combinatorial.numbers.lucas"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.numbers.lucas</span></code></a>, <a class="reference internal" href="#diofant.functions.combinatorial.factorials.binomial" title="diofant.functions.combinatorial.factorials.binomial"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.factorials.binomial</span></code></a></p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="euler">
+<h2>euler<a class="headerlink" href="#euler" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="diofant.functions.combinatorial.numbers.euler">
+<em class="property">class </em><code class="descclassname">diofant.functions.combinatorial.numbers.</code><code class="descname">euler</code><a class="reference internal" href="../../_modules/diofant/functions/combinatorial/numbers.html#euler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.functions.combinatorial.numbers.euler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Euler numbers</p>
+<p>The euler numbers are given by:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>        <span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span>   <span class="n">k</span>
+         <span class="n">___</span>   <span class="n">___</span>            <span class="n">j</span>          <span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span>
+        \     \     <span class="o">/</span> <span class="n">k</span> \ <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="o">*</span> <span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">j</span><span class="p">)</span>
+<span class="n">E</span>   <span class="o">=</span> <span class="n">I</span>  <span class="p">)</span>     <span class="p">)</span>    <span class="o">|</span>   <span class="o">|</span> <span class="o">--------------------</span>
+ <span class="mi">2</span><span class="n">n</span>     <span class="o">/</span><span class="n">___</span>  <span class="o">/</span><span class="n">___</span>  \ <span class="n">j</span> <span class="o">/</span>      <span class="n">k</span>    <span class="n">k</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="mi">1</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>           <span class="mi">2</span>  <span class="o">*</span> <span class="n">I</span>  <span class="o">*</span> <span class="n">k</span>
+
+<span class="n">E</span>     <span class="o">=</span> <span class="mi">0</span>
+ <span class="mi">2</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>euler(n) gives the n-th Euler number, E_n</li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.functions</span> <span class="k">import</span> <span class="n">euler</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">euler</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)]</span>
+<span class="go">[1, 0, -1, 0, 5, 0, -61, 0, 1385, 0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">euler</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="p">)</span>
+<span class="go">euler(3*n)</span>
+</pre></div>
+</div>
+<p class="rubric">References</p>
+<ul class="simple">
+<li>https//en.wikipedia.org/wiki/Euler_numbers</li>
+<li><a class="reference external" href="http://mathworld.wolfram.com/EulerNumber.html">http://mathworld.wolfram.com/EulerNumber.html</a></li>
+<li>https//en.wikipedia.org/wiki/Alternating_permutation</li>
+<li><a class="reference external" href="http://mathworld.wolfram.com/AlternatingPermutation.html">http://mathworld.wolfram.com/AlternatingPermutation.html</a></li>
+</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#diofant.functions.combinatorial.numbers.bell" title="diofant.functions.combinatorial.numbers.bell"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.numbers.bell</span></code></a>, <a class="reference internal" href="#diofant.functions.combinatorial.numbers.bernoulli" title="diofant.functions.combinatorial.numbers.bernoulli"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.numbers.bernoulli</span></code></a>, <a class="reference internal" href="#diofant.functions.combinatorial.numbers.fibonacci" title="diofant.functions.combinatorial.numbers.fibonacci"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.numbers.fibonacci</span></code></a>, <a class="reference internal" href="#diofant.functions.combinatorial.numbers.harmonic" title="diofant.functions.combinatorial.numbers.harmonic"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.numbers.harmonic</span></code></a>, <a class="reference internal" href="#diofant.functions.combinatorial.numbers.lucas" title="diofant.functions.combinatorial.numbers.lucas"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.numbers.lucas</span></code></a></p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="factorial">
+<h2>factorial<a class="headerlink" href="#factorial" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="diofant.functions.combinatorial.factorials.factorial">
+<em class="property">class </em><code class="descclassname">diofant.functions.combinatorial.factorials.</code><code class="descname">factorial</code><a class="reference internal" href="../../_modules/diofant/functions/combinatorial/factorials.html#factorial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.functions.combinatorial.factorials.factorial" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation of factorial function over nonnegative integers.</p>
+<p>By convention (consistent with the gamma function and the binomial
+coefficients), factorial of a negative integer is complex infinity.</p>
+<p>The factorial is very important in combinatorics where it gives
+the number of ways in which <span class="math notranslate nohighlight">\(n\)</span> objects can be permuted. It also
+arises in calculus, probability, number theory, etc.</p>
+<p>There is strict relation of factorial with gamma function. In
+fact n! = gamma(n+1) for nonnegative integers. Rewrite of this
+kind is very useful in case of combinatorial simplification.</p>
+<p>Computation of the factorial is done using two algorithms. For
+small arguments naive product is evaluated. However for bigger
+input algorithm Prime-Swing is used. It is the fastest algorithm
+known and computes n! via prime factorization of special class
+of numbers, called here the ‘Swing Numbers’.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">factorial</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">factorial</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+<span class="go">5040</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">factorial</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">zoo</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="go">factorial(n)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">factorial</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="p">)</span>
+<span class="go">factorial(2*n)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">factorial</span><span class="p">(</span><span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="go">factorial(1/2)</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#diofant.functions.combinatorial.factorials.factorial2" title="diofant.functions.combinatorial.factorials.factorial2"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.factorials.factorial2</span></code></a>, <a class="reference internal" href="#diofant.functions.combinatorial.factorials.RisingFactorial" title="diofant.functions.combinatorial.factorials.RisingFactorial"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.factorials.RisingFactorial</span></code></a>, <a class="reference internal" href="#diofant.functions.combinatorial.factorials.FallingFactorial" title="diofant.functions.combinatorial.factorials.FallingFactorial"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.factorials.FallingFactorial</span></code></a></p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="subfactorial">
+<h2>subfactorial<a class="headerlink" href="#subfactorial" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="diofant.functions.combinatorial.factorials.subfactorial">
+<em class="property">class </em><code class="descclassname">diofant.functions.combinatorial.factorials.</code><code class="descname">subfactorial</code><a class="reference internal" href="../../_modules/diofant/functions/combinatorial/factorials.html#subfactorial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.functions.combinatorial.factorials.subfactorial" title="Permalink to this definition">¶</a></dt>
+<dd><p>The subfactorial counts the derangements of n items and is
+defined for non-negative integers as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>      ,
+     |  1                             for n = 0
+!n = {  0                             for n = 1
+     |  (n - 1)*(!(n - 1) + !(n - 2)) for n &gt; 1
+      `
+</pre></div>
+</div>
+<p>It can also be written as int(round(n!/exp(1))) but the recursive
+definition with caching is implemented for this function.</p>
+<p>An interesting analytic expression is the following</p>
+<div class="math notranslate nohighlight">
+\[!x = \Gamma(x + 1, -1)/e\]</div>
+<p>which is valid for non-negative integers x. The above formula
+is not very useful in case of non-integers. <span class="math notranslate nohighlight">\(\Gamma(x + 1, -1)\)</span> is
+single-valued only for integral arguments x, elsewhere on the positive real
+axis it has an infinite number of branches none of which are real.</p>
+<p class="rubric">References</p>
+<ul class="simple">
+<li>https//en.wikipedia.org/wiki/Subfactorial</li>
+<li><a class="reference external" href="http://mathworld.wolfram.com/Subfactorial.html">http://mathworld.wolfram.com/Subfactorial.html</a></li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">subfactorial</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">subfactorial(n + 1)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">subfactorial</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="go">44</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#diofant.functions.combinatorial.factorials.factorial" title="diofant.functions.combinatorial.factorials.factorial"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.factorials.factorial</span></code></a>, <a class="reference internal" href="../utilities/iterables.html#diofant.utilities.iterables.generate_derangements" title="diofant.utilities.iterables.generate_derangements"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.utilities.iterables.generate_derangements</span></code></a>, <a class="reference internal" href="special.html#diofant.functions.special.gamma_functions.uppergamma" title="diofant.functions.special.gamma_functions.uppergamma"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.special.gamma_functions.uppergamma</span></code></a></p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="factorial2-double-factorial">
+<h2>factorial2 / double factorial<a class="headerlink" href="#factorial2-double-factorial" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="diofant.functions.combinatorial.factorials.factorial2">
+<em class="property">class </em><code class="descclassname">diofant.functions.combinatorial.factorials.</code><code class="descname">factorial2</code><a class="reference internal" href="../../_modules/diofant/functions/combinatorial/factorials.html#factorial2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.functions.combinatorial.factorials.factorial2" title="Permalink to this definition">¶</a></dt>
+<dd><p>The double factorial n!!, not to be confused with (n!)!</p>
+<p>The double factorial is defined for nonnegative integers and for odd
+negative integers as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>       ,
+      |  n*(n - 2)*(n - 4)* ... * 1    for n positive odd
+n!! = {  n*(n - 2)*(n - 4)* ... * 2    for n positive even
+      |  1                             for n = 0
+      |  (n+2)!! / (n+2)               for n negative odd
+       `
+</pre></div>
+</div>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><a class="reference external" href="https://en.wikipedia.org/wiki/Double_factorial">https://en.wikipedia.org/wiki/Double_factorial</a></li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">factorial2</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">factorial2(n + 1)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">factorial2</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="go">15</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">factorial2</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">factorial2</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span>
+<span class="go">1/3</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#diofant.functions.combinatorial.factorials.factorial" title="diofant.functions.combinatorial.factorials.factorial"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.factorials.factorial</span></code></a>, <a class="reference internal" href="#diofant.functions.combinatorial.factorials.RisingFactorial" title="diofant.functions.combinatorial.factorials.RisingFactorial"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.factorials.RisingFactorial</span></code></a>, <a class="reference internal" href="#diofant.functions.combinatorial.factorials.FallingFactorial" title="diofant.functions.combinatorial.factorials.FallingFactorial"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.factorials.FallingFactorial</span></code></a></p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="fallingfactorial">
+<h2>FallingFactorial<a class="headerlink" href="#fallingfactorial" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="diofant.functions.combinatorial.factorials.FallingFactorial">
+<em class="property">class </em><code class="descclassname">diofant.functions.combinatorial.factorials.</code><code class="descname">FallingFactorial</code><a class="reference internal" href="../../_modules/diofant/functions/combinatorial/factorials.html#FallingFactorial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.functions.combinatorial.factorials.FallingFactorial" title="Permalink to this definition">¶</a></dt>
+<dd><p>Falling factorial (related to rising factorial) is a double valued
+function arising in concrete mathematics, hypergeometric functions
+and series expansions.</p>
+<p>It is defined by:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="o">...</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>where ‘x’ can be arbitrary expression and ‘k’ is an integer. For
+more information check “Concrete mathematics” by Graham, pp. 66
+or visit <a class="reference external" href="http://mathworld.wolfram.com/FallingFactorial.html">http://mathworld.wolfram.com/FallingFactorial.html</a> page.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ff</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="go">120</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="o">==</span> <span class="n">x</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">4</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#diofant.functions.combinatorial.factorials.factorial" title="diofant.functions.combinatorial.factorials.factorial"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.factorials.factorial</span></code></a>, <a class="reference internal" href="#diofant.functions.combinatorial.factorials.factorial2" title="diofant.functions.combinatorial.factorials.factorial2"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.factorials.factorial2</span></code></a>, <a class="reference internal" href="#diofant.functions.combinatorial.factorials.RisingFactorial" title="diofant.functions.combinatorial.factorials.RisingFactorial"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.factorials.RisingFactorial</span></code></a></p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="fibonacci">
+<h2>fibonacci<a class="headerlink" href="#fibonacci" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="diofant.functions.combinatorial.numbers.fibonacci">
+<em class="property">class </em><code class="descclassname">diofant.functions.combinatorial.numbers.</code><code class="descname">fibonacci</code><a class="reference internal" href="../../_modules/diofant/functions/combinatorial/numbers.html#fibonacci"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.functions.combinatorial.numbers.fibonacci" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fibonacci numbers / Fibonacci polynomials</p>
+<p>The Fibonacci numbers are the integer sequence defined by the
+initial terms F_0 = 0, F_1 = 1 and the two-term recurrence
+relation F_n = F_{n-1} + F_{n-2}.  This definition
+extended to arbitrary real and complex arguments using
+the formula</p>
+<div class="math notranslate nohighlight">
+\[F_z = \frac{\phi^z - \cos(\pi z) \phi^{-z}}{\sqrt 5}\]</div>
+<p>The Fibonacci polynomials are defined by F_1(x) = 1,
+F_2(x) = x, and F_n(x) = x*F_{n-1}(x) + F_{n-2}(x) for n &gt; 2.
+For all positive integers n, F_n(1) = F_n.</p>
+<ul class="simple">
+<li>fibonacci(n) gives the nth Fibonacci number, F_n</li>
+<li>fibonacci(n, x) gives the nth Fibonacci polynomial in x, F_n(x)</li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">fibonacci</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">11</span><span class="p">)]</span>
+<span class="go">[0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fibonacci</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">))</span>
+<span class="go">t**4 + 3*t**2 + 1</span>
+</pre></div>
+</div>
+<p class="rubric">References</p>
+<ul class="simple">
+<li>https//en.wikipedia.org/wiki/Fibonacci_number</li>
+<li><a class="reference external" href="http://mathworld.wolfram.com/FibonacciNumber.html">http://mathworld.wolfram.com/FibonacciNumber.html</a></li>
+</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#diofant.functions.combinatorial.numbers.bell" title="diofant.functions.combinatorial.numbers.bell"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.numbers.bell</span></code></a>, <a class="reference internal" href="#diofant.functions.combinatorial.numbers.bernoulli" title="diofant.functions.combinatorial.numbers.bernoulli"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.numbers.bernoulli</span></code></a>, <a class="reference internal" href="#diofant.functions.combinatorial.numbers.catalan" title="diofant.functions.combinatorial.numbers.catalan"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.numbers.catalan</span></code></a>, <a class="reference internal" href="#diofant.functions.combinatorial.numbers.euler" title="diofant.functions.combinatorial.numbers.euler"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.numbers.euler</span></code></a>, <a class="reference internal" href="#diofant.functions.combinatorial.numbers.harmonic" title="diofant.functions.combinatorial.numbers.harmonic"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.numbers.harmonic</span></code></a>, <a class="reference internal" href="#diofant.functions.combinatorial.numbers.lucas" title="diofant.functions.combinatorial.numbers.lucas"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.numbers.lucas</span></code></a></p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="harmonic">
+<h2>harmonic<a class="headerlink" href="#harmonic" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="diofant.functions.combinatorial.numbers.harmonic">
+<em class="property">class </em><code class="descclassname">diofant.functions.combinatorial.numbers.</code><code class="descname">harmonic</code><a class="reference internal" href="../../_modules/diofant/functions/combinatorial/numbers.html#harmonic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.functions.combinatorial.numbers.harmonic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Harmonic numbers</p>
+<p>The nth harmonic number is given by <span class="math notranslate nohighlight">\(\operatorname{H}_{n} =
+1 + \frac{1}{2} + \frac{1}{3} + \ldots + \frac{1}{n}\)</span>.</p>
+<p>More generally:</p>
+<div class="math notranslate nohighlight">
+\[\operatorname{H}_{n,m} = \sum_{k=1}^{n} \frac{1}{k^m}\]</div>
+<p>As <span class="math notranslate nohighlight">\(n \rightarrow \infty\)</span>, <span class="math notranslate nohighlight">\(\operatorname{H}_{n,m} \rightarrow \zeta(m)\)</span>,
+the Riemann zeta function.</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">harmonic(n)</span></code> gives the nth harmonic number, <span class="math notranslate nohighlight">\(\operatorname{H}_n\)</span></li>
+<li><code class="docutils literal notranslate"><span class="pre">harmonic(n,</span> <span class="pre">m)</span></code> gives the nth generalized harmonic number
+of order <span class="math notranslate nohighlight">\(m\)</span>, <span class="math notranslate nohighlight">\(\operatorname{H}_{n,m}\)</span>, where
+<code class="docutils literal notranslate"><span class="pre">harmonic(n)</span> <span class="pre">==</span> <span class="pre">harmonic(n,</span> <span class="pre">1)</span></code></li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">harmonic</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">)]</span>
+<span class="go">[0, 1, 3/2, 11/6, 25/12, 137/60]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">harmonic</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">)]</span>
+<span class="go">[0, 1, 5/4, 49/36, 205/144, 5269/3600]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">harmonic</span><span class="p">(</span><span class="n">oo</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">pi**2/6</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">harmonic</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">rewrite</span><span class="p">(</span><span class="n">Sum</span><span class="p">)</span>
+<span class="go">Sum(1/_k, (_k, 1, n))</span>
+</pre></div>
+</div>
+<p>We can evaluate harmonic numbers for all integral and positive
+rational arguments:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">harmonic</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<span class="go">761/280</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">harmonic</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
+<span class="go">83711/27720</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">H</span> <span class="o">=</span> <span class="n">harmonic</span><span class="p">(</span><span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">H</span>
+<span class="go">harmonic(1/3)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">He</span> <span class="o">=</span> <span class="n">expand_func</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">He</span>
+<span class="go">-log(6) - sqrt(3)*pi/6 + 2*Sum(log(sin(pi*_k/3))*cos(2*pi*_k/3), (_k, 1, 1))</span>
+<span class="go">                       + 3*Sum(1/(3*_k + 1), (_k, 0, 0))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">He</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span>
+<span class="go">-log(6) - sqrt(3)*pi/6 - log(sqrt(3)/2) + 3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">H</span> <span class="o">=</span> <span class="n">harmonic</span><span class="p">(</span><span class="n">Rational</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">He</span> <span class="o">=</span> <span class="n">simplify</span><span class="p">(</span><span class="n">expand_func</span><span class="p">(</span><span class="n">H</span><span class="p">)</span><span class="o">.</span><span class="n">doit</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">He</span>
+<span class="go">log(sin(pi/7)**(-2*cos(pi/7))*sin(2*pi/7)**(2*cos(16*pi/7))*cos(pi/14)**(-2*sin(pi/14))/14)</span>
+<span class="go">+ pi*tan(pi/14)/2 + 30247/9900</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">He</span><span class="o">.</span><span class="n">evalf</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>
+<span class="go">1.983697455232980674869851942390639915940</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">harmonic</span><span class="p">(</span><span class="n">Rational</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span><span class="o">.</span><span class="n">evalf</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>
+<span class="go">1.983697455232980674869851942390639915940</span>
+</pre></div>
+</div>
+<p>We can rewrite harmonic numbers in terms of polygamma functions:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">harmonic</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">rewrite</span><span class="p">(</span><span class="n">digamma</span><span class="p">)</span>
+<span class="go">polygamma(0, n + 1) + EulerGamma</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">harmonic</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">rewrite</span><span class="p">(</span><span class="n">polygamma</span><span class="p">)</span>
+<span class="go">polygamma(0, n + 1) + EulerGamma</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">harmonic</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">rewrite</span><span class="p">(</span><span class="n">polygamma</span><span class="p">)</span>
+<span class="go">polygamma(2, n + 1)/2 - polygamma(2, 1)/2</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">harmonic</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span><span class="o">.</span><span class="n">rewrite</span><span class="p">(</span><span class="n">polygamma</span><span class="p">)</span>
+<span class="go">(-1)**m*(polygamma(m - 1, 1) - polygamma(m - 1, n + 1))/factorial(m - 1)</span>
+</pre></div>
+</div>
+<p>Integer offsets in the argument can be pulled out:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">expand_func</span><span class="p">(</span><span class="n">harmonic</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">4</span><span class="p">))</span>
+<span class="go">harmonic(n) + 1/(n + 4) + 1/(n + 3) + 1/(n + 2) + 1/(n + 1)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">expand_func</span><span class="p">(</span><span class="n">harmonic</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">4</span><span class="p">))</span>
+<span class="go">harmonic(n) - 1/(n - 1) - 1/(n - 2) - 1/(n - 3) - 1/n</span>
+</pre></div>
+</div>
+<p>Some limits can be computed as well:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">limit</span><span class="p">(</span><span class="n">harmonic</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">n</span><span class="p">,</span> <span class="n">oo</span><span class="p">)</span>
+<span class="go">oo</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">limit</span><span class="p">(</span><span class="n">harmonic</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">n</span><span class="p">,</span> <span class="n">oo</span><span class="p">)</span>
+<span class="go">pi**2/6</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">limit</span><span class="p">(</span><span class="n">harmonic</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">n</span><span class="p">,</span> <span class="n">oo</span><span class="p">)</span>
+<span class="go">-polygamma(2, 1)/2</span>
+</pre></div>
+</div>
+<p>However we can not compute the general relation yet:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">limit</span><span class="p">(</span><span class="n">harmonic</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">),</span> <span class="n">n</span><span class="p">,</span> <span class="n">oo</span><span class="p">)</span>
+<span class="go">harmonic(oo, m)</span>
+</pre></div>
+</div>
+<p>which equals <code class="docutils literal notranslate"><span class="pre">zeta(m)</span></code> for <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">&gt;</span> <span class="pre">1</span></code>.</p>
+<p class="rubric">References</p>
+<ul class="simple">
+<li>https//en.wikipedia.org/wiki/Harmonic_number</li>
+<li><a class="reference external" href="http://functions.wolfram.com/GammaBetaErf/HarmonicNumber/">http://functions.wolfram.com/GammaBetaErf/HarmonicNumber/</a></li>
+<li><a class="reference external" href="http://functions.wolfram.com/GammaBetaErf/HarmonicNumber2/">http://functions.wolfram.com/GammaBetaErf/HarmonicNumber2/</a></li>
+</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#diofant.functions.combinatorial.numbers.bell" title="diofant.functions.combinatorial.numbers.bell"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.numbers.bell</span></code></a>, <a class="reference internal" href="#diofant.functions.combinatorial.numbers.bernoulli" title="diofant.functions.combinatorial.numbers.bernoulli"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.numbers.bernoulli</span></code></a>, <a class="reference internal" href="#diofant.functions.combinatorial.numbers.catalan" title="diofant.functions.combinatorial.numbers.catalan"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.numbers.catalan</span></code></a>, <a class="reference internal" href="#diofant.functions.combinatorial.numbers.euler" title="diofant.functions.combinatorial.numbers.euler"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.numbers.euler</span></code></a>, <a class="reference internal" href="#diofant.functions.combinatorial.numbers.fibonacci" title="diofant.functions.combinatorial.numbers.fibonacci"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.numbers.fibonacci</span></code></a>, <a class="reference internal" href="#diofant.functions.combinatorial.numbers.lucas" title="diofant.functions.combinatorial.numbers.lucas"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.numbers.lucas</span></code></a></p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="lucas">
+<h2>lucas<a class="headerlink" href="#lucas" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="diofant.functions.combinatorial.numbers.lucas">
+<em class="property">class </em><code class="descclassname">diofant.functions.combinatorial.numbers.</code><code class="descname">lucas</code><a class="reference internal" href="../../_modules/diofant/functions/combinatorial/numbers.html#lucas"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.functions.combinatorial.numbers.lucas" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lucas numbers</p>
+<p>Lucas numbers satisfy a recurrence relation similar to that of
+the Fibonacci sequence, in which each term is the sum of the
+preceding two. They are generated by choosing the initial
+values L_0 = 2 and L_1 = 1.</p>
+<ul class="simple">
+<li>lucas(n) gives the nth Lucas number</li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">lucas</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">11</span><span class="p">)]</span>
+<span class="go">[2, 1, 3, 4, 7, 11, 18, 29, 47, 76, 123]</span>
+</pre></div>
+</div>
+<p class="rubric">References</p>
+<ul class="simple">
+<li>https//en.wikipedia.org/wiki/Lucas_number</li>
+<li><a class="reference external" href="http://mathworld.wolfram.com/LucasNumber.html">http://mathworld.wolfram.com/LucasNumber.html</a></li>
+</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#diofant.functions.combinatorial.numbers.bell" title="diofant.functions.combinatorial.numbers.bell"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.numbers.bell</span></code></a>, <a class="reference internal" href="#diofant.functions.combinatorial.numbers.bernoulli" title="diofant.functions.combinatorial.numbers.bernoulli"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.numbers.bernoulli</span></code></a>, <a class="reference internal" href="#diofant.functions.combinatorial.numbers.catalan" title="diofant.functions.combinatorial.numbers.catalan"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.numbers.catalan</span></code></a>, <a class="reference internal" href="#diofant.functions.combinatorial.numbers.euler" title="diofant.functions.combinatorial.numbers.euler"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.numbers.euler</span></code></a>, <a class="reference internal" href="#diofant.functions.combinatorial.numbers.fibonacci" title="diofant.functions.combinatorial.numbers.fibonacci"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.numbers.fibonacci</span></code></a>, <a class="reference internal" href="#diofant.functions.combinatorial.numbers.harmonic" title="diofant.functions.combinatorial.numbers.harmonic"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.numbers.harmonic</span></code></a></p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="multifactorial">
+<h2>MultiFactorial<a class="headerlink" href="#multifactorial" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="diofant.functions.combinatorial.factorials.MultiFactorial">
+<em class="property">class </em><code class="descclassname">diofant.functions.combinatorial.factorials.</code><code class="descname">MultiFactorial</code><a class="reference internal" href="../../_modules/diofant/functions/combinatorial/factorials.html#MultiFactorial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.functions.combinatorial.factorials.MultiFactorial" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="risingfactorial">
+<h2>RisingFactorial<a class="headerlink" href="#risingfactorial" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="diofant.functions.combinatorial.factorials.RisingFactorial">
+<em class="property">class </em><code class="descclassname">diofant.functions.combinatorial.factorials.</code><code class="descname">RisingFactorial</code><a class="reference internal" href="../../_modules/diofant/functions/combinatorial/factorials.html#RisingFactorial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.functions.combinatorial.factorials.RisingFactorial" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rising factorial (also called Pochhammer symbol) is a double valued
+function arising in concrete mathematics, hypergeometric functions
+and series expansions.</p>
+<p>It is defined by:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="o">...</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>where ‘x’ can be arbitrary expression and ‘k’ is an integer. For
+more information check “Concrete mathematics” by Graham, pp. 66
+or visit <a class="reference external" href="http://mathworld.wolfram.com/RisingFactorial.html">http://mathworld.wolfram.com/RisingFactorial.html</a> page.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rf</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="go">120</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="o">==</span> <span class="n">x</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">3</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">4</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#diofant.functions.combinatorial.factorials.factorial" title="diofant.functions.combinatorial.factorials.factorial"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.factorials.factorial</span></code></a>, <a class="reference internal" href="#diofant.functions.combinatorial.factorials.factorial2" title="diofant.functions.combinatorial.factorials.factorial2"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.factorials.factorial2</span></code></a>, <a class="reference internal" href="#diofant.functions.combinatorial.factorials.FallingFactorial" title="diofant.functions.combinatorial.factorials.FallingFactorial"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.functions.combinatorial.factorials.FallingFactorial</span></code></a></p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="stirling">
+<h2>stirling<a class="headerlink" href="#stirling" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="diofant.functions.combinatorial.numbers.stirling">
+<code class="descclassname">diofant.functions.combinatorial.numbers.</code><code class="descname">stirling</code><span class="sig-paren">(</span><em>n</em>, <em>k</em>, <em>d=None</em>, <em>kind=2</em>, <em>signed=False</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/diofant/functions/combinatorial/numbers.html#stirling"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.functions.combinatorial.numbers.stirling" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return Stirling number S(n, k) of the first or second (default) kind.</p>
+<p>The sum of all Stirling numbers of the second kind for k = 1
+through n is bell(n). The recurrence relationship for these numbers
+is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="mi">0</span><span class="p">}</span>       <span class="p">{</span><span class="n">n</span><span class="p">}</span>   <span class="p">{</span><span class="mi">0</span><span class="p">}</span>      <span class="p">{</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">}</span>     <span class="p">{</span><span class="n">n</span><span class="p">}</span>   <span class="p">{</span>  <span class="n">n</span>  <span class="p">}</span>
+<span class="p">{</span> <span class="p">}</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>  <span class="p">{</span> <span class="p">}</span> <span class="o">=</span> <span class="p">{</span> <span class="p">}</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="p">{</span>     <span class="p">}</span> <span class="o">=</span> <span class="n">j</span><span class="o">*</span><span class="p">{</span> <span class="p">}</span> <span class="o">+</span> <span class="p">{</span>     <span class="p">}</span>
+<span class="p">{</span><span class="mi">0</span><span class="p">}</span>       <span class="p">{</span><span class="mi">0</span><span class="p">}</span>   <span class="p">{</span><span class="n">k</span><span class="p">}</span>      <span class="p">{</span>  <span class="n">k</span>  <span class="p">}</span>     <span class="p">{</span><span class="n">k</span><span class="p">}</span>   <span class="p">{</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">}</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>where <code class="docutils literal notranslate"><span class="pre">j</span></code> is::</dt>
+<dd><code class="docutils literal notranslate"><span class="pre">n</span></code> for Stirling numbers of the first kind
+<code class="docutils literal notranslate"><span class="pre">-n</span></code> for signed Stirling numbers of the first kind
+<code class="docutils literal notranslate"><span class="pre">k</span></code> for Stirling numbers of the second kind</dd>
+</dl>
+<p>The first kind of Stirling number counts the number of permutations of
+<code class="docutils literal notranslate"><span class="pre">n</span></code> distinct items that have <code class="docutils literal notranslate"><span class="pre">k</span></code> cycles; the second kind counts the
+ways in which <code class="docutils literal notranslate"><span class="pre">n</span></code> distinct items can be partitioned into <code class="docutils literal notranslate"><span class="pre">k</span></code> parts.
+If <code class="docutils literal notranslate"><span class="pre">d</span></code> is given, the “reduced Stirling number of the second kind” is
+returned: <code class="docutils literal notranslate"><span class="pre">S^{d}(n,</span> <span class="pre">k)</span> <span class="pre">=</span> <span class="pre">S(n</span> <span class="pre">-</span> <span class="pre">d</span> <span class="pre">+</span> <span class="pre">1,</span> <span class="pre">k</span> <span class="pre">-</span> <span class="pre">d</span> <span class="pre">+</span> <span class="pre">1)</span></code> with <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">&gt;=</span> <span class="pre">k</span> <span class="pre">&gt;=</span> <span class="pre">d</span></code>.
+(This counts the ways to partition <code class="docutils literal notranslate"><span class="pre">n</span></code> consecutive integers into
+<code class="docutils literal notranslate"><span class="pre">k</span></code> groups with no pairwise difference less than <code class="docutils literal notranslate"><span class="pre">d</span></code>. See example
+below.)</p>
+<p>To obtain the signed Stirling numbers of the first kind, use keyword
+<code class="docutils literal notranslate"><span class="pre">signed=True</span></code>. Using this keyword automatically sets <code class="docutils literal notranslate"><span class="pre">kind</span></code> to 1.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.utilities.iterables</span> <span class="k">import</span> <span class="p">(</span><span class="n">multiset_partitions</span><span class="p">,</span>
+<span class="gp">... </span>                                         <span class="n">permutations</span><span class="p">,</span> <span class="n">subsets</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>First kind (unsigned by default):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">stirling</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">)]</span>
+<span class="go">[0, 120, 274, 225, 85, 15, 1]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">perms</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">permutations</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">sum</span><span class="p">(</span><span class="n">Permutation</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">.</span><span class="n">cycles</span> <span class="o">==</span> <span class="n">i</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">perms</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span>
+<span class="go">[0, 6, 11, 6, 1]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">stirling</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span>
+<span class="go">[0, 6, 11, 6, 1]</span>
+</pre></div>
+</div>
+<p>First kind (signed):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">stirling</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">signed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span>
+<span class="go">[0, -6, 11, -6, 1]</span>
+</pre></div>
+</div>
+<p>Second kind:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">stirling</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">)]</span>
+<span class="go">[0, 1, 511, 9330, 34105, 42525, 22827, 5880, 750, 45, 1, 0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sum</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">==</span> <span class="n">bell</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">multiset_partitions</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="mi">2</span><span class="p">)))</span> <span class="o">==</span> <span class="n">stirling</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>Reduced second kind:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">delta</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+<span class="gp">... </span>   <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+<span class="gp">... </span>       <span class="k">return</span> <span class="n">oo</span>
+<span class="gp">... </span>   <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">subsets</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parts</span> <span class="o">=</span> <span class="n">multiset_partitions</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">parts</span> <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">delta</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">d</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">p</span><span class="p">))</span>
+<span class="go">7</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stirling</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">7</span>
+</pre></div>
+</div>
+<p class="rubric">References</p>
+<ul class="simple">
+<li>https//en.wikipedia.org/wiki/Stirling_numbers_of_the_first_kind</li>
+<li>https//en.wikipedia.org/wiki/Stirling_numbers_of_the_second_kind</li>
+</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../utilities/iterables.html#diofant.utilities.iterables.multiset_partitions" title="diofant.utilities.iterables.multiset_partitions"><code class="xref py py-func docutils literal notranslate"><span class="pre">diofant.utilities.iterables.multiset_partitions()</span></code></a></p>
+</div>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="enumeration">
+<h1>Enumeration<a class="headerlink" href="#enumeration" title="Permalink to this headline">¶</a></h1>
+<p>Three functions are available. Each of them attempts to efficiently compute
+a given combinatorial quantity for a given set or multiset which can be
+entered as an integer, sequence or multiset (dictionary with
+elements as keys and multiplicities as values). The <code class="docutils literal notranslate"><span class="pre">k</span></code> parameter indicates
+the number of elements to pick (or the number of partitions to make). When
+<code class="docutils literal notranslate"><span class="pre">k</span></code> is None, the sum of the enumeration for all <code class="docutils literal notranslate"><span class="pre">k</span></code> (from 0 through the
+number of items represented by <code class="docutils literal notranslate"><span class="pre">n</span></code>) is returned. A <code class="docutils literal notranslate"><span class="pre">replacement</span></code> parameter
+is recognized for combinations and permutations; this indicates that any item
+may appear with multiplicity as high as the number of items in the original
+set.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.functions.combinatorial.numbers</span> <span class="k">import</span> <span class="n">nC</span><span class="p">,</span> <span class="n">nP</span><span class="p">,</span> <span class="n">nT</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">items</span> <span class="o">=</span> <span class="s1">&#39;baby&#39;</span>
+</pre></div>
+</div>
+<dl class="function">
+<dt id="diofant.functions.combinatorial.numbers.nC">
+<code class="descclassname">diofant.functions.combinatorial.numbers.</code><code class="descname">nC</code><span class="sig-paren">(</span><em>n</em>, <em>k=None</em>, <em>replacement=False</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/diofant/functions/combinatorial/numbers.html#nC"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.functions.combinatorial.numbers.nC" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the number of combinations of <code class="docutils literal notranslate"><span class="pre">n</span></code> items taken <code class="docutils literal notranslate"><span class="pre">k</span></code> at a time.</p>
+<dl class="docutils">
+<dt>Possible values for <code class="docutils literal notranslate"><span class="pre">n</span></code>::</dt>
+<dd>integer - set of length <code class="docutils literal notranslate"><span class="pre">n</span></code>
+sequence - converted to a multiset internally
+multiset - {element: multiplicity}</dd>
+</dl>
+<p>If <code class="docutils literal notranslate"><span class="pre">k</span></code> is None then the total of all combinations of length 0
+through the number of items represented in <code class="docutils literal notranslate"><span class="pre">n</span></code> will be returned.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">replacement</span></code> is True then a given item can appear more than once
+in the <code class="docutils literal notranslate"><span class="pre">k</span></code> items. (For example, for ‘ab’ sets of 2 would include ‘aa’,
+‘ab’, and ‘bb’.) The multiplicity of elements in <code class="docutils literal notranslate"><span class="pre">n</span></code> is ignored when
+<code class="docutils literal notranslate"><span class="pre">replacement</span></code> is True but the total number of elements is considered
+since no element can appear more times than the number of elements in
+<code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.utilities.iterables</span> <span class="k">import</span> <span class="n">multiset_combinations</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nC</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nC</span><span class="p">(</span><span class="s1">&#39;abc&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nC</span><span class="p">(</span><span class="s1">&#39;aab&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+<p>When <code class="docutils literal notranslate"><span class="pre">replacement</span></code> is True, each item can have multiplicity
+equal to the length represented by <code class="docutils literal notranslate"><span class="pre">n</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nC</span><span class="p">(</span><span class="s1">&#39;aabc&#39;</span><span class="p">,</span> <span class="n">replacement</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">35</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">multiset_combinations</span><span class="p">(</span><span class="s1">&#39;aaaabbbbcccc&#39;</span><span class="p">,</span> <span class="n">i</span><span class="p">)))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span>
+<span class="go">[1, 3, 6, 10, 15]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sum</span><span class="p">(</span><span class="n">_</span><span class="p">)</span>
+<span class="go">35</span>
+</pre></div>
+</div>
+<p>If there are <code class="docutils literal notranslate"><span class="pre">k</span></code> items with multiplicities <code class="docutils literal notranslate"><span class="pre">m_1,</span> <span class="pre">m_2,</span> <span class="pre">...,</span> <span class="pre">m_k</span></code>
+then the total of all combinations of length 0 through <code class="docutils literal notranslate"><span class="pre">k</span></code> is the
+product, <code class="docutils literal notranslate"><span class="pre">(m_1</span> <span class="pre">+</span> <span class="pre">1)*(m_2</span> <span class="pre">+</span> <span class="pre">1)*...*(m_k</span> <span class="pre">+</span> <span class="pre">1)</span></code>. When the multiplicity
+of each item is 1 (i.e., k unique items) then there are 2**k
+combinations. For example, if there are 4 unique items, the total number
+of combinations is 16:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">sum</span><span class="p">(</span><span class="n">nC</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="go">16</span>
+</pre></div>
+</div>
+<p class="rubric">References</p>
+<ul class="simple">
+<li>https//en.wikipedia.org/wiki/Combination</li>
+<li><a class="reference external" href="https://math.stackexchange.com/questions/4643/an-efficient-method-for-computing-the-number-of-submultisets-of-size-n-of-a-giv/4654">https://math.stackexchange.com/questions/4643/an-efficient-method-for-computing-the-number-of-submultisets-of-size-n-of-a-giv/4654</a></li>
+</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../utilities/iterables.html#diofant.utilities.iterables.multiset_combinations" title="diofant.utilities.iterables.multiset_combinations"><code class="xref py py-func docutils literal notranslate"><span class="pre">diofant.utilities.iterables.multiset_combinations()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="diofant.functions.combinatorial.numbers.nP">
+<code class="descclassname">diofant.functions.combinatorial.numbers.</code><code class="descname">nP</code><span class="sig-paren">(</span><em>n</em>, <em>k=None</em>, <em>replacement=False</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/diofant/functions/combinatorial/numbers.html#nP"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.functions.combinatorial.numbers.nP" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the number of permutations of <code class="docutils literal notranslate"><span class="pre">n</span></code> items taken <code class="docutils literal notranslate"><span class="pre">k</span></code> at a time.</p>
+<dl class="docutils">
+<dt>Possible values for <code class="docutils literal notranslate"><span class="pre">n</span></code>::</dt>
+<dd>integer - set of length <code class="docutils literal notranslate"><span class="pre">n</span></code>
+sequence - converted to a multiset internally
+multiset - {element: multiplicity}</dd>
+</dl>
+<p>If <code class="docutils literal notranslate"><span class="pre">k</span></code> is None then the total of all permutations of length 0
+through the number of items represented by <code class="docutils literal notranslate"><span class="pre">n</span></code> will be returned.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">replacement</span></code> is True then a given item can appear more than once
+in the <code class="docutils literal notranslate"><span class="pre">k</span></code> items. (For example, for ‘ab’ permutations of 2 would
+include ‘aa’, ‘ab’, ‘ba’ and ‘bb’.) The multiplicity of elements in
+<code class="docutils literal notranslate"><span class="pre">n</span></code> is ignored when <code class="docutils literal notranslate"><span class="pre">replacement</span></code> is True but the total number
+of elements is considered since no element can appear more times than
+the number of elements in <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.utilities.iterables</span> <span class="k">import</span> <span class="n">multiset_permutations</span><span class="p">,</span> <span class="n">multiset</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nP</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">6</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nP</span><span class="p">(</span><span class="s1">&#39;abc&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="n">nP</span><span class="p">(</span><span class="n">multiset</span><span class="p">(</span><span class="s1">&#39;abc&#39;</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">6</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nP</span><span class="p">(</span><span class="s1">&#39;aab&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nP</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">nP</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)]</span>
+<span class="go">[1, 3, 6, 6]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nP</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">==</span> <span class="nb">sum</span><span class="p">(</span><span class="n">_</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>When <code class="docutils literal notranslate"><span class="pre">replacement</span></code> is True, each item can have multiplicity
+equal to the length represented by <code class="docutils literal notranslate"><span class="pre">n</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nP</span><span class="p">(</span><span class="s1">&#39;aabc&#39;</span><span class="p">,</span> <span class="n">replacement</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">121</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">multiset_permutations</span><span class="p">(</span><span class="s1">&#39;aaaabbbbcccc&#39;</span><span class="p">,</span> <span class="n">i</span><span class="p">)))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span>
+<span class="go">[1, 3, 9, 27, 81]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sum</span><span class="p">(</span><span class="n">_</span><span class="p">)</span>
+<span class="go">121</span>
+</pre></div>
+</div>
+<p class="rubric">References</p>
+<ul class="simple">
+<li>https//en.wikipedia.org/wiki/Permutation</li>
+</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../utilities/iterables.html#diofant.utilities.iterables.multiset_permutations" title="diofant.utilities.iterables.multiset_permutations"><code class="xref py py-func docutils literal notranslate"><span class="pre">diofant.utilities.iterables.multiset_permutations()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="diofant.functions.combinatorial.numbers.nT">
+<code class="descclassname">diofant.functions.combinatorial.numbers.</code><code class="descname">nT</code><span class="sig-paren">(</span><em>n</em>, <em>k=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/diofant/functions/combinatorial/numbers.html#nT"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.functions.combinatorial.numbers.nT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the number of <code class="docutils literal notranslate"><span class="pre">k</span></code>-sized partitions of <code class="docutils literal notranslate"><span class="pre">n</span></code> items.</p>
+<dl class="docutils">
+<dt>Possible values for <code class="docutils literal notranslate"><span class="pre">n</span></code>::</dt>
+<dd>integer - <code class="docutils literal notranslate"><span class="pre">n</span></code> identical items
+sequence - converted to a multiset internally
+multiset - {element: multiplicity}</dd>
+</dl>
+<p>Note: the convention for <code class="docutils literal notranslate"><span class="pre">nT</span></code> is different than that of <code class="docutils literal notranslate"><span class="pre">nC</span></code> and
+<code class="docutils literal notranslate"><span class="pre">nP</span></code> in that
+here an integer indicates <code class="docutils literal notranslate"><span class="pre">n</span></code> <em>identical</em> items instead of a set of
+length <code class="docutils literal notranslate"><span class="pre">n</span></code>; this is in keeping with the <code class="docutils literal notranslate"><span class="pre">partitions</span></code> function which
+treats its integer-<code class="docutils literal notranslate"><span class="pre">n</span></code> input like a list of <code class="docutils literal notranslate"><span class="pre">n</span></code> 1s. One can use
+<code class="docutils literal notranslate"><span class="pre">range(n)</span></code> for <code class="docutils literal notranslate"><span class="pre">n</span></code> to indicate <code class="docutils literal notranslate"><span class="pre">n</span></code> distinct items.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">k</span></code> is None then the total number of ways to partition the elements
+represented in <code class="docutils literal notranslate"><span class="pre">n</span></code> will be returned.</p>
+<p class="rubric">Examples</p>
+<p>Partitions of the given multiset:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">nT</span><span class="p">(</span><span class="s1">&#39;aabbc&#39;</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)]</span>
+<span class="go">[1, 8, 11, 5, 1, 0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nT</span><span class="p">(</span><span class="s1">&#39;aabbc&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="nb">sum</span><span class="p">(</span><span class="n">_</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">nT</span><span class="p">(</span><span class="s2">&quot;mississippi&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">12</span><span class="p">)]</span>
+<span class="go">[1, 74, 609, 1521, 1768, 1224, 579, 197, 50, 9, 1]</span>
+</pre></div>
+</div>
+<p>Partitions when all items are identical:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">nT</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)]</span>
+<span class="go">[1, 2, 2, 1, 1]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nT</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="o">*</span><span class="mi">5</span><span class="p">)</span> <span class="o">==</span> <span class="nb">sum</span><span class="p">(</span><span class="n">_</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>When all items are different:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">nT</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)]</span>
+<span class="go">[1, 15, 25, 10, 1]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nT</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span> <span class="o">==</span> <span class="nb">sum</span><span class="p">(</span><span class="n">_</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><a class="reference external" href="http://teaching.csse.uwa.edu.au/units/CITS7209/partition.pdf">http://teaching.csse.uwa.edu.au/units/CITS7209/partition.pdf</a></li>
+</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../utilities/iterables.html#diofant.utilities.iterables.partitions" title="diofant.utilities.iterables.partitions"><code class="xref py py-func docutils literal notranslate"><span class="pre">diofant.utilities.iterables.partitions()</span></code></a>, <a class="reference internal" href="../utilities/iterables.html#diofant.utilities.iterables.multiset_partitions" title="diofant.utilities.iterables.multiset_partitions"><code class="xref py py-func docutils literal notranslate"><span class="pre">diofant.utilities.iterables.multiset_partitions()</span></code></a></p>
+</div>
+</dd></dl>
+
+<p>Note that the integer for <code class="docutils literal notranslate"><span class="pre">n</span></code> indicates <em>identical</em> items for <code class="docutils literal notranslate"><span class="pre">nT</span></code> but
+indicates <code class="docutils literal notranslate"><span class="pre">n</span></code> <em>different</em> items for <code class="docutils literal notranslate"><span class="pre">nC</span></code> and <code class="docutils literal notranslate"><span class="pre">nP</span></code>.</p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="special.html" class="btn btn-neutral float-right" title="Special" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="elementary.html" class="btn btn-neutral" title="Elementary" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2006-2018 SymPy Development Team, 2013-2018 Sergey B Kirpichev
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
