@@ -1,0 +1,393 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Numeric Computation &mdash; Diofant 0.10.0a3.dev8+gf2667d6f31 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Term rewriting" href="rewriting.html" />
+    <link rel="prev" title="Numerical evaluation" href="evalf.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Diofant
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.10.0a3.dev8+gf2667d6f31
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/index.html">Reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Internals</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="polys.html">Internals of the Polynomial Manipulation Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gruntz.html">The Gruntz Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hyperexpand.html">Details on the Hypergeometric Function Expansion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="g-functions.html">Computing Integrals using Meijer G-Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="g-functions.html#the-g-function-integration-theorems">The G-Function Integration Theorems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="g-functions.html#the-inverse-laplace-transform-of-a-g-function">The Inverse Laplace Transform of a G-function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="g-functions.html#implemented-g-function-formulae">Implemented G-Function Formulae</a></li>
+<li class="toctree-l2"><a class="reference internal" href="evalf.html">Numerical evaluation</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Numeric Computation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#subs-evalf">Subs/evalf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lambdify">Lambdify</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ufuncify">uFuncify</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#so-which-should-i-use">So Which Should I Use?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rewriting.html">Term rewriting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../literature.html">Literature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guide.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../aboutus.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release/index.html">Release Notes</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Diofant</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Internals</a> &raquo;</li>
+        
+      <li>Numeric Computation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/internals/numeric-computation.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="numeric-computation">
+<h1>Numeric Computation<a class="headerlink" href="#numeric-computation" title="Permalink to this headline">¶</a></h1>
+<p>Symbolic computer algebra systems like Diofant facilitate the construction and
+manipulation of mathematical expressions.  Unfortunately when it comes time
+to evaluate these expressions on numerical data, symbolic systems often have
+poor performance.</p>
+<p>Fortunately Diofant offers a number of easy-to-use hooks into other numeric
+systems, allowing you to create mathematical expressions in Diofant and then
+ship them off to the numeric system of your choice.  This page documents many
+of the options available including the <code class="docutils literal notranslate"><span class="pre">math</span></code> library, the popular array
+computing package <code class="docutils literal notranslate"><span class="pre">numpy</span></code>, code generation in <code class="docutils literal notranslate"><span class="pre">Fortran</span></code> or <code class="docutils literal notranslate"><span class="pre">C</span></code>.</p>
+<div class="section" id="subs-evalf">
+<h2>Subs/evalf<a class="headerlink" href="#subs-evalf" title="Permalink to this headline">¶</a></h2>
+<p>Subs is the slowest but simplest option.  It runs at Diofant speeds.
+The <code class="docutils literal notranslate"><span class="pre">.subs(...).evalf()</span></code> method can substitute a numeric value
+for a symbolic one and then evaluate the result within Diofant.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">x</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span><span class="o">.</span><span class="n">evalf</span><span class="p">(</span><span class="n">subs</span><span class="o">=</span><span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="mf">3.14</span><span class="p">},</span> <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">0.000507214304613640</span>
+</pre></div>
+</div>
+<p>This method is slow.  You should use this method production only if performance
+is not an issue.  You can expect <code class="docutils literal notranslate"><span class="pre">.subs</span></code> to take tens of microseconds. It
+can be useful while prototyping or if you just want to see a value once.</p>
+</div>
+<div class="section" id="lambdify">
+<h2>Lambdify<a class="headerlink" href="#lambdify" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">lambdify</span></code> function translates Diofant expressions into Python functions,
+leveraging a variety of numerical libraries.  It is used as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">x</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">lambdify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">expr</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="p">(</span><span class="mf">3.14</span><span class="p">)</span>
+<span class="go">0.000507214304614</span>
+</pre></div>
+</div>
+<p>Here lambdify makes a function that computes <code class="docutils literal notranslate"><span class="pre">f(x)</span> <span class="pre">=</span> <span class="pre">sin(x)/x</span></code>.  By default
+lambdify relies on implementations in the <code class="docutils literal notranslate"><span class="pre">math</span></code> standard library. This
+numerical evaluation takes on the order of hundreds of nanoseconds, roughly two
+orders of magnitude faster than the <code class="docutils literal notranslate"><span class="pre">.subs</span></code> method.  This is the speed
+difference between Diofant and raw Python.</p>
+<p>Lambdify can leverage a variety of numerical backends.  By default it uses the
+<code class="docutils literal notranslate"><span class="pre">math</span></code> library.  However it also supports <code class="docutils literal notranslate"><span class="pre">mpmath</span></code> and most notably,
+<code class="docutils literal notranslate"><span class="pre">numpy</span></code>.  Using the <code class="docutils literal notranslate"><span class="pre">numpy</span></code> library gives the generated function access to
+powerful vectorized ufuncs that are backed by compiled C code.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">x</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">lambdify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="s2">&quot;numpy&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pprint</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+<span class="go">[ 0.84147098  0.84119981  0.84092844 ..., -0.05426074 -0.05433146</span>
+<span class="go">                           -0.05440211]</span>
+</pre></div>
+</div>
+<p>If you have array-based data this can confer a considerable speedup, on the
+order of 10 nano-seconds per element. Unfortunately numpy incurs some start-up
+time and introduces an overhead of a few microseconds.</p>
+</div>
+<div class="section" id="ufuncify">
+<h2>uFuncify<a class="headerlink" href="#ufuncify" title="Permalink to this headline">¶</a></h2>
+<p>While NumPy operations are very efficient for vectorized data they sometimes
+incur unnecessary costs when chained together. Consider the following operation</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">get_numpy_array</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">x</span>
+</pre></div>
+</div>
+<p>The operators <code class="docutils literal notranslate"><span class="pre">sin</span></code> and <code class="docutils literal notranslate"><span class="pre">/</span></code> call routines that execute tight for loops in
+<code class="docutils literal notranslate"><span class="pre">C</span></code>. The resulting computation looks something like this</p>
+<div class="code c highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">temp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="p">}</span>
+<span class="k">for</span><span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This is slightly sub-optimal because</p>
+<ol class="arabic simple">
+<li>We allocate an extra <code class="docutils literal notranslate"><span class="pre">temp</span></code> array</li>
+<li>We walk over <code class="docutils literal notranslate"><span class="pre">x</span></code> memory twice when once would have been sufficient</li>
+</ol>
+<p>A better solution would fuse both element-wise operations into a single for loop</p>
+<div class="code c highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">/</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Statically compiled projects like NumPy are unable to take advantage of such
+optimizations. Fortunately, Diofant is able to generate efficient low-level C
+or Fortran code. It can then depend on projects like <code class="docutils literal notranslate"><span class="pre">Cython</span></code> or <code class="docutils literal notranslate"><span class="pre">f2py</span></code> to
+compile and reconnect that code back up to Python. Fortunately this process is
+well automated and a Diofant user wishing to make use of this code generation
+should call the <code class="docutils literal notranslate"><span class="pre">ufuncify</span></code> function</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">x</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.utilities.autowrap</span> <span class="k">import</span> <span class="n">ufuncify</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">ufuncify</span><span class="p">((</span><span class="n">x</span><span class="p">,),</span> <span class="n">expr</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This function <code class="docutils literal notranslate"><span class="pre">f</span></code> consumes and returns a NumPy array. Generally <code class="docutils literal notranslate"><span class="pre">ufuncify</span></code>
+performs at least as well as <code class="docutils literal notranslate"><span class="pre">lambdify</span></code>. If the expression is complicated
+then <code class="docutils literal notranslate"><span class="pre">ufuncify</span></code> often significantly outperforms the NumPy backed solution.
+Jensen has a good <a class="reference external" href="https://ojensen.wordpress.com/2010/08/10/fast-ufunc-ish-hydrogen-solutions/">blog post</a>
+on this topic.</p>
+</div>
+<div class="section" id="so-which-should-i-use">
+<h2>So Which Should I Use?<a class="headerlink" href="#so-which-should-i-use" title="Permalink to this headline">¶</a></h2>
+<p>The options here were listed in order from slowest and least dependencies to
+fastest and most dependencies.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="10%" />
+<col width="43%" />
+<col width="22%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Tool</th>
+<th class="head">Speed</th>
+<th class="head">Qualities</th>
+<th class="head">Dependencies</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>subs/evalf</td>
+<td>50us</td>
+<td>Simple</td>
+<td>None</td>
+</tr>
+<tr class="row-odd"><td>lambdify</td>
+<td>1us</td>
+<td>Scalar functions</td>
+<td>math</td>
+</tr>
+<tr class="row-even"><td>lambdify-numpy</td>
+<td>10ns</td>
+<td>Vector functions</td>
+<td>numpy</td>
+</tr>
+<tr class="row-odd"><td>ufuncify</td>
+<td>10ns</td>
+<td>Complex vector expressions</td>
+<td>f2py, Cython</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="rewriting.html" class="btn btn-neutral float-right" title="Term rewriting" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="evalf.html" class="btn btn-neutral" title="Numerical evaluation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2006-2018 SymPy Development Team, 2013-2018 Sergey B Kirpichev
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
