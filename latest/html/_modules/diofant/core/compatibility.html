@@ -1,0 +1,662 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>diofant.core.compatibility &mdash; Diofant 0.10.0a3.dev10+gbc098bd documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> Diofant
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.10.0a3.dev10+gbc098bd
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules/index.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../internals/index.html">Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../literature.html">Literature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../guide.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../aboutus.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release/index.html">Release Notes</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Diofant</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>diofant.core.compatibility</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for diofant.core.compatibility</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Reimplementations of constructs introduced in later versions of Python than</span>
+<span class="sd">we support. Also some functions that are needed Diofant-wide and are located</span>
+<span class="sd">here for easy import.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">defaultdict</span>
+
+<span class="kn">from</span> <span class="nn">..external</span> <span class="k">import</span> <span class="n">import_module</span>
+
+
+<span class="c1"># These are in here because telling if something is an iterable just by calling</span>
+<span class="c1"># hasattr(obj, &quot;__iter__&quot;) behaves differently in Python 2 and Python 3.  In</span>
+<span class="c1"># particular, hasattr(str, &quot;__iter__&quot;) is False in Python 2 and True in Python 3.</span>
+<span class="c1"># I think putting them here also makes it easier to use them in the core.</span>
+
+<div class="viewcode-block" id="NotIterable"><a class="viewcode-back" href="../../../modules/core.html#diofant.core.compatibility.NotIterable">[docs]</a><span class="k">class</span> <span class="nc">NotIterable</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Use this as mixin when creating a class which is not supposed to return</span>
+<span class="sd">    true when iterable() is called on its instances. I.e. avoid infinite loop</span>
+<span class="sd">    when calling e.g. list() on the instance</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="iterable"><a class="viewcode-back" href="../../../modules/core.html#diofant.core.compatibility.iterable">[docs]</a><span class="k">def</span> <span class="nf">iterable</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">exclude</span><span class="o">=</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">NotIterable</span><span class="p">)):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return a boolean indicating whether ``i`` is Diofant iterable.</span>
+<span class="sd">    True also indicates that the iterator is finite, i.e. you e.g.</span>
+<span class="sd">    call list(...) on the instance.</span>
+
+<span class="sd">    When Diofant is working with iterables, it is almost always assuming</span>
+<span class="sd">    that the iterable is not a string or a mapping, so those are excluded</span>
+<span class="sd">    by default. If you want a pure Python definition, make exclude=None. To</span>
+<span class="sd">    exclude multiple items, pass them as a tuple.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    is_sequence</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; things = [[1], (1,), {1}, Tuple(1), (j for j in [1, 2]), {1: 2}, &#39;1&#39;, 1]</span>
+<span class="sd">    &gt;&gt;&gt; for i in things:</span>
+<span class="sd">    ...     print(&#39;%s %s&#39; % (iterable(i), type(i)))</span>
+<span class="sd">    True &lt;... &#39;list&#39;&gt;</span>
+<span class="sd">    True &lt;... &#39;tuple&#39;&gt;</span>
+<span class="sd">    True &lt;... &#39;set&#39;&gt;</span>
+<span class="sd">    True &lt;class &#39;diofant.core.containers.Tuple&#39;&gt;</span>
+<span class="sd">    True &lt;... &#39;generator&#39;&gt;</span>
+<span class="sd">    False &lt;... &#39;dict&#39;&gt;</span>
+<span class="sd">    False &lt;... &#39;str&#39;&gt;</span>
+<span class="sd">    False &lt;... &#39;int&#39;&gt;</span>
+
+<span class="sd">    &gt;&gt;&gt; iterable({}, exclude=None)</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; iterable({}, exclude=str)</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; iterable(&quot;no&quot;, exclude=str)</span>
+<span class="sd">    False</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="nb">iter</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="n">exclude</span><span class="p">:</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">exclude</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="is_sequence"><a class="viewcode-back" href="../../../modules/core.html#diofant.core.compatibility.is_sequence">[docs]</a><span class="k">def</span> <span class="nf">is_sequence</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return a boolean indicating whether ``i`` is a sequence in the Diofant</span>
+<span class="sd">    sense. If anything that fails the test below should be included as</span>
+<span class="sd">    being a sequence for your application, set &#39;include&#39; to that object&#39;s</span>
+<span class="sd">    type; multiple types should be passed as a tuple of types.</span>
+
+<span class="sd">    Note: although generators can generate a sequence, they often need special</span>
+<span class="sd">    handling to make sure their elements are captured before the generator is</span>
+<span class="sd">    exhausted, so these are not included by default in the definition of a</span>
+<span class="sd">    sequence.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    iterable</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from types import GeneratorType</span>
+<span class="sd">    &gt;&gt;&gt; is_sequence([])</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; is_sequence(set())</span>
+<span class="sd">    False</span>
+<span class="sd">    &gt;&gt;&gt; is_sequence(&#39;abc&#39;)</span>
+<span class="sd">    False</span>
+<span class="sd">    &gt;&gt;&gt; is_sequence(&#39;abc&#39;, include=str)</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; generator = (c for c in &#39;abc&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; is_sequence(generator)</span>
+<span class="sd">    False</span>
+<span class="sd">    &gt;&gt;&gt; is_sequence(generator, include=(str, GeneratorType))</span>
+<span class="sd">    True</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="nb">hasattr</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="s1">&#39;__getitem__&#39;</span><span class="p">)</span> <span class="ow">and</span>
+            <span class="n">iterable</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="ow">or</span>
+            <span class="nb">bool</span><span class="p">(</span><span class="n">include</span><span class="p">)</span> <span class="ow">and</span>
+            <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">include</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="as_int"><a class="viewcode-back" href="../../../modules/core.html#diofant.core.compatibility.as_int">[docs]</a><span class="k">def</span> <span class="nf">as_int</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert the argument to a builtin integer.</span>
+
+<span class="sd">    The return value is guaranteed to be equal to the input. ValueError is</span>
+<span class="sd">    raised if the input has a non-integral value.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; 3.0</span>
+<span class="sd">    3.0</span>
+<span class="sd">    &gt;&gt;&gt; as_int(3.0)  # convert to int and test for equality</span>
+<span class="sd">    3</span>
+<span class="sd">    &gt;&gt;&gt; int(sqrt(10))</span>
+<span class="sd">    3</span>
+<span class="sd">    &gt;&gt;&gt; as_int(sqrt(10))</span>
+<span class="sd">    Traceback (most recent call last):</span>
+<span class="sd">    ...</span>
+<span class="sd">    ValueError: ... is not an integer</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">result</span> <span class="o">!=</span> <span class="n">n</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span>
+    <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> is not an integer&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">n</span><span class="p">,))</span>
+    <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="default_sort_key"><a class="viewcode-back" href="../../../modules/core.html#diofant.core.compatibility.default_sort_key">[docs]</a><span class="k">def</span> <span class="nf">default_sort_key</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return a key that can be used for sorting.</span>
+
+<span class="sd">    The key has the structure:</span>
+
+<span class="sd">    (class_key, (len(args), args), exponent.sort_key(), coefficient)</span>
+
+<span class="sd">    This key is supplied by the sort_key routine of Basic objects when</span>
+<span class="sd">    ``item`` is a Basic object or an object (other than a string) that</span>
+<span class="sd">    sympifies to a Basic object. Otherwise, this function produces the</span>
+<span class="sd">    key.</span>
+
+<span class="sd">    The ``order`` argument is passed along to the sort_key routine and is</span>
+<span class="sd">    used to determine how the terms *within* an expression are ordered.</span>
+<span class="sd">    (See examples below) ``order`` options are: &#39;lex&#39;, &#39;grlex&#39;, &#39;grevlex&#39;,</span>
+<span class="sd">    and reversed values of the same (e.g. &#39;rev-lex&#39;). The default order</span>
+<span class="sd">    value is None (which translates to &#39;lex&#39;).</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from diofant.core.function import UndefinedFunction</span>
+
+<span class="sd">    The following are equivalent ways of getting the key for an object:</span>
+
+<span class="sd">    &gt;&gt;&gt; x.sort_key() == default_sort_key(x)</span>
+<span class="sd">    True</span>
+
+<span class="sd">    Here are some examples of the key that is produced:</span>
+
+<span class="sd">    &gt;&gt;&gt; default_sort_key(UndefinedFunction(&#39;f&#39;))</span>
+<span class="sd">    ((0, 0, &#39;UndefinedFunction&#39;), (1, (&#39;f&#39;,)), ((1, 0, &#39;Number&#39;),</span>
+<span class="sd">        (0, ()), (), 1), 1)</span>
+<span class="sd">    &gt;&gt;&gt; default_sort_key(&#39;1&#39;)</span>
+<span class="sd">    ((0, 0, &#39;str&#39;), (1, (&#39;1&#39;,)), ((1, 0, &#39;Number&#39;), (0, ()), (), 1), 1)</span>
+<span class="sd">    &gt;&gt;&gt; default_sort_key(S.One)</span>
+<span class="sd">    ((1, 0, &#39;Number&#39;), (0, ()), (), 1)</span>
+<span class="sd">    &gt;&gt;&gt; default_sort_key(2)</span>
+<span class="sd">    ((1, 0, &#39;Number&#39;), (0, ()), (), 2)</span>
+
+<span class="sd">    While sort_key is a method only defined for Diofant objects,</span>
+<span class="sd">    default_sort_key will accept anything as an argument so it is</span>
+<span class="sd">    more robust as a sorting key. For the following, using key=</span>
+<span class="sd">    lambda i: i.sort_key() would fail because 2 doesn&#39;t have a sort_key</span>
+<span class="sd">    method; that&#39;s why default_sort_key is used. Note, that it also</span>
+<span class="sd">    handles sympification of non-string items likes ints:</span>
+
+<span class="sd">    &gt;&gt;&gt; a = [2, I, -I]</span>
+<span class="sd">    &gt;&gt;&gt; sorted(a, key=default_sort_key)</span>
+<span class="sd">    [2, -I, I]</span>
+
+<span class="sd">    The returned key can be used anywhere that a key can be specified for</span>
+<span class="sd">    a function, e.g. sort, min, max, etc...:</span>
+
+<span class="sd">    &gt;&gt;&gt; a.sort(key=default_sort_key); a[0]</span>
+<span class="sd">    2</span>
+<span class="sd">    &gt;&gt;&gt; min(a, key=default_sort_key)</span>
+<span class="sd">    2</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    =====</span>
+
+<span class="sd">    The key returned is useful for getting items into a canonical order</span>
+<span class="sd">    that will be the same across platforms. It is not directly useful for</span>
+<span class="sd">    sorting lists of expressions:</span>
+
+<span class="sd">    &gt;&gt;&gt; a, b = x, 1/x</span>
+
+<span class="sd">    Since ``a`` has only 1 term, its value of sort_key is unaffected by</span>
+<span class="sd">    ``order``:</span>
+
+<span class="sd">    &gt;&gt;&gt; a.sort_key() == a.sort_key(&#39;rev-lex&#39;)</span>
+<span class="sd">    True</span>
+
+<span class="sd">    If ``a`` and ``b`` are combined then the key will differ because there</span>
+<span class="sd">    are terms that can be ordered:</span>
+
+<span class="sd">    &gt;&gt;&gt; eq = a + b</span>
+<span class="sd">    &gt;&gt;&gt; eq.sort_key() == eq.sort_key(&#39;rev-lex&#39;)</span>
+<span class="sd">    False</span>
+<span class="sd">    &gt;&gt;&gt; eq.as_ordered_terms()</span>
+<span class="sd">    [x, 1/x]</span>
+<span class="sd">    &gt;&gt;&gt; eq.as_ordered_terms(&#39;rev-lex&#39;)</span>
+<span class="sd">    [1/x, x]</span>
+
+<span class="sd">    But since the keys for each of these terms are independent of ``order``&#39;s</span>
+<span class="sd">    value, they don&#39;t sort differently when they appear separately in a list:</span>
+
+<span class="sd">    &gt;&gt;&gt; sorted(eq.args, key=default_sort_key)</span>
+<span class="sd">    [1/x, x]</span>
+<span class="sd">    &gt;&gt;&gt; sorted(eq.args, key=lambda i: default_sort_key(i, order=&#39;rev-lex&#39;))</span>
+<span class="sd">    [1/x, x]</span>
+
+<span class="sd">    The order of terms obtained when using these keys is the order that would</span>
+<span class="sd">    be obtained if those terms were *factors* in a product.</span>
+
+<span class="sd">    Although it is useful for quickly putting expressions in canonical order,</span>
+<span class="sd">    it does not sort expressions based on their complexity defined by the</span>
+<span class="sd">    number of operations, power of variables and others:</span>
+
+<span class="sd">    &gt;&gt;&gt; sorted([sin(x)*cos(x), sin(x)], key=default_sort_key)</span>
+<span class="sd">    [sin(x)*cos(x), sin(x)]</span>
+<span class="sd">    &gt;&gt;&gt; sorted([x, x**2, sqrt(x), x**3], key=default_sort_key)</span>
+<span class="sd">    [sqrt(x), x, x**2, x**3]</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    ordered</span>
+<span class="sd">    diofant.core.expr.Expr.as_ordered_factors</span>
+<span class="sd">    diofant.core.expr.Expr.as_ordered_terms</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">S</span><span class="p">,</span> <span class="n">Basic</span>
+    <span class="kn">from</span> <span class="nn">.sympify</span> <span class="k">import</span> <span class="n">sympify</span><span class="p">,</span> <span class="n">SympifyError</span>
+    <span class="kn">from</span> <span class="nn">.compatibility</span> <span class="k">import</span> <span class="n">iterable</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">Basic</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">item</span><span class="o">.</span><span class="n">sort_key</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">iterable</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">exclude</span><span class="o">=</span><span class="p">(</span><span class="nb">str</span><span class="p">,)):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="n">args</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="n">unordered</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">set</span><span class="p">):</span>
+            <span class="n">args</span> <span class="o">=</span> <span class="n">item</span>
+            <span class="n">unordered</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># e.g. tuple, list</span>
+            <span class="n">args</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+            <span class="n">unordered</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">default_sort_key</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">)</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">unordered</span><span class="p">:</span>  <span class="c1"># e.g. dict, set</span>
+            <span class="n">args</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+
+        <span class="n">cls_index</span><span class="p">,</span> <span class="n">args</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">),</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">args</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">item</span> <span class="o">=</span> <span class="n">sympify</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">SympifyError</span><span class="p">:</span>
+                <span class="c1"># e.g. lambda x: x</span>
+                <span class="k">pass</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">Basic</span><span class="p">):</span>
+                    <span class="c1"># e.g int -&gt; Integer</span>
+                    <span class="k">return</span> <span class="n">default_sort_key</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+                <span class="c1"># e.g. UndefinedFunction</span>
+
+        <span class="c1"># e.g. str</span>
+        <span class="n">cls_index</span><span class="p">,</span> <span class="n">args</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">),))</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">cls_index</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">item</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
+            <span class="p">),</span> <span class="n">args</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="o">.</span><span class="n">sort_key</span><span class="p">(),</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span></div>
+
+
+<span class="k">def</span> <span class="nf">_nodes</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A helper for ordered() which returns the node count of ``e`` which</span>
+<span class="sd">    for Basic objects is the number of Basic nodes in the expression tree</span>
+<span class="sd">    but for other objects is 1 (unless the object is an iterable or dict</span>
+<span class="sd">    for which the sum of nodes is returned).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">.basic</span> <span class="k">import</span> <span class="n">Basic</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">Basic</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">e</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">Basic</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">iterable</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="n">_nodes</span><span class="p">(</span><span class="n">ei</span><span class="p">)</span> <span class="k">for</span> <span class="n">ei</span> <span class="ow">in</span> <span class="n">e</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="n">_nodes</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">+</span> <span class="n">_nodes</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">e</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+
+
+<div class="viewcode-block" id="ordered"><a class="viewcode-back" href="../../../modules/core.html#diofant.core.compatibility.ordered">[docs]</a><span class="k">def</span> <span class="nf">ordered</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">warn</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return an iterator of the seq where keys are used to break ties in</span>
+<span class="sd">    a conservative fashion: if, after applying a key, there are no ties</span>
+<span class="sd">    then no other keys will be computed.</span>
+
+<span class="sd">    Two default keys will be applied if 1) keys are not provided or 2) the</span>
+<span class="sd">    given keys don&#39;t resolve all ties (but only if `default` is True). The</span>
+<span class="sd">    two keys are `_nodes` (which places smaller expressions before large) and</span>
+<span class="sd">    `default_sort_key` which (if the `sort_key` for an object is defined</span>
+<span class="sd">    properly) should resolve any ties.</span>
+
+<span class="sd">    If ``warn`` is True then an error will be raised if there were no</span>
+<span class="sd">    keys remaining to break ties. This can be used if it was expected that</span>
+<span class="sd">    there should be no ties between items that are not identical.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    The count_ops is not sufficient to break ties in this list and the first</span>
+<span class="sd">    two items appear in their original order (i.e. the sorting is stable):</span>
+
+<span class="sd">    &gt;&gt;&gt; list(ordered([y + 2, x + 2, x**2 + y + 3],</span>
+<span class="sd">    ...              count_ops, default=False, warn=False))</span>
+<span class="sd">    [y + 2, x + 2, x**2 + y + 3]</span>
+
+<span class="sd">    The default_sort_key allows the tie to be broken:</span>
+
+<span class="sd">    &gt;&gt;&gt; list(ordered([y + 2, x + 2, x**2 + y + 3]))</span>
+<span class="sd">    [x + 2, y + 2, x**2 + y + 3]</span>
+
+<span class="sd">    Here, sequences are sorted by length, then sum:</span>
+
+<span class="sd">    &gt;&gt;&gt; seq, keys = [[[1, 2, 1], [0, 3, 1], [1, 1, 3], [2], [1]],</span>
+<span class="sd">    ...              [lambda x: len(x), lambda x: sum(x)]]</span>
+<span class="sd">    &gt;&gt;&gt; list(ordered(seq, keys, default=False, warn=False))</span>
+<span class="sd">    [[1], [2], [1, 2, 1], [0, 3, 1], [1, 1, 3]]</span>
+
+<span class="sd">    If ``warn`` is True, an error will be raised if there were not</span>
+<span class="sd">    enough keys to break ties:</span>
+
+<span class="sd">    &gt;&gt;&gt; list(ordered(seq, keys, default=False, warn=True))</span>
+<span class="sd">    Traceback (most recent call last):</span>
+<span class="sd">    ...</span>
+<span class="sd">    ValueError: not enough keys to break ties</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    =====</span>
+
+<span class="sd">    The decorated sort is one of the fastest ways to sort a sequence for</span>
+<span class="sd">    which special item comparison is desired: the sequence is decorated,</span>
+<span class="sd">    sorted on the basis of the decoration (e.g. making all letters lower</span>
+<span class="sd">    case) and then undecorated. If one wants to break ties for items that</span>
+<span class="sd">    have the same decorated value, a second key can be used. But if the</span>
+<span class="sd">    second key is expensive to compute then it is inefficient to decorate</span>
+<span class="sd">    all items with both keys: only those items having identical first key</span>
+<span class="sd">    values need to be decorated. This function applies keys successively</span>
+<span class="sd">    only when needed to break ties. By yielding an iterator, use of the</span>
+<span class="sd">    tie-breaker is delayed as long as possible.</span>
+
+<span class="sd">    This function is best used in cases when use of the first key is</span>
+<span class="sd">    expected to be a good hashing function; if there are no unique hashes</span>
+<span class="sd">    from application of a key then that key should not have been used. The</span>
+<span class="sd">    exception, however, is that even if there are many collisions, if the</span>
+<span class="sd">    first group is small and one does not need to process all items in the</span>
+<span class="sd">    list then time will not be wasted sorting what one was not interested</span>
+<span class="sd">    in. For example, if one were looking for the minimum in a list and</span>
+<span class="sd">    there were several criteria used to define the sort order, then this</span>
+<span class="sd">    function would be good at returning that quickly if the first group</span>
+<span class="sd">    of candidates is small relative to the number of items being processed.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">keys</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+            <span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="n">keys</span><span class="p">]</span>
+        <span class="n">keys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">keys</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">seq</span><span class="p">:</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">)]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">default</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;if default=False then keys must be provided&#39;</span><span class="p">)</span>
+        <span class="n">d</span><span class="p">[</span><span class="kc">None</span><span class="p">]</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">keys</span><span class="p">:</span>
+                <span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">ordered</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">keys</span><span class="p">,</span> <span class="n">default</span><span class="p">,</span> <span class="n">warn</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">default</span><span class="p">:</span>
+                <span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">ordered</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="p">(</span><span class="n">_nodes</span><span class="p">,</span> <span class="n">default_sort_key</span><span class="p">,),</span>
+                               <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">warn</span><span class="o">=</span><span class="n">warn</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">warn</span><span class="p">:</span>
+                <span class="kn">from</span> <span class="nn">..utilities.iterables</span> <span class="k">import</span> <span class="n">uniq</span>
+                <span class="n">u</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">uniq</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">]))</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">u</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;not enough keys to break ties: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">u</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">]:</span>
+            <span class="k">yield</span> <span class="n">v</span>
+        <span class="n">d</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">k</span><span class="p">)</span></div>
+
+
+<span class="c1"># If HAS_GMPY is 0, no supported version of gmpy is available. Otherwise,</span>
+<span class="c1"># HAS_GMPY contains the major version number of gmpy.</span>
+
+<span class="n">GROUND_TYPES</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;DIOFANT_GROUND_TYPES&#39;</span><span class="p">,</span> <span class="s1">&#39;auto&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+<span class="n">gmpy</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;gmpy2&#39;</span><span class="p">,</span> <span class="n">min_module_version</span><span class="o">=</span><span class="s1">&#39;2.1.0&#39;</span><span class="p">,</span>
+                     <span class="n">module_version_attr</span><span class="o">=</span><span class="s1">&#39;version&#39;</span><span class="p">,</span>
+                     <span class="n">module_version_attr_call_args</span><span class="o">=</span><span class="p">())</span>
+<span class="k">if</span> <span class="n">gmpy</span><span class="p">:</span>
+    <span class="n">HAS_GMPY</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">HAS_GMPY</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">if</span> <span class="n">GROUND_TYPES</span> <span class="o">==</span> <span class="s1">&#39;auto&#39;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">HAS_GMPY</span><span class="p">:</span>
+        <span class="n">GROUND_TYPES</span> <span class="o">=</span> <span class="s1">&#39;gmpy&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">GROUND_TYPES</span> <span class="o">=</span> <span class="s1">&#39;python&#39;</span>
+
+<span class="k">if</span> <span class="n">GROUND_TYPES</span> <span class="o">==</span> <span class="s1">&#39;gmpy&#39;</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">HAS_GMPY</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">warnings</span> <span class="k">import</span> <span class="n">warn</span>
+    <span class="n">warn</span><span class="p">(</span><span class="s2">&quot;gmpy library is not installed, switching to &#39;python&#39; ground types&quot;</span><span class="p">)</span>
+    <span class="n">GROUND_TYPES</span> <span class="o">=</span> <span class="s1">&#39;python&#39;</span>
+
+<span class="c1"># DIOFANT_INTS is a tuple containing the base types for valid integer types.</span>
+<span class="n">DIOFANT_INTS</span> <span class="o">=</span> <span class="nb">int</span><span class="p">,</span>
+
+<span class="k">if</span> <span class="n">GROUND_TYPES</span> <span class="o">==</span> <span class="s1">&#39;gmpy&#39;</span><span class="p">:</span>
+    <span class="n">DIOFANT_INTS</span> <span class="o">+=</span> <span class="n">gmpy</span><span class="o">.</span><span class="n">mpz</span><span class="p">,</span>
+
+<span class="k">if</span> <span class="n">GROUND_TYPES</span> <span class="o">==</span> <span class="s1">&#39;python&#39;</span><span class="p">:</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;MPMATH_NOGMPY&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;yes&#39;</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2006-2018 SymPy Development Team, 2013-2018 Sergey B Kirpichev
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

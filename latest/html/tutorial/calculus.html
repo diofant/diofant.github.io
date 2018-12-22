@@ -1,0 +1,562 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Calculus &mdash; Diofant 0.10.0a3.dev10+gbc098bd documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Solvers" href="solvers.html" />
+    <link rel="prev" title="Simplification" href="simplification.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Diofant
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.10.0a3.dev10+gbc098bd
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorial</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html">Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gotchas.html">Gotchas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="printing.html">Printing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simplification.html">Simplification</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Calculus</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#derivatives">Derivatives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#integrals">Integrals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sums-and-products">Sums and Products</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#limits">Limits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#series-expansion">Series Expansion</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="solvers.html">Solvers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polys.html">Polynomials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="matrices.html">Matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manipulation.html">Expression Trees</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/index.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../internals/index.html">Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../literature.html">Literature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guide.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../aboutus.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release/index.html">Release Notes</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Diofant</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Tutorial</a> &raquo;</li>
+        
+      <li>Calculus</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/tutorial/calculus.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="calculus">
+<h1>Calculus<a class="headerlink" href="#calculus" title="Permalink to this headline">¶</a></h1>
+<p>This section covers how to do basic calculus tasks such as derivatives,
+integrals, limits, and series expansions in Diofant.</p>
+<div class="section" id="derivatives">
+<h2>Derivatives<a class="headerlink" href="#derivatives" title="Permalink to this headline">¶</a></h2>
+<p>To take derivatives, use the <a class="reference internal" href="../modules/core.html#diofant.core.function.diff" title="diofant.core.function.diff"><code class="xref py py-func docutils literal notranslate"><span class="pre">diff()</span></code></a>
+function.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">diff</span><span class="p">(</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+<span class="go">-sin(x)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">diff</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+<span class="go">   ⎛ 2⎞</span>
+<span class="go">   ⎝x ⎠</span>
+<span class="go">2⋅ℯ    ⋅x</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../modules/core.html#diofant.core.function.diff" title="diofant.core.function.diff"><code class="xref py py-func docutils literal notranslate"><span class="pre">diff()</span></code></a> can take multiple derivatives at
+once.  To take multiple derivatives, pass the variable as many times
+as you wish to differentiate, or pass a number after the variable.
+For example, both of the following find the third derivative of <span class="math notranslate nohighlight">\(x^4\)</span>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">4</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="go">24⋅x</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">4</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">24⋅x</span>
+</pre></div>
+</div>
+<p>You can also take derivatives with respect to many variables at once.  Just
+pass each derivative in order, using the same syntax as for single variable
+derivatives.  For example, each of the following will compute
+<span class="math notranslate nohighlight">\(\frac{\partial^7}{\partial x\partial y^2\partial z^4} e^{x y z}\)</span>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span> <span class="o">=</span> <span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="o">*</span><span class="n">z</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">diff</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+<span class="go"> x⋅y⋅z  3  2 ⎛ 3  3  3       2  2  2                ⎞</span>
+<span class="go">ℯ     ⋅x ⋅y ⋅⎝x ⋅y ⋅z  + 14⋅x ⋅y ⋅z  + 52⋅x⋅y⋅z + 48⎠</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">diff</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go"> x⋅y⋅z  3  2 ⎛ 3  3  3       2  2  2                ⎞</span>
+<span class="go">ℯ     ⋅x ⋅y ⋅⎝x ⋅y ⋅z  + 14⋅x ⋅y ⋅z  + 52⋅x⋅y⋅z + 48⎠</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">diff</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go"> x⋅y⋅z  3  2 ⎛ 3  3  3       2  2  2                ⎞</span>
+<span class="go">ℯ     ⋅x ⋅y ⋅⎝x ⋅y ⋅z  + 14⋅x ⋅y ⋅z  + 52⋅x⋅y⋅z + 48⎠</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../modules/core.html#diofant.core.function.diff" title="diofant.core.function.diff"><code class="xref py py-func docutils literal notranslate"><span class="pre">diff()</span></code></a> can also be called as a method
+<a class="reference internal" href="../modules/core.html#diofant.core.expr.Expr.diff" title="diofant.core.expr.Expr.diff"><code class="xref py py-meth docutils literal notranslate"><span class="pre">diff()</span></code></a>.  The two ways of calling
+<a class="reference internal" href="../modules/core.html#diofant.core.function.diff" title="diofant.core.function.diff"><code class="xref py py-func docutils literal notranslate"><span class="pre">diff()</span></code></a> are exactly the same, and are
+provided only for convenience.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go"> x⋅y⋅z  3  2 ⎛ 3  3  3       2  2  2                ⎞</span>
+<span class="go">ℯ     ⋅x ⋅y ⋅⎝x ⋅y ⋅z  + 14⋅x ⋅y ⋅z  + 52⋅x⋅y⋅z + 48⎠</span>
+</pre></div>
+</div>
+<p>To create an unevaluated derivative, use the
+<a class="reference internal" href="../modules/core.html#diofant.core.function.Derivative" title="diofant.core.function.Derivative"><code class="xref py py-class docutils literal notranslate"><span class="pre">Derivative</span></code></a> class.  It has the same
+syntax as <a class="reference internal" href="../modules/core.html#diofant.core.function.diff" title="diofant.core.function.diff"><code class="xref py py-func docutils literal notranslate"><span class="pre">diff()</span></code></a>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Derivative</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">     7</span>
+<span class="go">    ∂     ⎛ x⋅y⋅z⎞</span>
+<span class="go">──────────⎝ℯ     ⎠</span>
+<span class="go">  4   2</span>
+<span class="go">∂z  ∂y  ∂x</span>
+</pre></div>
+</div>
+<p>Such unevaluated objects also used when Diofant does not know how to compute
+the derivative of an expression.</p>
+<p>To evaluate an unevaluated derivative, use the
+<a class="reference internal" href="../modules/core.html#diofant.core.basic.Basic.doit" title="diofant.core.basic.Basic.doit"><code class="xref py py-meth docutils literal notranslate"><span class="pre">doit()</span></code></a> method.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">_</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span>
+<span class="go"> x⋅y⋅z  3  2 ⎛ 3  3  3       2  2  2                ⎞</span>
+<span class="go">ℯ     ⋅x ⋅y ⋅⎝x ⋅y ⋅z  + 14⋅x ⋅y ⋅z  + 52⋅x⋅y⋅z + 48⎠</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="integrals">
+<h2>Integrals<a class="headerlink" href="#integrals" title="Permalink to this headline">¶</a></h2>
+<p>To compute an integral, use the <a class="reference internal" href="../modules/integrals.html#diofant.integrals.integrals.integrate" title="diofant.integrals.integrals.integrate"><code class="xref py py-func docutils literal notranslate"><span class="pre">integrate()</span></code></a>
+function.  There are two kinds of integrals, definite and indefinite.  To
+compute an indefinite integral, do</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">integrate</span><span class="p">(</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+<span class="go">sin(x)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For indefinite integrals, Diofant does not include the constant of
+integration.</p>
+</div>
+<p>For example, to compute a definite integral</p>
+<div class="math notranslate nohighlight">
+\[\int_0^\infty e^{-x}\,dx,\]</div>
+<p>we would do</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">integrate</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">oo</span><span class="p">))</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last"><span class="math notranslate nohighlight">\(\infty\)</span> in Diofant is <code class="docutils literal notranslate"><span class="pre">oo</span></code> (that’s the lowercase letter “oh” twice).</p>
+</div>
+<p>As with indefinite integrals, you can pass multiple limit tuples to perform a
+multiple integral.  For example, to compute</p>
+<div class="math notranslate nohighlight">
+\[\int_{-\infty}^{\infty}\int_{-\infty}^{\infty} e^{- x^{2} - y^{2}}\, dx\, dy,\]</div>
+<p>do</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">integrate</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="n">oo</span><span class="p">,</span> <span class="n">oo</span><span class="p">),</span> <span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="o">-</span><span class="n">oo</span><span class="p">,</span> <span class="n">oo</span><span class="p">))</span>
+<span class="go">π</span>
+</pre></div>
+</div>
+<p>If <a class="reference internal" href="../modules/integrals.html#diofant.integrals.integrals.integrate" title="diofant.integrals.integrals.integrate"><code class="xref py py-func docutils literal notranslate"><span class="pre">integrate()</span></code></a> is unable to compute an
+integral, it returns an unevaluated
+<a class="reference internal" href="../modules/integrals.html#diofant.integrals.integrals.Integral" title="diofant.integrals.integrals.Integral"><code class="xref py py-class docutils literal notranslate"><span class="pre">Integral</span></code></a> object.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">integrate</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="go">⌠</span>
+<span class="go">⎮  x</span>
+<span class="go">⎮ x  dx</span>
+<span class="go">⌡</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">_</span><span class="p">)</span>
+<span class="go">Integral(x**x, x)</span>
+</pre></div>
+</div>
+<p>As with <a class="reference internal" href="../modules/core.html#diofant.core.function.Derivative" title="diofant.core.function.Derivative"><code class="xref py py-class docutils literal notranslate"><span class="pre">Derivative</span></code></a>, you can create an
+unevaluated integral directly.  To later evaluate this integral, call
+<a class="reference internal" href="../modules/integrals.html#diofant.integrals.integrals.Integral.doit" title="diofant.integrals.integrals.Integral.doit"><code class="xref py py-meth docutils literal notranslate"><span class="pre">doit()</span></code></a>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Integral</span><span class="p">(</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="go">⌠</span>
+<span class="go">⎮    2</span>
+<span class="go">⎮ log (x) dx</span>
+<span class="go">⌡</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span>
+<span class="go">         2</span>
+<span class="go">x⋅log (x) - 2⋅x⋅log(x) + 2⋅x</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../modules/integrals.html#diofant.integrals.integrals.integrate" title="diofant.integrals.integrals.integrate"><code class="xref py py-func docutils literal notranslate"><span class="pre">integrate()</span></code></a> uses powerful algorithms that
+are always improving to compute both definite and indefinite integrals,
+including a partial implementation of the <a class="reference external" href="https://en.wikipedia.org/wiki/Risch_algorithm">Risch algorithm</a></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Integral</span><span class="p">((</span><span class="n">x</span><span class="o">**</span><span class="mi">4</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span>
+<span class="gp">... </span>          <span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)),</span> <span class="n">x</span><span class="p">)</span>
+<span class="go">⌠</span>
+<span class="go">⎮  x ⎛ x  2      x      x    4    2      ⎞</span>
+<span class="go">⎮ ℯ ⋅⎝ℯ ⋅x  - 2⋅ℯ ⋅x - ℯ  + x  - x  - 2⋅x⎠</span>
+<span class="go">⎮ ──────────────────────────────────────── dx</span>
+<span class="go">⎮        ⎛ x    ⎞        2        2</span>
+<span class="go">⎮        ⎝ℯ  + 1⎠⋅(x - 1) ⋅(x + 1)</span>
+<span class="go">⌡</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span>
+<span class="go">    x</span>
+<span class="go">  ℯ         ⎛ x    ⎞</span>
+<span class="go">────── + log⎝ℯ  + 1⎠</span>
+<span class="go"> 2</span>
+<span class="go">x  - 1</span>
+</pre></div>
+</div>
+<p>and an algorithm using <a class="reference external" href="https://en.wikipedia.org/wiki/Meijer_g-function">Meijer G-functions</a> that is useful for computing
+integrals in terms of special functions, especially definite integrals</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Integral</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+<span class="go">⌠</span>
+<span class="go">⎮    ⎛ 2⎞</span>
+<span class="go">⎮ sin⎝x ⎠ dx</span>
+<span class="go">⌡</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span>
+<span class="go">                      ⎛  ___  ⎞</span>
+<span class="go">    ___   ___         ⎜╲╱ 2 ⋅x⎟</span>
+<span class="go">3⋅╲╱ 2 ⋅╲╱ π ⋅fresnels⎜───────⎟⋅Γ(3/4)</span>
+<span class="go">                      ⎜   ___ ⎟</span>
+<span class="go">                      ⎝ ╲╱ π  ⎠</span>
+<span class="go">──────────────────────────────────────</span>
+<span class="go">               8⋅Γ(7/4)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Integral</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="n">y</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">oo</span><span class="p">))</span>
+<span class="go">∞</span>
+<span class="go">⌠</span>
+<span class="go">⎮  -x  y</span>
+<span class="go">⎮ ℯ  ⋅x  dx</span>
+<span class="go">⌡</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span>
+<span class="go">⎧ Γ(y + 1)    for -re(y) &lt; 1</span>
+<span class="go">⎪</span>
+<span class="go">⎪∞</span>
+<span class="go">⎪⌠</span>
+<span class="go">⎨⎮  -x  y</span>
+<span class="go">⎪⎮ ℯ  ⋅x  dx    otherwise</span>
+<span class="go">⎪⌡</span>
+<span class="go">⎪0</span>
+<span class="go">⎩</span>
+</pre></div>
+</div>
+<p>This last example returned a
+<a class="reference internal" href="../modules/functions/elementary.html#diofant.functions.elementary.piecewise.Piecewise" title="diofant.functions.elementary.piecewise.Piecewise"><code class="xref py py-class docutils literal notranslate"><span class="pre">Piecewise</span></code></a> expression because
+the integral does not converge unless <span class="math notranslate nohighlight">\(\Re(y) &gt; 1.\)</span></p>
+</div>
+<div class="section" id="sums-and-products">
+<h2>Sums and Products<a class="headerlink" href="#sums-and-products" title="Permalink to this headline">¶</a></h2>
+<p>Much like integrals, there are
+<a class="reference internal" href="../modules/concrete.html#diofant.concrete.summations.summation" title="diofant.concrete.summations.summation"><code class="xref py py-func docutils literal notranslate"><span class="pre">summation()</span></code></a> and
+<a class="reference internal" href="../modules/concrete.html#diofant.concrete.products.product" title="diofant.concrete.products.product"><code class="xref py py-func docutils literal notranslate"><span class="pre">product()</span></code></a> to compute sums and
+products respectively.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">summation</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">y</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+<span class="go"> y</span>
+<span class="go">2  - 1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">product</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+<span class="go"> y</span>
+<span class="go">z</span>
+</pre></div>
+</div>
+<p>Unevaluated sums and products are represented by
+<a class="reference internal" href="../modules/concrete.html#diofant.concrete.summations.Sum" title="diofant.concrete.summations.Sum"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sum</span></code></a> and
+<a class="reference internal" href="../modules/concrete.html#diofant.concrete.products.Product" title="diofant.concrete.products.Product"><code class="xref py py-class docutils literal notranslate"><span class="pre">Product</span></code></a> classes.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Sum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">z</span><span class="p">))</span>
+<span class="go"> z</span>
+<span class="go">___</span>
+<span class="go">╲</span>
+<span class="go"> ╲   1</span>
+<span class="go"> ╱</span>
+<span class="go">╱</span>
+<span class="go">‾‾‾</span>
+<span class="go">x = 1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span>
+<span class="go">z</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="limits">
+<h2>Limits<a class="headerlink" href="#limits" title="Permalink to this headline">¶</a></h2>
+<p>Diofant can compute symbolic limits with the
+<a class="reference internal" href="../modules/series.html#diofant.series.limits.limit" title="diofant.series.limits.limit"><code class="xref py py-func docutils literal notranslate"><span class="pre">limit()</span></code></a> function.  To compute a directional limit</p>
+<div class="math notranslate nohighlight">
+\[\lim_{x\to 0^+}\frac{\sin x}{x},\]</div>
+<p>do</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">limit</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../modules/series.html#diofant.series.limits.limit" title="diofant.series.limits.limit"><code class="xref py py-func docutils literal notranslate"><span class="pre">limit()</span></code></a> should be used instead of
+<a class="reference internal" href="../modules/core.html#diofant.core.basic.Basic.subs" title="diofant.core.basic.Basic.subs"><code class="xref py py-meth docutils literal notranslate"><span class="pre">subs()</span></code></a> whenever the point of evaluation is a
+singularity.  Even though Diofant has objects to represent <span class="math notranslate nohighlight">\(\infty\)</span>, using them
+for evaluation is not reliable because they do not keep track of things like
+rate of growth.  Also, things like <span class="math notranslate nohighlight">\(\infty - \infty\)</span> and
+<span class="math notranslate nohighlight">\(\frac{\infty}{\infty}\)</span> return <span class="math notranslate nohighlight">\(\mathrm{nan}\)</span> (not-a-number).  For example</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span> <span class="n">oo</span><span class="p">})</span>
+<span class="go">nan</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">limit</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">oo</span><span class="p">)</span>
+<span class="go">0</span>
+</pre></div>
+</div>
+<p>Like <a class="reference internal" href="../modules/core.html#diofant.core.function.Derivative" title="diofant.core.function.Derivative"><code class="xref py py-class docutils literal notranslate"><span class="pre">Derivative</span></code></a> and
+<a class="reference internal" href="../modules/integrals.html#diofant.integrals.integrals.Integral" title="diofant.integrals.integrals.Integral"><code class="xref py py-class docutils literal notranslate"><span class="pre">Integral</span></code></a>,
+<a class="reference internal" href="../modules/series.html#diofant.series.limits.limit" title="diofant.series.limits.limit"><code class="xref py py-func docutils literal notranslate"><span class="pre">limit()</span></code></a> has an unevaluated counterpart,
+<a class="reference internal" href="../modules/series.html#diofant.series.limits.Limit" title="diofant.series.limits.Limit"><code class="xref py py-class docutils literal notranslate"><span class="pre">Limit</span></code></a>.  To evaluate it, use
+<a class="reference internal" href="../modules/series.html#diofant.series.limits.Limit.doit" title="diofant.series.limits.Limit.doit"><code class="xref py py-meth docutils literal notranslate"><span class="pre">doit()</span></code></a>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Limit</span><span class="p">((</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="go">     cos(x) - 1</span>
+<span class="go"> lim ──────────</span>
+<span class="go">x─→0⁺    x</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span>
+<span class="go">0</span>
+</pre></div>
+</div>
+<p>To change side, pass <code class="docutils literal notranslate"><span class="pre">'-'</span></code> as a third argument to
+<a class="reference internal" href="../modules/series.html#diofant.series.limits.limit" title="diofant.series.limits.limit"><code class="xref py py-func docutils literal notranslate"><span class="pre">limit()</span></code></a>.  For example, to compute</p>
+<div class="math notranslate nohighlight">
+\[\lim_{x\to 0^-}\frac{1}{x},\]</div>
+<p>do</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">limit</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+<span class="go">-∞</span>
+</pre></div>
+</div>
+<p>You can also evaluate bidirectional limit</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">limit</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;real&#39;</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">limit</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;real&#39;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="c">...</span>
+<span class="gr">PoleError</span>: <span class="n">left and right limits for expression 1/x at point x=0 seems to be not equal</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="series-expansion">
+<h2>Series Expansion<a class="headerlink" href="#series-expansion" title="Permalink to this headline">¶</a></h2>
+<p>Diofant can compute asymptotic series expansions of functions around a point.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">series</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">         2</span>
+<span class="go">        x     ⎛ 4⎞</span>
+<span class="go">1 + x + ── + O⎝x ⎠</span>
+<span class="go">        2</span>
+</pre></div>
+</div>
+<p>The <span class="math notranslate nohighlight">\(O\left (x^4\right )\)</span> term, an instance of <a class="reference internal" href="../modules/series.html#diofant.series.order.O" title="diofant.series.order.O"><code class="xref py py-class docutils literal notranslate"><span class="pre">O</span></code></a>
+at the end represents the Landau order term at <span class="math notranslate nohighlight">\(x=0\)</span> (not to be confused with
+big O notation used in computer science, which generally represents the Landau
+order term at <span class="math notranslate nohighlight">\(x=\infty\)</span>).  Order terms can be created and manipulated outside
+of <a class="reference internal" href="../modules/series.html#diofant.series.series.series" title="diofant.series.series.series"><code class="xref py py-func docutils literal notranslate"><span class="pre">series()</span></code></a>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">6</span> <span class="o">+</span> <span class="n">O</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">4</span><span class="p">)</span>
+<span class="go">     3    ⎛ 4⎞</span>
+<span class="go">x + x  + O⎝x ⎠</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">*</span><span class="n">O</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">O(x)</span>
+</pre></div>
+</div>
+<p>If you do not want the order term, use the
+<a class="reference internal" href="../modules/core.html#diofant.core.expr.Expr.removeO" title="diofant.core.expr.Expr.removeO"><code class="xref py py-meth docutils literal notranslate"><span class="pre">removeO()</span></code></a> method.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">series</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">removeO</span><span class="p">()</span>
+<span class="go"> 2</span>
+<span class="go">x</span>
+<span class="go">── + x + 1</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="../modules/series.html#diofant.series.order.O" title="diofant.series.order.O"><code class="xref py py-class docutils literal notranslate"><span class="pre">O</span></code></a> notation supports arbitrary limit points
+(other than 0):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">series</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">x</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">       2          3          4          5</span>
+<span class="go">(x - 1)    (x - 1)    (x - 1)    (x - 1)         ⎛       6       ⎞</span>
+<span class="go">──────── + ──────── + ──────── + ──────── + x + O⎝(x - 1) ; x → 1⎠</span>
+<span class="go">   2          6          24        120</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="solvers.html" class="btn btn-neutral float-right" title="Solvers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="simplification.html" class="btn btn-neutral" title="Simplification" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2006-2018 SymPy Development Team, 2013-2018 Sergey B Kirpichev
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

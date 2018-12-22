@@ -1,0 +1,377 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Printing &mdash; Diofant 0.10.0a3.dev10+gbc098bd documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Simplification" href="simplification.html" />
+    <link rel="prev" title="Gotchas" href="gotchas.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Diofant
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.10.0a3.dev10+gbc098bd
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorial</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html">Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gotchas.html">Gotchas</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Printing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#str">Str</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#repr">Repr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#d-pretty-printer">2D Pretty Printer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#latex">LaTeX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dot">Dot</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="simplification.html">Simplification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="calculus.html">Calculus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solvers.html">Solvers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polys.html">Polynomials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="matrices.html">Matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manipulation.html">Expression Trees</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/index.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../internals/index.html">Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../literature.html">Literature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guide.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../aboutus.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release/index.html">Release Notes</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Diofant</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Tutorial</a> &raquo;</li>
+        
+      <li>Printing</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/tutorial/printing.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="printing">
+<span id="tutorial-printing"></span><h1>Printing<a class="headerlink" href="#printing" title="Permalink to this headline">¶</a></h1>
+<p>As we have already seen, Diofant can pretty print its output using
+Unicode characters.  This is a short introduction to the most common
+printing options available in Diofant.  The most common ones are</p>
+<ul class="simple">
+<li><a class="reference internal" href="#str">Str</a></li>
+<li><a class="reference internal" href="#repr">Repr</a></li>
+<li><a class="reference internal" href="#d-pretty-printer">2D Pretty Printer</a> (Unicode or ASCII)</li>
+<li><a class="reference internal" href="#latex">LaTeX</a></li>
+<li><a class="reference internal" href="#dot">Dot</a></li>
+</ul>
+<p>In addition to these, there are also “printers” that can output
+Diofant objects to code, such as C, Fortran, or Mathematica.</p>
+<p>Best printer is enabled automatically for interactive session
+(i.e. <span class="math notranslate nohighlight">\(\LaTeX\)</span> in the IPython notebooks, pretty printer in the IPython
+console or str printer in the Python console).  If you want manually
+configure pretty printing, please use the
+<a class="reference internal" href="../modules/interactive.html#diofant.interactive.printing.init_printing" title="diofant.interactive.printing.init_printing"><code class="xref py py-func docutils literal notranslate"><span class="pre">init_printing()</span></code></a> function.</p>
+<p>Lets take this simple expression</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span> <span class="o">=</span> <span class="n">Integral</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>and try several available printers.</p>
+<div class="section" id="str">
+<h2>Str<a class="headerlink" href="#str" title="Permalink to this headline">¶</a></h2>
+<p>To get a string form of an expression, use <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>.  This is also
+the form that is produced by <a class="reference external" href="https://docs.python.org/3/library/functions.html#print" title="(in Python v3.7)"><code class="xref py py-func docutils literal notranslate"><span class="pre">print()</span></code></a>.  String forms are designed
+to be easy to read and mostly to be in a form that is a correct Python syntax
+so that it can be copied and pasted.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+<span class="go">&#39;Integral(sqrt(1/x), x)&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+<span class="go">Integral(sqrt(1/x), x)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="repr">
+<h2>Repr<a class="headerlink" href="#repr" title="Permalink to this headline">¶</a></h2>
+<p>The repr form of an expression is designed to show the exact form of
+an expression, it would yield an object with the same value when
+passed to <a class="reference external" href="https://docs.python.org/3/library/functions.html#eval" title="(in Python v3.7)"><code class="xref py py-func docutils literal notranslate"><span class="pre">eval()</span></code></a>.  To get it, use <a class="reference external" href="https://docs.python.org/3/library/functions.html#repr" title="(in Python v3.7)"><code class="xref py py-func docutils literal notranslate"><span class="pre">repr()</span></code></a>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">repr</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+<span class="go">&quot;Integral(Pow(Pow(Symbol(&#39;x&#39;), Integer(-1)), Rational(1, 2)), Tuple(Symbol(&#39;x&#39;)))&quot;</span>
+</pre></div>
+</div>
+<p>The repr form is mostly useful for understanding how an expression is
+built internally.</p>
+</div>
+<div class="section" id="d-pretty-printer">
+<h2>2D Pretty Printer<a class="headerlink" href="#d-pretty-printer" title="Permalink to this headline">¶</a></h2>
+<p>A two-dimensional (2D) textual representation of the expression can be
+obtained with <a class="reference internal" href="../modules/printing.html#diofant.printing.pretty.pretty.pretty" title="diofant.printing.pretty.pretty.pretty"><code class="xref py py-func docutils literal notranslate"><span class="pre">pretty()</span></code></a>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pretty</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+<span class="go">&#39;⌠           \n⎮     ___   \n⎮    ╱ 1    \n⎮   ╱  ─  dx\n⎮ ╲╱   x    \n⌡           &#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">_</span><span class="p">)</span>
+<span class="go">⌠</span>
+<span class="go">⎮     ___</span>
+<span class="go">⎮    ╱ 1</span>
+<span class="go">⎮   ╱  ─  dx</span>
+<span class="go">⎮ ╲╱   x</span>
+<span class="go">⌡</span>
+</pre></div>
+</div>
+<p>You can pass <code class="docutils literal notranslate"><span class="pre">use_unicode=False</span></code> to use ASCII symbols.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">pretty</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">use_unicode</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="go">   /</span>
+<span class="go">  |</span>
+<span class="go">  |     ___</span>
+<span class="go">  |    / 1</span>
+<span class="go">  |   /  -  dx</span>
+<span class="go">  | \/   x</span>
+<span class="go">  |</span>
+<span class="go"> /</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../modules/printing.html#diofant.printing.pretty.pretty.pprint" title="diofant.printing.pretty.pretty.pprint"><code class="xref py py-func docutils literal notranslate"><span class="pre">pprint()</span></code></a> prints the output to
+the screen.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pprint</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+<span class="go">⌠</span>
+<span class="go">⎮     ___</span>
+<span class="go">⎮    ╱ 1</span>
+<span class="go">⎮   ╱  ─  dx</span>
+<span class="go">⎮ ╲╱   x</span>
+<span class="go">⌡</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="latex">
+<h2>LaTeX<a class="headerlink" href="#latex" title="Permalink to this headline">¶</a></h2>
+<p>To get the <span class="math notranslate nohighlight">\(\LaTeX\)</span> form of an expression, use
+<a class="reference internal" href="../modules/printing.html#diofant.printing.latex.latex" title="diofant.printing.latex.latex"><code class="xref py py-func docutils literal notranslate"><span class="pre">latex()</span></code></a>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">latex</span><span class="p">(</span><span class="n">expr</span><span class="p">))</span>
+<span class="go">\int \sqrt{\frac{1}{x}}\, dx</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="dot">
+<h2>Dot<a class="headerlink" href="#dot" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="../modules/printing.html#diofant.printing.dot.dotprint" title="diofant.printing.dot.dotprint"><code class="xref py py-func docutils literal notranslate"><span class="pre">dotprint()</span></code></a> function prints output to dot
+format, which can be rendered with <a class="reference external" href="http://www.graphviz.org/">Graphviz</a>:</p>
+<div class="graphviz"><object data="../_images/graphviz-dc9f110929d45d9935dc6a0fe1a76cf8226fdf2e.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph{
+
+# Graph style
+&quot;bgcolor&quot;=&quot;transparent&quot;
+&quot;ordering&quot;=&quot;out&quot;
+&quot;rankdir&quot;=&quot;TD&quot;
+
+#########
+# Nodes #
+#########
+
+&quot;Integral(Pow(Pow(Symbol('x'), Integer(-1)), Rational(1, 2)), Tuple(Symbol('x')))_()&quot; [&quot;color&quot;=&quot;black&quot;, &quot;label&quot;=&quot;Integral&quot;, &quot;shape&quot;=&quot;ellipse&quot;];
+&quot;Pow(Pow(Symbol('x'), Integer(-1)), Rational(1, 2))_(0,)&quot; [&quot;color&quot;=&quot;black&quot;, &quot;label&quot;=&quot;Pow&quot;, &quot;shape&quot;=&quot;ellipse&quot;];
+&quot;Pow(Symbol('x'), Integer(-1))_(0, 0)&quot; [&quot;color&quot;=&quot;black&quot;, &quot;label&quot;=&quot;Pow&quot;, &quot;shape&quot;=&quot;ellipse&quot;];
+&quot;Symbol('x')_(0, 0, 0)&quot; [&quot;color&quot;=&quot;black&quot;, &quot;label&quot;=&quot;x&quot;, &quot;shape&quot;=&quot;ellipse&quot;];
+&quot;Integer(-1)_(0, 0, 1)&quot; [&quot;color&quot;=&quot;black&quot;, &quot;label&quot;=&quot;-1&quot;, &quot;shape&quot;=&quot;ellipse&quot;];
+&quot;Rational(1, 2)_(0, 1)&quot; [&quot;color&quot;=&quot;black&quot;, &quot;label&quot;=&quot;1/2&quot;, &quot;shape&quot;=&quot;ellipse&quot;];
+&quot;Tuple(Symbol('x'))_(1,)&quot; [&quot;color&quot;=&quot;blue&quot;, &quot;label&quot;=&quot;Tuple&quot;, &quot;shape&quot;=&quot;ellipse&quot;];
+&quot;Symbol('x')_(1, 0)&quot; [&quot;color&quot;=&quot;black&quot;, &quot;label&quot;=&quot;x&quot;, &quot;shape&quot;=&quot;ellipse&quot;];
+
+#########
+# Edges #
+#########
+
+&quot;Integral(Pow(Pow(Symbol('x'), Integer(-1)), Rational(1, 2)), Tuple(Symbol('x')))_()&quot; -&gt; &quot;Pow(Pow(Symbol('x'), Integer(-1)), Rational(1, 2))_(0,)&quot;;
+&quot;Integral(Pow(Pow(Symbol('x'), Integer(-1)), Rational(1, 2)), Tuple(Symbol('x')))_()&quot; -&gt; &quot;Tuple(Symbol('x'))_(1,)&quot;;
+&quot;Pow(Pow(Symbol('x'), Integer(-1)), Rational(1, 2))_(0,)&quot; -&gt; &quot;Pow(Symbol('x'), Integer(-1))_(0, 0)&quot;;
+&quot;Pow(Pow(Symbol('x'), Integer(-1)), Rational(1, 2))_(0,)&quot; -&gt; &quot;Rational(1, 2)_(0, 1)&quot;;
+&quot;Pow(Symbol('x'), Integer(-1))_(0, 0)&quot; -&gt; &quot;Symbol('x')_(0, 0, 0)&quot;;
+&quot;Pow(Symbol('x'), Integer(-1))_(0, 0)&quot; -&gt; &quot;Integer(-1)_(0, 0, 1)&quot;;
+&quot;Tuple(Symbol('x'))_(1,)&quot; -&gt; &quot;Symbol('x')_(1, 0)&quot;;
+}</p></object></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="simplification.html" class="btn btn-neutral float-right" title="Simplification" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="gotchas.html" class="btn btn-neutral" title="Gotchas" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2006-2018 SymPy Development Team, 2013-2018 Sergey B Kirpichev
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
