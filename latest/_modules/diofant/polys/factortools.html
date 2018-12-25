@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.factortools &mdash; Diofant 0.10.0a4 documentation</title>
+  <title>diofant.polys.factortools &mdash; Diofant 0.10.0a5.dev3+g6897c42 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0a4
+                0.10.0a5.dev3+g6897c42
               </div>
             
           
@@ -603,9 +603,6 @@
 
     <span class="n">n</span> <span class="o">=</span> <span class="n">dmp_degree_in</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">dmp_LC</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">cont</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="o">-</span><span class="n">cont</span><span class="p">,</span> <span class="n">dmp_neg</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-
     <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">cont</span><span class="p">,</span> <span class="p">[]</span>
     <span class="k">elif</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
@@ -668,9 +665,6 @@
 
     <span class="n">n</span> <span class="o">=</span> <span class="n">dmp_degree_in</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">dmp_LC</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">cont</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="o">-</span><span class="n">cont</span><span class="p">,</span> <span class="n">dmp_neg</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-
     <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">cont</span><span class="p">,</span> <span class="p">[]</span>
     <span class="k">elif</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
@@ -724,9 +718,6 @@
         <span class="k">raise</span> <span class="n">EvaluationFailed</span><span class="p">(</span><span class="s1">&#39;no luck&#39;</span><span class="p">)</span>
 
     <span class="n">c</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">dmp_ground_primitive</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">K</span><span class="o">.</span><span class="n">is_negative</span><span class="p">(</span><span class="n">dmp_LC</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">K</span><span class="p">)):</span>
-        <span class="n">c</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="o">-</span><span class="n">c</span><span class="p">,</span> <span class="n">dmp_neg</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
 
     <span class="n">v</span> <span class="o">=</span> <span class="n">u</span> <span class="o">-</span> <span class="mi">1</span>
 
@@ -1096,9 +1087,6 @@
     <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">factors</span><span class="p">:</span>
         <span class="n">_</span><span class="p">,</span> <span class="n">f</span> <span class="o">=</span> <span class="n">dmp_ground_primitive</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">K</span><span class="o">.</span><span class="n">is_negative</span><span class="p">(</span><span class="n">dmp_ground_LC</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)):</span>
-            <span class="n">f</span> <span class="o">=</span> <span class="n">dmp_neg</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-
         <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">result</span></div>
@@ -1142,9 +1130,6 @@
         <span class="k">return</span> <span class="n">K</span><span class="o">.</span><span class="n">zero</span><span class="p">,</span> <span class="p">[]</span>
 
     <span class="n">cont</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="n">dmp_ground_primitive</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">dmp_ground_LC</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">cont</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="o">-</span><span class="n">cont</span><span class="p">,</span> <span class="n">dmp_neg</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">dmp_ground_p</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">cont</span><span class="p">,</span> <span class="p">[]</span>
