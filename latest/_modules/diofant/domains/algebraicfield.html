@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.domains.algebraicfield &mdash; Diofant 0.10.0a5.dev3+g6897c42 documentation</title>
+  <title>diofant.domains.algebraicfield &mdash; Diofant 0.10.0a5.dev9+ge97a258 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0a5.dev3+g6897c42
+                0.10.0a5.dev9+ge97a258
               </div>
             
           
@@ -340,16 +340,16 @@
 
         <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">minpoly</span><span class="o">.</span><span class="n">all_roots</span><span class="p">(</span><span class="n">radicals</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>  <span class="c1"># pragma: no branch</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">minimal_polynomial</span><span class="p">(</span><span class="n">ext</span> <span class="o">-</span> <span class="n">r</span><span class="p">)(</span><span class="mi">0</span><span class="p">):</span>
-                <span class="k">return</span> <span class="n">r</span><span class="o">.</span><span class="n">as_content_primitive</span><span class="p">()</span>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">ext_root</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ext_root</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_ext_root</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_ext_root</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ext</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">minpoly</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ext_root</span></div>
+                <span class="k">return</span> <span class="n">r</span><span class="o">.</span><span class="n">as_content_primitive</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="RealAlgebraicField"><a class="viewcode-back" href="../../../modules/domains.html#diofant.domains.RealAlgebraicField">[docs]</a><span class="k">class</span> <span class="nc">RealAlgebraicField</span><span class="p">(</span><span class="n">AlgebraicField</span><span class="p">):</span>
+<div class="viewcode-block" id="ComplexAlgebraicField"><a class="viewcode-back" href="../../../modules/domains.html#diofant.domains.ComplexAlgebraicField">[docs]</a><span class="k">class</span> <span class="nc">ComplexAlgebraicField</span><span class="p">(</span><span class="n">AlgebraicField</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A class for representing complex algebraic number fields. &quot;&quot;&quot;</span>
+
+    <span class="n">is_ComplexAlgebraicField</span> <span class="o">=</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="RealAlgebraicField"><a class="viewcode-back" href="../../../modules/domains.html#diofant.domains.RealAlgebraicField">[docs]</a><span class="k">class</span> <span class="nc">RealAlgebraicField</span><span class="p">(</span><span class="n">ComplexAlgebraicField</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;A class for representing real algebraic number fields. &quot;&quot;&quot;</span>
 
     <span class="n">is_RealAlgebraicField</span> <span class="o">=</span> <span class="kc">True</span>
@@ -361,12 +361,6 @@
 <div class="viewcode-block" id="RealAlgebraicField.is_negative"><a class="viewcode-back" href="../../../modules/domains.html#diofant.domains.RealAlgebraicField.is_negative">[docs]</a>    <span class="k">def</span> <span class="nf">is_negative</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns True if ``a`` is negative. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="mi">0</span></div></div>
-
-
-<div class="viewcode-block" id="ComplexAlgebraicField"><a class="viewcode-back" href="../../../modules/domains.html#diofant.domains.ComplexAlgebraicField">[docs]</a><span class="k">class</span> <span class="nc">ComplexAlgebraicField</span><span class="p">(</span><span class="n">AlgebraicField</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A class for representing complex algebraic number fields. &quot;&quot;&quot;</span>
-
-    <span class="n">is_ComplexAlgebraicField</span> <span class="o">=</span> <span class="kc">True</span></div>
 
 
 <span class="k">class</span> <span class="nc">AlgebraicElement</span><span class="p">(</span><span class="n">DomainElement</span><span class="p">,</span> <span class="n">CantSympify</span><span class="p">,</span> <span class="n">DefaultPrinting</span><span class="p">):</span>
@@ -542,15 +536,19 @@
             <span class="k">except</span> <span class="n">CoercionFailed</span><span class="p">:</span>
                 <span class="k">return</span> <span class="bp">NotImplemented</span>
 
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">_ext_root</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">_ext_root</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">_compute_ext_root</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">ext</span><span class="p">,</span>
+                                                                  <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">minpoly</span><span class="p">)</span>
+
         <span class="n">diff</span> <span class="o">=</span> <span class="bp">self</span> <span class="o">-</span> <span class="n">other</span>
         <span class="n">rep</span> <span class="o">=</span> <span class="n">dmp_compose</span><span class="p">(</span><span class="n">diff</span><span class="o">.</span><span class="n">rep</span><span class="p">,</span>
-                          <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">from_expr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">ext_root</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="mi">0</span><span class="p">],</span>
+                          <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">from_expr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">_ext_root</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="mi">0</span><span class="p">],</span>
                           <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
         <span class="k">while</span> <span class="n">dup_count_real_roots</span><span class="p">(</span><span class="n">rep</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span>
-                                   <span class="n">inf</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">ext_root</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">interval</span><span class="o">.</span><span class="n">a</span><span class="p">,</span>
-                                   <span class="n">sup</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">ext_root</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">interval</span><span class="o">.</span><span class="n">b</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">ext_root</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">refine</span><span class="p">()</span>
-        <span class="n">v</span> <span class="o">=</span> <span class="n">dmp_eval_in</span><span class="p">(</span><span class="n">rep</span><span class="p">,</span> <span class="n">diff</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">ext_root</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">interval</span><span class="o">.</span><span class="n">center</span><span class="p">,</span>
+                                   <span class="n">inf</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">_ext_root</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">interval</span><span class="o">.</span><span class="n">a</span><span class="p">,</span>
+                                   <span class="n">sup</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">_ext_root</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">interval</span><span class="o">.</span><span class="n">b</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">_ext_root</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">refine</span><span class="p">()</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">dmp_eval_in</span><span class="p">(</span><span class="n">rep</span><span class="p">,</span> <span class="n">diff</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">_ext_root</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">interval</span><span class="o">.</span><span class="n">center</span><span class="p">,</span>
                         <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">diff</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">op</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
 
@@ -612,7 +610,8 @@
         <script type="text/javascript" src="../../../_static/jquery.js"></script>
         <script type="text/javascript" src="../../../_static/underscore.js"></script>
         <script type="text/javascript" src="../../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
 
   

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.integrals.rationaltools &mdash; Diofant 0.10.0a5.dev3+g6897c42 documentation</title>
+  <title>diofant.integrals.rationaltools &mdash; Diofant 0.10.0a5.dev9+ge97a258 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0a5.dev3+g6897c42
+                0.10.0a5.dev9+ge97a258
               </div>
             
           
@@ -477,25 +477,34 @@
 
     <span class="n">R</span> <span class="o">=</span> <span class="n">Poly</span><span class="p">(</span><span class="n">resultant</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">v</span><span class="p">),</span> <span class="n">u</span><span class="p">)</span>
 
-    <span class="n">R_u</span> <span class="o">=</span> <span class="n">roots</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="nb">filter</span><span class="o">=</span><span class="s1">&#39;R&#39;</span><span class="p">)</span>
-    <span class="n">R_q</span> <span class="o">=</span> <span class="n">roots</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="nb">filter</span><span class="o">=</span><span class="s1">&#39;R&#39;</span><span class="p">)</span>
+    <span class="n">R_u_all</span> <span class="o">=</span> <span class="n">roots</span><span class="p">(</span><span class="n">R</span><span class="p">)</span>
+    <span class="n">R_q_all</span> <span class="o">=</span> <span class="n">roots</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">R_u</span><span class="p">)</span> <span class="o">!=</span> <span class="n">R</span><span class="o">.</span><span class="n">count_roots</span><span class="p">()</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">R_q</span><span class="p">)</span> <span class="o">!=</span> <span class="n">q</span><span class="o">.</span><span class="n">count_roots</span><span class="p">():</span>
+    <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">R_u_all</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="o">&lt;</span> <span class="n">R</span><span class="o">.</span><span class="n">degree</span><span class="p">()</span> <span class="ow">or</span> <span class="nb">sum</span><span class="p">(</span><span class="n">R_q_all</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="o">&lt;</span> <span class="n">q</span><span class="o">.</span><span class="n">degree</span><span class="p">():</span>
         <span class="k">return</span>
+
+    <span class="n">R_u</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">R_u_all</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span><span class="o">.</span><span class="n">is_extended_real</span><span class="p">}</span>
+    <span class="n">R_q</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">R_q_all</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span><span class="o">.</span><span class="n">is_extended_real</span><span class="p">}</span>
 
     <span class="n">result</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">r_u</span> <span class="ow">in</span> <span class="n">R_u</span><span class="p">:</span>
         <span class="n">C</span> <span class="o">=</span> <span class="n">Poly</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">u</span><span class="p">:</span> <span class="n">r_u</span><span class="p">}),</span> <span class="n">v</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-        <span class="n">R_v</span> <span class="o">=</span> <span class="n">roots</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="nb">filter</span><span class="o">=</span><span class="s1">&#39;R&#39;</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">R_v</span><span class="p">)</span> <span class="o">!=</span> <span class="n">C</span><span class="o">.</span><span class="n">count_roots</span><span class="p">():</span>
+        <span class="n">R_v_all</span> <span class="o">=</span> <span class="n">roots</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">R_v_all</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="o">&lt;</span> <span class="n">C</span><span class="o">.</span><span class="n">degree</span><span class="p">():</span>
             <span class="k">return</span>
+        <span class="n">R_v</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">R_v_all</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span><span class="o">.</span><span class="n">is_extended_real</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">False</span><span class="p">}</span>
 
+        <span class="n">R_v_paired</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># take one from each pair of conjugate roots</span>
         <span class="k">for</span> <span class="n">r_v</span> <span class="ow">in</span> <span class="n">R_v</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">r_v</span><span class="o">.</span><span class="n">is_positive</span><span class="p">:</span>
-                <span class="k">continue</span>
+            <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">_</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">R_v_paired</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="p">[</span><span class="o">+</span><span class="n">r_v</span><span class="p">,</span> <span class="o">-</span><span class="n">r_v</span><span class="p">]):</span>
+                <span class="k">if</span> <span class="n">r_v</span><span class="o">.</span><span class="n">could_extract_minus_sign</span><span class="p">():</span>
+                    <span class="n">R_v_paired</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="o">-</span><span class="n">r_v</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="ow">not</span> <span class="n">r_v</span><span class="o">.</span><span class="n">is_zero</span><span class="p">:</span>
+                    <span class="n">R_v_paired</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">r_v</span><span class="p">)</span>
 
+        <span class="k">for</span> <span class="n">r_v</span> <span class="ow">in</span> <span class="n">R_v_paired</span><span class="p">:</span>
             <span class="n">D</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">u</span><span class="p">:</span> <span class="n">r_u</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="n">r_v</span><span class="p">})</span>
 
             <span class="k">if</span> <span class="n">D</span><span class="o">.</span><span class="n">evalf</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">chop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
@@ -549,7 +558,8 @@
         <script type="text/javascript" src="../../../_static/jquery.js"></script>
         <script type="text/javascript" src="../../../_static/underscore.js"></script>
         <script type="text/javascript" src="../../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
 
   
