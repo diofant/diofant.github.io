@@ -1,0 +1,405 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Polynomials &mdash; Diofant 0.10.0a5.dev32+g9f6eb91 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Matrices" href="matrices.html" />
+    <link rel="prev" title="Solvers" href="solvers.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Diofant
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.10.0a5.dev32+g9f6eb91
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorial</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html">Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gotchas.html">Gotchas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="printing.html">Printing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simplification.html">Simplification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="calculus.html">Calculus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solvers.html">Solvers</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Polynomials</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#division">Division</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gcd-and-lcm">GCD and LCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#square-free-factorization">Square-free factorization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#factorization">Factorization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#grobner-bases">Gröbner bases</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="matrices.html">Matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manipulation.html">Expression Trees</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/index.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../internals/index.html">Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../literature.html">Literature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guide.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../aboutus.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release/index.html">Release Notes</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Diofant</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Tutorial</a> &raquo;</li>
+        
+      <li>Polynomials</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/tutorial/polys.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="polynomials">
+<h1>Polynomials<a class="headerlink" href="#polynomials" title="Permalink to this headline">¶</a></h1>
+<p>We show here some functions, that provide different algorithms dealing
+with polynomials in the form of Diofant expression.</p>
+<p>Note, that coefficients of a polynomial can be elements of any
+commutative ring, this ring is called the <code class="docutils literal notranslate"><span class="pre">domain</span></code> of the polynomial
+ring and may be specified as a keyword parameter for functions.
+Polynomial generators also can be specified via an arbitrary number of
+arguments after required arguments of functions.</p>
+<div class="section" id="division">
+<h2>Division<a class="headerlink" href="#division" title="Permalink to this headline">¶</a></h2>
+<p>The function <a class="reference internal" href="../modules/polys.html#diofant.polys.polytools.div" title="diofant.polys.polytools.div"><code class="xref py py-func docutils literal notranslate"><span class="pre">div()</span></code></a> provides
+division of polynomials with remainder.
+That is, for polynomials <code class="docutils literal notranslate"><span class="pre">f</span></code> and <code class="docutils literal notranslate"><span class="pre">g</span></code>, it computes <code class="docutils literal notranslate"><span class="pre">q</span></code> and <code class="docutils literal notranslate"><span class="pre">r</span></code>, such
+that <span class="math notranslate nohighlight">\(f = g \cdot q + r\)</span> and <span class="math notranslate nohighlight">\(\deg(r) &lt; q\)</span>. For polynomials in one variables
+with coefficients in a field, say, the rational numbers, <code class="docutils literal notranslate"><span class="pre">q</span></code> and <code class="docutils literal notranslate"><span class="pre">r</span></code> are
+uniquely defined this way:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="mi">5</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">10</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">2</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">div</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
+<span class="go">⎛5⋅x   5    ⎞</span>
+<span class="go">⎜─── + ─, -2⎟</span>
+<span class="go">⎝ 2    2    ⎠</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expand</span><span class="p">(</span><span class="n">_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">g</span> <span class="o">+</span> <span class="n">_</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="go">   2</span>
+<span class="go">5⋅x  + 10⋅x + 3</span>
+</pre></div>
+</div>
+<p>As you can see, <code class="docutils literal notranslate"><span class="pre">q</span></code> has a non-integer coefficient. If you want to do division
+only in the ring of polynomials with integer coefficients, you can specify an
+additional parameter:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">div</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">domain</span><span class="o">=</span><span class="n">ZZ</span><span class="p">)</span>
+<span class="go">⎛      2           ⎞</span>
+<span class="go">⎝0, 5⋅x  + 10⋅x + 3⎠</span>
+</pre></div>
+</div>
+<p>But be warned, that this ring is no longer Euclidean and that the degree of the
+remainder doesn’t need to be smaller than that of <code class="docutils literal notranslate"><span class="pre">f</span></code>. Since 2 doesn’t divide 5,
+<span class="math notranslate nohighlight">\(2 x\)</span> doesn’t divide <span class="math notranslate nohighlight">\(5 x^2\)</span>, even if the degree is smaller. But:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="mi">5</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">div</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">domain</span><span class="o">=</span><span class="n">ZZ</span><span class="p">)</span>
+<span class="go">(x, 9⋅x + 3)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expand</span><span class="p">(</span><span class="n">_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">g</span> <span class="o">+</span> <span class="n">_</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="go">   2</span>
+<span class="go">5⋅x  + 10⋅x + 3</span>
+</pre></div>
+</div>
+<p>This also works for polynomials with multiple variables:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">div</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="n">y</span><span class="o">*</span><span class="n">z</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">z</span><span class="p">)</span>
+<span class="go">⎛y   ⎞</span>
+<span class="go">⎜─, 0⎟</span>
+<span class="go">⎝3   ⎠</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="gcd-and-lcm">
+<h2>GCD and LCM<a class="headerlink" href="#gcd-and-lcm" title="Permalink to this headline">¶</a></h2>
+<p>With division, there is also the computation of the greatest common divisor and
+the least common multiple.</p>
+<p>When the polynomials have integer coefficients, the contents’ gcd is also
+considered:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="p">((</span><span class="mi">12</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">12</span><span class="p">)</span><span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="mi">16</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">4⋅x</span>
+</pre></div>
+</div>
+<p>But if the polynomials have rational coefficients, then the returned polynomial is
+monic:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">9</span><span class="o">*</span><span class="n">x</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span>
+<span class="go">x</span>
+</pre></div>
+</div>
+<p>Symbolic exponents are supported:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span> <span class="o">-</span> <span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">2</span><span class="p">),</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="n">n</span><span class="p">)</span>
+<span class="go"> n</span>
+<span class="go">x</span>
+</pre></div>
+</div>
+<p>It also works with multiple variables. In this case, the variables are ordered
+alphabetically, be default, which has influence on the leading coefficient:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">6</span><span class="o">*</span><span class="n">y</span><span class="p">)</span>
+<span class="go">x + 2⋅y</span>
+</pre></div>
+</div>
+<p>The lcm is connected with the gcd and one can be computed using the other:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
+<span class="go">x⋅y</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lcm</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
+<span class="go"> 3  2    2  3</span>
+<span class="go">x ⋅y  + x ⋅y</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expand</span><span class="p">(</span><span class="n">f</span><span class="o">*</span><span class="n">g</span><span class="p">)</span>
+<span class="go"> 4  3    3  4</span>
+<span class="go">x ⋅y  + x ⋅y</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expand</span><span class="p">(</span><span class="n">gcd</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span><span class="o">*</span><span class="n">lcm</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+<span class="go"> 4  3    3  4</span>
+<span class="go">x ⋅y  + x ⋅y</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="square-free-factorization">
+<h2>Square-free factorization<a class="headerlink" href="#square-free-factorization" title="Permalink to this headline">¶</a></h2>
+<p>The square-free factorization of a univariate polynomial is the product of all
+factors (not necessarily irreducible) of degree 1, 2 etc.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sqf</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">5</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">4</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">5</span><span class="p">)</span>
+<span class="go"> 2        2</span>
+<span class="go">x ⋅(x + 1) ⋅(x + 2)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="factorization">
+<h2>Factorization<a class="headerlink" href="#factorization" title="Permalink to this headline">¶</a></h2>
+<p>Factorization supported over different domains, lets compute one for the finite
+field with characteristic 5, rational field or its algebraic extension:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">4</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">factor</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">modulus</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="go">       2        2</span>
+<span class="go">(x - 2) ⋅(x + 2)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">factor</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="go">⎛ 2        ⎞ ⎛ 2        ⎞</span>
+<span class="go">⎝x  - x - 1⎠⋅⎝x  + x - 1⎠</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">factor</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="n">GoldenRatio</span><span class="p">)</span>
+<span class="go">(x - φ)⋅(x + φ)⋅(x - 1 + φ)⋅(x - φ + 1)</span>
+</pre></div>
+</div>
+<p>You also may use <code class="docutils literal notranslate"><span class="pre">gaussian</span></code> keyword to obtain a factorization over
+Gaussian rationals:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">factor</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">4</span> <span class="o">+</span> <span class="mi">8</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">77</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">18</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">153</span><span class="p">,</span> <span class="n">gaussian</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">  ⎛    3⋅ⅈ⎞ ⎛    3⋅ⅈ⎞</span>
+<span class="go">4⋅⎜x - ───⎟⋅⎜x + ───⎟⋅(x + 1 - 4⋅ⅈ)⋅(x + 1 + 4⋅ⅈ)</span>
+<span class="go">  ⎝     2 ⎠ ⎝     2 ⎠</span>
+</pre></div>
+</div>
+<p>Computing with multivariate polynomials over various domains is as simple as in
+univariate case.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">factor</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">         2</span>
+<span class="go">(x + 2⋅y)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">factor</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="n">sqrt</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">))</span>
+<span class="go">        ⎛      ⎛        ___  ⎞⎞ ⎛      ⎛        ___  ⎞⎞</span>
+<span class="go">        ⎜      ⎜  1   ╲╱ 3 ⋅ⅈ⎟⎟ ⎜      ⎜  1   ╲╱ 3 ⋅ⅈ⎟⎟</span>
+<span class="go">(x + y)⋅⎜x + y⋅⎜- ─ - ───────⎟⎟⋅⎜x + y⋅⎜- ─ + ───────⎟⎟</span>
+<span class="go">        ⎝      ⎝  2      2   ⎠⎠ ⎝      ⎝  2      2   ⎠⎠</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="grobner-bases">
+<h2>Gröbner bases<a class="headerlink" href="#grobner-bases" title="Permalink to this headline">¶</a></h2>
+<p>Buchberger’s algorithm is implemented, supporting various monomial orders:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">groebner</span><span class="p">([</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="o">**</span><span class="mi">4</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span><span class="p">])</span>
+<span class="go">             ⎛⎡ 2       4    ⎤                           ⎞</span>
+<span class="go">GroebnerBasis⎝⎣x  + 1, y  - 1⎦, x, y, domain=ℤ, order=lex⎠</span>
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">groebner</span><span class="p">([</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="o">**</span><span class="mi">4</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="o">*</span><span class="n">z</span><span class="o">**</span><span class="mi">3</span><span class="p">],</span> <span class="n">order</span><span class="o">=</span><span class="n">grevlex</span><span class="p">)</span>
+<span class="go">             ⎛⎡ 4       3   2    ⎤                                  ⎞</span>
+<span class="go">GroebnerBasis⎝⎣y  - 1, z , x  + 1⎦, x, y, z, domain=ℤ, order=grevlex⎠</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="matrices.html" class="btn btn-neutral float-right" title="Matrices" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="solvers.html" class="btn btn-neutral" title="Solvers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2006-2018 SymPy Development Team, 2013-2018 Sergey B Kirpichev
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

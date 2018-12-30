@@ -1,0 +1,481 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>diofant.domains.domain &mdash; Diofant 0.10.0a5.dev32+g9f6eb91 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> Diofant
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.10.0a5.dev32+g9f6eb91
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules/index.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../internals/index.html">Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../literature.html">Literature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../guide.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../aboutus.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release/index.html">Release Notes</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Diofant</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>diofant.domains.domain</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for diofant.domains.domain</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Implementation of :class:`Domain` class. &quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">abc</span>
+<span class="kn">import</span> <span class="nn">inspect</span>
+
+<span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">Expr</span>
+<span class="kn">from</span> <span class="nn">..core.compatibility</span> <span class="k">import</span> <span class="n">HAS_GMPY</span>
+<span class="kn">from</span> <span class="nn">..polys.orderings</span> <span class="k">import</span> <span class="n">lex</span>
+<span class="kn">from</span> <span class="nn">..polys.polyerrors</span> <span class="k">import</span> <span class="n">CoercionFailed</span><span class="p">,</span> <span class="n">UnificationFailed</span>
+<span class="kn">from</span> <span class="nn">..polys.polyutils</span> <span class="k">import</span> <span class="n">_unify_gens</span>
+<span class="kn">from</span> <span class="nn">..printing.defaults</span> <span class="k">import</span> <span class="n">DefaultPrinting</span>
+<span class="kn">from</span> <span class="nn">.domainelement</span> <span class="k">import</span> <span class="n">DomainElement</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="s1">&#39;Domain&#39;</span><span class="p">,</span>
+
+
+<div class="viewcode-block" id="Domain"><a class="viewcode-back" href="../../../modules/domains.html#diofant.domains.domain.Domain">[docs]</a><span class="k">class</span> <span class="nc">Domain</span><span class="p">(</span><span class="n">DefaultPrinting</span><span class="p">,</span> <span class="n">abc</span><span class="o">.</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Represents an abstract domain. &quot;&quot;&quot;</span>
+
+    <span class="n">dtype</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">zero</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">one</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="n">is_Ring</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">is_Field</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="n">has_assoc_Ring</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">has_assoc_Field</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="n">is_FiniteField</span> <span class="o">=</span> <span class="n">is_FF</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">is_IntegerRing</span> <span class="o">=</span> <span class="n">is_ZZ</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">is_RationalField</span> <span class="o">=</span> <span class="n">is_QQ</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">is_RealField</span> <span class="o">=</span> <span class="n">is_RR</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">is_ComplexField</span> <span class="o">=</span> <span class="n">is_CC</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">is_AlgebraicField</span> <span class="o">=</span> <span class="n">is_Algebraic</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">is_RealAlgebraicField</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">is_ComplexAlgebraicField</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">is_PolynomialRing</span> <span class="o">=</span> <span class="n">is_Poly</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">is_FractionField</span> <span class="o">=</span> <span class="n">is_Frac</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">is_SymbolicDomain</span> <span class="o">=</span> <span class="n">is_EX</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="n">is_Exact</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">is_Numerical</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="n">is_Simple</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">is_Composite</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="n">rep</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">hash</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">new</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Construct an element of ``self`` domain from ``args``. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">normal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Domain.from_expr"><a class="viewcode-back" href="../../../modules/domains.html#diofant.domains.domain.Domain.from_expr">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">from_expr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Convert Diofant&#39;s expression to ``dtype``. &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+<div class="viewcode-block" id="Domain.to_expr"><a class="viewcode-back" href="../../../modules/domains.html#diofant.domains.domain.Domain.to_expr">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">to_expr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Convert ``element`` to Diofant expression. &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+<div class="viewcode-block" id="Domain.convert_from"><a class="viewcode-back" href="../../../modules/domains.html#diofant.domains.domain.Domain.convert_from">[docs]</a>    <span class="k">def</span> <span class="nf">convert_from</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">,</span> <span class="n">base</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Convert ``element`` to ``self.dtype`` given the base domain. &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">superclass</span> <span class="ow">in</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getmro</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="vm">__class__</span><span class="p">):</span>
+            <span class="n">method</span> <span class="o">=</span> <span class="s2">&quot;_from_&quot;</span> <span class="o">+</span> <span class="n">superclass</span><span class="o">.</span><span class="vm">__name__</span>
+
+            <span class="n">convert</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">convert</span><span class="p">:</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">convert</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">base</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">result</span>
+
+        <span class="k">raise</span> <span class="n">CoercionFailed</span><span class="p">(</span><span class="s2">&quot;can&#39;t convert </span><span class="si">%s</span><span class="s2"> of type </span><span class="si">%s</span><span class="s2"> from </span><span class="si">%s</span><span class="s2"> &quot;</span>
+                             <span class="s2">&quot;to </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">element</span><span class="p">),</span> <span class="n">base</span><span class="p">,</span> <span class="bp">self</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Domain.convert"><a class="viewcode-back" href="../../../modules/domains.html#diofant.domains.domain.Domain.convert">[docs]</a>    <span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">,</span> <span class="n">base</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Convert ``element`` to ``self.dtype``. &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">base</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_from</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">base</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">element</span>
+
+        <span class="kn">from</span> <span class="nn">.integerring</span> <span class="k">import</span> <span class="n">PythonIntegerRing</span><span class="p">,</span> <span class="n">GMPYIntegerRing</span>
+        <span class="kn">from</span> <span class="nn">.rationalfield</span> <span class="k">import</span> <span class="n">PythonRationalField</span><span class="p">,</span> <span class="n">GMPYRationalField</span>
+        <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">RealField</span><span class="p">,</span> <span class="n">ComplexField</span><span class="p">,</span> <span class="n">PythonRational</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_from</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">PythonIntegerRing</span><span class="p">())</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">PythonRational</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_from</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">PythonRationalField</span><span class="p">())</span>
+
+        <span class="k">if</span> <span class="n">HAS_GMPY</span><span class="p">:</span>
+            <span class="n">integers</span> <span class="o">=</span> <span class="n">GMPYIntegerRing</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">integers</span><span class="o">.</span><span class="n">dtype</span><span class="p">):</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_from</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">integers</span><span class="p">)</span>
+
+            <span class="n">rationals</span> <span class="o">=</span> <span class="n">GMPYRationalField</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">rationals</span><span class="o">.</span><span class="n">dtype</span><span class="p">):</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_from</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">rationals</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+            <span class="n">parent</span> <span class="o">=</span> <span class="n">RealField</span><span class="p">(</span><span class="n">tol</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_from</span><span class="p">(</span><span class="n">parent</span><span class="p">(</span><span class="n">element</span><span class="p">),</span> <span class="n">parent</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="nb">complex</span><span class="p">):</span>
+            <span class="n">parent</span> <span class="o">=</span> <span class="n">ComplexField</span><span class="p">(</span><span class="n">tol</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_from</span><span class="p">(</span><span class="n">parent</span><span class="p">(</span><span class="n">element</span><span class="p">),</span> <span class="n">parent</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">DomainElement</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_from</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">element</span><span class="o">.</span><span class="n">parent</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">Expr</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">from_expr</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+            <span class="k">except</span> <span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
+                <span class="k">pass</span>
+
+        <span class="k">raise</span> <span class="n">CoercionFailed</span><span class="p">(</span><span class="s2">&quot;can&#39;t convert </span><span class="si">%s</span><span class="s2"> of type </span><span class="si">%s</span><span class="s2"> to </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">element</span><span class="p">),</span> <span class="bp">self</span><span class="p">))</span></div>
+
+    <span class="k">def</span> <span class="nf">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check if ``a`` belongs to this domain. &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">except</span> <span class="n">CoercionFailed</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="nf">_from_PolynomialRing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">is_ground</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">LC</span><span class="p">,</span> <span class="n">K0</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Domain.unify"><a class="viewcode-back" href="../../../modules/domains.html#diofant.domains.domain.Domain.unify">[docs]</a>    <span class="k">def</span> <span class="nf">unify</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">K1</span><span class="p">,</span> <span class="n">symbols</span><span class="o">=</span><span class="p">()):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Construct a minimal domain that contains elements of ``self`` and ``K1``.</span>
+
+<span class="sd">        Known domains (from smallest to largest):</span>
+
+<span class="sd">        - ``GF(p)``</span>
+<span class="sd">        - ``ZZ``</span>
+<span class="sd">        - ``QQ``</span>
+<span class="sd">        - ``RR(prec, tol)``</span>
+<span class="sd">        - ``CC(prec, tol)``</span>
+<span class="sd">        - ``ALG(a, b, c)``</span>
+<span class="sd">        - ``K[x, y, z]``</span>
+<span class="sd">        - ``K(x, y, z)``</span>
+<span class="sd">        - ``EX``</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">symbols</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">is_Composite</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">symbols</span><span class="p">)</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">symbols</span><span class="p">))</span>
+                   <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="p">[</span><span class="bp">self</span><span class="p">,</span> <span class="n">K1</span><span class="p">]):</span>
+                <span class="k">raise</span> <span class="n">UnificationFailed</span><span class="p">(</span><span class="s2">&quot;Can&#39;t unify </span><span class="si">%s</span><span class="s2"> with </span><span class="si">%s</span><span class="s2">, given </span><span class="si">%s</span><span class="s2">&quot;</span>
+                                        <span class="s2">&quot; generators&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">K1</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">symbols</span><span class="p">)))</span>
+
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">unify</span><span class="p">(</span><span class="n">K1</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span> <span class="o">==</span> <span class="n">K1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_SymbolicDomain</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span>
+        <span class="k">if</span> <span class="n">K1</span><span class="o">.</span><span class="n">is_SymbolicDomain</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">K1</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_Composite</span> <span class="ow">or</span> <span class="n">K1</span><span class="o">.</span><span class="n">is_Composite</span><span class="p">:</span>
+            <span class="n">self_ground</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_Composite</span> <span class="k">else</span> <span class="bp">self</span>
+            <span class="n">K1_ground</span> <span class="o">=</span> <span class="n">K1</span><span class="o">.</span><span class="n">domain</span> <span class="k">if</span> <span class="n">K1</span><span class="o">.</span><span class="n">is_Composite</span> <span class="k">else</span> <span class="n">K1</span>
+
+            <span class="n">self_symbols</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">symbols</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_Composite</span> <span class="k">else</span> <span class="p">()</span>
+            <span class="n">K1_symbols</span> <span class="o">=</span> <span class="n">K1</span><span class="o">.</span><span class="n">symbols</span> <span class="k">if</span> <span class="n">K1</span><span class="o">.</span><span class="n">is_Composite</span> <span class="k">else</span> <span class="p">()</span>
+
+            <span class="n">domain</span> <span class="o">=</span> <span class="n">self_ground</span><span class="o">.</span><span class="n">unify</span><span class="p">(</span><span class="n">K1_ground</span><span class="p">)</span>
+            <span class="n">symbols</span> <span class="o">=</span> <span class="n">_unify_gens</span><span class="p">(</span><span class="n">self_symbols</span><span class="p">,</span> <span class="n">K1_symbols</span><span class="p">)</span>
+            <span class="n">order</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_Composite</span> <span class="k">else</span> <span class="n">K1</span><span class="o">.</span><span class="n">order</span>
+
+            <span class="k">if</span> <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">is_FractionField</span> <span class="ow">and</span> <span class="n">K1</span><span class="o">.</span><span class="n">is_PolynomialRing</span> <span class="ow">or</span>
+                 <span class="n">K1</span><span class="o">.</span><span class="n">is_FractionField</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_PolynomialRing</span><span class="p">)</span> <span class="ow">and</span>
+                    <span class="p">(</span><span class="ow">not</span> <span class="n">self_ground</span><span class="o">.</span><span class="n">is_Field</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">K1_ground</span><span class="o">.</span><span class="n">is_Field</span><span class="p">)</span> <span class="ow">and</span> <span class="n">domain</span><span class="o">.</span><span class="n">is_Field</span><span class="p">):</span>
+                <span class="n">domain</span> <span class="o">=</span> <span class="n">domain</span><span class="o">.</span><span class="n">ring</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_Composite</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">K1</span><span class="o">.</span><span class="n">is_Composite</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_FractionField</span> <span class="ow">or</span> <span class="n">K1</span><span class="o">.</span><span class="n">is_PolynomialRing</span><span class="p">):</span>
+                <span class="bp">cls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">cls</span> <span class="o">=</span> <span class="n">K1</span><span class="o">.</span><span class="vm">__class__</span>
+
+            <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">domain</span><span class="p">,</span> <span class="n">symbols</span><span class="p">,</span> <span class="n">order</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">mkinexact</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">K0</span><span class="p">,</span> <span class="n">K1</span><span class="p">):</span>
+            <span class="n">prec</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">K0</span><span class="o">.</span><span class="n">precision</span><span class="p">,</span> <span class="n">K1</span><span class="o">.</span><span class="n">precision</span><span class="p">)</span>
+            <span class="n">tol</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">K0</span><span class="o">.</span><span class="n">tolerance</span><span class="p">,</span> <span class="n">K1</span><span class="o">.</span><span class="n">tolerance</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">prec</span><span class="o">=</span><span class="n">prec</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="n">tol</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_ComplexField</span> <span class="ow">and</span> <span class="n">K1</span><span class="o">.</span><span class="n">is_ComplexField</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">mkinexact</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">K1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_ComplexField</span> <span class="ow">and</span> <span class="n">K1</span><span class="o">.</span><span class="n">is_RealField</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">mkinexact</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">K1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_RealField</span> <span class="ow">and</span> <span class="n">K1</span><span class="o">.</span><span class="n">is_ComplexField</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">mkinexact</span><span class="p">(</span><span class="n">K1</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="n">K1</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_RealField</span> <span class="ow">and</span> <span class="n">K1</span><span class="o">.</span><span class="n">is_RealField</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">mkinexact</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">K1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_ComplexField</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_RealField</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span>
+        <span class="k">if</span> <span class="n">K1</span><span class="o">.</span><span class="n">is_ComplexField</span> <span class="ow">or</span> <span class="n">K1</span><span class="o">.</span><span class="n">is_RealField</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">K1</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_AlgebraicField</span> <span class="ow">and</span> <span class="n">K1</span><span class="o">.</span><span class="n">is_AlgebraicField</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">unify</span><span class="p">(</span><span class="n">K1</span><span class="o">.</span><span class="n">domain</span><span class="p">),</span> <span class="o">*</span><span class="n">_unify_gens</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gens</span><span class="p">,</span> <span class="n">K1</span><span class="o">.</span><span class="n">gens</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_AlgebraicField</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span>
+        <span class="k">elif</span> <span class="n">K1</span><span class="o">.</span><span class="n">is_AlgebraicField</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">K1</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_RationalField</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span>
+        <span class="k">if</span> <span class="n">K1</span><span class="o">.</span><span class="n">is_RationalField</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">K1</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_FiniteField</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span> <span class="o">==</span> <span class="n">K1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span>
+        <span class="k">if</span> <span class="n">K1</span><span class="o">.</span><span class="n">is_FiniteField</span> <span class="ow">and</span> <span class="n">K1</span><span class="o">.</span><span class="n">domain</span> <span class="o">==</span> <span class="bp">self</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">K1</span>
+
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns ``True`` if two domains are equivalent. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Domain</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">dtype</span>
+
+<div class="viewcode-block" id="Domain.get_exact"><a class="viewcode-back" href="../../../modules/domains.html#diofant.domains.domain.Domain.get_exact">[docs]</a>    <span class="k">def</span> <span class="nf">get_exact</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns an exact domain associated with ``self``. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="Domain.poly_ring"><a class="viewcode-back" href="../../../modules/domains.html#diofant.domains.domain.Domain.poly_ring">[docs]</a>    <span class="k">def</span> <span class="nf">poly_ring</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">symbols</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a polynomial ring, i.e. `K[X]`. &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">..polys</span> <span class="k">import</span> <span class="n">PolynomialRing</span>
+        <span class="k">return</span> <span class="n">PolynomialRing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">symbols</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;order&quot;</span><span class="p">,</span> <span class="n">lex</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Domain.frac_field"><a class="viewcode-back" href="../../../modules/domains.html#diofant.domains.domain.Domain.frac_field">[docs]</a>    <span class="k">def</span> <span class="nf">frac_field</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">symbols</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a fraction field, i.e. `K(X)`. &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">..polys</span> <span class="k">import</span> <span class="n">FractionField</span>
+        <span class="k">return</span> <span class="n">FractionField</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">symbols</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;order&quot;</span><span class="p">,</span> <span class="n">lex</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Domain.is_positive"><a class="viewcode-back" href="../../../modules/domains.html#diofant.domains.domain.Domain.is_positive">[docs]</a>    <span class="k">def</span> <span class="nf">is_positive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns True if ``a`` is positive. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="mi">0</span></div>
+
+<div class="viewcode-block" id="Domain.is_negative"><a class="viewcode-back" href="../../../modules/domains.html#diofant.domains.domain.Domain.is_negative">[docs]</a>    <span class="k">def</span> <span class="nf">is_negative</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns True if ``a`` is negative. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="mi">0</span></div>
+
+<div class="viewcode-block" id="Domain.is_nonpositive"><a class="viewcode-back" href="../../../modules/domains.html#diofant.domains.domain.Domain.is_nonpositive">[docs]</a>    <span class="k">def</span> <span class="nf">is_nonpositive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns True if ``a`` is non-positive. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">&lt;=</span> <span class="mi">0</span></div>
+
+<div class="viewcode-block" id="Domain.is_nonnegative"><a class="viewcode-back" href="../../../modules/domains.html#diofant.domains.domain.Domain.is_nonnegative">[docs]</a>    <span class="k">def</span> <span class="nf">is_nonnegative</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns True if ``a`` is non-negative. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">&gt;=</span> <span class="mi">0</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2006-2018 SymPy Development Team, 2013-2018 Sergey B Kirpichev
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

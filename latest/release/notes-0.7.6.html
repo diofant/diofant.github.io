@@ -1,0 +1,348 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>SymPy 0.7.6 &mdash; Diofant 0.10.0a5.dev32+g9f6eb91 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Diofant 0.8" href="notes-0.8.html" />
+    <link rel="prev" title="SymPy 0.7.5" href="notes-0.7.5.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Diofant
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.10.0a5.dev32+g9f6eb91
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/index.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../internals/index.html">Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../literature.html">Literature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guide.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../aboutus.html">About</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Release Notes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="notes-0.10.html">Diofant 0.10 (Not Released Yet)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notes-0.9.html">Diofant 0.9</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notes-0.8.html">Diofant 0.8</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="sympy.html">SymPy releases</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">SymPy 0.7.6</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#new-features">New features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#compatibility-breaks">Compatibility breaks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#minor-changes">Minor changes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="notes-0.7.5.html">SymPy 0.7.5</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes-0.7.4.html">SymPy 0.7.4</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes-0.7.3.html">SymPy 0.7.3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes-0.7.2.html">SymPy 0.7.2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes-0.7.1.html">SymPy 0.7.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes-0.7.0.html">SymPy 0.7.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes-0.6.7.html">SymPy 0.6.7</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes-0.6.6.html">SymPy 0.6.6</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes-0.6.5.html">SymPy 0.6.5</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes-0.6.4.html">SymPy 0.6.4</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes-0.6.3.html">SymPy 0.6.3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes-0.6.2.html">SymPy 0.6.2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes-0.6.1.html">SymPy 0.6.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes-0.6.0.html">SymPy 0.6.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes-0.5.15.html">SymPy 0.5.15</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes-0.5.14.html">SymPy 0.5.14</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes-0.5.13.html">SymPy 0.5.13</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes-0.5.12.html">SymPy 0.5.12</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes-0.5.11.html">SymPy 0.5.11</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes-0.5.10.html">SymPy 0.5.10</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes-0.5.9.html">SymPy 0.5.9</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes-0.5.8.html">SymPy 0.5.8</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes-0.5.7.html">SymPy 0.5.7</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes-0.5.6.html">SymPy 0.5.6</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes-0.5.5.html">SymPy 0.5.5</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes-0.5.4.html">SymPy 0.5.4</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes-0.5.3.html">SymPy 0.5.3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes-0.5.2.html">SymPy 0.5.2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes-0.5.1.html">SymPy 0.5.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes-0.5.0.html">SymPy 0.5.0</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Diofant</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Release Notes</a> &raquo;</li>
+        
+          <li><a href="sympy.html">SymPy releases</a> &raquo;</li>
+        
+      <li>SymPy 0.7.6</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/release/notes-0.7.6.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="sympy-0-7-6">
+<h1>SymPy 0.7.6<a class="headerlink" href="#sympy-0-7-6" title="Permalink to this headline">¶</a></h1>
+<p>21 Nov 2014</p>
+<div class="section" id="new-features">
+<h2>New features<a class="headerlink" href="#new-features" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>New module <code class="docutils literal notranslate"><span class="pre">calculus.finite_diff</span></code> for generating finite difference formulae approximating derivatives of arbitrary order on arbitrarily spaced grids.</li>
+<li>New module <code class="docutils literal notranslate"><span class="pre">physics.optics</span></code> for symbolic computations related to optics.</li>
+<li><code class="docutils literal notranslate"><span class="pre">geometry</span></code> module now supports 3D geometry.</li>
+<li>Support for series expansions at a point other then <code class="docutils literal notranslate"><span class="pre">0</span></code> or <code class="docutils literal notranslate"><span class="pre">oo</span></code>.  See <a class="reference external" href="https://github.com/sympy/sympy/pull/2427">sympy/sympy#2427</a>.</li>
+<li>Rules for the intersection of integer ImageSets were added. See <a class="reference external" href="https://github.com/sympy/sympy/pull/7587">sympy/sympy#7587</a>. We can now do things like <code class="docutils literal notranslate"><span class="pre">{2⋅m</span> <span class="pre">|</span> <span class="pre">m</span> <span class="pre">∊</span> <span class="pre">ℤ}</span> <span class="pre">∩</span> <span class="pre">{3⋅n</span> <span class="pre">|</span> <span class="pre">n</span> <span class="pre">∊</span> <span class="pre">ℤ}</span> <span class="pre">=</span> <span class="pre">{6⋅t</span> <span class="pre">|</span> <span class="pre">t</span> <span class="pre">∊</span> <span class="pre">ℤ}</span></code> and <code class="docutils literal notranslate"><span class="pre">{2⋅m</span> <span class="pre">|</span> <span class="pre">m</span> <span class="pre">∊</span> <span class="pre">ℤ}</span> <span class="pre">∩</span> <span class="pre">{2⋅n</span> <span class="pre">+</span> <span class="pre">1</span> <span class="pre">|</span> <span class="pre">n</span> <span class="pre">∊</span> <span class="pre">ℤ}</span> <span class="pre">=</span> <span class="pre">∅</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">dsolve</span></code> module now supports system of ODEs including linear system of ODEs of 1st order for 2 and 3 equations and of 2nd order for 2 equations. It also supports homogeneous linear system of <code class="docutils literal notranslate"><span class="pre">n</span></code> equations.</li>
+<li>New support for continued fractions, including iterators for partial quotients and convergents, and reducing a continued fraction to a Rational or a quadratic irrational.</li>
+<li>Support for Egyptian fraction expansions, using several different algorithms.</li>
+<li>Addition of generalized linearization methods to <code class="docutils literal notranslate"><span class="pre">physics.mechanics</span></code>.</li>
+<li>Use an LRU cache by default instead of an unbounded one. See <a class="reference external" href="https://github.com/sympy/sympy/pull/7464">sympy/sympy#7464</a>.  Control cache size by the environment variable <code class="docutils literal notranslate"><span class="pre">SYMPY_CACHE_SIZE</span></code> (default is 500).  <code class="docutils literal notranslate"><span class="pre">SYMPY_CACHE_SIZE=None</span></code> restores the unbounded cache.</li>
+<li>Added <code class="docutils literal notranslate"><span class="pre">fastcache</span></code> as an optional dependency.  Requires v0.4 or newer.  Control via <code class="docutils literal notranslate"><span class="pre">SYMPY_CACHE_SIZE</span></code>.  May result in significant speedup. See <a class="reference external" href="https://github.com/sympy/sympy/pull/7737">sympy/sympy#7737</a>.</li>
+<li>New experimental module <code class="docutils literal notranslate"><span class="pre">physics.unitsystems</span></code> for computation with dimensions, units and quantities gathered into systems. This opens the way to dimensional analysis and better quantity calculus.  The old module <code class="docutils literal notranslate"><span class="pre">physics.units</span></code> will stay available until the new one reaches a mature state. See <a class="reference external" href="https://github.com/sympy/sympy/pull/2628">sympy/sympy#2628</a>.</li>
+<li>New <code class="docutils literal notranslate"><span class="pre">Complement</span></code> class to represent relative complements of two sets. See <a class="reference external" href="https://github.com/sympy/sympy/pull/7462">sympy/sympy#7462</a>.</li>
+<li>New trigonometric functions (asec, acsc), many enhancements for other trigonometric functions (see <a class="reference external" href="https://github.com/sympy/sympy/pull/7500">sympy/sympy#7500</a>).</li>
+<li>New <code class="docutils literal notranslate"><span class="pre">Contains</span></code> class to represent the relation “is an element of” (see <a class="reference external" href="https://github.com/sympy/sympy/pull/7989">sympy/sympy#7989</a>).</li>
+<li>The code generation tools (code printers, <code class="docutils literal notranslate"><span class="pre">codegen</span></code>, <code class="docutils literal notranslate"><span class="pre">autowrap</span></code>, and <code class="docutils literal notranslate"><span class="pre">ufuncify</span></code>) have been updated to support a wider variety of constructs, and do so in a more robust way. Major changes include added support for matrices as inputs/outputs, and more robust handling of conditional (<code class="docutils literal notranslate"><span class="pre">Piecewise</span></code>) statements.</li>
+<li><code class="docutils literal notranslate"><span class="pre">ufuncify</span></code> now uses a backend that generates actual <code class="docutils literal notranslate"><span class="pre">numpy.ufuncs</span></code> by default through the use of the <code class="docutils literal notranslate"><span class="pre">numpy</span></code> C api. This allows broadcasting on <em>all</em> arguments. The previous <code class="docutils literal notranslate"><span class="pre">cython</span></code> and <code class="docutils literal notranslate"><span class="pre">f2py</span></code> backends are still accessible through the use of the <code class="docutils literal notranslate"><span class="pre">backend</span></code> kwarg.</li>
+<li><code class="docutils literal notranslate"><span class="pre">CodeGen</span></code> now generates code for Octave and Matlab from SymPy expressions.  This is supported by a new CodePrinter with interface <code class="docutils literal notranslate"><span class="pre">octave_code</span></code>.  For example <code class="docutils literal notranslate"><span class="pre">octave_code(Matrix([[x**2,</span> <span class="pre">sin(pi*x*y),</span> <span class="pre">ceiling(x)]]))</span></code> gives the string <code class="docutils literal notranslate"><span class="pre">[x.^2</span> <span class="pre">sin(pi*x.*y)</span> <span class="pre">ceil(x)]</span></code>.</li>
+<li>New general 3D vector package at <code class="docutils literal notranslate"><span class="pre">sympy.vector</span></code>.  This package provides a 3D vector object with the Del, gradient, divergence, curl, and operators. It supports arbitrary rotations of Cartesian coordinate systems and arbitrary locations of points.</li>
+</ul>
+</div>
+<div class="section" id="compatibility-breaks">
+<h2>Compatibility breaks<a class="headerlink" href="#compatibility-breaks" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>All usage of inequalities (<code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code>) on SymPy objects will now return SymPy’s <code class="docutils literal notranslate"><span class="pre">S.true</span></code> or <code class="docutils literal notranslate"><span class="pre">S.false</span></code> singletons instead of Python’s <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code> singletons.  Code that checks for, e.g., <code class="docutils literal notranslate"><span class="pre">(a</span> <span class="pre">&lt;</span> <span class="pre">b)</span> <span class="pre">is</span> <span class="pre">True</span></code> should be changed to <code class="docutils literal notranslate"><span class="pre">(a</span> <span class="pre">&lt;</span> <span class="pre">b)</span> <span class="pre">==</span> <span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">(a</span> <span class="pre">&lt;</span> <span class="pre">b)</span> <span class="pre">==</span> <span class="pre">S.true</span></code>.  Use of <code class="docutils literal notranslate"><span class="pre">is</span></code> is not recommended here.</li>
+<li>The <code class="docutils literal notranslate"><span class="pre">subset()</span></code> method in <code class="docutils literal notranslate"><span class="pre">sympy.core.sets</span></code> is marked as being deprecated and will be removed in a future release (<a class="reference external" href="https://github.com/sympy/sympy/issues/7460">sympy/sympy#7460</a>). Instead, the <code class="docutils literal notranslate"><span class="pre">is_subset()</span></code> method should be used.</li>
+<li>Previously, if you compute the series expansion at a point other than 0, the result was shifted to 0.  Now SymPy returns the usual series expansion, see <a class="reference external" href="https://github.com/sympy/sympy/pull/2427">sympy/sympy#2427</a>.</li>
+<li>In <code class="docutils literal notranslate"><span class="pre">physics.mechanics</span></code>, <code class="docutils literal notranslate"><span class="pre">KanesMethod.linearize</span></code> has a new interface. Old code should be changed to use this instead. See docstring for information.</li>
+<li><code class="docutils literal notranslate"><span class="pre">physics.gaussopt</span></code> has been moved to <code class="docutils literal notranslate"><span class="pre">physics.optics.gaussopt</span></code>. You can still import it from the previous location but it may result in a deprecation warning.</li>
+<li>This is the last release with the bundled <a class="reference external" href="http://mpmath.org/">mpmath library</a>. In the next release you will have to install this library from the official site.</li>
+<li>Previously <code class="docutils literal notranslate"><span class="pre">lambdify</span></code> would convert <code class="docutils literal notranslate"><span class="pre">Matrix</span></code> to <code class="docutils literal notranslate"><span class="pre">numpy.matrix</span></code> by default. This behavior is being deprecated, and will be completely phased out with the release of 0.7.7. To use the new behavior now set the modules kwarg to <code class="docutils literal notranslate"><span class="pre">[{'ImmutableMatrix':</span> <span class="pre">numpy.array},</span> <span class="pre">'numpy']</span></code>. If lambdify will be used frequently it is recommended to wrap it with a <code class="docutils literal notranslate"><span class="pre">partial</span></code> as so: <code class="docutils literal notranslate"><span class="pre">lambdify</span> <span class="pre">=</span> <span class="pre">functools.partial(lambdify,</span> <span class="pre">modules=[{'ImmutableMatrix':</span> <span class="pre">numpy.array},</span> <span class="pre">'numpy'])</span></code>. For more information see <a class="reference external" href="https://github.com/sympy/sympy/issues/7853">sympy/sympy#7853</a> and the <code class="docutils literal notranslate"><span class="pre">lambdify</span></code> docstring.</li>
+<li><code class="docutils literal notranslate"><span class="pre">Set.complement</span></code> doesn’t exists as an attribute anymore. Now we have a method <code class="docutils literal notranslate"><span class="pre">Set.complement(&lt;universal_set&gt;)</span></code> which complements the given universal set.</li>
+<li>Removed is_finite assumption (see <a class="reference external" href="https://github.com/sympy/sympy/pull/7891">sympy/sympy#7891</a>).  Use instead a combination of <code class="docutils literal notranslate"><span class="pre">is_bounded</span> <span class="pre">and</span> <span class="pre">is_nonzero</span></code> assumptions.</li>
+<li>is_bounded and is_unbounded assumptions were renamed to is_finite and is_infinite (see <a class="reference external" href="https://github.com/sympy/sympy/pull/7947">sympy/sympy#7947</a>).</li>
+<li>Removed is_infinitesimal assumption (see <a class="reference external" href="https://github.com/sympy/sympy/pull/7995">sympy/sympy#7995</a>).</li>
+<li>Removed is_real property for Sets, use <code class="docutils literal notranslate"><span class="pre">Set.is_subset(Reals)</span></code> instead (see <a class="reference external" href="https://github.com/sympy/sympy/pull/7996">sympy/sympy#7996</a>).</li>
+<li>For generic symbol <code class="docutils literal notranslate"><span class="pre">x</span></code> (SymPy’s symbols are not bounded by default), inequalities with <code class="docutils literal notranslate"><span class="pre">oo</span></code> are no longer evaluated as they were before, e.g. <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&lt;</span> <span class="pre">oo</span></code> no longer evaluates to True).  See <a class="reference external" href="https://github.com/sympy/sympy/pull/7861">sympy/sympy#7861</a>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">CodeGen</span></code> has been refactored to make it easier to add other languages.  The main high-level tool is still <code class="docutils literal notranslate"><span class="pre">utilities.codegen.codegen</span></code>.  But if you previously used the <code class="docutils literal notranslate"><span class="pre">Routine</span></code> class directly, note its <code class="docutils literal notranslate"><span class="pre">__init__</span></code> behaviour has changed; the new <code class="docutils literal notranslate"><span class="pre">utilities.codegen.make_routine</span></code> is recommended instead and by default retains the previous C/Fortran behaviour.  If needed, you can still instantiate <code class="docutils literal notranslate"><span class="pre">Routine</span></code> directly; it only does minimal sanity checking on its inputs.  See <a class="reference external" href="https://github.com/sympy/sympy/pull/8082">sympy/sympy#8082</a>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">FiniteSet([1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">4])</span></code> syntax not supported anymore, use <code class="docutils literal notranslate"><span class="pre">FiniteSet(1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">4)</span></code> instead.  See <a class="reference external" href="https://github.com/sympy/sympy/pull/7622">sympy/sympy#7622</a>.</li>
+</ul>
+</div>
+<div class="section" id="minor-changes">
+<h2>Minor changes<a class="headerlink" href="#minor-changes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Updated the parsing module to allow sympification of lambda statements to their SymPy equivalent.</li>
+<li>Lambdify can now use <code class="docutils literal notranslate"><span class="pre">numexpr</span></code> by specifying <code class="docutils literal notranslate"><span class="pre">modules='numexpr'</span></code>.</li>
+<li>Use <code class="docutils literal notranslate"><span class="pre">with</span> <span class="pre">evaluate(False)</span></code> context manager to control automatic evaluation.  E.g. <code class="docutils literal notranslate"><span class="pre">with</span> <span class="pre">evaluate(False):</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">x</span></code> is actually <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+</span> <span class="pre">x</span></code>, not <code class="docutils literal notranslate"><span class="pre">2*x</span></code>.</li>
+<li>IndexedBase and Indexed are changed to be commutative by default.</li>
+<li><code class="docutils literal notranslate"><span class="pre">sympy.core.sets</span></code> moved to <code class="docutils literal notranslate"><span class="pre">sympy.sets</span></code>.</li>
+<li>Changes in <code class="docutils literal notranslate"><span class="pre">sympy.sets</span></code>:<ul>
+<li>Infinite <code class="docutils literal notranslate"><span class="pre">Range</span></code> is now allowed. See <a class="reference external" href="https://github.com/sympy/sympy/pull/7741">sympy/sympy#7741</a>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">is_subset()</span></code>: The <code class="docutils literal notranslate"><span class="pre">is_subset()</span></code> method deprecates the <code class="docutils literal notranslate"><span class="pre">subset()</span></code> method.  <code class="docutils literal notranslate"><span class="pre">self.is_subset(other)</span></code> checks if <code class="docutils literal notranslate"><span class="pre">self</span></code> is a subset of <code class="docutils literal notranslate"><span class="pre">other</span></code>. This is different from <code class="docutils literal notranslate"><span class="pre">self.subset(other)</span></code>, which checked if <code class="docutils literal notranslate"><span class="pre">other</span></code> is a subset of <code class="docutils literal notranslate"><span class="pre">self</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">is_superset()</span></code>: A new method <code class="docutils literal notranslate"><span class="pre">is_superset()</span></code> method is now available.  <code class="docutils literal notranslate"><span class="pre">self.is_superset(other)</span></code> checks if <code class="docutils literal notranslate"><span class="pre">self</span></code> is a superset of <code class="docutils literal notranslate"><span class="pre">other</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">is_proper_subset</span></code> and <code class="docutils literal notranslate"><span class="pre">is_proper_superset</span></code>: Two new methods allow checking if one set is the proper subset and proper superset of another respectively. For e.g. <code class="docutils literal notranslate"><span class="pre">self.is_proper_subset(other)</span></code> and <code class="docutils literal notranslate"><span class="pre">self.is_proper_superset(other)</span></code> checks if <code class="docutils literal notranslate"><span class="pre">self</span></code> is the proper subset of <code class="docutils literal notranslate"><span class="pre">other</span></code> and if <code class="docutils literal notranslate"><span class="pre">self</span></code> is the proper superset of <code class="docutils literal notranslate"><span class="pre">other</span></code> respectively.</li>
+<li><code class="docutils literal notranslate"><span class="pre">is_disjoint()</span></code>: A new method for checking if two sets are disjoint.</li>
+<li><code class="docutils literal notranslate"><span class="pre">powerset()</span></code>: A new method <code class="docutils literal notranslate"><span class="pre">powerset()</span></code> has been added to find the power set of a set.</li>
+<li>The cardinality of a <code class="docutils literal notranslate"><span class="pre">ProductSet</span></code> can be found using the <code class="docutils literal notranslate"><span class="pre">len()</span></code> function.</li>
+</ul>
+</li>
+<li>Changes in <code class="docutils literal notranslate"><span class="pre">sympy.plot.plot_implicit</span></code>:<ul>
+<li>The <code class="docutils literal notranslate"><span class="pre">plot_implicit</span></code> function now also allows explicitly specifying the symbols to plot on the X and Y axes. If not specified, the symbols will be assigned in the order they are sorted.</li>
+<li>The <code class="docutils literal notranslate"><span class="pre">plot_implicit</span></code> function also allows axes labels for the plot to be specified.</li>
+</ul>
+</li>
+<li>rules for simplification of ImageSet were added <a class="reference external" href="https://github.com/sympy/sympy/pull/7625">sympy/sympy#7625</a>.  As a result <code class="docutils literal notranslate"><span class="pre">{x</span> <span class="pre">|</span> <span class="pre">x</span> <span class="pre">∊</span> <span class="pre">ℤ}</span></code> now simplifies to <code class="docutils literal notranslate"><span class="pre">ℤ</span></code> and <code class="docutils literal notranslate"><span class="pre">{sin(n)</span> <span class="pre">|</span> <span class="pre">n</span> <span class="pre">∊</span> <span class="pre">{tan(m)</span> <span class="pre">|</span> <span class="pre">m</span> <span class="pre">∊</span> <span class="pre">ℤ}}</span></code> automatically simplifies to <code class="docutils literal notranslate"><span class="pre">{sin(tan(m))</span> <span class="pre">|</span> <span class="pre">m</span> <span class="pre">∊</span> <span class="pre">ℤ}</span></code>.</li>
+<li>coth(0) now returns Complex Infinity.  See <a class="reference external" href="https://github.com/sympy/sympy/pull/7634">sympy/sympy#7634</a>.</li>
+<li>dioptre is added to <code class="docutils literal notranslate"><span class="pre">physics.units</span></code>.  See <a class="reference external" href="https://github.com/sympy/sympy/pull/7782">sympy/sympy#7782</a>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">replace</span></code> now respects commutativity, see <a class="reference external" href="https://github.com/sympy/sympy/pull/7752">sympy/sympy#7752</a>.</li>
+<li>The CCodePrinter gracefully handles Symbols which have string representations that match C reserved words, see <a class="reference external" href="https://github.com/sympy/sympy/pull/8199">sympy/sympy#8199</a>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">limit</span></code> function now returns an unevaluated <code class="docutils literal notranslate"><span class="pre">Limit</span></code> instance if it can’t compute given limit, see <a class="reference external" href="https://github.com/sympy/sympy/pull/8213">sympy/sympy#8213</a>.</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="notes-0.8.html" class="btn btn-neutral float-right" title="Diofant 0.8" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="notes-0.7.5.html" class="btn btn-neutral" title="SymPy 0.7.5" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2006-2018 SymPy Development Team, 2013-2018 Sergey B Kirpichev
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,750 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>diofant.solvers.inequalities &mdash; Diofant 0.10.0a5.dev32+g9f6eb91 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> Diofant
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.10.0a5.dev32+g9f6eb91
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules/index.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../internals/index.html">Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../literature.html">Literature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../guide.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../aboutus.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release/index.html">Release Notes</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Diofant</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>diofant.solvers.inequalities</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for diofant.solvers.inequalities</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Tools for solving inequalities and systems of inequalities. &quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">defaultdict</span>
+
+<span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">Dummy</span><span class="p">,</span> <span class="n">Eq</span><span class="p">,</span> <span class="n">Ge</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">Lt</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">Symbol</span><span class="p">,</span> <span class="n">oo</span>
+<span class="kn">from</span> <span class="nn">..core.compatibility</span> <span class="k">import</span> <span class="n">iterable</span>
+<span class="kn">from</span> <span class="nn">..core.relational</span> <span class="k">import</span> <span class="n">Relational</span>
+<span class="kn">from</span> <span class="nn">..functions</span> <span class="k">import</span> <span class="n">Abs</span><span class="p">,</span> <span class="n">Piecewise</span>
+<span class="kn">from</span> <span class="nn">..logic</span> <span class="k">import</span> <span class="n">And</span>
+<span class="kn">from</span> <span class="nn">..polys</span> <span class="k">import</span> <span class="n">Poly</span><span class="p">,</span> <span class="n">parallel_poly_from_expr</span>
+<span class="kn">from</span> <span class="nn">..polys.polyutils</span> <span class="k">import</span> <span class="n">_nsort</span>
+<span class="kn">from</span> <span class="nn">..sets</span> <span class="k">import</span> <span class="n">FiniteSet</span><span class="p">,</span> <span class="n">Interval</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span> <span class="nn">..utilities</span> <span class="k">import</span> <span class="n">filldedent</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="s1">&#39;reduce_inequalities&#39;</span><span class="p">,</span>
+
+
+<span class="k">def</span> <span class="nf">solve_poly_inequality</span><span class="p">(</span><span class="n">poly</span><span class="p">,</span> <span class="n">rel</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Solve a polynomial inequality with rational coefficients.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; solve_poly_inequality(Poly(x, x, domain=&#39;ZZ&#39;), &#39;==&#39;)</span>
+<span class="sd">    [{0}]</span>
+<span class="sd">    &gt;&gt;&gt; solve_poly_inequality(Poly(x**2 - 1, x, domain=&#39;ZZ&#39;), &#39;!=&#39;)</span>
+<span class="sd">    [(-oo, -1), (-1, 1), (1, oo)]</span>
+<span class="sd">    &gt;&gt;&gt; solve_poly_inequality(Poly(x**2 - 1, x, domain=&#39;ZZ&#39;), &#39;==&#39;)</span>
+<span class="sd">    [{-1}, {1}]</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    solve_poly_inequalities</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">poly</span><span class="p">,</span> <span class="n">Poly</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;`poly` should be a Poly instance&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">rel</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">{</span><span class="s1">&#39;&gt;&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;&#39;</span><span class="p">,</span> <span class="s1">&#39;&gt;=&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;=&#39;</span><span class="p">,</span> <span class="s1">&#39;==&#39;</span><span class="p">,</span> <span class="s1">&#39;!=&#39;</span><span class="p">}:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid relational operator symbol: </span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">rel</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">poly</span><span class="o">.</span><span class="n">is_number</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">Relational</span><span class="p">(</span><span class="n">poly</span><span class="o">.</span><span class="n">as_expr</span><span class="p">(),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">rel</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">t</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">true</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">S</span><span class="o">.</span><span class="n">Reals</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">t</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">false</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">S</span><span class="o">.</span><span class="n">EmptySet</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Couldn&#39;t determine truth value of </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">t</span><span class="p">)</span>
+
+    <span class="n">reals</span><span class="p">,</span> <span class="n">intervals</span> <span class="o">=</span> <span class="n">poly</span><span class="o">.</span><span class="n">real_roots</span><span class="p">(</span><span class="n">multiple</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span> <span class="p">[]</span>
+
+    <span class="k">if</span> <span class="n">rel</span> <span class="o">==</span> <span class="s1">&#39;==&#39;</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">root</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">reals</span><span class="p">:</span>
+            <span class="n">interval</span> <span class="o">=</span> <span class="n">Interval</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">root</span><span class="p">)</span>
+            <span class="n">intervals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">interval</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">rel</span> <span class="o">==</span> <span class="s1">&#39;!=&#39;</span><span class="p">:</span>
+        <span class="n">left</span> <span class="o">=</span> <span class="o">-</span><span class="n">oo</span>
+
+        <span class="k">for</span> <span class="n">right</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">reals</span> <span class="o">+</span> <span class="p">[(</span><span class="n">oo</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]:</span>
+            <span class="n">interval</span> <span class="o">=</span> <span class="n">Interval</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+            <span class="n">intervals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">interval</span><span class="p">)</span>
+            <span class="n">left</span> <span class="o">=</span> <span class="n">right</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">sign</span> <span class="o">=</span> <span class="o">+</span><span class="mi">1</span> <span class="k">if</span> <span class="n">poly</span><span class="o">.</span><span class="n">LC</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="n">eq_sign</span><span class="p">,</span> <span class="n">equal</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">False</span>
+
+        <span class="k">if</span> <span class="n">rel</span> <span class="o">==</span> <span class="s1">&#39;&gt;&#39;</span><span class="p">:</span>
+            <span class="n">eq_sign</span> <span class="o">=</span> <span class="o">+</span><span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">rel</span> <span class="o">==</span> <span class="s1">&#39;&lt;&#39;</span><span class="p">:</span>
+            <span class="n">eq_sign</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">rel</span> <span class="o">==</span> <span class="s1">&#39;&gt;=&#39;</span><span class="p">:</span>
+            <span class="n">eq_sign</span><span class="p">,</span> <span class="n">equal</span> <span class="o">=</span> <span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">eq_sign</span><span class="p">,</span> <span class="n">equal</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="kc">True</span>
+
+        <span class="n">right</span><span class="p">,</span> <span class="n">right_open</span> <span class="o">=</span> <span class="n">oo</span><span class="p">,</span> <span class="kc">True</span>
+
+        <span class="k">for</span> <span class="n">left</span><span class="p">,</span> <span class="n">multiplicity</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">reals</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">multiplicity</span> <span class="o">%</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">sign</span> <span class="o">==</span> <span class="n">eq_sign</span><span class="p">:</span>
+                    <span class="n">intervals</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Interval</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="ow">not</span> <span class="n">equal</span><span class="p">,</span> <span class="n">right_open</span><span class="p">))</span>
+
+                <span class="n">sign</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">right_open</span> <span class="o">=</span> <span class="o">-</span><span class="n">sign</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="ow">not</span> <span class="n">equal</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">sign</span> <span class="o">==</span> <span class="n">eq_sign</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">equal</span><span class="p">:</span>
+                    <span class="n">intervals</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Interval</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">right_open</span><span class="p">))</span>
+                    <span class="n">right</span><span class="p">,</span> <span class="n">right_open</span> <span class="o">=</span> <span class="n">left</span><span class="p">,</span> <span class="kc">True</span>
+                <span class="k">elif</span> <span class="n">sign</span> <span class="o">!=</span> <span class="n">eq_sign</span> <span class="ow">and</span> <span class="n">equal</span><span class="p">:</span>
+                    <span class="n">intervals</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Interval</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">left</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">sign</span> <span class="o">==</span> <span class="n">eq_sign</span><span class="p">:</span>
+            <span class="n">intervals</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Interval</span><span class="p">(</span><span class="o">-</span><span class="n">oo</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">right_open</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">intervals</span>
+
+
+<span class="k">def</span> <span class="nf">solve_poly_inequalities</span><span class="p">(</span><span class="n">polys</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Solve polynomial inequalities with rational coefficients.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; solve_poly_inequalities(((Poly(x**2 - 3), &quot;&gt;&quot;),</span>
+<span class="sd">    ...                          (Poly(-x**2 + 1), &quot;&gt;&quot;)))</span>
+<span class="sd">    (-oo, -sqrt(3)) U (-1, 1) U (sqrt(3), oo)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">Union</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">solve_poly_inequality</span><span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">polys</span><span class="p">])</span>
+
+
+<span class="k">def</span> <span class="nf">solve_rational_inequalities</span><span class="p">(</span><span class="n">eqs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Solve a system of rational inequalities with rational coefficients.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; solve_rational_inequalities([[((Poly(-x + 1), Poly(1, x)), &#39;&gt;=&#39;),</span>
+<span class="sd">    ...                               ((Poly(-x + 1), Poly(1, x)), &#39;&lt;=&#39;)]])</span>
+<span class="sd">    {1}</span>
+
+<span class="sd">    &gt;&gt;&gt; solve_rational_inequalities([[((Poly(x), Poly(1, x)), &#39;!=&#39;),</span>
+<span class="sd">    ...                               ((Poly(-x + 1), Poly(1, x)), &#39;&gt;=&#39;)]])</span>
+<span class="sd">    (-oo, 0) U (0, 1]</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    solve_poly_inequality</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">EmptySet</span>
+
+    <span class="k">for</span> <span class="n">eq</span> <span class="ow">in</span> <span class="n">eqs</span><span class="p">:</span>
+        <span class="n">global_intervals</span> <span class="o">=</span> <span class="p">[</span><span class="n">S</span><span class="o">.</span><span class="n">Reals</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="n">numer</span><span class="p">,</span> <span class="n">denom</span><span class="p">),</span> <span class="n">rel</span> <span class="ow">in</span> <span class="n">eq</span><span class="p">:</span>
+            <span class="n">intervals</span> <span class="o">=</span> <span class="p">[]</span>
+
+            <span class="k">for</span> <span class="n">numer_interval</span> <span class="ow">in</span> <span class="n">solve_poly_inequality</span><span class="p">(</span><span class="n">numer</span><span class="o">*</span><span class="n">denom</span><span class="p">,</span> <span class="n">rel</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">global_interval</span> <span class="ow">in</span> <span class="n">global_intervals</span><span class="p">:</span>
+                    <span class="n">interval</span> <span class="o">=</span> <span class="n">numer_interval</span> <span class="o">&amp;</span> <span class="n">global_interval</span>
+
+                    <span class="k">if</span> <span class="n">interval</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">S</span><span class="o">.</span><span class="n">EmptySet</span><span class="p">:</span>
+                        <span class="n">intervals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">interval</span><span class="p">)</span>
+
+            <span class="n">global_intervals</span> <span class="o">=</span> <span class="n">intervals</span>
+
+            <span class="n">intervals</span> <span class="o">=</span> <span class="p">[]</span>
+
+            <span class="k">for</span> <span class="n">global_interval</span> <span class="ow">in</span> <span class="n">global_intervals</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">denom_interval</span> <span class="ow">in</span> <span class="n">solve_poly_inequality</span><span class="p">(</span><span class="n">denom</span><span class="p">,</span> <span class="s1">&#39;==&#39;</span><span class="p">):</span>
+                    <span class="n">global_interval</span> <span class="o">-=</span> <span class="n">denom_interval</span>
+
+                <span class="k">if</span> <span class="n">global_interval</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">S</span><span class="o">.</span><span class="n">EmptySet</span><span class="p">:</span>
+                    <span class="n">intervals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">global_interval</span><span class="p">)</span>
+
+            <span class="n">global_intervals</span> <span class="o">=</span> <span class="n">intervals</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">global_intervals</span><span class="p">:</span>
+                <span class="k">break</span>
+
+        <span class="k">for</span> <span class="n">interval</span> <span class="ow">in</span> <span class="n">global_intervals</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">|=</span> <span class="n">interval</span>
+
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="k">def</span> <span class="nf">reduce_rational_inequalities</span><span class="p">(</span><span class="n">exprs</span><span class="p">,</span> <span class="n">gen</span><span class="p">,</span> <span class="n">relational</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Reduce a system of rational inequalities with rational coefficients.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; x = Symbol(&#39;x&#39;, real=True)</span>
+
+<span class="sd">    &gt;&gt;&gt; reduce_rational_inequalities([[x**2 &lt;= 0]], x)</span>
+<span class="sd">    Eq(x, 0)</span>
+<span class="sd">    &gt;&gt;&gt; reduce_rational_inequalities([[x + 2 &gt; 0]], x)</span>
+<span class="sd">    -2 &lt; x</span>
+<span class="sd">    &gt;&gt;&gt; reduce_rational_inequalities([[(x + 2, &quot;&gt;&quot;)]], x)</span>
+<span class="sd">    -2 &lt; x</span>
+<span class="sd">    &gt;&gt;&gt; reduce_rational_inequalities([[x + 2]], x)</span>
+<span class="sd">    Eq(x, -2)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">exact</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">eqs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">solution</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">Reals</span> <span class="k">if</span> <span class="n">exprs</span> <span class="k">else</span> <span class="n">S</span><span class="o">.</span><span class="n">EmptySet</span>
+    <span class="k">for</span> <span class="n">_exprs</span> <span class="ow">in</span> <span class="n">exprs</span><span class="p">:</span>
+        <span class="n">_eqs</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">expr</span> <span class="ow">in</span> <span class="n">_exprs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+                <span class="n">expr</span><span class="p">,</span> <span class="n">rel</span> <span class="o">=</span> <span class="n">expr</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_Relational</span><span class="p">:</span>
+                    <span class="n">expr</span><span class="p">,</span> <span class="n">rel</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">lhs</span> <span class="o">-</span> <span class="n">expr</span><span class="o">.</span><span class="n">rhs</span><span class="p">,</span> <span class="n">expr</span><span class="o">.</span><span class="n">rel_op</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">expr</span><span class="p">,</span> <span class="n">rel</span> <span class="o">=</span> <span class="n">expr</span><span class="p">,</span> <span class="s1">&#39;==&#39;</span>
+
+            <span class="k">if</span> <span class="n">expr</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">true</span><span class="p">:</span>
+                <span class="n">numer</span><span class="p">,</span> <span class="n">denom</span><span class="p">,</span> <span class="n">rel</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">,</span> <span class="s1">&#39;==&#39;</span>
+            <span class="k">elif</span> <span class="n">expr</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">false</span><span class="p">:</span>
+                <span class="n">numer</span><span class="p">,</span> <span class="n">denom</span><span class="p">,</span> <span class="n">rel</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">,</span> <span class="s1">&#39;==&#39;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">numer</span><span class="p">,</span> <span class="n">denom</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">together</span><span class="p">()</span><span class="o">.</span><span class="n">as_numer_denom</span><span class="p">()</span>
+
+            <span class="p">(</span><span class="n">numer</span><span class="p">,</span> <span class="n">denom</span><span class="p">),</span> <span class="n">opt</span> <span class="o">=</span> <span class="n">parallel_poly_from_expr</span><span class="p">((</span><span class="n">numer</span><span class="p">,</span> <span class="n">denom</span><span class="p">),</span> <span class="n">gen</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">opt</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">is_Exact</span><span class="p">:</span>
+                <span class="n">numer</span><span class="p">,</span> <span class="n">denom</span><span class="p">,</span> <span class="n">exact</span> <span class="o">=</span> <span class="n">numer</span><span class="o">.</span><span class="n">to_exact</span><span class="p">(),</span> <span class="n">denom</span><span class="o">.</span><span class="n">to_exact</span><span class="p">(),</span> <span class="kc">False</span>
+
+            <span class="n">domain</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">get_exact</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">domain</span><span class="o">.</span><span class="n">is_IntegerRing</span> <span class="ow">or</span> <span class="n">domain</span><span class="o">.</span><span class="n">is_RationalField</span><span class="p">):</span>
+                <span class="n">expr</span> <span class="o">=</span> <span class="n">numer</span><span class="o">/</span><span class="n">denom</span>
+                <span class="n">expr</span> <span class="o">=</span> <span class="n">Relational</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">rel</span><span class="p">)</span>
+                <span class="n">solution</span> <span class="o">&amp;=</span> <span class="n">solve_univariate_inequality</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">gen</span><span class="p">,</span> <span class="n">relational</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">_eqs</span><span class="o">.</span><span class="n">append</span><span class="p">(((</span><span class="n">numer</span><span class="p">,</span> <span class="n">denom</span><span class="p">),</span> <span class="n">rel</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">_eqs</span><span class="p">:</span>
+            <span class="n">eqs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_eqs</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">eqs</span><span class="p">:</span>
+        <span class="n">solution</span> <span class="o">&amp;=</span> <span class="n">solve_rational_inequalities</span><span class="p">(</span><span class="n">eqs</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">exact</span><span class="p">:</span>
+        <span class="n">solution</span> <span class="o">=</span> <span class="n">solution</span><span class="o">.</span><span class="n">evalf</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">relational</span><span class="p">:</span>
+        <span class="n">solution</span> <span class="o">=</span> <span class="n">solution</span><span class="o">.</span><span class="n">as_relational</span><span class="p">(</span><span class="n">gen</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">solution</span>
+
+
+<span class="k">def</span> <span class="nf">reduce_piecewise_inequality</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">rel</span><span class="p">,</span> <span class="n">gen</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Reduce an inequality with nested piecewise functions.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; x = Symbol(&#39;x&#39;, real=True)</span>
+
+<span class="sd">    &gt;&gt;&gt; reduce_piecewise_inequality(Abs(x - 5) - 3, &#39;&lt;&#39;, x)</span>
+<span class="sd">    And(2 &lt; x, x &lt; 8)</span>
+<span class="sd">    &gt;&gt;&gt; reduce_piecewise_inequality(Abs(x + 2)*3 - 13, &#39;&lt;&#39;, x)</span>
+<span class="sd">    And(-19/3 &lt; x, x &lt; 7/3)</span>
+
+<span class="sd">    &gt;&gt;&gt; reduce_piecewise_inequality(Piecewise((1, x &lt; 1),</span>
+<span class="sd">    ...                                       (3, True)) - 1, &#39;&gt;&#39;, x)</span>
+<span class="sd">    1 &lt;= x</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    reduce_piecewise_inequalities</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">gen</span><span class="o">.</span><span class="n">is_extended_real</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">filldedent</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">            can&#39;t solve inequalities with piecewise</span>
+<span class="s1">            functions containing non-real variables&#39;&#39;&#39;</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">_bottom_up_scan</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
+        <span class="n">exprs</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">if</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_Add</span> <span class="ow">or</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_Mul</span><span class="p">:</span>
+            <span class="n">op</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">func</span>
+
+            <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">:</span>
+                <span class="n">_exprs</span> <span class="o">=</span> <span class="n">_bottom_up_scan</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">exprs</span><span class="p">:</span>
+                    <span class="n">exprs</span> <span class="o">=</span> <span class="n">_exprs</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">args</span> <span class="o">=</span> <span class="p">[]</span>
+
+                    <span class="k">for</span> <span class="n">expr</span><span class="p">,</span> <span class="n">conds</span> <span class="ow">in</span> <span class="n">exprs</span><span class="p">:</span>
+                        <span class="k">for</span> <span class="n">_expr</span><span class="p">,</span> <span class="n">_conds</span> <span class="ow">in</span> <span class="n">_exprs</span><span class="p">:</span>
+                            <span class="n">args</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">op</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">_expr</span><span class="p">),</span> <span class="n">conds</span> <span class="o">+</span> <span class="n">_conds</span><span class="p">))</span>
+
+                    <span class="n">exprs</span> <span class="o">=</span> <span class="n">args</span>
+        <span class="k">elif</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_Pow</span><span class="p">:</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">exp</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">n</span><span class="o">.</span><span class="n">is_Integer</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+                <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;only integer powers are supported&quot;</span><span class="p">)</span>
+
+            <span class="n">_exprs</span> <span class="o">=</span> <span class="n">_bottom_up_scan</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">base</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">expr</span><span class="p">,</span> <span class="n">conds</span> <span class="ow">in</span> <span class="n">_exprs</span><span class="p">:</span>
+                <span class="n">exprs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">expr</span><span class="o">**</span><span class="n">n</span><span class="p">,</span> <span class="n">conds</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">Abs</span><span class="p">):</span>
+            <span class="n">_exprs</span> <span class="o">=</span> <span class="n">_bottom_up_scan</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+            <span class="k">for</span> <span class="n">expr</span><span class="p">,</span> <span class="n">conds</span> <span class="ow">in</span> <span class="n">_exprs</span><span class="p">:</span>
+                <span class="n">exprs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span> <span class="n">expr</span><span class="p">,</span> <span class="n">conds</span> <span class="o">+</span> <span class="p">[</span><span class="n">Ge</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]))</span>
+                <span class="n">exprs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="o">-</span><span class="n">expr</span><span class="p">,</span> <span class="n">conds</span> <span class="o">+</span> <span class="p">[</span><span class="n">Lt</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]))</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">Piecewise</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">:</span>
+                <span class="n">_exprs</span> <span class="o">=</span> <span class="n">_bottom_up_scan</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">expr</span><span class="p">)</span>
+
+                <span class="k">for</span> <span class="n">ex</span><span class="p">,</span> <span class="n">conds</span> <span class="ow">in</span> <span class="n">_exprs</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">cond</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">S</span><span class="o">.</span><span class="n">true</span><span class="p">:</span>
+                        <span class="n">exprs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">ex</span><span class="p">,</span> <span class="n">conds</span> <span class="o">+</span> <span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">cond</span><span class="p">]))</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">oconds</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">expr</span><span class="o">.</span><span class="n">args</span> <span class="k">if</span> <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">S</span><span class="o">.</span><span class="n">true</span><span class="p">]</span>
+                        <span class="n">exprs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">ex</span><span class="p">,</span> <span class="n">conds</span> <span class="o">+</span> <span class="p">[</span><span class="n">And</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="o">~</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">oconds</span><span class="p">])]))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">exprs</span> <span class="o">=</span> <span class="p">[(</span><span class="n">expr</span><span class="p">,</span> <span class="p">[])]</span>
+
+        <span class="k">return</span> <span class="n">exprs</span>
+
+    <span class="n">exprs</span> <span class="o">=</span> <span class="n">_bottom_up_scan</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+
+    <span class="n">mapping</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;&lt;&#39;</span><span class="p">:</span> <span class="s1">&#39;&gt;&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;=&#39;</span><span class="p">:</span> <span class="s1">&#39;&gt;=&#39;</span><span class="p">}</span>
+    <span class="n">inequalities</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">expr</span><span class="p">,</span> <span class="n">conds</span> <span class="ow">in</span> <span class="n">exprs</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">rel</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">mapping</span><span class="p">:</span>
+            <span class="n">expr</span> <span class="o">=</span> <span class="n">Relational</span><span class="p">(</span> <span class="n">expr</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">rel</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">expr</span> <span class="o">=</span> <span class="n">Relational</span><span class="p">(</span><span class="o">-</span><span class="n">expr</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">mapping</span><span class="p">[</span><span class="n">rel</span><span class="p">])</span>
+
+        <span class="n">inequalities</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">expr</span><span class="p">]</span> <span class="o">+</span> <span class="n">conds</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">reduce_rational_inequalities</span><span class="p">(</span><span class="n">inequalities</span><span class="p">,</span> <span class="n">gen</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">reduce_piecewise_inequalities</span><span class="p">(</span><span class="n">exprs</span><span class="p">,</span> <span class="n">gen</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Reduce a system of inequalities with nested piecewise functions.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; x = Symbol(&#39;x&#39;, real=True)</span>
+
+<span class="sd">    &gt;&gt;&gt; reduce_piecewise_inequalities([(Abs(3*x - 5) - 7, &#39;&lt;&#39;),</span>
+<span class="sd">    ...                                (Abs(x + 25) - 13, &#39;&gt;&#39;)], x)</span>
+<span class="sd">    And(-2/3 &lt; x, Or(-12 &lt; x, x &lt; -38), x &lt; 4)</span>
+<span class="sd">    &gt;&gt;&gt; reduce_piecewise_inequalities([(Abs(x - 4) + Abs(3*x - 5) - 7, &#39;&lt;&#39;)], x)</span>
+<span class="sd">    And(1/2 &lt; x, x &lt; 4)</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    reduce_piecewise_inequality</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">And</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">reduce_piecewise_inequality</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">rel</span><span class="p">,</span> <span class="n">gen</span><span class="p">)</span>
+                 <span class="k">for</span> <span class="n">expr</span><span class="p">,</span> <span class="n">rel</span> <span class="ow">in</span> <span class="n">exprs</span><span class="p">])</span>
+
+
+<span class="k">def</span> <span class="nf">solve_univariate_inequality</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">gen</span><span class="p">,</span> <span class="n">relational</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Solves a real univariate inequality.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; x = Symbol(&#39;x&#39;, real=True)</span>
+
+<span class="sd">    &gt;&gt;&gt; solve_univariate_inequality(x**2 &gt;= 4, x)</span>
+<span class="sd">    Or(2 &lt;= x, x &lt;= -2)</span>
+<span class="sd">    &gt;&gt;&gt; solve_univariate_inequality(x**2 &gt;= 4, x, relational=False)</span>
+<span class="sd">    (-oo, -2] U [2, oo)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">..simplify</span> <span class="k">import</span> <span class="n">simplify</span>
+    <span class="kn">from</span> <span class="nn">.solvers</span> <span class="k">import</span> <span class="n">solve</span><span class="p">,</span> <span class="n">denoms</span>
+
+    <span class="n">e</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">lhs</span> <span class="o">-</span> <span class="n">expr</span><span class="o">.</span><span class="n">rhs</span>
+    <span class="n">parts</span> <span class="o">=</span> <span class="n">n</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">as_numer_denom</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">is_polynomial</span><span class="p">(</span><span class="n">gen</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">parts</span><span class="p">):</span>
+        <span class="n">solns</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">gen</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">singularities</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">gen</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">solns</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">gen</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">singularities</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">denoms</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+            <span class="n">singularities</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">gen</span><span class="p">))</span>
+    <span class="n">solns</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">gen</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">solns</span><span class="p">]</span>
+    <span class="n">singularities</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">gen</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">singularities</span><span class="p">]</span>
+
+    <span class="n">include_x</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">valid</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">gen</span><span class="p">:</span> <span class="n">x</span><span class="p">})</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">false</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">simplify</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">r</span> <span class="ow">in</span> <span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">true</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">false</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">r</span>
+        <span class="k">elif</span> <span class="n">v</span><span class="o">.</span><span class="n">is_comparable</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="n">start</span> <span class="o">=</span> <span class="o">-</span><span class="n">oo</span>
+    <span class="n">sol_sets</span> <span class="o">=</span> <span class="p">[</span><span class="n">S</span><span class="o">.</span><span class="n">EmptySet</span><span class="p">]</span>
+    <span class="n">reals</span> <span class="o">=</span> <span class="n">_nsort</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">solns</span> <span class="o">+</span> <span class="n">singularities</span><span class="p">),</span> <span class="n">separated</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">reals</span><span class="p">:</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="n">x</span>
+
+        <span class="k">if</span> <span class="n">end</span> <span class="ow">in</span> <span class="p">[</span><span class="o">-</span><span class="n">oo</span><span class="p">,</span> <span class="n">oo</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">valid</span><span class="p">(</span><span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)):</span>
+                <span class="n">sol_sets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Interval</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">oo</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">))</span>
+                <span class="k">break</span>
+
+        <span class="k">if</span> <span class="n">valid</span><span class="p">((</span><span class="n">start</span> <span class="o">+</span> <span class="n">end</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="k">if</span> <span class="n">start</span> <span class="o">!=</span> <span class="o">-</span><span class="n">oo</span> <span class="k">else</span> <span class="n">end</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">sol_sets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Interval</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">singularities</span><span class="p">:</span>
+            <span class="n">singularities</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">include_x</span><span class="p">:</span>
+            <span class="n">sol_sets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">FiniteSet</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+
+        <span class="n">start</span> <span class="o">=</span> <span class="n">end</span>
+
+    <span class="n">end</span> <span class="o">=</span> <span class="n">oo</span>
+
+    <span class="k">if</span> <span class="n">valid</span><span class="p">(</span><span class="n">start</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">sol_sets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Interval</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">))</span>
+
+    <span class="n">rv</span> <span class="o">=</span> <span class="n">Union</span><span class="p">(</span><span class="o">*</span><span class="n">sol_sets</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">rv</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">relational</span> <span class="k">else</span> <span class="n">rv</span><span class="o">.</span><span class="n">as_relational</span><span class="p">(</span><span class="n">gen</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_reduce_inequalities</span><span class="p">(</span><span class="n">inequalities</span><span class="p">,</span> <span class="n">symbols</span><span class="p">):</span>
+    <span class="c1"># helper for reduce_inequalities</span>
+
+    <span class="n">poly_part</span><span class="p">,</span> <span class="n">pw_part</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">),</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+    <span class="n">other</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">inequality</span> <span class="ow">in</span> <span class="n">inequalities</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">inequality</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">true</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">elif</span> <span class="n">inequality</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">false</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">false</span>
+
+        <span class="n">expr</span><span class="p">,</span> <span class="n">rel</span> <span class="o">=</span> <span class="n">inequality</span><span class="o">.</span><span class="n">lhs</span><span class="p">,</span> <span class="n">inequality</span><span class="o">.</span><span class="n">rel_op</span>  <span class="c1"># rhs is 0</span>
+
+        <span class="c1"># check for gens using atoms which is more strict than free_symbols to</span>
+        <span class="c1"># guard against EX domain which won&#39;t be handled by</span>
+        <span class="c1"># reduce_rational_inequalities</span>
+        <span class="n">gens</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">atoms</span><span class="p">(</span><span class="n">Dummy</span><span class="p">,</span> <span class="n">Symbol</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">gens</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">gen</span> <span class="o">=</span> <span class="n">gens</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">common</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">free_symbols</span> <span class="o">&amp;</span> <span class="n">symbols</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">common</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">gen</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+                <span class="n">other</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">solve_univariate_inequality</span><span class="p">(</span><span class="n">Relational</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">rel</span><span class="p">),</span> <span class="n">gen</span><span class="p">))</span>
+                <span class="k">continue</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="n">filldedent</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">                    inequality has more than one</span>
+<span class="s1">                    symbol of interest&#39;&#39;&#39;</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_polynomial</span><span class="p">(</span><span class="n">gen</span><span class="p">):</span>
+            <span class="n">poly_part</span><span class="p">[</span><span class="n">gen</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">expr</span><span class="p">,</span> <span class="n">rel</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">components</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="k">lambda</span> <span class="n">u</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="n">gen</span><span class="p">)</span> <span class="ow">and</span>
+                                       <span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">is_Function</span> <span class="ow">or</span> <span class="n">u</span><span class="o">.</span><span class="n">is_Pow</span> <span class="ow">and</span>
+                                        <span class="ow">not</span> <span class="n">u</span><span class="o">.</span><span class="n">exp</span><span class="o">.</span><span class="n">is_Integer</span><span class="p">)))</span>
+            <span class="k">if</span> <span class="n">components</span> <span class="ow">and</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">Abs</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">Piecewise</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">components</span><span class="p">):</span>
+                <span class="n">pw_part</span><span class="p">[</span><span class="n">gen</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">expr</span><span class="p">,</span> <span class="n">rel</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">other</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">solve_univariate_inequality</span><span class="p">(</span><span class="n">Relational</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">rel</span><span class="p">),</span> <span class="n">gen</span><span class="p">))</span>
+
+    <span class="n">poly_reduced</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">pw_reduced</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">gen</span><span class="p">,</span> <span class="n">exprs</span> <span class="ow">in</span> <span class="n">poly_part</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">poly_reduced</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reduce_rational_inequalities</span><span class="p">([</span><span class="n">exprs</span><span class="p">],</span> <span class="n">gen</span><span class="p">))</span>
+
+    <span class="k">for</span> <span class="n">gen</span><span class="p">,</span> <span class="n">exprs</span> <span class="ow">in</span> <span class="n">pw_part</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">pw_reduced</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reduce_piecewise_inequalities</span><span class="p">(</span><span class="n">exprs</span><span class="p">,</span> <span class="n">gen</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">And</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">poly_reduced</span> <span class="o">+</span> <span class="n">pw_reduced</span> <span class="o">+</span> <span class="n">other</span><span class="p">))</span>
+
+
+<div class="viewcode-block" id="reduce_inequalities"><a class="viewcode-back" href="../../../modules/solvers/inequalities.html#diofant.solvers.inequalities.reduce_inequalities">[docs]</a><span class="k">def</span> <span class="nf">reduce_inequalities</span><span class="p">(</span><span class="n">inequalities</span><span class="p">,</span> <span class="n">symbols</span><span class="o">=</span><span class="p">[]):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Reduces a system of inequalities or equations.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; x = Symbol(&#39;x&#39;, real=True)</span>
+<span class="sd">    &gt;&gt;&gt; y = Symbol(&#39;y&#39;, real=True)</span>
+
+<span class="sd">    &gt;&gt;&gt; reduce_inequalities(0 &lt;= x + 3, [])</span>
+<span class="sd">    -3 &lt;= x</span>
+<span class="sd">    &gt;&gt;&gt; reduce_inequalities(0 &lt;= x + y*2 - 1, [x])</span>
+<span class="sd">    -2*y + 1 &lt;= x</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    diofant.solvers.solvers.solve : solve algebraic equations</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">iterable</span><span class="p">(</span><span class="n">inequalities</span><span class="p">):</span>
+        <span class="n">inequalities</span> <span class="o">=</span> <span class="p">[</span><span class="n">inequalities</span><span class="p">]</span>
+
+    <span class="c1"># prefilter</span>
+    <span class="n">keep</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">inequalities</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">Relational</span><span class="p">):</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">lhs</span><span class="o">.</span><span class="n">as_expr</span><span class="p">()</span> <span class="o">-</span> <span class="n">i</span><span class="o">.</span><span class="n">rhs</span><span class="o">.</span><span class="n">as_expr</span><span class="p">(),</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">Eq</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">S</span><span class="o">.</span><span class="n">true</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">elif</span> <span class="n">i</span> <span class="o">==</span> <span class="n">S</span><span class="o">.</span><span class="n">false</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">false</span>
+        <span class="n">keep</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">inequalities</span> <span class="o">=</span> <span class="n">keep</span>
+    <span class="k">del</span> <span class="n">keep</span>
+
+    <span class="n">gens</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">free_symbols</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">inequalities</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">iterable</span><span class="p">(</span><span class="n">symbols</span><span class="p">):</span>
+        <span class="n">symbols</span> <span class="o">=</span> <span class="p">[</span><span class="n">symbols</span><span class="p">]</span>
+    <span class="n">symbols</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">symbols</span><span class="p">)</span> <span class="ow">or</span> <span class="n">gens</span>
+
+    <span class="c1"># make vanilla symbol real</span>
+    <span class="n">recast</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="n">Dummy</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">extended_real</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+              <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">gens</span> <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">is_extended_real</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">}</span>
+    <span class="n">inequalities</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">xreplace</span><span class="p">(</span><span class="n">recast</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">inequalities</span><span class="p">]</span>
+    <span class="n">symbols</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="o">.</span><span class="n">xreplace</span><span class="p">(</span><span class="n">recast</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">symbols</span><span class="p">}</span>
+
+    <span class="c1"># solve system</span>
+    <span class="n">rv</span> <span class="o">=</span> <span class="n">_reduce_inequalities</span><span class="p">(</span><span class="n">inequalities</span><span class="p">,</span> <span class="n">symbols</span><span class="p">)</span>
+
+    <span class="c1"># restore original symbols and return</span>
+    <span class="k">return</span> <span class="n">rv</span><span class="o">.</span><span class="n">xreplace</span><span class="p">({</span><span class="n">v</span><span class="p">:</span> <span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">recast</span><span class="o">.</span><span class="n">items</span><span class="p">()})</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2006-2018 SymPy Development Team, 2013-2018 Sergey B Kirpichev
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
