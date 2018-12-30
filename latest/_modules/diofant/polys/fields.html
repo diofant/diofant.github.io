@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.fields &mdash; Diofant 0.10.0a5.dev16+g65bf0fd documentation</title>
+  <title>diofant.polys.fields &mdash; Diofant 0.10.0a5.dev29+g8609182 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0a5.dev16+g65bf0fd
+                0.10.0a5.dev29+g8609182
               </div>
             
           
@@ -394,6 +394,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">a</span><span class="p">))</span></div></div>
 
 
+<span class="nd">@functools</span><span class="o">.</span><span class="n">total_ordering</span>
 <span class="k">class</span> <span class="nc">FracElement</span><span class="p">(</span><span class="n">DomainElement</span><span class="p">,</span> <span class="n">DefaultPrinting</span><span class="p">,</span> <span class="n">CantSympify</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Element of multivariate distributed rational function field.</span>
 
@@ -470,23 +471,11 @@
     <span class="k">def</span> <span class="nf">sort_key</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">denom</span><span class="o">.</span><span class="n">sort_key</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">numer</span><span class="o">.</span><span class="n">sort_key</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">_cmp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">op</span><span class="p">):</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">dtype</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">op</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sort_key</span><span class="p">(),</span> <span class="n">other</span><span class="o">.</span><span class="n">sort_key</span><span class="p">())</span>
-        <span class="k">else</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
-            <span class="k">return</span> <span class="bp">NotImplemented</span>
-
     <span class="k">def</span> <span class="nf">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cmp</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">operator</span><span class="o">.</span><span class="n">lt</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">__le__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cmp</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">operator</span><span class="o">.</span><span class="n">le</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">__gt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cmp</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">operator</span><span class="o">.</span><span class="n">gt</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">__ge__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cmp</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">operator</span><span class="o">.</span><span class="n">ge</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">dtype</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sort_key</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">other</span><span class="o">.</span><span class="n">sort_key</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">NotImplemented</span>
 
     <span class="k">def</span> <span class="nf">__pos__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw_new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">numer</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">denom</span><span class="p">)</span>
@@ -534,7 +523,7 @@
                     <span class="k">pass</span>
                 <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">FractionField</span><span class="p">)</span> <span class="ow">and</span> <span class="n">other</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">field</span> <span class="o">==</span> <span class="n">field</span><span class="p">:</span>
                     <span class="k">return</span> <span class="n">other</span><span class="o">.</span><span class="fm">__radd__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-                <span class="k">else</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+                <span class="k">else</span><span class="p">:</span>
                     <span class="k">return</span> <span class="bp">NotImplemented</span>
             <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">PolyElement</span><span class="p">):</span>
                 <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">PolynomialRing</span><span class="p">)</span> <span class="ow">and</span> <span class="n">field</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">ring</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">ring</span><span class="p">:</span>
@@ -552,7 +541,7 @@
 
         <span class="k">if</span> <span class="n">op</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">numer</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">denom</span><span class="o">*</span><span class="n">other_numer</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">denom</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="ow">not</span> <span class="n">op</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="n">op</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">NotImplemented</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">numer</span><span class="o">*</span><span class="n">other_denom</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">denom</span><span class="o">*</span><span class="n">other_numer</span><span class="p">,</span>
@@ -580,7 +569,7 @@
                     <span class="k">pass</span>
                 <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">FractionField</span><span class="p">)</span> <span class="ow">and</span> <span class="n">other</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">field</span> <span class="o">==</span> <span class="n">field</span><span class="p">:</span>
                     <span class="k">return</span> <span class="n">other</span><span class="o">.</span><span class="fm">__rsub__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-                <span class="k">else</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+                <span class="k">else</span><span class="p">:</span>
                     <span class="k">return</span> <span class="bp">NotImplemented</span>
             <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">PolyElement</span><span class="p">):</span>
                 <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">PolynomialRing</span><span class="p">)</span> <span class="ow">and</span> <span class="n">field</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">ring</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">ring</span><span class="p">:</span>
@@ -592,7 +581,7 @@
 
         <span class="k">if</span> <span class="n">op</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">numer</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">denom</span><span class="o">*</span><span class="n">other_numer</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">denom</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="ow">not</span> <span class="n">op</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="n">op</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">NotImplemented</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">numer</span><span class="o">*</span><span class="n">other_denom</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">denom</span><span class="o">*</span><span class="n">other_numer</span><span class="p">,</span>
@@ -606,7 +595,7 @@
 
         <span class="k">if</span> <span class="n">op</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">numer</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">denom</span><span class="o">*</span><span class="n">other_numer</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">denom</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="ow">not</span> <span class="n">op</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="n">op</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">NotImplemented</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">numer</span><span class="o">*</span><span class="n">other_denom</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">denom</span><span class="o">*</span><span class="n">other_numer</span><span class="p">,</span>
@@ -628,7 +617,7 @@
                     <span class="k">pass</span>
                 <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">FractionField</span><span class="p">)</span> <span class="ow">and</span> <span class="n">other</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">field</span> <span class="o">==</span> <span class="n">field</span><span class="p">:</span>
                     <span class="k">return</span> <span class="n">other</span><span class="o">.</span><span class="fm">__rmul__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-                <span class="k">else</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+                <span class="k">else</span><span class="p">:</span>
                     <span class="k">return</span> <span class="bp">NotImplemented</span>
             <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">PolyElement</span><span class="p">):</span>
                 <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">PolynomialRing</span><span class="p">)</span> <span class="ow">and</span> <span class="n">field</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">ring</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">ring</span><span class="p">:</span>
@@ -646,7 +635,7 @@
 
         <span class="k">if</span> <span class="n">op</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">numer</span><span class="o">*</span><span class="n">other_numer</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">denom</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="ow">not</span> <span class="n">op</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="n">op</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">NotImplemented</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">numer</span><span class="o">*</span><span class="n">other_numer</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">denom</span><span class="o">*</span><span class="n">other_denom</span><span class="p">)</span>
@@ -667,7 +656,7 @@
                     <span class="k">pass</span>
                 <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">FractionField</span><span class="p">)</span> <span class="ow">and</span> <span class="n">other</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">field</span> <span class="o">==</span> <span class="n">field</span><span class="p">:</span>
                     <span class="k">return</span> <span class="n">other</span><span class="o">.</span><span class="fm">__rtruediv__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-                <span class="k">else</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+                <span class="k">else</span><span class="p">:</span>
                     <span class="k">return</span> <span class="bp">NotImplemented</span>
             <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">PolyElement</span><span class="p">):</span>
                 <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">PolynomialRing</span><span class="p">)</span> <span class="ow">and</span> <span class="n">field</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">ring</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">ring</span><span class="p">:</span>
@@ -679,7 +668,7 @@
 
         <span class="k">if</span> <span class="n">op</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">numer</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">denom</span><span class="o">*</span><span class="n">other_numer</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="ow">not</span> <span class="n">op</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="n">op</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">NotImplemented</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">numer</span><span class="o">*</span><span class="n">other_denom</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">denom</span><span class="o">*</span><span class="n">other_numer</span><span class="p">)</span>
@@ -694,7 +683,7 @@
 
         <span class="k">if</span> <span class="n">op</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">denom</span><span class="o">*</span><span class="n">other_numer</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">numer</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="ow">not</span> <span class="n">op</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="n">op</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">NotImplemented</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">denom</span><span class="o">*</span><span class="n">other_numer</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">numer</span><span class="o">*</span><span class="n">other_denom</span><span class="p">)</span>
