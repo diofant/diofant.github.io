@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.solvers.solvers &mdash; Diofant 0.10.0a5.dev37+g2722c06 documentation</title>
+  <title>diofant.solvers.solvers &mdash; Diofant 0.10.0a5.dev48+gb04abf9 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0a5.dev37+g2722c06
+                0.10.0a5.dev48+gb04abf9
               </div>
             
           
@@ -989,8 +989,6 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">symbols</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">exprs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="n">not_impl_msg</span> <span class="o">=</span> <span class="s2">&quot;No algorithms are implemented to solve equation </span><span class="si">%s</span><span class="s2">&quot;</span>
-
         <span class="n">f</span> <span class="o">=</span> <span class="n">exprs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">soln</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="n">free</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">free_symbols</span>
@@ -1003,21 +1001,6 @@
         <span class="n">got_s</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
         <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">symbols</span><span class="p">:</span>
-            <span class="n">n</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">solve_linear</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">is_Symbol</span><span class="p">:</span>
-                <span class="c1"># no need to check but we should simplify if desired</span>
-                <span class="k">if</span> <span class="n">flags</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;simplify&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">):</span>
-                    <span class="n">d</span> <span class="o">=</span> <span class="n">simplify</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">got_s</span> <span class="ow">and</span> <span class="nb">any</span><span class="p">(</span><span class="n">ss</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">free_symbols</span> <span class="k">for</span> <span class="n">ss</span> <span class="ow">in</span> <span class="n">got_s</span><span class="p">):</span>
-                    <span class="c1"># sol depends on previously solved symbols: discard it</span>
-                    <span class="k">continue</span>
-                <span class="n">got_s</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="n">n</span><span class="p">:</span> <span class="n">d</span><span class="p">})</span>
-            <span class="k">elif</span> <span class="n">n</span> <span class="ow">and</span> <span class="n">d</span><span class="p">:</span>  <span class="c1"># otherwise there was no solution for s</span>
-                <span class="n">failed</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">failed</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">result</span>
-        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">failed</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">soln</span> <span class="o">=</span> <span class="n">_solve</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="o">**</span><span class="n">flags</span><span class="p">)</span>
                 <span class="k">for</span> <span class="n">sol</span> <span class="ow">in</span> <span class="n">soln</span><span class="p">:</span>
@@ -1030,8 +1013,6 @@
                 <span class="k">continue</span>
         <span class="k">if</span> <span class="n">got_s</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">result</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="n">not_impl_msg</span> <span class="o">%</span> <span class="n">f</span><span class="p">)</span>
 
     <span class="n">polys</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">dens</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
@@ -1634,7 +1615,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2006-2018 SymPy Development Team, 2013-2018 Sergey B Kirpichev
+        &copy; Copyright 2006-2018 SymPy Development Team, 2013-2019 Sergey B Kirpichev
 
     </p>
   </div> 

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.galoistools &mdash; Diofant 0.10.0a5.dev37+g2722c06 documentation</title>
+  <title>diofant.polys.galoistools &mdash; Diofant 0.10.0a5.dev48+gb04abf9 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0a5.dev37+g2722c06
+                0.10.0a5.dev48+gb04abf9
               </div>
             
           
@@ -289,7 +289,7 @@
     <span class="k">return</span> <span class="n">dmp_strip</span><span class="p">([</span><span class="n">a</span> <span class="o">%</span> <span class="n">p</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">h</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="gf_to_dict"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.galoistools.gf_to_dict">[docs]</a><span class="k">def</span> <span class="nf">gf_to_dict</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">symmetric</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="gf_to_dict"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.galoistools.gf_to_dict">[docs]</a><span class="k">def</span> <span class="nf">gf_to_dict</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Convert a ``GF(p)[x]`` polynomial to a dict.</span>
 
@@ -297,17 +297,12 @@
 <span class="sd">    ========</span>
 
 <span class="sd">    &gt;&gt;&gt; gf_to_dict([4, 0, 0, 0, 0, 0, 3, 0, 0, 0, 4], 5)</span>
-<span class="sd">    {0: -1, 4: -2, 10: -1}</span>
-<span class="sd">    &gt;&gt;&gt; gf_to_dict([4, 0, 0, 0, 0, 0, 3, 0, 0, 0, 4], 5, symmetric=False)</span>
 <span class="sd">    {0: 4, 4: 3, 10: 4}</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">n</span><span class="p">,</span> <span class="n">result</span> <span class="o">=</span> <span class="n">dmp_degree_in</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">{}</span>
 
     <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">symmetric</span><span class="p">:</span>
-            <span class="n">a</span> <span class="o">=</span> <span class="n">gf_int</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="n">k</span><span class="p">],</span> <span class="n">p</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">a</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="n">k</span><span class="p">]</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="n">k</span><span class="p">]</span>
 
         <span class="k">if</span> <span class="n">a</span><span class="p">:</span>
             <span class="n">result</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span>
@@ -326,25 +321,6 @@
 <span class="sd">    [2, 3, 3]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">dmp_strip</span><span class="p">([</span><span class="n">a</span> <span class="o">%</span> <span class="n">p</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">f</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="gf_to_int_poly"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.galoistools.gf_to_int_poly">[docs]</a><span class="k">def</span> <span class="nf">gf_to_int_poly</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">symmetric</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Convert a ``GF(p)[x]`` polynomial to ``Z[x]``.</span>
-
-
-<span class="sd">    Examples</span>
-<span class="sd">    ========</span>
-
-<span class="sd">    &gt;&gt;&gt; gf_to_int_poly([2, 3, 3], 5)</span>
-<span class="sd">    [2, -2, -2]</span>
-<span class="sd">    &gt;&gt;&gt; gf_to_int_poly([2, 3, 3], 5, symmetric=False)</span>
-<span class="sd">    [2, 3, 3]</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">symmetric</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">[</span> <span class="n">gf_int</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">f</span> <span class="p">]</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">f</span></div>
 
 
 <div class="viewcode-block" id="gf_neg"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.galoistools.gf_neg">[docs]</a><span class="k">def</span> <span class="nf">gf_neg</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
@@ -2072,7 +2048,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2006-2018 SymPy Development Team, 2013-2018 Sergey B Kirpichev
+        &copy; Copyright 2006-2018 SymPy Development Team, 2013-2019 Sergey B Kirpichev
 
     </p>
   </div> 

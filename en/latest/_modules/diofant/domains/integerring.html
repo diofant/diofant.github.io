@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.domains.integerring &mdash; Diofant 0.10.0a5.dev37+g2722c06 documentation</title>
+  <title>diofant.domains.integerring &mdash; Diofant 0.10.0a5.dev48+gb04abf9 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0a5.dev37+g2722c06
+                0.10.0a5.dev48+gb04abf9
               </div>
             
           
@@ -209,14 +209,12 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_from_PythonFiniteField</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">to_int</span><span class="p">())</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">rep</span><span class="p">)</span>
+    <span class="n">_from_GMPYFiniteField</span> <span class="o">=</span> <span class="n">_from_PythonFiniteField</span>
 
     <span class="k">def</span> <span class="nf">_from_PythonRationalField</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">denominator</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">numerator</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">_from_GMPYFiniteField</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">to_int</span><span class="p">())</span>
 
     <span class="k">def</span> <span class="nf">_from_GMPYIntegerRing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
@@ -271,7 +269,7 @@
     <span class="k">def</span> <span class="nf">finite_field</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns a finite field. &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">.finitefield</span> <span class="k">import</span> <span class="n">PythonFiniteField</span>
-        <span class="k">return</span> <span class="n">PythonFiniteField</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">PythonFiniteField</span><span class="p">(</span><span class="n">p</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="GMPYIntegerRing"><a class="viewcode-back" href="../../../modules/domains.html#diofant.domains.GMPYIntegerRing">[docs]</a><span class="k">class</span> <span class="nc">GMPYIntegerRing</span><span class="p">(</span><span class="n">IntegerRing</span><span class="p">):</span>
@@ -305,7 +303,7 @@
     <span class="k">def</span> <span class="nf">finite_field</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns a finite field. &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">.finitefield</span> <span class="k">import</span> <span class="n">GMPYFiniteField</span>
-        <span class="k">return</span> <span class="n">GMPYFiniteField</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">GMPYFiniteField</span><span class="p">(</span><span class="n">p</span><span class="p">)</span></div>
 
 
 <span class="n">ZZ_python</span> <span class="o">=</span> <span class="n">PythonIntegerRing</span><span class="p">()</span>
@@ -322,7 +320,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2006-2018 SymPy Development Team, 2013-2018 Sergey B Kirpichev
+        &copy; Copyright 2006-2018 SymPy Development Team, 2013-2019 Sergey B Kirpichev
 
     </p>
   </div> 

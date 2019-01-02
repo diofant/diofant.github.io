@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.polyoptions &mdash; Diofant 0.10.0a5.dev37+g2722c06 documentation</title>
+  <title>diofant.polys.polyoptions &mdash; Diofant 0.10.0a5.dev48+gb04abf9 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0a5.dev37+g2722c06
+                0.10.0a5.dev48+gb04abf9
               </div>
             
           
@@ -313,10 +313,6 @@
         <span class="k">for</span> <span class="n">option</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
             <span class="bp">cls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__options__</span><span class="p">[</span><span class="n">option</span><span class="p">]</span>
 
-            <span class="k">for</span> <span class="n">require_option</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">requires</span><span class="p">:</span>
-                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">require_option</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                    <span class="k">raise</span> <span class="n">OptionError</span><span class="p">(</span><span class="s2">&quot;&#39;</span><span class="si">%s</span><span class="s2">&#39; option is only allowed together with &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">option</span><span class="p">,</span> <span class="n">require_option</span><span class="p">))</span>
-
             <span class="k">for</span> <span class="n">exclude_option</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">excludes</span><span class="p">:</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">exclude_option</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                     <span class="k">raise</span> <span class="n">OptionError</span><span class="p">(</span><span class="s2">&quot;&#39;</span><span class="si">%s</span><span class="s2">&#39; option is not allowed together with &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">option</span><span class="p">,</span> <span class="n">exclude_option</span><span class="p">))</span>
@@ -520,7 +516,7 @@
     <span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;greedy&#39;</span>
 
     <span class="n">requires</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">excludes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;domain&#39;</span><span class="p">,</span> <span class="s1">&#39;split&#39;</span><span class="p">,</span> <span class="s1">&#39;gaussian&#39;</span><span class="p">,</span> <span class="s1">&#39;extension&#39;</span><span class="p">,</span> <span class="s1">&#39;modulus&#39;</span><span class="p">,</span> <span class="s1">&#39;symmetric&#39;</span><span class="p">]</span>
+    <span class="n">excludes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;domain&#39;</span><span class="p">,</span> <span class="s1">&#39;split&#39;</span><span class="p">,</span> <span class="s1">&#39;gaussian&#39;</span><span class="p">,</span> <span class="s1">&#39;extension&#39;</span><span class="p">,</span> <span class="s1">&#39;modulus&#39;</span><span class="p">]</span>
 
 
 <span class="k">class</span> <span class="nc">Composite</span><span class="p">(</span><span class="n">BooleanOption</span><span class="p">,</span> <span class="n">metaclass</span><span class="o">=</span><span class="n">OptionType</span><span class="p">):</span>
@@ -533,7 +529,7 @@
         <span class="k">return</span>
 
     <span class="n">requires</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">excludes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;domain&#39;</span><span class="p">,</span> <span class="s1">&#39;split&#39;</span><span class="p">,</span> <span class="s1">&#39;gaussian&#39;</span><span class="p">,</span> <span class="s1">&#39;modulus&#39;</span><span class="p">,</span> <span class="s1">&#39;symmetric&#39;</span><span class="p">]</span>
+    <span class="n">excludes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;domain&#39;</span><span class="p">,</span> <span class="s1">&#39;split&#39;</span><span class="p">,</span> <span class="s1">&#39;gaussian&#39;</span><span class="p">,</span> <span class="s1">&#39;modulus&#39;</span><span class="p">]</span>
 
 
 <span class="k">class</span> <span class="nc">Domain</span><span class="p">(</span><span class="n">Option</span><span class="p">,</span> <span class="n">metaclass</span><span class="o">=</span><span class="n">OptionType</span><span class="p">):</span>
@@ -643,8 +639,7 @@
     <span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;split&#39;</span>
 
     <span class="n">requires</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">excludes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;field&#39;</span><span class="p">,</span> <span class="s1">&#39;greedy&#39;</span><span class="p">,</span> <span class="s1">&#39;domain&#39;</span><span class="p">,</span> <span class="s1">&#39;gaussian&#39;</span><span class="p">,</span> <span class="s1">&#39;extension&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;modulus&#39;</span><span class="p">,</span> <span class="s1">&#39;symmetric&#39;</span><span class="p">]</span>
+    <span class="n">excludes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;field&#39;</span><span class="p">,</span> <span class="s1">&#39;greedy&#39;</span><span class="p">,</span> <span class="s1">&#39;domain&#39;</span><span class="p">,</span> <span class="s1">&#39;gaussian&#39;</span><span class="p">,</span> <span class="s1">&#39;extension&#39;</span><span class="p">,</span> <span class="s1">&#39;modulus&#39;</span><span class="p">]</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">postprocess</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
@@ -658,8 +653,7 @@
     <span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;gaussian&#39;</span>
 
     <span class="n">requires</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">excludes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;field&#39;</span><span class="p">,</span> <span class="s1">&#39;greedy&#39;</span><span class="p">,</span> <span class="s1">&#39;domain&#39;</span><span class="p">,</span> <span class="s1">&#39;split&#39;</span><span class="p">,</span> <span class="s1">&#39;extension&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;modulus&#39;</span><span class="p">,</span> <span class="s1">&#39;symmetric&#39;</span><span class="p">]</span>
+    <span class="n">excludes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;field&#39;</span><span class="p">,</span> <span class="s1">&#39;greedy&#39;</span><span class="p">,</span> <span class="s1">&#39;domain&#39;</span><span class="p">,</span> <span class="s1">&#39;split&#39;</span><span class="p">,</span> <span class="s1">&#39;extension&#39;</span><span class="p">,</span> <span class="s1">&#39;modulus&#39;</span><span class="p">]</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">postprocess</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
@@ -674,8 +668,7 @@
     <span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;extension&#39;</span>
 
     <span class="n">requires</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">excludes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;greedy&#39;</span><span class="p">,</span> <span class="s1">&#39;domain&#39;</span><span class="p">,</span> <span class="s1">&#39;split&#39;</span><span class="p">,</span> <span class="s1">&#39;gaussian&#39;</span><span class="p">,</span> <span class="s1">&#39;modulus&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;symmetric&#39;</span><span class="p">]</span>
+    <span class="n">excludes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;greedy&#39;</span><span class="p">,</span> <span class="s1">&#39;domain&#39;</span><span class="p">,</span> <span class="s1">&#39;split&#39;</span><span class="p">,</span> <span class="s1">&#39;gaussian&#39;</span><span class="p">,</span> <span class="s1">&#39;modulus&#39;</span><span class="p">]</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">extension</span><span class="p">):</span>
@@ -725,17 +718,7 @@
         <span class="kn">from</span> <span class="nn">..</span> <span class="k">import</span> <span class="n">domains</span>
         <span class="k">if</span> <span class="s1">&#39;modulus&#39;</span> <span class="ow">in</span> <span class="n">options</span><span class="p">:</span>
             <span class="n">modulus</span> <span class="o">=</span> <span class="n">options</span><span class="p">[</span><span class="s1">&#39;modulus&#39;</span><span class="p">]</span>
-            <span class="n">symmetric</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;symmetric&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
-            <span class="n">options</span><span class="p">[</span><span class="s1">&#39;domain&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">domains</span><span class="o">.</span><span class="n">FF</span><span class="p">(</span><span class="n">modulus</span><span class="p">,</span> <span class="n">symmetric</span><span class="p">)</span>
-
-
-<span class="k">class</span> <span class="nc">Symmetric</span><span class="p">(</span><span class="n">BooleanOption</span><span class="p">,</span> <span class="n">metaclass</span><span class="o">=</span><span class="n">OptionType</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;``symmetric`` option to polynomial manipulation functions. &quot;&quot;&quot;</span>
-
-    <span class="n">option</span> <span class="o">=</span> <span class="s1">&#39;symmetric&#39;</span>
-
-    <span class="n">requires</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;modulus&#39;</span><span class="p">]</span>
-    <span class="n">excludes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;greedy&#39;</span><span class="p">,</span> <span class="s1">&#39;domain&#39;</span><span class="p">,</span> <span class="s1">&#39;split&#39;</span><span class="p">,</span> <span class="s1">&#39;gaussian&#39;</span><span class="p">,</span> <span class="s1">&#39;extension&#39;</span><span class="p">]</span>
+            <span class="n">options</span><span class="p">[</span><span class="s1">&#39;domain&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">domains</span><span class="o">.</span><span class="n">FF</span><span class="p">(</span><span class="n">modulus</span><span class="p">)</span>
 
 
 <span class="k">class</span> <span class="nc">Strict</span><span class="p">(</span><span class="n">BooleanOption</span><span class="p">,</span> <span class="n">metaclass</span><span class="o">=</span><span class="n">OptionType</span><span class="p">):</span>
@@ -919,7 +902,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2006-2018 SymPy Development Team, 2013-2018 Sergey B Kirpichev
+        &copy; Copyright 2006-2018 SymPy Development Team, 2013-2019 Sergey B Kirpichev
 
     </p>
   </div> 
