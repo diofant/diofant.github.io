@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.galoistools &mdash; Diofant 0.10.0a5.dev48+gb04abf9 documentation</title>
+  <title>diofant.polys.galoistools &mdash; Diofant 0.10.0a5.dev54+g8d57e07 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0a5.dev48+gb04abf9
+                0.10.0a5.dev54+g8d57e07
               </div>
             
           
@@ -162,7 +162,8 @@
 <span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">prod</span>
 <span class="kn">from</span> <span class="nn">..ntheory</span> <span class="k">import</span> <span class="n">factorint</span>
 <span class="kn">from</span> <span class="nn">.densearith</span> <span class="k">import</span> <span class="n">dup_lshift</span>
-<span class="kn">from</span> <span class="nn">.densebasic</span> <span class="k">import</span> <span class="n">dmp_degree_in</span><span class="p">,</span> <span class="n">dmp_LC</span><span class="p">,</span> <span class="n">dmp_strip</span>
+<span class="kn">from</span> <span class="nn">.densebasic</span> <span class="k">import</span> <span class="p">(</span><span class="n">dmp_convert</span><span class="p">,</span> <span class="n">dmp_degree_in</span><span class="p">,</span> <span class="n">dmp_from_dict</span><span class="p">,</span> <span class="n">dmp_LC</span><span class="p">,</span>
+                         <span class="n">dmp_normal</span><span class="p">,</span> <span class="n">dmp_strip</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">.polyconfig</span> <span class="k">import</span> <span class="n">query</span>
 <span class="kn">from</span> <span class="nn">.polyerrors</span> <span class="k">import</span> <span class="n">ExactQuotientFailed</span>
 <span class="kn">from</span> <span class="nn">.polyutils</span> <span class="k">import</span> <span class="n">_sort_factors</span>
@@ -281,33 +282,10 @@
 <span class="sd">    &gt;&gt;&gt; gf_from_dict({10: 4, 4: 33, 0: -1}, 5, ZZ)</span>
 <span class="sd">    [4, 0, 0, 0, 0, 0, 3, 0, 0, 0, 4]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">n</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">f</span><span class="p">),</span> <span class="p">[]</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">dmp_from_dict</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">K</span><span class="o">.</span><span class="n">finite_field</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">dmp_normal</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">K</span><span class="o">.</span><span class="n">finite_field</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>
 
-    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
-        <span class="n">h</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">K</span><span class="o">.</span><span class="n">zero</span><span class="p">)</span> <span class="o">%</span> <span class="n">p</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">dmp_strip</span><span class="p">([</span><span class="n">a</span> <span class="o">%</span> <span class="n">p</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">h</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="gf_to_dict"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.galoistools.gf_to_dict">[docs]</a><span class="k">def</span> <span class="nf">gf_to_dict</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Convert a ``GF(p)[x]`` polynomial to a dict.</span>
-
-<span class="sd">    Examples</span>
-<span class="sd">    ========</span>
-
-<span class="sd">    &gt;&gt;&gt; gf_to_dict([4, 0, 0, 0, 0, 0, 3, 0, 0, 0, 4], 5)</span>
-<span class="sd">    {0: 4, 4: 3, 10: 4}</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">n</span><span class="p">,</span> <span class="n">result</span> <span class="o">=</span> <span class="n">dmp_degree_in</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">{}</span>
-
-    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="n">a</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="n">k</span><span class="p">]</span>
-
-        <span class="k">if</span> <span class="n">a</span><span class="p">:</span>
-            <span class="n">result</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span>
-
-    <span class="k">return</span> <span class="n">result</span></div>
+    <span class="k">return</span> <span class="n">dmp_convert</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">K</span><span class="o">.</span><span class="n">finite_field</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="n">K</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="gf_from_int_poly"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.galoistools.gf_from_int_poly">[docs]</a><span class="k">def</span> <span class="nf">gf_from_int_poly</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>

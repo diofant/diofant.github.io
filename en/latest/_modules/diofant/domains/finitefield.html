@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.domains.finitefield &mdash; Diofant 0.10.0a5.dev48+gb04abf9 documentation</title>
+  <title>diofant.domains.finitefield &mdash; Diofant 0.10.0a5.dev54+g8d57e07 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0a5.dev48+gb04abf9
+                0.10.0a5.dev54+g8d57e07
               </div>
             
           
@@ -156,9 +156,7 @@
   <h1>Source code for diofant.domains.finitefield</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Implementation of :class:`FiniteField` class. &quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">functools</span>
 <span class="kn">import</span> <span class="nn">numbers</span>
-<span class="kn">import</span> <span class="nn">operator</span>
 
 <span class="kn">from</span> <span class="nn">..ntheory</span> <span class="k">import</span> <span class="n">isprime</span><span class="p">,</span> <span class="n">perfect_power</span>
 <span class="kn">from</span> <span class="nn">..polys.polyerrors</span> <span class="k">import</span> <span class="n">CoercionFailed</span>
@@ -188,12 +186,18 @@
 
     <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">mod</span><span class="p">,</span> <span class="n">dom</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">mod</span><span class="p">,</span> <span class="n">numbers</span><span class="o">.</span><span class="n">Integral</span><span class="p">)</span> <span class="ow">and</span> <span class="n">isprime</span><span class="p">(</span><span class="n">mod</span><span class="p">)):</span>
-            <span class="k">if</span> <span class="n">perfect_power</span><span class="p">(</span><span class="n">mod</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>
-                <span class="k">raise</span> <span class="ne">NotImplementedError</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;modulus must be a positive prime number, got </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">mod</span><span class="p">)</span>
+            <span class="n">pp</span> <span class="o">=</span> <span class="n">perfect_power</span><span class="p">(</span><span class="n">mod</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">pp</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;modulus must be a positive prime number, got </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">mod</span><span class="p">)</span>
+            <span class="n">mod</span><span class="p">,</span> <span class="n">deg</span> <span class="o">=</span> <span class="n">pp</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">deg</span> <span class="o">=</span> <span class="mi">1</span>
 
         <span class="n">mod</span> <span class="o">=</span> <span class="n">dom</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">mod</span><span class="p">)</span>
-        <span class="n">key</span> <span class="o">=</span> <span class="n">mod</span><span class="p">,</span> <span class="n">dom</span>
+        <span class="n">order</span> <span class="o">=</span> <span class="n">mod</span><span class="o">**</span><span class="n">deg</span>
+
+        <span class="n">key</span> <span class="o">=</span> <span class="n">order</span><span class="p">,</span> <span class="n">dom</span>
 
         <span class="n">obj</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
 
@@ -204,22 +208,24 @@
                              <span class="p">{</span><span class="s2">&quot;mod&quot;</span><span class="p">:</span> <span class="n">mod</span><span class="p">,</span> <span class="s2">&quot;domain&quot;</span><span class="p">:</span> <span class="n">dom</span><span class="p">,</span> <span class="s2">&quot;_parent&quot;</span><span class="p">:</span> <span class="n">obj</span><span class="p">})</span>
             <span class="n">_modular_integer_cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">dtype</span>
 
-        <span class="n">obj</span><span class="o">.</span><span class="n">zero</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-        <span class="n">obj</span><span class="o">.</span><span class="n">one</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">obj</span><span class="o">.</span><span class="n">domain</span> <span class="o">=</span> <span class="n">dom</span>
         <span class="n">obj</span><span class="o">.</span><span class="n">mod</span> <span class="o">=</span> <span class="n">mod</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="n">order</span>
 
-        <span class="n">obj</span><span class="o">.</span><span class="n">rep</span> <span class="o">=</span> <span class="s1">&#39;GF(</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="n">obj</span><span class="o">.</span><span class="n">mod</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">rep</span> <span class="o">=</span> <span class="s1">&#39;GF(</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="n">obj</span><span class="o">.</span><span class="n">order</span>
+
+        <span class="n">obj</span><span class="o">.</span><span class="n">zero</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">one</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">obj</span>
 
     <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">hash</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mod</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">))</span>
+        <span class="k">return</span> <span class="nb">hash</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns ``True`` if two domains are equivalent. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">FiniteField</span><span class="p">)</span> <span class="ow">and</span> \
-            <span class="bp">self</span><span class="o">.</span><span class="n">mod</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">mod</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">domain</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">order</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">domain</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">characteristic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -263,7 +269,15 @@
         <span class="n">p</span><span class="p">,</span> <span class="n">q</span> <span class="o">=</span> <span class="n">K0</span><span class="o">.</span><span class="n">to_rational</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">q</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">p</span><span class="p">))</span></div>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>
+
+<div class="viewcode-block" id="FiniteField.is_positive"><a class="viewcode-back" href="../../../modules/domains.html#diofant.domains.FiniteField.is_positive">[docs]</a>    <span class="k">def</span> <span class="nf">is_positive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns True if ``a`` is positive. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">a</span><span class="o">.</span><span class="n">rep</span> <span class="o">!=</span> <span class="mi">0</span></div>
+
+<div class="viewcode-block" id="FiniteField.is_negative"><a class="viewcode-back" href="../../../modules/domains.html#diofant.domains.FiniteField.is_negative">[docs]</a>    <span class="k">def</span> <span class="nf">is_negative</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns True if ``a`` is negative. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="kc">False</span></div></div>
 
 
 <div class="viewcode-block" id="PythonFiniteField"><a class="viewcode-back" href="../../../modules/domains.html#diofant.domains.PythonFiniteField">[docs]</a><span class="k">class</span> <span class="nc">PythonFiniteField</span><span class="p">(</span><span class="n">FiniteField</span><span class="p">):</span>
@@ -280,7 +294,6 @@
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">mod</span><span class="p">,</span> <span class="n">GMPYIntegerRing</span><span class="p">())</span></div>
 
 
-<span class="nd">@functools</span><span class="o">.</span><span class="n">total_ordering</span>
 <span class="k">class</span> <span class="nc">ModularInteger</span><span class="p">(</span><span class="n">DomainElement</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;A class representing a modular integer. &quot;&quot;&quot;</span>
 
@@ -371,18 +384,12 @@
             <span class="n">rep</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span><span class="n">rep</span><span class="o">**</span><span class="n">exp</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_compare</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">op</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">other</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
         <span class="k">except</span> <span class="n">CoercionFailed</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">NotImplemented</span>
-        <span class="k">return</span> <span class="n">op</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">rep</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compare</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">operator</span><span class="o">.</span><span class="n">eq</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compare</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">operator</span><span class="o">.</span><span class="n">lt</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">rep</span>
 
     <span class="k">def</span> <span class="nf">__bool__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="p">)</span>
