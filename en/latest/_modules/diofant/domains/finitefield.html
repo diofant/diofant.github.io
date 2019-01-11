@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.domains.finitefield &mdash; Diofant 0.10.0a5.dev54+g8d57e07 documentation</title>
+  <title>diofant.domains.finitefield &mdash; Diofant 0.10.0a5.dev58+gaade378 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0a5.dev54+g8d57e07
+                0.10.0a5.dev58+gaade378
               </div>
             
           
@@ -156,8 +156,7 @@
   <h1>Source code for diofant.domains.finitefield</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Implementation of :class:`FiniteField` class. &quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">numbers</span>
-
+<span class="kn">from</span> <span class="nn">..core.compatibility</span> <span class="k">import</span> <span class="n">DIOFANT_INTS</span>
 <span class="kn">from</span> <span class="nn">..ntheory</span> <span class="k">import</span> <span class="n">isprime</span><span class="p">,</span> <span class="n">perfect_power</span>
 <span class="kn">from</span> <span class="nn">..polys.polyerrors</span> <span class="k">import</span> <span class="n">CoercionFailed</span>
 <span class="kn">from</span> <span class="nn">.domainelement</span> <span class="k">import</span> <span class="n">DomainElement</span>
@@ -185,7 +184,7 @@
     <span class="n">mod</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">mod</span><span class="p">,</span> <span class="n">dom</span><span class="p">):</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">mod</span><span class="p">,</span> <span class="n">numbers</span><span class="o">.</span><span class="n">Integral</span><span class="p">)</span> <span class="ow">and</span> <span class="n">isprime</span><span class="p">(</span><span class="n">mod</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">mod</span><span class="p">,</span> <span class="n">DIOFANT_INTS</span><span class="p">)</span> <span class="ow">and</span> <span class="n">isprime</span><span class="p">(</span><span class="n">mod</span><span class="p">)):</span>
             <span class="n">pp</span> <span class="o">=</span> <span class="n">perfect_power</span><span class="p">(</span><span class="n">mod</span><span class="p">)</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">pp</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;modulus must be a positive prime number, got </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">mod</span><span class="p">)</span>
@@ -376,7 +375,7 @@
         <span class="k">return</span> <span class="n">other</span><span class="o">.</span><span class="fm">__mod__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__pow__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exp</span><span class="p">):</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">exp</span><span class="p">,</span> <span class="n">numbers</span><span class="o">.</span><span class="n">Integral</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">exp</span><span class="p">,</span> <span class="n">DIOFANT_INTS</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Integer exponent expected, got </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">type</span><span class="p">(</span><span class="n">exp</span><span class="p">))</span>
         <span class="k">if</span> <span class="n">exp</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">rep</span><span class="p">,</span> <span class="n">exp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">invert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mod</span><span class="p">),</span> <span class="o">-</span><span class="n">exp</span>
