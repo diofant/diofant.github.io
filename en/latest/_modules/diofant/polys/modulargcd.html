@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.modulargcd &mdash; Diofant 0.10.0a5.dev60+g83e9b97 documentation</title>
+  <title>diofant.polys.modulargcd &mdash; Diofant 0.10.0a5.dev62+g3174acb documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0a5.dev60+g83e9b97
+                0.10.0a5.dev62+g3174acb
               </div>
             
           
@@ -1604,12 +1604,12 @@
     <span class="n">den</span> <span class="o">=</span> <span class="n">domain</span><span class="o">.</span><span class="n">one</span>
 
     <span class="k">for</span> <span class="n">coeff</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">coeff</span><span class="o">.</span><span class="n">rep</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">coeff</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">to_dense</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">c</span><span class="p">:</span>
                 <span class="n">den</span> <span class="o">=</span> <span class="n">domain</span><span class="o">.</span><span class="n">lcm</span><span class="p">(</span><span class="n">den</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">denominator</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">monom</span><span class="p">,</span> <span class="n">coeff</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="n">coeff</span> <span class="o">=</span> <span class="n">coeff</span><span class="o">.</span><span class="n">rep</span>
+        <span class="n">coeff</span> <span class="o">=</span> <span class="n">coeff</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">to_dense</span><span class="p">()</span>
         <span class="n">m</span> <span class="o">=</span> <span class="n">ring</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">one</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ring</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">rings</span><span class="o">.</span><span class="n">PolynomialRing</span><span class="p">):</span>
             <span class="n">m</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">mul_monom</span><span class="p">(</span><span class="n">monom</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
@@ -1801,7 +1801,7 @@
     <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
         <span class="n">f_</span> <span class="o">=</span> <span class="n">_to_ZZ_poly</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">ZZring</span><span class="p">)</span>
         <span class="n">g_</span> <span class="o">=</span> <span class="n">_to_ZZ_poly</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">ZZring</span><span class="p">)</span>
-        <span class="n">minpoly</span> <span class="o">=</span> <span class="n">ZZring</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">from_dense</span><span class="p">(</span><span class="n">domain</span><span class="o">.</span><span class="n">mod</span><span class="o">.</span><span class="n">rep</span><span class="p">)</span>
+        <span class="n">minpoly</span> <span class="o">=</span> <span class="n">ZZring</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">from_dense</span><span class="p">(</span><span class="n">domain</span><span class="o">.</span><span class="n">mod</span><span class="o">.</span><span class="n">to_dense</span><span class="p">())</span>
 
         <span class="n">h</span> <span class="o">=</span> <span class="n">_func_field_modgcd_m</span><span class="p">(</span><span class="n">f_</span><span class="p">,</span> <span class="n">g_</span><span class="p">,</span> <span class="n">minpoly</span><span class="p">)</span>
         <span class="n">h</span> <span class="o">=</span> <span class="n">_to_ANP_poly</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">ring</span><span class="p">)</span>
