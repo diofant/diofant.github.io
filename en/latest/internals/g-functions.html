@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Computing Integrals using Meijer G-Functions &mdash; Diofant 0.10.0a5.dev62+g3174acb documentation</title>
+  <title>Computing Integrals using Meijer G-Functions &mdash; Diofant 0.10.0a5.dev72+ge231c54 documentation</title>
   
 
   
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.10.0a5.dev62+g3174acb
+                0.10.0a5.dev72+ge231c54
               </div>
             
           
@@ -117,10 +117,10 @@
 <li class="toctree-l2"><a class="reference internal" href="rewriting.html">Term rewriting</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../literature.html">Literature</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guide.html">Development</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../aboutus.html">About</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../release/index.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
 </ul>
 
             
@@ -323,7 +323,8 @@ of the argument of the G-function to unity (see <code class="docutils literal no
 <code class="docutils literal notranslate"><span class="pre">_rewrite_saxena</span></code>, respectively, for one or two G-functions). Next we go through
 a list of conditions under which the integral theorem applies. It can fail for
 basically two reasons: either the integral does not exist, or the manipulations
-in deriving the theorem may not be allowed (for more details, see this <a class="reference internal" href="#blogpost" id="id1">[BlogPost]</a>).</p>
+in deriving the theorem may not be allowed (for more details, see
+<a class="reference external" href="https://nessgrh.wordpress.com/2011/07/07/tricky-branch-cuts/">this</a>).</p>
 <p>Sometimes this can be remedied by reducing the argument of the G-functions
 involved. For example it is clear that the G-function representing <span class="math notranslate nohighlight">\(e^z\)</span>
 is satisfies <span class="math notranslate nohighlight">\(G(\operatorname{Exp}(2 \pi i)z) = G(z)\)</span> for all <span class="math notranslate nohighlight">\(z \in \mathcal{S}\)</span>. The function
@@ -331,12 +332,6 @@ is satisfies <span class="math notranslate nohighlight">\(G(\operatorname{Exp}(2
 <code class="docutils literal notranslate"><span class="pre">principal_branch(z,</span> <span class="pre">period)</span></code> in <code class="docutils literal notranslate"><span class="pre">functions/elementary/complexes.py</span></code> can
 be used to exploit the information. This is done transparently by the
 integration code.</p>
-<table class="docutils citation" frame="void" id="blogpost" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[BlogPost]</a></td><td><a class="reference external" href="https://nessgrh.wordpress.com/2011/07/07/tricky-branch-cuts/">https://nessgrh.wordpress.com/2011/07/07/tricky-branch-cuts/</a></td></tr>
-</tbody>
-</table>
 </div>
 </div>
 <div class="section" id="the-g-function-integration-theorems">
@@ -374,13 +369,13 @@ G_{v+p, u+q}^{m+t, n+s} \left.\left(
 </ol>
 <p>The more interesting question is under what conditions these formulae are
 valid. Below we detail the conditions implemented in Diofant. They are an
-amalgamation of conditions found in <a class="reference internal" href="hyperexpand.html#prudnikov1990" id="id2">[Prudnikov1990]</a> and <a class="reference internal" href="hyperexpand.html#luke1969" id="id3">[Luke1969]</a>; please
+amalgamation of conditions found in <a class="reference internal" href="../bibliography.html#prudnikov1990" id="id1">[Prudnikov1990]</a> and <a class="reference internal" href="../bibliography.html#luke1969" id="id2">[Luke1969]</a>; please
 let us know if you find any errors.</p>
 <div class="section" id="conditions-of-convergence-for-integral-1">
 <h2>Conditions of Convergence for Integral (1)<a class="headerlink" href="#conditions-of-convergence-for-integral-1" title="Permalink to this headline">¶</a></h2>
 <p>We can without loss of generality assume <span class="math notranslate nohighlight">\(p \le q\)</span>, since the G-functions
 of indices <span class="math notranslate nohighlight">\(m, n, p, q\)</span> and of indices <span class="math notranslate nohighlight">\(n, m, q, p\)</span> can be related easily
-(see e.g. <a class="reference internal" href="hyperexpand.html#luke1969" id="id4">[Luke1969]</a>, section 5.3). We introduce the following notation:</p>
+(see e.g. <a class="reference internal" href="../bibliography.html#luke1969" id="id3">[Luke1969]</a>, section 5.3). We introduce the following notation:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\xi = m + n - p \\
 \delta = m + n - \frac{p + q}{2}\end{split}\]</div>
@@ -677,7 +672,7 @@ as follows:</p>
 <p>The inverse laplace transform of a Meijer G-function can be expressed as
 another G-function. This is a fairly versatile method for computing this
 transform. However, I could not find the details in the literature, so I work
-them out here. In <a class="reference internal" href="hyperexpand.html#luke1969" id="id5">[Luke1969]</a>, section 5.6.3, there is a formula for the inverse
+them out here. In <a class="reference internal" href="../bibliography.html#luke1969" id="id4">[Luke1969]</a>, section 5.6.3, there is a formula for the inverse
 Laplace transform of a G-function of argument <span class="math notranslate nohighlight">\(bz\)</span>, and convergence conditions
 are also given. However, we need a formula for argument <span class="math notranslate nohighlight">\(bz^a\)</span> for rational <span class="math notranslate nohighlight">\(a\)</span>.</p>
 <p>We are asked to compute</p>
@@ -737,12 +732,12 @@ function of its parameters, and of the coefficient <span class="math notranslate
 Thus the final computation remains valid as long as the initial integral
 converges, and if there exists a changed set of parameters where the computation
 is valid. If we assume w.l.o.g. that <span class="math notranslate nohighlight">\(a &gt; 0\)</span>, then the latter condition is
-fulfilled if <span class="math notranslate nohighlight">\(G\)</span> converges along contours (2) or (3) of <a class="reference internal" href="hyperexpand.html#luke1969" id="id6">[Luke1969]</a>,
+fulfilled if <span class="math notranslate nohighlight">\(G\)</span> converges along contours (2) or (3) of <a class="reference internal" href="../bibliography.html#luke1969" id="id5">[Luke1969]</a>,
 section 5.2, i.e. either <span class="math notranslate nohighlight">\(\delta &gt;= \frac{a}{2}\)</span> or <span class="math notranslate nohighlight">\(p \ge 1, p \ge q\)</span>.</p>
 </div>
 <div class="section" id="when-the-integral-exists">
 <h2>When the integral exists<a class="headerlink" href="#when-the-integral-exists" title="Permalink to this headline">¶</a></h2>
-<p>Using <a class="reference internal" href="hyperexpand.html#luke1969" id="id7">[Luke1969]</a>, section 5.10, for any given meijer G-function we can find a
+<p>Using <a class="reference internal" href="../bibliography.html#luke1969" id="id6">[Luke1969]</a>, section 5.10, for any given meijer G-function we can find a
 dominant term of the form <span class="math notranslate nohighlight">\(z^a e^{bz^c}\)</span> (although this expression might not be
 the best possible, because of cancellation).</p>
 <p>We must thus investigate</p>
