@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.rootoftools &mdash; Diofant 0.10.0b1 documentation</title>
+  <title>diofant.polys.rootoftools &mdash; Diofant 0.10.0b2.dev19+g16f9e5a documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b1
+                0.10.0b2.dev19+g16f9e5a
               </div>
             
           
@@ -173,7 +173,7 @@
 <span class="kn">from</span> <span class="nn">.polyfuncs</span> <span class="k">import</span> <span class="n">symmetrize</span><span class="p">,</span> <span class="n">viete</span>
 <span class="kn">from</span> <span class="nn">.polyroots</span> <span class="k">import</span> <span class="p">(</span><span class="n">preprocess_roots</span><span class="p">,</span> <span class="n">roots</span><span class="p">,</span> <span class="n">roots_binomial</span><span class="p">,</span> <span class="n">roots_cubic</span><span class="p">,</span>
                         <span class="n">roots_linear</span><span class="p">,</span> <span class="n">roots_quadratic</span><span class="p">,</span> <span class="n">roots_quartic</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">.polytools</span> <span class="k">import</span> <span class="n">Poly</span><span class="p">,</span> <span class="n">PurePoly</span><span class="p">,</span> <span class="n">factor</span><span class="p">,</span> <span class="n">resultant</span>
+<span class="kn">from</span> <span class="nn">.polytools</span> <span class="k">import</span> <span class="n">Poly</span><span class="p">,</span> <span class="n">PurePoly</span><span class="p">,</span> <span class="n">factor</span>
 <span class="kn">from</span> <span class="nn">.rationaltools</span> <span class="k">import</span> <span class="n">together</span>
 <span class="kn">from</span> <span class="nn">.rootisolation</span> <span class="k">import</span> <span class="p">(</span><span class="n">dup_isolate_complex_roots_sqf</span><span class="p">,</span>
                             <span class="n">dup_isolate_real_roots_sqf</span><span class="p">)</span>
@@ -308,14 +308,10 @@
         <span class="n">poly</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">poly</span>
         <span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span>
         <span class="k">if</span> <span class="n">poly</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">is_AlgebraicField</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">poly</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">is_AlgebraicField</span><span class="p">:</span>
-                <span class="n">new_domain</span> <span class="o">=</span> <span class="n">QQ</span><span class="o">.</span><span class="n">algebraic_field</span><span class="p">(</span><span class="n">poly</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">ext</span><span class="p">,</span>
-                                                <span class="n">poly</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">ext</span><span class="p">)</span>
-                <span class="n">poly</span> <span class="o">=</span> <span class="n">poly</span><span class="o">.</span><span class="n">set_domain</span><span class="p">(</span><span class="n">new_domain</span><span class="p">)</span>
-            <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">poly</span><span class="o">.</span><span class="n">gen</span><span class="p">,</span> <span class="n">Dummy</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
-            <span class="n">p</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">Poly</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">rep</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="n">n</span> <span class="k">for</span> <span class="p">(</span><span class="n">n</span><span class="p">,),</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">poly</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">terms</span><span class="p">())</span><span class="o">.</span><span class="n">inject</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-            <span class="n">q</span> <span class="o">=</span> <span class="n">poly</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">minpoly</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-            <span class="n">minpoly</span> <span class="o">=</span> <span class="n">PurePoly</span><span class="p">(</span><span class="n">resultant</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+            <span class="n">minpoly</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">poly</span><span class="p">,</span> <span class="n">poly</span><span class="o">.</span><span class="n">gen</span>
+            <span class="k">while</span> <span class="n">minpoly</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">is_AlgebraicField</span><span class="p">:</span>
+                <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">minpoly</span> <span class="o">=</span> <span class="n">minpoly</span><span class="o">.</span><span class="n">sqf_norm</span><span class="p">()</span>
+                <span class="n">minpoly</span> <span class="o">=</span> <span class="n">minpoly</span><span class="o">.</span><span class="n">retract</span><span class="p">()</span>
             <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">minpoly</span><span class="o">.</span><span class="n">all_roots</span><span class="p">()):</span>  <span class="c1"># pragma: no branch</span>
                 <span class="k">if</span> <span class="n">poly</span><span class="o">.</span><span class="n">as_expr</span><span class="p">()</span><span class="o">.</span><span class="n">evalf</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">subs</span><span class="o">=</span><span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="n">r</span><span class="p">},</span> <span class="n">chop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                     <span class="n">index</span> <span class="o">-=</span> <span class="mi">1</span>

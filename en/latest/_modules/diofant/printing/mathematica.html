@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.printing.mathematica &mdash; Diofant 0.10.0b1 documentation</title>
+  <title>diofant.printing.mathematica &mdash; Diofant 0.10.0b2.dev19+g16f9e5a documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b1
+                0.10.0b2.dev19+g16f9e5a
               </div>
             
           
@@ -318,14 +318,12 @@
         <span class="k">return</span> <span class="s2">&quot;Hold[Sum[&quot;</span> <span class="o">+</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">doprint</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;]]&quot;</span>
 
     <span class="k">def</span> <span class="nf">_print_MatrixBase</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">A</span><span class="p">):</span>
-        <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">rows</span><span class="p">):</span>
-            <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;{&quot;</span> <span class="o">+</span>
-                       <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">doprint</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]])</span> <span class="o">+</span>
-                       <span class="s2">&quot;}&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="s2">&quot;{&quot;</span> <span class="o">+</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;}&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">doprint</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
 
     <span class="n">_print_Matrix</span> <span class="o">=</span> \
+        <span class="n">_print_SparseMatrix</span> <span class="o">=</span> \
+        <span class="n">_print_MutableSparseMatrix</span> <span class="o">=</span> \
+        <span class="n">_print_ImmutableSparseMatrix</span> <span class="o">=</span> \
         <span class="n">_print_DenseMatrix</span> <span class="o">=</span> \
         <span class="n">_print_MutableDenseMatrix</span> <span class="o">=</span> \
         <span class="n">_print_ImmutableMatrix</span> <span class="o">=</span> \
