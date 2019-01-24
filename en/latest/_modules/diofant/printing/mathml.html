@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.printing.mathml &mdash; Diofant 0.10.0b2.dev21+g3de6a5e documentation</title>
+  <title>diofant.printing.mathml &mdash; Diofant 0.10.0b2.dev31+g02685ba documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev21+g3de6a5e
+                0.10.0b2.dev31+g02685ba
               </div>
             
           
@@ -158,7 +158,7 @@
 <span class="sd">A MathML printer.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">Mul</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">sympify</span>
+<span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">Mul</span><span class="p">,</span> <span class="n">S</span>
 <span class="kn">from</span> <span class="nn">..core.function</span> <span class="k">import</span> <span class="n">_coeff_isneg</span>
 <span class="kn">from</span> <span class="nn">.conventions</span> <span class="k">import</span> <span class="n">requires_partial</span><span class="p">,</span> <span class="n">split_super_sub</span>
 <span class="kn">from</span> <span class="nn">.pretty.pretty_symbology</span> <span class="k">import</span> <span class="n">greek_unicode</span>
@@ -533,28 +533,6 @@
 <div class="viewcode-block" id="mathml"><a class="viewcode-back" href="../../../modules/printing.html#diofant.printing.mathml.mathml">[docs]</a><span class="k">def</span> <span class="nf">mathml</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="o">**</span><span class="n">settings</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Returns the MathML representation of expr&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">MathMLPrinter</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span><span class="o">.</span><span class="n">doprint</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="print_mathml"><a class="viewcode-back" href="../../../modules/printing.html#diofant.printing.mathml.print_mathml">[docs]</a><span class="k">def</span> <span class="nf">print_mathml</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="o">**</span><span class="n">settings</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Prints a pretty representation of the MathML code for expr</span>
-
-<span class="sd">    Examples</span>
-<span class="sd">    ========</span>
-
-<span class="sd">    &gt;&gt;&gt; print_mathml(x+1)  #doctest: +NORMALIZE_WHITESPACE</span>
-<span class="sd">    &lt;apply&gt;</span>
-<span class="sd">        &lt;plus/&gt;</span>
-<span class="sd">        &lt;ci&gt;x&lt;/ci&gt;</span>
-<span class="sd">        &lt;cn&gt;1&lt;/cn&gt;</span>
-<span class="sd">    &lt;/apply&gt;</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">s</span> <span class="o">=</span> <span class="n">MathMLPrinter</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span>
-    <span class="n">xml</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">_print</span><span class="p">(</span><span class="n">sympify</span><span class="p">(</span><span class="n">expr</span><span class="p">))</span>
-    <span class="n">pretty_xml</span> <span class="o">=</span> <span class="n">xml</span><span class="o">.</span><span class="n">toprettyxml</span><span class="p">()</span>
-
-    <span class="nb">print</span><span class="p">(</span><span class="n">pretty_xml</span><span class="p">)</span></div>
 </pre></div>
 
            </div>

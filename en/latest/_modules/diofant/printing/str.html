@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.printing.str &mdash; Diofant 0.10.0b2.dev21+g3de6a5e documentation</title>
+  <title>diofant.printing.str &mdash; Diofant 0.10.0b2.dev31+g02685ba documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev21+g3de6a5e
+                0.10.0b2.dev31+g02685ba
               </div>
             
           
@@ -164,6 +164,7 @@
 <span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">Mul</span><span class="p">,</span> <span class="n">Pow</span><span class="p">,</span> <span class="n">Rational</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">oo</span>
 <span class="kn">from</span> <span class="nn">..core.mul</span> <span class="k">import</span> <span class="n">_keep_coeff</span>
 <span class="kn">from</span> <span class="nn">..utilities</span> <span class="k">import</span> <span class="n">default_sort_key</span>
+<span class="kn">from</span> <span class="nn">.defaults</span> <span class="k">import</span> <span class="n">DefaultPrinting</span>
 <span class="kn">from</span> <span class="nn">.precedence</span> <span class="k">import</span> <span class="n">PRECEDENCE</span><span class="p">,</span> <span class="n">precedence</span>
 <span class="kn">from</span> <span class="nn">.printer</span> <span class="k">import</span> <span class="n">Printer</span>
 
@@ -189,8 +190,11 @@
     <span class="k">def</span> <span class="nf">emptyPrinter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">expr</span>
-        <span class="k">else</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="s1">&#39;__str__&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span>
+                                                         <span class="n">DefaultPrinting</span><span class="p">):</span>
             <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">repr</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_print_Add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">==</span> <span class="s1">&#39;none&#39;</span><span class="p">:</span>

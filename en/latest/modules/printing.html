@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Printing &mdash; Diofant 0.10.0b2.dev21+g3de6a5e documentation</title>
+  <title>Printing &mdash; Diofant 0.10.0b2.dev31+g02685ba documentation</title>
   
 
   
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev21+g3de6a5e
+                0.10.0b2.dev31+g02685ba
               </div>
             
           
@@ -111,7 +111,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#module-diofant.printing.python">PythonPrinter</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-diofant.printing.repr">ReprPrinter</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-diofant.printing.str">StrPrinter</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-diofant.printing.tree">Tree Printing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-diofant.printing.conventions">Implementation - Helper Classes/Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#module-diofant.printing.codeprinter">CodePrinter</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#module-diofant.printing.precedence">Precedence</a></li>
@@ -1070,21 +1069,6 @@ dictionary.</p>
 <dd><p>Returns the MathML representation of expr</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="diofant.printing.mathml.print_mathml">
-<code class="descclassname">diofant.printing.mathml.</code><code class="descname">print_mathml</code><span class="sig-paren">(</span><em>expr</em>, <em>**settings</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/printing/mathml.html#print_mathml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.printing.mathml.print_mathml" title="Permalink to this definition">¶</a></dt>
-<dd><p>Prints a pretty representation of the MathML code for expr</p>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">print_mathml</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>  <span class="c1">#doctest: +NORMALIZE_WHITESPACE</span>
-<span class="go">&lt;apply&gt;</span>
-<span class="go">    &lt;plus/&gt;</span>
-<span class="go">    &lt;ci&gt;x&lt;/ci&gt;</span>
-<span class="go">    &lt;cn&gt;1&lt;/cn&gt;</span>
-<span class="go">&lt;/apply&gt;</span>
-</pre></div>
-</div>
-</dd></dl>
-
 </div>
 <div class="section" id="module-diofant.printing.python">
 <span id="pythonprinter"></span><h2>PythonPrinter<a class="headerlink" href="#module-diofant.printing.python" title="Permalink to this headline">¶</a></h2>
@@ -1161,90 +1145,6 @@ order=’none’.</p>
 <p>i.e. strings are returned in repr form with quotes, and everything else
 is returned in str form.</p>
 <p>This function could be useful for hooking into sys.displayhook</p>
-</dd></dl>
-
-</div>
-<div class="section" id="module-diofant.printing.tree">
-<span id="tree-printing"></span><h2>Tree Printing<a class="headerlink" href="#module-diofant.printing.tree" title="Permalink to this headline">¶</a></h2>
-<p>The functions in this module create a representation of an expression as a
-tree.</p>
-<dl class="function">
-<dt id="diofant.printing.tree.pprint_nodes">
-<code class="descclassname">diofant.printing.tree.</code><code class="descname">pprint_nodes</code><span class="sig-paren">(</span><em>subtrees</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/printing/tree.html#pprint_nodes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.printing.tree.pprint_nodes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Prettyprints systems of nodes.</p>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">pprint_nodes</span><span class="p">([</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b1</span><span class="se">\n</span><span class="s2">b2&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">]))</span>
-<span class="go">+-a</span>
-<span class="go">+-b1</span>
-<span class="go">| b2</span>
-<span class="go">+-c</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.printing.tree.print_node">
-<code class="descclassname">diofant.printing.tree.</code><code class="descname">print_node</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/printing/tree.html#print_node"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.printing.tree.print_node" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns information about the “node”.</p>
-<p>This includes class name, string representation and assumptions.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.printing.tree.tree">
-<code class="descclassname">diofant.printing.tree.</code><code class="descname">tree</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/printing/tree.html#tree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.printing.tree.tree" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a tree representation of “node” as a string.</p>
-<p>It uses print_node() together with pprint_nodes() on node.args recursively.</p>
-<p>See also: print_tree()</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.printing.tree.print_tree">
-<code class="descclassname">diofant.printing.tree.</code><code class="descname">print_tree</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/printing/tree.html#print_tree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.printing.tree.print_tree" title="Permalink to this definition">¶</a></dt>
-<dd><p>Prints a tree representation of “node”.</p>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">odd</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">even</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">print_tree</span><span class="p">(</span><span class="n">y</span><span class="o">**</span><span class="n">x</span><span class="p">)</span>
-<span class="go">Pow: y**x</span>
-<span class="go">commutative: True</span>
-<span class="go">+-Symbol: y</span>
-<span class="go">| algebraic: True</span>
-<span class="go">| commutative: True</span>
-<span class="go">| complex: True</span>
-<span class="go">| even: True</span>
-<span class="go">| extended_real: True</span>
-<span class="go">| finite: True</span>
-<span class="go">| hermitian: True</span>
-<span class="go">| infinite: False</span>
-<span class="go">| integer: True</span>
-<span class="go">| irrational: False</span>
-<span class="go">| noninteger: False</span>
-<span class="go">| odd: False</span>
-<span class="go">| rational: True</span>
-<span class="go">| real: True</span>
-<span class="go">| transcendental: False</span>
-<span class="go">+-Symbol: x</span>
-<span class="go">  algebraic: True</span>
-<span class="go">  commutative: True</span>
-<span class="go">  complex: True</span>
-<span class="go">  even: False</span>
-<span class="go">  extended_real: True</span>
-<span class="go">  finite: True</span>
-<span class="go">  hermitian: True</span>
-<span class="go">  imaginary: False</span>
-<span class="go">  infinite: False</span>
-<span class="go">  integer: True</span>
-<span class="go">  irrational: False</span>
-<span class="go">  noninteger: False</span>
-<span class="go">  nonzero: True</span>
-<span class="go">  odd: True</span>
-<span class="go">  rational: True</span>
-<span class="go">  real: True</span>
-<span class="go">  transcendental: False</span>
-<span class="go">  zero: False</span>
-</pre></div>
-</div>
-<p>See also: tree()</p>
 </dd></dl>
 
 </div>
@@ -1419,8 +1319,7 @@ Baseline is baseline of top picture</p>
 <p class="rubric">Examples</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.printing.pretty.pretty_symbology</span> <span class="k">import</span> <span class="n">pretty_use_unicode</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">pretty_use_unicode</span><span class="p">(</span><span class="n">flag</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">stringPict</span><span class="p">(</span><span class="s2">&quot;x+3&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">below</span><span class="p">(</span>
-<span class="gp">... </span>      <span class="n">stringPict</span><span class="o">.</span><span class="n">LINE</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1">#doctest: +NORMALIZE_WHITESPACE</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">stringPict</span><span class="p">(</span><span class="s2">&quot;x+3&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">below</span><span class="p">(</span><span class="n">stringPict</span><span class="o">.</span><span class="n">LINE</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
 <span class="go">x+3</span>
 <span class="go">---</span>
 <span class="go"> 3</span>
@@ -1564,7 +1463,7 @@ are labeled <code class="docutils literal notranslate"><span class="pre">Symbol(
 </dl>
 <p>Additional keyword arguments are included as styles for the graph.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">dotprint</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">2</span><span class="p">))</span> <span class="c1"># doctest: +NORMALIZE_WHITESPACE</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">dotprint</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">2</span><span class="p">))</span>
 <span class="go">digraph{</span>
 <span class="go">&lt;BLANKLINE&gt;</span>
 <span class="go"># Graph style</span>

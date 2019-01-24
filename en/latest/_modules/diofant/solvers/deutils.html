@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.solvers.deutils &mdash; Diofant 0.10.0b2.dev21+g3de6a5e documentation</title>
+  <title>diofant.solvers.deutils &mdash; Diofant 0.10.0b2.dev31+g02685ba documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev21+g3de6a5e
+                0.10.0b2.dev31+g02685ba
               </div>
             
           
@@ -201,12 +201,6 @@
 <span class="sd">    &gt;&gt;&gt; _preprocess(Derivative(f(x), y), f(x), hint=&#39;&#39;)</span>
 <span class="sd">    (0, f(x))</span>
 
-<span class="sd">    Don&#39;t do any derivatives if hint is None:</span>
-
-<span class="sd">    &gt;&gt;&gt; eq = Derivative(f(x) + 1, x) + Derivative(f(x), y)</span>
-<span class="sd">    &gt;&gt;&gt; _preprocess(eq, f(x), hint=None)</span>
-<span class="sd">    (Derivative(f(x), y) + Derivative(f(x) + 1, x), f(x))</span>
-
 <span class="sd">    If it&#39;s not clear what the function of interest is, it must be given:</span>
 
 <span class="sd">    &gt;&gt;&gt; eq = Derivative(f(x) + g(x), x)</span>
@@ -226,8 +220,6 @@
                              <span class="s1">&#39;automatically detected for </span><span class="si">%s</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="n">expr</span><span class="p">)</span>
         <span class="n">func</span> <span class="o">=</span> <span class="n">funcs</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
     <span class="n">fvars</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">hint</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">expr</span><span class="p">,</span> <span class="n">func</span>
     <span class="n">reps</span> <span class="o">=</span> <span class="p">[(</span><span class="n">d</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">doit</span><span class="p">())</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">derivs</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">hint</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;_Integral&#39;</span><span class="p">)</span> <span class="ow">or</span>
             <span class="n">d</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="n">func</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">set</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">variables</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">fvars</span><span class="p">]</span>
     <span class="n">eq</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">reps</span><span class="p">)</span>
