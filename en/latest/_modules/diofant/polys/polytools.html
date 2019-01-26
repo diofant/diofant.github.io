@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.polytools &mdash; Diofant 0.10.0b2.dev38+gde1c268 documentation</title>
+  <title>diofant.polys.polytools &mdash; Diofant 0.10.0b2.dev55+g97f1e5f documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev38+gde1c268
+                0.10.0b2.dev55+g97f1e5f
               </div>
             
           
@@ -246,13 +246,13 @@
 
 <div class="viewcode-block" id="Poly.from_dict"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.polytools.Poly.from_dict">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">rep</span><span class="p">,</span> <span class="o">*</span><span class="n">gens</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Construct a polynomial from a ``dict``. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Construct a polynomial from a :class:`dict`. &quot;&quot;&quot;</span>
         <span class="n">opt</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">build_options</span><span class="p">(</span><span class="n">gens</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_from_dict</span><span class="p">(</span><span class="n">rep</span><span class="p">,</span> <span class="n">opt</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Poly.from_list"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.polytools.Poly.from_list">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_list</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">rep</span><span class="p">,</span> <span class="o">*</span><span class="n">gens</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Construct a polynomial from a ``list``. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Construct a polynomial from a :class:`list`. &quot;&quot;&quot;</span>
         <span class="n">opt</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">build_options</span><span class="p">(</span><span class="n">gens</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_from_list</span><span class="p">(</span><span class="n">rep</span><span class="p">,</span> <span class="n">opt</span><span class="p">)</span></div>
 
@@ -270,7 +270,7 @@
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">rep</span><span class="p">,</span> <span class="n">opt</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Construct a polynomial from a ``dict``. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Construct a polynomial from a :class:`dict`. &quot;&quot;&quot;</span>
         <span class="n">gens</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">gens</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">gens</span><span class="p">:</span>
@@ -290,7 +290,7 @@
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_from_list</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">rep</span><span class="p">,</span> <span class="n">opt</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Construct a polynomial from a ``list``. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Construct a polynomial from a :class:`list`. &quot;&quot;&quot;</span>
         <span class="n">gens</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">gens</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">gens</span><span class="p">:</span>
@@ -732,7 +732,7 @@
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
 
-<span class="sd">        &gt;&gt;&gt; Poly(x**2 + 1, domain=QQ).to_ring()</span>
+<span class="sd">        &gt;&gt;&gt; Poly(x**2 + 1, field=True).to_ring()</span>
 <span class="sd">        Poly(x**2 + 1, x, domain=&#39;ZZ&#39;)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">to_ring</span><span class="p">()</span>
@@ -745,7 +745,7 @@
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
 
-<span class="sd">        &gt;&gt;&gt; Poly(x**2 + 1, x, domain=ZZ).to_field()</span>
+<span class="sd">        &gt;&gt;&gt; Poly(x**2 + 1).to_field()</span>
 <span class="sd">        Poly(x**2 + 1, x, domain=&#39;QQ&#39;)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">to_field</span><span class="p">()</span>
@@ -758,7 +758,7 @@
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
 
-<span class="sd">        &gt;&gt;&gt; Poly(x**2 + 1.0, x, domain=RR).to_exact()</span>
+<span class="sd">        &gt;&gt;&gt; Poly(x**2 + 1.0).to_exact()</span>
 <span class="sd">        Poly(x**2 + 1, x, domain=&#39;QQ&#39;)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">to_exact</span><span class="p">()</span>
@@ -771,7 +771,7 @@
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
 
-<span class="sd">        &gt;&gt;&gt; f = Poly(x**2 + 1, x, domain=&#39;QQ[y]&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; f = Poly(x**2 + 1, domain=QQ.poly_ring(y))</span>
 <span class="sd">        &gt;&gt;&gt; f</span>
 <span class="sd">        Poly(x**2 + 1, x, domain=&#39;QQ[y]&#39;)</span>
 
@@ -780,7 +780,7 @@
 <span class="sd">        &gt;&gt;&gt; f.retract(field=True)</span>
 <span class="sd">        Poly(x**2 + 1, x, domain=&#39;QQ&#39;)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">dom</span><span class="p">,</span> <span class="n">rep</span> <span class="o">=</span> <span class="n">construct_domain</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">as_dict</span><span class="p">(</span><span class="n">zero</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+        <span class="n">dom</span><span class="p">,</span> <span class="n">rep</span> <span class="o">=</span> <span class="n">construct_domain</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">as_dict</span><span class="p">(),</span>
                                     <span class="n">field</span><span class="o">=</span><span class="n">field</span><span class="p">,</span>
                                     <span class="n">composite</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">is_Composite</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span>
                                     <span class="n">extension</span><span class="o">=</span><span class="kc">False</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">is_EX</span> <span class="k">else</span> <span class="kc">True</span><span class="p">)</span>
@@ -936,9 +936,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">as_dict</span><span class="p">())</span></div>
 
-<div class="viewcode-block" id="Poly.as_dict"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.polytools.Poly.as_dict">[docs]</a>    <span class="k">def</span> <span class="nf">as_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">native</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">zero</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="Poly.as_dict"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.polytools.Poly.as_dict">[docs]</a>    <span class="k">def</span> <span class="nf">as_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">native</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Switch to a ``dict`` representation.</span>
+<span class="sd">        Switch to a :class:`dict` representation.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -947,9 +947,9 @@
 <span class="sd">        {(0, 1): -1, (1, 2): 2, (2, 0): 1}</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">native</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">zero</span><span class="o">=</span><span class="n">zero</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">to_diofant_dict</span><span class="p">(</span><span class="n">zero</span><span class="o">=</span><span class="n">zero</span><span class="p">)</span></div>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">to_diofant_dict</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="Poly.as_expr"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.polytools.Poly.as_expr">[docs]</a>    <span class="k">def</span> <span class="nf">as_expr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">gens</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -983,19 +983,6 @@
                     <span class="n">gens</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
 
         <span class="k">return</span> <span class="n">basic_from_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">to_diofant_dict</span><span class="p">(),</span> <span class="o">*</span><span class="n">gens</span><span class="p">)</span></div>
-
-<div class="viewcode-block" id="Poly.lift"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.polytools.Poly.lift">[docs]</a>    <span class="k">def</span> <span class="nf">lift</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Convert algebraic coefficients to rationals.</span>
-
-<span class="sd">        Examples</span>
-<span class="sd">        ========</span>
-
-<span class="sd">        &gt;&gt;&gt; Poly(x**2 + I*x + 1, x, extension=I).lift()</span>
-<span class="sd">        Poly(x**4 + 3*x**2 + 1, x, domain=&#39;QQ&#39;)</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">lift</span><span class="p">()</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">per</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Poly.deflate"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.polytools.Poly.deflate">[docs]</a>    <span class="k">def</span> <span class="nf">deflate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -1562,7 +1549,7 @@
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
 
-<span class="sd">        &gt;&gt;&gt; f = Poly(x/2 + Rational(1, 3), x, domain=QQ)</span>
+<span class="sd">        &gt;&gt;&gt; f = Poly(x/2 + Rational(1, 3))</span>
 
 <span class="sd">        &gt;&gt;&gt; f.clear_denoms()</span>
 <span class="sd">        (6, Poly(3*x + 2, x, domain=&#39;QQ&#39;))</span>
@@ -1907,70 +1894,18 @@
 <div class="viewcode-block" id="Poly.dispersionset"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.polytools.Poly.dispersionset">[docs]</a>    <span class="k">def</span> <span class="nf">dispersionset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Compute the *dispersion set* of two polynomials.</span>
 
-<span class="sd">        For two polynomials `f(x)` and `g(x)` with `\deg f &gt; 0`</span>
-<span class="sd">        and `\deg g &gt; 0` the dispersion set `\operatorname{J}(f, g)` is defined as:</span>
-
-<span class="sd">        .. math::</span>
-<span class="sd">            \operatorname{J}(f, g)</span>
-<span class="sd">            &amp; := \{a \in \mathbb{N}_0 | \gcd(f(x), g(x+a)) \neq 1\} \\</span>
-<span class="sd">            &amp;  = \{a \in \mathbb{N}_0 | \deg \gcd(f(x), g(x+a)) \geq 1\}</span>
-
-<span class="sd">        For a single polynomial one defines `\operatorname{J}(f) := \operatorname{J}(f, f)`.</span>
-
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
 
-<span class="sd">        &gt;&gt;&gt; from diofant.polys.dispersion import dispersion, dispersionset</span>
-
-<span class="sd">        Dispersion set and dispersion of a simple polynomial:</span>
-
-<span class="sd">        &gt;&gt;&gt; fp = Poly((x - 3)*(x + 3), x)</span>
-<span class="sd">        &gt;&gt;&gt; sorted(dispersionset(fp))</span>
+<span class="sd">        &gt;&gt;&gt; sorted(Poly((x - 3)*(x + 3)).dispersionset())</span>
 <span class="sd">        [0, 6]</span>
-<span class="sd">        &gt;&gt;&gt; dispersion(fp)</span>
-<span class="sd">        6</span>
-
-<span class="sd">        Note that the definition of the dispersion is not symmetric:</span>
-
-<span class="sd">        &gt;&gt;&gt; fp = Poly(x**4 - 3*x**2 + 1, x)</span>
-<span class="sd">        &gt;&gt;&gt; gp = fp.shift(-3)</span>
-<span class="sd">        &gt;&gt;&gt; sorted(dispersionset(fp, gp))</span>
-<span class="sd">        [2, 3, 4]</span>
-<span class="sd">        &gt;&gt;&gt; dispersion(fp, gp)</span>
-<span class="sd">        4</span>
-<span class="sd">        &gt;&gt;&gt; sorted(dispersionset(gp, fp))</span>
-<span class="sd">        []</span>
-<span class="sd">        &gt;&gt;&gt; dispersion(gp, fp)</span>
-<span class="sd">        -oo</span>
-
-<span class="sd">        Computing the dispersion also works over field extensions:</span>
-
-<span class="sd">        &gt;&gt;&gt; fp = Poly(x**2 + sqrt(5)*x - 1, x, domain=&#39;QQ&lt;sqrt(5)&gt;&#39;)</span>
-<span class="sd">        &gt;&gt;&gt; gp = Poly(x**2 + (2 + sqrt(5))*x + sqrt(5), x, domain=&#39;QQ&lt;sqrt(5)&gt;&#39;)</span>
-<span class="sd">        &gt;&gt;&gt; sorted(dispersionset(fp, gp))</span>
-<span class="sd">        [2]</span>
-<span class="sd">        &gt;&gt;&gt; sorted(dispersionset(gp, fp))</span>
-<span class="sd">        [1, 4]</span>
-
-<span class="sd">        We can even perform the computations for polynomials</span>
-<span class="sd">        having symbolic coefficients:</span>
-
-<span class="sd">        &gt;&gt;&gt; fp = Poly(4*x**4 + (4*a + 8)*x**3 + (a**2 + 6*a + 4)*x**2 + (a**2 + 2*a)*x, x)</span>
-<span class="sd">        &gt;&gt;&gt; sorted(dispersionset(fp))</span>
-<span class="sd">        [0, 1]</span>
 
 <span class="sd">        See Also</span>
 <span class="sd">        ========</span>
 
-<span class="sd">        diofant.polys.polytools.Poly.dispersion</span>
+<span class="sd">        dispersion</span>
+<span class="sd">        diofant.polys.dispersion.dispersionset</span>
 
-<span class="sd">        References</span>
-<span class="sd">        ==========</span>
-
-<span class="sd">        * [ManWright94]_</span>
-<span class="sd">        * [Koepf98]_</span>
-<span class="sd">        * [Abramov71]_</span>
-<span class="sd">        * [Man93]_</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">.dispersion</span> <span class="k">import</span> <span class="n">dispersionset</span>
         <span class="k">return</span> <span class="n">dispersionset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span></div>
@@ -1978,70 +1913,18 @@
 <div class="viewcode-block" id="Poly.dispersion"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.polytools.Poly.dispersion">[docs]</a>    <span class="k">def</span> <span class="nf">dispersion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Compute the *dispersion* of polynomials.</span>
 
-<span class="sd">        For two polynomials `f(x)` and `g(x)` with `\deg f &gt; 0`</span>
-<span class="sd">        and `\deg g &gt; 0` the dispersion `\operatorname{dis}(f, g)` is defined as:</span>
-
-<span class="sd">        .. math::</span>
-<span class="sd">            \operatorname{dis}(f, g)</span>
-<span class="sd">            &amp; := \max\{ J(f,g) \cup \{0\} \} \\</span>
-<span class="sd">            &amp;  = \max\{ \{a \in \mathbb{N} | \gcd(f(x), g(x+a)) \neq 1\} \cup \{0\} \}</span>
-
-<span class="sd">        and for a single polynomial `\operatorname{dis}(f) := \operatorname{dis}(f, f)`.</span>
-
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
 
-<span class="sd">        &gt;&gt;&gt; from diofant.polys.dispersion import dispersion, dispersionset</span>
-
-<span class="sd">        Dispersion set and dispersion of a simple polynomial:</span>
-
-<span class="sd">        &gt;&gt;&gt; fp = Poly((x - 3)*(x + 3), x)</span>
-<span class="sd">        &gt;&gt;&gt; sorted(dispersionset(fp))</span>
-<span class="sd">        [0, 6]</span>
-<span class="sd">        &gt;&gt;&gt; dispersion(fp)</span>
+<span class="sd">        &gt;&gt;&gt; Poly((x - 3)*(x + 3)).dispersion()</span>
 <span class="sd">        6</span>
-
-<span class="sd">        Note that the definition of the dispersion is not symmetric:</span>
-
-<span class="sd">        &gt;&gt;&gt; fp = Poly(x**4 - 3*x**2 + 1, x)</span>
-<span class="sd">        &gt;&gt;&gt; gp = fp.shift(-3)</span>
-<span class="sd">        &gt;&gt;&gt; sorted(dispersionset(fp, gp))</span>
-<span class="sd">        [2, 3, 4]</span>
-<span class="sd">        &gt;&gt;&gt; dispersion(fp, gp)</span>
-<span class="sd">        4</span>
-<span class="sd">        &gt;&gt;&gt; sorted(dispersionset(gp, fp))</span>
-<span class="sd">        []</span>
-<span class="sd">        &gt;&gt;&gt; dispersion(gp, fp)</span>
-<span class="sd">        -oo</span>
-
-<span class="sd">        Computing the dispersion also works over field extensions:</span>
-
-<span class="sd">        &gt;&gt;&gt; fp = Poly(x**2 + sqrt(5)*x - 1, x, domain=&#39;QQ&lt;sqrt(5)&gt;&#39;)</span>
-<span class="sd">        &gt;&gt;&gt; gp = Poly(x**2 + (2 + sqrt(5))*x + sqrt(5), x, domain=&#39;QQ&lt;sqrt(5)&gt;&#39;)</span>
-<span class="sd">        &gt;&gt;&gt; sorted(dispersionset(fp, gp))</span>
-<span class="sd">        [2]</span>
-<span class="sd">        &gt;&gt;&gt; sorted(dispersionset(gp, fp))</span>
-<span class="sd">        [1, 4]</span>
-
-<span class="sd">        We can even perform the computations for polynomials</span>
-<span class="sd">        having symbolic coefficients:</span>
-
-<span class="sd">        &gt;&gt;&gt; fp = Poly(4*x**4 + (4*a + 8)*x**3 + (a**2 + 6*a + 4)*x**2 + (a**2 + 2*a)*x, x)</span>
-<span class="sd">        &gt;&gt;&gt; sorted(dispersionset(fp))</span>
-<span class="sd">        [0, 1]</span>
 
 <span class="sd">        See Also</span>
 <span class="sd">        ========</span>
 
-<span class="sd">        diofant.polys.polytools.Poly.dispersionset</span>
+<span class="sd">        dispersionset</span>
+<span class="sd">        diofant.polys.dispersion.dispersion</span>
 
-<span class="sd">        References</span>
-<span class="sd">        ==========</span>
-
-<span class="sd">        * [ManWright94]_</span>
-<span class="sd">        * [Koepf98]_</span>
-<span class="sd">        * [Abramov71]_</span>
-<span class="sd">        * [Man93]_</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">.dispersion</span> <span class="k">import</span> <span class="n">dispersion</span>
         <span class="k">return</span> <span class="n">dispersion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span></div>
@@ -2120,10 +2003,10 @@
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
 
-<span class="sd">        &gt;&gt;&gt; Poly(3*x**2 + 6*x + 9, x, domain=ZZ).monic()</span>
+<span class="sd">        &gt;&gt;&gt; Poly(3*x**2 + 6*x + 9).monic()</span>
 <span class="sd">        Poly(x**2 + 2*x + 3, x, domain=&#39;QQ&#39;)</span>
 
-<span class="sd">        &gt;&gt;&gt; Poly(3*x**2 + 4*x + 2, x, domain=ZZ).monic()</span>
+<span class="sd">        &gt;&gt;&gt; Poly(3*x**2 + 4*x + 2).monic()</span>
 <span class="sd">        Poly(x**2 + 4/3*x + 2/3, x, domain=&#39;QQ&#39;)</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -2183,7 +2066,7 @@
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
 
-<span class="sd">        &gt;&gt;&gt; Poly(x**4 + 2*x**3 - x - 1, x, domain=&#39;ZZ&#39;).decompose()</span>
+<span class="sd">        &gt;&gt;&gt; Poly(x**4 + 2*x**3 - x - 1).decompose()</span>
 <span class="sd">        [Poly(x**2 - x - 1, x, domain=&#39;ZZ&#39;), Poly(x**2 + x, x, domain=&#39;ZZ&#39;)]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">decompose</span><span class="p">()</span>
@@ -3533,9 +3416,9 @@
 <span class="sd">    Examples</span>
 <span class="sd">    ========</span>
 
-<span class="sd">    &gt;&gt;&gt; div(x**2 + 1, 2*x - 4, domain=ZZ)</span>
+<span class="sd">    &gt;&gt;&gt; div(x**2 + 1, 2*x - 4, field=False)</span>
 <span class="sd">    (0, x**2 + 1)</span>
-<span class="sd">    &gt;&gt;&gt; div(x**2 + 1, 2*x - 4, domain=QQ)</span>
+<span class="sd">    &gt;&gt;&gt; div(x**2 + 1, 2*x - 4)</span>
 <span class="sd">    (x/2 + 1, 5)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -3561,9 +3444,9 @@
 <span class="sd">    Examples</span>
 <span class="sd">    ========</span>
 
-<span class="sd">    &gt;&gt;&gt; rem(x**2 + 1, 2*x - 4, domain=ZZ)</span>
+<span class="sd">    &gt;&gt;&gt; rem(x**2 + 1, 2*x - 4, field=False)</span>
 <span class="sd">    x**2 + 1</span>
-<span class="sd">    &gt;&gt;&gt; rem(x**2 + 1, 2*x - 4, domain=QQ)</span>
+<span class="sd">    &gt;&gt;&gt; rem(x**2 + 1, 2*x - 4)</span>
 <span class="sd">    5</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -4575,14 +4458,14 @@
 <span class="sd">    Examples</span>
 <span class="sd">    ========</span>
 
-<span class="sd">    &gt;&gt;&gt; p = Poly(((x**2-1)*(x-2)).subs({x: x*(1 + sqrt(2))}), x, domain=&#39;EX&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; p = Poly(((x**2-1)*(x-2)).subs({x: x*(1 + sqrt(2))}), x, domain=EX)</span>
 <span class="sd">    &gt;&gt;&gt; lc, r, _, g = to_rational_coeffs(p)</span>
 <span class="sd">    &gt;&gt;&gt; lc, r</span>
 <span class="sd">    (7 + 5*sqrt(2), -2*sqrt(2) + 2)</span>
 <span class="sd">    &gt;&gt;&gt; g</span>
 <span class="sd">    Poly(x**3 + x**2 - 1/4*x - 1/4, x, domain=&#39;QQ&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; r1 = simplify(1/r)</span>
-<span class="sd">    &gt;&gt;&gt; Poly(lc*r**3*(g.as_expr()).subs({x: x*r1}), x, domain=&#39;EX&#39;) == p</span>
+<span class="sd">    &gt;&gt;&gt; Poly(lc*r**3*(g.as_expr()).subs({x: x*r1}), x, domain=EX) == p</span>
 <span class="sd">    True</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>

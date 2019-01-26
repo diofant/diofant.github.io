@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.dispersion &mdash; Diofant 0.10.0b2.dev38+gde1c268 documentation</title>
+  <title>diofant.polys.dispersion &mdash; Diofant 0.10.0b2.dev55+g97f1e5f documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev38+gde1c268
+                0.10.0b2.dev55+g97f1e5f
               </div>
             
           
@@ -174,17 +174,9 @@
 <span class="sd">    Examples</span>
 <span class="sd">    ========</span>
 
-<span class="sd">    Dispersion set and dispersion of a simple polynomial:</span>
-
-<span class="sd">    &gt;&gt;&gt; fp = poly((x - 3)*(x + 3), x)</span>
-<span class="sd">    &gt;&gt;&gt; sorted(dispersionset(fp))</span>
-<span class="sd">    [0, 6]</span>
-<span class="sd">    &gt;&gt;&gt; dispersion(fp)</span>
-<span class="sd">    6</span>
-
 <span class="sd">    Note that the definition of the dispersion is not symmetric:</span>
 
-<span class="sd">    &gt;&gt;&gt; fp = poly(x**4 - 3*x**2 + 1, x)</span>
+<span class="sd">    &gt;&gt;&gt; fp = Poly(x**4 - 3*x**2 + 1)</span>
 <span class="sd">    &gt;&gt;&gt; gp = fp.shift(-3)</span>
 <span class="sd">    &gt;&gt;&gt; sorted(dispersionset(fp, gp))</span>
 <span class="sd">    [2, 3, 4]</span>
@@ -197,8 +189,8 @@
 
 <span class="sd">    Computing the dispersion also works over field extensions:</span>
 
-<span class="sd">    &gt;&gt;&gt; fp = poly(x**2 + sqrt(5)*x - 1, x, domain=&#39;QQ&lt;sqrt(5)&gt;&#39;)</span>
-<span class="sd">    &gt;&gt;&gt; gp = poly(x**2 + (2 + sqrt(5))*x + sqrt(5), x, domain=&#39;QQ&lt;sqrt(5)&gt;&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; fp = Poly(x**2 + sqrt(5)*x - 1, x)</span>
+<span class="sd">    &gt;&gt;&gt; gp = Poly(x**2 + (2 + sqrt(5))*x + sqrt(5), x)</span>
 <span class="sd">    &gt;&gt;&gt; sorted(dispersionset(fp, gp))</span>
 <span class="sd">    [2]</span>
 <span class="sd">    &gt;&gt;&gt; sorted(dispersionset(gp, fp))</span>
@@ -207,14 +199,14 @@
 <span class="sd">    We can even perform the computations for polynomials</span>
 <span class="sd">    having symbolic coefficients:</span>
 
-<span class="sd">    &gt;&gt;&gt; fp = poly(4*x**4 + (4*a + 8)*x**3 + (a**2 + 6*a + 4)*x**2 + (a**2 + 2*a)*x, x)</span>
+<span class="sd">    &gt;&gt;&gt; fp = Poly(4*x**4 + (4*a + 8)*x**3 + (a**2 + 6*a + 4)*x**2 + (a**2 + 2*a)*x, x)</span>
 <span class="sd">    &gt;&gt;&gt; sorted(dispersionset(fp))</span>
 <span class="sd">    [0, 1]</span>
 
 <span class="sd">    See Also</span>
 <span class="sd">    ========</span>
 
-<span class="sd">    diofant.polys.dispersion.dispersion</span>
+<span class="sd">    dispersion</span>
 
 <span class="sd">    References</span>
 <span class="sd">    ==========</span>
@@ -291,53 +283,10 @@
 <span class="sd">    and for a single polynomial `\operatorname{dis}(f) := \operatorname{dis}(f, f)`.</span>
 <span class="sd">    Note that we make the definition `\max\{\} := -\infty`.</span>
 
-<span class="sd">    Examples</span>
-<span class="sd">    ========</span>
-
-<span class="sd">    Dispersion set and dispersion of a simple polynomial:</span>
-
-<span class="sd">    &gt;&gt;&gt; fp = poly((x - 3)*(x + 3), x)</span>
-<span class="sd">    &gt;&gt;&gt; sorted(dispersionset(fp))</span>
-<span class="sd">    [0, 6]</span>
-<span class="sd">    &gt;&gt;&gt; dispersion(fp)</span>
-<span class="sd">    6</span>
-
-<span class="sd">    Note that the definition of the dispersion is not symmetric:</span>
-
-<span class="sd">    &gt;&gt;&gt; fp = poly(x**4 - 3*x**2 + 1, x)</span>
-<span class="sd">    &gt;&gt;&gt; gp = fp.shift(-3)</span>
-<span class="sd">    &gt;&gt;&gt; sorted(dispersionset(fp, gp))</span>
-<span class="sd">    [2, 3, 4]</span>
-<span class="sd">    &gt;&gt;&gt; dispersion(fp, gp)</span>
-<span class="sd">    4</span>
-<span class="sd">    &gt;&gt;&gt; sorted(dispersionset(gp, fp))</span>
-<span class="sd">    []</span>
-<span class="sd">    &gt;&gt;&gt; dispersion(gp, fp)</span>
-<span class="sd">    -oo</span>
-
-<span class="sd">    The maximum of an empty set is defined to be `-\infty`</span>
-<span class="sd">    as seen in this example.</span>
-
-<span class="sd">    Computing the dispersion also works over field extensions:</span>
-
-<span class="sd">    &gt;&gt;&gt; fp = poly(x**2 + sqrt(5)*x - 1, x, domain=&#39;QQ&lt;sqrt(5)&gt;&#39;)</span>
-<span class="sd">    &gt;&gt;&gt; gp = poly(x**2 + (2 + sqrt(5))*x + sqrt(5), x, domain=&#39;QQ&lt;sqrt(5)&gt;&#39;)</span>
-<span class="sd">    &gt;&gt;&gt; sorted(dispersionset(fp, gp))</span>
-<span class="sd">    [2]</span>
-<span class="sd">    &gt;&gt;&gt; sorted(dispersionset(gp, fp))</span>
-<span class="sd">    [1, 4]</span>
-
-<span class="sd">    We can even perform the computations for polynomials</span>
-<span class="sd">    having symbolic coefficients:</span>
-
-<span class="sd">    &gt;&gt;&gt; fp = poly(4*x**4 + (4*a + 8)*x**3 + (a**2 + 6*a + 4)*x**2 + (a**2 + 2*a)*x, x)</span>
-<span class="sd">    &gt;&gt;&gt; sorted(dispersionset(fp))</span>
-<span class="sd">    [0, 1]</span>
-
 <span class="sd">    See Also</span>
 <span class="sd">    ========</span>
 
-<span class="sd">    diofant.polys.dispersion.dispersionset</span>
+<span class="sd">    dispersionset</span>
 
 <span class="sd">    References</span>
 <span class="sd">    ==========</span>

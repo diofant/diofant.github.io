@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.galoistools &mdash; Diofant 0.10.0b2.dev38+gde1c268 documentation</title>
+  <title>diofant.polys.galoistools &mdash; Diofant 0.10.0b2.dev55+g97f1e5f documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev38+gde1c268
+                0.10.0b2.dev55+g97f1e5f
               </div>
             
           
@@ -177,20 +177,18 @@
 <span class="sd">    co-prime integer moduli ``m_0,...,m_n``, returns an integer</span>
 <span class="sd">    ``u``, such that ``u = u_i mod m_i`` for ``i = ``0,...,n``.</span>
 
-<span class="sd">    As an example consider a set of residues ``U = [49, 76, 65]``</span>
-<span class="sd">    and a set of moduli ``M = [99, 97, 95]``. Then we have::</span>
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
 
-<span class="sd">       &gt;&gt;&gt; from diofant.ntheory.modular import solve_congruence</span>
+<span class="sd">    &gt;&gt;&gt; gf_crt([49, 76, 65], [99, 97, 95], ZZ)</span>
+<span class="sd">    639985</span>
+<span class="sd">    &gt;&gt;&gt; [_ % m for m in [99, 97, 95]]</span>
+<span class="sd">    [49, 76, 65]</span>
 
-<span class="sd">       &gt;&gt;&gt; gf_crt([49, 76, 65], [99, 97, 95], ZZ)</span>
-<span class="sd">       639985</span>
+<span class="sd">    Notes</span>
+<span class="sd">    =====</span>
 
-<span class="sd">    This is the correct result because::</span>
-
-<span class="sd">       &gt;&gt;&gt; [639985 % m for m in [99, 97, 95]]</span>
-<span class="sd">       [49, 76, 65]</span>
-
-<span class="sd">    Note: this is a low-level routine with no error checking.</span>
+<span class="sd">    This is a low-level routine with no error checking.</span>
 
 <span class="sd">    See Also</span>
 <span class="sd">    ========</span>
@@ -582,15 +580,13 @@
 <span class="sd">    finite field with ``p`` elements, returns polynomials ``q`` and ``r``</span>
 <span class="sd">    (quotient and remainder) such that ``f = q*g + r``.</span>
 
-<span class="sd">    Consider polynomials ``x**3 + x + 1`` and ``x**2 + x`` in GF(2)::</span>
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
 
-<span class="sd">       &gt;&gt;&gt; gf_div([1, 0, 1, 1], [1, 1, 0], 2, ZZ)</span>
-<span class="sd">       ([1, 1], [1])</span>
-
-<span class="sd">    As result we obtained quotient ``x + 1`` and remainder ``1``, thus::</span>
-
-<span class="sd">       &gt;&gt;&gt; gf_add_mul([1], [1, 1], [1, 1, 0], 2, ZZ)</span>
-<span class="sd">       [1, 0, 1, 1]</span>
+<span class="sd">    &gt;&gt;&gt; gf_div([1, 0, 1, 1], [1, 1, 0], 2, ZZ)</span>
+<span class="sd">    ([1, 1], [1])</span>
+<span class="sd">    &gt;&gt;&gt; gf_add_mul(_[1], _[0], [1, 1, 0], 2, ZZ)</span>
+<span class="sd">    [1, 0, 1, 1]</span>
 
 <span class="sd">    References</span>
 <span class="sd">    ==========</span>
@@ -737,8 +733,7 @@
 <span class="sd">    Examples</span>
 <span class="sd">    ========</span>
 
-<span class="sd">    &gt;&gt;&gt; g = [1, 0, 2, 1]</span>
-<span class="sd">    &gt;&gt;&gt; gf_frobenius_monomial_base(g, 5, ZZ)</span>
+<span class="sd">    &gt;&gt;&gt; gf_frobenius_monomial_base([1, 0, 2, 1], 5, ZZ)</span>
 <span class="sd">    [[1], [4, 4, 2], [1, 2]]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">n</span> <span class="o">=</span> <span class="n">dmp_degree_in</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
@@ -920,21 +915,17 @@
 <span class="sd">    ``s``, ``t`` and ``h``, such that ``h = gcd(f, g)`` and ``s*f + t*g = h``.</span>
 <span class="sd">    The typical application of EEA is solving polynomial diophantine equations.</span>
 
-<span class="sd">    Consider polynomials ``f = (x + 7) (x + 1)``, ``g = (x + 7) (x**2 + 1)``</span>
-<span class="sd">    in ``GF(11)[x]``. Application of Extended Euclidean Algorithm gives::</span>
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
 
-<span class="sd">       &gt;&gt;&gt; s, t, g = gf_gcdex([1, 8, 7], [1, 7, 1, 7], 11, ZZ)</span>
-<span class="sd">       &gt;&gt;&gt; (s, t, g)</span>
-<span class="sd">       ([5, 6], [6], [1, 7])</span>
+<span class="sd">    &gt;&gt;&gt; s, t, g = gf_gcdex([1, 8, 7], [1, 7, 1, 7], 11, ZZ)</span>
+<span class="sd">    &gt;&gt;&gt; (s, t, g)</span>
+<span class="sd">    ([5, 6], [6], [1, 7])</span>
 
-<span class="sd">    As result we obtained polynomials ``s = 5*x + 6`` and ``t = 6``, and</span>
-<span class="sd">    additionally ``gcd(f, g) = x + 7``. This is correct because::</span>
-
-<span class="sd">       &gt;&gt;&gt; S = gf_mul(s, [1, 8, 7], 11, ZZ)</span>
-<span class="sd">       &gt;&gt;&gt; T = gf_mul(t, [1, 7, 1, 7], 11, ZZ)</span>
-
-<span class="sd">       &gt;&gt;&gt; gf_add(S, T, 11, ZZ)</span>
-<span class="sd">       [1, 7]</span>
+<span class="sd">    &gt;&gt;&gt; S = gf_mul(s, [1, 8, 7], 11, ZZ)</span>
+<span class="sd">    &gt;&gt;&gt; T = gf_mul(t, [1, 7, 1, 7], 11, ZZ)</span>
+<span class="sd">    &gt;&gt;&gt; gf_add(S, T, 11, ZZ)</span>
+<span class="sd">    [1, 7]</span>
 
 <span class="sd">    References</span>
 <span class="sd">    ==========</span>
@@ -1303,25 +1294,23 @@
 <span class="sd">    are co-prime and ``e_1 ... e_k`` are given in increasing order. All trivial</span>
 <span class="sd">    terms (i.e. ``f_i = 1``) aren&#39;t included in the output.</span>
 
-<span class="sd">    Consider polynomial ``f = x**11 + 1`` over ``GF(11)[x]``::</span>
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
 
-<span class="sd">       &gt;&gt;&gt; f = gf_from_dict({11: ZZ(1), 0: ZZ(1)}, 11, ZZ)</span>
+<span class="sd">    &gt;&gt;&gt; f = gf_from_dict({11: ZZ(1), 0: ZZ(1)}, 11, ZZ)</span>
 
-<span class="sd">    Note that ``f&#39;(x) = 0``::</span>
+<span class="sd">    Note that:</span>
 
-<span class="sd">       &gt;&gt;&gt; gf_diff(f, 11, ZZ)</span>
-<span class="sd">       []</span>
+<span class="sd">    &gt;&gt;&gt; gf_diff(f, 11, ZZ)</span>
+<span class="sd">    []</span>
 
 <span class="sd">    This phenomenon doesn&#39;t happen in characteristic zero. However we can</span>
-<span class="sd">    still compute square-free decomposition of ``f`` using ``gf_sqf()``::</span>
+<span class="sd">    still compute square-free decomposition of ``f``:</span>
 
-<span class="sd">       &gt;&gt;&gt; gf_sqf_list(f, 11, ZZ)</span>
-<span class="sd">       (1, [([1, 1], 11)])</span>
-
-<span class="sd">    We obtained factorization ``f = (x + 1)**11``. This is correct because::</span>
-
-<span class="sd">       &gt;&gt;&gt; gf_pow([1, 1], 11, 11, ZZ) == f</span>
-<span class="sd">       True</span>
+<span class="sd">    &gt;&gt;&gt; gf_sqf_list(f, 11, ZZ)</span>
+<span class="sd">    (1, [([1, 1], 11)])</span>
+<span class="sd">    &gt;&gt;&gt; gf_pow(*_[1][0], 11, ZZ) == f</span>
+<span class="sd">    True</span>
 
 <span class="sd">    References</span>
 <span class="sd">    ==========</span>
@@ -1515,17 +1504,15 @@
 <span class="sd">    list of pairs ``(f_i, e_i)`` where ``deg(f_i) &gt; 0`` and ``e_i &gt; 0``</span>
 <span class="sd">    is an argument to the equal degree factorization routine.</span>
 
-<span class="sd">    Consider the polynomial ``x**15 - 1`` in ``GF(11)[x]``::</span>
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
 
-<span class="sd">       &gt;&gt;&gt; f = gf_from_dict({15: ZZ(1), 0: ZZ(-1)}, 11, ZZ)</span>
+<span class="sd">    &gt;&gt;&gt; f = gf_from_dict({15: ZZ(1), 0: ZZ(-1)}, 11, ZZ)</span>
 
-<span class="sd">    Distinct degree factorization gives::</span>
+<span class="sd">    &gt;&gt;&gt; gf_ddf_zassenhaus(f, 11, ZZ)</span>
+<span class="sd">    [([1, 0, 0, 0, 0, 10], 1), ([1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1], 2)]</span>
 
-<span class="sd">       &gt;&gt;&gt; gf_ddf_zassenhaus(f, 11, ZZ)</span>
-<span class="sd">       [([1, 0, 0, 0, 0, 10], 1), ([1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1], 2)]</span>
-
-<span class="sd">    which means ``x**15 - 1 = (x**5 - 1) (x**10 + x**5 + 1)``. To obtain</span>
-<span class="sd">    factorization into irreducibles, use equal degree factorization</span>
+<span class="sd">    To obtain factorization into irreducibles, use equal degree factorization</span>
 <span class="sd">    procedure (EDF) with each of the factors.</span>
 
 <span class="sd">    References</span>
@@ -1565,11 +1552,11 @@
 <span class="sd">    irreducible factors ``f_1,...,f_d`` of ``f``, each of degree ``n``.</span>
 <span class="sd">    EDF procedure gives complete factorization over Galois fields.</span>
 
-<span class="sd">    Consider the square-free polynomial ``f = x**3 + x**2 + x + 1`` in</span>
-<span class="sd">    ``GF(5)[x]``. Let&#39;s compute its irreducible factors of degree one::</span>
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
 
-<span class="sd">       &gt;&gt;&gt; gf_edf_zassenhaus([1, 1, 1, 1], 1, 5, ZZ)</span>
-<span class="sd">       [[1, 1], [1, 2], [1, 3]]</span>
+<span class="sd">    &gt;&gt;&gt; gf_edf_zassenhaus([1, 1, 1, 1], 1, 5, ZZ)</span>
+<span class="sd">    [[1, 1], [1, 2], [1, 3]]</span>
 
 <span class="sd">    References</span>
 <span class="sd">    ==========</span>
@@ -1822,16 +1809,6 @@
 <span class="sd">    The algorithm proceeds by first computing square-free decomposition</span>
 <span class="sd">    of ``f`` and then iteratively factoring each of square-free factors.</span>
 
-<span class="sd">    Consider a non square-free polynomial ``f = (7*x + 1) (x + 2)**2`` in</span>
-<span class="sd">    ``GF(11)[x]``. We obtain its factorization into irreducibles as follows::</span>
-
-<span class="sd">       &gt;&gt;&gt; gf_factor([5, 2, 7, 2], 11, ZZ)</span>
-<span class="sd">       (5, [([1, 2], 1), ([1, 8], 2)])</span>
-
-<span class="sd">    We arrived with factorization ``f = 5 (x + 2) (x + 8)**2``. We didn&#39;t</span>
-<span class="sd">    recover the exact form of the input polynomial because we requested to</span>
-<span class="sd">    get monic factors of ``f`` and its leading coefficient separately.</span>
-
 <span class="sd">    Square-free factors of ``f`` can be factored into irreducibles over</span>
 <span class="sd">    ``GF(p)`` using three very different methods:</span>
 
@@ -1845,6 +1822,16 @@
 <span class="sd">    If you want to use a specific factorization method, instead of the default</span>
 <span class="sd">    one, set ``GF_FACTOR_METHOD`` with one of ``berlekamp``, ``zassenhaus`` or</span>
 <span class="sd">    ``shoup`` values.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; gf_factor([5, 2, 7, 2], 11, ZZ)</span>
+<span class="sd">    (5, [([1, 2], 1), ([1, 8], 2)])</span>
+
+<span class="sd">    We arrived with factorization ``f = 5 (x + 2) (x + 8)**2``. We didn&#39;t</span>
+<span class="sd">    recover the exact form of the input polynomial because we requested to</span>
+<span class="sd">    get monic factors of ``f`` and its leading coefficient separately.</span>
 
 <span class="sd">    References</span>
 <span class="sd">    ==========</span>
@@ -1963,9 +1950,6 @@
 <span class="sd">    [1]</span>
 <span class="sd">    &gt;&gt;&gt; csolve_prime([1, 1, 7], 3, 2)</span>
 <span class="sd">    [1, 4, 7]</span>
-
-<span class="sd">    Solutions [7, 4, 1] (mod 3**2) are generated by ``_raise_mod_power()``</span>
-<span class="sd">    from solution [1] (mod 3).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">..domains</span> <span class="k">import</span> <span class="n">ZZ</span>
     <span class="n">X1</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">if</span> <span class="n">gf_eval</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
@@ -1994,8 +1978,6 @@
 
 <span class="sd">    Examples</span>
 <span class="sd">    ========</span>
-
-<span class="sd">    Solve [1, 1, 7] congruent 0 mod(189):</span>
 
 <span class="sd">    &gt;&gt;&gt; gf_csolve([1, 1, 7], 189)</span>
 <span class="sd">    [13, 49, 76, 112, 139, 175]</span>
