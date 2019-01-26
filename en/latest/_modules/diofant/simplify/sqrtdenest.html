@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.simplify.sqrtdenest &mdash; Diofant 0.10.0b2.dev55+g97f1e5f documentation</title>
+  <title>diofant.simplify.sqrtdenest &mdash; Diofant 0.10.0b2.dev59+g6273bb4 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev55+g97f1e5f
+                0.10.0b2.dev59+g6273bb4
               </div>
             
           
@@ -184,6 +184,7 @@
 
 <span class="sd">    &gt;&gt;&gt; sqrt_depth(1 + sqrt(2)*sqrt(1 + sqrt(3)))</span>
 <span class="sd">    2</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">is_Atom</span><span class="p">:</span>
@@ -207,6 +208,7 @@
 <span class="sd">    True</span>
 <span class="sd">    &gt;&gt;&gt; is_algebraic(sqrt(2)*(3/(sqrt(7) + sqrt(5)*cos(2))))</span>
 <span class="sd">    False</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">is_Rational</span><span class="p">:</span>
@@ -272,6 +274,7 @@
 
 <span class="sd">    * D. J. Jeffrey and A. D. Rich, &#39;Symplifying Square Roots of Square Roots</span>
 <span class="sd">      by Denesting&#39; (available at http://www.cybertester.com/data/denest.pdf)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">expr</span> <span class="o">=</span> <span class="n">expand_mul</span><span class="p">(</span><span class="n">sympify</span><span class="p">(</span><span class="n">expr</span><span class="p">))</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_iter</span><span class="p">):</span>
@@ -291,6 +294,7 @@
 
 <span class="sd">    &gt;&gt;&gt; _sqrt_match(1 + sqrt(2) + sqrt(2)*sqrt(3) +  2*sqrt(1+sqrt(5)))</span>
 <span class="sd">    [1 + sqrt(2) + sqrt(6), 2, 1 + sqrt(5)]</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">.radsimp</span> <span class="k">import</span> <span class="n">split_surds</span>
 
@@ -407,6 +411,7 @@
 <span class="sd">    &gt;&gt;&gt; w = -6*sqrt(55)-6*sqrt(35)-2*sqrt(22)-2*sqrt(14)+2*sqrt(77)+6*sqrt(10)+65</span>
 <span class="sd">    &gt;&gt;&gt; _sqrtdenest_rec(sqrt(w))</span>
 <span class="sd">    -sqrt(11) - sqrt(7) + sqrt(2) + 3*sqrt(5)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">.radsimp</span> <span class="k">import</span> <span class="n">radsimp</span><span class="p">,</span> <span class="n">rad_rationalize</span><span class="p">,</span> <span class="n">split_surds</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_Pow</span><span class="p">:</span>
@@ -449,6 +454,7 @@
 <span class="k">def</span> <span class="nf">_sqrtdenest1</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">denester</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return denested expr after denesting with simpler methods or, that</span>
 <span class="sd">    failing, using the denester.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="kn">from</span> <span class="nn">.simplify</span> <span class="k">import</span> <span class="n">radsimp</span>
@@ -540,6 +546,7 @@
 
 <span class="sd">    &gt;&gt;&gt; _.subs({x: Symbol(&#39;x&#39;, positive=True)})</span>
 <span class="sd">    sqrt(sqrt(sqrt(x + 3) + 1) + 1) + 1 + sqrt(2)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="n">sympify</span><span class="p">,</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">r</span><span class="p">))</span>
@@ -566,6 +573,7 @@
 <span class="k">def</span> <span class="nf">_sqrt_numeric_denest</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">d2</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Helper that denest expr = a + b*sqrt(r), with d2 = a**2 - b**2*r &gt; 0</span>
 <span class="sd">    or returns None if not denested.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">.simplify</span> <span class="k">import</span> <span class="n">radsimp</span>
     <span class="n">depthr</span> <span class="o">=</span> <span class="n">sqrt_depth</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
@@ -623,6 +631,7 @@
 <span class="sd">    &gt;&gt;&gt; d2 = a**2 - b**2*r</span>
 <span class="sd">    &gt;&gt;&gt; sqrt_biquadratic_denest(z, a, b, r, d2)</span>
 <span class="sd">    sqrt(2) + sqrt(sqrt(2) + 2) + 2</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">.radsimp</span> <span class="k">import</span> <span class="n">radsimp</span><span class="p">,</span> <span class="n">rad_rationalize</span>
     <span class="k">if</span> <span class="n">r</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">d2</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">b</span> <span class="ow">or</span> <span class="n">sqrt_depth</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">base</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
@@ -669,6 +678,7 @@
 <span class="sd">    exponential complexity.</span>
 
 <span class="sd">    This is discussed in the paper in the middle paragraph of page 179.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">.simplify</span> <span class="k">import</span> <span class="n">radsimp</span>
     <span class="k">if</span> <span class="n">h</span> <span class="o">&gt;</span> <span class="n">max_depth_level</span><span class="p">:</span>
@@ -801,6 +811,7 @@
 <span class="sd">    &gt;&gt;&gt; eq = sqrt(x) + root(x, 3) - 2</span>
 <span class="sd">    &gt;&gt;&gt; unrad(eq)</span>
 <span class="sd">    (_p**3 + _p**2 - 2, [_p, -x + _p**6])</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">..polys.rootoftools</span> <span class="k">import</span> <span class="n">RootOf</span>
     <span class="kn">from</span> <span class="nn">..solvers</span> <span class="k">import</span> <span class="n">solve</span>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.logic.boolalg &mdash; Diofant 0.10.0b2.dev55+g97f1e5f documentation</title>
+  <title>diofant.logic.boolalg &mdash; Diofant 0.10.0b2.dev59+g6273bb4 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev55+g97f1e5f
+                0.10.0b2.dev59+g6273bb4
               </div>
             
           
@@ -221,6 +221,7 @@
 <span class="sd">        False</span>
 <span class="sd">        &gt;&gt;&gt; Not(And(a, Not(a))).equals(Or(b, Not(b)))</span>
 <span class="sd">        False</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">.inference</span> <span class="k">import</span> <span class="n">satisfiable</span>
         <span class="kn">from</span> <span class="nn">..core.relational</span> <span class="k">import</span> <span class="n">Relational</span>
@@ -234,9 +235,7 @@
 
 
 <span class="k">class</span> <span class="nc">BooleanAtom</span><span class="p">(</span><span class="n">Atom</span><span class="p">,</span> <span class="n">Boolean</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Base class of BooleanTrue and BooleanFalse.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Base class of BooleanTrue and BooleanFalse.&quot;&quot;&quot;</span>
 
     <span class="n">is_Boolean</span> <span class="o">=</span> <span class="kc">True</span>
 
@@ -317,6 +316,7 @@
 <span class="sd">    ========</span>
 
 <span class="sd">    diofant.logic.boolalg.BooleanFalse</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__bool__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -334,6 +334,7 @@
 
 <span class="sd">        &gt;&gt;&gt; true.as_set()</span>
 <span class="sd">        UniversalSet()</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">UniversalSet</span></div>
 
@@ -368,6 +369,7 @@
 <span class="sd">    ========</span>
 
 <span class="sd">    diofant.logic.boolalg.BooleanTrue</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__bool__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -385,6 +387,7 @@
 
 <span class="sd">        &gt;&gt;&gt; false.as_set()</span>
 <span class="sd">        EmptySet()</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">..sets</span> <span class="k">import</span> <span class="n">EmptySet</span>
         <span class="k">return</span> <span class="n">EmptySet</span><span class="p">()</span></div>
@@ -406,6 +409,7 @@
     <span class="sd">&quot;&quot;&quot;Boolean function is a function that lives in a boolean space.</span>
 
 <span class="sd">    This is used as base class for And, Or, Not, etc.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">is_Boolean</span> <span class="o">=</span> <span class="kc">True</span>
@@ -460,6 +464,7 @@
 
 <span class="sd">    &gt;&gt;&gt; And(x, y).subs({x: 1})</span>
 <span class="sd">    y</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">zero</span> <span class="o">=</span> <span class="n">false</span>
@@ -495,6 +500,7 @@
 
 <span class="sd">        &gt;&gt;&gt; And(x&lt;2, x&gt;-2).as_set()</span>
 <span class="sd">        (-2, 2)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">..sets</span> <span class="k">import</span> <span class="n">Intersection</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">free_symbols</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
@@ -528,6 +534,7 @@
 
 <span class="sd">    &gt;&gt;&gt; Or(x, y).subs({x: 0})</span>
 <span class="sd">    y</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">zero</span> <span class="o">=</span> <span class="n">true</span>
@@ -561,6 +568,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Or(x&gt;2, x&lt;-2).as_set()</span>
 <span class="sd">        (-oo, -2) U (2, oo)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">..sets</span> <span class="k">import</span> <span class="n">Union</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">free_symbols</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
@@ -611,6 +619,7 @@
 <span class="sd">    -2</span>
 <span class="sd">    &gt;&gt;&gt; ~true</span>
 <span class="sd">    false</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">is_Not</span> <span class="o">=</span> <span class="kc">True</span>
@@ -646,6 +655,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Not(x&gt;0, evaluate=False).as_set()</span>
 <span class="sd">        (-oo, 0]</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">free_symbols</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">as_set</span><span class="p">()</span><span class="o">.</span><span class="n">complement</span><span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">Reals</span><span class="p">)</span>
@@ -724,6 +734,7 @@
 
 <span class="sd">    &gt;&gt;&gt; Xor(x, y).subs({y: 0})</span>
 <span class="sd">    x</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -806,6 +817,7 @@
 <span class="sd">    false</span>
 <span class="sd">    &gt;&gt;&gt; Nand(x, y)</span>
 <span class="sd">    Not(And(x, y))</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="nd">@classmethod</span>
@@ -836,6 +848,7 @@
 <span class="sd">    true</span>
 <span class="sd">    &gt;&gt;&gt; Nor(x, y)</span>
 <span class="sd">    Not(Or(x, y))</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="nd">@classmethod</span>
@@ -884,6 +897,7 @@
 <span class="sd">    1</span>
 <span class="sd">    &gt;&gt;&gt; true &gt;&gt; false</span>
 <span class="sd">    false</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="nd">@classmethod</span>
@@ -935,6 +949,7 @@
 <span class="sd">    false</span>
 <span class="sd">    &gt;&gt;&gt; Equivalent(x, And(x, True))</span>
 <span class="sd">    true</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
@@ -1011,6 +1026,7 @@
 <span class="sd">    y</span>
 <span class="sd">    &gt;&gt;&gt; ITE(x, y, y)</span>
 <span class="sd">    y</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="nd">@classmethod</span>
@@ -1057,6 +1073,7 @@
 <span class="sd">    True</span>
 <span class="sd">    &gt;&gt;&gt; conjuncts(a | b) == frozenset([Or(a, b)])</span>
 <span class="sd">    True</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">And</span><span class="o">.</span><span class="n">make_args</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
 
@@ -1071,6 +1088,7 @@
 <span class="sd">    True</span>
 <span class="sd">    &gt;&gt;&gt; disjuncts(a &amp; b) == frozenset([And(a, b)])</span>
 <span class="sd">    True</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">Or</span><span class="o">.</span><span class="n">make_args</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
 
@@ -1085,6 +1103,7 @@
 
 <span class="sd">    &gt;&gt;&gt; distribute_and_over_or(Or(a, And(Not(b), Not(c))))</span>
 <span class="sd">    And(Or(Not(b), a), Or(Not(c), a))</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">_distribute</span><span class="p">((</span><span class="n">expr</span><span class="p">,</span> <span class="n">And</span><span class="p">,</span> <span class="n">Or</span><span class="p">))</span>
 
@@ -1101,14 +1120,13 @@
 
 <span class="sd">    &gt;&gt;&gt; distribute_or_over_and(And(Or(Not(a), b), c))</span>
 <span class="sd">    Or(And(Not(a), c), And(b, c))</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">_distribute</span><span class="p">((</span><span class="n">expr</span><span class="p">,</span> <span class="n">Or</span><span class="p">,</span> <span class="n">And</span><span class="p">))</span>
 
 
 <span class="k">def</span> <span class="nf">_distribute</span><span class="p">(</span><span class="n">info</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Distributes info[1] over info[2] with respect to info[0].</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Distributes info[1] over info[2] with respect to info[0].&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">info</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">info</span><span class="p">[</span><span class="mi">2</span><span class="p">]):</span>
         <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">args</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">info</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
@@ -1140,6 +1158,7 @@
 <span class="sd">    And(Or(Not(c), Not(d)), Or(a, b))</span>
 <span class="sd">    &gt;&gt;&gt; to_nnf(Equivalent(a &gt;&gt; b, b &gt;&gt; a))</span>
 <span class="sd">    And(Or(And(Not(a), b), Not(a), b), Or(And(Not(b), a), Not(b), a))</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">is_nnf</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">simplify</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">expr</span>
@@ -1159,6 +1178,7 @@
 <span class="sd">    And(Or(Not(a), c), Or(Not(b), c))</span>
 <span class="sd">    &gt;&gt;&gt; to_cnf((a | b) &amp; (a | ~a), True)</span>
 <span class="sd">    Or(a, b)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">expr</span> <span class="o">=</span> <span class="n">sympify</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">BooleanFunction</span><span class="p">):</span>
@@ -1188,6 +1208,7 @@
 <span class="sd">    Or(And(a, b), And(b, c))</span>
 <span class="sd">    &gt;&gt;&gt; to_dnf((a &amp; b) | (a &amp; ~b) | (b &amp; c) | (~b &amp; c), True)</span>
 <span class="sd">    Or(a, c)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">expr</span> <span class="o">=</span> <span class="n">sympify</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">BooleanFunction</span><span class="p">):</span>
@@ -1224,6 +1245,7 @@
 <span class="sd">    False</span>
 <span class="sd">    &gt;&gt;&gt; is_nnf((a &gt;&gt; b) &amp; (b &gt;&gt; a))</span>
 <span class="sd">    False</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">expr</span> <span class="o">=</span> <span class="n">sympify</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
@@ -1261,6 +1283,7 @@
 <span class="sd">    True</span>
 <span class="sd">    &gt;&gt;&gt; is_cnf((a &amp; b) | c)</span>
 <span class="sd">    False</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">_is_form</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">And</span><span class="p">,</span> <span class="n">Or</span><span class="p">)</span></div>
 
@@ -1280,14 +1303,13 @@
 <span class="sd">    True</span>
 <span class="sd">    &gt;&gt;&gt; is_dnf(a &amp; (b | c))</span>
 <span class="sd">    False</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">_is_form</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">Or</span><span class="p">,</span> <span class="n">And</span><span class="p">)</span></div>
 
 
 <span class="k">def</span> <span class="nf">_is_form</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">function1</span><span class="p">,</span> <span class="n">function2</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Test whether or not an expression is of the required form.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Test whether or not an expression is of the required form.&quot;&quot;&quot;</span>
     <span class="n">expr</span> <span class="o">=</span> <span class="n">sympify</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
 
     <span class="c1"># Special case of an Atom</span>
@@ -1347,6 +1369,7 @@
 <span class="sd">    And(Or(Not(a), b), Or(Not(b), a))</span>
 <span class="sd">    &gt;&gt;&gt; eliminate_implications(Equivalent(a, b, c))</span>
 <span class="sd">    And(Or(Not(a), b), Or(Not(b), c), Or(Not(c), a))</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">to_nnf</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
 
@@ -1366,6 +1389,7 @@
 <span class="sd">    True</span>
 <span class="sd">    &gt;&gt;&gt; is_literal(Or(a, b))</span>
 <span class="sd">    False</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">Not</span><span class="p">):</span>
         <span class="k">return</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">BooleanFunction</span><span class="p">)</span>
@@ -1382,6 +1406,7 @@
 
 <span class="sd">    &gt;&gt;&gt; to_int_repr([x | y, y], [x, y])</span>
 <span class="sd">    [{1, 2}, {2}]</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">symbols</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">symbols</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">symbols</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)))</span>
@@ -1400,6 +1425,7 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Checks if a pair of minterms differs by only one bit. If yes, returns</span>
 <span class="sd">    index, else returns -1.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">index</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
     <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">minterm1</span><span class="p">,</span> <span class="n">minterm2</span><span class="p">)):</span>
@@ -1415,6 +1441,7 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Converts a term in the expansion of a function from binary to it&#39;s</span>
 <span class="sd">    variable form (for SOP).</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">temp</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">minterm</span><span class="p">):</span>
@@ -1429,6 +1456,7 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Converts a term in the expansion of a function from binary to it&#39;s</span>
 <span class="sd">    variable form (for POS).</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">temp</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">maxterm</span><span class="p">):</span>
@@ -1443,6 +1471,7 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Reduces a set of minterms, if possible, to a simplified set of minterms</span>
 <span class="sd">    with one less variable in the terms using QM method.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">simplified_terms</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">todo</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">terms</span><span class="p">)))</span>
@@ -1464,6 +1493,7 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return True if a binary term is satisfied by the given term. Used</span>
 <span class="sd">    for recognizing prime implicants.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">term</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">x</span> <span class="o">!=</span> <span class="n">minterm</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
@@ -1476,6 +1506,7 @@
 <span class="sd">    After the truth table has been sufficiently simplified, use the prime</span>
 <span class="sd">    implicant table method to recognize and eliminate redundant pairs,</span>
 <span class="sd">    and return the essential arguments.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">essential</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">terms</span><span class="p">:</span>
@@ -1528,6 +1559,7 @@
 <span class="sd">    ==========</span>
 
 <span class="sd">    * https://en.wikipedia.org/wiki/Quine-McCluskey_algorithm</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">variables</span> <span class="o">=</span> <span class="p">[</span><span class="n">sympify</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">]</span>
     <span class="k">if</span> <span class="n">minterms</span> <span class="o">==</span> <span class="p">[]:</span>
@@ -1576,6 +1608,7 @@
 <span class="sd">    ==========</span>
 
 <span class="sd">    * https://en.wikipedia.org/wiki/Quine-McCluskey_algorithm</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">variables</span> <span class="o">=</span> <span class="p">[</span><span class="n">sympify</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">]</span>
     <span class="k">if</span> <span class="n">minterms</span> <span class="o">==</span> <span class="p">[]:</span>
@@ -1606,6 +1639,7 @@
 
 <span class="sd">    A logical predicate is defined here as anything within a BooleanFunction</span>
 <span class="sd">    that is not a BooleanFunction itself.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">BooleanFunction</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">{</span><span class="n">expr</span><span class="p">}</span>
@@ -1640,6 +1674,7 @@
 <span class="sd">    Or(And(Not(x), Not(y), Not(z)), And(Not(x), Not(y), z))</span>
 <span class="sd">    &gt;&gt;&gt; simplify_logic(_)</span>
 <span class="sd">    And(Not(x), Not(y))</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="n">form</span> <span class="o">==</span> <span class="s1">&#39;cnf&#39;</span> <span class="ow">or</span> <span class="n">form</span> <span class="o">==</span> <span class="s1">&#39;dnf&#39;</span> <span class="ow">or</span> <span class="n">form</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -1683,6 +1718,7 @@
 <span class="sd">     (0, 0, 1, 2, 8): [y]}</span>
 
 <span class="sd">    So y and x have unique fingerprints, but a and b do not.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">f</span> <span class="o">=</span> <span class="n">eq</span><span class="o">.</span><span class="n">free_symbols</span>
     <span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="n">fi</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">5</span> <span class="k">for</span> <span class="n">fi</span> <span class="ow">in</span> <span class="n">f</span><span class="p">}</span>
@@ -1739,6 +1775,7 @@
 <span class="sd">    (And(Or(Not(a), Not(b)),</span>
 <span class="sd">     Or(a, b), c, d),</span>
 <span class="sd">     {a: a, b: b, c: d, d: x})</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">match</span><span class="p">(</span><span class="n">function1</span><span class="p">,</span> <span class="n">function2</span><span class="p">):</span>
@@ -1753,6 +1790,7 @@
 
 <span class="sd">        Basic.match is not robust enough (see issue sympy/sympy#4835) so this is</span>
 <span class="sd">        a workaround that is valid for simplified boolean expressions.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1"># do some quick checks</span>

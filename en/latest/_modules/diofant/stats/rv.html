@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.stats.rv &mdash; Diofant 0.10.0b2.dev55+g97f1e5f documentation</title>
+  <title>diofant.stats.rv &mdash; Diofant 0.10.0b2.dev59+g6273bb4 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev55+g97f1e5f
+                0.10.0b2.dev59+g6273bb4
               </div>
             
           
@@ -166,6 +166,7 @@
 <span class="sd">diofant.stats.crv</span>
 <span class="sd">diofant.stats.frv</span>
 <span class="sd">diofant.stats.rv_interface</span>
+
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">..abc</span> <span class="k">import</span> <span class="n">x</span>
@@ -187,6 +188,7 @@
 <span class="sd">    ========</span>
 <span class="sd">    diofant.stats.crv.ContinuousDomain</span>
 <span class="sd">    diofant.stats.frv.FiniteDomain</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">is_ProductDomain</span> <span class="o">=</span> <span class="kc">False</span>
@@ -217,6 +219,7 @@
 
 <span class="sd">    diofant.stats.crv.SingleContinuousDomain</span>
 <span class="sd">    diofant.stats.frv.SingleFiniteDomain</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">symbol</span><span class="p">,</span> <span class="nb">set</span><span class="p">):</span>
@@ -241,6 +244,7 @@
 
 <span class="sd">    diofant.stats.crv.ConditionalContinuousDomain</span>
 <span class="sd">    diofant.stats.frv.ConditionalFiniteDomain</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">fulldomain</span><span class="p">,</span> <span class="n">condition</span><span class="p">):</span>
@@ -277,6 +281,7 @@
 <span class="sd">    ========</span>
 <span class="sd">    diofant.stats.crv.ContinuousPSpace</span>
 <span class="sd">    diofant.stats.frv.FinitePSpace</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">is_Finite</span> <span class="o">=</span> <span class="kc">None</span>
@@ -310,6 +315,7 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Represents the probabilities of a set of random events that can be</span>
 <span class="sd">    attributed to a single variable/symbol.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">distribution</span><span class="p">):</span>
@@ -356,6 +362,7 @@
 <span class="sd">    user. They tend to be created instead by the PSpace class&#39;s value method.</span>
 <span class="sd">    Traditionally a user doesn&#39;t even do this but instead calls one of the</span>
 <span class="sd">    convenience functions Normal, Exponential, Coin, Die, FiniteRV, etc....</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">pspace</span><span class="p">,</span> <span class="n">symbol</span><span class="p">):</span>
@@ -401,6 +408,7 @@
 <span class="sd">    spaces.</span>
 
 <span class="sd">    Often created using the function, pspace</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">spaces</span><span class="p">):</span>
@@ -476,6 +484,7 @@
 
 <span class="sd">    diofant.stats.crv.ProductContinuousDomain</span>
 <span class="sd">    diofant.stats.frv.ProductFiniteDomain</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">is_ProductDomain</span> <span class="o">=</span> <span class="kc">True</span>
@@ -527,9 +536,7 @@
 
 
 <div class="viewcode-block" id="random_symbols"><a class="viewcode-back" href="../../../modules/stats.html#diofant.stats.random_symbols">[docs]</a><span class="k">def</span> <span class="nf">random_symbols</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Returns all RandomSymbols within a Diofant Expression.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Returns all RandomSymbols within a Diofant Expression.&quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">atoms</span><span class="p">(</span><span class="n">RandomSymbol</span><span class="p">))</span>
     <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
@@ -549,6 +556,7 @@
 <span class="sd">    &gt;&gt;&gt; X = Normal(&#39;X&#39;, 0, 1)</span>
 <span class="sd">    &gt;&gt;&gt; pspace(2*X + 1) == X.pspace</span>
 <span class="sd">    True</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">expr</span> <span class="o">=</span> <span class="n">sympify</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
@@ -563,9 +571,7 @@
 
 
 <span class="k">def</span> <span class="nf">sumsets</span><span class="p">(</span><span class="n">sets</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Union of sets</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Union of sets.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="nb">frozenset</span><span class="p">()</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="o">*</span><span class="n">sets</span><span class="p">)</span>
 
 
@@ -581,6 +587,7 @@
 
 <span class="sd">    Inputs: collections a and b of random variables which share common symbols</span>
 <span class="sd">    Output: dict mapping RVs in a to RVs in b</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">for</span> <span class="n">rsa</span> <span class="ow">in</span> <span class="n">a</span><span class="p">:</span>
@@ -619,6 +626,7 @@
 <span class="sd">    ------------------</span>
 <span class="sd">             ____</span>
 <span class="sd">         2*\/ pi</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">random_symbols</span><span class="p">(</span><span class="n">condition</span><span class="p">)</span> <span class="ow">or</span> <span class="n">pspace_independent</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">condition</span><span class="p">):</span>
@@ -676,6 +684,7 @@
 
 <span class="sd">    &gt;&gt;&gt; E(X, X &gt; 3) # Expectation of X given that it is above 3</span>
 <span class="sd">    5</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">random_symbols</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>  <span class="c1"># expr isn&#39;t random?</span>
@@ -730,6 +739,7 @@
 <span class="sd">    1/4</span>
 <span class="sd">    &gt;&gt;&gt; P(X &gt; Y)</span>
 <span class="sd">    5/12</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">condition</span> <span class="o">=</span> <span class="n">sympify</span><span class="p">(</span><span class="n">condition</span><span class="p">)</span>
@@ -830,6 +840,7 @@
 <span class="sd">    {2: 1/6, 4: 1/6, 6: 1/6, 8: 1/6, 10: 1/6, 12: 1/6}</span>
 <span class="sd">    &gt;&gt;&gt; density(X)(x)</span>
 <span class="sd">    sqrt(2)*E**(-x**2/2)/(2*sqrt(pi))</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="n">numsamples</span><span class="p">:</span>
@@ -869,6 +880,7 @@
 
 <span class="sd">    &gt;&gt;&gt; cdf(X)</span>
 <span class="sd">    Lambda(_z, erf(sqrt(2)*_z/2)/2 + 1/2)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">condition</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># If there is a condition</span>
         <span class="c1"># Recompute on new conditional expr</span>
@@ -904,6 +916,7 @@
 
 <span class="sd">    &gt;&gt;&gt; where(And(D1&lt;=D2 , D2&lt;3))</span>
 <span class="sd">    Domain: Or(And(Eq(a, 1), Eq(b, 1)), And(Eq(a, 1), Eq(b, 2)), And(Eq(a, 2), Eq(b, 2)))</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">given_condition</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># If there is a condition</span>
         <span class="c1"># Recompute on new conditional expr</span>
@@ -924,6 +937,7 @@
 <span class="sd">    &gt;&gt;&gt; X, Y, Z = Die(&#39;X&#39;, 6), Die(&#39;Y&#39;, 6), Die(&#39;Z&#39;, 6)</span>
 
 <span class="sd">    &gt;&gt;&gt; die_roll = sample(X + Y + Z) # A random realization of three dice</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="nb">next</span><span class="p">(</span><span class="n">sample_iter</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">condition</span><span class="p">,</span> <span class="n">numsamples</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span></div>
 
@@ -952,6 +966,7 @@
 <span class="sd">    diofant.stats.sample</span>
 <span class="sd">    diofant.stats.rv.sampling_P</span>
 <span class="sd">    diofant.stats.rv.sampling_E</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">condition</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">ps</span> <span class="o">=</span> <span class="n">pspace</span><span class="p">(</span><span class="n">Tuple</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">condition</span><span class="p">))</span>
@@ -1003,6 +1018,7 @@
 <span class="sd">    diofant.stats.P</span>
 <span class="sd">    diofant.stats.rv.sampling_E</span>
 <span class="sd">    diofant.stats.rv.sampling_density</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">count_true</span> <span class="o">=</span> <span class="mi">0</span>
@@ -1031,6 +1047,7 @@
 <span class="sd">    diofant.stats.P</span>
 <span class="sd">    diofant.stats.rv.sampling_P</span>
 <span class="sd">    diofant.stats.rv.sampling_density</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">samples</span> <span class="o">=</span> <span class="n">sample_iter</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">given_condition</span><span class="p">,</span>
@@ -1049,6 +1066,7 @@
 <span class="sd">    diofant.stats.density</span>
 <span class="sd">    diofant.stats.rv.sampling_P</span>
 <span class="sd">    diofant.stats.rv.sampling_E</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
@@ -1082,6 +1100,7 @@
 <span class="sd">    See Also</span>
 <span class="sd">    ========</span>
 <span class="sd">    diofant.stats.rv.independent</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">pspace_independent</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
         <span class="k">return</span> <span class="kc">False</span>
@@ -1117,6 +1136,7 @@
 <span class="sd">    See Also</span>
 <span class="sd">    ========</span>
 <span class="sd">    diofant.stats.rv.dependent</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="ow">not</span> <span class="n">dependent</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span></div>
 
@@ -1132,6 +1152,7 @@
 
 <span class="sd">    pspace_independent(a, b) implies independent(a, b)</span>
 <span class="sd">    independent(a, b) does not imply pspace_independent(a, b)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">a_symbols</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">pspace</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">symbols</span><span class="p">)</span>
     <span class="n">b_symbols</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">pspace</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">.</span><span class="n">symbols</span><span class="p">)</span>
@@ -1142,9 +1163,7 @@
 
 
 <span class="k">def</span> <span class="nf">rv_subs</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Given a random expression replace all random variables with their symbols.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Given a random expression replace all random variables with their symbols.&quot;&quot;&quot;</span>
     <span class="n">symbols</span> <span class="o">=</span> <span class="n">random_symbols</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">symbols</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">expr</span>
@@ -1168,6 +1187,7 @@
 <span class="sd">    Check a condition on input value.</span>
 
 <span class="sd">    Raises ValueError with message if condition is not True</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">condition</span> <span class="o">!=</span> <span class="n">S</span><span class="o">.</span><span class="n">true</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>

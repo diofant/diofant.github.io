@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.geometry.entity &mdash; Diofant 0.10.0b2.dev55+g97f1e5f documentation</title>
+  <title>diofant.geometry.entity &mdash; Diofant 0.10.0b2.dev59+g6273bb4 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev55+g97f1e5f
+                0.10.0b2.dev59+g6273bb4
               </div>
             
           
@@ -173,6 +173,7 @@
 
 <span class="sd">Rn is a GeometrySet representing n-dimensional Euclidean space. R2 and</span>
 <span class="sd">R3 are currently the only ambient spaces implemented.</span>
+
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">Basic</span><span class="p">,</span> <span class="n">Dummy</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">oo</span><span class="p">,</span> <span class="n">sympify</span>
@@ -215,6 +216,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        diofant.geometry.util.intersection</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div>
 
@@ -358,6 +360,7 @@
 <span class="sd">        True</span>
 <span class="sd">        &gt;&gt;&gt; t.encloses(t2)</span>
 <span class="sd">        False</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">.line</span> <span class="k">import</span> <span class="n">Segment</span><span class="p">,</span> <span class="n">Ray</span><span class="p">,</span> <span class="n">Line</span>
         <span class="kn">from</span> <span class="nn">.ellipse</span> <span class="k">import</span> <span class="n">Ellipse</span>
@@ -430,6 +433,7 @@
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;String representation of a GeometryEntity that can be evaluated</span>
 <span class="sd">        by diofant.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">+</span> <span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
 
@@ -453,7 +457,8 @@
 
 <span class="k">class</span> <span class="nc">GeometrySet</span><span class="p">(</span><span class="n">GeometryEntity</span><span class="p">,</span> <span class="n">Set</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Parent class of all GeometryEntity that are also Sets</span>
-<span class="sd">    (compatible with diofant.sets)</span>
+<span class="sd">    (compatible with diofant.sets).</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">_contains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
@@ -467,6 +472,7 @@
     <span class="k">def</span> <span class="nf">_union</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Returns the union of self and o</span>
 <span class="sd">        for use with diofant.sets.Set, if possible.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="kn">from</span> <span class="nn">..sets</span> <span class="k">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">FiniteSet</span>
@@ -482,8 +488,9 @@
             <span class="k">return</span> <span class="bp">self</span>
 
     <span class="k">def</span> <span class="nf">_intersection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Returns a diofant.sets.Set of intersection objects,</span>
+        <span class="sd">&quot;&quot;&quot;Returns a diofant.sets.Set of intersection objects,</span>
 <span class="sd">        if possible.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">.point</span> <span class="k">import</span> <span class="n">Point</span>
         <span class="kn">from</span> <span class="nn">..sets</span> <span class="k">import</span> <span class="n">FiniteSet</span><span class="p">,</span> <span class="n">Union</span>
@@ -514,6 +521,7 @@
     <span class="sd">&quot;&quot;&quot;Return the matrix to multiply a 2-D point&#39;s coordinates by x and y.</span>
 
 <span class="sd">    If pt is given, the scaling is done relative to that point.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">rv</span> <span class="o">=</span> <span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
     <span class="n">rv</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span>
@@ -539,6 +547,7 @@
 <span class="sd">    Point2D(1, 1)</span>
 <span class="sd">    &gt;&gt;&gt; Point(0, 0).transform(rot_about_11)</span>
 <span class="sd">    Point2D(2, 0)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">s</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">th</span><span class="p">)</span>
     <span class="n">rv</span> <span class="o">=</span> <span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">th</span><span class="p">)</span>

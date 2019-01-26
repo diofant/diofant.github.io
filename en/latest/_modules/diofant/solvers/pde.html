@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.solvers.pde &mdash; Diofant 0.10.0b2.dev55+g97f1e5f documentation</title>
+  <title>diofant.solvers.pde &mdash; Diofant 0.10.0b2.dev59+g6273bb4 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev55+g97f1e5f
+                0.10.0b2.dev59+g6273bb4
               </div>
             
           
@@ -306,6 +306,7 @@
 <span class="sd">    &gt;&gt;&gt; eq = Eq(1 + (2*(ux/u)) + (3*(uy/u)))</span>
 <span class="sd">    &gt;&gt;&gt; pdsolve(eq)</span>
 <span class="sd">    Eq(f(x, y), E**(-2*x/13 - 3*y/13)*F(3*x - 2*y))</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">solvefun</span><span class="p">:</span>
@@ -346,6 +347,7 @@
 <span class="sd">    pde functions to solve for the partial differential</span>
 <span class="sd">    equations. This minimises the computation in</span>
 <span class="sd">    calling _desolve multiple times.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="n">hint</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;_Integral&quot;</span><span class="p">):</span>
@@ -362,6 +364,7 @@
 <span class="sd">    Converts a solution with integrals in it into an actual solution.</span>
 
 <span class="sd">    Simplifies the integral mainly using doit()</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">hint</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;_Integral&quot;</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">expr</span>
@@ -406,6 +409,7 @@
 <span class="sd">    &gt;&gt;&gt; eq = Eq(1 + (2*(ux/u)) + (3*(uy/u)))</span>
 <span class="sd">    &gt;&gt;&gt; classify_pde(eq)</span>
 <span class="sd">    (&#39;1st_linear_constant_coeff_homogeneous&#39;,)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">prep</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;prep&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
@@ -558,6 +562,7 @@
 <span class="sd">    &gt;&gt;&gt; eq = x*f(x, y) + f(x, y).diff(x)</span>
 <span class="sd">    &gt;&gt;&gt; checkpdesol(eq, sol)</span>
 <span class="sd">    (False, E**(-6*x/25 - 8*y/25)*(x*F(4*x - 3*y) - 6*F(4*x - 3*y)/25 + 4*Subs(Derivative(F(_xi_1), _xi_1), (_xi_1, 4*x - 3*y))))</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Converting the pde into an equation</span>
@@ -868,6 +873,7 @@
 <span class="k">def</span> <span class="nf">_simplify_variable_coeff</span><span class="p">(</span><span class="n">sol</span><span class="p">,</span> <span class="n">syms</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">funcarg</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Helper function to replace constants by functions in 1st_linear_variable_coeff</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">eta</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s2">&quot;eta&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">syms</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
@@ -913,6 +919,7 @@
 
 <span class="sd">    diofant.solvers.pde.pde_separate_add</span>
 <span class="sd">    diofant.solvers.pde.pde_separate_mul</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">do_add</span> <span class="o">=</span> <span class="kc">False</span>
@@ -984,6 +991,7 @@
 <span class="sd">    &gt;&gt;&gt; eq = Eq(Derivative(u(x, t), x), E**(u(x, t))*Derivative(u(x, t), t))</span>
 <span class="sd">    &gt;&gt;&gt; pde_separate_add(eq, u(x, t), [X(x), T(t)])</span>
 <span class="sd">    [E**(-X(x))*Derivative(X(x), x), E**T(t)*Derivative(T(t), t)]</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">pde_separate</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">fun</span><span class="p">,</span> <span class="n">sep</span><span class="p">,</span> <span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;add&#39;</span><span class="p">)</span></div>
 

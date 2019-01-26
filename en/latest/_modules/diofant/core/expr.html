@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.core.expr &mdash; Diofant 0.10.0b2.dev55+g97f1e5f documentation</title>
+  <title>diofant.core.expr &mdash; Diofant 0.10.0b2.dev59+g6273bb4 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev55+g97f1e5f
+                0.10.0b2.dev59+g6273bb4
               </div>
             
           
@@ -182,6 +182,7 @@
 <span class="sd">    ========</span>
 
 <span class="sd">    diofant.core.basic.Basic</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
@@ -222,12 +223,13 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        diofant.core.function.Derivative</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="kc">False</span>
 
 <div class="viewcode-block" id="Expr.sort_key"><a class="viewcode-back" href="../../../modules/core.html#diofant.core.expr.Expr.sort_key">[docs]</a>    <span class="nd">@cacheit</span>
     <span class="k">def</span> <span class="nf">sort_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return a sort key. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Return a sort key.&quot;&quot;&quot;</span>
 
         <span class="n">coeff</span><span class="p">,</span> <span class="n">expr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">as_coeff_Mul</span><span class="p">()</span>
 
@@ -461,6 +463,7 @@
 <span class="sd">        False</span>
 <span class="sd">        &gt;&gt;&gt; (2 + Integral(2, (x, 1, 2))).is_number</span>
 <span class="sd">        True</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">is_number</span> <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
 
@@ -493,6 +496,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        diofant.utilities.randtest.random_complex_number</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">free</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">free_symbols</span>
@@ -588,6 +592,7 @@
 <span class="sd">        True</span>
 <span class="sd">        &gt;&gt;&gt; ((one - 1)**(x + 1)).is_constant() in (True, False) # could be 0 or 1</span>
 <span class="sd">        True</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">simplify</span> <span class="o">=</span> <span class="n">flags</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;simplify&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
@@ -688,6 +693,7 @@
 <span class="sd">        and the result has significance (i.e. the precision is either -1, for</span>
 <span class="sd">        a Rational result, or is greater than 1) then the evalf value will be</span>
 <span class="sd">        used to return True or False.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">other</span> <span class="o">=</span> <span class="n">sympify</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span> <span class="o">==</span> <span class="n">other</span><span class="p">:</span>
@@ -798,6 +804,7 @@
 
 <span class="sd">        If b or a is None, it only evaluates -self.subs({x: a}) or self.subs({b: x}),</span>
 <span class="sd">        respectively.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">..series</span> <span class="k">import</span> <span class="n">limit</span><span class="p">,</span> <span class="n">Limit</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">b</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
@@ -841,6 +848,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        diofant.functions.elementary.complexes.conjugate</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">..functions.elementary.complexes</span> <span class="k">import</span> <span class="n">conjugate</span> <span class="k">as</span> <span class="n">c</span>
         <span class="k">return</span> <span class="n">c</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
@@ -861,6 +869,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        diofant.functions.elementary.complexes.transpose</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">..functions.elementary.complexes</span> <span class="k">import</span> <span class="n">transpose</span>
         <span class="k">return</span> <span class="n">transpose</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
@@ -885,13 +894,14 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        diofant.functions.elementary.complexes.adjoint</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">..functions.elementary.complexes</span> <span class="k">import</span> <span class="n">adjoint</span>
         <span class="k">return</span> <span class="n">adjoint</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_parse_order</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Parse and configure the ordering of terms. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Parse and configure the ordering of terms.&quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">..polys.orderings</span> <span class="k">import</span> <span class="n">monomial_key</span>
 
         <span class="k">try</span><span class="p">:</span>
@@ -938,6 +948,7 @@
 
 <span class="sd">        &gt;&gt;&gt; (sin(x)**2*cos(x) + sin(x)**2 + 1).as_ordered_terms()</span>
 <span class="sd">        [sin(x)**2*cos(x), sin(x)**2, 1]</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">key</span><span class="p">,</span> <span class="n">reverse</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_order</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
         <span class="n">terms</span><span class="p">,</span> <span class="n">gens</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">as_terms</span><span class="p">()</span>
@@ -962,7 +973,7 @@
             <span class="k">return</span> <span class="p">[</span><span class="n">term</span> <span class="k">for</span> <span class="n">term</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">ordered</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="Expr.as_terms"><a class="viewcode-back" href="../../../modules/core.html#diofant.core.expr.Expr.as_terms">[docs]</a>    <span class="k">def</span> <span class="nf">as_terms</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Transform an expression to a list of terms. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Transform an expression to a list of terms.&quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">Add</span><span class="p">,</span> <span class="n">Mul</span><span class="p">,</span> <span class="n">S</span>
         <span class="kn">from</span> <span class="nn">.exprtools</span> <span class="k">import</span> <span class="n">decompose_power</span>
 
@@ -1016,7 +1027,7 @@
         <span class="k">return</span> <span class="n">result</span><span class="p">,</span> <span class="n">gens</span></div>
 
 <div class="viewcode-block" id="Expr.removeO"><a class="viewcode-back" href="../../../modules/core.html#diofant.core.expr.Expr.removeO">[docs]</a>    <span class="k">def</span> <span class="nf">removeO</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Removes the additive O(..) symbol if there is one&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Removes the additive O(..) symbol if there is one.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="Expr.getO"><a class="viewcode-back" href="../../../modules/core.html#diofant.core.expr.Expr.getO">[docs]</a>    <span class="k">def</span> <span class="nf">getO</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1035,6 +1046,7 @@
 <span class="sd">        &gt;&gt;&gt; (1 + x + O(x**2)).getn()</span>
 <span class="sd">        2</span>
 <span class="sd">        &gt;&gt;&gt; (1 + x).getn()</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">.symbol</span> <span class="k">import</span> <span class="n">Dummy</span><span class="p">,</span> <span class="n">Symbol</span>
         <span class="n">o</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getO</span><span class="p">()</span>
@@ -1096,6 +1108,7 @@
 <span class="sd">        [[], [x - 2 + A]]</span>
 <span class="sd">        &gt;&gt;&gt; (-oo).args_cnc() # -oo is a singleton</span>
 <span class="sd">        [[-1, oo], []]</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_Mul</span><span class="p">:</span>
@@ -1225,6 +1238,7 @@
 <span class="sd">        x</span>
 <span class="sd">        &gt;&gt;&gt; (n*m + x*m*n).coeff(m*n, right=1)</span>
 <span class="sd">        1</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">sympify</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="n">n</span> <span class="o">=</span> <span class="n">as_int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
@@ -1271,6 +1285,7 @@
 <span class="sd">            7</span>
 <span class="sd">            &gt;&gt; find(l, [2, 4])</span>
 <span class="sd">            None</span>
+
 <span class="sd">            &quot;&quot;&quot;</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">sub</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">l</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">sub</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
                 <span class="k">return</span>
@@ -1397,6 +1412,7 @@
 
 <span class="sd">        &gt;&gt;&gt; sin(x).as_expr()</span>
 <span class="sd">        sin(x)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span></div>
 
@@ -1414,6 +1430,7 @@
 
 <span class="sd">        &gt;&gt;&gt; (x**2 + sin(y)).as_poly(x, y) is None</span>
 <span class="sd">        True</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">..polys</span> <span class="k">import</span> <span class="n">Poly</span><span class="p">,</span> <span class="n">PolynomialError</span>
 
@@ -1476,6 +1493,7 @@
 <span class="sd">        as_coeff_Mul: separate the multiplicative constant from an expression</span>
 <span class="sd">        as_independent: separate x-dependent terms/factors from others</span>
 <span class="sd">        diofant.polys.polytools.Poly.coeff_monomial: efficiently find the single coefficient of a monomial in Poly</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_multiplicatively</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
@@ -1607,6 +1625,7 @@
 <span class="sd">        diofant.core.mul.Mul.as_two_terms</span>
 <span class="sd">        as_coeff_add</span>
 <span class="sd">        as_coeff_mul</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">.symbol</span> <span class="k">import</span> <span class="n">Dummy</span><span class="p">,</span> <span class="n">Symbol</span>
         <span class="kn">from</span> <span class="nn">..utilities.iterables</span> <span class="k">import</span> <span class="n">sift</span>
@@ -1625,6 +1644,7 @@
         <span class="k">def</span> <span class="nf">has</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
             <span class="sd">&quot;&quot;&quot;return the standard has() if there are no literal symbols, else</span>
 <span class="sd">            check to see that symbol-deps are in the free symbols.</span>
+
 <span class="sd">            &quot;&quot;&quot;</span>
             <span class="n">has_other</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="o">*</span><span class="n">other</span><span class="p">)</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">sym</span><span class="p">:</span>
@@ -1677,6 +1697,7 @@
 
 <span class="sd">        &gt;&gt;&gt; (z + t*I).as_real_imag()</span>
 <span class="sd">        (re(z) - im(t), re(t) + im(z))</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">..functions</span> <span class="k">import</span> <span class="n">im</span><span class="p">,</span> <span class="n">re</span>
         <span class="k">if</span> <span class="n">hints</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="p">:</span>
@@ -1691,6 +1712,7 @@
 <span class="sd">        be used with caution if the expression is a Mul and contains non-</span>
 <span class="sd">        commutative factors since the order that they appeared will be lost in</span>
 <span class="sd">        the dictionary.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">d</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
         <span class="n">b</span><span class="p">,</span> <span class="n">e</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">as_base_exp</span><span class="p">()</span>
@@ -1712,6 +1734,7 @@
 <span class="sd">        0</span>
 <span class="sd">        &gt;&gt;&gt; (3*a*x).as_coefficients_dict()</span>
 <span class="sd">        {a*x: 3}</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">c</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">as_coeff_Mul</span><span class="p">()</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">c</span><span class="o">.</span><span class="n">is_Rational</span><span class="p">:</span>
@@ -1728,6 +1751,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        diofant.core.power.Pow.as_base_exp</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span></div>
 
@@ -1758,6 +1782,7 @@
 <span class="sd">        (3*y, (x,))</span>
 <span class="sd">        &gt;&gt;&gt; (3*y).as_coeff_mul(x)</span>
 <span class="sd">        (3*y, ())</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">deps</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="o">*</span><span class="n">deps</span><span class="p">):</span>
@@ -1791,6 +1816,7 @@
 <span class="sd">        (y + 3, (x,))</span>
 <span class="sd">        &gt;&gt;&gt; (3 + y).as_coeff_add(x)</span>
 <span class="sd">        (y + 3, ())</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">deps</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="o">*</span><span class="n">deps</span><span class="p">):</span>
@@ -1814,6 +1840,7 @@
 <span class="sd">        (1/2, x + 6)</span>
 <span class="sd">        &gt;&gt;&gt; (a*b).primitive()</span>
 <span class="sd">        (1, (x/2 + 3)*(6*x + 2))</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
@@ -1864,6 +1891,7 @@
 
 <span class="sd">        &gt;&gt;&gt; (2*sqrt(2) + 4*sqrt(10)).as_content_primitive(radical=True)</span>
 <span class="sd">        (2, sqrt(2)*(1 + 2*sqrt(5)))</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">,</span> <span class="bp">self</span></div>
 
@@ -1877,6 +1905,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        normal: return a/b instead of a, b</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">try</span><span class="p">:</span>
@@ -1885,7 +1914,7 @@
             <span class="k">return</span> <span class="bp">self</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span></div>
 
 <div class="viewcode-block" id="Expr.normal"><a class="viewcode-back" href="../../../modules/core.html#diofant.core.expr.Expr.normal">[docs]</a>    <span class="k">def</span> <span class="nf">normal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;canonicalize ratio, i.e. return numerator if denominator is 1&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;canonicalize ratio, i.e. return numerator if denominator is 1.&quot;&quot;&quot;</span>
         <span class="n">n</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">as_numer_denom</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">d</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">n</span>
@@ -1910,6 +1939,7 @@
 
 <span class="sd">        &gt;&gt;&gt; (Rational(1, 2)*x).extract_multiplicatively(3)</span>
 <span class="sd">        x/6</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">c</span> <span class="o">=</span> <span class="n">sympify</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span> <span class="ow">is</span> <span class="n">nan</span><span class="p">:</span>
@@ -2019,6 +2049,7 @@
 <span class="sd">        extract_multiplicatively</span>
 <span class="sd">        coeff</span>
 <span class="sd">        as_coefficient</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">c</span> <span class="o">=</span> <span class="n">sympify</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
@@ -2103,6 +2134,7 @@
 
 <span class="sd">        &gt;&gt;&gt; (x-y).could_extract_minus_sign() != (y-x).could_extract_minus_sign()</span>
 <span class="sd">        True</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">negative_self</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span>
         <span class="n">self_has_minus</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">extract_multiplicatively</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span>
@@ -2158,6 +2190,7 @@
 <span class="sd">        (1, 3/2)</span>
 <span class="sd">        &gt;&gt;&gt; exp_polar(-I*pi).extract_branch_factor(allow_half=True)</span>
 <span class="sd">        (1, -1/2)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">.add</span> <span class="k">import</span> <span class="n">Add</span>
         <span class="kn">from</span> <span class="nn">.numbers</span> <span class="k">import</span> <span class="n">pi</span><span class="p">,</span> <span class="n">I</span>
@@ -2262,6 +2295,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        is_rational_function</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">syms</span><span class="p">:</span>
             <span class="n">syms</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">sympify</span><span class="p">,</span> <span class="n">syms</span><span class="p">))</span>
@@ -2326,6 +2360,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        is_algebraic_expr</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span> <span class="ow">in</span> <span class="p">[</span><span class="n">nan</span><span class="p">,</span> <span class="n">oo</span><span class="p">,</span> <span class="o">-</span><span class="n">oo</span><span class="p">,</span> <span class="n">zoo</span><span class="p">]:</span>
             <span class="k">return</span> <span class="kc">False</span>
@@ -2384,6 +2419,7 @@
 <span class="sd">        ==========</span>
 
 <span class="sd">        * https//en.wikipedia.org/wiki/Algebraic_expression</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">syms</span><span class="p">:</span>
             <span class="n">syms</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">sympify</span><span class="p">,</span> <span class="n">syms</span><span class="p">))</span>
@@ -2403,6 +2439,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        diofant.simplify.simplify.hypersimp</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">..simplify</span> <span class="k">import</span> <span class="n">hypersimp</span>
         <span class="k">return</span> <span class="n">hypersimp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span></div>
@@ -2419,6 +2456,7 @@
 <span class="sd">        True</span>
 <span class="sd">        &gt;&gt;&gt; (I*exp_polar(I*pi*2)).is_comparable</span>
 <span class="sd">        False</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">is_real</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_extended_real</span>
         <span class="k">if</span> <span class="n">is_real</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
@@ -2481,6 +2519,7 @@
 
 <span class="sd">        &gt;&gt;&gt; (1/x).series(x, n=8)</span>
 <span class="sd">        1/x</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">.symbol</span> <span class="k">import</span> <span class="n">Dummy</span><span class="p">,</span> <span class="n">Symbol</span>
         <span class="kn">from</span> <span class="nn">..series</span> <span class="k">import</span> <span class="n">Order</span>
@@ -2596,6 +2635,7 @@
 
 <span class="sd">        This method is slow, because it differentiates n-times. Subclasses can</span>
 <span class="sd">        redefine it to make it faster by using the &quot;previous_terms&quot;.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">.symbol</span> <span class="k">import</span> <span class="n">Dummy</span>
         <span class="kn">from</span> <span class="nn">..functions</span> <span class="k">import</span> <span class="n">factorial</span>
@@ -2622,6 +2662,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        nseries</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">series</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="nb">dir</span><span class="p">,</span> <span class="n">logx</span><span class="o">=</span><span class="n">logx</span><span class="p">)</span></div>
 
@@ -2722,6 +2763,7 @@
 <span class="sd">        only numbers, the function log, and log(x).  (This also means it</span>
 <span class="sd">        must not contain log(x(1 + p)), this *has* to be expanded to</span>
 <span class="sd">        log(x) + log(1 + p) if p.is_positive.)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">.symbol</span> <span class="k">import</span> <span class="n">Dummy</span>
         <span class="kn">from</span> <span class="nn">..simplify</span> <span class="k">import</span> <span class="n">collect</span>
@@ -2780,6 +2822,7 @@
 <span class="sd">        ==========</span>
 
 <span class="sd">        * https//en.wikipedia.org/wiki/Asymptotic_expansion</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">Dummy</span>
         <span class="kn">from</span> <span class="nn">..series.gruntz</span> <span class="k">import</span> <span class="n">mrv</span><span class="p">,</span> <span class="n">rewrite</span>
@@ -2838,14 +2881,14 @@
             <span class="k">return</span> <span class="p">(</span><span class="n">s</span> <span class="o">+</span> <span class="n">o</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">d</span><span class="p">:</span> <span class="n">exp</span><span class="p">(</span><span class="n">logw</span><span class="p">)})</span></div>
 
 <div class="viewcode-block" id="Expr.limit"><a class="viewcode-back" href="../../../modules/core.html#diofant.core.expr.Expr.limit">[docs]</a>    <span class="k">def</span> <span class="nf">limit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">xlim</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Compute limit x-&gt;xlim.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Compute limit x-&gt;xlim.&quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">..series.limits</span> <span class="k">import</span> <span class="n">limit</span>
         <span class="k">return</span> <span class="n">limit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">xlim</span><span class="p">,</span> <span class="nb">dir</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Expr.compute_leading_term"><a class="viewcode-back" href="../../../modules/core.html#diofant.core.expr.Expr.compute_leading_term">[docs]</a>    <span class="k">def</span> <span class="nf">compute_leading_term</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">logx</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;as_leading_term is only allowed for results of .series()</span>
 <span class="sd">        This is a wrapper to compute a series first.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">.symbol</span> <span class="k">import</span> <span class="n">Dummy</span>
         <span class="kn">from</span> <span class="nn">..functions</span> <span class="k">import</span> <span class="n">log</span>
@@ -2882,6 +2925,7 @@
 <span class="sd">        1</span>
 <span class="sd">        &gt;&gt;&gt; (1/x**2 + x + x**2).as_leading_term(x)</span>
 <span class="sd">        x**(-2)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">..simplify</span> <span class="k">import</span> <span class="n">powsimp</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">symbols</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
@@ -2939,6 +2983,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Lambda(x, 2*x).canonical_variables</span>
 <span class="sd">        {x: 0_}</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">Symbol</span>
         <span class="k">try</span><span class="p">:</span>
@@ -2956,7 +3001,7 @@
     <span class="c1">###################################################################################</span>
 
 <div class="viewcode-block" id="Expr.diff"><a class="viewcode-back" href="../../../modules/core.html#diofant.core.expr.Expr.diff">[docs]</a>    <span class="k">def</span> <span class="nf">diff</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">symbols</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Alias for :func:`~diofant.core.function.diff`. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Alias for :func:`~diofant.core.function.diff`.&quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">.function</span> <span class="k">import</span> <span class="n">diff</span>
         <span class="k">return</span> <span class="n">diff</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">symbols</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
@@ -2978,6 +3023,7 @@
 <span class="sd">        Returns ``(expr, hit)``, where expr is the (possibly) expanded</span>
 <span class="sd">        ``expr`` and ``hit`` is ``True`` if ``expr`` was truly expanded and</span>
 <span class="sd">        ``False`` otherwise.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">hit</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="c1"># XXX: Hack to support non-Basic args</span>
@@ -3009,6 +3055,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        diofant.core.function.expand</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">..simplify.radsimp</span> <span class="k">import</span> <span class="n">fraction</span>
 
@@ -3044,7 +3091,7 @@
         <span class="c1"># TODO: Smarter heuristics</span>
 
         <span class="k">def</span> <span class="nf">_expand_hint_key</span><span class="p">(</span><span class="n">hint</span><span class="p">):</span>
-            <span class="sd">&quot;&quot;&quot;Make multinomial come before mul&quot;&quot;&quot;</span>
+            <span class="sd">&quot;&quot;&quot;Make multinomial come before mul.&quot;&quot;&quot;</span>
             <span class="k">if</span> <span class="n">hint</span> <span class="o">==</span> <span class="s1">&#39;mul&#39;</span><span class="p">:</span>
                 <span class="k">return</span> <span class="s1">&#39;mulz&#39;</span>
             <span class="k">return</span> <span class="n">hint</span>
@@ -3095,69 +3142,69 @@
     <span class="c1">###########################################################################</span>
 
 <div class="viewcode-block" id="Expr.integrate"><a class="viewcode-back" href="../../../modules/core.html#diofant.core.expr.Expr.integrate">[docs]</a>    <span class="k">def</span> <span class="nf">integrate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;See the integrate function in diofant.integrals&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;See the integrate function in diofant.integrals.&quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">..integrals</span> <span class="k">import</span> <span class="n">integrate</span>
         <span class="k">return</span> <span class="n">integrate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Expr.simplify"><a class="viewcode-back" href="../../../modules/core.html#diofant.core.expr.Expr.simplify">[docs]</a>    <span class="k">def</span> <span class="nf">simplify</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ratio</span><span class="o">=</span><span class="mf">1.7</span><span class="p">,</span> <span class="n">measure</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;See the simplify function in diofant.simplify&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;See the simplify function in diofant.simplify.&quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">..simplify</span> <span class="k">import</span> <span class="n">simplify</span>
         <span class="kn">from</span> <span class="nn">.function</span> <span class="k">import</span> <span class="n">count_ops</span>
         <span class="n">measure</span> <span class="o">=</span> <span class="n">measure</span> <span class="ow">or</span> <span class="n">count_ops</span>
         <span class="k">return</span> <span class="n">simplify</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ratio</span><span class="p">,</span> <span class="n">measure</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Expr.nsimplify"><a class="viewcode-back" href="../../../modules/core.html#diofant.core.expr.Expr.nsimplify">[docs]</a>    <span class="k">def</span> <span class="nf">nsimplify</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">constants</span><span class="o">=</span><span class="p">[],</span> <span class="n">tolerance</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">full</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;See the nsimplify function in diofant.simplify&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;See the nsimplify function in diofant.simplify.&quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">..simplify</span> <span class="k">import</span> <span class="n">nsimplify</span>
         <span class="k">return</span> <span class="n">nsimplify</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">constants</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">,</span> <span class="n">full</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Expr.collect"><a class="viewcode-back" href="../../../modules/core.html#diofant.core.expr.Expr.collect">[docs]</a>    <span class="k">def</span> <span class="nf">collect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">syms</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exact</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">distribute_order_term</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;See the collect function in diofant.simplify&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;See the collect function in diofant.simplify.&quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">..simplify</span> <span class="k">import</span> <span class="n">collect</span>
         <span class="k">return</span> <span class="n">collect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">syms</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">evaluate</span><span class="p">,</span> <span class="n">exact</span><span class="p">,</span> <span class="n">distribute_order_term</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Expr.together"><a class="viewcode-back" href="../../../modules/core.html#diofant.core.expr.Expr.together">[docs]</a>    <span class="k">def</span> <span class="nf">together</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;See the together function in diofant.polys&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;See the together function in diofant.polys.&quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">..polys</span> <span class="k">import</span> <span class="n">together</span>
         <span class="k">return</span> <span class="n">together</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Expr.apart"><a class="viewcode-back" href="../../../modules/core.html#diofant.core.expr.Expr.apart">[docs]</a>    <span class="k">def</span> <span class="nf">apart</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;See the apart function in diofant.polys&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;See the apart function in diofant.polys.&quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">..polys</span> <span class="k">import</span> <span class="n">apart</span>
         <span class="k">return</span> <span class="n">apart</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Expr.ratsimp"><a class="viewcode-back" href="../../../modules/core.html#diofant.core.expr.Expr.ratsimp">[docs]</a>    <span class="k">def</span> <span class="nf">ratsimp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;See the ratsimp function in diofant.simplify&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;See the ratsimp function in diofant.simplify.&quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">..simplify</span> <span class="k">import</span> <span class="n">ratsimp</span>
         <span class="k">return</span> <span class="n">ratsimp</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Expr.trigsimp"><a class="viewcode-back" href="../../../modules/core.html#diofant.core.expr.Expr.trigsimp">[docs]</a>    <span class="k">def</span> <span class="nf">trigsimp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;See the trigsimp function in diofant.simplify&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;See the trigsimp function in diofant.simplify.&quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">..simplify</span> <span class="k">import</span> <span class="n">trigsimp</span>
         <span class="k">return</span> <span class="n">trigsimp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Expr.radsimp"><a class="viewcode-back" href="../../../modules/core.html#diofant.core.expr.Expr.radsimp">[docs]</a>    <span class="k">def</span> <span class="nf">radsimp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;See the radsimp function in diofant.simplify&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;See the radsimp function in diofant.simplify.&quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">..simplify</span> <span class="k">import</span> <span class="n">radsimp</span>
         <span class="k">return</span> <span class="n">radsimp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Expr.powsimp"><a class="viewcode-back" href="../../../modules/core.html#diofant.core.expr.Expr.powsimp">[docs]</a>    <span class="k">def</span> <span class="nf">powsimp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;See the powsimp function in diofant.simplify&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;See the powsimp function in diofant.simplify.&quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">..simplify</span> <span class="k">import</span> <span class="n">powsimp</span>
         <span class="k">return</span> <span class="n">powsimp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Expr.combsimp"><a class="viewcode-back" href="../../../modules/core.html#diofant.core.expr.Expr.combsimp">[docs]</a>    <span class="k">def</span> <span class="nf">combsimp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;See the combsimp function in diofant.simplify&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;See the combsimp function in diofant.simplify.&quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">..simplify</span> <span class="k">import</span> <span class="n">combsimp</span>
         <span class="k">return</span> <span class="n">combsimp</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Expr.factor"><a class="viewcode-back" href="../../../modules/core.html#diofant.core.expr.Expr.factor">[docs]</a>    <span class="k">def</span> <span class="nf">factor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">gens</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;See the factor() function in diofant.polys.polytools&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;See the factor() function in diofant.polys.polytools.&quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">..polys</span> <span class="k">import</span> <span class="n">factor</span>
         <span class="k">return</span> <span class="n">factor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">gens</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Expr.cancel"><a class="viewcode-back" href="../../../modules/core.html#diofant.core.expr.Expr.cancel">[docs]</a>    <span class="k">def</span> <span class="nf">cancel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">gens</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;See the cancel function in diofant.polys&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;See the cancel function in diofant.polys.&quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">..polys</span> <span class="k">import</span> <span class="n">cancel</span>
         <span class="k">return</span> <span class="n">cancel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">gens</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">)</span></div>
 
@@ -3170,6 +3217,7 @@
 
 <span class="sd">        diofant.core.numbers.mod_inverse</span>
 <span class="sd">        diofant.polys.polytools.invert</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">..polys.polytools</span> <span class="k">import</span> <span class="n">invert</span>
         <span class="kn">from</span> <span class="nn">.numbers</span> <span class="k">import</span> <span class="n">mod_inverse</span>
@@ -3220,6 +3268,7 @@
 <span class="sd">        True</span>
 <span class="sd">        &gt;&gt;&gt; isinstance((1 + 3*I).round(), Add)</span>
 <span class="sd">        True</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">.numbers</span> <span class="k">import</span> <span class="n">Float</span>
         <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span>
@@ -3271,6 +3320,7 @@
 
 <span class="sd">    For example: Symbol, Number, Rational, Integer, ...</span>
 <span class="sd">    But not: Add, Mul, Pow, ...</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">is_number</span> <span class="o">=</span> <span class="kc">False</span>
@@ -3306,6 +3356,7 @@
 <span class="sd">    -1</span>
 <span class="sd">    &gt;&gt;&gt; _mag(Float(1234))</span>
 <span class="sd">    4</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">log10</span><span class="p">,</span> <span class="n">ceil</span><span class="p">,</span> <span class="n">log</span>
     <span class="kn">from</span> <span class="nn">.numbers</span> <span class="k">import</span> <span class="n">Float</span>

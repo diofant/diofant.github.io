@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.core.add &mdash; Diofant 0.10.0b2.dev55+g97f1e5f documentation</title>
+  <title>diofant.core.add &mdash; Diofant 0.10.0b2.dev59+g6273bb4 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev55+g97f1e5f
+                0.10.0b2.dev59+g6273bb4
               </div>
             
           
@@ -370,7 +370,7 @@
 
 <div class="viewcode-block" id="Add.class_key"><a class="viewcode-back" href="../../../modules/core.html#diofant.core.add.Add.class_key">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">class_key</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Nice order of classes&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Nice order of classes.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span></div>
 
 <div class="viewcode-block" id="Add.as_coefficients_dict"><a class="viewcode-back" href="../../../modules/core.html#diofant.core.add.Add.as_coefficients_dict">[docs]</a>    <span class="k">def</span> <span class="nf">as_coefficients_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -389,6 +389,7 @@
 <span class="sd">        0</span>
 <span class="sd">        &gt;&gt;&gt; (3*y*x).as_coefficients_dict()</span>
 <span class="sd">        {x*y: 3}</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">d</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
@@ -417,6 +418,7 @@
 <span class="sd">        (7, (3*x,))</span>
 <span class="sd">        &gt;&gt;&gt; (7*x).as_coeff_add()</span>
 <span class="sd">        (0, (7*x,))</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">deps</span><span class="p">:</span>
             <span class="n">l1</span> <span class="o">=</span> <span class="p">[]</span>
@@ -433,7 +435,7 @@
         <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span></div>
 
 <div class="viewcode-block" id="Add.as_coeff_Add"><a class="viewcode-back" href="../../../modules/core.html#diofant.core.add.Add.as_coeff_Add">[docs]</a>    <span class="k">def</span> <span class="nf">as_coeff_Add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rational</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Efficiently extract the coefficient of a summation. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Efficiently extract the coefficient of a summation.&quot;&quot;&quot;</span>
         <span class="n">coeff</span><span class="p">,</span> <span class="n">args</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
 
         <span class="k">if</span> <span class="n">coeff</span><span class="o">.</span><span class="n">is_Number</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">rational</span> <span class="ow">or</span> <span class="n">coeff</span><span class="o">.</span><span class="n">is_Rational</span><span class="p">:</span>
@@ -466,6 +468,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        diofant.core.basic.Basic.matches</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">AssocOp</span><span class="o">.</span><span class="n">_matches_commutative</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="n">repl_dict</span><span class="p">)</span>
 
@@ -474,6 +477,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns lhs - rhs, but treats arguments like symbols, so things like</span>
 <span class="sd">        oo - oo return 0, instead of a nan.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">oo</span><span class="p">,</span> <span class="n">I</span>
         <span class="kn">from</span> <span class="nn">..simplify</span> <span class="k">import</span> <span class="n">signsimp</span>
@@ -497,6 +501,7 @@
 
 <span class="sd">        &gt;&gt;&gt; (3*x*y).as_two_terms()</span>
 <span class="sd">        (3, x*y)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_new_rawargs</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span></div>
 
@@ -507,6 +512,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        diofant.core.expr.Expr.as_numer_denom</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">.mul</span> <span class="k">import</span> <span class="n">Mul</span><span class="p">,</span> <span class="n">_keep_coeff</span>
 
@@ -705,6 +711,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        diofant.core.expr.Expr.removeO</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">a</span><span class="o">.</span><span class="n">is_Order</span><span class="p">]</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_new_rawargs</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span></div>
@@ -716,6 +723,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        diofant.core.expr.Expr.getO</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span> <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">is_Order</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">args</span><span class="p">:</span>
@@ -734,6 +742,7 @@
 <span class="sd">        ((1, O(1)),)</span>
 <span class="sd">        &gt;&gt;&gt; (x + x**2).extract_leading_order(x)</span>
 <span class="sd">        ((x, O(x)),)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">..series</span> <span class="k">import</span> <span class="n">Order</span>
         <span class="n">lst</span> <span class="o">=</span> <span class="p">[]</span>
@@ -768,6 +777,7 @@
 <span class="sd">        (0, 1)</span>
 <span class="sd">        &gt;&gt;&gt; ((1 + 2*I)*(1 + 3*I)).as_real_imag()</span>
 <span class="sd">        (-5, 5)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">sargs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span>
         <span class="n">re_part</span><span class="p">,</span> <span class="n">im_part</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
@@ -844,6 +854,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        diofant.polys.polytools.primitive</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">.mul</span> <span class="k">import</span> <span class="n">_keep_coeff</span>
         <span class="kn">from</span> <span class="nn">.numbers</span> <span class="k">import</span> <span class="n">Rational</span>
@@ -907,6 +918,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        diofant.core.expr.Expr.as_content_primitive</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">.mul</span> <span class="k">import</span> <span class="n">Mul</span><span class="p">,</span> <span class="n">_keep_coeff</span><span class="p">,</span> <span class="n">prod</span>
         <span class="kn">from</span> <span class="nn">..functions</span> <span class="k">import</span> <span class="n">root</span>

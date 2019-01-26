@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.numberfields &mdash; Diofant 0.10.0b2.dev55+g97f1e5f documentation</title>
+  <title>diofant.polys.numberfields &mdash; Diofant 0.10.0b2.dev59+g6273bb4 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev55+g97f1e5f
+                0.10.0b2.dev59+g6273bb4
               </div>
             
           
@@ -190,6 +190,7 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return a factor having root ``v``</span>
 <span class="sd">    It is assumed that one of the factors has root ``v``.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">factors</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">tuple</span><span class="p">):</span>
         <span class="n">factors</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">factors</span><span class="p">]</span>
@@ -304,6 +305,7 @@
 <span class="sd">    &gt;&gt;&gt; q = 1 + sqrt(2) + sqrt(3)</span>
 <span class="sd">    &gt;&gt;&gt; _minimal_polynomial_sq(q, 3, x)</span>
 <span class="sd">    x**12 - 4*x**9 - 4*x**6 + 16*x**3 - 8</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">p</span> <span class="o">=</span> <span class="n">sympify</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
     <span class="n">n</span> <span class="o">=</span> <span class="n">sympify</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
@@ -357,6 +359,7 @@
 <span class="sd">    * https//en.wikipedia.org/wiki/Resultant</span>
 <span class="sd">    * I.M. Isaacs, Proc. Amer. Math. Soc. 25 (1970), 638</span>
 <span class="sd">      &quot;Degrees of sums in a separable field extension&quot;.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">y</span> <span class="o">=</span> <span class="n">Dummy</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
     <span class="k">if</span> <span class="n">mp1</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -402,9 +405,7 @@
 
 
 <span class="k">def</span> <span class="nf">_invertx</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Returns ``expand_mul(x**degree(p, x)*p.subs({x: 1/x}))``</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Returns ``expand_mul(x**degree(p, x)*p.subs({x: 1/x}))``.&quot;&quot;&quot;</span>
     <span class="n">p1</span> <span class="o">=</span> <span class="n">poly_from_expr</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">x</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 
     <span class="n">n</span> <span class="o">=</span> <span class="n">degree</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span>
@@ -413,9 +414,7 @@
 
 
 <span class="k">def</span> <span class="nf">_muly</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Returns ``_mexpand(y**deg*p.subs({x:x / y}))``</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Returns ``_mexpand(y**deg*p.subs({x:x / y}))``.&quot;&quot;&quot;</span>
     <span class="n">p1</span> <span class="o">=</span> <span class="n">poly_from_expr</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">x</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 
     <span class="n">n</span> <span class="o">=</span> <span class="n">degree</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span>
@@ -447,6 +446,7 @@
 <span class="sd">    x**3 - y</span>
 <span class="sd">    &gt;&gt;&gt; minimal_polynomial(cbrt(y))(x)</span>
 <span class="sd">    x**3 - y</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">pw</span> <span class="o">=</span> <span class="n">sympify</span><span class="p">(</span><span class="n">pw</span><span class="p">)</span>
     <span class="n">mp</span> <span class="o">=</span> <span class="n">_minpoly_compose</span><span class="p">(</span><span class="n">ex</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">dom</span><span class="p">)</span>
@@ -471,9 +471,7 @@
 
 
 <span class="k">def</span> <span class="nf">_minpoly_add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dom</span><span class="p">,</span> <span class="o">*</span><span class="n">a</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    returns ``minimal_polynomial(Add(*a), dom)``</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Returns ``minimal_polynomial(Add(*a), dom)``.&quot;&quot;&quot;</span>
     <span class="n">mp</span> <span class="o">=</span> <span class="n">_minpoly_op_algebraic_element</span><span class="p">(</span><span class="n">Add</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">x</span><span class="p">,</span> <span class="n">dom</span><span class="p">)</span>
     <span class="n">p</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
     <span class="k">for</span> <span class="n">px</span> <span class="ow">in</span> <span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">:]:</span>
@@ -483,9 +481,7 @@
 
 
 <span class="k">def</span> <span class="nf">_minpoly_mul</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dom</span><span class="p">,</span> <span class="o">*</span><span class="n">a</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    returns ``minimal_polynomial(Mul(*a), dom)``</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Returns ``minimal_polynomial(Mul(*a), dom)``.&quot;&quot;&quot;</span>
     <span class="n">mp</span> <span class="o">=</span> <span class="n">_minpoly_op_algebraic_element</span><span class="p">(</span><span class="n">Mul</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">x</span><span class="p">,</span> <span class="n">dom</span><span class="p">)</span>
     <span class="n">p</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
     <span class="k">for</span> <span class="n">px</span> <span class="ow">in</span> <span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">:]:</span>
@@ -498,6 +494,7 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns the minimal polynomial of ``sin(ex)``</span>
 <span class="sd">    see http://mathworld.wolfram.com/TrigonometryAngles.html</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">c</span><span class="p">,</span> <span class="n">a</span> <span class="o">=</span> <span class="n">ex</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">as_coeff_Mul</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">a</span> <span class="ow">is</span> <span class="n">pi</span><span class="p">:</span>
@@ -534,6 +531,7 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns the minimal polynomial of ``cos(ex)``</span>
 <span class="sd">    see http://mathworld.wolfram.com/TrigonometryAngles.html</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">c</span><span class="p">,</span> <span class="n">a</span> <span class="o">=</span> <span class="n">ex</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">as_coeff_Mul</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">a</span> <span class="ow">is</span> <span class="n">pi</span><span class="p">:</span>
@@ -560,9 +558,7 @@
 
 
 <span class="k">def</span> <span class="nf">_minpoly_exp</span><span class="p">(</span><span class="n">ex</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Returns the minimal polynomial of ``exp(ex)``</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Returns the minimal polynomial of ``exp(ex)``.&quot;&quot;&quot;</span>
     <span class="n">c</span><span class="p">,</span> <span class="n">a</span> <span class="o">=</span> <span class="n">ex</span><span class="o">.</span><span class="n">exp</span><span class="o">.</span><span class="n">as_coeff_Mul</span><span class="p">()</span>
     <span class="n">q</span> <span class="o">=</span> <span class="n">sympify</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">denominator</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="n">I</span><span class="o">*</span><span class="n">pi</span><span class="p">:</span>
@@ -592,9 +588,7 @@
 
 
 <span class="k">def</span> <span class="nf">_minpoly_rootof</span><span class="p">(</span><span class="n">ex</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Returns the minimal polynomial of a ``RootOf`` object.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Returns the minimal polynomial of a ``RootOf`` object.&quot;&quot;&quot;</span>
     <span class="n">p</span> <span class="o">=</span> <span class="n">ex</span><span class="o">.</span><span class="n">expr</span>
     <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">ex</span><span class="o">.</span><span class="n">poly</span><span class="o">.</span><span class="n">gens</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="n">x</span><span class="p">})</span>
     <span class="n">_</span><span class="p">,</span> <span class="n">factors</span> <span class="o">=</span> <span class="n">factor_list</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
@@ -713,6 +707,7 @@
 <span class="sd">    x**3 + x + 3</span>
 <span class="sd">    &gt;&gt;&gt; minimal_polynomial(sqrt(y))(x)</span>
 <span class="sd">    x**2 - y</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="n">method</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -756,6 +751,7 @@
 <span class="sd">    ==========</span>
 
 <span class="sd">    * [Adams94]_</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">generator</span> <span class="o">=</span> <span class="n">numbered_symbols</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">Dummy</span><span class="p">)</span>
@@ -829,6 +825,7 @@
 
 <span class="sd">    * [Yokoyama89]_</span>
 <span class="sd">    * [Arno96]_</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">extension</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;can&#39;t compute primitive element for empty extension&quot;</span><span class="p">)</span>
@@ -878,7 +875,7 @@
 
 
 <span class="k">def</span> <span class="nf">is_isomorphism_possible</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns `True` if there is a chance for isomorphism. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Returns `True` if there is a chance for isomorphism.&quot;&quot;&quot;</span>
     <span class="n">n</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">minpoly</span><span class="o">.</span><span class="n">degree</span><span class="p">()</span>
     <span class="n">m</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">minpoly</span><span class="o">.</span><span class="n">degree</span><span class="p">()</span>
 
@@ -909,7 +906,7 @@
 
 
 <span class="k">def</span> <span class="nf">field_isomorphism_pslq</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Construct field isomorphism using PSLQ algorithm. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Construct field isomorphism using PSLQ algorithm.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">_</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">is_RationalField</span> <span class="ow">and</span> <span class="n">_</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">is_real</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;PSLQ doesn&#39;t support complex coefficients&quot;</span><span class="p">)</span>
 
@@ -939,7 +936,7 @@
 
 
 <span class="k">def</span> <span class="nf">field_isomorphism_factor</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Construct field isomorphism via factorization. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Construct field isomorphism via factorization.&quot;&quot;&quot;</span>
     <span class="n">_</span><span class="p">,</span> <span class="n">factors</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">minpoly</span><span class="o">.</span><span class="n">set_domain</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">factor_list</span><span class="p">()</span>
 
     <span class="k">for</span> <span class="n">f</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">factors</span><span class="p">:</span>
@@ -961,7 +958,7 @@
 
 
 <div class="viewcode-block" id="field_isomorphism"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.numberfields.field_isomorphism">[docs]</a><span class="k">def</span> <span class="nf">field_isomorphism</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Construct an isomorphism between two number fields. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Construct an isomorphism between two number fields.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">AlgebraicField</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Arguments should be algebraic fields, &quot;</span>
                          <span class="s2">&quot;got </span><span class="si">%s</span><span class="s2"> and </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>

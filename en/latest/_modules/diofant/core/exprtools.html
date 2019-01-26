@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.core.exprtools &mdash; Diofant 0.10.0b2.dev55+g97f1e5f documentation</title>
+  <title>diofant.core.exprtools &mdash; Diofant 0.10.0b2.dev59+g6273bb4 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev55+g97f1e5f
+                0.10.0b2.dev59+g6273bb4
               </div>
             
           
@@ -344,6 +344,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        &gt;&gt;&gt; Factors(0).is_zero</span>
 <span class="sd">        True</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">factors</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="mi">0</span> <span class="ow">in</span> <span class="n">f</span>
@@ -353,6 +354,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        &gt;&gt;&gt; Factors(1).is_one</span>
 <span class="sd">        True</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">factors</span>
 
@@ -394,6 +396,7 @@
 <span class="sd">        Factors({x: 2, y: 3, z: -1})</span>
 <span class="sd">        &gt;&gt;&gt; a*b</span>
 <span class="sd">        Factors({x: 2, y: 3, z: -1})</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Factors</span><span class="p">):</span>
             <span class="n">other</span> <span class="o">=</span> <span class="n">Factors</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
@@ -582,6 +585,7 @@
 <span class="sd">        &gt;&gt;&gt; b = Factors((x*y/z).as_powers_dict())</span>
 <span class="sd">        &gt;&gt;&gt; a.quo(b)  # same as a/b</span>
 <span class="sd">        Factors({y: 1})</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">other</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 
@@ -597,6 +601,7 @@
 <span class="sd">        Factors({z: -1})</span>
 <span class="sd">        &gt;&gt;&gt; a.rem(a)</span>
 <span class="sd">        Factors({})</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">other</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
 
@@ -638,6 +643,7 @@
 <span class="sd">        &gt;&gt;&gt; b = Factors((x*y/z).as_powers_dict())</span>
 <span class="sd">        &gt;&gt;&gt; a.gcd(b)</span>
 <span class="sd">        Factors({x: 1, y: 1})</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Factors</span><span class="p">):</span>
             <span class="n">other</span> <span class="o">=</span> <span class="n">Factors</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
@@ -669,6 +675,7 @@
 <span class="sd">        &gt;&gt;&gt; b = Factors((x*y/z).as_powers_dict())</span>
 <span class="sd">        &gt;&gt;&gt; a.lcm(b)</span>
 <span class="sd">        Factors({x: 1, y: 2, z: -1})</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Factors</span><span class="p">):</span>
             <span class="n">other</span> <span class="o">=</span> <span class="n">Factors</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
@@ -707,7 +714,7 @@
 
 
 <span class="k">class</span> <span class="nc">Term</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Efficient representation of ``coeff*(numer/denom)``. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Efficient representation of ``coeff*(numer/denom)``.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">term</span><span class="p">,</span> <span class="n">numer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">denom</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">numer</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">denom</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -814,6 +821,7 @@
 
 <span class="sd">    If ``fraction`` is True then the expression will appear over a common</span>
 <span class="sd">    denominator, the lcm of all term denominators.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">terms</span><span class="p">,</span> <span class="n">Basic</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">terms</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">):</span>
@@ -916,6 +924,7 @@
     <span class="k">def</span> <span class="nf">mask</span><span class="p">(</span><span class="n">terms</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;replace nc portions of each term with a unique Dummy symbols</span>
 <span class="sd">        and return the replacements to restore them</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">args</span> <span class="o">=</span> <span class="p">[(</span><span class="n">a</span><span class="p">,</span> <span class="p">[])</span> <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">is_commutative</span> <span class="k">else</span> <span class="n">a</span><span class="o">.</span><span class="n">args_cnc</span><span class="p">()</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">terms</span><span class="p">]</span>
         <span class="n">reps</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1127,6 +1136,7 @@
 <span class="sd">    True</span>
 <span class="sd">    &gt;&gt;&gt; _mask_nc(eq, &#39;d&#39;)</span>
 <span class="sd">    (_d0**2 + 1, {_d0: Expr()}, [])</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">name</span> <span class="o">=</span> <span class="n">name</span> <span class="ow">or</span> <span class="s1">&#39;mask&#39;</span>
     <span class="c1"># Make Dummy() append sequential numbers to the name</span>
@@ -1197,14 +1207,13 @@
 <span class="sd">    (x + A)**2</span>
 <span class="sd">    &gt;&gt;&gt; factor_nc(((x + A)*(x + B)).expand())</span>
 <span class="sd">    (x + A)*(x + B)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">..simplify.simplify</span> <span class="k">import</span> <span class="n">powsimp</span>
     <span class="kn">from</span> <span class="nn">..polys</span> <span class="k">import</span> <span class="n">gcd</span><span class="p">,</span> <span class="n">factor</span>
 
     <span class="k">def</span> <span class="nf">_pemexpand</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Expand with the minimal set of hints necessary to check</span>
-<span class="sd">        the result.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Expand with the minimal set of hints necessary to check the result.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">expr</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">mul</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">power_exp</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                            <span class="n">power_base</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">basic</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">multinomial</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.matrices.expressions.blockmatrix &mdash; Diofant 0.10.0b2.dev55+g97f1e5f documentation</title>
+  <title>diofant.matrices.expressions.blockmatrix &mdash; Diofant 0.10.0b2.dev59+g6273bb4 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev55+g97f1e5f
+                0.10.0b2.dev59+g6273bb4
               </div>
             
           
@@ -193,6 +193,7 @@
 
 <span class="sd">    &gt;&gt;&gt; block_collapse(C*B)</span>
 <span class="sd">    Matrix([[X, Z + Z*Y]])</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
@@ -289,6 +290,7 @@
 <span class="sd">        Matrix([</span>
 <span class="sd">        [X, Z],</span>
 <span class="sd">        [0, Y]])</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eval_transpose</span><span class="p">()</span></div>
 
@@ -341,6 +343,7 @@
 <span class="sd">    Matrix([</span>
 <span class="sd">    [X, 0],</span>
 <span class="sd">    [0, Y]])</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">mats</span><span class="p">):</span>
@@ -416,6 +419,7 @@
 
 <span class="sd">    &gt;&gt;&gt; block_collapse(C*B)</span>
 <span class="sd">    Matrix([[X, Z + Z*Y]])</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">hasbm</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">MatrixExpr</span><span class="p">)</span> <span class="ow">and</span> <span class="n">expr</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="n">BlockMatrix</span><span class="p">)</span>
@@ -468,7 +472,7 @@
 
 
 <span class="k">def</span> <span class="nf">bc_dist</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Turn  a*[X, Y] into [a*X, a*Y] &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Turn  a*[X, Y] into [a*X, a*Y].&quot;&quot;&quot;</span>
     <span class="n">factor</span><span class="p">,</span> <span class="n">mat</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">as_coeff_mmul</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">factor</span> <span class="o">!=</span> <span class="mi">1</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="n">mat</span><span class="p">),</span> <span class="n">BlockMatrix</span><span class="p">):</span>
         <span class="n">B</span> <span class="o">=</span> <span class="n">unpack</span><span class="p">(</span><span class="n">mat</span><span class="p">)</span><span class="o">.</span><span class="n">blocks</span>
@@ -515,7 +519,7 @@
 
 
 <span class="k">def</span> <span class="nf">deblock</span><span class="p">(</span><span class="n">B</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Flatten a BlockMatrix of BlockMatrices &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Flatten a BlockMatrix of BlockMatrices.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">BlockMatrix</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">B</span><span class="o">.</span><span class="n">blocks</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="n">BlockMatrix</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">B</span>
 
@@ -536,7 +540,7 @@
 
 
 <span class="k">def</span> <span class="nf">reblock_2x2</span><span class="p">(</span><span class="n">B</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Reblock a BlockMatrix so that it has 2x2 blocks of block matrices &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Reblock a BlockMatrix so that it has 2x2 blocks of block matrices.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">BlockMatrix</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">d</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">B</span><span class="o">.</span><span class="n">blocks</span><span class="o">.</span><span class="n">shape</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">B</span>
 
@@ -550,6 +554,7 @@
 
 <span class="sd">    &gt;&gt;&gt; bounds((1, 10, 50))</span>
 <span class="sd">    [(0, 1), (1, 11), (11, 61)]</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">low</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">rv</span> <span class="o">=</span> <span class="p">[]</span>
@@ -568,6 +573,7 @@
 <span class="sd">    &#39;BlockMatrix&#39;</span>
 <span class="sd">    &gt;&gt;&gt; ImmutableMatrix(B.blocks[0, 1])</span>
 <span class="sd">    Matrix([[1, 2, 3]])</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">rowbounds</span> <span class="o">=</span> <span class="n">bounds</span><span class="p">(</span><span class="n">rowsizes</span><span class="p">)</span>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.combinatorics.perm_groups &mdash; Diofant 0.10.0b2.dev55+g97f1e5f documentation</title>
+  <title>diofant.combinatorics.perm_groups &mdash; Diofant 0.10.0b2.dev59+g6273bb4 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev55+g97f1e5f
+                0.10.0b2.dev59+g6273bb4
               </div>
             
           
@@ -265,6 +265,7 @@
 <span class="sd">    [12] https://en.wikipedia.org/wiki/Nilpotent_group</span>
 
 <span class="sd">    [13] http://www.math.colostate.edu/~hulpke/CGT/cgtnotes.pdf</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">is_group</span> <span class="o">=</span> <span class="kc">True</span>
@@ -272,6 +273,7 @@
 <div class="viewcode-block" id="PermutationGroup.__new__"><a class="viewcode-back" href="../../../modules/combinatorics/perm_groups.html#diofant.combinatorics.perm_groups.PermutationGroup.__new__">[docs]</a>    <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;The default constructor. Accepts Cycle and Permutation forms.</span>
 <span class="sd">        Removes duplicates unless ``dups`` keyword is False.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">args</span><span class="p">:</span>
             <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">Permutation</span><span class="p">()]</span>
@@ -1066,6 +1068,7 @@
 <span class="sd">        []</span>
 
 <span class="sd">        see util._strip</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="p">(</span><span class="n">Cycle</span><span class="p">,</span> <span class="n">Permutation</span><span class="p">)):</span>
             <span class="n">g</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">list</span><span class="p">()</span>
@@ -1193,6 +1196,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        order</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_degree</span>
 
@@ -1200,9 +1204,6 @@
     <span class="k">def</span> <span class="nf">elements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns all the elements of the permutation group in</span>
 <span class="sd">        a list</span>
-
-<span class="sd">        Examples</span>
-<span class="sd">        ========</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">islice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">generate</span><span class="p">(),</span> <span class="kc">None</span><span class="p">)))</span>
@@ -1337,6 +1338,7 @@
 <span class="sd">            Permutation(0, 2)(1, 3)])</span>
 <span class="sd">        &gt;&gt;&gt; _.is_group</span>
 <span class="sd">        True</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;coset&quot;</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_schreier_sims</span><span class="p">(</span><span class="n">af</span><span class="p">)</span>
@@ -1419,6 +1421,7 @@
 <span class="sd">        &gt;&gt;&gt; list(g.generate_schreier_sims(af=True))</span>
 <span class="sd">        [[0, 1, 2, 3], [0, 2, 1, 3], [0, 3, 2, 1],</span>
 <span class="sd">         [0, 1, 3, 2], [0, 2, 3, 1], [0, 3, 1, 2]]</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">n</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_degree</span>
@@ -1753,6 +1756,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        minimal_block, random_stab</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_primitive</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_primitive</span>
@@ -1847,6 +1851,7 @@
 <span class="sd">        True</span>
 <span class="sd">        &gt;&gt;&gt; C7.is_subgroup(G, 0)</span>
 <span class="sd">        False</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">PermutationGroup</span><span class="p">):</span>
             <span class="k">return</span> <span class="kc">False</span>
@@ -1888,6 +1893,7 @@
 <span class="sd">        &gt;&gt;&gt; G3 = PermutationGroup([d, e])</span>
 <span class="sd">        &gt;&gt;&gt; G3.is_transitive() or G3.is_transitive(strict=False)</span>
 <span class="sd">        False</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_transitive</span><span class="p">:</span>  <span class="c1"># strict or not, if True then True</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_transitive</span>
@@ -2292,6 +2298,7 @@
 <span class="sd">        &gt;&gt;&gt; G = PermutationGroup([a, b])</span>
 <span class="sd">        &gt;&gt;&gt; G.orbits()</span>
 <span class="sd">        [{0, 2, 3, 4, 6}, {1, 5}]</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">_orbits</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_degree</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_generators</span><span class="p">)</span></div>
 
@@ -2327,6 +2334,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        degree</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_order</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_order</span>
@@ -2426,6 +2434,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        random</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">is_sequence</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">seed</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -2447,8 +2456,7 @@
         <span class="k">return</span> <span class="n">result</span></div>
 
 <div class="viewcode-block" id="PermutationGroup.random"><a class="viewcode-back" href="../../../modules/combinatorics/perm_groups.html#diofant.combinatorics.perm_groups.PermutationGroup.random">[docs]</a>    <span class="k">def</span> <span class="nf">random</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">af</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return a random group element</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Return a random group element.&quot;&quot;&quot;</span>
         <span class="n">rank</span> <span class="o">=</span> <span class="n">randrange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="p">())</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">coset_unrank</span><span class="p">(</span><span class="n">rank</span><span class="p">,</span> <span class="n">af</span><span class="p">)</span></div>
 
@@ -2539,6 +2547,7 @@
 <span class="sd">        &gt;&gt;&gt; G.basic_transversals</span>
 <span class="sd">        [{0: Permutation(2)(0, 1), 1: Permutation(2), 2: Permutation(1, 2)},</span>
 <span class="sd">         {0: Permutation(2), 2: Permutation(0, 2)}]</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transversals</span><span class="p">:</span>
             <span class="k">return</span>
@@ -3312,6 +3321,7 @@
 <span class="sd">    &gt;&gt;&gt; b = Permutation([1, 0, 2])</span>
 <span class="sd">    &gt;&gt;&gt; _orbits(a.size, [a, b])</span>
 <span class="sd">    [{0, 1, 2}]</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">orbs</span> <span class="o">=</span> <span class="p">[]</span>
@@ -3353,6 +3363,7 @@
 <span class="sd">         Permutation(0, 2, 4)(1, 3, 5),</span>
 <span class="sd">         Permutation(5)(0, 4)(1, 3),</span>
 <span class="sd">         Permutation(0, 3)(1, 4)(2, 5)]</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">tr</span> <span class="o">=</span> <span class="p">[(</span><span class="n">alpha</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">degree</span><span class="p">)))]</span>

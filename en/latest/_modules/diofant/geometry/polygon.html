@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.geometry.polygon &mdash; Diofant 0.10.0b2.dev55+g97f1e5f documentation</title>
+  <title>diofant.geometry.polygon &mdash; Diofant 0.10.0b2.dev59+g6273bb4 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev55+g97f1e5f
+                0.10.0b2.dev59+g6273bb4
               </div>
             
           
@@ -456,6 +456,7 @@
 <span class="sd">        &gt;&gt;&gt; poly = Polygon(p1, p2, p3, p4)</span>
 <span class="sd">        &gt;&gt;&gt; poly.perimeter</span>
 <span class="sd">        sqrt(17) + 7</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">p</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="n">args</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span>
@@ -830,6 +831,7 @@
 <span class="sd">        &gt;&gt;&gt; poly = Polygon(*RegularPolygon(p1, 1, 3).vertices)</span>
 <span class="sd">        &gt;&gt;&gt; poly.distance(p2)</span>
 <span class="sd">        sqrt(61)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">Point</span><span class="p">):</span>
             <span class="n">dist</span> <span class="o">=</span> <span class="n">oo</span>
@@ -880,6 +882,7 @@
 <span class="sd">        [2] https//en.wikipedia.org/wiki/Rotating_calipers</span>
 <span class="sd">        and antipodal points:</span>
 <span class="sd">        [3] https//en.wikipedia.org/wiki/Antipodal_point</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">e1</span> <span class="o">=</span> <span class="bp">self</span>
 
@@ -1206,6 +1209,7 @@
 <span class="sd">        &gt;&gt;&gt; r = RegularPolygon(Point(0, 0), 5, 3)</span>
 <span class="sd">        &gt;&gt;&gt; r.args</span>
 <span class="sd">        (Point2D(0, 0), 5, 3, 0)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_center</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_radius</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_n</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rot</span>
 
@@ -1227,6 +1231,7 @@
 <span class="sd">        2</span>
 <span class="sd">        &gt;&gt;&gt; _ == square.length**2</span>
 <span class="sd">        True</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">c</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">rot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span>
         <span class="k">return</span> <span class="n">sign</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="o">*</span><span class="n">n</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">tan</span><span class="p">(</span><span class="n">pi</span><span class="o">/</span><span class="n">n</span><span class="p">))</span>
@@ -1273,6 +1278,7 @@
 <span class="sd">        &gt;&gt;&gt; rp = RegularPolygon(Point(0, 0), 5, 4)</span>
 <span class="sd">        &gt;&gt;&gt; rp.center</span>
 <span class="sd">        Point2D(0, 0)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_center</span>
 
@@ -1289,6 +1295,7 @@
 <span class="sd">        &gt;&gt;&gt; rp = RegularPolygon(Point(0, 0), 5, 4)</span>
 <span class="sd">        &gt;&gt;&gt; rp.circumcenter</span>
 <span class="sd">        Point2D(0, 0)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">center</span>
 
@@ -1331,6 +1338,7 @@
 <span class="sd">        &gt;&gt;&gt; rp = RegularPolygon(Point(0, 0), radius, 4)</span>
 <span class="sd">        &gt;&gt;&gt; rp.circumradius</span>
 <span class="sd">        r</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span>
 
@@ -1391,6 +1399,7 @@
 <span class="sd">        &gt;&gt;&gt; rp = RegularPolygon(Point(0, 0), radius, 4)</span>
 <span class="sd">        &gt;&gt;&gt; rp.inradius</span>
 <span class="sd">        sqrt(2)*r/2</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">apothem</span>
 
@@ -1504,6 +1513,7 @@
 <span class="sd">        {Point2D(-5/2, -5*sqrt(3)/2): pi/3,</span>
 <span class="sd">         Point2D(-5/2, 5*sqrt(3)/2): pi/3,</span>
 <span class="sd">         Point2D(5, 0): pi/3}</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">ret</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">ang</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">interior_angle</span>
@@ -2058,6 +2068,7 @@
 <span class="sd">        &gt;&gt;&gt; t = Triangle(p1, p2, p3)</span>
 <span class="sd">        &gt;&gt;&gt; t.circumcenter</span>
 <span class="sd">        Point2D(1/2, 1/2)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">perpendicular_bisector</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">sides</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">a</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">b</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
@@ -2084,6 +2095,7 @@
 <span class="sd">        &gt;&gt;&gt; t = Triangle(p1, p2, p3)</span>
 <span class="sd">        &gt;&gt;&gt; t.circumradius</span>
 <span class="sd">        sqrt(a**2/4 + 1/4)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">Point</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">circumcenter</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 

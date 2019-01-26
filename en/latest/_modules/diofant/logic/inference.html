@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.logic.inference &mdash; Diofant 0.10.0b2.dev55+g97f1e5f documentation</title>
+  <title>diofant.logic.inference &mdash; Diofant 0.10.0b2.dev59+g6273bb4 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev55+g97f1e5f
+                0.10.0b2.dev59+g6273bb4
               </div>
             
           
@@ -172,6 +172,7 @@
 <span class="sd">    a</span>
 <span class="sd">    &gt;&gt;&gt; literal_symbol(~a)</span>
 <span class="sd">    a</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="n">literal</span> <span class="ow">is</span> <span class="kc">True</span> <span class="ow">or</span> <span class="n">literal</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
@@ -225,6 +226,7 @@
 <span class="sd">    {a: False}</span>
 <span class="sd">    &gt;&gt;&gt; use_models(satisfiable(a ^ a, all_models=True))</span>
 <span class="sd">    UNSAT</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">expr</span> <span class="o">=</span> <span class="n">to_cnf</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">algorithm</span> <span class="o">==</span> <span class="s2">&quot;dpll&quot;</span><span class="p">:</span>
@@ -254,6 +256,7 @@
 <span class="sd">    ==========</span>
 
 <span class="sd">    * https//en.wikipedia.org/wiki/Validity</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="ow">not</span> <span class="n">satisfiable</span><span class="p">(</span><span class="n">Not</span><span class="p">(</span><span class="n">expr</span><span class="p">))</span>
 
@@ -293,6 +296,7 @@
 <span class="sd">    &gt;&gt;&gt; pl_true(a &amp; b &amp; (~a | ~b), {a: True})</span>
 <span class="sd">    &gt;&gt;&gt; pl_true(a &amp; b &amp; (~a | ~b), {a: True}, deep=True)</span>
 <span class="sd">    False</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">Symbol</span>
@@ -347,6 +351,7 @@
 <span class="sd">    ==========</span>
 
 <span class="sd">    * https//en.wikipedia.org/wiki/Logical_consequence</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">formula_set</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">formula_set</span><span class="p">)</span>
     <span class="n">formula_set</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Not</span><span class="p">(</span><span class="n">expr</span><span class="p">))</span>
@@ -354,7 +359,7 @@
 
 
 <span class="k">class</span> <span class="nc">KB</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Base class for all knowledge bases&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Base class for all knowledge bases.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sentence</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">clauses_</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
@@ -395,6 +400,7 @@
 <span class="sd">        &gt;&gt;&gt; l.tell(y)</span>
 <span class="sd">        &gt;&gt;&gt; l.clauses</span>
 <span class="sd">        [y, Or(x, y)]</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">conjuncts</span><span class="p">(</span><span class="n">to_cnf</span><span class="p">(</span><span class="n">sentence</span><span class="p">)):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">clauses_</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
@@ -411,6 +417,7 @@
 <span class="sd">        True</span>
 <span class="sd">        &gt;&gt;&gt; l.ask(y)</span>
 <span class="sd">        False</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">entails</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">clauses_</span><span class="p">)</span>
 
@@ -431,6 +438,7 @@
 <span class="sd">        &gt;&gt;&gt; l.retract(x | y)</span>
 <span class="sd">        &gt;&gt;&gt; l.clauses</span>
 <span class="sd">        []</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">conjuncts</span><span class="p">(</span><span class="n">to_cnf</span><span class="p">(</span><span class="n">sentence</span><span class="p">)):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">clauses_</span><span class="o">.</span><span class="n">discard</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>

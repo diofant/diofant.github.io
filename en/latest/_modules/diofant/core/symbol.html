@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.core.symbol &mdash; Diofant 0.10.0b2.dev55+g97f1e5f documentation</title>
+  <title>diofant.core.symbol &mdash; Diofant 0.10.0b2.dev59+g6273bb4 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev55+g97f1e5f
+                0.10.0b2.dev59+g6273bb4
               </div>
             
           
@@ -216,6 +216,7 @@
 <span class="sd">    ==========</span>
 
 <span class="sd">    * https://docs.python.org/3/reference/datamodel.html#object.__lt__</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">is_comparable</span> <span class="o">=</span> <span class="kc">False</span>
@@ -232,12 +233,14 @@
 <span class="sd">            &gt;&gt;&gt; x = Symbol(&#39;x&#39;)</span>
 <span class="sd">            &gt;&gt;&gt; x._diff_wrt</span>
 <span class="sd">            True</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="kc">True</span>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">_sanitize</span><span class="p">(</span><span class="n">assumptions</span><span class="p">,</span> <span class="n">obj</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Remove None, covert values to bool, check commutativity *in place*.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1"># be strict about commutativity: cannot be None</span>
@@ -329,6 +332,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        diofant.core.expr.Expr.is_constant</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">wrt</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">False</span>
@@ -342,6 +346,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        diofant.core.basic.Basic.free_symbols</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">{</span><span class="bp">self</span><span class="p">}</span>
 
@@ -381,6 +386,7 @@
 <span class="sd">    :mod:`diofant.core.assumptions`</span>
 <span class="sd">    Dummy</span>
 <span class="sd">    Wild</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">pass</span></div>
@@ -403,6 +409,7 @@
 <span class="sd">    ========</span>
 
 <span class="sd">    Symbol</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">_count</span> <span class="o">=</span> <span class="mi">0</span>
@@ -504,6 +511,7 @@
 <span class="sd">    ========</span>
 
 <span class="sd">    Symbol</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">is_Wild</span> <span class="o">=</span> <span class="kc">True</span>
@@ -536,6 +544,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        diofant.core.basic.Basic.matches</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">exclude</span><span class="p">):</span>
             <span class="k">return</span>
@@ -660,6 +669,7 @@
 
 <span class="sd">        &gt;&gt;&gt; type(_[0])</span>
 <span class="sd">        &lt;class &#39;diofant.core.function.UndefinedFunction&#39;&gt;</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
 
@@ -783,9 +793,10 @@
 <span class="sd">    ========</span>
 
 <span class="sd">    symbols</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">traverse</span><span class="p">(</span><span class="n">symbols</span><span class="p">,</span> <span class="n">frame</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Recursively inject symbols to the global namespace. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Recursively inject symbols to the global namespace.&quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">symbol</span> <span class="ow">in</span> <span class="n">symbols</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">symbol</span><span class="p">,</span> <span class="n">Basic</span><span class="p">):</span>
                 <span class="n">frame</span><span class="o">.</span><span class="n">f_globals</span><span class="p">[</span><span class="n">symbol</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">symbol</span>

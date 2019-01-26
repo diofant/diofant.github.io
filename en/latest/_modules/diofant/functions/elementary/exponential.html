@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.functions.elementary.exponential &mdash; Diofant 0.10.0b2.dev55+g97f1e5f documentation</title>
+  <title>diofant.functions.elementary.exponential &mdash; Diofant 0.10.0b2.dev59+g6273bb4 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev55+g97f1e5f
+                0.10.0b2.dev59+g6273bb4
               </div>
             
           
@@ -189,6 +189,7 @@
 <span class="sd">    diofant.functions.elementary.complexes.polar_lift</span>
 <span class="sd">    diofant.functions.elementary.complexes.periodic_argument</span>
 <span class="sd">    diofant.functions.elementary.complexes.principal_branch</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">is_polar</span> <span class="o">=</span> <span class="kc">True</span>
@@ -207,6 +208,7 @@
 <span class="sd">        (1, E**x)</span>
 <span class="sd">        &gt;&gt;&gt; exp(x).as_numer_denom()</span>
 <span class="sd">        (E**x, 1)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># this should be the same as Pow.as_numer_denom wrt</span>
         <span class="c1"># exponent handling</span>
@@ -220,9 +222,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">exp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns the exponent of the function.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Returns the exponent of the function.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">_eval_conjugate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -262,7 +262,7 @@
         <span class="k">return</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">expand_mul</span><span class="p">(</span><span class="bp">self</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">conjugate</span><span class="p">()))</span>
 
     <span class="k">def</span> <span class="nf">_eval_evalf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prec</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Careful! any evalf of polar numbers is flaky &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Careful! any evalf of polar numbers is flaky.&quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">.complexes</span> <span class="k">import</span> <span class="n">im</span><span class="p">,</span> <span class="n">re</span>
         <span class="n">i</span> <span class="o">=</span> <span class="n">im</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">exp</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
@@ -298,6 +298,7 @@
 <span class="sd">    ========</span>
 
 <span class="sd">    diofant.functions.elementary.exponential.log</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">Pow</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">arg</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
@@ -313,21 +314,18 @@
 <span class="sd">    ========</span>
 
 <span class="sd">    diofant.functions.elementary.exponential.exp</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="log.fdiff"><a class="viewcode-back" href="../../../../modules/functions/elementary.html#diofant.functions.elementary.exponential.log.fdiff">[docs]</a>    <span class="k">def</span> <span class="nf">fdiff</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argindex</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns the first derivative of the function.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Returns the first derivative of the function.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">argindex</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">return</span> <span class="mi">1</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">ArgumentIndexError</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argindex</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="log.inverse"><a class="viewcode-back" href="../../../../modules/functions/elementary.html#diofant.functions.elementary.exponential.log.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argindex</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns `e^x`, the inverse function of `\log(x)`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns `e^x`, the inverse function of `\log(x)`.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">exp</span></div>
 
     <span class="nd">@classmethod</span>
@@ -399,9 +397,7 @@
                         <span class="k">return</span> <span class="o">-</span><span class="n">pi</span> <span class="o">*</span> <span class="n">I</span> <span class="o">*</span> <span class="n">S</span><span class="o">.</span><span class="n">Half</span> <span class="o">+</span> <span class="bp">cls</span><span class="p">(</span><span class="o">-</span><span class="n">coeff</span><span class="p">)</span>
 
 <div class="viewcode-block" id="log.as_base_exp"><a class="viewcode-back" href="../../../../modules/functions/elementary.html#diofant.functions.elementary.exponential.log.as_base_exp">[docs]</a>    <span class="k">def</span> <span class="nf">as_base_exp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns this function in the form (base, exponent).</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Returns this function in the form (base, exponent).&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span></div>
 
     <span class="k">def</span> <span class="nf">_eval_expand_log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">hints</span><span class="p">):</span>
@@ -591,6 +587,7 @@
 <span class="sd">    ==========</span>
 
 <span class="sd">    * https//en.wikipedia.org/wiki/Lambert_W_function</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="nd">@classmethod</span>
@@ -624,9 +621,7 @@
                 <span class="k">return</span> <span class="o">-</span><span class="n">Integer</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 
 <div class="viewcode-block" id="LambertW.fdiff"><a class="viewcode-back" href="../../../../modules/functions/elementary.html#diofant.functions.elementary.exponential.LambertW.fdiff">[docs]</a>    <span class="k">def</span> <span class="nf">fdiff</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argindex</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return the first derivative of this function.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Return the first derivative of this function.&quot;&quot;&quot;</span>
         <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>

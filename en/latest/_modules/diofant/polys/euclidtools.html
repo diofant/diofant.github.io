@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.euclidtools &mdash; Diofant 0.10.0b2.dev55+g97f1e5f documentation</title>
+  <title>diofant.polys.euclidtools &mdash; Diofant 0.10.0b2.dev59+g6273bb4 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev55+g97f1e5f
+                0.10.0b2.dev59+g6273bb4
               </div>
             
           
@@ -192,6 +192,7 @@
 
 <span class="sd">    &gt;&gt;&gt; R.dup_half_gcdex(f, g)</span>
 <span class="sd">    (-1/5*x + 3/5, x + 1)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">K</span><span class="o">.</span><span class="n">is_Field</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">DomainError</span><span class="p">(</span><span class="s2">&quot;can&#39;t compute half extended GCD over </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">K</span><span class="p">)</span>
@@ -367,6 +368,7 @@
 <span class="sd">    ==========</span>
 
 <span class="sd">    * [Brown78]_</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">n</span> <span class="o">=</span> <span class="n">dmp_degree_in</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
     <span class="n">m</span> <span class="o">=</span> <span class="n">dmp_degree_in</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
@@ -431,6 +433,7 @@
 
 <span class="sd">    &gt;&gt;&gt; R.dmp_resultant(x**2 + 1, x**2 - 1, includePRS=True)</span>
 <span class="sd">    (4, [x**2 + 1, x**2 - 1, -2])</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">f</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">g</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">K</span><span class="o">.</span><span class="n">zero</span><span class="p">,</span> <span class="p">[]</span>
@@ -454,6 +457,7 @@
 
 <span class="sd">    &gt;&gt;&gt; R.dmp_resultant(x**2 + 1, x**2 - 1)</span>
 <span class="sd">    4</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">includePRS</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">dup_prs_resultant</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
@@ -673,7 +677,7 @@
 
 
 <span class="k">def</span> <span class="nf">_collins_crt</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Wrapper of CRT for Collins&#39;s resultant algorithm. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Wrapper of CRT for Collins&#39;s resultant algorithm.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">gf_int</span><span class="p">(</span><span class="n">gf_crt</span><span class="p">([</span><span class="n">r</span><span class="p">,</span> <span class="n">R</span><span class="p">],</span> <span class="p">[</span><span class="n">P</span><span class="p">,</span> <span class="n">p</span><span class="p">],</span> <span class="n">K</span><span class="p">),</span> <span class="n">P</span><span class="o">*</span><span class="n">p</span><span class="p">)</span>
 
 
@@ -817,6 +821,7 @@
 
 <span class="sd">    &gt;&gt;&gt; R.dmp_discriminant(x**2*y + x*z + t)</span>
 <span class="sd">    -4*y*t + z**2</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">d</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">dmp_degree_in</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">u</span><span class="p">),</span> <span class="n">u</span> <span class="o">-</span> <span class="mi">1</span>
 
@@ -836,7 +841,7 @@
 
 
 <span class="k">def</span> <span class="nf">_dmp_rr_trivial_gcd</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Handle trivial cases in GCD algorithm over a ring. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Handle trivial cases in GCD algorithm over a ring.&quot;&quot;&quot;</span>
     <span class="n">zero_f</span> <span class="o">=</span> <span class="n">dmp_zero_p</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
     <span class="n">zero_g</span> <span class="o">=</span> <span class="n">dmp_zero_p</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
 
@@ -859,7 +864,7 @@
 
 
 <span class="k">def</span> <span class="nf">_dmp_ff_trivial_gcd</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Handle trivial cases in GCD algorithm over a field. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Handle trivial cases in GCD algorithm over a field.&quot;&quot;&quot;</span>
     <span class="n">zero_f</span> <span class="o">=</span> <span class="n">dmp_zero_p</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
     <span class="n">zero_g</span> <span class="o">=</span> <span class="n">dmp_zero_p</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
 
@@ -878,7 +883,7 @@
 
 
 <span class="k">def</span> <span class="nf">_dmp_simplify_gcd</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Try to eliminate `x_0` from GCD computation in `K[X]`. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Try to eliminate `x_0` from GCD computation in `K[X]`.&quot;&quot;&quot;</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">dmp_degree_in</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
     <span class="n">dg</span> <span class="o">=</span> <span class="n">dmp_degree_in</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
 
@@ -1087,6 +1092,7 @@
 <span class="sd">    ==========</span>
 
 <span class="sd">    * [Liao95]_</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">_dmp_rr_trivial_gcd</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
 
@@ -1172,7 +1178,7 @@
 
 
 <span class="k">def</span> <span class="nf">_dmp_inner_gcd</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Helper function for `dmp_inner_gcd()`. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Helper function for `dmp_inner_gcd()`.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">K</span><span class="o">.</span><span class="n">is_Exact</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">exact</span> <span class="o">=</span> <span class="n">K</span><span class="o">.</span><span class="n">get_exact</span><span class="p">()</span>
@@ -1315,6 +1321,7 @@
 
 <span class="sd">    &gt;&gt;&gt; R.dmp_lcm(f, g)</span>
 <span class="sd">    x**3 + 4*x**2*y + 4*x*y**2</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">h</span> <span class="o">=</span> <span class="n">dmp_quo</span><span class="p">(</span><span class="n">dmp_mul</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">),</span>
                 <span class="n">dmp_gcd</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">),</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
@@ -1336,6 +1343,7 @@
 
 <span class="sd">    &gt;&gt;&gt; R.dmp_lcm(f, g)</span>
 <span class="sd">    x**3 + 2*x**2*y + x*y**2</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">K</span><span class="o">.</span><span class="n">is_Field</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">dmp_ff_lcm</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>

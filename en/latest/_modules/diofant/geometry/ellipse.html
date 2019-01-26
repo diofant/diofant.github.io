@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.geometry.ellipse &mdash; Diofant 0.10.0b2.dev55+g97f1e5f documentation</title>
+  <title>diofant.geometry.ellipse &mdash; Diofant 0.10.0b2.dev59+g6273bb4 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev55+g97f1e5f
+                0.10.0b2.dev59+g6273bb4
               </div>
             
           
@@ -241,6 +241,7 @@
 <span class="sd">    &gt;&gt;&gt; e2 = Ellipse(Point(3, 1), hradius=3, eccentricity=Rational(4, 5))</span>
 <span class="sd">    &gt;&gt;&gt; e2</span>
 <span class="sd">    Ellipse(Point2D(3, 1), 3, 9/5)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span>
@@ -645,6 +646,7 @@
 <span class="sd">        Ellipse(Point2D(0, 1), 1, 2)</span>
 <span class="sd">        &gt;&gt;&gt; Ellipse((1, 0), 2, 1).rotate(pi)</span>
 <span class="sd">        Ellipse(Point2D(-1, 0), 2, 1)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hradius</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">vradius</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">center</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">angle</span><span class="p">,</span> <span class="n">pt</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">hradius</span><span class="p">)</span>
@@ -666,6 +668,7 @@
 <span class="sd">        Circle(Point2D(0, 0), 4)</span>
 <span class="sd">        &gt;&gt;&gt; Ellipse((0, 0), 2, 1).scale(2)</span>
 <span class="sd">        Ellipse(Point2D(0, 0), 4, 1)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">c</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">center</span>
         <span class="k">if</span> <span class="n">pt</span><span class="p">:</span>
@@ -801,6 +804,7 @@
 <span class="sd">        &gt;&gt;&gt; e1 = Ellipse(Point(0, 0), 3, 2)</span>
 <span class="sd">        &gt;&gt;&gt; e1.tangent_lines(Point(3, 0))</span>
 <span class="sd">        [Line(Point2D(3, 0), Point2D(3, -12))]</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">p</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">encloses_point</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
@@ -937,6 +941,7 @@
 
 <span class="sd">        Whereas the above solution has an operation count of 12, the exact</span>
 <span class="sd">        solution has an operation count of 2020.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">p</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
 
@@ -1259,6 +1264,7 @@
 
 <span class="sd">        &gt;&gt;&gt; e.intersection(Ellipse(Point(-1, 0), 3, 4))</span>
 <span class="sd">        [Point2D(-17/5, -12/5), Point2D(-17/5, 12/5), Point2D(7/5, -12/5), Point2D(7/5, 12/5)]</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">Point</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">o</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
@@ -1304,6 +1310,7 @@
 <span class="sd">        &gt;&gt;&gt; e1 = Ellipse(Point(1, 0), 3, 2)</span>
 <span class="sd">        &gt;&gt;&gt; e1.evolute()</span>
 <span class="sd">        2**(2/3)*y**(2/3) + (3*x - 3)**(2/3) - 5**(2/3)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;Evolute of arbitrary Ellipse is not supported.&#39;</span><span class="p">)</span>
@@ -1443,6 +1450,7 @@
 <span class="sd">        &gt;&gt;&gt; c1 = Circle(Point(3, 4), 6)</span>
 <span class="sd">        &gt;&gt;&gt; c1.vradius</span>
 <span class="sd">        6</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">)</span>
 
@@ -1567,6 +1575,7 @@
 <span class="sd">        Circle(Point2D(0, 0), 2)</span>
 <span class="sd">        &gt;&gt;&gt; Circle((0, 0), 1).scale(2, 4)</span>
 <span class="sd">        Ellipse(Point2D(0, 0), 2, 4)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">c</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">center</span>
         <span class="k">if</span> <span class="n">pt</span><span class="p">:</span>
@@ -1588,6 +1597,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Circle((0, 1), 1).reflect(Line((0, 0), (1, 1)))</span>
 <span class="sd">        Circle(Point2D(1, 0), -1)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">c</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">center</span>
         <span class="n">c</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">reflect</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>

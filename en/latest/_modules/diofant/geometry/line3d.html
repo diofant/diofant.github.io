@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.geometry.line3d &mdash; Diofant 0.10.0b2.dev55+g97f1e5f documentation</title>
+  <title>diofant.geometry.line3d &mdash; Diofant 0.10.0b2.dev59+g6273bb4 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev55+g97f1e5f
+                0.10.0b2.dev59+g6273bb4
               </div>
             
           
@@ -193,6 +193,7 @@
 <span class="sd">    =====</span>
 
 <span class="sd">    This is a base class and is not meant to be instantiated.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -261,6 +262,7 @@
 <span class="sd">        &gt;&gt;&gt; l = Line3D(p1, p2)</span>
 <span class="sd">        &gt;&gt;&gt; l.direction_ratio</span>
 <span class="sd">        [5, 3, 1]</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">points</span>
         <span class="k">return</span> <span class="n">p1</span><span class="o">.</span><span class="n">direction_ratio</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span>
@@ -283,6 +285,7 @@
 <span class="sd">        [sqrt(35)/7, 3*sqrt(35)/35, sqrt(35)/35]</span>
 <span class="sd">        &gt;&gt;&gt; sum(i**2 for i in _)</span>
 <span class="sd">        1</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">points</span>
         <span class="k">return</span> <span class="n">p1</span><span class="o">.</span><span class="n">direction_cosine</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span>
@@ -299,6 +302,7 @@
 <span class="sd">        &gt;&gt;&gt; l1 = Line3D(p1, p2)</span>
 <span class="sd">        &gt;&gt;&gt; l1.length</span>
 <span class="sd">        oo</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">oo</span>
 
@@ -911,6 +915,7 @@
 <span class="sd">        &gt;&gt;&gt; l2 = Line3D(p1, p3)</span>
 <span class="sd">        &gt;&gt;&gt; l1.is_similar(l2)</span>
 <span class="sd">        True</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Line3D</span><span class="p">):</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">direction_cosine</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">direction_cosine</span> <span class="ow">and</span> <span class="n">other</span><span class="o">.</span><span class="n">p1</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
@@ -922,6 +927,7 @@
     <span class="k">def</span> <span class="nf">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return a definitive answer or else raise an error if it cannot</span>
 <span class="sd">        be determined that other is on the boundaries of self.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
@@ -936,6 +942,7 @@
 <span class="sd">        True if other is on the boundaries of self;</span>
 <span class="sd">        False if not on the boundaries of self;</span>
 <span class="sd">        None if a determination cannot be made.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div></div>
 
@@ -967,6 +974,7 @@
 <span class="sd">    Line3D(Point3D(2, 3, 4), Point3D(3, 5, 1))</span>
 <span class="sd">    &gt;&gt;&gt; L.points</span>
 <span class="sd">    (Point3D(2, 3, 4), Point3D(3, 5, 1))</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">pt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">direction_ratio</span><span class="o">=</span><span class="p">[],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -1061,6 +1069,7 @@
 <span class="sd">        False</span>
 <span class="sd">        &gt;&gt;&gt; l1 in l2</span>
 <span class="sd">        True</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">is_sequence</span><span class="p">(</span><span class="n">o</span><span class="p">):</span>
             <span class="n">o</span> <span class="o">=</span> <span class="n">Point3D</span><span class="p">(</span><span class="n">o</span><span class="p">)</span>
@@ -1100,6 +1109,7 @@
 <span class="sd">        2*sqrt(6)/3</span>
 <span class="sd">        &gt;&gt;&gt; s.distance((-1, 1, 1))</span>
 <span class="sd">        2*sqrt(6)/3</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">Point3D</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">is_sequence</span><span class="p">(</span><span class="n">o</span><span class="p">):</span>
@@ -1110,7 +1120,7 @@
         <span class="k">return</span> <span class="n">a</span></div>
 
 <div class="viewcode-block" id="Line3D.equals"><a class="viewcode-back" href="../../../modules/geometry/line3d.html#diofant.geometry.line3d.Line3D.equals">[docs]</a>    <span class="k">def</span> <span class="nf">equals</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns True if self and other are the same mathematical entities&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Returns True if self and other are the same mathematical entities.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Line3D</span><span class="p">):</span>
             <span class="k">return</span> <span class="kc">False</span>
         <span class="k">return</span> <span class="n">Point3D</span><span class="o">.</span><span class="n">are_collinear</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">p1</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">p1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">p2</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">p2</span><span class="p">)</span></div></div>
@@ -1312,6 +1322,7 @@
 <span class="sd">        sqrt(6)</span>
 <span class="sd">        &gt;&gt;&gt; s.distance((-1, -1, 2))</span>
 <span class="sd">        sqrt(6)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">Point3D</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">is_sequence</span><span class="p">(</span><span class="n">o</span><span class="p">):</span>
@@ -1392,7 +1403,7 @@
         <span class="k">return</span> <span class="kc">False</span></div>
 
 <div class="viewcode-block" id="Ray3D.equals"><a class="viewcode-back" href="../../../modules/geometry/line3d.html#diofant.geometry.line3d.Ray3D.equals">[docs]</a>    <span class="k">def</span> <span class="nf">equals</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns True if self and other are the same mathematical entities&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Returns True if self and other are the same mathematical entities.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Ray3D</span><span class="p">):</span>
             <span class="k">return</span> <span class="kc">False</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">source</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">source</span> <span class="ow">and</span> <span class="n">other</span><span class="o">.</span><span class="n">p2</span> <span class="ow">in</span> <span class="bp">self</span></div></div>
@@ -1433,6 +1444,7 @@
 <span class="sd">    sqrt(17)</span>
 <span class="sd">    &gt;&gt;&gt; s.midpoint</span>
 <span class="sd">    Point3D(5/2, 2, 8)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -1536,6 +1548,7 @@
 <span class="sd">        sqrt(341)</span>
 <span class="sd">        &gt;&gt;&gt; s.distance((10, 15, 12))</span>
 <span class="sd">        sqrt(341)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">is_sequence</span><span class="p">(</span><span class="n">o</span><span class="p">):</span>
             <span class="n">o</span> <span class="o">=</span> <span class="n">Point3D</span><span class="p">(</span><span class="n">o</span><span class="p">)</span>
@@ -1566,6 +1579,7 @@
 <span class="sd">        &gt;&gt;&gt; s2 = Segment3D(p2, p1)</span>
 <span class="sd">        &gt;&gt;&gt; s.contains(s2)</span>
 <span class="sd">        True</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">is_sequence</span><span class="p">(</span><span class="n">other</span><span class="p">):</span>
             <span class="n">other</span> <span class="o">=</span> <span class="n">Point3D</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>

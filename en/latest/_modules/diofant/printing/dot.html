@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.printing.dot &mdash; Diofant 0.10.0b2.dev55+g97f1e5f documentation</title>
+  <title>diofant.printing.dot &mdash; Diofant 0.10.0b2.dev59+g6273bb4 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev55+g97f1e5f
+                0.10.0b2.dev59+g6273bb4
               </div>
             
           
@@ -164,7 +164,7 @@
 
 
 <span class="k">def</span> <span class="nf">styleof</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">styles</span><span class="o">=</span><span class="n">default_styles</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Merge style dictionaries in order</span>
+    <span class="sd">&quot;&quot;&quot;Merge style dictionaries in order.</span>
 
 <span class="sd">    &gt;&gt;&gt; styles = [(Basic, {&#39;color&#39;: &#39;blue&#39;, &#39;shape&#39;: &#39;ellipse&#39;}),</span>
 <span class="sd">    ...           (Expr,  {&#39;color&#39;: &#39;black&#39;})]</span>
@@ -175,6 +175,7 @@
 <span class="sd">    &gt;&gt;&gt; x = Symbol(&#39;x&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; styleof(x + 1, styles)  # this is an Expr</span>
 <span class="sd">    {&#39;color&#39;: &#39;black&#39;, &#39;shape&#39;: &#39;ellipse&#39;}</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">style</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">for</span> <span class="n">typ</span><span class="p">,</span> <span class="n">sty</span> <span class="ow">in</span> <span class="n">styles</span><span class="p">:</span>
@@ -184,19 +185,21 @@
 
 
 <span class="k">def</span> <span class="nf">attrprint</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;, &#39;</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Print a dictionary of attributes</span>
+    <span class="sd">&quot;&quot;&quot;Print a dictionary of attributes.</span>
 
 <span class="sd">    &gt;&gt;&gt; print(attrprint({&#39;color&#39;: &#39;blue&#39;, &#39;shape&#39;: &#39;ellipse&#39;}))</span>
 <span class="sd">    &quot;color&quot;=&quot;blue&quot;, &quot;shape&quot;=&quot;ellipse&quot;</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">delimiter</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;&quot;</span><span class="si">%s</span><span class="s1">&quot;=&quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span> <span class="o">%</span> <span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span>
 
 
 <span class="k">def</span> <span class="nf">dotnode</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">styles</span><span class="o">=</span><span class="n">default_styles</span><span class="p">,</span> <span class="n">labelfunc</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="p">(),</span> <span class="n">repeat</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; String defining a node</span>
+    <span class="sd">&quot;&quot;&quot;String defining a node.</span>
 
 <span class="sd">    &gt;&gt;&gt; print(dotnode(x))</span>
 <span class="sd">    &quot;Symbol(&#39;x&#39;)_()&quot; [&quot;color&quot;=&quot;black&quot;, &quot;label&quot;=&quot;x&quot;, &quot;shape&quot;=&quot;ellipse&quot;];</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">style</span> <span class="o">=</span> <span class="n">styleof</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">styles</span><span class="p">)</span>
 
@@ -212,7 +215,7 @@
 
 
 <span class="k">def</span> <span class="nf">dotedges</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">atom</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">Basic</span><span class="p">),</span> <span class="n">pos</span><span class="o">=</span><span class="p">(),</span> <span class="n">repeat</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; List of strings for all expr-&gt;expr.arg pairs</span>
+    <span class="sd">&quot;&quot;&quot;List of strings for all expr-&gt;expr.arg pairs.</span>
 
 <span class="sd">    &gt;&gt;&gt; for e in dotedges(x+2):</span>
 <span class="sd">    ...     print(e)</span>
@@ -223,6 +226,7 @@
 <span class="sd">    ========</span>
 
 <span class="sd">    dotprint</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">atom</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">[]</span>
@@ -317,6 +321,7 @@
 <span class="sd">    &quot;Add(Symbol(&#39;x&#39;), Integer(2))_()&quot; -&gt; &quot;Integer(2)_(0,)&quot;;</span>
 <span class="sd">    &quot;Add(Symbol(&#39;x&#39;), Integer(2))_()&quot; -&gt; &quot;Symbol(&#39;x&#39;)_(1,)&quot;;</span>
 <span class="sd">    }</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># repeat works by adding a signature tuple to the end of each node for its</span>
     <span class="c1"># position in the graph. For example, for expr = Add(x, Pow(x, 2)), the x in the</span>

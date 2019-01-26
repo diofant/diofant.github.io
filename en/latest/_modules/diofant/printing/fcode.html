@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.printing.fcode &mdash; Diofant 0.10.0b2.dev55+g97f1e5f documentation</title>
+  <title>diofant.printing.fcode &mdash; Diofant 0.10.0b2.dev59+g6273bb4 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev55+g97f1e5f
+                0.10.0b2.dev59+g6273bb4
               </div>
             
           
@@ -201,7 +201,7 @@
 
 
 <div class="viewcode-block" id="FCodePrinter"><a class="viewcode-back" href="../../../modules/printing.html#diofant.printing.fcode.FCodePrinter">[docs]</a><span class="k">class</span> <span class="nc">FCodePrinter</span><span class="p">(</span><span class="n">CodePrinter</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A printer to convert diofant expressions to strings of Fortran code&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;A printer to convert diofant expressions to strings of Fortran code.&quot;&quot;&quot;</span>
 
     <span class="n">printmethod</span> <span class="o">=</span> <span class="s2">&quot;_fcode&quot;</span>
     <span class="n">language</span> <span class="o">=</span> <span class="s2">&quot;Fortran&quot;</span>
@@ -438,6 +438,7 @@
 
 <span class="sd">        A comment line is split at white space. Code lines are split with a more</span>
 <span class="sd">        complex rule to give nice results.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># routine to find split point in a code line</span>
         <span class="n">my_alnum</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="s2">&quot;_+-.&quot;</span> <span class="o">+</span> <span class="n">string</span><span class="o">.</span><span class="n">digits</span> <span class="o">+</span> <span class="n">string</span><span class="o">.</span><span class="n">ascii_letters</span><span class="p">)</span>
@@ -504,7 +505,7 @@
         <span class="k">return</span> <span class="n">result</span>
 
 <div class="viewcode-block" id="FCodePrinter.indent_code"><a class="viewcode-back" href="../../../modules/printing.html#diofant.printing.fcode.FCodePrinter.indent_code">[docs]</a>    <span class="k">def</span> <span class="nf">indent_code</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Accepts a string of code or a list of code lines&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Accepts a string of code or a list of code lines.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">code_lines</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">indent_code</span><span class="p">(</span><span class="n">code</span><span class="o">.</span><span class="n">splitlines</span><span class="p">(</span><span class="kc">True</span><span class="p">))</span>
             <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">code_lines</span><span class="p">)</span>
@@ -659,6 +660,7 @@
 <span class="sd">          A(2, 1) = x</span>
 <span class="sd">             end if</span>
 <span class="sd">          A(3, 1) = sin(x)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">return</span> <span class="n">FCodePrinter</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span><span class="o">.</span><span class="n">doprint</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assign_to</span><span class="p">)</span></div>

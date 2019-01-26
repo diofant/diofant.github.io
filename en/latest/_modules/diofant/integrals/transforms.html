@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.integrals.transforms &mdash; Diofant 0.10.0b2.dev55+g97f1e5f documentation</title>
+  <title>diofant.integrals.transforms &mdash; Diofant 0.10.0b2.dev59+g6273bb4 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev55+g97f1e5f
+                0.10.0b2.dev59+g6273bb4
               </div>
             
           
@@ -187,6 +187,7 @@
 <span class="sd">    The hint ``needeval=True`` can be used to disable returning transform</span>
 <span class="sd">    objects, and instead raise this exception if an integral cannot be</span>
 <span class="sd">    computed.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transform</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
@@ -209,21 +210,22 @@
 
 <span class="sd">    Implement self._collapse_extra if your function returns more than just a</span>
 <span class="sd">    number and possibly a convergence condition.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">function</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; The function to be transformed. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;The function to be transformed.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">function_variable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; The dependent variable of the function to be transformed. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;The dependent variable of the function to be transformed.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">transform_variable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; The independent transform variable. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;The independent transform variable.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
 
     <span class="nd">@property</span>
@@ -231,6 +233,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This method returns the symbols that will exist when the transform</span>
 <span class="sd">        is evaluated.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="o">.</span><span class="n">free_symbols</span><span class="o">.</span><span class="n">union</span><span class="p">({</span><span class="bp">self</span><span class="o">.</span><span class="n">transform_variable</span><span class="p">})</span> \
             <span class="o">-</span> <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">function_variable</span><span class="p">}</span>
@@ -263,6 +266,7 @@
 <span class="sd">        The default values of these hints depend on the concrete transform,</span>
 <span class="sd">        usually the default is</span>
 <span class="sd">        ``(simplify, noconds, needeval) = (True, False, False)``.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">..core.function</span> <span class="k">import</span> <span class="n">AppliedUndef</span>
         <span class="n">needeval</span> <span class="o">=</span> <span class="n">hints</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;needeval&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
@@ -341,6 +345,7 @@
 
 <span class="sd">    The default value of the ``noconds`` keyword will be ``default`` (i.e. the</span>
 <span class="sd">    argument of this function).</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">make_wrapper</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
         <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
@@ -367,7 +372,7 @@
 
 <span class="nd">@_noconds</span>
 <span class="k">def</span> <span class="nf">_mellin_transform</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">s_</span><span class="p">,</span> <span class="n">integrator</span><span class="o">=</span><span class="n">_default_integrator</span><span class="p">,</span> <span class="n">simplify</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Backend function to compute Mellin transforms. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Backend function to compute Mellin transforms.&quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">count_ops</span>
     <span class="kn">from</span> <span class="nn">..functions</span> <span class="k">import</span> <span class="n">re</span><span class="p">,</span> <span class="n">Max</span><span class="p">,</span> <span class="n">Min</span>
     <span class="c1"># We use a fresh dummy, because assumptions on s might drop conditions on</span>
@@ -387,9 +392,7 @@
             <span class="s1">&#39;Mellin&#39;</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="s1">&#39;integral in unexpected form&#39;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">process_conds</span><span class="p">(</span><span class="n">cond</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Turn ``cond`` into a strip (a, b), and auxiliary conditions.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Turn ``cond`` into a strip (a, b), and auxiliary conditions.&quot;&quot;&quot;</span>
         <span class="n">a</span> <span class="o">=</span> <span class="o">-</span><span class="n">oo</span>
         <span class="n">b</span> <span class="o">=</span> <span class="n">oo</span>
         <span class="n">aux</span> <span class="o">=</span> <span class="kc">True</span>
@@ -444,6 +447,7 @@
 
 <span class="sd">    IntegralTransform</span>
 <span class="sd">    mellin_transform</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">_name</span> <span class="o">=</span> <span class="s1">&#39;Mellin&#39;</span>
@@ -503,6 +507,7 @@
 
 <span class="sd">    inverse_mellin_transform, laplace_transform, fourier_transform</span>
 <span class="sd">    hankel_transform, inverse_hankel_transform</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">MellinTransform</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">doit</span><span class="p">(</span><span class="o">**</span><span class="n">hints</span><span class="p">)</span></div>
 
@@ -529,6 +534,7 @@
 <span class="sd">    (gamma(2*s), gamma(-2*s + 1), pi)</span>
 <span class="sd">    &gt;&gt;&gt; _rewrite_sin((2*pi, 0), s, Rational(1, 2), 1)</span>
 <span class="sd">    (gamma(2*s - 1), gamma(-2*s + 2), -pi)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># (This is a separate function because it is moderately complicated,</span>
     <span class="c1">#  and I want to doctest it.)</span>
@@ -549,9 +555,7 @@
 
 
 <span class="k">class</span> <span class="nc">MellinTransformStripError</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Exception raised by _rewrite_gamma. Mainly for internal use.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Exception raised by _rewrite_gamma. Mainly for internal use.&quot;&quot;&quot;</span>
 
     <span class="k">pass</span>
 
@@ -600,6 +604,7 @@
 
 <span class="sd">    &gt;&gt;&gt; _rewrite_gamma(2**(-s+3), s, -oo, oo)</span>
 <span class="sd">    (([], []), ([], []), 1/2, 1, 8)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">ilcm</span><span class="p">,</span> <span class="n">igcd</span>
     <span class="kn">from</span> <span class="nn">..polys</span> <span class="k">import</span> <span class="n">Poly</span><span class="p">,</span> <span class="n">roots</span><span class="p">,</span> <span class="n">RootOf</span>
@@ -617,9 +622,7 @@
     <span class="n">a_</span><span class="p">,</span> <span class="n">b_</span> <span class="o">=</span> <span class="n">sympify</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">left</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">is_numer</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Decide whether pole at c lies to the left of the fundamental strip.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Decide whether pole at c lies to the left of the fundamental strip.&quot;&quot;&quot;</span>
         <span class="c1"># heuristically, this is the best chance for us to solve the inequalities</span>
         <span class="n">c</span> <span class="o">=</span> <span class="n">expand</span><span class="p">(</span><span class="n">re</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
         <span class="k">if</span> <span class="n">a_</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -712,7 +715,7 @@
             <span class="n">ufacs</span> <span class="o">=</span> <span class="n">dfacs</span>
 
         <span class="k">def</span> <span class="nf">linear_arg</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
-            <span class="sd">&quot;&quot;&quot; Test if arg is of form a*s+b, raise exception if not. &quot;&quot;&quot;</span>
+            <span class="sd">&quot;&quot;&quot;Test if arg is of form a*s+b, raise exception if not.&quot;&quot;&quot;</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">arg</span><span class="o">.</span><span class="n">is_polynomial</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
                 <span class="k">raise</span> <span class="n">exception</span><span class="p">(</span><span class="n">fact</span><span class="p">)</span>
             <span class="n">p</span> <span class="o">=</span> <span class="n">Poly</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
@@ -854,6 +857,7 @@
 <span class="k">def</span> <span class="nf">_inverse_mellin_transform</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">x_</span><span class="p">,</span> <span class="n">strip</span><span class="p">,</span> <span class="n">as_meijerg</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; A helper for the real inverse_mellin_transform function, this one here</span>
 <span class="sd">    assumes x to be real and positive.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">..functions</span> <span class="k">import</span> <span class="n">meijerg</span><span class="p">,</span> <span class="n">arg</span><span class="p">,</span> <span class="n">re</span><span class="p">,</span> <span class="n">Heaviside</span><span class="p">,</span> <span class="n">gamma</span>
     <span class="kn">from</span> <span class="nn">..polys</span> <span class="k">import</span> <span class="n">factor</span>
@@ -922,6 +926,7 @@
 
 <span class="sd">    IntegralTransform</span>
 <span class="sd">    inverse_mellin_transform</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">_name</span> <span class="o">=</span> <span class="s1">&#39;Inverse Mellin&#39;</span>
@@ -1009,6 +1014,7 @@
 
 <span class="sd">    mellin_transform</span>
 <span class="sd">    hankel_transform, inverse_hankel_transform</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">InverseMellinTransform</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">strip</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">strip</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">doit</span><span class="p">(</span><span class="o">**</span><span class="n">hints</span><span class="p">)</span></div>
 
@@ -1040,6 +1046,7 @@
 <span class="sd">    True</span>
 <span class="sd">    &gt;&gt;&gt; _simplifyconds(Ne(1, x**3), x, 0)</span>
 <span class="sd">    Ne(1, x**3)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">..core.relational</span> <span class="k">import</span> <span class="p">(</span><span class="n">StrictGreaterThan</span><span class="p">,</span> <span class="n">StrictLessThan</span><span class="p">,</span>
                                    <span class="n">Unequality</span><span class="p">)</span>
@@ -1055,6 +1062,7 @@
     <span class="k">def</span> <span class="nf">bigger</span><span class="p">(</span><span class="n">ex1</span><span class="p">,</span> <span class="n">ex2</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Return True only if |ex1| &gt; |ex2|, False only if |ex1| &lt; |ex2|.</span>
 <span class="sd">        Else return None.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">ex1</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="ow">and</span> <span class="n">ex2</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
             <span class="k">return</span>
@@ -1076,7 +1084,7 @@
             <span class="k">pass</span>
 
     <span class="k">def</span> <span class="nf">replie</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; simplify x &lt; y &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;simplify x &lt; y.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">is_positive</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">Abs</span><span class="p">))</span> \
                 <span class="ow">or</span> <span class="ow">not</span> <span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">is_positive</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">Abs</span><span class="p">)):</span>
             <span class="k">return</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">y</span>
@@ -1103,7 +1111,7 @@
 
 <span class="nd">@_noconds</span>
 <span class="k">def</span> <span class="nf">_laplace_transform</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">s_</span><span class="p">,</span> <span class="n">simplify</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; The backend function for Laplace transforms. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;The backend function for Laplace transforms.&quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">Wild</span><span class="p">,</span> <span class="n">symbols</span>
     <span class="kn">from</span> <span class="nn">..functions</span> <span class="k">import</span> <span class="p">(</span><span class="n">re</span><span class="p">,</span> <span class="n">Max</span><span class="p">,</span> <span class="n">exp</span><span class="p">,</span> <span class="n">Min</span><span class="p">,</span> <span class="n">periodic_argument</span> <span class="k">as</span> <span class="n">arg</span><span class="p">,</span>
                              <span class="n">cos</span><span class="p">,</span> <span class="n">polar_lift</span><span class="p">)</span>
@@ -1123,7 +1131,7 @@
             <span class="s1">&#39;Laplace&#39;</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="s1">&#39;integral in unexpected form&#39;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">process_conds</span><span class="p">(</span><span class="n">conds</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Turn ``conds`` into a strip and auxiliary conditions. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Turn ``conds`` into a strip and auxiliary conditions.&quot;&quot;&quot;</span>
         <span class="n">a</span> <span class="o">=</span> <span class="o">-</span><span class="n">oo</span>
         <span class="n">aux</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="n">conds</span> <span class="o">=</span> <span class="n">conjuncts</span><span class="p">(</span><span class="n">to_cnf</span><span class="p">(</span><span class="n">conds</span><span class="p">))</span>
@@ -1208,6 +1216,7 @@
 
 <span class="sd">    IntegralTransform</span>
 <span class="sd">    laplace_transform</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">_name</span> <span class="o">=</span> <span class="s1">&#39;Laplace&#39;</span>
@@ -1263,6 +1272,7 @@
 
 <span class="sd">    inverse_laplace_transform, mellin_transform, fourier_transform</span>
 <span class="sd">    hankel_transform, inverse_hankel_transform</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">MatrixBase</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s1">&#39;applyfunc&#39;</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">applyfunc</span><span class="p">(</span><span class="k">lambda</span> <span class="n">fij</span><span class="p">:</span> <span class="n">laplace_transform</span><span class="p">(</span><span class="n">fij</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="o">**</span><span class="n">hints</span><span class="p">))</span>
@@ -1271,7 +1281,7 @@
 
 <span class="nd">@_noconds_</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">_inverse_laplace_transform</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">t_</span><span class="p">,</span> <span class="n">plane</span><span class="p">,</span> <span class="n">simplify</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; The backend function for inverse Laplace transforms. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;The backend function for inverse Laplace transforms.&quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">expand_complex</span>
     <span class="kn">from</span> <span class="nn">..functions</span> <span class="k">import</span> <span class="n">exp</span><span class="p">,</span> <span class="n">Heaviside</span><span class="p">,</span> <span class="n">log</span><span class="p">,</span> <span class="n">Piecewise</span>
     <span class="kn">from</span> <span class="nn">.integrals</span> <span class="k">import</span> <span class="n">Integral</span>
@@ -1283,7 +1293,7 @@
     <span class="n">t</span> <span class="o">=</span> <span class="n">Dummy</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="n">extended_real</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">pw_simp</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Simplify a piecewise expression from hyperexpand. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Simplify a piecewise expression from hyperexpand.&quot;&quot;&quot;</span>
         <span class="c1"># XXX we break modularity here!</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">Piecewise</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
@@ -1351,6 +1361,7 @@
 
 <span class="sd">    IntegralTransform</span>
 <span class="sd">    inverse_laplace_transform</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">_name</span> <span class="o">=</span> <span class="s1">&#39;Inverse Laplace&#39;</span>
@@ -1413,6 +1424,7 @@
 
 <span class="sd">    laplace_transform</span>
 <span class="sd">    hankel_transform, inverse_hankel_transform</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">MatrixBase</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="s1">&#39;applyfunc&#39;</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">F</span><span class="o">.</span><span class="n">applyfunc</span><span class="p">(</span><span class="k">lambda</span> <span class="n">Fij</span><span class="p">:</span> <span class="n">inverse_laplace_transform</span><span class="p">(</span><span class="n">Fij</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">plane</span><span class="p">,</span> <span class="o">**</span><span class="n">hints</span><span class="p">))</span>
@@ -1431,6 +1443,7 @@
 
 <span class="sd">    For suitable choice of a and b, this reduces to the standard Fourier</span>
 <span class="sd">    and inverse Fourier transforms.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">..functions</span> <span class="k">import</span> <span class="n">exp</span>
     <span class="n">F</span> <span class="o">=</span> <span class="n">integrate</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">f</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="n">b</span><span class="o">*</span><span class="n">I</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">k</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="n">oo</span><span class="p">,</span> <span class="n">oo</span><span class="p">))</span>
@@ -1449,7 +1462,7 @@
 
 
 <span class="k">class</span> <span class="nc">FourierTypeTransform</span><span class="p">(</span><span class="n">IntegralTransform</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Base class for Fourier transforms.&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Base class for Fourier transforms.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">a</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
@@ -1480,6 +1493,7 @@
 
 <span class="sd">    IntegralTransform</span>
 <span class="sd">    fourier_transform</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">_name</span> <span class="o">=</span> <span class="s1">&#39;Fourier&#39;</span>
@@ -1518,6 +1532,7 @@
 <span class="sd">    cosine_transform, inverse_cosine_transform</span>
 <span class="sd">    hankel_transform, inverse_hankel_transform</span>
 <span class="sd">    mellin_transform, laplace_transform</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">FourierTransform</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span><span class="o">.</span><span class="n">doit</span><span class="p">(</span><span class="o">**</span><span class="n">hints</span><span class="p">)</span></div>
 
@@ -1531,6 +1546,7 @@
 
 <span class="sd">    IntegralTransform</span>
 <span class="sd">    inverse_fourier_transform</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">_name</span> <span class="o">=</span> <span class="s1">&#39;Inverse Fourier&#39;</span>
@@ -1569,6 +1585,7 @@
 <span class="sd">    cosine_transform, inverse_cosine_transform</span>
 <span class="sd">    hankel_transform, inverse_hankel_transform</span>
 <span class="sd">    mellin_transform, laplace_transform</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">InverseFourierTransform</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">doit</span><span class="p">(</span><span class="o">**</span><span class="n">hints</span><span class="p">)</span></div>
 
@@ -1587,6 +1604,7 @@
 
 <span class="sd">    For suitable choice of a and b, this reduces to the standard sine/cosine</span>
 <span class="sd">    and inverse sine/cosine transforms.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">F</span> <span class="o">=</span> <span class="n">integrate</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">f</span><span class="o">*</span><span class="n">K</span><span class="p">(</span><span class="n">b</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">k</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">oo</span><span class="p">))</span>
 
@@ -1607,6 +1625,7 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Base class for sine and cosine transforms.</span>
 <span class="sd">    Specify cls._kern.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">a</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1639,6 +1658,7 @@
 
 <span class="sd">    IntegralTransform</span>
 <span class="sd">    sine_transform</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">_name</span> <span class="o">=</span> <span class="s1">&#39;Sine&#39;</span>
@@ -1678,6 +1698,7 @@
 <span class="sd">    cosine_transform, inverse_cosine_transform</span>
 <span class="sd">    hankel_transform, inverse_hankel_transform</span>
 <span class="sd">    mellin_transform, laplace_transform</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">SineTransform</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span><span class="o">.</span><span class="n">doit</span><span class="p">(</span><span class="o">**</span><span class="n">hints</span><span class="p">)</span></div>
 
@@ -1691,6 +1712,7 @@
 
 <span class="sd">    IntegralTransform</span>
 <span class="sd">    inverse_sine_transform</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">_name</span> <span class="o">=</span> <span class="s1">&#39;Inverse Sine&#39;</span>
@@ -1731,6 +1753,7 @@
 <span class="sd">    cosine_transform, inverse_cosine_transform</span>
 <span class="sd">    hankel_transform, inverse_hankel_transform</span>
 <span class="sd">    mellin_transform, laplace_transform</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">InverseSineTransform</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">doit</span><span class="p">(</span><span class="o">**</span><span class="n">hints</span><span class="p">)</span></div>
 
@@ -1744,6 +1767,7 @@
 
 <span class="sd">    IntegralTransform</span>
 <span class="sd">    cosine_transform</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">_name</span> <span class="o">=</span> <span class="s1">&#39;Cosine&#39;</span>
@@ -1783,6 +1807,7 @@
 <span class="sd">    inverse_cosine_transform</span>
 <span class="sd">    hankel_transform, inverse_hankel_transform</span>
 <span class="sd">    mellin_transform, laplace_transform</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">CosineTransform</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span><span class="o">.</span><span class="n">doit</span><span class="p">(</span><span class="o">**</span><span class="n">hints</span><span class="p">)</span></div>
 
@@ -1796,6 +1821,7 @@
 
 <span class="sd">    IntegralTransform</span>
 <span class="sd">    inverse_cosine_transform</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">_name</span> <span class="o">=</span> <span class="s1">&#39;Inverse Cosine&#39;</span>
@@ -1835,6 +1861,7 @@
 <span class="sd">    cosine_transform</span>
 <span class="sd">    hankel_transform, inverse_hankel_transform</span>
 <span class="sd">    mellin_transform, laplace_transform</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">InverseCosineTransform</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">doit</span><span class="p">(</span><span class="o">**</span><span class="n">hints</span><span class="p">)</span></div>
 
@@ -1849,6 +1876,7 @@
 <span class="sd">    Compute a general Hankel transform</span>
 
 <span class="sd">    .. math:: F_\nu(k) = \int_{0}^\infty f(r) J_\nu(k r) r \mathrm{d} r.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">..functions</span> <span class="k">import</span> <span class="n">besselj</span>
     <span class="n">F</span> <span class="o">=</span> <span class="n">integrate</span><span class="p">(</span><span class="n">f</span><span class="o">*</span><span class="n">besselj</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="n">k</span><span class="o">*</span><span class="n">r</span><span class="p">)</span><span class="o">*</span><span class="n">r</span><span class="p">,</span> <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">oo</span><span class="p">))</span>
@@ -1867,9 +1895,7 @@
 
 
 <span class="k">class</span> <span class="nc">HankelTypeTransform</span><span class="p">(</span><span class="n">IntegralTransform</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Base class for Hankel transforms.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Base class for Hankel transforms.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">doit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">hints</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_transform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="p">,</span>
@@ -1902,6 +1928,7 @@
 
 <span class="sd">    IntegralTransform</span>
 <span class="sd">    hankel_transform</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">_name</span> <span class="o">=</span> <span class="s1">&#39;Hankel&#39;</span></div>
@@ -1944,6 +1971,7 @@
 <span class="sd">    cosine_transform, inverse_cosine_transform</span>
 <span class="sd">    inverse_hankel_transform</span>
 <span class="sd">    mellin_transform, laplace_transform</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">HankelTransform</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">nu</span><span class="p">)</span><span class="o">.</span><span class="n">doit</span><span class="p">(</span><span class="o">**</span><span class="n">hints</span><span class="p">)</span></div>
 
@@ -1957,6 +1985,7 @@
 
 <span class="sd">    IntegralTransform</span>
 <span class="sd">    inverse_hankel_transform</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">_name</span> <span class="o">=</span> <span class="s1">&#39;Inverse Hankel&#39;</span></div>
@@ -1999,6 +2028,7 @@
 <span class="sd">    cosine_transform, inverse_cosine_transform</span>
 <span class="sd">    hankel_transform</span>
 <span class="sd">    mellin_transform, laplace_transform</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">InverseHankelTransform</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">nu</span><span class="p">)</span><span class="o">.</span><span class="n">doit</span><span class="p">(</span><span class="o">**</span><span class="n">hints</span><span class="p">)</span></div>
 </pre></div>

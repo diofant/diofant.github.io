@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.series.gruntz &mdash; Diofant 0.10.0b2.dev55+g97f1e5f documentation</title>
+  <title>diofant.series.gruntz &mdash; Diofant 0.10.0b2.dev59+g6273bb4 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev55+g97f1e5f
+                0.10.0b2.dev59+g6273bb4
               </div>
             
           
@@ -210,10 +210,10 @@
 
 <span class="sd">Notes</span>
 <span class="sd">-----</span>
-
 <span class="sd">This exposition glossed over several details.  For example, limits could be</span>
 <span class="sd">computed recursively (steps 1 and 4).  Please address to the Gruntz thesis [Gruntz96]_</span>
 <span class="sd">for proof of the termination (pp. 52-60).</span>
+
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">functools</span> <span class="k">import</span> <span class="n">reduce</span>
@@ -249,6 +249,7 @@
 <span class="sd">    -1</span>
 <span class="sd">    &gt;&gt;&gt; compare(exp(x), x**5, x)</span>
 <span class="sd">    1</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># The log(exp(...)) must always be simplified here for termination.</span>
     <span class="n">la</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">exp</span> <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">is_Pow</span> <span class="ow">and</span> <span class="n">a</span><span class="o">.</span><span class="n">base</span> <span class="ow">is</span> <span class="n">E</span> <span class="k">else</span> <span class="n">log</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
@@ -276,6 +277,7 @@
 <span class="sd">    {x}</span>
 <span class="sd">    &gt;&gt;&gt; mrv(exp(x + exp(-x)), x)</span>
 <span class="sd">    {E**(-x), E**(x + E**(-x))}</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">e</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">set</span><span class="p">()</span>
@@ -328,6 +330,7 @@
 
 <span class="sd">        The result of this function is currently undefined if `e` changes</span>
 <span class="sd">        sign arbitrarily often at infinity (e.g. `\sin(x)`).</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">e</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">sgn</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="n">simplify</span><span class="p">()</span>
@@ -359,6 +362,7 @@
 <span class="sd">    -1</span>
 <span class="sd">    &gt;&gt;&gt; limitinf(x/log(x**(log(x**(log(2)/log(x))))), x)</span>
 <span class="sd">    oo</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">assert</span> <span class="n">x</span><span class="o">.</span><span class="n">is_real</span> <span class="ow">and</span> <span class="n">x</span><span class="o">.</span><span class="n">is_positive</span>
     <span class="k">assert</span> <span class="ow">not</span> <span class="n">e</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="n">Float</span><span class="p">)</span>
@@ -414,6 +418,7 @@
 
 <span class="sd">    &gt;&gt;&gt; mrv_leadterm(1/exp(-x + exp(-x)) - exp(x), x)</span>
 <span class="sd">    (-1, 0)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">e</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">e</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
@@ -470,6 +475,7 @@
 <span class="sd">    (1/m, -x)</span>
 <span class="sd">    &gt;&gt;&gt; rewrite(exp(x)*log(log(exp(x))), x, m)</span>
 <span class="sd">    (log(x)/m, -x)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">Omega</span> <span class="o">=</span> <span class="n">mrv</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">Omega</span><span class="p">:</span>

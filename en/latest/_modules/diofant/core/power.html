@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.core.power &mdash; Diofant 0.10.0b2.dev55+g97f1e5f documentation</title>
+  <title>diofant.core.power &mdash; Diofant 0.10.0b2.dev59+g6273bb4 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev55+g97f1e5f
+                0.10.0b2.dev59+g6273bb4
               </div>
             
           
@@ -324,6 +324,7 @@
 <span class="sd">    * https//en.wikipedia.org/wiki/Exponentiation</span>
 <span class="sd">    * https//en.wikipedia.org/wiki/Exponentiation#Zero_to_the_power_of_zero</span>
 <span class="sd">    * https//en.wikipedia.org/wiki/Indeterminate_forms</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">is_Pow</span> <span class="o">=</span> <span class="kc">True</span>
@@ -380,17 +381,17 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">base</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns base of the power expression. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Returns base of the power expression.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">exp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns exponent of the power expression. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Returns exponent of the power expression.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
 <div class="viewcode-block" id="Pow.class_key"><a class="viewcode-back" href="../../../modules/core.html#diofant.core.power.Pow.class_key">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">class_key</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Nice order of classes. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Nice order of classes.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span></div>
 
     <span class="k">def</span> <span class="nf">_eval_power</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
@@ -409,6 +410,7 @@
             <span class="k">def</span> <span class="nf">_half</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
                 <span class="sd">&quot;&quot;&quot;Return True if the exponent has a literal 2 as the</span>
 <span class="sd">                denominator, else None.</span>
+
 <span class="sd">                &quot;&quot;&quot;</span>
                 <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="s1">&#39;denominator&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
                     <span class="k">return</span> <span class="kc">True</span>
@@ -419,6 +421,7 @@
             <span class="k">def</span> <span class="nf">_n2</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
                 <span class="sd">&quot;&quot;&quot;Return ``e`` evaluated to a Number with 2 significant</span>
 <span class="sd">                digits, else None.</span>
+
 <span class="sd">                &quot;&quot;&quot;</span>
                 <span class="k">try</span><span class="p">:</span>
                     <span class="n">rv</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">evalf</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
@@ -688,6 +691,7 @@
 <span class="sd">            will give y**2 since (b**x)**2 == b**(2*x); if that equality does</span>
 <span class="sd">            not hold then the substitution should not occur so `bool` will be</span>
 <span class="sd">            False.</span>
+
 <span class="sd">            &quot;&quot;&quot;</span>
             <span class="n">coeff1</span><span class="p">,</span> <span class="n">terms1</span> <span class="o">=</span> <span class="n">ct1</span>
             <span class="n">coeff2</span><span class="p">,</span> <span class="n">terms2</span> <span class="o">=</span> <span class="n">ct2</span>
@@ -801,7 +805,7 @@
             <span class="k">return</span> <span class="n">transpose</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">base</span><span class="p">)</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">exp</span>
 
     <span class="k">def</span> <span class="nf">_eval_expand_power_exp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">hints</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;a**(n+m) -&gt; a**n*a**m&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;a**(n+m) -&gt; a**n*a**m.&quot;&quot;&quot;</span>
         <span class="n">b</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base</span>
         <span class="n">e</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">exp</span>
         <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">is_Add</span> <span class="ow">and</span> <span class="n">e</span><span class="o">.</span><span class="n">is_commutative</span><span class="p">:</span>
@@ -812,7 +816,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_eval_expand_power_base</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">hints</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;(a*b)**n -&gt; a**n * b**n&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;(a*b)**n -&gt; a**n * b**n.&quot;&quot;&quot;</span>
         <span class="n">force</span> <span class="o">=</span> <span class="n">hints</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;force&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 
         <span class="n">b</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base</span>
@@ -927,7 +931,7 @@
         <span class="k">return</span> <span class="n">rv</span>
 
     <span class="k">def</span> <span class="nf">_eval_expand_multinomial</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">hints</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;(a+b+..) ** n -&gt; a**n + n*a**(n-1)*b + .., n is nonzero integer&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;(a+b+..) ** n -&gt; a**n + n*a**(n-1)*b + .., n is nonzero integer.&quot;&quot;&quot;</span>
 
         <span class="n">base</span><span class="p">,</span> <span class="n">exp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span>
         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span>
@@ -1049,6 +1053,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        diofant.core.expr.Expr.as_real_imag</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">..functions</span> <span class="k">import</span> <span class="n">arg</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">sin</span>
         <span class="kn">from</span> <span class="nn">..polys.polytools</span> <span class="k">import</span> <span class="n">poly</span>
@@ -1220,6 +1225,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        diofant.core.expr.Expr.as_numer_denom</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_commutative</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span>
@@ -1261,6 +1267,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        diofant.core.basic.Basic.matches</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">expr</span> <span class="o">=</span> <span class="n">sympify</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
@@ -1428,6 +1435,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        diofant.core.expr.Expr.as_content_primitive</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">b</span><span class="p">,</span> <span class="n">e</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">as_base_exp</span><span class="p">()</span>

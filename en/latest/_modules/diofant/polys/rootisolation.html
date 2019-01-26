@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.rootisolation &mdash; Diofant 0.10.0b2.dev55+g97f1e5f documentation</title>
+  <title>diofant.polys.rootisolation &mdash; Diofant 0.10.0b2.dev59+g6273bb4 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev55+g97f1e5f
+                0.10.0b2.dev59+g6273bb4
               </div>
             
           
@@ -188,6 +188,7 @@
 
 <span class="sd">    &gt;&gt;&gt; R.dup_sturm(x**3 - 2*x**2 + x - 3)</span>
 <span class="sd">    [x**3 - 2*x**2 + x - 3, 3*x**2 - 4*x + 1, 2/9*x + 25/9, -2079/4]</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">K</span><span class="o">.</span><span class="n">is_Field</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">DomainError</span><span class="p">(</span><span class="s2">&quot;can&#39;t compute Sturm sequence over </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">K</span><span class="p">)</span>
@@ -233,6 +234,7 @@
 
 <span class="sd">    LMQ (Local Max Quadratic) bound was developed by</span>
 <span class="sd">    Akritas-Strzebonski-Vigklas [Alkiviadis09]_.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">n</span><span class="p">,</span> <span class="n">P</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">f</span><span class="p">),</span> <span class="p">[]</span>
     <span class="k">if</span> <span class="n">K</span><span class="o">.</span><span class="n">is_AlgebraicField</span><span class="p">:</span>
@@ -269,7 +271,7 @@
 
 
 <span class="k">def</span> <span class="nf">_mobius_from_interval</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">field</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Convert an open interval to a Mobius transform. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Convert an open interval to a Mobius transform.&quot;&quot;&quot;</span>
     <span class="n">s</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">I</span>
 
     <span class="n">a</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">numerator</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">denominator</span><span class="p">))</span>
@@ -279,7 +281,7 @@
 
 
 <span class="k">def</span> <span class="nf">_mobius_to_interval</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Convert a Mobius transform to an open interval. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Convert a Mobius transform to an open interval.&quot;&quot;&quot;</span>
     <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">M</span>
 
     <span class="n">s</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">a</span><span class="o">/</span><span class="n">c</span><span class="p">,</span> <span class="n">b</span><span class="o">/</span><span class="n">d</span>
@@ -288,7 +290,7 @@
 
 
 <div class="viewcode-block" id="dup_step_refine_real_root"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.rootisolation.dup_step_refine_real_root">[docs]</a><span class="k">def</span> <span class="nf">dup_step_refine_real_root</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">fast</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;One step of positive real root refinement algorithm. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;One step of positive real root refinement algorithm.&quot;&quot;&quot;</span>
     <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">M</span>
 
     <span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="n">b</span> <span class="ow">and</span> <span class="n">c</span> <span class="o">==</span> <span class="n">d</span><span class="p">:</span>
@@ -333,7 +335,7 @@
 
 
 <div class="viewcode-block" id="dup_inner_refine_real_root"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.rootisolation.dup_inner_refine_real_root">[docs]</a><span class="k">def</span> <span class="nf">dup_inner_refine_real_root</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">disjoint</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fast</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">mobius</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Refine a positive root of `f` given a Mobius transform or an interval. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Refine a positive root of `f` given a Mobius transform or an interval.&quot;&quot;&quot;</span>
     <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">M</span>
 
     <span class="k">while</span> <span class="ow">not</span> <span class="n">c</span><span class="p">:</span>
@@ -368,7 +370,7 @@
 
 
 <div class="viewcode-block" id="dup_outer_refine_real_root"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.rootisolation.dup_outer_refine_real_root">[docs]</a><span class="k">def</span> <span class="nf">dup_outer_refine_real_root</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">disjoint</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fast</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Refine a positive root of `f` given an interval `(s, t)`. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Refine a positive root of `f` given an interval `(s, t)`.&quot;&quot;&quot;</span>
     <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">_mobius_from_interval</span><span class="p">((</span><span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">),</span> <span class="n">K</span><span class="p">)</span>
 
     <span class="n">f</span> <span class="o">=</span> <span class="n">dup_transform</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">dmp_strip</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">],</span> <span class="mi">0</span><span class="p">),</span> <span class="n">dmp_strip</span><span class="p">([</span><span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">],</span> <span class="mi">0</span><span class="p">),</span> <span class="n">K</span><span class="p">)</span>
@@ -380,7 +382,7 @@
 
 
 <div class="viewcode-block" id="dup_refine_real_root"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.rootisolation.dup_refine_real_root">[docs]</a><span class="k">def</span> <span class="nf">dup_refine_real_root</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">disjoint</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fast</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Refine real root&#39;s approximating interval to the given precision. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Refine real root&#39;s approximating interval to the given precision.&quot;&quot;&quot;</span>
     <span class="n">R</span><span class="p">,</span> <span class="n">K</span> <span class="o">=</span> <span class="n">K</span><span class="p">,</span> <span class="n">K</span><span class="o">.</span><span class="n">field</span>
     <span class="n">f</span> <span class="o">=</span> <span class="n">dmp_convert</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
     <span class="n">f</span> <span class="o">=</span> <span class="n">dmp_clear_denoms</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">K</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
@@ -414,7 +416,7 @@
 
 
 <div class="viewcode-block" id="dup_inner_isolate_real_roots"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.rootisolation.dup_inner_isolate_real_roots">[docs]</a><span class="k">def</span> <span class="nf">dup_inner_isolate_real_roots</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fast</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Internal function for isolation positive roots up to given precision. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Internal function for isolation positive roots up to given precision.&quot;&quot;&quot;</span>
     <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">K</span><span class="o">.</span><span class="n">one</span><span class="p">,</span> <span class="n">K</span><span class="o">.</span><span class="n">zero</span><span class="p">,</span> <span class="n">K</span><span class="o">.</span><span class="n">zero</span><span class="p">,</span> <span class="n">K</span><span class="o">.</span><span class="n">one</span>
     <span class="n">k</span> <span class="o">=</span> <span class="n">dup_sign_variations</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
 
@@ -511,7 +513,7 @@
 
 
 <span class="k">def</span> <span class="nf">_discard_if_outside_interval</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">inf</span><span class="p">,</span> <span class="n">sup</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">negative</span><span class="p">,</span> <span class="n">fast</span><span class="p">,</span> <span class="n">mobius</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Discard an isolating interval if outside ``(inf, sup)``. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Discard an isolating interval if outside ``(inf, sup)``.&quot;&quot;&quot;</span>
     <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
         <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">_mobius_to_interval</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
 
@@ -530,7 +532,7 @@
 
 
 <div class="viewcode-block" id="dup_inner_isolate_positive_roots"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.rootisolation.dup_inner_isolate_positive_roots">[docs]</a><span class="k">def</span> <span class="nf">dup_inner_isolate_positive_roots</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">inf</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sup</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fast</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">mobius</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Iteratively compute disjoint positive root isolation intervals. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Iteratively compute disjoint positive root isolation intervals.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">sup</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">sup</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">[]</span>
 
@@ -555,7 +557,7 @@
 
 
 <div class="viewcode-block" id="dup_inner_isolate_negative_roots"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.rootisolation.dup_inner_isolate_negative_roots">[docs]</a><span class="k">def</span> <span class="nf">dup_inner_isolate_negative_roots</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">inf</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sup</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fast</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">mobius</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Iteratively compute disjoint negative root isolation intervals. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Iteratively compute disjoint negative root isolation intervals.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">inf</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">inf</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">[]</span>
 
@@ -580,7 +582,7 @@
 
 
 <span class="k">def</span> <span class="nf">_isolate_zero</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">inf</span><span class="p">,</span> <span class="n">sup</span><span class="p">,</span> <span class="n">sqf</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Handle special case of CF algorithm when ``f`` is homogeneous. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Handle special case of CF algorithm when ``f`` is homogeneous.&quot;&quot;&quot;</span>
     <span class="p">(</span><span class="n">j</span><span class="p">,),</span> <span class="n">f</span> <span class="o">=</span> <span class="n">dmp_terms_gcd</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -594,7 +596,7 @@
 
 
 <div class="viewcode-block" id="dup_isolate_real_roots_sqf"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.rootisolation.dup_isolate_real_roots_sqf">[docs]</a><span class="k">def</span> <span class="nf">dup_isolate_real_roots_sqf</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">inf</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sup</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fast</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">blackbox</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Isolate real roots of a square-free polynomial. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Isolate real roots of a square-free polynomial.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">K</span><span class="o">.</span><span class="n">is_Field</span><span class="p">:</span>
         <span class="n">R</span><span class="p">,</span> <span class="n">K</span> <span class="o">=</span> <span class="n">K</span><span class="p">,</span> <span class="n">K</span><span class="o">.</span><span class="n">field</span>
         <span class="n">f</span> <span class="o">=</span> <span class="n">dmp_convert</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
@@ -634,6 +636,7 @@
 
 <span class="sd">    Implemented algorithms use Vincent-Akritas-Strzebonski (VAS) continued</span>
 <span class="sd">    fractions approach [Alkiviadis05]_, [Alkiviadis08]_.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">K</span><span class="o">.</span><span class="n">is_Field</span><span class="p">:</span>
         <span class="n">R</span><span class="p">,</span> <span class="n">K</span> <span class="o">=</span> <span class="n">K</span><span class="p">,</span> <span class="n">K</span><span class="o">.</span><span class="n">field</span>
@@ -655,7 +658,7 @@
 
 
 <div class="viewcode-block" id="dup_isolate_real_roots_list"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.rootisolation.dup_isolate_real_roots_list">[docs]</a><span class="k">def</span> <span class="nf">dup_isolate_real_roots_list</span><span class="p">(</span><span class="n">polys</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">inf</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sup</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">basis</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fast</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Isolate real roots of a list of polynomials. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Isolate real roots of a list of polynomials.&quot;&quot;&quot;</span>
     <span class="n">R</span><span class="p">,</span> <span class="n">K</span> <span class="o">=</span> <span class="n">K</span><span class="p">,</span> <span class="n">K</span><span class="o">.</span><span class="n">field</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">polys</span><span class="p">):</span>
         <span class="n">p</span> <span class="o">=</span> <span class="n">dmp_convert</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
@@ -703,7 +706,7 @@
 
 
 <span class="k">def</span> <span class="nf">_disjoint_p</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Check if Mobius transforms define disjoint intervals. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Check if Mobius transforms define disjoint intervals.&quot;&quot;&quot;</span>
     <span class="n">a1</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">d1</span> <span class="o">=</span> <span class="n">M</span>
     <span class="n">a2</span><span class="p">,</span> <span class="n">b2</span><span class="p">,</span> <span class="n">c2</span><span class="p">,</span> <span class="n">d2</span> <span class="o">=</span> <span class="n">N</span>
 
@@ -726,7 +729,7 @@
 
 
 <span class="k">def</span> <span class="nf">_real_isolate_and_disjoin</span><span class="p">(</span><span class="n">factors</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">inf</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sup</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">basis</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fast</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Isolate real roots of a list of polynomials and disjoin intervals. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Isolate real roots of a list of polynomials and disjoin intervals.&quot;&quot;&quot;</span>
     <span class="n">I_pos</span><span class="p">,</span> <span class="n">I_neg</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
 
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">factors</span><span class="p">):</span>
@@ -787,7 +790,7 @@
 
 
 <div class="viewcode-block" id="dup_count_real_roots"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.rootisolation.dup_count_real_roots">[docs]</a><span class="k">def</span> <span class="nf">dup_count_real_roots</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">inf</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sup</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns the number of distinct real roots of ``f`` in ``[inf, sup]``. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Returns the number of distinct real roots of ``f`` in ``[inf, sup]``.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">dmp_degree_in</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="mi">0</span>
 
@@ -822,7 +825,7 @@
 
 
 <div class="viewcode-block" id="dup_isolate_imaginary_roots"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.rootisolation.dup_isolate_imaginary_roots">[docs]</a><span class="k">def</span> <span class="nf">dup_isolate_imaginary_roots</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">inf</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sup</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fast</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Isolate imaginary roots. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Isolate imaginary roots.&quot;&quot;&quot;</span>
     <span class="n">F</span> <span class="o">=</span> <span class="n">K</span><span class="o">.</span><span class="n">algebraic_field</span><span class="p">(</span><span class="n">I</span><span class="p">)</span>
     <span class="n">f</span> <span class="o">=</span> <span class="n">dmp_compose</span><span class="p">(</span><span class="n">dmp_convert</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">F</span><span class="p">),</span> <span class="p">[</span><span class="n">F</span><span class="o">.</span><span class="n">unit</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="n">F</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">dup_isolate_real_roots</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="n">eps</span><span class="p">,</span> <span class="n">inf</span><span class="o">=</span><span class="n">inf</span><span class="p">,</span> <span class="n">sup</span><span class="o">=</span><span class="n">sup</span><span class="p">,</span> <span class="n">fast</span><span class="o">=</span><span class="n">fast</span><span class="p">)</span></div>
@@ -1050,7 +1053,7 @@
 
 
 <span class="k">def</span> <span class="nf">_classify_point</span><span class="p">(</span><span class="n">re</span><span class="p">,</span> <span class="n">im</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return the half-axis (or origin) on which (re, im) point is located. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Return the half-axis (or origin) on which (re, im) point is located.&quot;&quot;&quot;</span>
     <span class="k">assert</span> <span class="ow">not</span> <span class="n">re</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">im</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">im</span><span class="p">:</span>
@@ -1069,7 +1072,7 @@
 
 
 <span class="k">def</span> <span class="nf">_intervals_to_quadrants</span><span class="p">(</span><span class="n">intervals</span><span class="p">,</span> <span class="n">f1</span><span class="p">,</span> <span class="n">f2</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">F</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Generate a sequence of extended quadrants from a list of critical points. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Generate a sequence of extended quadrants from a list of critical points.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">intervals</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">[]</span>
 
@@ -1217,7 +1220,7 @@
 
 
 <span class="k">def</span> <span class="nf">_traverse_quadrants</span><span class="p">(</span><span class="n">Q_L1</span><span class="p">,</span> <span class="n">Q_L2</span><span class="p">,</span> <span class="n">Q_L3</span><span class="p">,</span> <span class="n">Q_L4</span><span class="p">,</span> <span class="n">exclude</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Transform sequences of quadrants to a sequence of rules. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Transform sequences of quadrants to a sequence of rules.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">exclude</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
         <span class="n">edges</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
 
@@ -1280,12 +1283,12 @@
 
 
 <span class="k">def</span> <span class="nf">_reverse_intervals</span><span class="p">(</span><span class="n">intervals</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Reverse intervals for traversal from right to left and from top to bottom. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Reverse intervals for traversal from right to left and from top to bottom.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="p">[((</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">),</span> <span class="n">indices</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="n">indices</span><span class="p">,</span> <span class="n">f</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">intervals</span><span class="p">)]</span>
 
 
 <span class="k">def</span> <span class="nf">_winding_number</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">field</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Compute the winding number of the input polynomial, i.e. the number of roots. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Compute the winding number of the input polynomial, i.e. the number of roots.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="nb">sum</span><span class="p">((</span><span class="n">field</span><span class="p">(</span><span class="n">_values</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="n">field</span><span class="p">(</span><span class="n">_values</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">t</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">T</span><span class="p">),</span> <span class="n">field</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span> <span class="o">/</span> <span class="n">field</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
 
 
@@ -1337,7 +1340,7 @@
 
 
 <div class="viewcode-block" id="dup_count_complex_roots"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.rootisolation.dup_count_complex_roots">[docs]</a><span class="k">def</span> <span class="nf">dup_count_complex_roots</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">inf</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sup</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">exclude</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Count all roots in [u + v*I, s + t*I] rectangle using Collins-Krandick algorithm. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Count all roots in [u + v*I, s + t*I] rectangle using Collins-Krandick algorithm.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">K</span><span class="o">.</span><span class="n">is_Field</span><span class="p">:</span>
         <span class="n">R</span><span class="p">,</span> <span class="n">K</span> <span class="o">=</span> <span class="n">K</span><span class="p">,</span> <span class="n">K</span><span class="o">.</span><span class="n">field</span>
         <span class="n">f</span> <span class="o">=</span> <span class="n">dmp_convert</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
@@ -1371,7 +1374,7 @@
 
 
 <span class="k">def</span> <span class="nf">_vertical_bisection</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">F1</span><span class="p">,</span> <span class="n">F2</span><span class="p">,</span> <span class="n">f1</span><span class="p">,</span> <span class="n">f2</span><span class="p">,</span> <span class="n">F</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Vertical bisection step in Collins-Krandick root isolation algorithm. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Vertical bisection step in Collins-Krandick root isolation algorithm.&quot;&quot;&quot;</span>
     <span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">),</span> <span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span> <span class="o">=</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span>
 
     <span class="n">I_L1</span><span class="p">,</span> <span class="n">I_L2</span><span class="p">,</span> <span class="n">I_L3</span><span class="p">,</span> <span class="n">I_L4</span> <span class="o">=</span> <span class="n">I</span>
@@ -1478,7 +1481,7 @@
 
 
 <span class="k">def</span> <span class="nf">_horizontal_bisection</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">F1</span><span class="p">,</span> <span class="n">F2</span><span class="p">,</span> <span class="n">f1</span><span class="p">,</span> <span class="n">f2</span><span class="p">,</span> <span class="n">F</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Horizontal bisection step in Collins-Krandick root isolation algorithm. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Horizontal bisection step in Collins-Krandick root isolation algorithm.&quot;&quot;&quot;</span>
     <span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">),</span> <span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span> <span class="o">=</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span>
 
     <span class="n">I_L1</span><span class="p">,</span> <span class="n">I_L2</span><span class="p">,</span> <span class="n">I_L3</span><span class="p">,</span> <span class="n">I_L4</span> <span class="o">=</span> <span class="n">I</span>
@@ -1585,7 +1588,7 @@
 
 
 <span class="k">def</span> <span class="nf">_depth_first_select</span><span class="p">(</span><span class="n">rectangles</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Find a rectangle of minimum area for bisection. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Find a rectangle of minimum area for bisection.&quot;&quot;&quot;</span>
     <span class="n">min_area</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
 
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">),</span> <span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">),</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">rectangles</span><span class="p">):</span>
@@ -1598,7 +1601,7 @@
 
 
 <span class="k">def</span> <span class="nf">_rectangle_small_p</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">eps</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return ``True`` if the given rectangle is small enough. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Return ``True`` if the given rectangle is small enough.&quot;&quot;&quot;</span>
     <span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">),</span> <span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span> <span class="o">=</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span>
 
     <span class="k">if</span> <span class="n">eps</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -1608,7 +1611,7 @@
 
 
 <div class="viewcode-block" id="dup_isolate_complex_roots_sqf"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.rootisolation.dup_isolate_complex_roots_sqf">[docs]</a><span class="k">def</span> <span class="nf">dup_isolate_complex_roots_sqf</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">inf</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sup</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">blackbox</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Isolate complex roots of a square-free polynomial using Collins-Krandick algorithm. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Isolate complex roots of a square-free polynomial using Collins-Krandick algorithm.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">dmp_degree_in</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">[]</span>
 
@@ -1754,13 +1757,13 @@
 
 
 <div class="viewcode-block" id="dup_isolate_all_roots_sqf"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.rootisolation.dup_isolate_all_roots_sqf">[docs]</a><span class="k">def</span> <span class="nf">dup_isolate_all_roots_sqf</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">inf</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sup</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fast</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">blackbox</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Isolate real and complex roots of a square-free polynomial ``f``. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Isolate real and complex roots of a square-free polynomial ``f``.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">dup_isolate_real_roots_sqf</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="n">eps</span><span class="p">,</span> <span class="n">inf</span><span class="o">=</span><span class="n">inf</span><span class="p">,</span> <span class="n">sup</span><span class="o">=</span><span class="n">sup</span><span class="p">,</span> <span class="n">fast</span><span class="o">=</span><span class="n">fast</span><span class="p">,</span> <span class="n">blackbox</span><span class="o">=</span><span class="n">blackbox</span><span class="p">),</span>
             <span class="n">dup_isolate_complex_roots_sqf</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="n">eps</span><span class="p">,</span> <span class="n">inf</span><span class="o">=</span><span class="n">inf</span><span class="p">,</span> <span class="n">sup</span><span class="o">=</span><span class="n">sup</span><span class="p">,</span> <span class="n">blackbox</span><span class="o">=</span><span class="n">blackbox</span><span class="p">))</span></div>
 
 
 <div class="viewcode-block" id="dup_isolate_all_roots"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.rootisolation.dup_isolate_all_roots">[docs]</a><span class="k">def</span> <span class="nf">dup_isolate_all_roots</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">inf</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sup</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fast</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Isolate real and complex roots of a non-square-free polynomial ``f``. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Isolate real and complex roots of a non-square-free polynomial ``f``.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">K</span><span class="o">.</span><span class="n">is_IntegerRing</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">K</span><span class="o">.</span><span class="n">is_RationalField</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">DomainError</span><span class="p">(</span><span class="s2">&quot;isolation of real and complex roots is not supported over </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">K</span><span class="p">)</span>
 
@@ -1780,10 +1783,10 @@
 
 
 <div class="viewcode-block" id="RealInterval"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.rootisolation.RealInterval">[docs]</a><span class="k">class</span> <span class="nc">RealInterval</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;A fully qualified representation of a real isolation interval. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;A fully qualified representation of a real isolation interval.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">dom</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Initialize new real interval with complete information. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Initialize new real interval with complete information.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
             <span class="n">s</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">data</span>
 
@@ -1808,7 +1811,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">a</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the position of the left end. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Return the position of the left end.&quot;&quot;&quot;</span>
         <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mobius</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">neg</span><span class="p">:</span>
@@ -1822,7 +1825,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">b</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the position of the right end. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Return the position of the right end.&quot;&quot;&quot;</span>
         <span class="n">was</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">neg</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">neg</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">was</span>
         <span class="n">rv</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span>
@@ -1831,19 +1834,19 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">center</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the center of the real isolating interval. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Return the center of the real isolating interval.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
 
 <div class="viewcode-block" id="RealInterval.as_tuple"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.rootisolation.RealInterval.as_tuple">[docs]</a>    <span class="k">def</span> <span class="nf">as_tuple</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return tuple representation of real isolating interval. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Return tuple representation of real isolating interval.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span></div>
 
 <div class="viewcode-block" id="RealInterval.is_disjoint"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.rootisolation.RealInterval.is_disjoint">[docs]</a>    <span class="k">def</span> <span class="nf">is_disjoint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return ``True`` if two isolation intervals are disjoint. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Return ``True`` if two isolation intervals are disjoint.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">&lt;=</span> <span class="n">other</span><span class="o">.</span><span class="n">a</span> <span class="ow">or</span> <span class="n">other</span><span class="o">.</span><span class="n">b</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span></div>
 
 <div class="viewcode-block" id="RealInterval.refine"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.rootisolation.RealInterval.refine">[docs]</a>    <span class="k">def</span> <span class="nf">refine</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Perform one step of real root refinement algorithm. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Perform one step of real root refinement algorithm.&quot;&quot;&quot;</span>
         <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">mobius</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
 
         <span class="n">f</span><span class="p">,</span> <span class="n">mobius</span> <span class="o">=</span> <span class="n">dup_inner_refine_real_root</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mobius</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">mobius</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -1855,10 +1858,11 @@
     <span class="sd">&quot;&quot;&quot;A fully qualified representation of a complex isolation interval.</span>
 <span class="sd">    The printed form is shown as (x1, y1) x (x2, y2): the southwest x northeast</span>
 <span class="sd">    coordinates of the interval&#39;s rectangle.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">F1</span><span class="p">,</span> <span class="n">F2</span><span class="p">,</span> <span class="n">f1</span><span class="p">,</span> <span class="n">f2</span><span class="p">,</span> <span class="n">dom</span><span class="p">,</span> <span class="n">conj</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Initialize new complex interval with complete information. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Initialize new complex interval with complete information.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span>  <span class="c1"># the southwest and northeast corner: (x1, y1), (x2, y2)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">I</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Q</span> <span class="o">=</span> <span class="n">I</span><span class="p">,</span> <span class="n">Q</span>
 
@@ -1870,12 +1874,12 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">ax</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return ``x`` coordinate of south-western corner. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Return ``x`` coordinate of south-western corner.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">ay</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return ``y`` coordinate of south-western corner. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Return ``y`` coordinate of south-western corner.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">conj</span><span class="p">:</span>
             <span class="k">return</span> <span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
@@ -1883,12 +1887,12 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">bx</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return ``x`` coordinate of north-eastern corner. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Return ``x`` coordinate of north-eastern corner.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">by</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return ``y`` coordinate of north-eastern corner. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Return ``y`` coordinate of north-eastern corner.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">conj</span><span class="p">:</span>
             <span class="k">return</span> <span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
@@ -1896,15 +1900,15 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">center</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the center of the complex isolating interval. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Return the center of the complex isolating interval.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ax</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">bx</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ay</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">by</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
 
 <div class="viewcode-block" id="ComplexInterval.as_tuple"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.rootisolation.ComplexInterval.as_tuple">[docs]</a>    <span class="k">def</span> <span class="nf">as_tuple</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return tuple representation of complex isolating interval. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Return tuple representation of complex isolating interval.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ay</span><span class="p">),</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bx</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">by</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="ComplexInterval.conjugate"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.rootisolation.ComplexInterval.conjugate">[docs]</a>    <span class="k">def</span> <span class="nf">conjugate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return conjugated isolating interval. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Return conjugated isolating interval.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">ComplexInterval</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">I</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Q</span><span class="p">,</span>
                                <span class="bp">self</span><span class="o">.</span><span class="n">F1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">F2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">f1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">f2</span><span class="p">,</span>
                                <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">conj</span><span class="p">)</span></div>
@@ -1921,6 +1925,7 @@
 <span class="sd">        re_disjoint : bool, optional</span>
 <span class="sd">            If enabled, return ``True`` only if real projections of isolation</span>
 <span class="sd">            intervals are disjoint.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">test_re</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bx</span> <span class="o">&lt;=</span> <span class="n">other</span><span class="o">.</span><span class="n">ax</span> <span class="ow">or</span> <span class="n">other</span><span class="o">.</span><span class="n">bx</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ax</span>
         <span class="k">if</span> <span class="n">test_re</span> <span class="ow">or</span> <span class="n">re_disjoint</span><span class="p">:</span>
@@ -1968,7 +1973,7 @@
                        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="ComplexInterval.refine"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.rootisolation.ComplexInterval.refine">[docs]</a>    <span class="k">def</span> <span class="nf">refine</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Perform one step of complex root refinement algorithm. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Perform one step of complex root refinement algorithm.&quot;&quot;&quot;</span>
         <span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">),</span> <span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span>
 
         <span class="n">I</span><span class="p">,</span> <span class="n">Q</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">I</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Q</span>

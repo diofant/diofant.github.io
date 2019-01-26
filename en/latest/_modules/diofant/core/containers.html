@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.core.containers &mdash; Diofant 0.10.0b2.dev55+g97f1e5f documentation</title>
+  <title>diofant.core.containers &mdash; Diofant 0.10.0b2.dev59+g6273bb4 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev55+g97f1e5f
+                0.10.0b2.dev59+g6273bb4
               </div>
             
           
@@ -182,6 +182,7 @@
 <span class="sd">    (b, c)</span>
 <span class="sd">    &gt;&gt;&gt; Tuple(a, b, c).subs({a: d})</span>
 <span class="sd">    (d, b, c)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
@@ -254,13 +255,14 @@
     <span class="c1"># XXX: Basic defines count() as something different, so we can&#39;t</span>
     <span class="c1"># redefine it here. Originally this lead to cse() test failure.</span>
 <div class="viewcode-block" id="Tuple.tuple_count"><a class="viewcode-back" href="../../../modules/core.html#diofant.core.containers.Tuple.tuple_count">[docs]</a>    <span class="k">def</span> <span class="nf">tuple_count</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;T.count(value) -&gt; integer -- return number of occurrences of value&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;T.count(value) -&gt; integer -- return number of occurrences of value.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Tuple.index"><a class="viewcode-back" href="../../../modules/core.html#diofant.core.containers.Tuple.index">[docs]</a>    <span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;T.index(value, [start, [stop]]) -&gt; integer -- return first index of value.</span>
 
 <span class="sd">        Raises ValueError if the value is not present.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># XXX: One would expect:</span>
         <span class="c1">#</span>
@@ -302,6 +304,7 @@
 
 <span class="sd">    &gt;&gt;&gt; g(0, (1, 2), 3)</span>
 <span class="sd">    (0, (1, 2), 3)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">wrap_tuples</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw_args</span><span class="p">):</span>
         <span class="n">newargs</span> <span class="o">=</span> <span class="p">[]</span>
@@ -358,7 +361,7 @@
         <span class="k">return</span> <span class="n">obj</span>
 
     <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;x.__getitem__(y) &lt;==&gt; x[y]&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;x.__getitem__(y) &lt;==&gt; x[y].&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dict</span><span class="p">[</span><span class="n">sympify</span><span class="p">(</span><span class="n">key</span><span class="p">)]</span>
 
     <span class="k">def</span> <span class="nf">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
@@ -372,27 +375,28 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        diofant.core.basic.Basic.args</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Dict.items"><a class="viewcode-back" href="../../../modules/core.html#diofant.core.containers.Dict.items">[docs]</a>    <span class="k">def</span> <span class="nf">items</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;D.items() -&gt; list of D&#39;s (key, value) pairs, as 2-tuples&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;D.items() -&gt; list of D&#39;s (key, value) pairs, as 2-tuples.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="Dict.keys"><a class="viewcode-back" href="../../../modules/core.html#diofant.core.containers.Dict.keys">[docs]</a>    <span class="k">def</span> <span class="nf">keys</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;D.keys() -&gt; list of D&#39;s keys&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;D.keys() -&gt; list of D&#39;s keys.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="Dict.values"><a class="viewcode-back" href="../../../modules/core.html#diofant.core.containers.Dict.values">[docs]</a>    <span class="k">def</span> <span class="nf">values</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;D.values() -&gt; list of D&#39;s values&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;D.values() -&gt; list of D&#39;s values.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dict</span><span class="o">.</span><span class="n">values</span><span class="p">()</span></div>
 
     <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;x.__iter__() &lt;==&gt; iter(x)&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;x.__iter__() &lt;==&gt; iter(x).&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dict</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;x.__len__() &lt;==&gt; len(x)&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;x.__len__() &lt;==&gt; len(x).&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dict</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span>
 
 <div class="viewcode-block" id="Dict.get"><a class="viewcode-back" href="../../../modules/core.html#diofant.core.containers.Dict.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -400,7 +404,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">sympify</span><span class="p">(</span><span class="n">key</span><span class="p">),</span> <span class="n">default</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;D.__contains__(k) -&gt; True if D has a key k, else False&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;D.__contains__(k) -&gt; True if D has a key k, else False.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">sympify</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dict</span>
 
     <span class="k">def</span> <span class="nf">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.functions.elementary.trigonometric &mdash; Diofant 0.10.0b2.dev55+g97f1e5f documentation</title>
+  <title>diofant.functions.elementary.trigonometric &mdash; Diofant 0.10.0b2.dev59+g6273bb4 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev55+g97f1e5f
+                0.10.0b2.dev59+g6273bb4
               </div>
             
           
@@ -172,7 +172,7 @@
 
 
 <span class="k">class</span> <span class="nc">TrigonometricFunction</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Base class for trigonometric functions. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Base class for trigonometric functions.&quot;&quot;&quot;</span>
 
     <span class="n">unbranched</span> <span class="o">=</span> <span class="kc">True</span>
 
@@ -207,6 +207,7 @@
 <span class="sd">    (x, pi/2)</span>
 <span class="sd">    &gt;&gt;&gt; _peeloff_pi(x + 2*pi/3 + pi*y)</span>
 <span class="sd">    (x + pi*y + pi/6, pi/2)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">Add</span><span class="o">.</span><span class="n">make_args</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">a</span> <span class="ow">is</span> <span class="n">pi</span><span class="p">:</span>
@@ -256,6 +257,7 @@
 <span class="sd">    2</span>
 <span class="sd">    &gt;&gt;&gt; _pi_coeff(2*Dummy(even=True)*pi)</span>
 <span class="sd">    0</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">arg</span> <span class="o">=</span> <span class="n">sympify</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">arg</span> <span class="ow">is</span> <span class="n">pi</span><span class="p">:</span>
@@ -344,6 +346,7 @@
 <span class="sd">    * https://dlmf.nist.gov/4.14</span>
 <span class="sd">    * http://functions.wolfram.com/ElementaryFunctions/Sin</span>
 <span class="sd">    * http://mathworld.wolfram.com/TrigonometryAngles.html</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">fdiff</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argindex</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
@@ -587,6 +590,7 @@
 <span class="sd">    * https//en.wikipedia.org/wiki/Trigonometric_functions</span>
 <span class="sd">    * https://dlmf.nist.gov/4.14</span>
 <span class="sd">    * http://functions.wolfram.com/ElementaryFunctions/Cos</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">fdiff</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argindex</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
@@ -951,6 +955,7 @@
 <span class="sd">    * https//en.wikipedia.org/wiki/Trigonometric_functions</span>
 <span class="sd">    * https://dlmf.nist.gov/4.14</span>
 <span class="sd">    * http://functions.wolfram.com/ElementaryFunctions/Tan</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">fdiff</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argindex</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
@@ -960,9 +965,7 @@
             <span class="k">raise</span> <span class="n">ArgumentIndexError</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argindex</span><span class="p">)</span>
 
 <div class="viewcode-block" id="tan.inverse"><a class="viewcode-back" href="../../../../modules/functions/elementary.html#diofant.functions.elementary.trigonometric.tan.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argindex</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns the inverse of this function.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Returns the inverse of this function.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">atan</span></div>
 
     <span class="nd">@classmethod</span>
@@ -1186,7 +1189,7 @@
 
 
 <span class="k">class</span> <span class="nc">ReciprocalTrigonometricFunction</span><span class="p">(</span><span class="n">TrigonometricFunction</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Base class for reciprocal functions of trigonometric functions. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Base class for reciprocal functions of trigonometric functions.&quot;&quot;&quot;</span>
 
     <span class="n">_reciprocal_of</span> <span class="o">=</span> <span class="kc">None</span>       <span class="c1"># mandatory, to be defined in subclass</span>
 
@@ -1337,6 +1340,7 @@
 <span class="sd">    * https//en.wikipedia.org/wiki/Trigonometric_functions</span>
 <span class="sd">    * https://dlmf.nist.gov/4.14</span>
 <span class="sd">    * http://functions.wolfram.com/ElementaryFunctions/Sec</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">_reciprocal_of</span> <span class="o">=</span> <span class="n">cos</span>
@@ -1412,6 +1416,7 @@
 <span class="sd">    * https//en.wikipedia.org/wiki/Trigonometric_functions</span>
 <span class="sd">    * https://dlmf.nist.gov/4.14</span>
 <span class="sd">    * http://functions.wolfram.com/ElementaryFunctions/Csc</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">_reciprocal_of</span> <span class="o">=</span> <span class="n">sin</span>
@@ -1488,6 +1493,7 @@
 <span class="sd">    * https//en.wikipedia.org/wiki/Trigonometric_functions</span>
 <span class="sd">    * https://dlmf.nist.gov/4.14</span>
 <span class="sd">    * http://functions.wolfram.com/ElementaryFunctions/Cot</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">_reciprocal_of</span> <span class="o">=</span> <span class="n">tan</span>
@@ -1500,9 +1506,7 @@
             <span class="k">raise</span> <span class="n">ArgumentIndexError</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argindex</span><span class="p">)</span>
 
 <div class="viewcode-block" id="cot.inverse"><a class="viewcode-back" href="../../../../modules/functions/elementary.html#diofant.functions.elementary.trigonometric.cot.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argindex</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns the inverse of this function.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Returns the inverse of this function.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">acot</span></div>
 
     <span class="k">def</span> <span class="nf">_eval_rewrite_as_tan</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
@@ -1624,6 +1628,7 @@
 <span class="sd">    * https//en.wikipedia.org/wiki/Inverse_trigonometric_functions</span>
 <span class="sd">    * https://dlmf.nist.gov/4.23</span>
 <span class="sd">    * http://functions.wolfram.com/ElementaryFunctions/ArcSin</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">fdiff</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argindex</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
@@ -1744,9 +1749,7 @@
             <span class="k">return</span> <span class="n">fuzzy_not</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">is_positive</span><span class="p">)</span>
 
 <div class="viewcode-block" id="asin.inverse"><a class="viewcode-back" href="../../../../modules/functions/elementary.html#diofant.functions.elementary.trigonometric.asin.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argindex</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns the inverse of this function.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Returns the inverse of this function.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">sin</span></div></div>
 
 
@@ -1797,6 +1800,7 @@
 <span class="sd">    * https//en.wikipedia.org/wiki/Inverse_trigonometric_functions</span>
 <span class="sd">    * https://dlmf.nist.gov/4.23</span>
 <span class="sd">    * http://functions.wolfram.com/ElementaryFunctions/ArcCos</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">fdiff</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argindex</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
@@ -1894,9 +1898,7 @@
         <span class="k">return</span> <span class="n">atan</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">x</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
 
 <div class="viewcode-block" id="acos.inverse"><a class="viewcode-back" href="../../../../modules/functions/elementary.html#diofant.functions.elementary.trigonometric.acos.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argindex</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns the inverse of this function.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Returns the inverse of this function.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">cos</span></div>
 
     <span class="k">def</span> <span class="nf">_eval_rewrite_as_acot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
@@ -1961,6 +1963,7 @@
 <span class="sd">    * https//en.wikipedia.org/wiki/Inverse_trigonometric_functions</span>
 <span class="sd">    * https://dlmf.nist.gov/4.23</span>
 <span class="sd">    * http://functions.wolfram.com/ElementaryFunctions/ArcTan</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">fdiff</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argindex</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
@@ -2055,9 +2058,7 @@
             <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_eval_aseries</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">args0</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">logx</span><span class="p">)</span>
 
 <div class="viewcode-block" id="atan.inverse"><a class="viewcode-back" href="../../../../modules/functions/elementary.html#diofant.functions.elementary.trigonometric.atan.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argindex</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns the inverse of this function.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Returns the inverse of this function.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">tan</span></div>
 
     <span class="k">def</span> <span class="nf">_eval_rewrite_as_asin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
@@ -2106,6 +2107,7 @@
 <span class="sd">    * https://dlmf.nist.gov/4.23</span>
 <span class="sd">    * http://functions.wolfram.com/ElementaryFunctions/ArcCot</span>
 <span class="sd">    * https//en.wikipedia.org/wiki/Inverse_trigonometric_functions</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">fdiff</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argindex</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
@@ -2201,9 +2203,7 @@
             <span class="p">(</span><span class="n">log</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">I</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">I</span><span class="p">)))</span>
 
 <div class="viewcode-block" id="acot.inverse"><a class="viewcode-back" href="../../../../modules/functions/elementary.html#diofant.functions.elementary.trigonometric.acot.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argindex</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns the inverse of this function.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Returns the inverse of this function.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">cot</span></div>
 
     <span class="k">def</span> <span class="nf">_eval_rewrite_as_asin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
@@ -2284,6 +2284,7 @@
 <span class="sd">    * https://dlmf.nist.gov/4.23</span>
 <span class="sd">    * http://functions.wolfram.com/ElementaryFunctions/ArcSec</span>
 <span class="sd">    * https://reference.wolfram.com/language/ref/ArcSec.html</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="nd">@classmethod</span>
@@ -2305,9 +2306,7 @@
             <span class="k">raise</span> <span class="n">ArgumentIndexError</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argindex</span><span class="p">)</span>
 
 <div class="viewcode-block" id="asec.inverse"><a class="viewcode-back" href="../../../../modules/functions/elementary.html#diofant.functions.elementary.trigonometric.asec.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argindex</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns the inverse of this function.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Returns the inverse of this function.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">sec</span></div>
 
     <span class="k">def</span> <span class="nf">_eval_as_leading_term</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
@@ -2379,6 +2378,7 @@
 <span class="sd">    * https//en.wikipedia.org/wiki/Inverse_trigonometric_functions</span>
 <span class="sd">    * https://dlmf.nist.gov/4.23</span>
 <span class="sd">    * http://functions.wolfram.com/ElementaryFunctions/ArcCsc</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="nd">@classmethod</span>
@@ -2398,9 +2398,7 @@
             <span class="k">raise</span> <span class="n">ArgumentIndexError</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argindex</span><span class="p">)</span>
 
 <div class="viewcode-block" id="acsc.inverse"><a class="viewcode-back" href="../../../../modules/functions/elementary.html#diofant.functions.elementary.trigonometric.acsc.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argindex</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns the inverse of this function.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Returns the inverse of this function.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">csc</span></div>
 
     <span class="k">def</span> <span class="nf">_eval_as_leading_term</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
@@ -2527,6 +2525,7 @@
 <span class="sd">    * https//en.wikipedia.org/wiki/Inverse_trigonometric_functions</span>
 <span class="sd">    * https//en.wikipedia.org/wiki/Atan2</span>
 <span class="sd">    * http://functions.wolfram.com/ElementaryFunctions/ArcTan2</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="nd">@classmethod</span>

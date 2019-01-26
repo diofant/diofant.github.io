@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.vector.dyadic &mdash; Diofant 0.10.0b2.dev55+g97f1e5f documentation</title>
+  <title>diofant.vector.dyadic &mdash; Diofant 0.10.0b2.dev59+g6273bb4 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev55+g97f1e5f
+                0.10.0b2.dev59+g6273bb4
               </div>
             
           
@@ -169,6 +169,7 @@
 
 <span class="sd">    * https//en.wikipedia.org/wiki/Dyadic_tensor</span>
 <span class="sd">    * Kane, T., Levinson, D. Dynamics Theory and Applications. 1985 McGraw-Hill</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">_op_priority</span> <span class="o">=</span> <span class="mf">13.0</span>
@@ -209,6 +210,7 @@
 <span class="sd">        (N.i|N.j)</span>
 <span class="sd">        &gt;&gt;&gt; D1.dot(N.j)</span>
 <span class="sd">        N.i</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="kn">from</span> <span class="nn">.vector</span> <span class="k">import</span> <span class="n">Vector</span>
@@ -256,6 +258,7 @@
 <span class="sd">        &gt;&gt;&gt; d = N.i.outer(N.i)</span>
 <span class="sd">        &gt;&gt;&gt; d.cross(N.j)</span>
 <span class="sd">        (N.i|N.k)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="kn">from</span> <span class="nn">.vector</span> <span class="k">import</span> <span class="n">Vector</span>
@@ -323,9 +326,7 @@
 
 
 <span class="k">class</span> <span class="nc">BaseDyadic</span><span class="p">(</span><span class="n">Dyadic</span><span class="p">,</span> <span class="n">AtomicExpr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Class to denote a base dyadic tensor component.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Class to denote a base dyadic tensor component.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">vector1</span><span class="p">,</span> <span class="n">vector2</span><span class="p">):</span>
         <span class="kn">from</span> <span class="nn">.vector</span> <span class="k">import</span> <span class="n">Vector</span><span class="p">,</span> <span class="n">BaseVector</span><span class="p">,</span> <span class="n">VectorZero</span>
@@ -359,7 +360,7 @@
 
 
 <span class="k">class</span> <span class="nc">DyadicMul</span><span class="p">(</span><span class="n">BasisDependentMul</span><span class="p">,</span> <span class="n">Dyadic</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Products of scalars and BaseDyadics &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Products of scalars and BaseDyadics.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
         <span class="n">obj</span> <span class="o">=</span> <span class="n">BasisDependentMul</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
@@ -367,19 +368,20 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">base_dyadic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; The BaseDyadic involved in the product. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;The BaseDyadic involved in the product.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_base_instance</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">measure_number</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; The scalar expression involved in the definition of</span>
 <span class="sd">        this DyadicMul.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_measure_number</span>
 
 
 <span class="k">class</span> <span class="nc">DyadicAdd</span><span class="p">(</span><span class="n">BasisDependentAdd</span><span class="p">,</span> <span class="n">Dyadic</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Class to hold dyadic sums &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Class to hold dyadic sums.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
         <span class="n">obj</span> <span class="o">=</span> <span class="n">BasisDependentAdd</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
@@ -399,9 +401,7 @@
 
 
 <span class="k">class</span> <span class="nc">DyadicZero</span><span class="p">(</span><span class="n">BasisDependentZero</span><span class="p">,</span> <span class="n">Dyadic</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Class to denote a zero dyadic</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Class to denote a zero dyadic.&quot;&quot;&quot;</span>
 
     <span class="n">_op_priority</span> <span class="o">=</span> <span class="mf">13.1</span>
     <span class="n">_pretty_form</span> <span class="o">=</span> <span class="s1">&#39;(0|0)&#39;</span>
@@ -413,7 +413,7 @@
 
 
 <span class="k">def</span> <span class="nf">_dyad_div</span><span class="p">(</span><span class="n">one</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Helper for division involving dyadics &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Helper for division involving dyadics.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Dyadic</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Cannot divide two dyadics&quot;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>

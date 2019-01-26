@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.sets.sets &mdash; Diofant 0.10.0b2.dev55+g97f1e5f documentation</title>
+  <title>diofant.sets.sets &mdash; Diofant 0.10.0b2.dev59+g6273bb4 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev55+g97f1e5f
+                0.10.0b2.dev59+g6273bb4
               </div>
             
           
@@ -178,6 +178,7 @@
 <span class="sd">    Real intervals are represented by the :class:`Interval` class and unions of</span>
 <span class="sd">    sets by the :class:`Union` class. The empty set is represented by the</span>
 <span class="sd">    :class:`EmptySet` class and available as a singleton as ``S.EmptySet``.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">is_number</span> <span class="o">=</span> <span class="kc">False</span>
@@ -196,9 +197,7 @@
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">_infimum_key</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return infimum (if possible) else oo.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Return infimum (if possible) else oo.&quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">infimum</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">inf</span>
             <span class="k">assert</span> <span class="n">infimum</span><span class="o">.</span><span class="n">is_comparable</span>
@@ -229,6 +228,7 @@
 <span class="sd">        (1, 2]</span>
 <span class="sd">        &gt;&gt;&gt; Interval(1, 3) - FiniteSet(2)</span>
 <span class="sd">        [1, 2) U (2, 3]</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">Union</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span></div>
 
@@ -239,6 +239,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Interval(1, 3).intersection(Interval(1, 2))</span>
 <span class="sd">        [1, 2]</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">Intersection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span></div>
 
@@ -253,6 +254,7 @@
 <span class="sd">        be a :class:`Union`, :class:`FiniteSet`, or :class:`EmptySet`</span>
 
 <span class="sd">        Used within the :class:`Intersection` class</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span>
 
@@ -272,13 +274,12 @@
 <span class="sd">        ==========</span>
 
 <span class="sd">        * https//en.wikipedia.org/wiki/Disjoint_sets</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="o">==</span> <span class="n">S</span><span class="o">.</span><span class="n">EmptySet</span></div>
 
 <div class="viewcode-block" id="Set.isdisjoint"><a class="viewcode-back" href="../../../modules/sets.html#diofant.sets.sets.Set.isdisjoint">[docs]</a>    <span class="k">def</span> <span class="nf">isdisjoint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Alias for :meth:`is_disjoint()`</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Alias for :meth:`is_disjoint()`.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_disjoint</span><span class="p">(</span><span class="n">other</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_union</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
@@ -292,6 +293,7 @@
 <span class="sd">        must return ``None`` with _union&#39;ed with each other</span>
 
 <span class="sd">        Used within the :class:`Union` class</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span>
 
@@ -307,6 +309,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Interval(0, 1).complement(S.UniversalSet)</span>
 <span class="sd">        UniversalSet() \ [0, 1]</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">Complement</span><span class="p">(</span><span class="n">universe</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span></div>
 
@@ -368,6 +371,7 @@
 <span class="sd">        0</span>
 <span class="sd">        &gt;&gt;&gt; Union(Interval(0, 1), Interval(2, 3)).inf</span>
 <span class="sd">        0</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inf</span>
 
@@ -387,6 +391,7 @@
 <span class="sd">        1</span>
 <span class="sd">        &gt;&gt;&gt; Union(Interval(0, 1), Interval(2, 3)).sup</span>
 <span class="sd">        3</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sup</span>
 
@@ -407,6 +412,7 @@
 <span class="sd">        true</span>
 <span class="sd">        &gt;&gt;&gt; 0.5 in Interval(0, 1)</span>
 <span class="sd">        True</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">other</span> <span class="o">=</span> <span class="n">sympify</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contains</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
@@ -428,6 +434,7 @@
 <span class="sd">        True</span>
 <span class="sd">        &gt;&gt;&gt; Interval(0, 1).is_subset(Interval(0, 1, left_open=True))</span>
 <span class="sd">        False</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Set</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span>
@@ -435,9 +442,7 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unknown argument &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span> <span class="o">%</span> <span class="n">other</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Set.issubset"><a class="viewcode-back" href="../../../modules/sets.html#diofant.sets.sets.Set.issubset">[docs]</a>    <span class="k">def</span> <span class="nf">issubset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Alias for :meth:`is_subset()`</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Alias for :meth:`is_subset()`.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_subset</span><span class="p">(</span><span class="n">other</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Set.is_proper_subset"><a class="viewcode-back" href="../../../modules/sets.html#diofant.sets.sets.Set.is_proper_subset">[docs]</a>    <span class="k">def</span> <span class="nf">is_proper_subset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
@@ -451,6 +456,7 @@
 <span class="sd">        True</span>
 <span class="sd">        &gt;&gt;&gt; Interval(0, 1).is_proper_subset(Interval(0, 1))</span>
 <span class="sd">        False</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Set</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">self</span> <span class="o">!=</span> <span class="n">other</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_subset</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
@@ -468,6 +474,7 @@
 <span class="sd">        False</span>
 <span class="sd">        &gt;&gt;&gt; Interval(0, 1).is_superset(Interval(0, 1, left_open=True))</span>
 <span class="sd">        True</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Set</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">other</span><span class="o">.</span><span class="n">is_subset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
@@ -475,9 +482,7 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unknown argument &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span> <span class="o">%</span> <span class="n">other</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Set.issuperset"><a class="viewcode-back" href="../../../modules/sets.html#diofant.sets.sets.Set.issuperset">[docs]</a>    <span class="k">def</span> <span class="nf">issuperset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Alias for :meth:`is_superset()`</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Alias for :meth:`is_superset()`.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_superset</span><span class="p">(</span><span class="n">other</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Set.is_proper_superset"><a class="viewcode-back" href="../../../modules/sets.html#diofant.sets.sets.Set.is_proper_superset">[docs]</a>    <span class="k">def</span> <span class="nf">is_proper_superset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
@@ -491,6 +496,7 @@
 <span class="sd">        True</span>
 <span class="sd">        &gt;&gt;&gt; Interval(0, 1).is_proper_superset(Interval(0, 1))</span>
 <span class="sd">        False</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Set</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">self</span> <span class="o">!=</span> <span class="n">other</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_superset</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
@@ -519,6 +525,7 @@
 <span class="sd">        ==========</span>
 
 <span class="sd">        * https//en.wikipedia.org/wiki/Power_set</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eval_powerset</span><span class="p">()</span></div>
 
@@ -534,6 +541,7 @@
 <span class="sd">        1</span>
 <span class="sd">        &gt;&gt;&gt; Union(Interval(0, 1), Interval(2, 3)).measure</span>
 <span class="sd">        2</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_measure</span>
 
@@ -563,6 +571,7 @@
 <span class="sd">        {0, 1}</span>
 <span class="sd">        &gt;&gt;&gt; Interval(0, 1, True, False).boundary</span>
 <span class="sd">        {0, 1}</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_boundary</span>
 
@@ -583,6 +592,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        boundary</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">Intersection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">boundary</span><span class="p">):</span>
             <span class="k">return</span> <span class="kc">True</span>
@@ -678,6 +688,7 @@
 <span class="sd">    ==========</span>
 
 <span class="sd">    * https//en.wikipedia.org/wiki/Cartesian_product</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">is_ProductSet</span> <span class="o">=</span> <span class="kc">True</span>
@@ -725,6 +736,7 @@
 <span class="sd">        False</span>
 
 <span class="sd">        Passes operation on to constituent sets</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">element</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">):</span>
@@ -738,6 +750,7 @@
 <span class="sd">        This function should only be used internally</span>
 
 <span class="sd">        See Set._intersection for docstring</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">other</span><span class="o">.</span><span class="n">is_ProductSet</span><span class="p">:</span>
             <span class="k">return</span>
@@ -829,6 +842,7 @@
 <span class="sd">    ==========</span>
 
 <span class="sd">    * https//en.wikipedia.org/wiki/Interval_%28mathematics%29</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">is_Interval</span> <span class="o">=</span> <span class="kc">True</span>
@@ -873,6 +887,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Interval(0, 1).start</span>
 <span class="sd">        0</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
@@ -905,6 +920,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Interval(0, 1).end</span>
 <span class="sd">        1</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
@@ -922,6 +938,7 @@
 <span class="sd">        true</span>
 <span class="sd">        &gt;&gt;&gt; Interval(0, 1, left_open=False).left_open</span>
 <span class="sd">        false</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
 
@@ -937,6 +954,7 @@
 <span class="sd">        true</span>
 <span class="sd">        &gt;&gt;&gt; Interval(0, 1, right_open=False).right_open</span>
 <span class="sd">        false</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
 
@@ -945,6 +963,7 @@
 <span class="sd">        This function should only be used internally</span>
 
 <span class="sd">        See Set._intersection for docstring</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># We only know how to intersect with other intervals</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">other</span><span class="o">.</span><span class="n">is_Interval</span><span class="p">:</span>
@@ -1006,6 +1025,7 @@
 <span class="sd">        This function should only be used internally</span>
 
 <span class="sd">        See Set._union for docstring</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">other</span><span class="o">.</span><span class="n">is_UniversalSet</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">UniversalSet</span>
@@ -1166,12 +1186,12 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">is_left_unbounded</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return ``True`` if the left endpoint is negative infinity. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Return ``True`` if the left endpoint is negative infinity.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="o">==</span> <span class="o">-</span><span class="n">oo</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">is_right_unbounded</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return ``True`` if the right endpoint is positive infinity. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Return ``True`` if the right endpoint is positive infinity.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">right</span> <span class="o">==</span> <span class="n">oo</span>
 
 <div class="viewcode-block" id="Interval.as_relational"><a class="viewcode-back" href="../../../modules/sets.html#diofant.sets.sets.Interval.as_relational">[docs]</a>    <span class="k">def</span> <span class="nf">as_relational</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
@@ -1226,6 +1246,7 @@
 <span class="sd">    ==========</span>
 
 <span class="sd">    * https//en.wikipedia.org/wiki/Union_%28set_theory%29</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">is_Union</span> <span class="o">=</span> <span class="kc">True</span>
@@ -1269,6 +1290,7 @@
 
 <span class="sd">        Then we iterate through all pairs and ask the constituent sets if they</span>
 <span class="sd">        can simplify themselves with any other constituent</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1"># ===== Global Rules =====</span>
@@ -1373,7 +1395,7 @@
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">_boundary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">def</span> <span class="nf">boundary_of_set</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
-            <span class="sd">&quot;&quot;&quot; The boundary of set i minus interior of all other sets &quot;&quot;&quot;</span>
+            <span class="sd">&quot;&quot;&quot;The boundary of set i minus interior of all other sets.&quot;&quot;&quot;</span>
             <span class="n">b</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">boundary</span>
             <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">):</span>
                 <span class="k">if</span> <span class="n">j</span> <span class="o">!=</span> <span class="n">i</span><span class="p">:</span>
@@ -1385,7 +1407,7 @@
         <span class="k">return</span> <span class="n">Union</span><span class="p">(</span><span class="n">imageset</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Union.as_relational"><a class="viewcode-back" href="../../../modules/sets.html#diofant.sets.sets.Union.as_relational">[docs]</a>    <span class="k">def</span> <span class="nf">as_relational</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">symbol</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Rewrite a Union in terms of equalities and logic operators. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Rewrite a Union in terms of equalities and logic operators.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">Or</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="nb">set</span><span class="o">.</span><span class="n">as_relational</span><span class="p">(</span><span class="n">symbol</span><span class="p">)</span> <span class="k">for</span> <span class="nb">set</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">])</span></div>
 
     <span class="nd">@property</span>
@@ -1399,7 +1421,7 @@
         <span class="c1"># roundrobin recipe taken from itertools documentation:</span>
         <span class="c1"># https://docs.python.org/3/library/itertools.html#itertools-recipes</span>
         <span class="k">def</span> <span class="nf">roundrobin</span><span class="p">(</span><span class="o">*</span><span class="n">iterables</span><span class="p">):</span>
-            <span class="sd">&quot;&quot;&quot;roundrobin(&#39;ABC&#39;, &#39;D&#39;, &#39;EF&#39;) --&gt; A D E B F C&quot;&quot;&quot;</span>
+            <span class="sd">&quot;&quot;&quot;roundrobin(&#39;ABC&#39;, &#39;D&#39;, &#39;EF&#39;) --&gt; A D E B F C.&quot;&quot;&quot;</span>
             <span class="n">sentinel</span> <span class="o">=</span> <span class="nb">object</span><span class="p">()</span>
             <span class="n">it</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="o">.</span><span class="n">from_iterable</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">zip_longest</span><span class="p">(</span><span class="n">fillvalue</span><span class="o">=</span><span class="n">sentinel</span><span class="p">,</span> <span class="o">*</span><span class="n">iterables</span><span class="p">))</span>
             <span class="k">return</span> <span class="p">(</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">it</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">sentinel</span><span class="p">)</span>
@@ -1434,6 +1456,7 @@
 <span class="sd">    ==========</span>
 
 <span class="sd">    * https//en.wikipedia.org/wiki/Intersection_%28set_theory%29</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">is_Intersection</span> <span class="o">=</span> <span class="kc">True</span>
@@ -1495,6 +1518,7 @@
 
 <span class="sd">        Then we iterate through all pairs and ask the constituent sets if they</span>
 <span class="sd">        can simplify themselves with any other constituent</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1"># ===== Global Rules =====</span>
@@ -1557,7 +1581,7 @@
             <span class="k">return</span> <span class="n">Intersection</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Intersection.as_relational"><a class="viewcode-back" href="../../../modules/sets.html#diofant.sets.sets.Intersection.as_relational">[docs]</a>    <span class="k">def</span> <span class="nf">as_relational</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">symbol</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Rewrite an Intersection in terms of equalities and logic operators&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Rewrite an Intersection in terms of equalities and logic operators.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">And</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="nb">set</span><span class="o">.</span><span class="n">as_relational</span><span class="p">(</span><span class="n">symbol</span><span class="p">)</span> <span class="k">for</span> <span class="nb">set</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">])</span></div></div>
 
 
@@ -1582,6 +1606,7 @@
 <span class="sd">    ==========</span>
 
 <span class="sd">    * http://mathworld.wolfram.com/ComplementSet.html</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">is_Complement</span> <span class="o">=</span> <span class="kc">True</span>
@@ -1594,10 +1619,7 @@
 
 <div class="viewcode-block" id="Complement.reduce"><a class="viewcode-back" href="../../../modules/sets.html#diofant.sets.sets.Complement.reduce">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">reduce</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Simplify a :class:`Complement`.</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Simplify a :class:`Complement`.&quot;&quot;&quot;</span>
 
         <span class="n">result</span> <span class="o">=</span> <span class="n">B</span><span class="o">.</span><span class="n">_complement</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -1635,6 +1657,7 @@
 <span class="sd">    ==========</span>
 
 <span class="sd">    * https//en.wikipedia.org/wiki/Empty_set</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">is_EmptySet</span> <span class="o">=</span> <span class="kc">True</span>
@@ -1700,6 +1723,7 @@
 <span class="sd">    ==========</span>
 
 <span class="sd">    * https//en.wikipedia.org/wiki/Universal_set</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">is_UniversalSet</span> <span class="o">=</span> <span class="kc">True</span>
@@ -1744,6 +1768,7 @@
 <span class="sd">    ==========</span>
 
 <span class="sd">    * https//en.wikipedia.org/wiki/Finite_set</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">is_FiniteSet</span> <span class="o">=</span> <span class="kc">True</span>
@@ -1822,6 +1847,7 @@
 <span class="sd">        This function should only be used internally</span>
 
 <span class="sd">        See Set._union for docstring</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1"># If other set contains one of my elements, remove it from myself</span>
@@ -1844,6 +1870,7 @@
 <span class="sd">        True</span>
 <span class="sd">        &gt;&gt;&gt; 5 in FiniteSet(1, 2)</span>
 <span class="sd">        False</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">r</span> <span class="o">=</span> <span class="n">false</span>
         <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_elements</span><span class="p">:</span>
@@ -1881,7 +1908,7 @@
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
 
 <div class="viewcode-block" id="FiniteSet.as_relational"><a class="viewcode-back" href="../../../modules/sets.html#diofant.sets.sets.FiniteSet.as_relational">[docs]</a>    <span class="k">def</span> <span class="nf">as_relational</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">symbol</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Rewrite a FiniteSet in terms of equalities and logic operators. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Rewrite a FiniteSet in terms of equalities and logic operators.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">Or</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">Eq</span><span class="p">(</span><span class="n">symbol</span><span class="p">,</span> <span class="n">elem</span><span class="p">)</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">])</span></div>
 
     <span class="k">def</span> <span class="nf">_eval_evalf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prec</span><span class="p">):</span>
@@ -1940,6 +1967,7 @@
 <span class="sd">    ==========</span>
 
 <span class="sd">    * https//en.wikipedia.org/wiki/Symmetric_difference</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">is_SymmetricDifference</span> <span class="o">=</span> <span class="kc">True</span>
@@ -1985,6 +2013,7 @@
 <span class="sd">    ========</span>
 
 <span class="sd">    diofant.sets.fancysets.ImageSet</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">Dummy</span><span class="p">,</span> <span class="n">Lambda</span>
     <span class="kn">from</span> <span class="nn">.fancysets</span> <span class="k">import</span> <span class="n">ImageSet</span>

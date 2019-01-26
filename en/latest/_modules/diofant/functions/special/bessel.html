@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.functions.special.bessel &mdash; Diofant 0.10.0b2.dev55+g97f1e5f documentation</title>
+  <title>diofant.functions.special.bessel &mdash; Diofant 0.10.0b2.dev59+g6273bb4 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev55+g97f1e5f
+                0.10.0b2.dev59+g6273bb4
               </div>
             
           
@@ -195,16 +195,17 @@
 
 <span class="sd">    To use this base class, define class attributes ``_a`` and ``_b`` such that</span>
 <span class="sd">    ``2*F_n&#39; = -_a*F_{n+1} + b*F_{n-1}``.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">order</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; The order of the bessel-type function. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;The order of the bessel-type function.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">argument</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; The argument of the bessel-type function. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;The argument of the bessel-type function.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
     <span class="nd">@classmethod</span>
@@ -299,6 +300,7 @@
 <span class="sd">      Approximations, Volume 1</span>
 <span class="sd">    * https//en.wikipedia.org/wiki/Bessel_function</span>
 <span class="sd">    * http://functions.wolfram.com/Bessel-TypeFunctions/BesselJ/</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">_a</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span>
@@ -687,14 +689,15 @@
 <span class="sd">    ones just by a slight change in order.</span>
 
 <span class="sd">    To use this class, define the ``_rewrite`` and ``_expand`` methods.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">_expand</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">hints</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Expand self into a polynomial. Nu is guaranteed to be Integer. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Expand self into a polynomial. Nu is guaranteed to be Integer.&quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;expansion&#39;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_rewrite</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Rewrite self in terms of ordinary Bessel functions. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Rewrite self in terms of ordinary Bessel functions.&quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;rewriting&#39;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_eval_expand_func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">hints</span><span class="p">):</span>
@@ -836,6 +839,7 @@
 <span class="sd">    ========</span>
 
 <span class="sd">    jn, yn, besselj, besselk, bessely</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">pi</span>
 
@@ -883,6 +887,7 @@
 <span class="sd">    Abstract base class for Airy functions.</span>
 
 <span class="sd">    This class is meant to reduce code duplication.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">_eval_conjugate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -985,6 +990,7 @@
 <span class="sd">    * https://dlmf.nist.gov/9</span>
 <span class="sd">    * https://www.encyclopediaofmath.org/index.php/Airy_functions</span>
 <span class="sd">    * http://mathworld.wolfram.com/AiryFunctions.html</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">unbranched</span> <span class="o">=</span> <span class="kc">True</span>
@@ -1138,6 +1144,7 @@
 <span class="sd">    * https://dlmf.nist.gov/9</span>
 <span class="sd">    * https://www.encyclopediaofmath.org/index.php/Airy_functions</span>
 <span class="sd">    * http://mathworld.wolfram.com/AiryFunctions.html</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">unbranched</span> <span class="o">=</span> <span class="kc">True</span>
@@ -1342,6 +1349,7 @@
 <span class="sd">    * https://dlmf.nist.gov/9</span>
 <span class="sd">    * https://www.encyclopediaofmath.org/index.php/Airy_functions</span>
 <span class="sd">    * http://mathworld.wolfram.com/AiryFunctions.html</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">unbranched</span> <span class="o">=</span> <span class="kc">True</span>
@@ -1484,6 +1492,7 @@
 <span class="sd">    * https://dlmf.nist.gov/9</span>
 <span class="sd">    * https://www.encyclopediaofmath.org/index.php/Airy_functions</span>
 <span class="sd">    * http://mathworld.wolfram.com/AiryFunctions.html</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">unbranched</span> <span class="o">=</span> <span class="kc">True</span>

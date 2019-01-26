@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.matrices.matrices &mdash; Diofant 0.10.0b2.dev55+g97f1e5f documentation</title>
+  <title>diofant.matrices.matrices &mdash; Diofant 0.10.0b2.dev59+g6273bb4 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev55+g97f1e5f
+                0.10.0b2.dev59+g6273bb4
               </div>
             
           
@@ -185,7 +185,7 @@
 
 
 <div class="viewcode-block" id="ShapeError"><a class="viewcode-back" href="../../../modules/matrices/matrices.html#diofant.matrices.immutable.ShapeError">[docs]</a><span class="k">class</span> <span class="nc">ShapeError</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="n">MatrixError</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Wrong matrix shape&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Wrong matrix shape.&quot;&quot;&quot;</span>
 
     <span class="k">pass</span></div>
 
@@ -207,6 +207,7 @@
 <span class="sd">    &gt;&gt;&gt; func = lambdify(X, expr)</span>
 <span class="sd">    &gt;&gt;&gt; func([1, 2, 3])</span>
 <span class="sd">    (3, 6)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
@@ -414,6 +415,7 @@
 <span class="sd">        [0, 0, 4, 0],</span>
 <span class="sd">        [0, 0, 4, 0],</span>
 <span class="sd">        [2, 2, 4, 2]])</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">Matrix</span>
 
@@ -474,6 +476,7 @@
 <span class="sd">        inverse_LU</span>
 <span class="sd">        inverse_GE</span>
 <span class="sd">        inverse_ADJ</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_square</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">NonSquareMatrixError</span><span class="p">()</span>
@@ -558,6 +561,7 @@
 
 <span class="sd">        conjugate: By-element conjugation</span>
 <span class="sd">        D: Dirac conjugation</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">C</span>
 
@@ -593,6 +597,7 @@
 
 <span class="sd">        conjugate: By-element conjugation</span>
 <span class="sd">        H: Hermite conjugation</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rows</span> <span class="o">!=</span> <span class="mi">4</span><span class="p">:</span>
             <span class="c1"># In Python 3.2, properties can only return an AttributeError</span>
@@ -610,6 +615,7 @@
         <span class="sd">&quot;&quot;&quot;Return the number of elements of self.</span>
 
 <span class="sd">        Implemented mainly so bool(Matrix()) == False.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">cols</span><span class="p">)</span>
 
@@ -627,6 +633,7 @@
 <span class="sd">        2</span>
 <span class="sd">        &gt;&gt;&gt; M.cols</span>
 <span class="sd">        3</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span>
 
@@ -661,6 +668,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        matrix_multiply_elementwise</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="s1">&#39;is_Matrix&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
             <span class="n">A</span> <span class="o">=</span> <span class="bp">self</span>
@@ -765,11 +773,12 @@
 <span class="sd">        dot</span>
 <span class="sd">        cross</span>
 <span class="sd">        multiply_elementwise</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">*</span><span class="n">b</span></div>
 
 <div class="viewcode-block" id="MatrixBase.add"><a class="viewcode-back" href="../../../modules/matrices/matrices.html#diofant.matrices.immutable.MatrixBase.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return self + b &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Return self + b.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span> <span class="o">+</span> <span class="n">b</span></div>
 
 <div class="viewcode-block" id="MatrixBase.table"><a class="viewcode-back" href="../../../modules/matrices/matrices.html#diofant.matrices.immutable.MatrixBase.table">[docs]</a>    <span class="k">def</span> <span class="nf">table</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">printer</span><span class="p">,</span> <span class="n">rowstart</span><span class="o">=</span><span class="s1">&#39;[&#39;</span><span class="p">,</span> <span class="n">rowend</span><span class="o">=</span><span class="s1">&#39;]&#39;</span><span class="p">,</span> <span class="n">rowsep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span>
@@ -820,6 +829,7 @@
 <span class="sd">        &gt;&gt;&gt; print(M.table(printer, rowstart=&#39;{&#39;, rowend=&#39;}&#39;))</span>
 <span class="sd">        {  1, 2}</span>
 <span class="sd">        {-33, 4}</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Handle zero dimensions:</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rows</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -892,6 +902,7 @@
 <span class="sd">        LDLdecomposition</span>
 <span class="sd">        LUdecomposition</span>
 <span class="sd">        QRdecomposition</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_square</span><span class="p">:</span>
@@ -932,6 +943,7 @@
 <span class="sd">        cholesky</span>
 <span class="sd">        LUdecomposition</span>
 <span class="sd">        QRdecomposition</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_square</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">NonSquareMatrixError</span><span class="p">(</span><span class="s2">&quot;Matrix must be square.&quot;</span><span class="p">)</span>
@@ -952,6 +964,7 @@
 <span class="sd">        LUsolve</span>
 <span class="sd">        QRsolve</span>
 <span class="sd">        pinv_solve</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_square</span><span class="p">:</span>
@@ -975,6 +988,7 @@
 <span class="sd">        LUsolve</span>
 <span class="sd">        QRsolve</span>
 <span class="sd">        pinv_solve</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_square</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">NonSquareMatrixError</span><span class="p">(</span><span class="s2">&quot;Matrix must be square.&quot;</span><span class="p">)</span>
@@ -1000,6 +1014,7 @@
 <span class="sd">        LUsolve</span>
 <span class="sd">        QRsolve</span>
 <span class="sd">        pinv_solve</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_symmetric</span><span class="p">():</span>
             <span class="n">L</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cholesky</span><span class="p">()</span>
@@ -1033,6 +1048,7 @@
 <span class="sd">        LUsolve</span>
 <span class="sd">        QRsolve</span>
 <span class="sd">        pinv_solve</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_diagonal</span><span class="p">():</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Matrix should be diagonal&quot;</span><span class="p">)</span>
@@ -1066,6 +1082,7 @@
 <span class="sd">        LUsolve</span>
 <span class="sd">        QRsolve</span>
 <span class="sd">        pinv_solve</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_symmetric</span><span class="p">():</span>
             <span class="n">L</span><span class="p">,</span> <span class="n">D</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">LDLdecomposition</span><span class="p">()</span>
@@ -1133,6 +1150,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        inv</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;CH&#39;</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cholesky_solve</span><span class="p">(</span><span class="n">rhs</span><span class="p">)</span>
@@ -1192,6 +1210,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        key2ij</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">islice</span><span class="p">,</span> <span class="n">jslice</span> <span class="o">=</span> <span class="p">[</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="nb">slice</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">]</span>
@@ -1218,6 +1237,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        key2bounds</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">is_sequence</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
@@ -1245,6 +1265,7 @@
 <span class="sd">        Matrix([[x]])</span>
 <span class="sd">        &gt;&gt;&gt; _.atoms()</span>
 <span class="sd">        {x}</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="n">types</span><span class="p">:</span>
@@ -1265,6 +1286,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Matrix([[x], [1]]).free_symbols</span>
 <span class="sd">        {x}</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">return</span> <span class="nb">set</span><span class="p">()</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">free_symbols</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">])</span>
@@ -1281,6 +1303,7 @@
 <span class="sd">        Matrix([[y]])</span>
 <span class="sd">        &gt;&gt;&gt; Matrix(_).subs({y: x})</span>
 <span class="sd">        Matrix([[x]])</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">applyfunc</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span></div>
 
@@ -1296,6 +1319,7 @@
 <span class="sd">        Matrix([[y]])</span>
 <span class="sd">        &gt;&gt;&gt; Matrix(_).xreplace({y: x})</span>
 <span class="sd">        Matrix([[x]])</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">applyfunc</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">xreplace</span><span class="p">(</span><span class="n">rule</span><span class="p">))</span></div>
 
@@ -1326,6 +1350,7 @@
 <span class="sd">        Matrix([[x*sin(y)**2 + x*cos(y)**2]])</span>
 <span class="sd">        &gt;&gt;&gt; _.simplify()</span>
 <span class="sd">        Matrix([[x]])</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">applyfunc</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">simplify</span><span class="p">(</span><span class="n">ratio</span><span class="p">,</span> <span class="n">measure</span><span class="p">))</span></div>
     <span class="n">_eval_simplify</span> <span class="o">=</span> <span class="n">simplify</span>
@@ -1380,6 +1405,7 @@
 <span class="sd">        QRsolve</span>
 <span class="sd">        pinv_solve</span>
 <span class="sd">        LUdecomposition</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">rhs</span><span class="o">.</span><span class="n">rows</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">ShapeError</span><span class="p">(</span><span class="s2">&quot;`self` and `rhs` must have the same number of rows.&quot;</span><span class="p">)</span>
@@ -1427,6 +1453,7 @@
 <span class="sd">        LUdecomposition_Simple</span>
 <span class="sd">        LUdecompositionFF</span>
 <span class="sd">        LUsolve</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">combined</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">LUdecomposition_Simple</span><span class="p">(</span><span class="n">iszerofunc</span><span class="o">=</span><span class="n">_iszero</span><span class="p">)</span>
         <span class="n">L</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">)</span>
@@ -1451,6 +1478,7 @@
 <span class="sd">        LUdecomposition</span>
 <span class="sd">        LUdecompositionFF</span>
 <span class="sd">        LUsolve</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_square</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">NonSquareMatrixError</span><span class="p">(</span><span class="s2">&quot;A Matrix must be square to apply LUdecomposition_Simple().&quot;</span><span class="p">)</span>
@@ -1499,6 +1527,7 @@
 <span class="sd">        LUdecomposition</span>
 <span class="sd">        LUdecomposition_Simple</span>
 <span class="sd">        LUsolve</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">SparseMatrix</span>
         <span class="n">zeros</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="o">.</span><span class="n">zeros</span>
@@ -1540,6 +1569,7 @@
 <span class="sd">        minorEntry</span>
 <span class="sd">        minorMatrix</span>
 <span class="sd">        adjugate</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">cofactor</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">method</span><span class="p">))</span>
@@ -1554,6 +1584,7 @@
 <span class="sd">        minorMatrix</span>
 <span class="sd">        cofactor</span>
 <span class="sd">        cofactorMatrix</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">rows</span> <span class="ow">or</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`i` and `j` must satisfy 0 &lt;= i &lt; `self.rows` &quot;</span> <span class="o">+</span>
@@ -1569,6 +1600,7 @@
 <span class="sd">        minorEntry</span>
 <span class="sd">        cofactor</span>
 <span class="sd">        cofactorMatrix</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">rows</span> <span class="ow">or</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`i` and `j` must satisfy 0 &lt;= i &lt; `self.rows` &quot;</span> <span class="o">+</span>
@@ -1587,6 +1619,7 @@
 <span class="sd">        cofactorMatrix</span>
 <span class="sd">        minorEntry</span>
 <span class="sd">        minorMatrix</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">minorEntry</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">method</span><span class="p">)</span>
@@ -1627,6 +1660,7 @@
 
 <span class="sd">        diofant.matrices.dense.hessian</span>
 <span class="sd">        diofant.matrices.dense.wronskian</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">MatrixBase</span><span class="p">):</span>
             <span class="n">X</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_new</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
@@ -1694,6 +1728,7 @@
 <span class="sd">        LDLdecomposition</span>
 <span class="sd">        LUdecomposition</span>
 <span class="sd">        QRsolve</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">cls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span>
         <span class="n">mat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">as_mutable</span><span class="p">()</span>
@@ -1754,6 +1789,7 @@
 <span class="sd">        LUsolve</span>
 <span class="sd">        pinv_solve</span>
 <span class="sd">        QRdecomposition</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">Q</span><span class="p">,</span> <span class="n">R</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">as_mutable</span><span class="p">()</span><span class="o">.</span><span class="n">QRdecomposition</span><span class="p">()</span>
@@ -1784,6 +1820,7 @@
 <span class="sd">        dot</span>
 <span class="sd">        multiply</span>
 <span class="sd">        multiply_elementwise</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">is_sequence</span><span class="p">(</span><span class="n">b</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;`b` must be an ordered iterable or Matrix, not </span><span class="si">%s</span><span class="s2">.&quot;</span> <span class="o">%</span>
@@ -1822,6 +1859,7 @@
 <span class="sd">        cross</span>
 <span class="sd">        multiply</span>
 <span class="sd">        multiply_elementwise</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">Matrix</span>
 
@@ -1869,6 +1907,7 @@
 <span class="sd">        cross</span>
 <span class="sd">        dot</span>
 <span class="sd">        multiply</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">matrix_multiply_elementwise</span>
 
@@ -1923,6 +1962,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        normalized</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Row or Column Vector Norms</span>
         <span class="n">vals</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="ow">or</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -1968,6 +2008,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        norm</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rows</span> <span class="o">!=</span> <span class="mi">1</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">ShapeError</span><span class="p">(</span><span class="s2">&quot;A Matrix must be a vector to normalize.&quot;</span><span class="p">)</span>
@@ -1987,6 +2028,7 @@
 <span class="sd">        Matrix([[sqrt(3)/2, 0]])</span>
 <span class="sd">        &gt;&gt;&gt; V.project(-x)</span>
 <span class="sd">        Matrix([[sqrt(3)/2, 0]])</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">v</span><span class="o">*</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">/</span> <span class="n">v</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">v</span><span class="p">))</span></div>
 
@@ -2007,6 +2049,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        permuteFwd</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">copy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">perm</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
@@ -2030,6 +2073,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        permuteBkwd</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">copy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">perm</span><span class="p">)):</span>
@@ -2090,6 +2134,7 @@
 <span class="sd">        True</span>
 <span class="sd">        &gt;&gt;&gt; c.is_square</span>
 <span class="sd">        True</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rows</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span>
 
@@ -2119,6 +2164,7 @@
 <span class="sd">        &gt;&gt;&gt; d.is_zero</span>
 <span class="sd">        True</span>
 <span class="sd">        &gt;&gt;&gt; e.is_zero</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">is_zero</span> <span class="ow">is</span> <span class="kc">False</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">):</span>
             <span class="k">return</span> <span class="kc">False</span>
@@ -2142,6 +2188,7 @@
 <span class="sd">        &gt;&gt;&gt; a = Matrix([[1, 0, 1], [1, 0, 0], [1, 1, 0]])</span>
 <span class="sd">        &gt;&gt;&gt; a.is_nilpotent()</span>
 <span class="sd">        False</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">True</span>
@@ -2193,6 +2240,7 @@
 <span class="sd">        is_lower</span>
 <span class="sd">        is_diagonal</span>
 <span class="sd">        is_upper_hessenberg</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">is_zero</span>
                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">)</span>
@@ -2238,6 +2286,7 @@
 <span class="sd">        is_upper</span>
 <span class="sd">        is_diagonal</span>
 <span class="sd">        is_lower_hessenberg</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">is_zero</span>
                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">)</span>
@@ -2268,6 +2317,7 @@
 <span class="sd">        &gt;&gt;&gt; a[0, 1] = a[1, 0]*I</span>
 <span class="sd">        &gt;&gt;&gt; a.is_hermitian</span>
 <span class="sd">        False</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">def</span> <span class="nf">cond</span><span class="p">():</span>
             <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_square</span>
@@ -2304,6 +2354,7 @@
 
 <span class="sd">        is_lower_hessenberg</span>
 <span class="sd">        is_upper</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">is_zero</span>
                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">)</span>
@@ -2334,6 +2385,7 @@
 
 <span class="sd">        is_upper_hessenberg</span>
 <span class="sd">        is_lower</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">is_zero</span>
                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">)</span>
@@ -2404,6 +2456,7 @@
 <span class="sd">        &gt;&gt;&gt; m1 = m.expand()</span>
 <span class="sd">        &gt;&gt;&gt; m1.is_symmetric(simplify=False)</span>
 <span class="sd">        True</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_square</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">False</span>
@@ -2473,6 +2526,7 @@
 <span class="sd">        &gt;&gt;&gt; m = m.expand()</span>
 <span class="sd">        &gt;&gt;&gt; m.is_anti_symmetric(simplify=False)</span>
 <span class="sd">        True</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># accept custom simplification</span>
         <span class="n">simpfunc</span> <span class="o">=</span> <span class="n">simplify</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">simplify</span><span class="p">,</span> <span class="n">FunctionType</span><span class="p">)</span> <span class="k">else</span> \
@@ -2538,6 +2592,7 @@
 <span class="sd">        is_upper</span>
 <span class="sd">        is_diagonalizable</span>
 <span class="sd">        diagonalize</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">):</span>
             <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cols</span><span class="p">):</span>
@@ -2559,6 +2614,7 @@
 <span class="sd">        det_bareis</span>
 <span class="sd">        berkowitz_det</span>
 <span class="sd">        det_LU_decomposition</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1"># if methods were made internal and all determinant calculations</span>
@@ -2596,6 +2652,7 @@
 
 <span class="sd">        det</span>
 <span class="sd">        berkowitz_det</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_square</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">NonSquareMatrixError</span><span class="p">()</span>
@@ -2663,6 +2720,7 @@
 <span class="sd">        det</span>
 <span class="sd">        det_bareis</span>
 <span class="sd">        berkowitz_det</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_square</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">NonSquareMatrixError</span><span class="p">()</span>
@@ -2693,6 +2751,7 @@
 <span class="sd">        cofactorMatrix</span>
 <span class="sd">        transpose</span>
 <span class="sd">        berkowitz</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cofactorMatrix</span><span class="p">(</span><span class="n">method</span><span class="p">)</span><span class="o">.</span><span class="n">T</span></div>
@@ -2706,6 +2765,7 @@
 <span class="sd">        diofant.matrices.matrices.MatrixBase.inv</span>
 <span class="sd">        inverse_GE</span>
 <span class="sd">        inverse_ADJ</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_square</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">NonSquareMatrixError</span><span class="p">()</span>
@@ -2725,6 +2785,7 @@
 <span class="sd">        diofant.matrices.matrices.MatrixBase.inv</span>
 <span class="sd">        inverse_LU</span>
 <span class="sd">        inverse_ADJ</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">Matrix</span>
 
@@ -2747,6 +2808,7 @@
 <span class="sd">        diofant.matrices.matrices.MatrixBase.inv</span>
 <span class="sd">        inverse_LU</span>
 <span class="sd">        inverse_GE</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_square</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">NonSquareMatrixError</span><span class="p">(</span><span class="s2">&quot;A Matrix must be square to invert.&quot;</span><span class="p">)</span>
@@ -2773,6 +2835,7 @@
 <span class="sd">        (Matrix([</span>
 <span class="sd">        [1, 0],</span>
 <span class="sd">        [0, 1]]), [0, 1])</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">simpfunc</span> <span class="o">=</span> <span class="n">simplify</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span>
             <span class="n">simplify</span><span class="p">,</span> <span class="n">FunctionType</span><span class="p">)</span> <span class="k">else</span> <span class="n">_simplify</span>
@@ -2815,14 +2878,14 @@
 <span class="sd">        &gt;&gt;&gt; n = Matrix(3, 3, range(1, 10))</span>
 <span class="sd">        &gt;&gt;&gt; n.rank()</span>
 <span class="sd">        2</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">row_reduced</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rref</span><span class="p">(</span><span class="n">iszerofunc</span><span class="o">=</span><span class="n">iszerofunc</span><span class="p">,</span> <span class="n">simplify</span><span class="o">=</span><span class="n">simplify</span><span class="p">)</span>
         <span class="n">rank</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">row_reduced</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">rank</span></div>
 
 <div class="viewcode-block" id="MatrixBase.nullspace"><a class="viewcode-back" href="../../../modules/matrices/matrices.html#diofant.matrices.immutable.MatrixBase.nullspace">[docs]</a>    <span class="k">def</span> <span class="nf">nullspace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">simplify</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns list of vectors (Matrix objects) that span nullspace of self</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Returns list of vectors (Matrix objects) that span nullspace of self.&quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">zeros</span>
 
         <span class="n">simpfunc</span> <span class="o">=</span> <span class="n">simplify</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span>
@@ -2909,6 +2972,7 @@
 <span class="sd">        berkowitz_minors</span>
 <span class="sd">        berkowitz_charpoly</span>
 <span class="sd">        berkowitz_eigenvals</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">zeros</span>
 
@@ -2954,6 +3018,7 @@
 
 <span class="sd">        det</span>
 <span class="sd">        berkowitz</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_square</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">NonSquareMatrixError</span><span class="p">()</span>
@@ -2970,6 +3035,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        berkowitz</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">sign</span><span class="p">,</span> <span class="n">minors</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">NegativeOne</span><span class="p">,</span> <span class="p">[]</span>
 
@@ -3012,6 +3078,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        berkowitz</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">PurePoly</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">simplify</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">berkowitz</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">])),</span> <span class="n">x</span><span class="p">)</span></div>
 
@@ -3024,6 +3091,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        berkowitz</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">roots</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">berkowitz_charpoly</span><span class="p">(</span><span class="n">Dummy</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)),</span> <span class="o">**</span><span class="n">flags</span><span class="p">)</span></div>
 
@@ -3033,6 +3101,7 @@
 <span class="sd">        Since the roots routine doesn&#39;t always work well with Floats,</span>
 <span class="sd">        they will be replaced with Rationals before calling that</span>
 <span class="sd">        routine. If this is not desired, set flag ``rational`` to False.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># roots doesn&#39;t like Floats, so replace them with Rationals</span>
         <span class="c1"># unless the nsimplify flag indicates that this has already</span>
@@ -3062,6 +3131,7 @@
 <span class="sd">        for computation purposes, but the answers will be returned after being</span>
 <span class="sd">        evaluated with evalf. If it is desired to removed small imaginary</span>
 <span class="sd">        portions during the evalf step, pass a value for the ``chop`` flag.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">eye</span>
 
@@ -3127,6 +3197,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        condition_number</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">mat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">as_mutable</span><span class="p">()</span>
         <span class="c1"># Compute eigenvalues of A.H A</span>
@@ -3157,6 +3228,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        singular_values</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="p">:</span>
@@ -3185,6 +3257,7 @@
 
 <span class="sd">        limit</span>
 <span class="sd">        diff</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span><span class="p">,</span>
                          <span class="k">lambda</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="bp">self</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">))</span></div>
@@ -3206,6 +3279,7 @@
 
 <span class="sd">        integrate</span>
 <span class="sd">        diff</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span><span class="p">,</span>
                          <span class="k">lambda</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="bp">self</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">))</span></div>
@@ -3227,6 +3301,7 @@
 
 <span class="sd">        integrate</span>
 <span class="sd">        limit</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span><span class="p">,</span>
                          <span class="k">lambda</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="bp">self</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">))</span></div>
@@ -3253,6 +3328,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        vech</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span></div>
 
@@ -3284,6 +3360,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        vec</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">zeros</span>
 
@@ -3457,6 +3534,7 @@
 
 <span class="sd">        is_diagonal</span>
 <span class="sd">        diagonalize</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_square</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">False</span>
@@ -3698,6 +3776,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        jordan_cells</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">P</span><span class="p">,</span> <span class="n">Jcells</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">jordan_cells</span><span class="p">()</span>
         <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">diag</span>
@@ -3742,6 +3821,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        jordan_form</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">n</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rows</span>
         <span class="n">Jcells</span> <span class="o">=</span> <span class="p">[]</span>
@@ -3783,6 +3863,7 @@
 <span class="sd">        False</span>
 <span class="sd">        &gt;&gt;&gt; A.has(Float)</span>
 <span class="sd">        True</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="o">*</span><span class="n">patterns</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mat</span><span class="p">)</span></div>
 
@@ -3837,6 +3918,7 @@
 <span class="sd">        Matrix([</span>
 <span class="sd">        [1, 0, 2, 0],</span>
 <span class="sd">        [0, 1, 0, 2]])</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">reduce</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">row_join</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span></div>
 
@@ -3854,6 +3936,7 @@
 <span class="sd">        [0, 1],</span>
 <span class="sd">        [2, 0],</span>
 <span class="sd">        [0, 2]])</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">reduce</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">col_join</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span></div>
 
@@ -3875,6 +3958,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        col_join</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">MutableMatrix</span>
 
@@ -3908,6 +3992,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        row_join</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">MutableMatrix</span>
 
@@ -3941,6 +4026,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        col_insert</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span><span class="n">mti</span><span class="p">)</span>
@@ -3983,6 +4069,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        row_insert</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">MutableMatrix</span>
 
@@ -4024,6 +4111,7 @@
 <span class="sd">        Matrix([</span>
 <span class="sd">        [G(0), G(1)],</span>
 <span class="sd">        [G(1), G(2)]])</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">M</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[:,</span> <span class="p">:]</span>
 
@@ -4165,6 +4253,7 @@
 <span class="sd">    &gt;&gt;&gt; IM = ImmutableMatrix([[1, 2], [3, 4]])</span>
 <span class="sd">    &gt;&gt;&gt; classof(M, IM)</span>
 <span class="sd">    &lt;class &#39;diofant.matrices.immutable.ImmutableMatrix&#39;&gt;</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">A</span><span class="o">.</span><span class="n">_class_priority</span> <span class="o">&gt;</span> <span class="n">B</span><span class="o">.</span><span class="n">_class_priority</span><span class="p">:</span>
@@ -4207,6 +4296,7 @@
 <span class="sd">    ==========</span>
 
 <span class="sd">    * https//en.wikipedia.org/wiki/Gamma_matrices</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">Matrix</span>
     <span class="k">if</span> <span class="n">mu</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]:</span>

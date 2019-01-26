@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.stats.frv &mdash; Diofant 0.10.0b2.dev55+g97f1e5f documentation</title>
+  <title>diofant.stats.frv &mdash; Diofant 0.10.0b2.dev59+g6273bb4 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev55+g97f1e5f
+                0.10.0b2.dev59+g6273bb4
               </div>
             
           
@@ -162,6 +162,7 @@
 <span class="sd">diofant.stats.frv_types</span>
 <span class="sd">diofant.stats.rv</span>
 <span class="sd">diofant.stats.crv</span>
+
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">random</span>
@@ -194,6 +195,7 @@
 <span class="sd">    A domain with discrete finite support</span>
 
 <span class="sd">    Represented using a FiniteSet.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">is_Finite</span> <span class="o">=</span> <span class="kc">True</span>
@@ -211,6 +213,7 @@
 <span class="sd">    A FiniteDomain over a single symbol/set</span>
 
 <span class="sd">    Example: The possibilities of a *single* die roll.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">symbol</span><span class="p">,</span> <span class="nb">set</span><span class="p">):</span>
@@ -247,6 +250,7 @@
 <span class="sd">    A Finite domain consisting of several other FiniteDomains</span>
 
 <span class="sd">    Example: The possibilities of the rolls of three independent dice</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -264,6 +268,7 @@
 
 <span class="sd">    Example: The possibilities of a die roll under the condition that the</span>
 <span class="sd">    roll is even.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">domain</span><span class="p">,</span> <span class="n">condition</span><span class="p">):</span>
@@ -348,6 +353,7 @@
 <span class="sd">    A Finite Probability Space</span>
 
 <span class="sd">    Represents the probabilities of a finite number of events.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">is_Finite</span> <span class="o">=</span> <span class="kc">True</span>
@@ -429,6 +435,7 @@
 <span class="sd">        Internal sample method</span>
 
 <span class="sd">        Returns dictionary mapping RandomSymbol to realization value.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">expr</span> <span class="o">=</span> <span class="n">Tuple</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
         <span class="n">cdf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sorted_cdf</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">python_float</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -453,6 +460,7 @@
 
 <span class="sd">    This class is implemented by many of the standard FiniteRV types such as</span>
 <span class="sd">    Die, Bernoulli, Coin, etc....</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="nd">@property</span>
@@ -467,9 +475,7 @@
 
 
 <span class="k">class</span> <span class="nc">ProductFinitePSpace</span><span class="p">(</span><span class="n">ProductPSpace</span><span class="p">,</span> <span class="n">FinitePSpace</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    A collection of several independent finite probability spaces</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;A collection of several independent finite probability spaces.&quot;&quot;&quot;</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">domain</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

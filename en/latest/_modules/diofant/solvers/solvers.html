@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.solvers.solvers &mdash; Diofant 0.10.0b2.dev55+g97f1e5f documentation</title>
+  <title>diofant.solvers.solvers &mdash; Diofant 0.10.0b2.dev59+g6273bb4 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev55+g97f1e5f
+                0.10.0b2.dev59+g6273bb4
               </div>
             
           
@@ -209,6 +209,7 @@
 <span class="sd">    {x, z}</span>
 <span class="sd">    &gt;&gt;&gt; denoms(x/2 + y/z)</span>
 <span class="sd">    {2, z}</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">pot</span> <span class="o">=</span> <span class="n">preorder_traversal</span><span class="p">(</span><span class="n">eq</span><span class="p">)</span>
@@ -273,6 +274,7 @@
 <span class="sd">        force : bool, optional</span>
 <span class="sd">           Make positive all symbols without assumptions regarding</span>
 <span class="sd">           sign.  Default is False.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">minimal</span> <span class="o">=</span> <span class="n">flags</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;minimal&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 
@@ -449,6 +451,7 @@
 <span class="sd">    diofant.solvers.recurr.rsolve : solving recurrence equations</span>
 <span class="sd">    diofant.solvers.ode.dsolve : solving differential equations</span>
 <span class="sd">    diofant.solvers.inequalities.reduce_inequalities : solving inequalities</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">_sympified_list</span><span class="p">(</span><span class="n">w</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">sympify</span><span class="p">,</span> <span class="n">w</span> <span class="k">if</span> <span class="n">iterable</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="k">else</span> <span class="p">[</span><span class="n">w</span><span class="p">]))</span>
@@ -702,6 +705,7 @@
 <span class="sd">    If no method is implemented to solve the equation, a NotImplementedError</span>
 <span class="sd">    will be raised. In the case that conversion of an expression to a Poly</span>
 <span class="sd">    gives None a ValueError will be raised.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">not_impl_msg</span> <span class="o">=</span> <span class="s2">&quot;No algorithms are implemented to solve equation </span><span class="si">%s</span><span class="s2">&quot;</span>
@@ -793,6 +797,7 @@
         <span class="k">def</span> <span class="nf">_as_base_q</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
             <span class="sd">&quot;&quot;&quot;Return (b**e, q) for x = b**(p*e/q) where p/q is the leading</span>
 <span class="sd">            Rational of the exponent of x, e.g. exp(-2*x/3) -&gt; (exp(x), 3)</span>
+
 <span class="sd">            &quot;&quot;&quot;</span>
             <span class="n">b</span><span class="p">,</span> <span class="n">e</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">as_base_exp</span><span class="p">()</span>
             <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">is_Rational</span><span class="p">:</span>
@@ -986,6 +991,7 @@
 <span class="k">def</span> <span class="nf">_solve_system</span><span class="p">(</span><span class="n">exprs</span><span class="p">,</span> <span class="n">symbols</span><span class="p">,</span> <span class="o">**</span><span class="n">flags</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return a checked solution for list of exprs in terms of one or more</span>
 <span class="sd">    of the symbols. A list of dict&#39;s (possibly empty) should be returned.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">symbols</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">exprs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
@@ -1173,6 +1179,7 @@
 <span class="sd">    (0, 1)</span>
 <span class="sd">    &gt;&gt;&gt; solve_linear(1/(1/x - 2), x)</span>
 <span class="sd">    (0, 0)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">x</span><span class="o">.</span><span class="n">is_Symbol</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> is not a Symbol&quot;</span> <span class="o">%</span> <span class="n">x</span><span class="p">)</span>
@@ -1209,6 +1216,7 @@
 <span class="sd">        quick : boolean, optional</span>
 <span class="sd">            If True, a heuristic is used.  Otherwise (default) a naive</span>
 <span class="sd">            algorithm with exponential complexity is used.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">quick</span> <span class="o">=</span> <span class="n">flags</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;quick&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
     <span class="c1"># Check if there are any non-zero solutions at all</span>
@@ -1313,6 +1321,7 @@
 
 <span class="sd">    &gt;&gt;&gt; _tsolve(log(x) + 2*x, x)</span>
 <span class="sd">    [LambertW(2)/2]</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">.bivariate</span> <span class="k">import</span> <span class="n">bivariate_type</span><span class="p">,</span> <span class="n">_solve_lambert</span><span class="p">,</span> <span class="n">_filtered_gens</span>
 

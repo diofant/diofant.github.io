@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.printing.codeprinter &mdash; Diofant 0.10.0b2.dev55+g97f1e5f documentation</title>
+  <title>diofant.printing.codeprinter &mdash; Diofant 0.10.0b2.dev59+g6273bb4 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev55+g97f1e5f
+                0.10.0b2.dev59+g6273bb4
               </div>
             
           
@@ -163,9 +163,7 @@
 
 
 <div class="viewcode-block" id="AssignmentError"><a class="viewcode-back" href="../../../modules/printing.html#diofant.printing.codeprinter.AssignmentError">[docs]</a><span class="k">class</span> <span class="nc">AssignmentError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Raised if an assignment variable for a loop is missing.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Raised if an assignment variable for a loop is missing.&quot;&quot;&quot;</span>
 
     <span class="k">pass</span></div>
 
@@ -175,7 +173,8 @@
 <span class="sd">    Represents variable assignment for code generation.</span>
 
 <span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
+<span class="sd">    ==========</span>
+
 <span class="sd">    lhs : Expr</span>
 <span class="sd">        Diofant object representing the lhs of the expression. These should be</span>
 <span class="sd">        singular objects, such as one would use in writing code. Notable types</span>
@@ -189,7 +188,7 @@
 <span class="sd">        the dimensions will not align.</span>
 
 <span class="sd">    Examples</span>
-<span class="sd">    --------</span>
+<span class="sd">    ========</span>
 
 <span class="sd">    &gt;&gt;&gt; Assignment(x, y)</span>
 <span class="sd">    x := y</span>
@@ -201,6 +200,7 @@
 <span class="sd">    A := Matrix([[x, y, z]])</span>
 <span class="sd">    &gt;&gt;&gt; Assignment(A[0, 1], x)</span>
 <span class="sd">    A[0, 1] := x</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">rel_op</span> <span class="o">=</span> <span class="s1">&#39;:=&#39;</span>
@@ -231,9 +231,7 @@
 
 
 <div class="viewcode-block" id="CodePrinter"><a class="viewcode-back" href="../../../modules/printing.html#diofant.printing.codeprinter.CodePrinter">[docs]</a><span class="k">class</span> <span class="nc">CodePrinter</span><span class="p">(</span><span class="n">StrPrinter</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    The base class for code-printing subclasses.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;The base class for code-printing subclasses.&quot;&quot;&quot;</span>
 
     <span class="n">_operators</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s1">&#39;and&#39;</span><span class="p">:</span> <span class="s1">&#39;&amp;&amp;&#39;</span><span class="p">,</span>
@@ -257,13 +255,15 @@
 <span class="sd">        Print the expression as code.</span>
 
 <span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
+<span class="sd">        ==========</span>
+
 <span class="sd">        expr : Expression</span>
 <span class="sd">            The expression to be printed.</span>
 
 <span class="sd">        assign_to : Symbol, MatrixSymbol, or string (optional)</span>
 <span class="sd">            If provided, the printed code will set the expression to a</span>
 <span class="sd">            variable with name ``assign_to``.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">..matrices</span> <span class="k">import</span> <span class="n">MatrixSymbol</span>
 
@@ -425,6 +425,7 @@
 
 <span class="sd">        This method is used to sort loops in an optimized order, see</span>
 <span class="sd">        CodePrinter._sort_optimized()</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;This function must be implemented by &quot;</span>
                                   <span class="s2">&quot;subclass of CodePrinter.&quot;</span><span class="p">)</span>  <span class="c1"># pragma: no cover</span>
@@ -440,7 +441,7 @@
                                   <span class="s2">&quot;subclass of CodePrinter.&quot;</span><span class="p">)</span>  <span class="c1"># pragma: no cover</span>
 
     <span class="k">def</span> <span class="nf">_declare_number_const</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Declare a numeric constant at the top of a function&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Declare a numeric constant at the top of a function.&quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;This function must be implemented by &quot;</span>
                                   <span class="s2">&quot;subclass of CodePrinter.&quot;</span><span class="p">)</span>  <span class="c1"># pragma: no cover</span>
 
@@ -448,6 +449,7 @@
         <span class="sd">&quot;&quot;&quot;Take in a list of lines of code, and format them accordingly.</span>
 
 <span class="sd">        This may include indenting, wrapping long lines, etc...</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;This function must be implemented by &quot;</span>
                                   <span class="s2">&quot;subclass of CodePrinter.&quot;</span><span class="p">)</span>  <span class="c1"># pragma: no cover</span>
@@ -455,6 +457,7 @@
     <span class="k">def</span> <span class="nf">_get_loop_opening_ending</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">indices</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns a tuple (open_lines, close_lines) containing lists</span>
 <span class="sd">        of codelines</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;This function must be implemented by &quot;</span>
                                   <span class="s2">&quot;subclass of CodePrinter.&quot;</span><span class="p">)</span>  <span class="c1"># pragma: no cover</span>

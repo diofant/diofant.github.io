@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.stats.rv_interface &mdash; Diofant 0.10.0b2.dev55+g97f1e5f documentation</title>
+  <title>diofant.stats.rv_interface &mdash; Diofant 0.10.0b2.dev59+g6273bb4 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev55+g97f1e5f
+                0.10.0b2.dev59+g6273bb4
               </div>
             
           
@@ -182,6 +182,7 @@
 <span class="sd">    91/6</span>
 <span class="sd">    &gt;&gt;&gt; moment(X, 1) == E(X)</span>
 <span class="sd">    True</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">expectation</span><span class="p">((</span><span class="n">X</span> <span class="o">-</span> <span class="n">c</span><span class="p">)</span><span class="o">**</span><span class="n">n</span><span class="p">,</span> <span class="n">condition</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
@@ -206,6 +207,7 @@
 
 <span class="sd">    &gt;&gt;&gt; simplify(variance(B))</span>
 <span class="sd">    p*(-p + 1)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">cmoment</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">condition</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
@@ -226,6 +228,7 @@
 
 <span class="sd">    &gt;&gt;&gt; simplify(std(B))</span>
 <span class="sd">    sqrt(p*(-p + 1))</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">variance</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">condition</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
 
@@ -256,6 +259,7 @@
 <span class="sd">    0</span>
 <span class="sd">    &gt;&gt;&gt; covariance(X, Y + rate*X)</span>
 <span class="sd">    1/lambda</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">expectation</span><span class="p">(</span>
         <span class="p">(</span><span class="n">X</span> <span class="o">-</span> <span class="n">expectation</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">condition</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span> <span class="o">*</span>
@@ -288,6 +292,7 @@
 <span class="sd">    0</span>
 <span class="sd">    &gt;&gt;&gt; correlation(X, Y + rate*X)</span>
 <span class="sd">    1/sqrt(1 + lambda**(-2))</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">covariance</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">condition</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">std</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">condition</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
                                                   <span class="o">*</span> <span class="n">std</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">condition</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
@@ -309,6 +314,7 @@
 <span class="sd">    35/12</span>
 <span class="sd">    &gt;&gt;&gt; cmoment(X, 2) == variance(X)</span>
 <span class="sd">    True</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">mu</span> <span class="o">=</span> <span class="n">expectation</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">condition</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">moment</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">condition</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -331,6 +337,7 @@
 <span class="sd">    True</span>
 <span class="sd">    &gt;&gt;&gt; smoment(Y, 3) == skewness(Y)</span>
 <span class="sd">    True</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">sigma</span> <span class="o">=</span> <span class="n">std</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">condition</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="k">return</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">sigma</span><span class="p">)</span><span class="o">**</span><span class="n">n</span><span class="o">*</span><span class="n">cmoment</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">condition</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -356,6 +363,7 @@
 <span class="sd">    &gt;&gt;&gt; Y = Exponential(&#39;Y&#39;, rate)</span>
 <span class="sd">    &gt;&gt;&gt; skewness(Y)</span>
 <span class="sd">    2</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">smoment</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">condition</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.simplify.cse_main &mdash; Diofant 0.10.0b2.dev55+g97f1e5f documentation</title>
+  <title>diofant.simplify.cse_main &mdash; Diofant 0.10.0b2.dev59+g6273bb4 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev55+g97f1e5f
+                0.10.0b2.dev59+g6273bb4
               </div>
             
           
@@ -228,6 +228,7 @@
 <span class="sd">    ...  [x0 + exp(x0/x1) + cos(x1), z - 2]]]</span>
 <span class="sd">    ...</span>
 <span class="sd">    True</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">d</span> <span class="o">=</span> <span class="n">sift</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">w</span><span class="p">:</span> <span class="n">w</span><span class="o">.</span><span class="n">is_Equality</span> <span class="ow">and</span> <span class="n">w</span><span class="o">.</span><span class="n">lhs</span><span class="o">.</span><span class="n">is_Symbol</span><span class="p">)</span>
     <span class="n">r</span> <span class="o">=</span> <span class="n">r</span> <span class="o">+</span> <span class="p">[</span><span class="n">w</span><span class="o">.</span><span class="n">args</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">d</span><span class="p">[</span><span class="kc">True</span><span class="p">]]</span>
@@ -252,6 +253,7 @@
 <span class="sd">    -------</span>
 <span class="sd">    expr : diofant expression</span>
 <span class="sd">        The transformed expression.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">pre</span><span class="p">,</span> <span class="n">post</span> <span class="ow">in</span> <span class="n">optimizations</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">pre</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -276,6 +278,7 @@
 <span class="sd">    -------</span>
 <span class="sd">    expr : diofant expression</span>
 <span class="sd">        The transformed expression.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">pre</span><span class="p">,</span> <span class="n">post</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">optimizations</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">post</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -288,7 +291,8 @@
 <span class="sd">    coefficient Muls</span>
 
 <span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
+<span class="sd">    ==========</span>
+
 <span class="sd">    exprs : list of diofant expressions</span>
 <span class="sd">        The expressions to optimize.</span>
 <span class="sd">    order : string, &#39;none&#39; or &#39;canonical&#39;</span>
@@ -296,16 +300,18 @@
 <span class="sd">        expressions where speed is a concern, use the setting order=&#39;none&#39;.</span>
 
 <span class="sd">    Returns</span>
-<span class="sd">    -------</span>
+<span class="sd">    =======</span>
+
 <span class="sd">    opt_subs : dictionary of expression substitutions</span>
 <span class="sd">        The expression substitutions which can be useful to optimize CSE.</span>
 
 <span class="sd">    Examples</span>
-<span class="sd">    --------</span>
+<span class="sd">    ========</span>
 
 <span class="sd">    &gt;&gt;&gt; opt_subs = opt_cse([x**-2])</span>
 <span class="sd">    &gt;&gt;&gt; opt_subs</span>
 <span class="sd">    {x**(-2): 1/(x**2)}</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">opt_subs</span> <span class="o">=</span> <span class="p">{}</span>
 
@@ -420,6 +426,7 @@
 <span class="sd">    order : string, &#39;none&#39; or &#39;canonical&#39;</span>
 <span class="sd">        The order by which Mul and Add arguments are processed. For large</span>
 <span class="sd">        expressions where speed is a concern, use the setting order=&#39;none&#39;.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Find repeated sub-expressions</span>
 
@@ -581,6 +588,7 @@
 
 <span class="sd">    &gt;&gt;&gt; isinstance(_[1][-1], SparseMatrix)</span>
 <span class="sd">    True</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">..matrices</span> <span class="k">import</span> <span class="p">(</span><span class="n">MatrixBase</span><span class="p">,</span> <span class="n">Matrix</span><span class="p">,</span> <span class="n">ImmutableMatrix</span><span class="p">,</span>
                             <span class="n">SparseMatrix</span><span class="p">,</span> <span class="n">ImmutableSparseMatrix</span><span class="p">)</span>

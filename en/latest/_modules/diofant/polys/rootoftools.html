@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.rootoftools &mdash; Diofant 0.10.0b2.dev55+g97f1e5f documentation</title>
+  <title>diofant.polys.rootoftools &mdash; Diofant 0.10.0b2.dev59+g6273bb4 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev55+g97f1e5f
+                0.10.0b2.dev59+g6273bb4
               </div>
             
           
@@ -217,12 +217,13 @@
 
 <span class="sd">    &gt;&gt;&gt; expand_func(RootOf(x**3 + I*x + 2, 0))</span>
 <span class="sd">    RootOf(x**6 + 4*x**3 + x**2 + 4, 1)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">is_commutative</span> <span class="o">=</span> <span class="kc">True</span>
 
     <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">radicals</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Construct a new ``RootOf`` object for ``k``-th root of ``f``. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Construct a new ``RootOf`` object for ``k``-th root of ``f``.&quot;&quot;&quot;</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">sympify</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">index</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">x</span><span class="o">.</span><span class="n">is_Integer</span><span class="p">:</span>
@@ -285,7 +286,7 @@
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_new</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">poly</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Construct new ``RootOf`` object from raw data. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Construct new ``RootOf`` object from raw data.&quot;&quot;&quot;</span>
         <span class="n">obj</span> <span class="o">=</span> <span class="n">Expr</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
 
         <span class="n">obj</span><span class="o">.</span><span class="n">poly</span> <span class="o">=</span> <span class="n">PurePoly</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
@@ -380,17 +381,17 @@
 
 <div class="viewcode-block" id="RootOf.real_roots"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.rootoftools.RootOf.real_roots">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">real_roots</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">poly</span><span class="p">,</span> <span class="n">radicals</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Get real roots of a polynomial. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Get real roots of a polynomial.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_get_roots</span><span class="p">(</span><span class="s2">&quot;_real_roots&quot;</span><span class="p">,</span> <span class="n">poly</span><span class="p">,</span> <span class="n">radicals</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="RootOf.all_roots"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.rootoftools.RootOf.all_roots">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">all_roots</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">poly</span><span class="p">,</span> <span class="n">radicals</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Get real and complex roots of a polynomial. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Get real and complex roots of a polynomial.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_get_roots</span><span class="p">(</span><span class="s2">&quot;_all_roots&quot;</span><span class="p">,</span> <span class="n">poly</span><span class="p">,</span> <span class="n">radicals</span><span class="p">)</span></div>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_get_reals_sqf</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">factor</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Compute real root isolating intervals for a square-free polynomial. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Compute real root isolating intervals for a square-free polynomial.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">factor</span><span class="o">.</span><span class="n">rep</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_reals_cache</span><span class="p">:</span>
             <span class="n">reals</span> <span class="o">=</span> <span class="n">dup_isolate_real_roots_sqf</span><span class="p">(</span><span class="n">factor</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">rep</span><span class="p">,</span> <span class="n">factor</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">blackbox</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">reals</span><span class="p">:</span>
@@ -400,7 +401,7 @@
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_get_complexes_sqf</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">factor</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Compute complex root isolating intervals for a square-free polynomial. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Compute complex root isolating intervals for a square-free polynomial.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">factor</span><span class="o">.</span><span class="n">rep</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_complexes_cache</span><span class="p">:</span>
             <span class="n">complexes</span> <span class="o">=</span> <span class="n">dup_isolate_complex_roots_sqf</span><span class="p">(</span><span class="n">factor</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">rep</span><span class="p">,</span> <span class="n">factor</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">blackbox</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">complexes</span><span class="p">:</span>
@@ -410,7 +411,7 @@
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_get_reals</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">factors</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Compute real root isolating intervals for a list of factors. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Compute real root isolating intervals for a list of factors.&quot;&quot;&quot;</span>
         <span class="n">reals</span> <span class="o">=</span> <span class="p">[]</span>
 
         <span class="k">for</span> <span class="n">factor</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">factors</span><span class="p">:</span>
@@ -421,7 +422,7 @@
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_get_complexes</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">factors</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Compute complex root isolating intervals for a list of factors. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Compute complex root isolating intervals for a list of factors.&quot;&quot;&quot;</span>
         <span class="n">complexes</span> <span class="o">=</span> <span class="p">[]</span>
 
         <span class="k">for</span> <span class="n">factor</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">factors</span><span class="p">:</span>
@@ -432,7 +433,7 @@
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_reals_sorted</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">reals</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Make real isolating intervals disjoint and sort roots. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Make real isolating intervals disjoint and sort roots.&quot;&quot;&quot;</span>
         <span class="n">factors</span> <span class="o">=</span> <span class="nb">list</span><span class="p">({</span><span class="n">f</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">reals</span><span class="p">})</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">factors</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">factors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">rep</span> <span class="ow">in</span> <span class="n">_reals_cache</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">reals</span>
@@ -462,7 +463,7 @@
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_complexes_sorted</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">complexes</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Make complex isolating intervals disjoint and sort roots. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Make complex isolating intervals disjoint and sort roots.&quot;&quot;&quot;</span>
         <span class="n">factors</span> <span class="o">=</span> <span class="nb">list</span><span class="p">({</span><span class="n">f</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">complexes</span><span class="p">})</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">factors</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">factors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">rep</span> <span class="ow">in</span> <span class="n">_complexes_cache</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">complexes</span>
@@ -495,7 +496,7 @@
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_reals_index</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">reals</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Map initial real root index to an index in a factor where the root belongs. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Map initial real root index to an index in a factor where the root belongs.&quot;&quot;&quot;</span>
         <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
 
         <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">factor</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">reals</span><span class="p">):</span>  <span class="c1"># pragma: no branch</span>
@@ -512,7 +513,7 @@
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_complexes_index</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">complexes</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Map initial complex root index to an index in a factor where the root belongs. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Map initial complex root index to an index in a factor where the root belongs.&quot;&quot;&quot;</span>
         <span class="n">index</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="n">index</span><span class="p">,</span> <span class="mi">0</span>
 
         <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">factor</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">complexes</span><span class="p">):</span>  <span class="c1"># pragma: no branch</span>
@@ -554,7 +555,7 @@
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_indexed_root</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">poly</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Get a root of a composite polynomial by index. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Get a root of a composite polynomial by index.&quot;&quot;&quot;</span>
         <span class="n">_</span><span class="p">,</span> <span class="n">factors</span> <span class="o">=</span> <span class="n">poly</span><span class="o">.</span><span class="n">factor_list</span><span class="p">()</span>
 
         <span class="n">reals</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_get_reals</span><span class="p">(</span><span class="n">factors</span><span class="p">)</span>
@@ -571,7 +572,7 @@
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_real_roots</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">poly</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Get real roots of a composite polynomial. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Get real roots of a composite polynomial.&quot;&quot;&quot;</span>
         <span class="n">_</span><span class="p">,</span> <span class="n">factors</span> <span class="o">=</span> <span class="n">poly</span><span class="o">.</span><span class="n">factor_list</span><span class="p">()</span>
 
         <span class="n">reals</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_get_reals</span><span class="p">(</span><span class="n">factors</span><span class="p">)</span>
@@ -587,7 +588,7 @@
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_all_roots</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">poly</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Get real and complex roots of a composite polynomial. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Get real and complex roots of a composite polynomial.&quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">poly</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">is_IntegerRing</span> <span class="ow">or</span> <span class="n">poly</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">is_AlgebraicField</span><span class="p">):</span>
             <span class="k">return</span> <span class="p">[(</span><span class="n">poly</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">poly</span><span class="o">.</span><span class="n">degree</span><span class="p">())]</span>
@@ -616,7 +617,7 @@
     <span class="nd">@classmethod</span>
     <span class="nd">@cacheit</span>
     <span class="k">def</span> <span class="nf">_roots_trivial</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">poly</span><span class="p">,</span> <span class="n">radicals</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Compute roots in linear, quadratic and binomial cases. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Compute roots in linear, quadratic and binomial cases.&quot;&quot;&quot;</span>
         <span class="n">n</span> <span class="o">=</span> <span class="n">poly</span><span class="o">.</span><span class="n">degree</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
@@ -638,7 +639,7 @@
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_preprocess_roots</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">poly</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Take heroic measures to make ``poly`` compatible with ``RootOf``. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Take heroic measures to make ``poly`` compatible with ``RootOf``.&quot;&quot;&quot;</span>
         <span class="n">dom</span> <span class="o">=</span> <span class="n">poly</span><span class="o">.</span><span class="n">domain</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">dom</span><span class="o">.</span><span class="n">is_Exact</span><span class="p">:</span>
@@ -654,7 +655,7 @@
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_postprocess_root</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">root</span><span class="p">,</span> <span class="n">radicals</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the root if it is trivial or a ``RootOf`` object. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Return the root if it is trivial or a ``RootOf`` object.&quot;&quot;&quot;</span>
         <span class="n">poly</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">root</span>
         <span class="n">roots</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_roots_trivial</span><span class="p">(</span><span class="n">poly</span><span class="p">,</span> <span class="n">radicals</span><span class="p">)</span>
 
@@ -665,7 +666,7 @@
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_get_roots</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">poly</span><span class="p">,</span> <span class="n">radicals</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return postprocessed roots of specified kind. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Return postprocessed roots of specified kind.&quot;&quot;&quot;</span>
 
         <span class="n">coeff</span><span class="p">,</span> <span class="n">poly</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_preprocess_roots</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
         <span class="n">roots</span> <span class="o">=</span> <span class="p">[]</span>
@@ -677,7 +678,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">interval</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return isolation interval for the root. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Return isolation interval for the root.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_real</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">_reals_cache</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">poly</span><span class="o">.</span><span class="n">rep</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
@@ -685,7 +686,7 @@
             <span class="k">return</span> <span class="n">_complexes_cache</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">poly</span><span class="o">.</span><span class="n">rep</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">-</span> <span class="n">reals_count</span><span class="p">]</span>
 
 <div class="viewcode-block" id="RootOf.refine"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.rootoftools.RootOf.refine">[docs]</a>    <span class="k">def</span> <span class="nf">refine</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Refine isolation interval for the root. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Refine isolation interval for the root.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_real</span><span class="p">:</span>
             <span class="n">root</span> <span class="o">=</span> <span class="n">_reals_cache</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">poly</span><span class="o">.</span><span class="n">rep</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
             <span class="n">_reals_cache</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">poly</span><span class="o">.</span><span class="n">rep</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">refine</span><span class="p">()</span>
@@ -702,7 +703,7 @@
             <span class="k">return</span> <span class="bp">self</span>
 
     <span class="k">def</span> <span class="nf">_eval_evalf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prec</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Evaluate this complex root to the given precision. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Evaluate this complex root to the given precision.&quot;&quot;&quot;</span>
         <span class="k">with</span> <span class="n">workprec</span><span class="p">(</span><span class="n">prec</span><span class="p">):</span>
             <span class="n">g</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">poly</span><span class="o">.</span><span class="n">gen</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">g</span><span class="o">.</span><span class="n">is_Symbol</span><span class="p">:</span>
@@ -824,10 +825,10 @@
 
 
 <div class="viewcode-block" id="RootSum"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.rootoftools.RootSum">[docs]</a><span class="k">class</span> <span class="nc">RootSum</span><span class="p">(</span><span class="n">Expr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Represents a sum of all roots of a univariate polynomial. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Represents a sum of all roots of a univariate polynomial.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">auto</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">quadratic</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Construct a new ``RootSum`` instance carrying all roots of a polynomial. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Construct a new ``RootSum`` instance carrying all roots of a polynomial.&quot;&quot;&quot;</span>
         <span class="n">coeff</span><span class="p">,</span> <span class="n">poly</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_transform</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">poly</span><span class="o">.</span><span class="n">is_univariate</span><span class="p">:</span>
@@ -891,7 +892,7 @@
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_new</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">poly</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">auto</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Construct new raw ``RootSum`` instance. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Construct new raw ``RootSum`` instance.&quot;&quot;&quot;</span>
         <span class="n">obj</span> <span class="o">=</span> <span class="n">Expr</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
 
         <span class="n">obj</span><span class="o">.</span><span class="n">poly</span> <span class="o">=</span> <span class="n">poly</span>
@@ -902,7 +903,7 @@
 
 <div class="viewcode-block" id="RootSum.new"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.rootoftools.RootSum.new">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">new</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">poly</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">auto</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Construct new ``RootSum`` instance. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Construct new ``RootSum`` instance.&quot;&quot;&quot;</span>
 
         <span class="n">rational</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_is_func_rational</span><span class="p">(</span><span class="n">poly</span><span class="p">,</span> <span class="n">func</span><span class="p">)</span>
 
@@ -913,19 +914,19 @@
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_transform</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Transform an expression to a polynomial. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Transform an expression to a polynomial.&quot;&quot;&quot;</span>
         <span class="n">poly</span> <span class="o">=</span> <span class="n">PurePoly</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">greedy</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">preprocess_roots</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_is_func_rational</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">poly</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Check if a lambda is areational function. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Check if a lambda is areational function.&quot;&quot;&quot;</span>
         <span class="n">var</span><span class="p">,</span> <span class="n">expr</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">func</span><span class="o">.</span><span class="n">expr</span>
         <span class="k">return</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_rational_function</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_rational_case</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">poly</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Handle the rational function case. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Handle the rational function case.&quot;&quot;&quot;</span>
         <span class="n">roots</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;r:</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">poly</span><span class="o">.</span><span class="n">degree</span><span class="p">())</span>
         <span class="n">var</span><span class="p">,</span> <span class="n">expr</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">func</span><span class="o">.</span><span class="n">expr</span>
 

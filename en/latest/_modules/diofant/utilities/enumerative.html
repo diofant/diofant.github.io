@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.utilities.enumerative &mdash; Diofant 0.10.0b2.dev55+g97f1e5f documentation</title>
+  <title>diofant.utilities.enumerative &mdash; Diofant 0.10.0b2.dev59+g6273bb4 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev55+g97f1e5f
+                0.10.0b2.dev59+g6273bb4
               </div>
             
           
@@ -256,6 +256,7 @@
 <span class="sd">    partition of the multiset.</span>
 
 <span class="sd">    Knuth&#39;s psuedocode makes c, u, and v separate arrays.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -274,11 +275,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">v</span> <span class="o">=</span> <span class="mi">0</span>
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;for debug/algorithm animation purposes&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;for debug/algorithm animation purposes.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;c:</span><span class="si">%d</span><span class="s1"> u:</span><span class="si">%d</span><span class="s1"> v:</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">v</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Define  value oriented equality, which is useful for testers&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Define  value oriented equality, which is useful for testers.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">)</span> <span class="ow">and</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">c</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">c</span> <span class="ow">and</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">u</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">u</span> <span class="ow">and</span>
@@ -351,6 +352,7 @@
 <span class="sd">    [[&#39;a&#39;, &#39;b&#39;], [&#39;b&#39;]],</span>
 <span class="sd">    [[&#39;a&#39;], [&#39;b&#39;, &#39;b&#39;]],</span>
 <span class="sd">    [[&#39;a&#39;], [&#39;b&#39;], [&#39;b&#39;]]]</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Important variables.</span>
@@ -467,6 +469,7 @@
 <span class="sd">    &gt;&gt;&gt; states = multiset_partitions_taocp(multiplicities)</span>
 <span class="sd">    &gt;&gt;&gt; list(factoring_visitor(state, primes) for state in states)</span>
 <span class="sd">    [[24], [8, 3], [12, 2], [4, 6], [4, 2, 3], [6, 2, 2], [2, 2, 2, 3]]</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">f</span><span class="p">,</span> <span class="n">lpart</span><span class="p">,</span> <span class="n">pstack</span> <span class="o">=</span> <span class="n">state</span>
     <span class="n">factoring</span> <span class="o">=</span> <span class="p">[]</span>
@@ -492,6 +495,7 @@
 <span class="sd">    &gt;&gt;&gt; s = next(states)</span>
 <span class="sd">    &gt;&gt;&gt; list_visitor(s, [1, 2, 3])  # for multiset &#39;1 2 2 3</span>
 <span class="sd">    [[1, 2, 2], [3]]</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">f</span><span class="p">,</span> <span class="n">lpart</span><span class="p">,</span> <span class="n">pstack</span> <span class="o">=</span> <span class="n">state</span>
 
@@ -560,6 +564,7 @@
     <span class="k">def</span> <span class="nf">db_trace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Useful for usderstanding/debugging the algorithms.  Not</span>
 <span class="sd">        generally activated in end-user code.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">debug</span><span class="p">:</span>
             <span class="n">letters</span> <span class="o">=</span> <span class="s1">&#39;abcdefghijklmnopqrstuvwxyz&#39;</span>
@@ -576,6 +581,7 @@
 
 <span class="sd">        This is called from the enumeration/counting routines, so</span>
 <span class="sd">        there is no need to call it separately.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">num_components</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">multiplicities</span><span class="p">)</span>
@@ -681,6 +687,7 @@
 <span class="sd">           it exists) once decrementing has finished.  If this has</span>
 <span class="sd">           ``v == 0``, this next component will push the expansion over the</span>
 <span class="sd">           limit by 1, so fail.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">lpart</span> <span class="o">&gt;=</span> <span class="n">ub</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">p1</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c1"># increment to keep track of usefulness of tests</span>
@@ -805,6 +812,7 @@
 <span class="sd">        methods.  If returns success, part has been decremented at</span>
 <span class="sd">        least once, but perhaps by quite a bit more if needed to meet</span>
 <span class="sd">        the lb constraint.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1"># Constraint in the range case is just enforcing both the</span>
@@ -830,6 +838,7 @@
 
 <span class="sd">        This call does nothing (and returns False) if the current top</span>
 <span class="sd">        part has no unallocated multiplicity.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">j</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">lpart</span><span class="p">]</span>  <span class="c1"># base of current top part</span>
         <span class="n">k</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">lpart</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>  <span class="c1"># ub of current; potential base of next</span>
@@ -953,6 +962,7 @@
 
 <span class="sd">        * Algorithm 7.1.2.5M in Volume 4A, Combinatoral Algorithms,</span>
 <span class="sd">          Part 1, of The Art of Computer Programming, by Donald Knuth.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1"># Keep track of iterations which do not yield a partition.</span>
@@ -1209,6 +1219,7 @@
 
 <span class="sd">        * Algorithm 7.1.2.5M in Volume 4A, Combinatoral Algorithms,</span>
 <span class="sd">          Part 1, of The Art of Computer Programming, by Donald Knuth.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># number of partitions so far in the enumeration</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pcount</span> <span class="o">=</span> <span class="mi">0</span>

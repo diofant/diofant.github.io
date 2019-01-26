@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.groebnertools &mdash; Diofant 0.10.0b2.dev55+g97f1e5f documentation</title>
+  <title>diofant.polys.groebnertools &mdash; Diofant 0.10.0b2.dev59+g6273bb4 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev55+g97f1e5f
+                0.10.0b2.dev59+g6273bb4
               </div>
             
           
@@ -238,6 +238,7 @@
 
 <span class="sd">    Used an improved version of Buchberger&#39;s algorithm</span>
 <span class="sd">    as presented in [BeckerWeispfenning93]_.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">order</span> <span class="o">=</span> <span class="n">ring</span><span class="o">.</span><span class="n">order</span>
 
@@ -412,6 +413,7 @@
 <span class="sd">    Compute LCM(LM(p1), LM(p2))/LM(p1)*p1 - LCM(LM(p1), LM(p2))/LM(p2)*p2.</span>
 
 <span class="sd">    This is the S-poly, provided p1 and p2 are monic</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">LM1</span> <span class="o">=</span> <span class="n">p1</span><span class="o">.</span><span class="n">LM</span>
     <span class="n">LM2</span> <span class="o">=</span> <span class="n">p2</span><span class="o">.</span><span class="n">LM</span>
@@ -460,6 +462,7 @@
 <span class="sd">        - the index of v is equal to the index of u and u[0] &lt; v[0] w.r.t. order</span>
 
 <span class="sd">    u &gt; v otherwise</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
         <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
@@ -476,6 +479,7 @@
 
 <span class="sd">    s &lt; t iff [k &gt; l] or [k == l and m &lt; n]</span>
 <span class="sd">    s &gt; t otherwise</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="o">-</span><span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">order</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div>
 
@@ -486,6 +490,7 @@
 
 <span class="sd">    The product of a signature (m, i) and a monomial n is defined as</span>
 <span class="sd">    (m * t, i).</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">sig</span><span class="p">(</span><span class="n">monomial_mul</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">m</span><span class="p">),</span> <span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span></div>
 
@@ -498,6 +503,7 @@
 
 <span class="sd">    The signature and number of the difference of f and g are signature</span>
 <span class="sd">    and number of the maximum of f and g, w.r.t. lbp_cmp.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">lbp_cmp</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">max_poly</span> <span class="o">=</span> <span class="n">g</span>
@@ -515,6 +521,7 @@
 
 <span class="sd">    The product of a labeled polynomial (s, p, k) by a monomial is</span>
 <span class="sd">    defined as (m * s, m * p, k).</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">lbp</span><span class="p">(</span><span class="n">sig_mult</span><span class="p">(</span><span class="n">Sign</span><span class="p">(</span><span class="n">f</span><span class="p">),</span> <span class="n">cx</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">Polyn</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="o">.</span><span class="n">mul_term</span><span class="p">(</span><span class="n">cx</span><span class="p">),</span> <span class="n">Num</span><span class="p">(</span><span class="n">f</span><span class="p">))</span></div>
 
@@ -529,6 +536,7 @@
 <span class="sd">        - Sign(f) == Sign(g) and Num(f) &gt; Num(g)</span>
 
 <span class="sd">    f &gt; g otherwise</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">sig_cmp</span><span class="p">(</span><span class="n">Sign</span><span class="p">(</span><span class="n">f</span><span class="p">),</span> <span class="n">Sign</span><span class="p">(</span><span class="n">g</span><span class="p">),</span> <span class="n">Polyn</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">order</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
         <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
@@ -538,9 +546,7 @@
 
 
 <div class="viewcode-block" id="lbp_key"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.groebnertools.lbp_key">[docs]</a><span class="k">def</span> <span class="nf">lbp_key</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Key for comparing two labeled polynomials.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Key for comparing two labeled polynomials.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">sig_key</span><span class="p">(</span><span class="n">Sign</span><span class="p">(</span><span class="n">f</span><span class="p">),</span> <span class="n">Polyn</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">order</span><span class="p">),</span> <span class="o">-</span><span class="n">Num</span><span class="p">(</span><span class="n">f</span><span class="p">)</span></div>
 
 <span class="c1"># algorithm and helper functions</span>
@@ -558,6 +564,7 @@
 <span class="sd">    a new, relatively expensive object in memory, whereas Sign(um *</span>
 <span class="sd">    f) and um are lightweight and f (in the tuple) is a reference to</span>
 <span class="sd">    an already existing object in memory.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">domain</span> <span class="o">=</span> <span class="n">ring</span><span class="o">.</span><span class="n">domain</span>
 
@@ -582,17 +589,15 @@
 
 
 <div class="viewcode-block" id="cp_key"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.groebnertools.cp_key">[docs]</a><span class="k">def</span> <span class="nf">cp_key</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">ring</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Key for comparing critical pairs.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Key for comparing critical pairs.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">lbp_key</span><span class="p">(</span><span class="n">lbp</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ring</span><span class="o">.</span><span class="n">zero</span><span class="p">,</span> <span class="n">Num</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">2</span><span class="p">]))),</span> <span class="n">lbp_key</span><span class="p">(</span><span class="n">lbp</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">ring</span><span class="o">.</span><span class="n">zero</span><span class="p">,</span> <span class="n">Num</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">5</span><span class="p">])))</span></div>
 
 
 <div class="viewcode-block" id="s_poly"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.groebnertools.s_poly">[docs]</a><span class="k">def</span> <span class="nf">s_poly</span><span class="p">(</span><span class="n">cp</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Compute the S-polynomial of a critical pair.</span>
+    <span class="sd">&quot;&quot;&quot;Compute the S-polynomial of a critical pair.</span>
 
 <span class="sd">    The S-polynomial of a critical pair cp is cp[1] * cp[2] - cp[4] * cp[5].</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">lbp_sub</span><span class="p">(</span><span class="n">lbp_mul_term</span><span class="p">(</span><span class="n">cp</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">cp</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">lbp_mul_term</span><span class="p">(</span><span class="n">cp</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">cp</span><span class="p">[</span><span class="mi">4</span><span class="p">]))</span></div>
 
@@ -609,6 +614,7 @@
 <span class="sd">    (sign, num) is rewritable if there exists a labeled polynomial</span>
 <span class="sd">    h in B, such thatsign[1] is equal to Sign(h)[1], num &lt; Num(h)</span>
 <span class="sd">    and sign[0] is divisible by Sign(h)[0].</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">B</span><span class="p">:</span>
         <span class="c1"># comparable</span>
@@ -700,6 +706,7 @@
 
 <span class="sd">    * [SunWang10]_</span>
 <span class="sd">    * [BeckerWeispfenning93]_, pp. 203, 216.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">order</span> <span class="o">=</span> <span class="n">ring</span><span class="o">.</span><span class="n">order</span>
 
@@ -804,11 +811,10 @@
 <span class="sd">    ==========</span>
 
 <span class="sd">    * [BeckerWeispfenning93], page 216.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">reduction</span><span class="p">(</span><span class="n">P</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        The actual reduction algorithm.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;The actual reduction algorithm.&quot;&quot;&quot;</span>
         <span class="n">Q</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">P</span><span class="p">):</span>
             <span class="n">h</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">P</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">P</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:])[</span><span class="mi">1</span><span class="p">]</span>
@@ -831,9 +837,7 @@
 
 
 <div class="viewcode-block" id="is_groebner"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.groebnertools.is_groebner">[docs]</a><span class="k">def</span> <span class="nf">is_groebner</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Check if G is a Gröbner basis.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Check if G is a Gröbner basis.&quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">G</span><span class="p">)):</span>
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">G</span><span class="p">)):</span>
             <span class="n">s</span> <span class="o">=</span> <span class="n">spoly</span><span class="p">(</span><span class="n">G</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">G</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
@@ -845,9 +849,7 @@
 
 
 <div class="viewcode-block" id="is_minimal"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.groebnertools.is_minimal">[docs]</a><span class="k">def</span> <span class="nf">is_minimal</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">ring</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Checks if G is a minimal Gröbner basis.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Checks if G is a minimal Gröbner basis.&quot;&quot;&quot;</span>
     <span class="n">order</span> <span class="o">=</span> <span class="n">ring</span><span class="o">.</span><span class="n">order</span>
     <span class="n">domain</span> <span class="o">=</span> <span class="n">ring</span><span class="o">.</span><span class="n">domain</span>
 
@@ -878,6 +880,7 @@
 <span class="sd">    ==========</span>
 
 <span class="sd">    * [Cox97]_</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">ring</span> <span class="o">!=</span> <span class="n">g</span><span class="o">.</span><span class="n">ring</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Values should be equal&quot;</span><span class="p">)</span>
@@ -922,7 +925,7 @@
 
 
 <div class="viewcode-block" id="groebner_gcd"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.groebnertools.groebner_gcd">[docs]</a><span class="k">def</span> <span class="nf">groebner_gcd</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Computes GCD of two polynomials using Gröbner bases. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Computes GCD of two polynomials using Gröbner bases.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">ring</span> <span class="o">!=</span> <span class="n">g</span><span class="o">.</span><span class="n">ring</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Values should be equal&quot;</span><span class="p">)</span>
     <span class="n">domain</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">domain</span>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.diffgeom.diffgeom &mdash; Diofant 0.10.0b2.dev55+g97f1e5f documentation</title>
+  <title>diofant.diffgeom.diffgeom &mdash; Diofant 0.10.0b2.dev59+g6273bb4 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev55+g97f1e5f
+                0.10.0b2.dev59+g6273bb4
               </div>
             
           
@@ -178,6 +178,7 @@
 <span class="sd">    The only role that this object plays is to keep a list of all patches</span>
 <span class="sd">    defined on the manifold. It does not provide any means to study the</span>
 <span class="sd">    topological characteristics of the manifold that it represents.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">dim</span><span class="p">):</span>
@@ -220,6 +221,7 @@
 <span class="sd">    &gt;&gt;&gt; p = Patch(&#39;P&#39;, m)</span>
 <span class="sd">    &gt;&gt;&gt; p in m.patches</span>
 <span class="sd">    True</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Contains a reference to the parent manifold in order to be able to access</span>
@@ -328,6 +330,7 @@
 <span class="sd">    &gt;&gt;&gt; rect = CoordSystem(&#39;rect&#39;, patch, [&#39;x&#39;, &#39;y&#39;])</span>
 <span class="sd">    &gt;&gt;&gt; rect.coord_function(0), rect.base_vector(0), rect.base_oneform(0)</span>
 <span class="sd">    (x, e_x, dx)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1">#  Contains a reference to the parent patch in order to be able to access</span>
@@ -414,6 +417,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        CoordSystem</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">coords</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">(</span><span class="n">coords</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span> <span class="o">!=</span> <span class="n">to_sys</span><span class="p">:</span>
@@ -440,6 +444,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        CoordSystem</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">BaseScalarField</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coord_index</span><span class="p">)</span></div>
 
@@ -447,6 +452,7 @@
         <span class="sd">&quot;&quot;&quot;Returns a list of all coordinate functions.</span>
 
 <span class="sd">        For more details see the ``coord_function`` method of this class.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">coord_function</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">)]</span></div>
 
@@ -460,6 +466,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        CoordSystem</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">BaseVectorField</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coord_index</span><span class="p">)</span></div>
 
@@ -467,6 +474,7 @@
         <span class="sd">&quot;&quot;&quot;Returns a list of all base vectors.</span>
 
 <span class="sd">        For more details see the ``base_vector`` method of this class.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">base_vector</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">)]</span></div>
 
@@ -480,6 +488,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        CoordSystem</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">Differential</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coord_function</span><span class="p">(</span><span class="n">coord_index</span><span class="p">))</span></div>
 
@@ -487,6 +496,7 @@
         <span class="sd">&quot;&quot;&quot;Returns a list of all base oneforms.</span>
 
 <span class="sd">        For more details see the ``base_oneform`` method of this class.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">base_oneform</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">)]</span></div>
 
@@ -501,6 +511,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        CoordSystem</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">Point</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coords</span><span class="p">)</span></div>
 
@@ -511,6 +522,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        CoordSystem</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">point</span><span class="o">.</span><span class="n">coords</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
@@ -557,6 +569,7 @@
 <span class="sd">    Matrix([</span>
 <span class="sd">    [-sqrt(2)*r/2],</span>
 <span class="sd">    [ sqrt(2)*r/2]])</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coord_sys</span><span class="p">,</span> <span class="n">coords</span><span class="p">):</span>
@@ -570,6 +583,7 @@
 
 <span class="sd">        If ``to_sys`` is ``None`` it returns the coordinates in the system in</span>
 <span class="sd">        which the point was defined.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">to_sys</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_coord_sys</span><span class="o">.</span><span class="n">coord_tuple_transform_to</span><span class="p">(</span><span class="n">to_sys</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_coords</span><span class="p">)</span>
@@ -624,6 +638,7 @@
 <span class="sd">    &gt;&gt;&gt; fg = g(ftheta-pi)</span>
 <span class="sd">    &gt;&gt;&gt; fg.rcall(point)</span>
 <span class="sd">    g(-pi)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">is_commutative</span> <span class="o">=</span> <span class="kc">True</span>
@@ -641,6 +656,7 @@
 <span class="sd">        point. The field is returned itself if the argument is any other</span>
 <span class="sd">        object. It is so in order to have working recursive calling mechanics</span>
 <span class="sd">        for all fields (check the ``__call__`` method of ``Expr``).</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">point</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="n">Point</span><span class="p">):</span>
@@ -711,6 +727,7 @@
 <span class="sd">    /  d                           \|</span>
 <span class="sd">    |-----(g(r0*cos(theta0), xi_2))||</span>
 <span class="sd">    \dxi_2                         /|xi_2=r0*sin(theta0)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">is_commutative</span> <span class="o">=</span> <span class="kc">False</span>
@@ -729,6 +746,7 @@
 <span class="sd">        differentiation.</span>
 
 <span class="sd">        If the argument is not a scalar field an error is raised.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">covariant_order</span><span class="p">(</span><span class="n">scalar_field</span><span class="p">)</span> <span class="ow">or</span> <span class="n">contravariant_order</span><span class="p">(</span><span class="n">scalar_field</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Only scalar fields can be supplied as arguments to vector fields.&#39;</span><span class="p">)</span>
@@ -787,6 +805,7 @@
 
 <span class="sd">    &gt;&gt;&gt; simplify(c_xr(R2.y**2).doit())</span>
 <span class="sd">    -2*cos(theta)*y**2/(x**2 + y**2)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">):</span>
@@ -824,6 +843,7 @@
         <span class="sd">&quot;&quot;&quot;Apply on a scalar field.</span>
 
 <span class="sd">        If the argument is not a scalar field an error is raised.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_v1</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_v2</span><span class="p">(</span><span class="n">scalar_field</span><span class="p">))</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_v2</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_v1</span><span class="p">(</span><span class="n">scalar_field</span><span class="p">))</span></div>
 
@@ -871,6 +891,7 @@
 
 <span class="sd">    &gt;&gt;&gt; Differential(dg)</span>
 <span class="sd">    0</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">is_commutative</span> <span class="o">=</span> <span class="kc">False</span>
@@ -907,6 +928,7 @@
 <span class="sd">        commutator.</span>
 
 <span class="sd">        If the arguments are not vectors or ``None``s an error is raised.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">any</span><span class="p">((</span><span class="n">contravariant_order</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">covariant_order</span><span class="p">(</span><span class="n">a</span><span class="p">))</span> <span class="ow">and</span> <span class="n">a</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
                 <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">vector_fields</span><span class="p">):</span>
@@ -979,6 +1001,7 @@
 
 <span class="sd">    &gt;&gt;&gt; metric.rcall(R2.e_y)</span>
 <span class="sd">    3*dy</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
@@ -1007,6 +1030,7 @@
 <span class="sd">        the forms inside the tensor product. The sublists are provided as</span>
 <span class="sd">        arguments to these forms and the resulting expressions are given to the</span>
 <span class="sd">        constructor of ``TensorProduct``.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">tot_order</span> <span class="o">=</span> <span class="n">covariant_order</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="n">tot_args</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">v_fields</span><span class="p">)</span>
@@ -1048,6 +1072,7 @@
 <span class="sd">    &gt;&gt;&gt; wp1 = WedgeProduct(R2.dx, R2.dy)</span>
 <span class="sd">    &gt;&gt;&gt; WedgeProduct(wp1, R2.dx)(R2.e_x, R2.e_y, R2.e_x)</span>
 <span class="sd">    0</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># TODO the calculation of signatures is slow</span>
@@ -1056,6 +1081,7 @@
         <span class="sd">&quot;&quot;&quot;Apply on a list of vector_fields.</span>
 
 <span class="sd">        The expression is rewritten internally in terms of tensor products and evaluated.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">orders</span> <span class="o">=</span> <span class="p">(</span><span class="n">covariant_order</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
         <span class="n">mul</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">Mul</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">factorial</span><span class="p">(</span><span class="n">o</span><span class="p">)</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">orders</span><span class="p">))</span>
@@ -1095,6 +1121,7 @@
 <span class="sd">    LieDerivative(e_x, TensorProduct(dx, dy))</span>
 <span class="sd">    &gt;&gt;&gt; LieDerivative(R2.e_x, tp).doit()</span>
 <span class="sd">    LieDerivative(e_x, TensorProduct(dx, dy))</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v_field</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
@@ -1141,6 +1168,7 @@
 <span class="sd">    1</span>
 <span class="sd">    &gt;&gt;&gt; cvd(R2.x*R2.e_x)</span>
 <span class="sd">    e_x</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coord_sys</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">christoffel</span><span class="p">):</span>
@@ -1157,6 +1185,7 @@
 <span class="sd">        differentiation.</span>
 
 <span class="sd">        If the argument is not a scalar field the behaviour is undefined.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">covariant_order</span><span class="p">(</span><span class="n">field</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">NotImplementedError</span>
@@ -1207,6 +1236,7 @@
 <span class="sd">    x</span>
 <span class="sd">    &gt;&gt;&gt; cvd(R2.x*R2.e_x)</span>
 <span class="sd">    x*e_x</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wrt</span><span class="p">,</span> <span class="n">christoffel</span><span class="p">):</span>
@@ -1544,6 +1574,7 @@
 <span class="sd">    -y*e_theta/(x**2 + y**2) + x*e_r/sqrt(x**2 + y**2)</span>
 <span class="sd">    &gt;&gt;&gt; vectors_in_basis(R2_p.e_r, R2_r)</span>
 <span class="sd">    sin(theta)*e_y + cos(theta)*e_x</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">vectors</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">atoms</span><span class="p">(</span><span class="n">BaseVectorField</span><span class="p">))</span>
     <span class="n">new_vectors</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1693,6 +1724,7 @@
 <span class="sd">    [[[0, 0], [0, 0]], [[0, E**(-2*r)*r], [-E**(-2*r)*r, 0]]]</span>
 <span class="sd">    &gt;&gt;&gt; riemann[1, :, :, :]</span>
 <span class="sd">    [[[0, -1/r], [1/r, 0]], [[0, 0], [0, 0]]]</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">ch_2nd</span> <span class="o">=</span> <span class="n">metric_to_Christoffel_2nd</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
     <span class="n">coord_sys</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">atoms</span><span class="p">(</span><span class="n">CoordSystem</span><span class="p">)</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
@@ -1741,6 +1773,7 @@
 <span class="sd">    E**(2*r)*TensorProduct(dr, dr) + r**2*TensorProduct(dtheta, dtheta)</span>
 <span class="sd">    &gt;&gt;&gt; metric_to_Ricci_components(non_trivial_metric)</span>
 <span class="sd">    [[1/r, 0], [0, E**(-2*r)*r]]</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">riemann</span> <span class="o">=</span> <span class="n">metric_to_Riemann_components</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
     <span class="n">coord_sys</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">atoms</span><span class="p">(</span><span class="n">CoordSystem</span><span class="p">)</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>

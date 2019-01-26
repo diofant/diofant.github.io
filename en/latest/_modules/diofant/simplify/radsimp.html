@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.simplify.radsimp &mdash; Diofant 0.10.0b2.dev55+g97f1e5f documentation</title>
+  <title>diofant.simplify.radsimp &mdash; Diofant 0.10.0b2.dev59+g6273bb4 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev55+g97f1e5f
+                0.10.0b2.dev59+g6273bb4
               </div>
             
           
@@ -305,6 +305,7 @@
 <span class="sd">    ========</span>
 
 <span class="sd">    collect_const, collect_sqrt, rcollect</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">make_expression</span><span class="p">(</span><span class="n">terms</span><span class="p">):</span>
         <span class="n">product</span> <span class="o">=</span> <span class="p">[]</span>
@@ -364,6 +365,7 @@
 
 <span class="sd">         for example, the output of x would be (x, 1, None, None)</span>
 <span class="sd">         the output of 2**x would be (2, 1, x, None)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">rat_expo</span><span class="p">,</span> <span class="n">sym_expo</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">,</span> <span class="kc">None</span>
         <span class="n">sexpr</span><span class="p">,</span> <span class="n">deriv</span> <span class="o">=</span> <span class="n">expr</span><span class="p">,</span> <span class="kc">None</span>
@@ -392,6 +394,7 @@
         <span class="sd">&quot;&quot;&quot;Parse terms searching for a pattern.</span>
 <span class="sd">        terms is a list of tuples as returned by parse_terms;</span>
 <span class="sd">        pattern is an expression treated as a product of factors</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">pattern</span> <span class="o">=</span> <span class="n">Mul</span><span class="o">.</span><span class="n">make_args</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
 
@@ -559,6 +562,7 @@
 <span class="sd">    See Also</span>
 <span class="sd">    ========</span>
 <span class="sd">    collect, collect_const, collect_sqrt</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_Atom</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">expr</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="o">*</span><span class="nb">vars</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">expr</span>
@@ -606,6 +610,7 @@
 <span class="sd">    See Also</span>
 <span class="sd">    ========</span>
 <span class="sd">    collect, collect_const, rcollect</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># this step will help to standardize any complex arguments</span>
     <span class="c1"># of sqrts</span>
@@ -678,6 +683,7 @@
 <span class="sd">    See Also</span>
 <span class="sd">    ========</span>
 <span class="sd">    collect, collect_sqrt, rcollect</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_Add</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">expr</span>
@@ -1003,6 +1009,7 @@
 
 <span class="sd">    &gt;&gt;&gt; rad_rationalize(sqrt(3), 1 + sqrt(2)/3)</span>
 <span class="sd">    (-sqrt(3) + sqrt(6)/3, -7/9)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">den</span><span class="o">.</span><span class="n">is_Add</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">num</span><span class="p">,</span> <span class="n">den</span>
@@ -1056,6 +1063,7 @@
 
 <span class="sd">    &gt;&gt;&gt; fraction(exp(-x), exact=True)</span>
 <span class="sd">    (E**(-x), 1)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">expr</span> <span class="o">=</span> <span class="n">sympify</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
 
@@ -1125,6 +1133,7 @@
 
 <span class="sd">    &gt;&gt;&gt; split_surds(3*sqrt(3) + sqrt(5)/7 + sqrt(6) + sqrt(10) + sqrt(15))</span>
 <span class="sd">    (3, sqrt(2) + sqrt(5) + 3, sqrt(5)/7 + sqrt(10))</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">args</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">default_sort_key</span><span class="p">)</span>
     <span class="n">coeff_muls</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">as_coeff_Mul</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">args</span><span class="p">]</span>
@@ -1164,6 +1173,7 @@
 
 <span class="sd">    &gt;&gt;&gt; _split_gcd(55, 35, 22, 14, 77, 10)</span>
 <span class="sd">    (5, [55, 35, 10], [22, 14, 77])</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">g</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">b1</span> <span class="o">=</span> <span class="p">[</span><span class="n">g</span><span class="p">]</span>

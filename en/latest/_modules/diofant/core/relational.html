@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.core.relational &mdash; Diofant 0.10.0b2.dev55+g97f1e5f documentation</title>
+  <title>diofant.core.relational &mdash; Diofant 0.10.0b2.dev59+g6273bb4 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev55+g97f1e5f
+                0.10.0b2.dev59+g6273bb4
               </div>
             
           
@@ -238,6 +238,7 @@
 <span class="sd">        x &lt; 1</span>
 <span class="sd">        &gt;&gt;&gt; _.reversed</span>
 <span class="sd">        1 &gt; x</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">ops</span> <span class="o">=</span> <span class="p">{</span><span class="n">Gt</span><span class="p">:</span> <span class="n">Lt</span><span class="p">,</span> <span class="n">Ge</span><span class="p">:</span> <span class="n">Le</span><span class="p">,</span> <span class="n">Lt</span><span class="p">:</span> <span class="n">Gt</span><span class="p">,</span> <span class="n">Le</span><span class="p">:</span> <span class="n">Ge</span><span class="p">}</span>
         <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span>
@@ -256,6 +257,7 @@
 <span class="sd">            3) Gt/Ge changed to Lt/Le;</span>
 <span class="sd">            4) Lt/Le are unchanged;</span>
 <span class="sd">            5) Eq and Ne get ordered args.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span>
         <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">func</span> <span class="ow">in</span> <span class="p">(</span><span class="n">Ge</span><span class="p">,</span> <span class="n">Gt</span><span class="p">):</span>
@@ -279,6 +281,7 @@
 <span class="sd">        identical and the type of relationship is the same.</span>
 <span class="sd">        If failing_expression is True, return the expression whose truth value</span>
 <span class="sd">        was unknown.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Relational</span><span class="p">):</span>
             <span class="k">if</span> <span class="bp">self</span> <span class="o">==</span> <span class="n">other</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">reversed</span> <span class="o">==</span> <span class="n">other</span><span class="p">:</span>
@@ -421,6 +424,7 @@
 <span class="sd">    returns anything other than None, that return value will be substituted for</span>
 <span class="sd">    the Equality.  If None is returned by `_eval_Eq`, an Equality object will</span>
 <span class="sd">    be created as usual.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">rel_op</span> <span class="o">=</span> <span class="s1">&#39;==&#39;</span>
@@ -488,6 +492,7 @@
 
 <span class="sd">    This class is effectively the inverse of Equality.  As such, it uses the</span>
 <span class="sd">    same algorithms, including any available `_eval_Eq` methods.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">rel_op</span> <span class="o">=</span> <span class="s1">&#39;!=&#39;</span>
@@ -514,6 +519,7 @@
 
 <span class="sd">    Each subclass must implement _eval_relation to provide the method for</span>
 <span class="sd">    comparing two real numbers.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
@@ -542,16 +548,17 @@
 
 <span class="sd">    _Greater is only used so that GreaterThan and StrictGreaterThan may subclass</span>
 <span class="sd">    it for the .gts and .lts properties.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">gts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Greater than side argument&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Greater than side argument.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">lts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Less than side argument&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Less than side argument.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
 
@@ -560,16 +567,17 @@
 
 <span class="sd">    _Less is only used so that LessThan and StrictLessThan may subclass it for</span>
 <span class="sd">    the .gts and .lts properties.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">gts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Greater than side argument&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Greater than side argument.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">lts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Less than side argument&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Less than side argument.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
 
@@ -746,6 +754,7 @@
 
 <span class="sd">    &gt;&gt;&gt; And(x &lt; y, y &lt; z)</span>
 <span class="sd">    And(x &lt; y, y &lt; z)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">rel_op</span> <span class="o">=</span> <span class="s1">&#39;&gt;=&#39;</span>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.polytools &mdash; Diofant 0.10.0b2.dev55+g97f1e5f documentation</title>
+  <title>diofant.polys.polytools &mdash; Diofant 0.10.0b2.dev59+g6273bb4 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev55+g97f1e5f
+                0.10.0b2.dev59+g6273bb4
               </div>
             
           
@@ -201,7 +201,7 @@
 
 
 <div class="viewcode-block" id="Poly"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.polytools.Poly">[docs]</a><span class="k">class</span> <span class="nc">Poly</span><span class="p">(</span><span class="n">Expr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Generic class for representing polynomial expressions. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Generic class for representing polynomial expressions.&quot;&quot;&quot;</span>
 
     <span class="n">is_commutative</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="n">is_Poly</span> <span class="o">=</span> <span class="kc">True</span>
@@ -209,7 +209,7 @@
     <span class="n">_op_priority</span> <span class="o">=</span> <span class="mf">10.1</span>
 
     <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">rep</span><span class="p">,</span> <span class="o">*</span><span class="n">gens</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Create a new polynomial instance out of something useful. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Create a new polynomial instance out of something useful.&quot;&quot;&quot;</span>
         <span class="n">opt</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">build_options</span><span class="p">(</span><span class="n">gens</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="s1">&#39;order&#39;</span> <span class="ow">in</span> <span class="n">opt</span><span class="p">:</span>
@@ -230,7 +230,7 @@
 
 <div class="viewcode-block" id="Poly.new"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.polytools.Poly.new">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">new</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">rep</span><span class="p">,</span> <span class="o">*</span><span class="n">gens</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Construct :class:`Poly` instance from raw representation. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Construct :class:`Poly` instance from raw representation.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">rep</span><span class="p">,</span> <span class="n">DMP</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">PolynomialError</span><span class="p">(</span>
                 <span class="s2">&quot;invalid polynomial representation: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">rep</span><span class="p">)</span>
@@ -246,31 +246,31 @@
 
 <div class="viewcode-block" id="Poly.from_dict"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.polytools.Poly.from_dict">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">rep</span><span class="p">,</span> <span class="o">*</span><span class="n">gens</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Construct a polynomial from a :class:`dict`. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Construct a polynomial from a :class:`dict`.&quot;&quot;&quot;</span>
         <span class="n">opt</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">build_options</span><span class="p">(</span><span class="n">gens</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_from_dict</span><span class="p">(</span><span class="n">rep</span><span class="p">,</span> <span class="n">opt</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Poly.from_list"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.polytools.Poly.from_list">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_list</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">rep</span><span class="p">,</span> <span class="o">*</span><span class="n">gens</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Construct a polynomial from a :class:`list`. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Construct a polynomial from a :class:`list`.&quot;&quot;&quot;</span>
         <span class="n">opt</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">build_options</span><span class="p">(</span><span class="n">gens</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_from_list</span><span class="p">(</span><span class="n">rep</span><span class="p">,</span> <span class="n">opt</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Poly.from_poly"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.polytools.Poly.from_poly">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_poly</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">rep</span><span class="p">,</span> <span class="o">*</span><span class="n">gens</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Construct a polynomial from a polynomial. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Construct a polynomial from a polynomial.&quot;&quot;&quot;</span>
         <span class="n">opt</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">build_options</span><span class="p">(</span><span class="n">gens</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_from_poly</span><span class="p">(</span><span class="n">rep</span><span class="p">,</span> <span class="n">opt</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Poly.from_expr"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.polytools.Poly.from_expr">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_expr</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">rep</span><span class="p">,</span> <span class="o">*</span><span class="n">gens</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Construct a polynomial from an expression. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Construct a polynomial from an expression.&quot;&quot;&quot;</span>
         <span class="n">opt</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">build_options</span><span class="p">(</span><span class="n">gens</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_from_expr</span><span class="p">(</span><span class="n">rep</span><span class="p">,</span> <span class="n">opt</span><span class="p">)</span></div>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">rep</span><span class="p">,</span> <span class="n">opt</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Construct a polynomial from a :class:`dict`. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Construct a polynomial from a :class:`dict`.&quot;&quot;&quot;</span>
         <span class="n">gens</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">gens</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">gens</span><span class="p">:</span>
@@ -290,7 +290,7 @@
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_from_list</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">rep</span><span class="p">,</span> <span class="n">opt</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Construct a polynomial from a :class:`list`. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Construct a polynomial from a :class:`list`.&quot;&quot;&quot;</span>
         <span class="n">gens</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">gens</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">gens</span><span class="p">:</span>
@@ -312,7 +312,7 @@
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_from_poly</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">rep</span><span class="p">,</span> <span class="n">opt</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Construct a polynomial from a polynomial. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Construct a polynomial from a polynomial.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">cls</span> <span class="o">!=</span> <span class="n">rep</span><span class="o">.</span><span class="vm">__class__</span><span class="p">:</span>
             <span class="n">rep</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">rep</span><span class="o">.</span><span class="n">rep</span><span class="p">,</span> <span class="o">*</span><span class="n">rep</span><span class="o">.</span><span class="n">gens</span><span class="p">)</span>
 
@@ -335,12 +335,12 @@
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_from_expr</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">rep</span><span class="p">,</span> <span class="n">opt</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Construct a polynomial from an expression. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Construct a polynomial from an expression.&quot;&quot;&quot;</span>
         <span class="n">rep</span><span class="p">,</span> <span class="n">opt</span> <span class="o">=</span> <span class="n">_dict_from_expr</span><span class="p">(</span><span class="n">rep</span><span class="p">,</span> <span class="n">opt</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_from_dict</span><span class="p">(</span><span class="n">rep</span><span class="p">,</span> <span class="n">opt</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_hashable_content</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Allow Diofant to hash Poly instances. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Allow Diofant to hash Poly instances.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">gens</span>
 
     <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -360,6 +360,7 @@
 <span class="sd">        {x, y}</span>
 <span class="sd">        &gt;&gt;&gt; Poly(x**2 + y, x).free_symbols</span>
 <span class="sd">        {x, y}</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">symbols</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
 
@@ -382,6 +383,7 @@
 <span class="sd">        set()</span>
 <span class="sd">        &gt;&gt;&gt; Poly(x**2 + y, x).free_symbols_in_domain</span>
 <span class="sd">        {y}</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">domain</span><span class="p">,</span> <span class="n">symbols</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="nb">set</span><span class="p">()</span>
 
@@ -428,22 +430,22 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">domain</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Get the ground domain of ``self``. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Get the ground domain of ``self``.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">domain</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">zero</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return zero polynomial with ``self``&#39;s properties. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Return zero polynomial with ``self``&#39;s properties.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">zero</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">lev</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">domain</span><span class="p">),</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">gens</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">one</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return one polynomial with ``self``&#39;s properties. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Return one polynomial with ``self``&#39;s properties.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">one</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">lev</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">domain</span><span class="p">),</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">gens</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">unit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return unit polynomial with ``self``&#39;s properties. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Return unit polynomial with ``self``&#39;s properties.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">unit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">lev</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">domain</span><span class="p">),</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">gens</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Poly.unify"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.polytools.Poly.unify">[docs]</a>    <span class="k">def</span> <span class="nf">unify</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
@@ -547,7 +549,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">rep</span><span class="p">,</span> <span class="o">*</span><span class="n">gens</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Poly.set_domain"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.polytools.Poly.set_domain">[docs]</a>    <span class="k">def</span> <span class="nf">set_domain</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">domain</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the ground domain of ``self``. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Set the ground domain of ``self``.&quot;&quot;&quot;</span>
         <span class="n">opt</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">build_options</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gens</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;domain&#39;</span><span class="p">:</span> <span class="n">domain</span><span class="p">})</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">per</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">opt</span><span class="o">.</span><span class="n">domain</span><span class="p">))</span></div>
 
@@ -584,7 +586,7 @@
             <span class="k">raise</span> <span class="n">PolynomialError</span><span class="p">(</span><span class="s2">&quot;not a polynomial over a Galois field&quot;</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_eval_subs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Internal implementation of :func:`~diofant.core.basic.Basic.subs`. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Internal implementation of :func:`~diofant.core.basic.Basic.subs`.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">old</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">gens</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">new</span><span class="o">.</span><span class="n">is_number</span><span class="p">:</span>
                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="p">)</span>
@@ -656,6 +658,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Poly(x**2 + x*y**2, x, y).reorder(y, x)</span>
 <span class="sd">        Poly(y**2*x + x**2, y, x, domain=&#39;ZZ&#39;)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">opt</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">Options</span><span class="p">((),</span> <span class="n">args</span><span class="p">)</span>
 
@@ -678,6 +681,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Poly(y**2 + y*z**2, x, y, z).ltrim(y)</span>
 <span class="sd">        Poly(y**2 + y*z**2, y, z, domain=&#39;ZZ&#39;)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">rep</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">as_dict</span><span class="p">(</span><span class="n">native</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">j</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_gen_to_level</span><span class="p">(</span><span class="n">gen</span><span class="p">)</span>
@@ -706,6 +710,7 @@
 <span class="sd">        True</span>
 <span class="sd">        &gt;&gt;&gt; Poly(x*y + z, x, y, z).has_only_gens(x, y)</span>
 <span class="sd">        False</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">indices</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
 
@@ -734,6 +739,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Poly(x**2 + 1, field=True).to_ring()</span>
 <span class="sd">        Poly(x**2 + 1, x, domain=&#39;ZZ&#39;)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">to_ring</span><span class="p">()</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">per</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
@@ -747,6 +753,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Poly(x**2 + 1).to_field()</span>
 <span class="sd">        Poly(x**2 + 1, x, domain=&#39;QQ&#39;)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">to_field</span><span class="p">()</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">per</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
@@ -760,6 +767,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Poly(x**2 + 1.0).to_exact()</span>
 <span class="sd">        Poly(x**2 + 1, x, domain=&#39;QQ&#39;)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">to_exact</span><span class="p">()</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">per</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
@@ -779,6 +787,7 @@
 <span class="sd">        Poly(x**2 + 1, x, domain=&#39;ZZ&#39;)</span>
 <span class="sd">        &gt;&gt;&gt; f.retract(field=True)</span>
 <span class="sd">        Poly(x**2 + 1, x, domain=&#39;QQ&#39;)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">dom</span><span class="p">,</span> <span class="n">rep</span> <span class="o">=</span> <span class="n">construct_domain</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">as_dict</span><span class="p">(),</span>
                                     <span class="n">field</span><span class="o">=</span><span class="n">field</span><span class="p">,</span>
@@ -787,7 +796,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">rep</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">gens</span><span class="p">,</span> <span class="n">domain</span><span class="o">=</span><span class="n">dom</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Poly.slice"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.polytools.Poly.slice">[docs]</a>    <span class="k">def</span> <span class="nf">slice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Take a continuous subsequence of terms of ``self``. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Take a continuous subsequence of terms of ``self``.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">n</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">j</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">m</span>
         <span class="k">else</span><span class="p">:</span>
@@ -813,6 +822,7 @@
 
 <span class="sd">        all_coeffs</span>
 <span class="sd">        coeff_monomial</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">to_expr</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">coeffs</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">)]</span></div>
 
@@ -830,6 +840,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        all_monoms</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">monoms</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">)</span></div>
 
@@ -847,6 +858,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        all_terms</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">[(</span><span class="n">m</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">to_expr</span><span class="p">(</span><span class="n">c</span><span class="p">))</span> <span class="k">for</span> <span class="n">m</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">terms</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">)]</span></div>
 
@@ -859,6 +871,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Poly(x**3 + 2*x - 1, x).all_coeffs()</span>
 <span class="sd">        [1, 0, 2, -1]</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">to_expr</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">all_coeffs</span><span class="p">()]</span></div>
 
@@ -876,6 +889,7 @@
 <span class="sd">        ========</span>
 
 <span class="sd">        all_terms</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">all_monoms</span><span class="p">()</span></div>
 
@@ -888,6 +902,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Poly(x**3 + 2*x - 1, x).all_terms()</span>
 <span class="sd">        [((3,), 1), ((2,), 0), ((1,), 2), ((0,), -1)]</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">[(</span><span class="n">m</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">to_expr</span><span class="p">(</span><span class="n">c</span><span class="p">))</span> <span class="k">for</span> <span class="n">m</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">all_terms</span><span class="p">()]</span></div>
 
@@ -904,6 +919,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Poly(x**2 + 20*x + 400).termwise(func)</span>
 <span class="sd">        Poly(x**2 + 2*x + 4, x, domain=&#39;ZZ&#39;)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">terms</span> <span class="o">=</span> <span class="p">{}</span>
 
@@ -933,6 +949,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Poly(x**2 + 2*x - 1).length()</span>
 <span class="sd">        3</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">as_dict</span><span class="p">())</span></div>
 
@@ -945,6 +962,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Poly(x**2 + 2*x*y**2 - y, x, y).as_dict()</span>
 <span class="sd">        {(0, 1): -1, (1, 2): 2, (2, 0): 1}</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">native</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
@@ -966,6 +984,7 @@
 <span class="sd">        10*y**2 - y + 25</span>
 <span class="sd">        &gt;&gt;&gt; f.as_expr(5, 6)</span>
 <span class="sd">        379</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">gens</span><span class="p">:</span>
             <span class="n">gens</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gens</span>
@@ -993,6 +1012,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Poly(x**6*y**2 + x**3 + 1, x, y).deflate()</span>
 <span class="sd">        ((3, 2), Poly(x**2*y + x + 1, x, y, domain=&#39;ZZ&#39;))</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">J</span><span class="p">,</span> <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">deflate</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">J</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">per</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
@@ -1010,6 +1030,7 @@
 <span class="sd">        Poly(x**2*y + x*y**3 + x*y + 1, x, y, domain=&#39;ZZ&#39;)</span>
 <span class="sd">        &gt;&gt;&gt; f.inject(front=True)</span>
 <span class="sd">        Poly(y**3*x + y*x**2 + y*x + 1, y, x, domain=&#39;ZZ&#39;)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">dom</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">domain</span>
 
@@ -1038,6 +1059,7 @@
 <span class="sd">        Poly(x*y**3 + (x**2 + x)*y + 1, y, domain=&#39;ZZ[x]&#39;)</span>
 <span class="sd">        &gt;&gt;&gt; f.eject(y)</span>
 <span class="sd">        Poly(y*x**2 + (y**3 + y)*x + 1, x, domain=&#39;ZZ[y]&#39;)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">dom</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">domain</span>
 
@@ -1068,6 +1090,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Poly(x**6*y**2 + x**3*y, x, y).terms_gcd()</span>
 <span class="sd">        ((3, 1), Poly(x**3*y + 1, x, y, domain=&#39;ZZ&#39;))</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">J</span><span class="p">,</span> <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">terms_gcd</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">J</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">per</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
@@ -1084,6 +1107,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Poly(2*x + 3).quo_ground(2)</span>
 <span class="sd">        Poly(x + 1, x, domain=&#39;ZZ&#39;)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">quo_ground</span><span class="p">(</span><span class="n">coeff</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">per</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
@@ -1102,6 +1126,7 @@
 <span class="sd">        Traceback (most recent call last):</span>
 <span class="sd">        ...</span>
 <span class="sd">        ExactQuotientFailed: 2 does not divide 3 in ZZ</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">exquo_ground</span><span class="p">(</span><span class="n">coeff</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">per</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
@@ -1115,6 +1140,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Poly(x**2 + 1, x).pdiv(Poly(2*x - 4, x))</span>
 <span class="sd">        (Poly(2*x + 4, x, domain=&#39;ZZ&#39;), Poly(20, x, domain=&#39;ZZ&#39;))</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">_</span><span class="p">,</span> <span class="n">per</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unify</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
@@ -1130,6 +1156,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Poly(x**2 + 1, x).prem(Poly(2*x - 4, x))</span>
 <span class="sd">        Poly(20, x, domain=&#39;ZZ&#39;)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">_</span><span class="p">,</span> <span class="n">per</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unify</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
@@ -1148,6 +1175,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Poly(x**2 - 1, x).pquo(Poly(2*x - 2, x))</span>
 <span class="sd">        Poly(2*x + 2, x, domain=&#39;ZZ&#39;)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">_</span><span class="p">,</span> <span class="n">per</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unify</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
@@ -1168,6 +1196,7 @@
 <span class="sd">        Traceback (most recent call last):</span>
 <span class="sd">        ...</span>
 <span class="sd">        ExactQuotientFailed: 2*x - 4 does not divide x**2 + 1</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">_</span><span class="p">,</span> <span class="n">per</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unify</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
@@ -1190,6 +1219,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Poly(x**2 + 1, x).div(Poly(2*x - 4, x), auto=False)</span>
 <span class="sd">        (Poly(0, x, domain=&#39;ZZ&#39;), Poly(x**2 + 1, x, domain=&#39;ZZ&#39;))</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">dom</span><span class="p">,</span> <span class="n">per</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unify</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
         <span class="n">retract</span> <span class="o">=</span> <span class="kc">False</span>
@@ -1222,6 +1252,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Poly(x**2 + 1, x).rem(Poly(2*x - 4, x), auto=False)</span>
 <span class="sd">        Poly(x**2 + 1, x, domain=&#39;ZZ&#39;)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">dom</span><span class="p">,</span> <span class="n">per</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unify</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
         <span class="n">retract</span> <span class="o">=</span> <span class="kc">False</span>
@@ -1252,6 +1283,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Poly(x**2 - 1, x).quo(Poly(x - 1, x))</span>
 <span class="sd">        Poly(x + 1, x, domain=&#39;ZZ&#39;)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">dom</span><span class="p">,</span> <span class="n">per</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unify</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
         <span class="n">retract</span> <span class="o">=</span> <span class="kc">False</span>
@@ -1284,6 +1316,7 @@
 <span class="sd">        Traceback (most recent call last):</span>
 <span class="sd">        ...</span>
 <span class="sd">        ExactQuotientFailed: 2*x - 4 does not divide x**2 + 1</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">dom</span><span class="p">,</span> <span class="n">per</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unify</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
         <span class="n">retract</span> <span class="o">=</span> <span class="kc">False</span>
@@ -1306,7 +1339,7 @@
         <span class="k">return</span> <span class="n">per</span><span class="p">(</span><span class="n">q</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_gen_to_level</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gen</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns level associated with the given generator. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Returns level associated with the given generator.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">gen</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
             <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gens</span><span class="p">)</span>
 
@@ -1340,6 +1373,7 @@
 <span class="sd">        1</span>
 <span class="sd">        &gt;&gt;&gt; Poly(0, x).degree()</span>
 <span class="sd">        -oo</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">j</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_gen_to_level</span><span class="p">(</span><span class="n">gen</span><span class="p">)</span>
 
@@ -1354,6 +1388,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Poly(x**2 + y*x + 1, x, y).degree_list()</span>
 <span class="sd">        (2, 1)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">degree_list</span><span class="p">()</span></div>
 
@@ -1368,6 +1403,7 @@
 <span class="sd">        2</span>
 <span class="sd">        &gt;&gt;&gt; Poly(x + y**5, x, y).total_degree()</span>
 <span class="sd">        5</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">total_degree</span><span class="p">()</span></div>
 
@@ -1380,6 +1416,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Poly(4*x**3 + 2*x**2 + 3*x, x).LC()</span>
 <span class="sd">        4</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">order</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">coeffs</span><span class="p">(</span><span class="n">order</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
@@ -1396,6 +1433,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Poly(x**3 + 2*x**2 + 3*x, x).TC()</span>
 <span class="sd">        0</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">TC</span><span class="p">()</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">to_expr</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
@@ -1409,6 +1447,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Poly(x**3 + 2*x**2 + 3*x, x).EC()</span>
 <span class="sd">        3</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">coeffs</span><span class="p">(</span><span class="n">order</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></div>
 
@@ -1440,6 +1479,7 @@
 <span class="sd">        24*E**8*x</span>
 <span class="sd">        &gt;&gt;&gt; p.as_expr().coeff(x*y)</span>
 <span class="sd">        24*E**8</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">N</span> <span class="o">=</span> <span class="n">Monomial</span><span class="p">(</span><span class="n">monom</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">gens</span><span class="p">)</span><span class="o">.</span><span class="n">exponents</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gens</span><span class="p">):</span>
@@ -1472,6 +1512,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Poly(4*x**2 + 2*x*y**2 + x*y + 3*y, x, y).LM()</span>
 <span class="sd">        x**2*y**0</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">Monomial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">monoms</span><span class="p">(</span><span class="n">order</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">gens</span><span class="p">)</span></div>
 
@@ -1484,6 +1525,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Poly(4*x**2 + 2*x*y**2 + x*y + 3*y, x, y).EM()</span>
 <span class="sd">        x**0*y**1</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">Monomial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">monoms</span><span class="p">(</span><span class="n">order</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">gens</span><span class="p">)</span></div>
 
@@ -1499,6 +1541,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Poly(4*x**2 + 2*x*y**2 + x*y + 3*y, x, y).LT()</span>
 <span class="sd">        (x**2*y**0, 4)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">monom</span><span class="p">,</span> <span class="n">coeff</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">terms</span><span class="p">(</span><span class="n">order</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">Monomial</span><span class="p">(</span><span class="n">monom</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">gens</span><span class="p">),</span> <span class="n">coeff</span></div>
@@ -1512,6 +1555,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Poly(4*x**2 + 2*x*y**2 + x*y + 3*y, x, y).ET()</span>
 <span class="sd">        (x**0*y**1, 3)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">monom</span><span class="p">,</span> <span class="n">coeff</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">terms</span><span class="p">(</span><span class="n">order</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">Monomial</span><span class="p">(</span><span class="n">monom</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">gens</span><span class="p">),</span> <span class="n">coeff</span></div>
@@ -1525,6 +1569,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Poly(-x**2 + 2*x - 3, x).max_norm()</span>
 <span class="sd">        3</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">max_norm</span><span class="p">()</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">to_expr</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
@@ -1538,6 +1583,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Poly(-x**2 + 2*x - 3, x).l1_norm()</span>
 <span class="sd">        6</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">l1_norm</span><span class="p">()</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">to_expr</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
@@ -1555,6 +1601,7 @@
 <span class="sd">        (6, Poly(3*x + 2, x, domain=&#39;QQ&#39;))</span>
 <span class="sd">        &gt;&gt;&gt; f.clear_denoms(convert=True)</span>
 <span class="sd">        (6, Poly(3*x + 2, x, domain=&#39;ZZ&#39;))</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span>
 
@@ -1589,6 +1636,7 @@
 <span class="sd">        Poly(x**2 + y, x, domain=&#39;ZZ[y]&#39;)</span>
 <span class="sd">        &gt;&gt;&gt; q</span>
 <span class="sd">        Poly(y*x**3 + y**2, x, domain=&#39;ZZ[y]&#39;)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">f</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="bp">self</span><span class="p">,</span> <span class="n">other</span>
 
@@ -1620,6 +1668,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Poly(x*y**2 + x, x, y).integrate((0, 1), (1, 0))</span>
 <span class="sd">        Poly(1/2*x**2*y**2 + 1/2*x**2, x, y, domain=&#39;QQ&#39;)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span>
 
@@ -1653,6 +1702,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Poly(x*y**2 + x, x, y).diff((0, 0), (1, 1))</span>
 <span class="sd">        Poly(2*x*y, x, y, domain=&#39;ZZ&#39;)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;evaluate&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">Derivative</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">specs</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -1700,6 +1750,7 @@
 <span class="sd">        Poly(2*z + 31, z, domain=&#39;ZZ&#39;)</span>
 <span class="sd">        &gt;&gt;&gt; f(2, 5)</span>
 <span class="sd">        Poly(2*z + 31, z, domain=&#39;ZZ&#39;)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span>
 
@@ -1757,6 +1808,7 @@
 <span class="sd">        Poly(2*z + 31, z, domain=&#39;ZZ&#39;)</span>
 <span class="sd">        &gt;&gt;&gt; f(2, 5, 7)</span>
 <span class="sd">        45</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
 
@@ -1774,6 +1826,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Poly(f).half_gcdex(Poly(g))</span>
 <span class="sd">        (Poly(-1/5*x + 3/5, x, domain=&#39;QQ&#39;), Poly(x + 1, x, domain=&#39;QQ&#39;))</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">dom</span><span class="p">,</span> <span class="n">per</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unify</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
@@ -1799,6 +1852,7 @@
 <span class="sd">        (Poly(-1/5*x + 3/5, x, domain=&#39;QQ&#39;),</span>
 <span class="sd">         Poly(1/5*x**2 - 6/5*x + 2, x, domain=&#39;QQ&#39;),</span>
 <span class="sd">         Poly(x + 1, x, domain=&#39;QQ&#39;))</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">dom</span><span class="p">,</span> <span class="n">per</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unify</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
@@ -1822,6 +1876,7 @@
 <span class="sd">        Traceback (most recent call last):</span>
 <span class="sd">        ...</span>
 <span class="sd">        NotInvertible: zero divisor</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">dom</span><span class="p">,</span> <span class="n">per</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unify</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
@@ -1842,6 +1897,7 @@
 <span class="sd">        [Poly(x**2 + 1, x, domain=&#39;ZZ&#39;),</span>
 <span class="sd">         Poly(x**2 - 1, x, domain=&#39;ZZ&#39;),</span>
 <span class="sd">         Poly(-2, x, domain=&#39;ZZ&#39;)]</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">_</span><span class="p">,</span> <span class="n">per</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unify</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
@@ -1866,6 +1922,7 @@
 <span class="sd">        &gt;&gt;&gt; f.resultant(Poly(x**2 - 1, x), includePRS=True)</span>
 <span class="sd">        (4, [Poly(x**2 + 1, x, domain=&#39;ZZ&#39;), Poly(x**2 - 1, x, domain=&#39;ZZ&#39;),</span>
 <span class="sd">             Poly(-2, x, domain=&#39;ZZ&#39;)])</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">_</span><span class="p">,</span> <span class="n">per</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unify</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
@@ -1887,6 +1944,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Poly(x**2 + 2*x + 3, x).discriminant()</span>
 <span class="sd">        -8</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">discriminant</span><span class="p">()</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">per</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">remove</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></div>
@@ -1944,6 +2002,7 @@
 <span class="sd">        (Poly(x - 1, x, domain=&#39;ZZ&#39;),</span>
 <span class="sd">         Poly(x + 1, x, domain=&#39;ZZ&#39;),</span>
 <span class="sd">         Poly(x - 2, x, domain=&#39;ZZ&#39;))</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">_</span><span class="p">,</span> <span class="n">per</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unify</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
@@ -1959,6 +2018,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Poly(x**2 - 1, x).gcd(Poly(x**2 - 3*x + 2, x))</span>
 <span class="sd">        Poly(x - 1, x, domain=&#39;ZZ&#39;)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">_</span><span class="p">,</span> <span class="n">per</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unify</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
@@ -1974,6 +2034,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Poly(x**2 - 1, x).lcm(Poly(x**2 - 3*x + 2, x))</span>
 <span class="sd">        Poly(x**3 - 2*x**2 - x + 2, x, domain=&#39;ZZ&#39;)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">_</span><span class="p">,</span> <span class="n">per</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unify</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
@@ -2027,6 +2088,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Poly(6*x**2 + 8*x + 12, x).content()</span>
 <span class="sd">        2</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">content</span><span class="p">()</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">to_expr</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
@@ -2040,6 +2102,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Poly(2*x**2 + 8*x + 12, x).primitive()</span>
 <span class="sd">        (2, Poly(x**2 + 4*x + 6, x, domain=&#39;ZZ&#39;))</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">cont</span><span class="p">,</span> <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">primitive</span><span class="p">()</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">to_expr</span><span class="p">(</span><span class="n">cont</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">per</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
@@ -2053,6 +2116,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Poly(x**2 + x, x).compose(Poly(x - 1, x))</span>
 <span class="sd">        Poly(x**2 - x, x, domain=&#39;ZZ&#39;)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">_</span><span class="p">,</span> <span class="n">per</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unify</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
@@ -2068,6 +2132,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Poly(x**4 + 2*x**3 - x - 1).decompose()</span>
 <span class="sd">        [Poly(x**2 - x - 1, x, domain=&#39;ZZ&#39;), Poly(x**2 + x, x, domain=&#39;ZZ&#39;)]</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">decompose</span><span class="p">()</span>
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">per</span><span class="p">,</span> <span class="n">result</span><span class="p">))</span></div>
@@ -2081,6 +2146,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Poly(x**2 - 2*x + 1, x).shift(2)</span>
 <span class="sd">        Poly(x**2 + 2*x + 1, x, domain=&#39;ZZ&#39;)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">per</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
@@ -2097,6 +2163,7 @@
 <span class="sd">         Poly(3*x**2 - 4*x + 1, x, domain=&#39;QQ&#39;),</span>
 <span class="sd">         Poly(2/9*x + 25/9, x, domain=&#39;QQ&#39;),</span>
 <span class="sd">         Poly(-2079/4, x, domain=&#39;QQ&#39;)]</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span>
 
@@ -2125,6 +2192,7 @@
 <span class="sd">        Poly(x**2 - 2*sqrt(3)*x + 4, x, domain=&#39;QQ&lt;sqrt(3)&gt;&#39;)</span>
 <span class="sd">        &gt;&gt;&gt; r</span>
 <span class="sd">        Poly(x**4 - 4*x**2 + 16, x, domain=&#39;QQ&#39;)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">s</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">sqf_norm</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">s</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">per</span><span class="p">(</span><span class="n">g</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">per</span><span class="p">(</span><span class="n">r</span><span class="p">)</span></div>
@@ -2138,6 +2206,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Poly(x**3 - 3*x - 2, x).sqf_part()</span>
 <span class="sd">        Poly(x**2 - x - 2, x, domain=&#39;ZZ&#39;)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">sqf_part</span><span class="p">()</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">per</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
@@ -2154,6 +2223,7 @@
 <span class="sd">        &gt;&gt;&gt; Poly(f).sqf_list()</span>
 <span class="sd">        (2, [(Poly(x + 1, x, domain=&#39;ZZ&#39;), 2),</span>
 <span class="sd">             (Poly(x + 2, x, domain=&#39;ZZ&#39;), 3)])</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">coeff</span><span class="p">,</span> <span class="n">factors</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">sqf_list</span><span class="p">()</span>
         <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">to_expr</span><span class="p">(</span><span class="n">coeff</span><span class="p">),</span>
@@ -2171,6 +2241,7 @@
 <span class="sd">        &gt;&gt;&gt; Poly(f).factor_list()</span>
 <span class="sd">        (2, [(Poly(x + y, x, y, domain=&#39;ZZ&#39;), 1),</span>
 <span class="sd">             (Poly(x**2 + 1, x, y, domain=&#39;ZZ&#39;), 2)])</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">coeff</span><span class="p">,</span> <span class="n">factors</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">factor_list</span><span class="p">()</span>
@@ -2199,6 +2270,7 @@
 <span class="sd">        [((-2, -1), 1), ((1, 2), 1)]</span>
 <span class="sd">        &gt;&gt;&gt; Poly(x**2 - 3, x).intervals(eps=1e-2)</span>
 <span class="sd">        [((-26/15, -19/11), 1), ((19/11, 26/15), 1)]</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">eps</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">eps</span> <span class="o">=</span> <span class="n">QQ</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">eps</span><span class="p">)</span>
@@ -2256,6 +2328,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Poly(x**2 - 3, x).refine_root(1, 2, eps=1e-2)</span>
 <span class="sd">        (19/11, 26/15)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">check_sqf</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_squarefree</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">PolynomialError</span><span class="p">(</span><span class="s2">&quot;only square-free polynomials supported&quot;</span><span class="p">)</span>
@@ -2287,6 +2360,7 @@
 <span class="sd">        2</span>
 <span class="sd">        &gt;&gt;&gt; Poly(x**4 - 4, x).count_roots(0, 1 + 3*I)</span>
 <span class="sd">        1</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">inf_real</span><span class="p">,</span> <span class="n">sup_real</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span>
 
@@ -2351,6 +2425,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Poly(x**5 + x + 1).root(0)</span>
 <span class="sd">        RootOf(x**3 - x**2 + 1, 0)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">.rootoftools</span> <span class="k">import</span> <span class="n">RootOf</span>
         <span class="k">return</span> <span class="n">RootOf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">radicals</span><span class="o">=</span><span class="n">radicals</span><span class="p">)</span></div>
@@ -2366,6 +2441,7 @@
 <span class="sd">        [-1/2, 2, 2]</span>
 <span class="sd">        &gt;&gt;&gt; Poly(x**3 + x + 1).real_roots()</span>
 <span class="sd">        [RootOf(x**3 + x + 1, 0)]</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">.rootoftools</span> <span class="k">import</span> <span class="n">RootOf</span>
         <span class="n">reals</span> <span class="o">=</span> <span class="n">RootOf</span><span class="o">.</span><span class="n">real_roots</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">radicals</span><span class="o">=</span><span class="n">radicals</span><span class="p">)</span>
@@ -2387,6 +2463,7 @@
 <span class="sd">        &gt;&gt;&gt; Poly(x**3 + x + 1).all_roots()</span>
 <span class="sd">        [RootOf(x**3 + x + 1, 0), RootOf(x**3 + x + 1, 1),</span>
 <span class="sd">         RootOf(x**3 + x + 1, 2)]</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">.rootoftools</span> <span class="k">import</span> <span class="n">RootOf</span>
         <span class="n">roots</span> <span class="o">=</span> <span class="n">RootOf</span><span class="o">.</span><span class="n">all_roots</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">radicals</span><span class="o">=</span><span class="n">radicals</span><span class="p">)</span>
@@ -2416,6 +2493,7 @@
 <span class="sd">        [-1.73205080756888, 1.73205080756888]</span>
 <span class="sd">        &gt;&gt;&gt; Poly(x**2 - 3).nroots(n=30)</span>
 <span class="sd">        [-1.73205080756887729352744634151, 1.73205080756887729352744634151]</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_multivariate</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">MultivariatePolynomialError</span><span class="p">(</span>
@@ -2475,6 +2553,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Poly(x**6 - 4*x**4 + 4*x**3 - x**2).ground_roots()</span>
 <span class="sd">        {0: 2, 1: 2}</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_multivariate</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">MultivariatePolynomialError</span><span class="p">(</span>
@@ -2506,6 +2585,7 @@
 <span class="sd">        Poly(x**4 + 2*x**3 + 3*x**2 + 2*x + 1, x, domain=&#39;ZZ&#39;)</span>
 <span class="sd">        &gt;&gt;&gt; f.nth_power_roots_poly(12)</span>
 <span class="sd">        Poly(x**4 - 4*x**3 + 6*x**2 - 4*x + 1, x, domain=&#39;ZZ&#39;)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_multivariate</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">MultivariatePolynomialError</span><span class="p">(</span><span class="s2">&quot;must be a univariate polynomial&quot;</span><span class="p">)</span>
@@ -2536,6 +2616,7 @@
 
 <span class="sd">        &gt;&gt;&gt; Poly(2*x**2 - 2, x).cancel(Poly(x**2 - 2*x + 1, x), include=True)</span>
 <span class="sd">        (Poly(2*x + 2, x, domain=&#39;ZZ&#39;), Poly(x - 1, x, domain=&#39;ZZ&#39;))</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">dom</span><span class="p">,</span> <span class="n">per</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unify</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
@@ -2566,6 +2647,7 @@
 <span class="sd">        True</span>
 <span class="sd">        &gt;&gt;&gt; Poly(1, x).is_zero</span>
 <span class="sd">        False</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">is_zero</span>
 
@@ -2581,6 +2663,7 @@
 <span class="sd">        False</span>
 <span class="sd">        &gt;&gt;&gt; Poly(1, x).is_one</span>
 <span class="sd">        True</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">is_one</span>
 
@@ -2596,6 +2679,7 @@
 <span class="sd">        False</span>
 <span class="sd">        &gt;&gt;&gt; Poly(x**2 - 1, x).is_squarefree</span>
 <span class="sd">        True</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">is_squarefree</span>
 
@@ -2611,6 +2695,7 @@
 <span class="sd">        True</span>
 <span class="sd">        &gt;&gt;&gt; Poly(2*x + 2, x).is_monic</span>
 <span class="sd">        False</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">is_monic</span>
 
@@ -2626,6 +2711,7 @@
 <span class="sd">        False</span>
 <span class="sd">        &gt;&gt;&gt; Poly(x**2 + 3*x + 6, x).is_primitive</span>
 <span class="sd">        True</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">is_primitive</span>
 
@@ -2643,6 +2729,7 @@
 <span class="sd">        True</span>
 <span class="sd">        &gt;&gt;&gt; Poly(y, x).is_ground</span>
 <span class="sd">        True</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">is_ground</span>
 
@@ -2658,6 +2745,7 @@
 <span class="sd">        True</span>
 <span class="sd">        &gt;&gt;&gt; Poly(x*y + 2, x, y).is_linear</span>
 <span class="sd">        False</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">is_linear</span>
 
@@ -2673,6 +2761,7 @@
 <span class="sd">        True</span>
 <span class="sd">        &gt;&gt;&gt; Poly(x*y**2 + 2, x, y).is_quadratic</span>
 <span class="sd">        False</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">is_quadratic</span>
 
@@ -2688,6 +2777,7 @@
 <span class="sd">        True</span>
 <span class="sd">        &gt;&gt;&gt; Poly(3*x**2 + 1, x).is_monomial</span>
 <span class="sd">        False</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">is_monomial</span>
 
@@ -2706,6 +2796,7 @@
 <span class="sd">        True</span>
 <span class="sd">        &gt;&gt;&gt; Poly(x**3 + x*y, x, y).is_homogeneous</span>
 <span class="sd">        False</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">is_homogeneous</span>
 
@@ -2741,6 +2832,7 @@
 <span class="sd">        True</span>
 <span class="sd">        &gt;&gt;&gt; Poly(x**2 + x + 1, x, y).is_univariate</span>
 <span class="sd">        False</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gens</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
 
@@ -2760,6 +2852,7 @@
 <span class="sd">        False</span>
 <span class="sd">        &gt;&gt;&gt; Poly(x**2 + x + 1, x, y).is_multivariate</span>
 <span class="sd">        True</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gens</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span>
 
@@ -2778,6 +2871,7 @@
 <span class="sd">        &gt;&gt;&gt; g = x**16 + x**14 - x**10 - x**8 - x**6 + x**2 + 1</span>
 <span class="sd">        &gt;&gt;&gt; Poly(g).is_cyclotomic</span>
 <span class="sd">        True</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">is_cyclotomic</span>
 
@@ -2790,6 +2884,7 @@
 
 <span class="sd">        &gt;&gt;&gt; abs(Poly(x**2 - 1, x))</span>
 <span class="sd">        Poly(x**2 + 1, x, domain=&#39;ZZ&#39;)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">result</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">per</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
@@ -2803,6 +2898,7 @@
 
 <span class="sd">        &gt;&gt;&gt; -Poly(x**2 - 1, x)</span>
 <span class="sd">        Poly(-x**2 + 1, x, domain=&#39;ZZ&#39;)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">result</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">per</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
@@ -2951,10 +3047,10 @@
 
 
 <div class="viewcode-block" id="PurePoly"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.polytools.PurePoly">[docs]</a><span class="k">class</span> <span class="nc">PurePoly</span><span class="p">(</span><span class="n">Poly</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Class for representing pure polynomials. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Class for representing pure polynomials.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">_hashable_content</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Allow Diofant to hash Poly instances. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Allow Diofant to hash Poly instances.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="p">,</span>
 
     <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -2974,6 +3070,7 @@
 <span class="sd">        set()</span>
 <span class="sd">        &gt;&gt;&gt; PurePoly(x**2 + y, x).free_symbols</span>
 <span class="sd">        {y}</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">free_symbols_in_domain</span>
 
@@ -3035,13 +3132,13 @@
 
 
 <div class="viewcode-block" id="poly_from_expr"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.polytools.poly_from_expr">[docs]</a><span class="k">def</span> <span class="nf">poly_from_expr</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="o">*</span><span class="n">gens</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Construct a polynomial from an expression. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Construct a polynomial from an expression.&quot;&quot;&quot;</span>
     <span class="n">opt</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">build_options</span><span class="p">(</span><span class="n">gens</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">_poly_from_expr</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">opt</span><span class="p">)</span></div>
 
 
 <span class="k">def</span> <span class="nf">_poly_from_expr</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">opt</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Construct a polynomial from an expression. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Construct a polynomial from an expression.&quot;&quot;&quot;</span>
     <span class="n">orig</span><span class="p">,</span> <span class="n">expr</span> <span class="o">=</span> <span class="n">expr</span><span class="p">,</span> <span class="n">sympify</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">Basic</span><span class="p">):</span>
@@ -3082,13 +3179,13 @@
 
 
 <div class="viewcode-block" id="parallel_poly_from_expr"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.polytools.parallel_poly_from_expr">[docs]</a><span class="k">def</span> <span class="nf">parallel_poly_from_expr</span><span class="p">(</span><span class="n">exprs</span><span class="p">,</span> <span class="o">*</span><span class="n">gens</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Construct polynomials from expressions. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Construct polynomials from expressions.&quot;&quot;&quot;</span>
     <span class="n">opt</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">build_options</span><span class="p">(</span><span class="n">gens</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">_parallel_poly_from_expr</span><span class="p">(</span><span class="n">exprs</span><span class="p">,</span> <span class="n">opt</span><span class="p">)</span></div>
 
 
 <span class="k">def</span> <span class="nf">_parallel_poly_from_expr</span><span class="p">(</span><span class="n">exprs</span><span class="p">,</span> <span class="n">opt</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Construct polynomials from expressions. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Construct polynomials from expressions.&quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">..functions</span> <span class="k">import</span> <span class="n">Piecewise</span>
 
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">exprs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
@@ -3613,6 +3710,7 @@
 <span class="sd">    ========</span>
 
 <span class="sd">    diofant.core.numbers.mod_inverse</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">options</span><span class="o">.</span><span class="n">allowed_flags</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="s1">&#39;polys&#39;</span><span class="p">])</span>
 
@@ -4293,7 +4391,7 @@
 
 
 <span class="k">def</span> <span class="nf">_sorted_factors</span><span class="p">(</span><span class="n">factors</span><span class="p">,</span> <span class="n">method</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Sort a list of ``(expr, exp)`` pairs. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Sort a list of ``(expr, exp)`` pairs.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;sqf&#39;</span><span class="p">:</span>
         <span class="k">def</span> <span class="nf">key</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
             <span class="n">poly</span><span class="p">,</span> <span class="n">exp</span> <span class="o">=</span> <span class="n">obj</span>
@@ -4309,12 +4407,12 @@
 
 
 <span class="k">def</span> <span class="nf">_factors_product</span><span class="p">(</span><span class="n">factors</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Multiply a list of ``(expr, exp)`` pairs. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Multiply a list of ``(expr, exp)`` pairs.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">Mul</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">as_expr</span><span class="p">()</span><span class="o">**</span><span class="n">k</span> <span class="k">for</span> <span class="n">f</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">factors</span><span class="p">])</span>
 
 
 <span class="k">def</span> <span class="nf">_symbolic_factor_list</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">opt</span><span class="p">,</span> <span class="n">method</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Helper function for :func:`_symbolic_factor`. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Helper function for :func:`_symbolic_factor`.&quot;&quot;&quot;</span>
     <span class="n">coeff</span><span class="p">,</span> <span class="n">factors</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">,</span> <span class="p">[]</span>
 
     <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">_eval_factor</span><span class="p">()</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="s1">&#39;_eval_factor&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="n">i</span>
@@ -4369,7 +4467,7 @@
 
 
 <span class="k">def</span> <span class="nf">_symbolic_factor</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">opt</span><span class="p">,</span> <span class="n">method</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Helper function for :func:`_factor`. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Helper function for :func:`_factor`.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">Expr</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_Relational</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="s1">&#39;_eval_factor&#39;</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">expr</span><span class="o">.</span><span class="n">_eval_factor</span><span class="p">()</span>
@@ -4384,7 +4482,7 @@
 
 
 <span class="k">def</span> <span class="nf">_generic_factor_list</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">gens</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">method</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Helper function for :func:`sqf_list` and :func:`factor_list`. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Helper function for :func:`sqf_list` and :func:`factor_list`.&quot;&quot;&quot;</span>
     <span class="n">options</span><span class="o">.</span><span class="n">allowed_flags</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;frac&#39;</span><span class="p">,</span> <span class="s1">&#39;polys&#39;</span><span class="p">])</span>
     <span class="n">opt</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">build_options</span><span class="p">(</span><span class="n">gens</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
 
@@ -4428,7 +4526,7 @@
 
 
 <span class="k">def</span> <span class="nf">_generic_factor</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">gens</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">method</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Helper function for :func:`sqf` and :func:`factor`. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Helper function for :func:`sqf` and :func:`factor`.&quot;&quot;&quot;</span>
     <span class="n">options</span><span class="o">.</span><span class="n">allowed_flags</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="p">[])</span>
     <span class="n">opt</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">build_options</span><span class="p">(</span><span class="n">gens</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">_symbolic_factor</span><span class="p">(</span><span class="n">sympify</span><span class="p">(</span><span class="n">expr</span><span class="p">),</span> <span class="n">opt</span><span class="p">,</span> <span class="n">method</span><span class="p">)</span>
@@ -4478,6 +4576,7 @@
 <span class="sd">        Returns ``alpha, f``; if the rescaling is successful,</span>
 <span class="sd">        ``alpha`` is the rescaling factor, and ``f`` is the rescaled</span>
 <span class="sd">        polynomial; else ``alpha`` is ``None``.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">Add</span>
         <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">is_multivariate</span> <span class="ow">or</span> <span class="ow">not</span> <span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">gens</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">is_Atom</span><span class="p">:</span>
@@ -4512,6 +4611,7 @@
 <span class="sd">        Returns ``alpha, f``; if the translating is successful,</span>
 <span class="sd">        ``alpha`` is the translating factor, and ``f`` is the shifted</span>
 <span class="sd">        polynomial; else ``alpha`` is ``None``.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">Add</span>
         <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">is_multivariate</span> <span class="ow">or</span> <span class="ow">not</span> <span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">gens</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">is_Atom</span><span class="p">:</span>
@@ -4534,9 +4634,7 @@
             <span class="k">return</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">f2</span>
 
     <span class="k">def</span> <span class="nf">_has_square_roots</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return True if ``f`` is a sum with square roots but no other root</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Return True if ``f`` is a sum with square roots but no other root.&quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">..core.exprtools</span> <span class="k">import</span> <span class="n">Factors</span>
         <span class="n">coeffs</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">coeffs</span><span class="p">()</span>
         <span class="n">has_sq</span> <span class="o">=</span> <span class="kc">False</span>
@@ -4930,6 +5028,7 @@
 <span class="sd">    (2*x + 2)/(x - 1)</span>
 <span class="sd">    &gt;&gt;&gt; cancel((sqrt(3) + sqrt(15)*A)/(sqrt(2) + sqrt(10)*A))</span>
 <span class="sd">    sqrt(6)/2</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">..core.exprtools</span> <span class="k">import</span> <span class="n">factor_terms</span>
     <span class="kn">from</span> <span class="nn">..functions</span> <span class="k">import</span> <span class="n">Piecewise</span>
@@ -5090,15 +5189,16 @@
 <span class="sd">    ========</span>
 
 <span class="sd">    diofant.solvers.polysys.solve_poly_system</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">GroebnerBasis</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="o">*</span><span class="n">gens</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="GroebnerBasis"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.polytools.GroebnerBasis">[docs]</a><span class="k">class</span> <span class="nc">GroebnerBasis</span><span class="p">(</span><span class="n">Basic</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Represents a reduced Gröbner basis. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Represents a reduced Gröbner basis.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="o">*</span><span class="n">gens</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Compute a reduced Gröbner basis for a system of polynomials. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Compute a reduced Gröbner basis for a system of polynomials.&quot;&quot;&quot;</span>
         <span class="n">options</span><span class="o">.</span><span class="n">allowed_flags</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;polys&#39;</span><span class="p">,</span> <span class="s1">&#39;method&#39;</span><span class="p">])</span>
 
         <span class="k">try</span><span class="p">:</span>
@@ -5195,6 +5295,7 @@
 <span class="sd">        ==========</span>
 
 <span class="sd">        * [KredelWeispfennig88]_</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)):</span>
             <span class="k">return</span>
@@ -5239,6 +5340,7 @@
 
 <span class="sd">        &gt;&gt;&gt; G.set_order(&#39;lex&#39;) == groebner(F, x, y, order=&#39;lex&#39;)</span>
 <span class="sd">        True</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">src_order</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">order</span>
         <span class="n">dst_order</span> <span class="o">=</span> <span class="n">monomial_key</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>

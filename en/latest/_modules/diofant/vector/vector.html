@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.vector.vector &mdash; Diofant 0.10.0b2.dev55+g97f1e5f documentation</title>
+  <title>diofant.vector.vector &mdash; Diofant 0.10.0b2.dev59+g6273bb4 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev55+g97f1e5f
+                0.10.0b2.dev59+g6273bb4
               </div>
             
           
@@ -169,6 +169,7 @@
 <span class="sd">    Super class for all Vector classes.</span>
 <span class="sd">    Ideally, neither this class nor any of its subclasses should be</span>
 <span class="sd">    instantiated by the user.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">is_Vector</span> <span class="o">=</span> <span class="kc">True</span>
@@ -195,15 +196,11 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_components</span>
 
 <div class="viewcode-block" id="Vector.magnitude"><a class="viewcode-back" href="../../../modules/vector/api/classes.html#diofant.vector.vector.Vector.magnitude">[docs]</a>    <span class="k">def</span> <span class="nf">magnitude</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns the magnitude of this vector.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Returns the magnitude of this vector.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span> <span class="o">&amp;</span> <span class="bp">self</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Vector.normalize"><a class="viewcode-back" href="../../../modules/vector/api/classes.html#diofant.vector.vector.Vector.normalize">[docs]</a>    <span class="k">def</span> <span class="nf">normalize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns the normalized version of this vector.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Returns the normalized version of this vector.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">magnitude</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="Vector.dot"><a class="viewcode-back" href="../../../modules/vector/api/classes.html#diofant.vector.vector.Vector.dot">[docs]</a>    <span class="k">def</span> <span class="nf">dot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
@@ -447,6 +444,7 @@
 <span class="sd">        &gt;&gt;&gt; v = R1.i + R2.i</span>
 <span class="sd">        &gt;&gt;&gt; v.separate()</span>
 <span class="sd">        {R1: R1.i, R2: R2.i}</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">parts</span> <span class="o">=</span> <span class="p">{}</span>
@@ -457,9 +455,7 @@
 
 
 <span class="k">class</span> <span class="nc">BaseVector</span><span class="p">(</span><span class="n">Vector</span><span class="p">,</span> <span class="n">AtomicExpr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Class to denote a base vector.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Class to denote a base vector.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">system</span><span class="p">,</span> <span class="n">pretty_str</span><span class="p">,</span> <span class="n">latex_str</span><span class="p">):</span>
         <span class="n">name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
@@ -509,9 +505,7 @@
 
 
 <span class="k">class</span> <span class="nc">VectorAdd</span><span class="p">(</span><span class="n">BasisDependentAdd</span><span class="p">,</span> <span class="n">Vector</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Class to denote sum of Vector instances.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Class to denote sum of Vector instances.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
         <span class="n">obj</span> <span class="o">=</span> <span class="n">BasisDependentAdd</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
@@ -534,9 +528,7 @@
 
 
 <span class="k">class</span> <span class="nc">VectorMul</span><span class="p">(</span><span class="n">BasisDependentMul</span><span class="p">,</span> <span class="n">Vector</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Class to denote products of scalars and BaseVectors.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Class to denote products of scalars and BaseVectors.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
         <span class="n">obj</span> <span class="o">=</span> <span class="n">BasisDependentMul</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
@@ -544,21 +536,20 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">base_vector</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; The BaseVector involved in the product. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;The BaseVector involved in the product.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_base_instance</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">measure_number</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; The scalar expression involved in the defition of</span>
 <span class="sd">        this VectorMul.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_measure_number</span>
 
 
 <span class="k">class</span> <span class="nc">VectorZero</span><span class="p">(</span><span class="n">BasisDependentZero</span><span class="p">,</span> <span class="n">Vector</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Class to denote a zero vector</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Class to denote a zero vector.&quot;&quot;&quot;</span>
 
     <span class="n">_op_priority</span> <span class="o">=</span> <span class="mf">12.1</span>
     <span class="n">_pretty_form</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span>
@@ -570,7 +561,7 @@
 
 
 <span class="k">def</span> <span class="nf">_vect_div</span><span class="p">(</span><span class="n">one</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Helper for division involving vectors. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Helper for division involving vectors.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Vector</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Cannot divide two vectors&quot;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>

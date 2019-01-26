@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.parsing.sympy_parser &mdash; Diofant 0.10.0b2.dev55+g97f1e5f documentation</title>
+  <title>diofant.parsing.sympy_parser &mdash; Diofant 0.10.0b2.dev59+g6273bb4 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0b2.dev55+g97f1e5f
+                0.10.0b2.dev59+g6273bb4
               </div>
             
           
@@ -173,6 +173,7 @@
 <span class="sd">    A token is splittable if it does not contain an underscore character and</span>
 <span class="sd">    it is not the name of a Greek letter. This is used to implicitly convert</span>
 <span class="sd">    expressions like &#39;xyz&#39; into &#39;x*y*z&#39;.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="s1">&#39;_&#39;</span> <span class="ow">in</span> <span class="n">token</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">False</span>
@@ -192,6 +193,7 @@
 
 <span class="sd">    Essentially wraps ``callable``, but looks up the token name in the</span>
 <span class="sd">    locals and globals.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">func</span> <span class="o">=</span> <span class="n">local_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">token</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">func</span><span class="p">:</span>
@@ -204,6 +206,7 @@
 <span class="sd">    A group of tokens representing a function and its arguments.</span>
 
 <span class="sd">    `exponent` is for handling the shorthand sin^2, ln^2, etc.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">exponent</span><span class="o">=</span><span class="p">[]):</span>
@@ -213,7 +216,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;function&#39;</span><span class="p">,</span> <span class="s1">&#39;args&#39;</span><span class="p">,</span> <span class="s1">&#39;exponent&#39;</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">expand</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return a list of tokens representing the function&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Return a list of tokens representing the function.&quot;&quot;&quot;</span>
         <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="p">)</span>
         <span class="n">result</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
@@ -322,6 +325,7 @@
 <span class="sd">    - A close parenthesis next to an open parenthesis (&quot;(x+2)(x+3)&quot;)</span>
 
 <span class="sd">    - AppliedFunction next to an implicitly applied function (&quot;sin(x)cos x&quot;)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">tok</span><span class="p">,</span> <span class="n">nextTok</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">tokens</span><span class="p">[</span><span class="mi">1</span><span class="p">:]):</span>
@@ -438,6 +442,7 @@
 <span class="sd">    &gt;&gt;&gt; transformations = standard_transformations + (function_exponentiation,)</span>
 <span class="sd">    &gt;&gt;&gt; parse_expr(&#39;sin**4(x)&#39;, transformations=transformations)</span>
 <span class="sd">    sin(x)**4</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">exponent</span> <span class="o">=</span> <span class="p">[]</span>
@@ -495,6 +500,7 @@
 <span class="sd">    &gt;&gt;&gt; parse_expr(&#39;unsplittable&#39;, transformations=standard_transformations +</span>
 <span class="sd">    ...            (transformation, implicit_multiplication))</span>
 <span class="sd">    unsplittable</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">_split_symbols</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">local_dict</span><span class="p">,</span> <span class="n">global_dict</span><span class="p">):</span>
         <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
@@ -559,6 +565,7 @@
 <span class="sd">    &gt;&gt;&gt; transformations = standard_transformations + (implicit_multiplication,)</span>
 <span class="sd">    &gt;&gt;&gt; parse_expr(&#39;3 x y&#39;, transformations=transformations)</span>
 <span class="sd">    3*x*y</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># These are interdependent steps, so we don&#39;t expose them separately</span>
     <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="p">(</span><span class="n">_group_parentheses</span><span class="p">(</span><span class="n">implicit_multiplication</span><span class="p">),</span>
@@ -583,6 +590,7 @@
 <span class="sd">    &gt;&gt;&gt; transformations = standard_transformations + (implicit_application,)</span>
 <span class="sd">    &gt;&gt;&gt; parse_expr(&#39;cot z + csc z&#39;, transformations=transformations)</span>
 <span class="sd">    cot(z) + csc(z)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="p">(</span><span class="n">_group_parentheses</span><span class="p">(</span><span class="n">implicit_application</span><span class="p">),</span>
                  <span class="n">_apply_functions</span><span class="p">,</span>
@@ -789,6 +797,7 @@
 <span class="sd">    Converts the string ``s`` to Python code, in ``local_dict``</span>
 
 <span class="sd">    Generally, ``parse_expr`` should be used.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">tokens</span> <span class="o">=</span> <span class="p">[]</span>
@@ -807,6 +816,7 @@
 <span class="sd">    Evaluate Python code generated by ``stringify_expr``.</span>
 
 <span class="sd">    Generally, ``parse_expr`` should be used.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">expr</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span>
         <span class="n">code</span><span class="p">,</span> <span class="n">global_dict</span><span class="p">,</span> <span class="n">local_dict</span><span class="p">)</span>  <span class="c1"># take local objects in preference</span>
@@ -879,6 +889,7 @@
 <span class="sd">    diofant.parsing.sympy_parser.eval_expr</span>
 <span class="sd">    diofant.parsing.sympy_parser.standard_transformations</span>
 <span class="sd">    diofant.parsing.sympy_parser.implicit_multiplication_application</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="n">local_dict</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -899,6 +910,7 @@
 <span class="k">def</span> <span class="nf">evaluateFalse</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Replaces operators with the Diofant equivalent and sets evaluate=False.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">node</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
     <span class="n">node</span> <span class="o">=</span> <span class="n">EvaluateFalseTransformer</span><span class="p">()</span><span class="o">.</span><span class="n">visit</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
