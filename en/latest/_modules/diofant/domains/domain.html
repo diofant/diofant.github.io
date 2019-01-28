@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.domains.domain &mdash; Diofant 0.10.0 documentation</title>
+  <title>diofant.domains.domain &mdash; Diofant 0.11.0a1 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.10.0
+                0.11.0a1
               </div>
             
           
@@ -210,10 +210,6 @@
     <span class="k">def</span> <span class="nf">new</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
 
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">tp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span>
-
     <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Construct an element of ``self`` domain from ``args``. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
@@ -252,7 +248,7 @@
         <span class="k">if</span> <span class="n">base</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_from</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">base</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tp</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">element</span>
 
         <span class="kn">from</span> <span class="nn">.integerring</span> <span class="k">import</span> <span class="n">PythonIntegerRing</span><span class="p">,</span> <span class="n">GMPYIntegerRing</span>
@@ -267,11 +263,11 @@
 
         <span class="k">if</span> <span class="n">HAS_GMPY</span><span class="p">:</span>
             <span class="n">integers</span> <span class="o">=</span> <span class="n">GMPYIntegerRing</span><span class="p">()</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">integers</span><span class="o">.</span><span class="n">tp</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">integers</span><span class="o">.</span><span class="n">dtype</span><span class="p">):</span>
                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_from</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">integers</span><span class="p">)</span>
 
             <span class="n">rationals</span> <span class="o">=</span> <span class="n">GMPYRationalField</span><span class="p">()</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">rationals</span><span class="o">.</span><span class="n">tp</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">rationals</span><span class="o">.</span><span class="n">dtype</span><span class="p">):</span>
                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_from</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">rationals</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
