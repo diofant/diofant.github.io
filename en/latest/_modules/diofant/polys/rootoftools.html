@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.rootoftools &mdash; Diofant 0.11.0a1 documentation</title>
+  <title>diofant.polys.rootoftools &mdash; Diofant 0.10.1.dev33+g8117c30 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.11.0a1
+                0.10.1.dev33+g8117c30
               </div>
             
           
@@ -393,7 +393,7 @@
     <span class="k">def</span> <span class="nf">_get_reals_sqf</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">factor</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Compute real root isolating intervals for a square-free polynomial.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">factor</span><span class="o">.</span><span class="n">rep</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_reals_cache</span><span class="p">:</span>
-            <span class="n">reals</span> <span class="o">=</span> <span class="n">dup_isolate_real_roots_sqf</span><span class="p">(</span><span class="n">factor</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">rep</span><span class="p">,</span> <span class="n">factor</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">blackbox</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">reals</span> <span class="o">=</span> <span class="n">dup_isolate_real_roots_sqf</span><span class="p">(</span><span class="n">factor</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">rep</span><span class="p">,</span> <span class="n">factor</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">blackbox</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">reals</span><span class="p">:</span>
                 <span class="n">_reals_cache</span><span class="p">[</span><span class="n">factor</span><span class="o">.</span><span class="n">rep</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">return</span> <span class="n">reals</span>
@@ -403,7 +403,7 @@
     <span class="k">def</span> <span class="nf">_get_complexes_sqf</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">factor</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Compute complex root isolating intervals for a square-free polynomial.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">factor</span><span class="o">.</span><span class="n">rep</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_complexes_cache</span><span class="p">:</span>
-            <span class="n">complexes</span> <span class="o">=</span> <span class="n">dup_isolate_complex_roots_sqf</span><span class="p">(</span><span class="n">factor</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">rep</span><span class="p">,</span> <span class="n">factor</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">blackbox</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">complexes</span> <span class="o">=</span> <span class="n">dup_isolate_complex_roots_sqf</span><span class="p">(</span><span class="n">factor</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">rep</span><span class="p">,</span> <span class="n">factor</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">blackbox</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">complexes</span><span class="p">:</span>
                 <span class="n">_complexes_cache</span><span class="p">[</span><span class="n">factor</span><span class="o">.</span><span class="n">rep</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">return</span> <span class="n">complexes</span>
@@ -801,9 +801,8 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="n">other</span><span class="o">.</span><span class="n">is_finite</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">false</span>
         <span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">expr</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="bp">self</span><span class="o">.</span><span class="n">expr</span><span class="o">.</span><span class="n">free_symbols</span><span class="o">.</span><span class="n">pop</span><span class="p">():</span> <span class="n">other</span><span class="p">})</span><span class="o">.</span><span class="n">is_zero</span>
-        <span class="k">if</span> <span class="n">z</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>  <span class="c1"># all roots will make z True but we don&#39;t know</span>
-                        <span class="c1"># whether this is the right root if z is True</span>
-            <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">false</span>
+        <span class="k">if</span> <span class="n">z</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>      <span class="c1"># all roots will make z True but we don&#39;t know</span>
+            <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">false</span>  <span class="c1"># whether this is the right root if z is True</span>
         <span class="n">o</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">is_extended_real</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">is_imaginary</span>
         <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_extended_real</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_imaginary</span>
         <span class="k">if</span> <span class="n">o</span> <span class="o">!=</span> <span class="n">s</span> <span class="ow">and</span> <span class="kc">None</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">o</span> <span class="ow">and</span> <span class="kc">None</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.rings &mdash; Diofant 0.11.0a1 documentation</title>
+  <title>diofant.polys.rings &mdash; Diofant 0.10.1.dev33+g8117c30 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.11.0a1
+                0.10.1.dev33+g8117c30
               </div>
             
           
@@ -169,6 +169,7 @@
 <span class="kn">from</span> <span class="nn">..domains.domainelement</span> <span class="k">import</span> <span class="n">DomainElement</span>
 <span class="kn">from</span> <span class="nn">..domains.ring</span> <span class="k">import</span> <span class="n">Ring</span>
 <span class="kn">from</span> <span class="nn">..ntheory</span> <span class="k">import</span> <span class="n">multinomial_coefficients</span>
+<span class="kn">from</span> <span class="nn">..ntheory.modular</span> <span class="k">import</span> <span class="n">symmetric_residue</span>
 <span class="kn">from</span> <span class="nn">..utilities.magic</span> <span class="k">import</span> <span class="n">pollute</span>
 <span class="kn">from</span> <span class="nn">.compatibility</span> <span class="k">import</span> <span class="n">IPolys</span>
 <span class="kn">from</span> <span class="nn">.constructor</span> <span class="k">import</span> <span class="n">construct_domain</span>
@@ -176,12 +177,12 @@
 <span class="kn">from</span> <span class="nn">.heuristicgcd</span> <span class="k">import</span> <span class="n">heugcd</span>
 <span class="kn">from</span> <span class="nn">.modulargcd</span> <span class="k">import</span> <span class="n">func_field_modgcd</span><span class="p">,</span> <span class="n">modgcd</span>
 <span class="kn">from</span> <span class="nn">.monomials</span> <span class="k">import</span> <span class="p">(</span><span class="n">monomial_div</span><span class="p">,</span> <span class="n">monomial_gcd</span><span class="p">,</span> <span class="n">monomial_ldiv</span><span class="p">,</span>
-                        <span class="n">monomial_mul</span><span class="p">,</span> <span class="n">monomial_pow</span><span class="p">)</span>
+                        <span class="n">monomial_min</span><span class="p">,</span> <span class="n">monomial_mul</span><span class="p">,</span> <span class="n">monomial_pow</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">.orderings</span> <span class="k">import</span> <span class="n">lex</span>
 <span class="kn">from</span> <span class="nn">.polyconfig</span> <span class="k">import</span> <span class="n">query</span>
 <span class="kn">from</span> <span class="nn">.polyerrors</span> <span class="k">import</span> <span class="p">(</span><span class="n">CoercionFailed</span><span class="p">,</span> <span class="n">ExactQuotientFailed</span><span class="p">,</span> <span class="n">GeneratorsError</span><span class="p">,</span>
                          <span class="n">GeneratorsNeeded</span><span class="p">,</span> <span class="n">HeuristicGCDFailed</span><span class="p">,</span>
-                         <span class="n">MultivariatePolynomialError</span><span class="p">)</span>
+                         <span class="n">MultivariatePolynomialError</span><span class="p">,</span> <span class="n">PolynomialError</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">.polyoptions</span> <span class="k">import</span> <span class="n">Domain</span> <span class="k">as</span> <span class="n">DomainOpt</span>
 <span class="kn">from</span> <span class="nn">.polyoptions</span> <span class="k">import</span> <span class="n">Order</span> <span class="k">as</span> <span class="n">OrderOpt</span>
 <span class="kn">from</span> <span class="nn">.polyoptions</span> <span class="k">import</span> <span class="n">build_options</span>
@@ -969,11 +970,30 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">MultivariatePolynomialError</span><span class="p">(</span><span class="s2">&quot;cyclotomic polynomial&quot;</span><span class="p">)</span>
 
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">is_homogeneous</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_zero</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+
+        <span class="n">monoms</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">tdeg</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">monoms</span><span class="p">))</span>
+
+        <span class="k">for</span> <span class="n">monom</span> <span class="ow">in</span> <span class="n">monoms</span><span class="p">:</span>
+            <span class="n">_tdeg</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">monom</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">_tdeg</span> <span class="o">!=</span> <span class="n">tdeg</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="k">return</span> <span class="kc">True</span>
+
     <span class="k">def</span> <span class="nf">__neg__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">new</span><span class="p">([(</span><span class="n">monom</span><span class="p">,</span> <span class="o">-</span><span class="n">coeff</span><span class="p">)</span> <span class="k">for</span> <span class="n">monom</span><span class="p">,</span> <span class="n">coeff</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">()])</span>
 
     <span class="k">def</span> <span class="nf">__pos__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">__abs__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">new</span><span class="p">([(</span><span class="n">monom</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="n">coeff</span><span class="p">))</span> <span class="k">for</span> <span class="n">monom</span><span class="p">,</span> <span class="n">coeff</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">()])</span>
 
     <span class="k">def</span> <span class="nf">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Add two polynomials.</span>
@@ -1321,7 +1341,7 @@
         <span class="k">except</span> <span class="n">CoercionFailed</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">NotImplemented</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">quo_ground</span><span class="p">(</span><span class="n">other</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">rem_ground</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">quo_ground</span><span class="p">(</span><span class="n">other</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">trunc_ground</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__rdivmod__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">NotImplemented</span>
@@ -1346,7 +1366,7 @@
         <span class="k">except</span> <span class="n">CoercionFailed</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">NotImplemented</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rem_ground</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">trunc_ground</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__rmod__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">NotImplemented</span>
@@ -1630,6 +1650,10 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">min</span><span class="p">,</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="p">)))</span></div>
 
+<div class="viewcode-block" id="PolyElement.total_degree"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.rings.PolyElement.total_degree">[docs]</a>    <span class="k">def</span> <span class="nf">total_degree</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the total degree.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">monoms</span><span class="p">())</span></div>
+
 <div class="viewcode-block" id="PolyElement.leading_expv"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.rings.PolyElement.leading_expv">[docs]</a>    <span class="k">def</span> <span class="nf">leading_expv</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Leading monomial tuple according to the monomial ordering.</span>
 
@@ -1767,6 +1791,15 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">[</span> <span class="n">coeff</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">coeff</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">terms</span><span class="p">(</span><span class="n">order</span><span class="p">)</span> <span class="p">]</span></div>
+
+    <span class="k">def</span> <span class="nf">all_coeffs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">is_univariate</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_zero</span><span class="p">:</span>
+                <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">zero</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_dense</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">PolynomialError</span><span class="p">(</span><span class="s1">&#39;multivariate polynomials not supported&#39;</span><span class="p">)</span>
 
 <div class="viewcode-block" id="PolyElement.monoms"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.rings.PolyElement.monoms">[docs]</a>    <span class="k">def</span> <span class="nf">monoms</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Ordered list of polynomial monomials.</span>
@@ -1942,10 +1975,7 @@
 
             <span class="k">for</span> <span class="n">monom</span><span class="p">,</span> <span class="n">coeff</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                 <span class="n">coeff</span> <span class="o">=</span> <span class="n">coeff</span> <span class="o">%</span> <span class="n">p</span>
-
-                <span class="k">if</span> <span class="n">coeff</span> <span class="o">&gt;</span> <span class="n">p</span> <span class="o">//</span> <span class="mi">2</span><span class="p">:</span>
-                    <span class="n">coeff</span> <span class="o">=</span> <span class="n">coeff</span> <span class="o">-</span> <span class="n">p</span>
-
+                <span class="n">coeff</span> <span class="o">=</span> <span class="n">symmetric_residue</span><span class="p">(</span><span class="n">coeff</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
                 <span class="n">terms</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">monom</span><span class="p">,</span> <span class="n">coeff</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">terms</span> <span class="o">=</span> <span class="p">[(</span><span class="n">monom</span><span class="p">,</span> <span class="n">coeff</span> <span class="o">%</span> <span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">monom</span><span class="p">,</span> <span class="n">coeff</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
@@ -1953,8 +1983,6 @@
         <span class="n">poly</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">terms</span><span class="p">)</span>
         <span class="n">poly</span><span class="o">.</span><span class="n">strip_zero</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">poly</span>
-
-    <span class="n">rem_ground</span> <span class="o">=</span> <span class="n">trunc_ground</span>
 
     <span class="k">def</span> <span class="nf">extract_ground</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
         <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span>
@@ -2136,6 +2164,22 @@
 
         <span class="n">method</span> <span class="o">=</span> <span class="n">_gcd_aa_methods</span><span class="p">[</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;GCD_AA_METHOD&#39;</span><span class="p">)]</span>
         <span class="k">return</span> <span class="n">method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">terms_gcd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_zero</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span><span class="mi">0</span><span class="p">,)</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">ngens</span><span class="p">,</span> <span class="bp">self</span>
+
+        <span class="n">G</span> <span class="o">=</span> <span class="n">monomial_min</span><span class="p">(</span><span class="o">*</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">g</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">G</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">G</span><span class="p">,</span> <span class="bp">self</span>
+
+        <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">zero</span>
+
+        <span class="k">for</span> <span class="n">monom</span><span class="p">,</span> <span class="n">coeff</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">f</span><span class="p">[</span><span class="n">monomial_div</span><span class="p">(</span><span class="n">monom</span><span class="p">,</span> <span class="n">G</span><span class="p">)]</span> <span class="o">=</span> <span class="n">coeff</span>
+
+        <span class="k">return</span> <span class="n">G</span><span class="p">,</span> <span class="n">f</span>
 
 <div class="viewcode-block" id="PolyElement.cancel"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.rings.PolyElement.cancel">[docs]</a>    <span class="k">def</span> <span class="nf">cancel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>

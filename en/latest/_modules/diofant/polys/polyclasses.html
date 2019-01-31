@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.polyclasses &mdash; Diofant 0.11.0a1 documentation</title>
+  <title>diofant.polys.polyclasses &mdash; Diofant 0.10.1.dev33+g8117c30 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.11.0a1
+                0.10.1.dev33+g8117c30
               </div>
             
           
@@ -166,9 +166,9 @@
                          <span class="n">dmp_degree_list</span><span class="p">,</span> <span class="n">dmp_eject</span><span class="p">,</span> <span class="n">dmp_exclude</span><span class="p">,</span>
                          <span class="n">dmp_from_dict</span><span class="p">,</span> <span class="n">dmp_ground</span><span class="p">,</span> <span class="n">dmp_ground_LC</span><span class="p">,</span>
                          <span class="n">dmp_ground_nth</span><span class="p">,</span> <span class="n">dmp_ground_p</span><span class="p">,</span> <span class="n">dmp_ground_TC</span><span class="p">,</span>
-                         <span class="n">dmp_inject</span><span class="p">,</span> <span class="n">dmp_list_terms</span><span class="p">,</span> <span class="n">dmp_one_p</span><span class="p">,</span> <span class="n">dmp_permute</span><span class="p">,</span>
-                         <span class="n">dmp_slice_in</span><span class="p">,</span> <span class="n">dmp_terms_gcd</span><span class="p">,</span> <span class="n">dmp_to_dict</span><span class="p">,</span>
-                         <span class="n">dmp_to_tuple</span><span class="p">,</span> <span class="n">dmp_validate</span><span class="p">,</span> <span class="n">dmp_zero_p</span><span class="p">)</span>
+                         <span class="n">dmp_inject</span><span class="p">,</span> <span class="n">dmp_list_terms</span><span class="p">,</span> <span class="n">dmp_one_p</span><span class="p">,</span> <span class="n">dmp_slice_in</span><span class="p">,</span>
+                         <span class="n">dmp_terms_gcd</span><span class="p">,</span> <span class="n">dmp_to_dict</span><span class="p">,</span> <span class="n">dmp_to_tuple</span><span class="p">,</span>
+                         <span class="n">dmp_validate</span><span class="p">,</span> <span class="n">dmp_zero_p</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">.densetools</span> <span class="k">import</span> <span class="p">(</span><span class="n">dmp_clear_denoms</span><span class="p">,</span> <span class="n">dmp_compose</span><span class="p">,</span> <span class="n">dmp_diff_in</span><span class="p">,</span>
                          <span class="n">dmp_eval_in</span><span class="p">,</span> <span class="n">dmp_ground_content</span><span class="p">,</span> <span class="n">dmp_ground_monic</span><span class="p">,</span>
                          <span class="n">dmp_ground_primitive</span><span class="p">,</span> <span class="n">dmp_ground_trunc</span><span class="p">,</span>
@@ -202,7 +202,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">domain</span> <span class="o">=</span> <span class="n">dom</span>
 
     <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">hash</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_tuple</span><span class="p">(),</span>
+        <span class="k">return</span> <span class="nb">hash</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">dmp_to_tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lev</span><span class="p">),</span>
                      <span class="bp">self</span><span class="o">.</span><span class="n">lev</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">))</span>
 
 <div class="viewcode-block" id="DMP.unify"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.polyclasses.DMP.unify">[docs]</a>    <span class="k">def</span> <span class="nf">unify</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
@@ -269,23 +269,10 @@
 
         <span class="k">return</span> <span class="n">rep</span></div>
 
-<div class="viewcode-block" id="DMP.to_tuple"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.polyclasses.DMP.to_tuple">[docs]</a>    <span class="k">def</span> <span class="nf">to_tuple</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Convert ``self`` to a tuple representation with native coefficients.</span>
-
-<span class="sd">        This is needed for hashing.</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">dmp_to_tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lev</span><span class="p">)</span></div>
-
 <div class="viewcode-block" id="DMP.from_dict"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.polyclasses.DMP.from_dict">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">rep</span><span class="p">,</span> <span class="n">lev</span><span class="p">,</span> <span class="n">dom</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Construct and instance of ``cls`` from a :class:`dict` representation.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">dmp_from_dict</span><span class="p">(</span><span class="n">rep</span><span class="p">,</span> <span class="n">lev</span><span class="p">,</span> <span class="n">dom</span><span class="p">),</span> <span class="n">dom</span><span class="p">,</span> <span class="n">lev</span><span class="p">)</span></div>
-
-    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">from_monoms_coeffs</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">monoms</span><span class="p">,</span> <span class="n">coeffs</span><span class="p">,</span> <span class="n">lev</span><span class="p">,</span> <span class="n">dom</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">DMP</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">monoms</span><span class="p">,</span> <span class="n">coeffs</span><span class="p">)),</span> <span class="n">dom</span><span class="p">,</span> <span class="n">lev</span><span class="p">)</span>
 
 <div class="viewcode-block" id="DMP.to_ring"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.polyclasses.DMP.to_ring">[docs]</a>    <span class="k">def</span> <span class="nf">to_ring</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Make the ground domain a ring.&quot;&quot;&quot;</span>
@@ -335,30 +322,6 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">PolynomialError</span><span class="p">(</span><span class="s1">&#39;multivariate polynomials not supported&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="DMP.all_monoms"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.polyclasses.DMP.all_monoms">[docs]</a>    <span class="k">def</span> <span class="nf">all_monoms</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns all monomials from ``self``.&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">lev</span><span class="p">:</span>
-            <span class="n">n</span> <span class="o">=</span> <span class="n">dmp_degree_in</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-
-            <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="k">return</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,)]</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">return</span> <span class="p">[(</span><span class="n">n</span> <span class="o">-</span> <span class="n">i</span><span class="p">,)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="p">)]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">PolynomialError</span><span class="p">(</span><span class="s1">&#39;multivariate polynomials not supported&#39;</span><span class="p">)</span></div>
-
-<div class="viewcode-block" id="DMP.all_terms"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.polyclasses.DMP.all_terms">[docs]</a>    <span class="k">def</span> <span class="nf">all_terms</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns all terms from a ``self``.&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">lev</span><span class="p">:</span>
-            <span class="n">n</span> <span class="o">=</span> <span class="n">dmp_degree_in</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-
-            <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="k">return</span> <span class="p">[((</span><span class="mi">0</span><span class="p">,),</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">zero</span><span class="p">)]</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">return</span> <span class="p">[((</span><span class="n">n</span> <span class="o">-</span> <span class="n">i</span><span class="p">,),</span> <span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="p">)]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">PolynomialError</span><span class="p">(</span><span class="s1">&#39;multivariate polynomials not supported&#39;</span><span class="p">)</span></div>
-
 <div class="viewcode-block" id="DMP.deflate"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.polyclasses.DMP.deflate">[docs]</a>    <span class="k">def</span> <span class="nf">deflate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Reduce degree of `self` by mapping `x_i^m` to `y_i`.&quot;&quot;&quot;</span>
         <span class="n">J</span><span class="p">,</span> <span class="n">F</span> <span class="o">=</span> <span class="n">dmp_deflate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lev</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
@@ -389,22 +352,6 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">J</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">u</span> <span class="o">=</span> <span class="n">dmp_exclude</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lev</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">J</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span></div>
-
-<div class="viewcode-block" id="DMP.permute"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.polyclasses.DMP.permute">[docs]</a>    <span class="k">def</span> <span class="nf">permute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">P</span><span class="p">):</span>
-        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns a polynomial in `K[x_{P(1)}, ..., x_{P(n)}]`.</span>
-
-<span class="sd">        Examples</span>
-<span class="sd">        ========</span>
-
-<span class="sd">        &gt;&gt;&gt; DMP([[[ZZ(2)], [ZZ(1), ZZ(0)]], [[]]], ZZ).permute([1, 0, 2])</span>
-<span class="sd">        DMP([[[2], []], [[1, 0], []]], ZZ)</span>
-
-<span class="sd">        &gt;&gt;&gt; DMP([[[ZZ(2)], [ZZ(1), ZZ(0)]], [[]]], ZZ).permute([1, 2, 0])</span>
-<span class="sd">        DMP([[[1], []], [[2, 0], []]], ZZ)</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">per</span><span class="p">(</span><span class="n">dmp_permute</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lev</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="DMP.terms_gcd"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.polyclasses.DMP.terms_gcd">[docs]</a>    <span class="k">def</span> <span class="nf">terms_gcd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Remove GCD of terms from the polynomial ``self``.&quot;&quot;&quot;</span>
@@ -441,11 +388,6 @@
         <span class="sd">&quot;&quot;&quot;Polynomial exact pseudo-quotient of ``self`` and ``other``.&quot;&quot;&quot;</span>
         <span class="n">lev</span><span class="p">,</span> <span class="n">dom</span><span class="p">,</span> <span class="n">per</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">unify</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">per</span><span class="p">(</span><span class="n">dmp_pexquo</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">lev</span><span class="p">,</span> <span class="n">dom</span><span class="p">))</span></div>
-
-<div class="viewcode-block" id="DMP.quo"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.polyclasses.DMP.quo">[docs]</a>    <span class="k">def</span> <span class="nf">quo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Computes polynomial quotient of ``self`` and ``other``.&quot;&quot;&quot;</span>
-        <span class="n">lev</span><span class="p">,</span> <span class="n">dom</span><span class="p">,</span> <span class="n">per</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">unify</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">per</span><span class="p">(</span><span class="n">dmp_quo</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">lev</span><span class="p">,</span> <span class="n">dom</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="DMP.exquo"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.polyclasses.DMP.exquo">[docs]</a>    <span class="k">def</span> <span class="nf">exquo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Computes polynomial exact quotient of ``self`` and ``other``.&quot;&quot;&quot;</span>
@@ -603,7 +545,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">cF</span><span class="p">,</span> <span class="n">cG</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">G</span></div>
 
-<div class="viewcode-block" id="DMP.trunc"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.polyclasses.DMP.trunc">[docs]</a>    <span class="k">def</span> <span class="nf">trunc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+<div class="viewcode-block" id="DMP.trunc_ground"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.polyclasses.DMP.trunc_ground">[docs]</a>    <span class="k">def</span> <span class="nf">trunc_ground</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Reduce ``self`` modulo a constant ``p``.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">per</span><span class="p">(</span><span class="n">dmp_ground_trunc</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">p</span><span class="p">),</span>
                                          <span class="bp">self</span><span class="o">.</span><span class="n">lev</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">))</span></div>
@@ -840,7 +782,8 @@
 
     <span class="k">def</span> <span class="nf">__floordiv__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">DMP</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">quo</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+            <span class="n">lev</span><span class="p">,</span> <span class="n">dom</span><span class="p">,</span> <span class="n">per</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">unify</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">per</span><span class="p">(</span><span class="n">dmp_quo</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">lev</span><span class="p">,</span> <span class="n">dom</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">quo_ground</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
