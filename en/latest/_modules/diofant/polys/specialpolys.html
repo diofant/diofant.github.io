@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.specialpolys &mdash; Diofant 0.10.1.dev33+g8117c30 documentation</title>
+  <title>diofant.polys.specialpolys &mdash; Diofant 0.10.1.dev44+gb6ca1ec documentation</title>
   
 
   
@@ -54,13 +54,6 @@
           
           </a>
 
-          
-            
-            
-              <div class="version">
-                0.10.1.dev33+g8117c30
-              </div>
-            
           
 
           
@@ -165,7 +158,6 @@
 <span class="kn">from</span> <span class="nn">.densebasic</span> <span class="k">import</span> <span class="p">(</span><span class="n">dmp_from_dict</span><span class="p">,</span> <span class="n">dmp_ground</span><span class="p">,</span> <span class="n">dmp_one</span><span class="p">,</span> <span class="n">dmp_raise</span><span class="p">,</span>
                          <span class="n">dmp_zero</span><span class="p">,</span> <span class="n">dup_random</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">.factortools</span> <span class="k">import</span> <span class="n">dup_zz_cyclotomic_poly</span>
-<span class="kn">from</span> <span class="nn">.polyclasses</span> <span class="k">import</span> <span class="n">DMP</span>
 <span class="kn">from</span> <span class="nn">.polytools</span> <span class="k">import</span> <span class="n">Poly</span><span class="p">,</span> <span class="n">PurePoly</span>
 <span class="kn">from</span> <span class="nn">.polyutils</span> <span class="k">import</span> <span class="n">_analyze_gens</span>
 <span class="kn">from</span> <span class="nn">.rings</span> <span class="k">import</span> <span class="n">ring</span>
@@ -213,12 +205,12 @@
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
             <span class="s2">&quot;can&#39;t generate cyclotomic polynomial of order </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">n</span><span class="p">)</span>
 
-    <span class="n">poly</span> <span class="o">=</span> <span class="n">DMP</span><span class="p">(</span><span class="n">dup_zz_cyclotomic_poly</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">)</span>
+    <span class="n">poly</span> <span class="o">=</span> <span class="n">dup_zz_cyclotomic_poly</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">poly</span> <span class="o">=</span> <span class="n">Poly</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">poly</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+        <span class="n">poly</span> <span class="o">=</span> <span class="n">Poly</span><span class="p">(</span><span class="n">poly</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">poly</span> <span class="o">=</span> <span class="n">PurePoly</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">poly</span><span class="p">,</span> <span class="n">Dummy</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">))</span>
+        <span class="n">poly</span> <span class="o">=</span> <span class="n">PurePoly</span><span class="p">(</span><span class="n">poly</span><span class="p">,</span> <span class="n">Dummy</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">))</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;polys&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">poly</span><span class="o">.</span><span class="n">as_expr</span><span class="p">()</span>

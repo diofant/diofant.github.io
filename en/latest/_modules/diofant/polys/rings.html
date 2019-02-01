@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.rings &mdash; Diofant 0.10.1.dev33+g8117c30 documentation</title>
+  <title>diofant.polys.rings &mdash; Diofant 0.10.1.dev44+gb6ca1ec documentation</title>
   
 
   
@@ -54,13 +54,6 @@
           
           </a>
 
-          
-            
-            
-              <div class="version">
-                0.10.1.dev33+g8117c30
-              </div>
-            
           
 
           
@@ -434,6 +427,8 @@
         <span class="n">poly</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">zero</span>
 
         <span class="k">for</span> <span class="n">monom</span><span class="p">,</span> <span class="n">coeff</span> <span class="ow">in</span> <span class="n">element</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">monom</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+                <span class="n">monom</span> <span class="o">=</span> <span class="n">monom</span><span class="p">,</span>
             <span class="n">coeff</span> <span class="o">=</span> <span class="n">domain_new</span><span class="p">(</span><span class="n">coeff</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">coeff</span><span class="p">:</span>
                 <span class="n">poly</span><span class="p">[</span><span class="n">monom</span><span class="p">]</span> <span class="o">=</span> <span class="n">coeff</span>
@@ -492,6 +487,11 @@
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">gen</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">):</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">i</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gens</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">gen</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;invalid generator: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">gen</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">gen</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">i</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">symbols</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">Symbol</span><span class="p">(</span><span class="n">gen</span><span class="p">))</span>
             <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;invalid generator: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">gen</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
@@ -678,6 +678,14 @@
             <span class="k">return</span> <span class="n">new_ring</span><span class="o">.</span><span class="n">from_terms</span><span class="p">(</span><span class="n">terms</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">new_ring</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">set_domain</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_domain</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">domain</span> <span class="o">==</span> <span class="n">new_domain</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">new_ring</span> <span class="o">=</span> <span class="n">new_domain</span><span class="o">.</span><span class="n">poly_ring</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">symbols</span><span class="p">,</span>
+                                            <span class="n">order</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">order</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_ring</span><span class="p">(</span><span class="n">new_ring</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">as_expr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">symbols</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">symbols</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">symbols</span><span class="p">)</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">ngens</span><span class="p">:</span>
@@ -1711,6 +1719,15 @@
     <span class="k">def</span> <span class="nf">LC</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_coeff</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">leading_expv</span><span class="p">())</span>
 
+    <span class="k">def</span> <span class="nf">TC</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">is_univariate</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_zero</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">zero</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_dense</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">PolynomialError</span><span class="p">(</span><span class="s1">&#39;multivariate polynomials not supported&#39;</span><span class="p">)</span>
+
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">LM</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">expv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">leading_expv</span><span class="p">()</span>
@@ -2237,7 +2254,7 @@
 
         <span class="k">return</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span></div>
 
-<div class="viewcode-block" id="PolyElement.diff"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.rings.PolyElement.diff">[docs]</a>    <span class="k">def</span> <span class="nf">diff</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<div class="viewcode-block" id="PolyElement.diff"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.rings.PolyElement.diff">[docs]</a>    <span class="k">def</span> <span class="nf">diff</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Computes partial derivative in ``x``.</span>
 
 <span class="sd">        Examples</span>
@@ -2251,12 +2268,15 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">ring</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span>
         <span class="n">i</span> <span class="o">=</span> <span class="n">ring</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="n">m</span> <span class="o">=</span> <span class="n">ring</span><span class="o">.</span><span class="n">monomial_basis</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">ring</span><span class="o">.</span><span class="n">monomial_basis</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">monomial_pow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
         <span class="n">g</span> <span class="o">=</span> <span class="n">ring</span><span class="o">.</span><span class="n">zero</span>
         <span class="k">for</span> <span class="n">expv</span><span class="p">,</span> <span class="n">coeff</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">expv</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
-                <span class="n">e</span> <span class="o">=</span> <span class="n">monomial_ldiv</span><span class="p">(</span><span class="n">expv</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
-                <span class="n">g</span><span class="p">[</span><span class="n">e</span><span class="p">]</span> <span class="o">=</span> <span class="n">coeff</span><span class="o">*</span><span class="n">expv</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">e</span> <span class="o">=</span> <span class="n">monomial_ldiv</span><span class="p">(</span><span class="n">expv</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">expv</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">expv</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">m</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                    <span class="n">coeff</span> <span class="o">*=</span> <span class="n">j</span>
+                <span class="n">g</span><span class="p">[</span><span class="n">e</span><span class="p">]</span> <span class="o">=</span> <span class="n">coeff</span>
         <span class="n">g</span><span class="o">.</span><span class="n">strip_zero</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">g</span></div>
 
@@ -2404,10 +2424,10 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">dmp_prem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">pquo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">dmp_quo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">dmp_pquo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">pexquo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">dmp_exquo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">dmp_pexquo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">half_gcdex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">is_univariate</span><span class="p">:</span>

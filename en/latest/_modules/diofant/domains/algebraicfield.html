@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.domains.algebraicfield &mdash; Diofant 0.10.1.dev33+g8117c30 documentation</title>
+  <title>diofant.domains.algebraicfield &mdash; Diofant 0.10.1.dev44+gb6ca1ec documentation</title>
   
 
   
@@ -54,13 +54,6 @@
           
           </a>
 
-          
-            
-            
-              <div class="version">
-                0.10.1.dev33+g8117c30
-              </div>
-            
           
 
           
@@ -517,21 +510,22 @@
         <span class="k">except</span> <span class="n">CoercionFailed</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">NotImplemented</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">_ext_root</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">_ext_root</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">_compute_ext_root</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">ext</span><span class="p">,</span>
-                                                                  <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">minpoly</span><span class="p">)</span>
+        <span class="n">parent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span>
+        <span class="n">dom</span> <span class="o">=</span> <span class="n">parent</span><span class="o">.</span><span class="n">domain</span>
+
+        <span class="k">if</span> <span class="n">parent</span><span class="o">.</span><span class="n">_ext_root</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">parent</span><span class="o">.</span><span class="n">_ext_root</span> <span class="o">=</span> <span class="n">parent</span><span class="o">.</span><span class="n">_compute_ext_root</span><span class="p">(</span><span class="n">parent</span><span class="o">.</span><span class="n">ext</span><span class="p">,</span>
+                                                        <span class="n">parent</span><span class="o">.</span><span class="n">minpoly</span><span class="p">)</span>
+        <span class="n">coeff</span><span class="p">,</span> <span class="n">root</span> <span class="o">=</span> <span class="n">parent</span><span class="o">.</span><span class="n">_ext_root</span>
 
         <span class="n">rep</span> <span class="o">=</span> <span class="n">dmp_compose</span><span class="p">((</span><span class="bp">self</span> <span class="o">-</span> <span class="n">other</span><span class="p">)</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">to_dense</span><span class="p">(),</span>
-                          <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">from_expr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">_ext_root</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="mi">0</span><span class="p">],</span>
-                          <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
+                          <span class="p">(</span><span class="n">parent</span><span class="o">.</span><span class="n">unit</span><span class="o">.</span><span class="n">rep</span><span class="o">*</span><span class="n">coeff</span><span class="p">)</span><span class="o">.</span><span class="n">to_dense</span><span class="p">(),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">dom</span><span class="p">)</span>
 
-        <span class="k">while</span> <span class="n">dup_count_real_roots</span><span class="p">(</span><span class="n">rep</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span>
-                                   <span class="n">inf</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">_ext_root</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">interval</span><span class="o">.</span><span class="n">a</span><span class="p">,</span>
-                                   <span class="n">sup</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">_ext_root</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">interval</span><span class="o">.</span><span class="n">b</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">_ext_root</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">refine</span><span class="p">()</span>
+        <span class="k">while</span> <span class="n">dup_count_real_roots</span><span class="p">(</span><span class="n">rep</span><span class="p">,</span> <span class="n">dom</span><span class="p">,</span> <span class="n">root</span><span class="o">.</span><span class="n">interval</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">root</span><span class="o">.</span><span class="n">interval</span><span class="o">.</span><span class="n">b</span><span class="p">):</span>
+            <span class="n">root</span><span class="o">.</span><span class="n">refine</span><span class="p">()</span>
 
-        <span class="k">return</span> <span class="n">dmp_eval_in</span><span class="p">(</span><span class="n">rep</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">_ext_root</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">interval</span><span class="o">.</span><span class="n">center</span><span class="p">,</span>
-                           <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">_ext_root</span> <span class="o">=</span> <span class="p">(</span><span class="n">coeff</span><span class="p">,</span> <span class="n">root</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">dmp_eval_in</span><span class="p">(</span><span class="n">rep</span><span class="p">,</span> <span class="n">root</span><span class="o">.</span><span class="n">interval</span><span class="o">.</span><span class="n">center</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">dom</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">real</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
