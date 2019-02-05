@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.domains.rationalfield &mdash; Diofant 0.10.1.dev61+g7a7d008 documentation</title>
+  <title>diofant.domains.rationalfield &mdash; Diofant 0.10.1.dev64+g0954012 documentation</title>
   
 
   
@@ -149,8 +149,6 @@
   <h1>Source code for diofant.domains.rationalfield</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Implementation of :class:`RationalField` class. &quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">math</span>
-
 <span class="kn">from</span> <span class="nn">..polys.polyerrors</span> <span class="k">import</span> <span class="n">CoercionFailed</span>
 <span class="kn">from</span> <span class="nn">.characteristiczero</span> <span class="k">import</span> <span class="n">CharacteristicZero</span>
 <span class="kn">from</span> <span class="nn">.field</span> <span class="k">import</span> <span class="n">Field</span>
@@ -209,11 +207,7 @@
 
     <span class="k">def</span> <span class="nf">_from_AlgebraicField</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">is_ground</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">LC</span><span class="p">(),</span> <span class="n">K0</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
-
-<div class="viewcode-block" id="RationalField.log"><a class="viewcode-back" href="../../../modules/domains.html#diofant.domains.RationalField.log">[docs]</a>    <span class="k">def</span> <span class="nf">log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns b-base logarithm of ``a``. &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">b</span><span class="p">)))</span></div></div>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">LC</span><span class="p">(),</span> <span class="n">K0</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="PythonRationalField"><a class="viewcode-back" href="../../../modules/domains.html#diofant.domains.PythonRationalField">[docs]</a><span class="k">class</span> <span class="nc">PythonRationalField</span><span class="p">(</span><span class="n">RationalField</span><span class="p">):</span>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.rootisolation &mdash; Diofant 0.10.1.dev61+g7a7d008 documentation</title>
+  <title>diofant.polys.rootisolation &mdash; Diofant 0.10.1.dev64+g0954012 documentation</title>
   
 
   
@@ -149,6 +149,8 @@
   <h1>Source code for diofant.polys.rootisolation</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Real and complex root isolation and refinement algorithms. &quot;&quot;&quot;</span>
 
+<span class="kn">import</span> <span class="nn">math</span>
+
 <span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">I</span>
 <span class="kn">from</span> <span class="nn">.densearith</span> <span class="k">import</span> <span class="n">dmp_add</span><span class="p">,</span> <span class="n">dmp_mul_ground</span><span class="p">,</span> <span class="n">dmp_neg</span><span class="p">,</span> <span class="n">dmp_rem</span><span class="p">,</span> <span class="n">dup_rshift</span>
 <span class="kn">from</span> <span class="nn">.densebasic</span> <span class="k">import</span> <span class="p">(</span><span class="n">dmp_convert</span><span class="p">,</span> <span class="n">dmp_degree_in</span><span class="p">,</span> <span class="n">dmp_LC</span><span class="p">,</span> <span class="n">dmp_permute</span><span class="p">,</span>
@@ -232,23 +234,28 @@
     <span class="n">n</span><span class="p">,</span> <span class="n">P</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">f</span><span class="p">),</span> <span class="p">[]</span>
     <span class="k">if</span> <span class="n">K</span><span class="o">.</span><span class="n">is_AlgebraicField</span><span class="p">:</span>
         <span class="k">return</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="p">[</span><span class="n">K</span><span class="o">.</span><span class="n">one</span><span class="p">]</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
     <span class="k">if</span> <span class="n">dmp_LC</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">f</span> <span class="o">=</span> <span class="n">dmp_neg</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
     <span class="n">f</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
 
+    <span class="k">def</span> <span class="nf">ilog2</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-        <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="o">-</span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">b</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">continue</span>
 
-        <span class="n">a</span><span class="p">,</span> <span class="n">QL</span> <span class="o">=</span> <span class="n">K</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="o">-</span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="mi">2</span><span class="p">),</span> <span class="p">[]</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">QL</span> <span class="o">=</span> <span class="n">ilog2</span><span class="p">(</span><span class="n">b</span><span class="p">),</span> <span class="p">[]</span>
 
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
 
-            <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">b</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="k">continue</span>
 
-            <span class="n">q</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">a</span> <span class="o">-</span> <span class="n">K</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="n">q</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">a</span> <span class="o">-</span> <span class="n">ilog2</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
             <span class="n">QL</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">q</span> <span class="o">//</span> <span class="p">(</span><span class="n">j</span> <span class="o">-</span> <span class="n">i</span><span class="p">),</span> <span class="n">j</span><span class="p">])</span>
 
         <span class="k">assert</span> <span class="n">QL</span>
