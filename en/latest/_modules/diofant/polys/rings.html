@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.rings &mdash; Diofant 0.10.1.dev71+g7c7bb68 documentation</title>
+  <title>diofant.polys.rings &mdash; Diofant 0.10.1.dev81+g6f0f24c documentation</title>
   
 
   
@@ -169,8 +169,8 @@
 <span class="kn">from</span> <span class="nn">.densebasic</span> <span class="k">import</span> <span class="n">dmp_from_dict</span><span class="p">,</span> <span class="n">dmp_to_dict</span>
 <span class="kn">from</span> <span class="nn">.heuristicgcd</span> <span class="k">import</span> <span class="n">heugcd</span>
 <span class="kn">from</span> <span class="nn">.modulargcd</span> <span class="k">import</span> <span class="n">func_field_modgcd</span><span class="p">,</span> <span class="n">modgcd</span>
-<span class="kn">from</span> <span class="nn">.monomials</span> <span class="k">import</span> <span class="p">(</span><span class="n">monomial_div</span><span class="p">,</span> <span class="n">monomial_gcd</span><span class="p">,</span> <span class="n">monomial_ldiv</span><span class="p">,</span>
-                        <span class="n">monomial_min</span><span class="p">,</span> <span class="n">monomial_mul</span><span class="p">,</span> <span class="n">monomial_pow</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">.monomials</span> <span class="k">import</span> <span class="p">(</span><span class="n">monomial_div</span><span class="p">,</span> <span class="n">monomial_ldiv</span><span class="p">,</span> <span class="n">monomial_min</span><span class="p">,</span>
+                        <span class="n">monomial_mul</span><span class="p">,</span> <span class="n">monomial_pow</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">.orderings</span> <span class="k">import</span> <span class="n">lex</span>
 <span class="kn">from</span> <span class="nn">.polyconfig</span> <span class="k">import</span> <span class="n">query</span>
 <span class="kn">from</span> <span class="nn">.polyerrors</span> <span class="k">import</span> <span class="p">(</span><span class="n">CoercionFailed</span><span class="p">,</span> <span class="n">ExactQuotientFailed</span><span class="p">,</span> <span class="n">GeneratorsError</span><span class="p">,</span>
@@ -702,10 +702,14 @@
     <span class="k">def</span> <span class="nf">clear_denoms</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">domain</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">domain</span>
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">domain</span><span class="o">.</span><span class="n">is_Field</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">domain</span><span class="o">.</span><span class="n">has_assoc_Ring</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">domain</span><span class="o">.</span><span class="n">is_Field</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">domain</span><span class="o">.</span><span class="n">one</span><span class="p">,</span> <span class="bp">self</span>
 
-        <span class="n">ground_ring</span> <span class="o">=</span> <span class="n">domain</span><span class="o">.</span><span class="n">ring</span>
+        <span class="k">if</span> <span class="n">domain</span><span class="o">.</span><span class="n">has_assoc_Ring</span><span class="p">:</span>
+            <span class="n">ground_ring</span> <span class="o">=</span> <span class="n">domain</span><span class="o">.</span><span class="n">ring</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ground_ring</span> <span class="o">=</span> <span class="n">domain</span>
+
         <span class="n">common</span> <span class="o">=</span> <span class="n">ground_ring</span><span class="o">.</span><span class="n">one</span>
         <span class="n">lcm</span> <span class="o">=</span> <span class="n">ground_ring</span><span class="o">.</span><span class="n">lcm</span>
 
@@ -1719,15 +1723,6 @@
     <span class="k">def</span> <span class="nf">LC</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_coeff</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">leading_expv</span><span class="p">())</span>
 
-    <span class="k">def</span> <span class="nf">TC</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">is_univariate</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_zero</span><span class="p">:</span>
-                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">zero</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_dense</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">PolynomialError</span><span class="p">(</span><span class="s1">&#39;multivariate polynomials not supported&#39;</span><span class="p">)</span>
-
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">LM</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">expv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">leading_expv</span><span class="p">()</span>
@@ -1908,6 +1903,8 @@
 <div class="viewcode-block" id="PolyElement.primitive"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.rings.PolyElement.primitive">[docs]</a>    <span class="k">def</span> <span class="nf">primitive</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns content and a primitive polynomial.&quot;&quot;&quot;</span>
         <span class="n">cont</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">is_negative</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">LC</span><span class="p">):</span>
+            <span class="n">cont</span> <span class="o">=</span> <span class="o">-</span><span class="n">cont</span>
         <span class="k">return</span> <span class="n">cont</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">quo_ground</span><span class="p">(</span><span class="n">cont</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="PolyElement.monic"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.rings.PolyElement.monic">[docs]</a>    <span class="k">def</span> <span class="nf">monic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -2096,12 +2093,6 @@
         <span class="k">elif</span> <span class="ow">not</span> <span class="n">other</span><span class="p">:</span>
             <span class="n">h</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">cff</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">_gcd_zero</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">h</span><span class="p">,</span> <span class="n">cff</span><span class="p">,</span> <span class="n">cfg</span>
-        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">h</span><span class="p">,</span> <span class="n">cff</span><span class="p">,</span> <span class="n">cfg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_gcd_monom</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">h</span><span class="p">,</span> <span class="n">cff</span><span class="p">,</span> <span class="n">cfg</span>
-        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">h</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">cff</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">_gcd_monom</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">h</span><span class="p">,</span> <span class="n">cff</span><span class="p">,</span> <span class="n">cfg</span>
 
         <span class="n">J</span><span class="p">,</span> <span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">deflate</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
         <span class="n">h</span><span class="p">,</span> <span class="n">cff</span><span class="p">,</span> <span class="n">cfg</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">_gcd</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
@@ -2114,20 +2105,6 @@
             <span class="k">return</span> <span class="n">other</span><span class="p">,</span> <span class="n">zero</span><span class="p">,</span> <span class="n">one</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="o">-</span><span class="n">other</span><span class="p">,</span> <span class="n">zero</span><span class="p">,</span> <span class="o">-</span><span class="n">one</span>
-
-    <span class="k">def</span> <span class="nf">_gcd_monom</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="n">ring</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span>
-        <span class="n">ground_gcd</span> <span class="o">=</span> <span class="n">ring</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">gcd</span>
-        <span class="n">ground_quo</span> <span class="o">=</span> <span class="n">ring</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">quo</span>
-        <span class="n">mf</span><span class="p">,</span> <span class="n">cf</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">_mgcd</span><span class="p">,</span> <span class="n">_cgcd</span> <span class="o">=</span> <span class="n">mf</span><span class="p">,</span> <span class="n">cf</span>
-        <span class="k">for</span> <span class="n">mg</span><span class="p">,</span> <span class="n">cg</span> <span class="ow">in</span> <span class="n">other</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="n">_mgcd</span> <span class="o">=</span> <span class="n">monomial_gcd</span><span class="p">(</span><span class="n">_mgcd</span><span class="p">,</span> <span class="n">mg</span><span class="p">)</span>
-            <span class="n">_cgcd</span> <span class="o">=</span> <span class="n">ground_gcd</span><span class="p">(</span><span class="n">_cgcd</span><span class="p">,</span> <span class="n">cg</span><span class="p">)</span>
-        <span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">new</span><span class="p">([(</span><span class="n">_mgcd</span><span class="p">,</span> <span class="n">_cgcd</span><span class="p">)])</span>
-        <span class="n">cff</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">new</span><span class="p">([(</span><span class="n">monomial_ldiv</span><span class="p">(</span><span class="n">mf</span><span class="p">,</span> <span class="n">_mgcd</span><span class="p">),</span> <span class="n">ground_quo</span><span class="p">(</span><span class="n">cf</span><span class="p">,</span> <span class="n">_cgcd</span><span class="p">))])</span>
-        <span class="n">cfg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">new</span><span class="p">([(</span><span class="n">monomial_ldiv</span><span class="p">(</span><span class="n">mg</span><span class="p">,</span> <span class="n">_mgcd</span><span class="p">),</span> <span class="n">ground_quo</span><span class="p">(</span><span class="n">cg</span><span class="p">,</span> <span class="n">_cgcd</span><span class="p">))</span> <span class="k">for</span> <span class="n">mg</span><span class="p">,</span> <span class="n">cg</span> <span class="ow">in</span> <span class="n">other</span><span class="o">.</span><span class="n">items</span><span class="p">()])</span>
-        <span class="k">return</span> <span class="n">h</span><span class="p">,</span> <span class="n">cff</span><span class="p">,</span> <span class="n">cfg</span>
 
     <span class="k">def</span> <span class="nf">_gcd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="n">ring</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.rootisolation &mdash; Diofant 0.10.1.dev71+g7c7bb68 documentation</title>
+  <title>diofant.polys.rootisolation &mdash; Diofant 0.10.1.dev81+g6f0f24c documentation</title>
   
 
   
@@ -643,6 +643,9 @@
         <span class="n">R</span><span class="p">,</span> <span class="n">K</span> <span class="o">=</span> <span class="n">K</span><span class="p">,</span> <span class="n">K</span><span class="o">.</span><span class="n">field</span>
         <span class="n">f</span> <span class="o">=</span> <span class="n">dmp_convert</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
 
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">K</span><span class="o">.</span><span class="n">is_ComplexAlgebraicField</span> <span class="ow">or</span> <span class="n">K</span><span class="o">.</span><span class="n">is_RationalField</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">DomainError</span><span class="p">(</span><span class="s2">&quot;isolation of real roots not supported over </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">K</span><span class="p">)</span>
+
     <span class="n">_</span><span class="p">,</span> <span class="n">factors</span> <span class="o">=</span> <span class="n">dmp_sqf_list</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
     <span class="n">factors</span> <span class="o">=</span> <span class="p">[(</span><span class="n">dmp_clear_denoms</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">K</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span> <span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">factors</span><span class="p">]</span>
 
@@ -650,9 +653,6 @@
         <span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">k</span><span class="p">),</span> <span class="o">=</span> <span class="n">factors</span>
         <span class="k">return</span> <span class="p">[(</span><span class="n">r</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">dup_isolate_real_roots_sqf</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">eps</span><span class="p">,</span> <span class="n">inf</span><span class="p">,</span> <span class="n">sup</span><span class="p">,</span> <span class="n">fast</span><span class="p">)]</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">K</span><span class="o">.</span><span class="n">is_RationalField</span> <span class="ow">or</span> <span class="n">K</span><span class="o">.</span><span class="n">is_RealAlgebraicField</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="n">DomainError</span><span class="p">(</span><span class="s2">&quot;isolation of real roots not supported over </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">K</span><span class="p">)</span>
-
         <span class="n">I_zero</span><span class="p">,</span> <span class="n">f</span> <span class="o">=</span> <span class="n">_isolate_zero</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">inf</span><span class="p">,</span> <span class="n">sup</span><span class="p">)</span>
         <span class="n">I_neg</span><span class="p">,</span> <span class="n">I_pos</span> <span class="o">=</span> <span class="n">_real_isolate_and_disjoin</span><span class="p">(</span><span class="n">factors</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">eps</span><span class="p">,</span> <span class="n">inf</span><span class="p">,</span> <span class="n">sup</span><span class="p">,</span> <span class="n">fast</span><span class="o">=</span><span class="n">fast</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">I_neg</span> <span class="o">+</span> <span class="n">I_zero</span> <span class="o">+</span> <span class="n">I_pos</span><span class="p">)</span></div>
