@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Internals of the Polynomial Manipulation Module &mdash; Diofant 0.10.1.dev86+g95ec09c documentation</title>
+  <title>Internals of the Polynomial Manipulation Module &mdash; Diofant 0.10.1.dev89+g89e19a6 documentation</title>
   
 
   
@@ -117,7 +117,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../guide.html">Development</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../aboutus.html">About</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../release/index.html">Release Notes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sources.html">Bibliography</a></li>
 </ul>
 
             
@@ -1714,7 +1714,7 @@ the given percentage of elements will be non-zero.</p>
 <dd><p>Multiply dense polynomials in <code class="docutils literal notranslate"><span class="pre">K[x]</span></code> using Karatsuba’s algorithm.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><a class="reference internal" href="../bibliography.html#hoeven02" id="id1">[Hoeven02]</a></li>
+<li><a class="reference internal" href="../sources.html#hoeven02" id="id1">[VdH02]</a></li>
 </ul>
 </dd></dl>
 
@@ -2050,7 +2050,7 @@ polynomials are not unique, consider examples:</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><a class="reference internal" href="../bibliography.html#kozen89" id="id2">[Kozen89]</a></li>
+<li><a class="reference internal" href="../sources.html#kozen1989decomposition" id="id2">[KL89]</a></li>
 </ul>
 </dd></dl>
 
@@ -2330,7 +2330,7 @@ intervals are disjoint.</li>
 <dd><p>Isolate real roots.</p>
 <p class="rubric">Notes</p>
 <p>Implemented algorithms use Vincent-Akritas-Strzebonski (VAS) continued
-fractions approach <a class="reference internal" href="../bibliography.html#alkiviadis05" id="id3">[Alkiviadis05]</a>, <a class="reference internal" href="../bibliography.html#alkiviadis08" id="id4">[Alkiviadis08]</a>.</p>
+fractions approach <a class="reference internal" href="../sources.html#alkiviadis2005comp" id="id3">[SA05]</a>, <a class="reference internal" href="../sources.html#alkiviadis2008cf" id="id4">[ASV08]</a>.</p>
 </dd></dl>
 
 <dl class="function">
@@ -2362,7 +2362,7 @@ fractions approach <a class="reference internal" href="../bibliography.html#alki
 <code class="descclassname">diofant.polys.rootisolation.</code><code class="descname">dup_root_upper_bound</code><span class="sig-paren">(</span><em>f</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/rootisolation.html#dup_root_upper_bound"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.dup_root_upper_bound" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the LMQ upper bound for the positive roots of <span class="math notranslate nohighlight">\(f\)</span>.</p>
 <p>LMQ (Local Max Quadratic) bound was developed by
-Akritas-Strzebonski-Vigklas <a class="reference internal" href="../bibliography.html#alkiviadis09" id="id5">[Alkiviadis09]</a>.</p>
+Akritas-Strzebonski-Vigklas <a class="reference internal" href="../sources.html#alkiviadis2009bounds" id="id5">[Akr09]</a>.</p>
 </dd></dl>
 
 <dl class="function">
@@ -2390,7 +2390,7 @@ Akritas-Strzebonski-Vigklas <a class="reference internal" href="../bibliography.
 <code class="descclassname">diofant.polys.rootisolation.</code><code class="descname">dup_sturm</code><span class="sig-paren">(</span><em>f</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/rootisolation.html#dup_sturm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.dup_sturm" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes the Sturm sequence of <code class="docutils literal notranslate"><span class="pre">f</span></code> in <code class="docutils literal notranslate"><span class="pre">F[x]</span></code>.</p>
 <p>Given a univariate, square-free polynomial <code class="docutils literal notranslate"><span class="pre">f(x)</span></code> returns the
-associated Sturm sequence (see e.g. <a class="reference internal" href="../bibliography.html#davenport88" id="id6">[Davenport88]</a>)
+associated Sturm sequence (see e.g. <a class="reference internal" href="../sources.html#davenport1988systems" id="id6">[DST88]</a>)
 <code class="docutils literal notranslate"><span class="pre">f_0(x),</span> <span class="pre">...,</span> <span class="pre">f_n(x)</span></code> defined by:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f_0</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">f_1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">f</span><span class="s1">&#39;(x)</span>
 <span class="n">f_n</span> <span class="o">=</span> <span class="o">-</span><span class="n">rem</span><span class="p">(</span><span class="n">f_</span><span class="p">{</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">}(</span><span class="n">x</span><span class="p">),</span> <span class="n">f_</span><span class="p">{</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">}(</span><span class="n">x</span><span class="p">))</span>
@@ -2419,7 +2419,7 @@ associated Sturm sequence (see e.g. <a class="reference internal" href="../bibli
 <dd><p>Compute square-free decomposition of <code class="docutils literal notranslate"><span class="pre">f</span></code> in zero-characteristic ring <code class="docutils literal notranslate"><span class="pre">K</span></code>.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><a class="reference internal" href="../bibliography.html#leem13" id="id7">[LeeM13]</a>, page 8</li>
+<li><a class="reference internal" href="../sources.html#leem2013factor" id="id7">[Lee13]</a>, page 8</li>
 </ul>
 </dd></dl>
 
@@ -2690,7 +2690,7 @@ results returns the final answers.</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><a class="reference internal" href="../bibliography.html#niven91" id="id8">[Niven91]</a></li>
+<li><a class="reference internal" href="../sources.html#nivenzuckerman" id="id8">[NZ91]</a></li>
 </ul>
 </dd></dl>
 
@@ -2715,9 +2715,9 @@ large <code class="docutils literal notranslate"><span class="pre">deg(f)</span>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><a class="reference internal" href="../bibliography.html#kaltofen98" id="id9">[Kaltofen98]</a></li>
-<li><a class="reference internal" href="../bibliography.html#shoup95" id="id10">[Shoup95]</a></li>
-<li><a class="reference internal" href="../bibliography.html#gathen92" id="id11">[Gathen92]</a></li>
+<li><a class="reference internal" href="../sources.html#kaltofen1998subquadratic" id="id9">[KS98]</a></li>
+<li><a class="reference internal" href="../sources.html#shoup1995factor" id="id10">[Sho95]</a></li>
+<li><a class="reference internal" href="../sources.html#gathen1992frobenious" id="id11">[vzGS92]</a></li>
 </ul>
 </dd></dl>
 
@@ -2742,8 +2742,8 @@ is an argument to the equal degree factorization routine.</p>
 procedure (EDF) with each of the factors.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><a class="reference internal" href="../bibliography.html#gathen99" id="id12">[Gathen99]</a></li>
-<li><a class="reference internal" href="../bibliography.html#geddes92" id="id13">[Geddes92]</a></li>
+<li><a class="reference internal" href="../sources.html#gathen1999modern" id="id12">[vzGG99]</a></li>
+<li><a class="reference internal" href="../sources.html#geddes1992algorithms" id="id13">[GCL92]</a></li>
 </ul>
 </dd></dl>
 
@@ -2774,8 +2774,8 @@ finite field with <code class="docutils literal notranslate"><span class="pre">p
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><a class="reference internal" href="../bibliography.html#monagan93" id="id14">[Monagan93]</a></li>
-<li><a class="reference internal" href="../bibliography.html#gathen99" id="id15">[Gathen99]</a></li>
+<li><a class="reference internal" href="../sources.html#monagan1993inplace" id="id14">[Mon93]</a></li>
+<li><a class="reference internal" href="../sources.html#gathen1999modern" id="id15">[vzGG99]</a></li>
 </ul>
 </dd></dl>
 
@@ -2796,8 +2796,8 @@ large <code class="docutils literal notranslate"><span class="pre">deg(f)</span>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><a class="reference internal" href="../bibliography.html#shoup91" id="id16">[Shoup91]</a></li>
-<li><a class="reference internal" href="../bibliography.html#gathen92" id="id17">[Gathen92]</a></li>
+<li><a class="reference internal" href="../sources.html#shoup1991ffactor" id="id16">[Sho91]</a></li>
+<li><a class="reference internal" href="../sources.html#gathen1992frobenious" id="id17">[vzGS92]</a></li>
 </ul>
 </dd></dl>
 
@@ -2816,8 +2816,8 @@ EDF procedure gives complete factorization over Galois fields.</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><a class="reference internal" href="../bibliography.html#gathen99" id="id18">[Gathen99]</a></li>
-<li><a class="reference internal" href="../bibliography.html#geddes92" id="id19">[Geddes92]</a></li>
+<li><a class="reference internal" href="../sources.html#gathen1999modern" id="id18">[vzGG99]</a></li>
+<li><a class="reference internal" href="../sources.html#geddes1992algorithms" id="id19">[GCL92]</a></li>
 </ul>
 </dd></dl>
 
@@ -2898,7 +2898,7 @@ recover the exact form of the input polynomial because we requested to
 get monic factors of <code class="docutils literal notranslate"><span class="pre">f</span></code> and its leading coefficient separately.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><a class="reference internal" href="../bibliography.html#gathen99" id="id20">[Gathen99]</a></li>
+<li><a class="reference internal" href="../sources.html#gathen1999modern" id="id20">[vzGG99]</a></li>
 </ul>
 </dd></dl>
 
@@ -3009,7 +3009,7 @@ The typical application of EEA is solving polynomial diophantine equations.</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><a class="reference internal" href="../bibliography.html#gathen99" id="id21">[Gathen99]</a></li>
+<li><a class="reference internal" href="../sources.html#gathen1999modern" id="id21">[vzGG99]</a></li>
 </ul>
 </dd></dl>
 
@@ -3026,7 +3026,7 @@ The typical application of EEA is solving polynomial diophantine equations.</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><a class="reference internal" href="../bibliography.html#benor81" id="id22">[BenOr81]</a></li>
+<li><a class="reference internal" href="../sources.html#ben-or1981ff" id="id22">[BO81]</a></li>
 </ul>
 </dd></dl>
 
@@ -3147,7 +3147,7 @@ of <code class="docutils literal notranslate"><span class="pre">f**n</span></cod
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><a class="reference internal" href="../bibliography.html#gathen99" id="id23">[Gathen99]</a></li>
+<li><a class="reference internal" href="../sources.html#gathen1999modern" id="id23">[vzGG99]</a></li>
 </ul>
 </dd></dl>
 
@@ -3236,7 +3236,7 @@ still compute square-free decomposition of <code class="docutils literal notrans
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><a class="reference internal" href="../bibliography.html#geddes92" id="id24">[Geddes92]</a></li>
+<li><a class="reference internal" href="../sources.html#geddes1992algorithms" id="id24">[GCL92]</a></li>
 </ul>
 </dd></dl>
 
@@ -3306,7 +3306,7 @@ like iterated Frobenius algorithm, for large degrees.</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><a class="reference internal" href="../bibliography.html#gathen92" id="id25">[Gathen92]</a></li>
+<li><a class="reference internal" href="../sources.html#gathen1992frobenious" id="id25">[vzGS92]</a></li>
 </ul>
 </dd></dl>
 
@@ -3890,7 +3890,7 @@ exceedingly, but the computation of the primitive parts requires
 extra processing effort. Besides, the method only works with fraction fields
 of unique factorization domains, excluding, for example, the general number
 fields.</p>
-<p>Collins <a class="reference internal" href="../bibliography.html#collins67" id="id26">[Collins67]</a> realized that the so-called <em>subresultant polynomials</em>
+<p>Collins <a class="reference internal" href="../sources.html#collins1967subr" id="id26">[Col67]</a> realized that the so-called <em>subresultant polynomials</em>
 of a pair of polynomials also form a generalized remainder sequence.
 The coefficients of these polynomials
 are expressible as determinants in the coefficients of the given
@@ -3969,12 +3969,12 @@ formulas</p>
 \[\gamma_i f_i = \mathrm{rem}(f_{i-2},f_{i-1})\]</div>
 <p>in terms of the leading coefficients of <span class="math notranslate nohighlight">\(f_1,\ldots,f_{i-1}\)</span>, working
 in the field <span class="math notranslate nohighlight">\(K\)</span>.</p>
-<p>Brown and Traub <a class="reference internal" href="../bibliography.html#browntraub71" id="id27">[BrownTraub71]</a> later developed a recursive procedure
+<p>Brown and Traub <a class="reference internal" href="../sources.html#brown1971subres" id="id27">[BT71]</a> later developed a recursive procedure
 for computing the coefficients <span class="math notranslate nohighlight">\(\gamma_i\)</span>. Their algorithm deals with elements
 of the domain <span class="math notranslate nohighlight">\(A\)</span> exclusively (assuming <span class="math notranslate nohighlight">\(f,g\in A[X]\)</span>). However, in the
 abnormal case there was a problem, a division in <span class="math notranslate nohighlight">\(A\)</span>
 which could only be conjectured to be exact.</p>
-<p>This was subsequently justified by Brown <a class="reference internal" href="../bibliography.html#brown78" id="id28">[Brown78]</a> who showed that
+<p>This was subsequently justified by Brown <a class="reference internal" href="../sources.html#brown1978prs" id="id28">[Bro78]</a> who showed that
 the result of the division is, in fact, a scalar subresultant.
 More specifically, the constant appearing in the computation of <span class="math notranslate nohighlight">\(f_i\)</span> is
 <span class="math notranslate nohighlight">\(s_{n_{i-2}}(f,g)\)</span> (Theorem 3).
@@ -4210,7 +4210,7 @@ and <code class="docutils literal notranslate"><span class="pre">cfg</span> <spa
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><a class="reference internal" href="../bibliography.html#liao95" id="id29">[Liao95]</a></li>
+<li><a class="reference internal" href="../sources.html#liao1995heuristic" id="id29">[LF95]</a></li>
 </ul>
 </dd></dl>
 
@@ -4397,7 +4397,7 @@ is used to recover the multiplicities of factors.</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><a class="reference internal" href="../bibliography.html#gathen99" id="id30">[Gathen99]</a></li>
+<li><a class="reference internal" href="../sources.html#gathen1999modern" id="id30">[vzGG99]</a></li>
 </ul>
 </dd></dl>
 
@@ -4429,8 +4429,8 @@ factors. For this purpose a parallel Hensel lifting procedure is used.</p>
 (when an integer) or (for testing purposes) can be a sequence of numbers.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><a class="reference internal" href="../bibliography.html#wang78" id="id31">[Wang78]</a></li>
-<li><a class="reference internal" href="../bibliography.html#geddes92" id="id32">[Geddes92]</a></li>
+<li><a class="reference internal" href="../sources.html#wang1978improved" id="id31">[Wan78]</a></li>
+<li><a class="reference internal" href="../sources.html#geddes1992algorithms" id="id32">[GCL92]</a></li>
 </ul>
 </dd></dl>
 
@@ -4490,7 +4490,7 @@ which makes this method much faster that any other direct factorization
 approach (e.g. Zassenhaus’s).</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><a class="reference internal" href="../bibliography.html#weisstein09" id="id33">[Weisstein09]</a></li>
+<li><a class="reference internal" href="../sources.html#mathworld-cyclotomic-poly" id="id33">[Mat]</a></li>
 </ul>
 </dd></dl>
 
@@ -4538,7 +4538,7 @@ using cyclotomic decomposition to speedup computations. To
 disable this behaviour set cyclotomic=False.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><a class="reference internal" href="../bibliography.html#gathen99" id="id34">[Gathen99]</a></li>
+<li><a class="reference internal" href="../sources.html#gathen1999modern" id="id34">[vzGG99]</a></li>
 </ul>
 </dd></dl>
 
@@ -4567,7 +4567,7 @@ over <span class="math notranslate nohighlight">\(Z[x]\)</span> satisfying:</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><a class="reference internal" href="../bibliography.html#gathen99" id="id35">[Gathen99]</a></li>
+<li><a class="reference internal" href="../sources.html#gathen1999modern" id="id35">[vzGG99]</a></li>
 </ul>
 </dd></dl>
 
@@ -4595,7 +4595,7 @@ and <span class="math notranslate nohighlight">\(t\)</span> such that:</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><a class="reference internal" href="../bibliography.html#gathen99" id="id36">[Gathen99]</a></li>
+<li><a class="reference internal" href="../sources.html#gathen1999modern" id="id36">[vzGG99]</a></li>
 </ul>
 </dd></dl>
 
@@ -4643,15 +4643,15 @@ variable at a time, provided that the ideal is zero-dimensional
 (finite number of solutions).</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><a class="reference internal" href="../bibliography.html#bose03" id="id37">[Bose03]</a></li>
-<li><a class="reference internal" href="../bibliography.html#giovini91" id="id38">[Giovini91]</a></li>
-<li><a class="reference internal" href="../bibliography.html#ajwa95" id="id39">[Ajwa95]</a></li>
-<li><a class="reference internal" href="../bibliography.html#cox97" id="id40">[Cox97]</a></li>
-<li><a class="reference internal" href="../bibliography.html#beckerweispfenning93" id="id41">[BeckerWeispfenning93]</a>, page 232</li>
+<li><a class="reference internal" href="../sources.html#bose03" id="id37">[NKBG03]</a></li>
+<li><a class="reference internal" href="../sources.html#giovini1991sugar" id="id38">[GMN+91]</a></li>
+<li><a class="reference internal" href="../sources.html#ajwa95groebner" id="id39">[ALW95]</a></li>
+<li><a class="reference internal" href="../sources.html#cox1997ideals" id="id40">[CLOShea97]</a></li>
+<li><a class="reference internal" href="../sources.html#beckerweispfenning93" id="id41">[BW93]</a>, page 232</li>
 </ul>
 <p class="rubric">Notes</p>
 <p>Used an improved version of Buchberger’s algorithm
-as presented in <a class="reference internal" href="../bibliography.html#beckerweispfenning93" id="id42">[BeckerWeispfenning93]</a>.</p>
+as presented in <a class="reference internal" href="../sources.html#beckerweispfenning93" id="id42">[BW93]</a>.</p>
 </dd></dl>
 
 <dl class="function">
@@ -4722,8 +4722,8 @@ the current basis.</p>
 <p>Once a Gröbner basis has been found, it gets reduced.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><a class="reference internal" href="../bibliography.html#sunwang10" id="id43">[SunWang10]</a></li>
-<li><a class="reference internal" href="../bibliography.html#beckerweispfenning93" id="id44">[BeckerWeispfenning93]</a>, pp. 203, 216.</li>
+<li><a class="reference internal" href="../sources.html#sunwang2010f5" id="id43">[SW10]</a></li>
+<li><a class="reference internal" href="../sources.html#beckerweispfenning93" id="id44">[BW93]</a>, pp. 203, 216.</li>
 </ul>
 </dd></dl>
 
@@ -4754,7 +4754,7 @@ of <span class="math notranslate nohighlight">\(t*f\)</span> and <span class="ma
 then filtering out the solution that doesn’t contain <span class="math notranslate nohighlight">\(t\)</span>.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><a class="reference internal" href="../bibliography.html#cox97" id="id45">[Cox97]</a></li>
+<li><a class="reference internal" href="../sources.html#cox1997ideals" id="id45">[CLOShea97]</a></li>
 </ul>
 </dd></dl>
 
@@ -4832,7 +4832,7 @@ and number of the maximum of f and g, w.r.t. lbp_cmp.</p>
 and computes a reduced Gröbner basis for them.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li>[BeckerWeispfenning93], page 216.</li>
+<li><a class="reference internal" href="../sources.html#beckerweispfenning93" id="id46">[BW93]</a>, page 216.</li>
 </ul>
 </dd></dl>
 
@@ -4895,7 +4895,7 @@ ideal w.r.t. <code class="docutils literal notranslate"><span class="pre">O_from
 w.r.t. <code class="docutils literal notranslate"><span class="pre">O_to</span></code>.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><a class="reference internal" href="../bibliography.html#faugere94" id="id46">[Faugère94]</a></li>
+<li><a class="reference internal" href="../sources.html#faugere1993groebner" id="id47">[FaugereGLM93]</a></li>
 </ul>
 </dd></dl>
 
@@ -4914,7 +4914,7 @@ using Gröbner bases</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><a class="reference internal" href="../bibliography.html#adams94" id="id47">[Adams94]</a></li>
+<li><a class="reference internal" href="../sources.html#adams1994intro" id="id48">[AL94]</a></li>
 </ul>
 </dd></dl>
 
@@ -4985,8 +4985,8 @@ candidates which are very likely the desired GCD.</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><a class="reference internal" href="../bibliography.html#monagan00" id="id48">[Monagan00]</a></li>
-<li><a class="reference internal" href="../bibliography.html#brown71" id="id49">[Brown71]</a></li>
+<li><a class="reference internal" href="../sources.html#monagan2000brown" id="id49">[MW00]</a></li>
+<li><a class="reference internal" href="../sources.html#brown1971gcd" id="id50">[Bro71]</a></li>
 </ul>
 </dd></dl>
 
@@ -5059,7 +5059,7 @@ called recursively.</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><a class="reference internal" href="../bibliography.html#hoeij04" id="id50">[Hoeij04]</a></li>
+<li><a class="reference internal" href="../sources.html#monagan2004algebraic" id="id51">[MvH04]</a></li>
 </ul>
 </dd></dl>
 
@@ -5091,7 +5091,7 @@ is given, <span class="math notranslate nohighlight">\(\mathbb Z_p\)</span> is c
 </table>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><a class="reference internal" href="../bibliography.html#hoeij02" id="id51">[Hoeij02]</a></li>
+<li><a class="reference internal" href="../sources.html#vanhoeij2002modgcd" id="id52">[vHM02]</a></li>
 </ul>
 </dd></dl>
 
@@ -5123,7 +5123,7 @@ not a prime number, so it is possible that <span class="math notranslate nohighl
 </table>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><a class="reference internal" href="../bibliography.html#wang81" id="id52">[Wang81]</a></li>
+<li><a class="reference internal" href="../sources.html#wang1981partial" id="id53">[Wan81]</a></li>
 </ul>
 </dd></dl>
 
@@ -5161,7 +5161,7 @@ the input polynomials as a side effect.</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><a class="reference internal" href="../bibliography.html#liao95" id="id53">[Liao95]</a></li>
+<li><a class="reference internal" href="../sources.html#liao1995heuristic" id="id54">[LF95]</a></li>
 </ul>
 </dd></dl>
 
@@ -5186,7 +5186,7 @@ by <code class="docutils literal notranslate"><span class="pre">polys.ring.ring<
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><a class="reference internal" href="../bibliography.html#bostan02" id="id54">[Bostan02]</a></li>
+<li><a class="reference internal" href="../sources.html#bostan02" id="id55">[ABS02]</a></li>
 </ul>
 </dd></dl>
 
