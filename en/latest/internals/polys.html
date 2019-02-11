@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Internals of the Polynomial Manipulation Module &mdash; Diofant 0.10.1.dev81+g6f0f24c documentation</title>
+  <title>Internals of the Polynomial Manipulation Module &mdash; Diofant 0.10.1.dev86+g95ec09c documentation</title>
   
 
   
@@ -719,9 +719,10 @@ may be slightly more efficient.)</p>
 <code class="descclassname">diofant.polys.densebasic.</code><code class="descname">dmp_LC</code><span class="sig-paren">(</span><em>f</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/densebasic.html#dmp_LC"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densebasic.dmp_LC" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return leading coefficient of <code class="docutils literal notranslate"><span class="pre">f</span></code>.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dmp_LC</span><span class="p">([],</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dmp_LC</span><span class="p">([</span><span class="n">ZZ</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">3</span><span class="p">)],</span> <span class="n">ZZ</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="o">.</span><span class="n">dmp_LC</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">3</span><span class="p">)</span>
 <span class="go">1</span>
 </pre></div>
 </div>
@@ -799,7 +800,10 @@ may be slightly more efficient.)</p>
 <code class="descclassname">diofant.polys.densebasic.</code><code class="descname">dmp_degree_in</code><span class="sig-paren">(</span><em>f</em>, <em>j</em>, <em>u</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/densebasic.html#dmp_degree_in"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densebasic.dmp_degree_in" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the leading degree of <code class="docutils literal notranslate"><span class="pre">f</span></code> in <code class="docutils literal notranslate"><span class="pre">x_j</span></code> in <code class="docutils literal notranslate"><span class="pre">K[X]</span></code>.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dmp_degree_in</span><span class="p">([[</span><span class="n">ZZ</span><span class="p">(</span><span class="mi">2</span><span class="p">)],</span> <span class="p">[</span><span class="n">ZZ</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">3</span><span class="p">)]],</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s1">&#39;x y&#39;</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="o">.</span><span class="n">dmp_degree_in</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="go">2</span>
 </pre></div>
 </div>
