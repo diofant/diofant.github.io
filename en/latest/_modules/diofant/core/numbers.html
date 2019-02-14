@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.core.numbers &mdash; Diofant 0.10.1.dev89+g89e19a6 documentation</title>
+  <title>diofant.core.numbers &mdash; Diofant 0.10.1.dev96+g5e3faef documentation</title>
   
 
   
@@ -17,34 +17,37 @@
   
 
   
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
-
-  
-  <script src="../../../_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -156,7 +159,7 @@
 <span class="kn">import</span> <span class="nn">mpmath</span>
 <span class="kn">import</span> <span class="nn">mpmath.libmp</span> <span class="k">as</span> <span class="nn">mlib</span>
 <span class="kn">from</span> <span class="nn">mpmath.ctx_mp</span> <span class="k">import</span> <span class="n">mpnumeric</span>
-<span class="kn">from</span> <span class="nn">mpmath.libmp</span> <span class="k">import</span> <span class="n">mpf_e</span><span class="p">,</span> <span class="n">mpf_pi</span><span class="p">,</span> <span class="n">mpf_pow</span><span class="p">,</span> <span class="n">phi_fixed</span>
+<span class="kn">from</span> <span class="nn">mpmath.libmp</span> <span class="k">import</span> <span class="n">mpf_e</span><span class="p">,</span> <span class="n">mpf_pi</span><span class="p">,</span> <span class="n">mpf_pow</span><span class="p">,</span> <span class="n">phi_fixed</span><span class="p">,</span> <span class="n">to_rational</span>
 <span class="kn">from</span> <span class="nn">mpmath.libmp.libmpf</span> <span class="k">import</span> <span class="n">_normalize</span> <span class="k">as</span> <span class="n">mpf_normalize</span>
 <span class="kn">from</span> <span class="nn">mpmath.libmp.libmpf</span> <span class="k">import</span> <span class="n">finf</span> <span class="k">as</span> <span class="n">_mpf_inf</span>
 <span class="kn">from</span> <span class="nn">mpmath.libmp.libmpf</span> <span class="k">import</span> <span class="n">fnan</span> <span class="k">as</span> <span class="n">_mpf_nan</span>
@@ -1280,7 +1283,8 @@
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">Rational</span><span class="p">):</span>
                 <span class="k">return</span> <span class="n">p</span>
             <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">Float</span><span class="p">):</span>
-                <span class="n">p</span><span class="p">,</span> <span class="n">q</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">.</span><span class="n">as_integer_ratio</span><span class="p">()</span>
+                <span class="k">with</span> <span class="n">mpmath</span><span class="o">.</span><span class="n">workprec</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">_prec</span><span class="p">):</span>
+                    <span class="n">p</span><span class="p">,</span> <span class="n">q</span> <span class="o">=</span> <span class="n">to_rational</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">_mpf_</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">Rational</span><span class="p">):</span>
             <span class="n">p</span> <span class="o">=</span> <span class="n">fractions</span><span class="o">.</span><span class="n">Fraction</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">numerator</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">denominator</span><span class="p">)</span>
@@ -3035,27 +3039,16 @@
   
 
 
-  
-
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../../_static/language_data.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-
-  
-
-  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>
