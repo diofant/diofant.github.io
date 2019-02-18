@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Core &mdash; Diofant 0.10.1.dev96+g5e3faef documentation</title>
+  <title>Core &mdash; Diofant 0.10.1.dev120+ge2e3d84 documentation</title>
   
 
   
@@ -119,7 +119,6 @@
 <li class="toctree-l4"><a class="reference internal" href="#ilcm">ilcm</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mod-inverse">mod_inverse</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#integer-digits">integer_digits</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#seterr">seterr</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#zero">Zero</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#one">One</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#negativeone">NegativeOne</a></li>
@@ -3617,24 +3616,6 @@ it will not increase the accuracy – the underlying value is not changed:</p>
 <span class="go">307/2**10 at prec=10</span>
 </pre></div>
 </div>
-<p>Finally, Floats can be instantiated with an mpf tuple (n, c, p) to
-produce the number (-1)**n*c*2**p:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="n">n</span><span class="o">*</span><span class="n">c</span><span class="o">*</span><span class="mi">2</span><span class="o">**</span><span class="n">p</span>
-<span class="go">-5</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Float</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
-<span class="go">-5.00000000000000</span>
-</pre></div>
-</div>
-<p>An actual mpf tuple also contains the number of bits in c as the last
-element of the tuple:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">_</span><span class="o">.</span><span class="n">_mpf_</span>
-<span class="go">(1, 5, 0, 3)</span>
-</pre></div>
-</div>
-<p>This is not needed for instantiation and is not the same thing as the
-precision. The mpf tuple and the precision are two separate quantities
-that Float tracks.</p>
 <dl class="method">
 <dt id="diofant.core.numbers.Float.ceiling">
 <code class="descname">ceiling</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/core/numbers.html#Float.ceiling"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.numbers.Float.ceiling" title="Permalink to this definition">¶</a></dt>
@@ -3656,7 +3637,7 @@ that Float tracks.</p>
 <dl class="attribute">
 <dt id="diofant.core.numbers.Float.num">
 <code class="descname">num</code><a class="headerlink" href="#diofant.core.numbers.Float.num" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return mpmath representation of self.</p>
+<dd><p>Return mpmath representation.</p>
 </dd></dl>
 
 </dd></dl>
@@ -3973,17 +3954,6 @@ This is the value return by mod_inverse:</p>
 <dt id="diofant.core.numbers.integer_digits">
 <code class="descclassname">diofant.core.numbers.</code><code class="descname">integer_digits</code><span class="sig-paren">(</span><em>n</em>, <em>b</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/core/numbers.html#integer_digits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.numbers.integer_digits" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gives a list of the base <span class="math notranslate nohighlight">\(b\)</span> digits in the integer <span class="math notranslate nohighlight">\(n\)</span>.</p>
-</dd></dl>
-
-</div>
-<div class="section" id="seterr">
-<h3>seterr<a class="headerlink" href="#seterr" title="Permalink to this headline">¶</a></h3>
-<dl class="function">
-<dt id="diofant.core.numbers.seterr">
-<code class="descclassname">diofant.core.numbers.</code><code class="descname">seterr</code><span class="sig-paren">(</span><em>divide=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/core/numbers.html#seterr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.numbers.seterr" title="Permalink to this definition">¶</a></dt>
-<dd><p>Should diofant raise an exception on 0/0 or return a nan?</p>
-<p>divide == True …. raise an exception
-divide == False … return nan</p>
 </dd></dl>
 
 </div>

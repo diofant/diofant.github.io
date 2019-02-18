@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.ntheory.residue_ntheory &mdash; Diofant 0.10.1.dev96+g5e3faef documentation</title>
+  <title>diofant.ntheory.residue_ntheory &mdash; Diofant 0.10.1.dev120+ge2e3d84 documentation</title>
   
 
   
@@ -150,8 +150,9 @@
            <div itemprop="articleBody">
             
   <h1>Source code for diofant.ntheory.residue_ntheory</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">math</span>
-<span class="kn">from</span> <span class="nn">random</span> <span class="k">import</span> <span class="n">randint</span>
+<span></span><span class="kn">import</span> <span class="nn">collections</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">random</span>
 
 <span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">Function</span><span class="p">,</span> <span class="n">S</span>
 <span class="kn">from</span> <span class="nn">..core.compatibility</span> <span class="k">import</span> <span class="n">as_int</span>
@@ -176,11 +177,10 @@
 <span class="sd">    3</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">defaultdict</span>
     <span class="n">a</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">as_int</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">as_int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">math</span><span class="o">.</span><span class="n">gcd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The two numbers should be relatively prime&quot;</span><span class="p">)</span>
-    <span class="n">factors</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">factors</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
     <span class="n">f</span> <span class="o">=</span> <span class="n">factorint</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">px</span><span class="p">,</span> <span class="n">kx</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="k">if</span> <span class="n">kx</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
@@ -337,7 +337,7 @@
     <span class="n">t</span> <span class="o">=</span> <span class="n">p</span> <span class="o">&gt;&gt;</span> <span class="n">s</span>
     <span class="c1"># find a non-quadratic residue</span>
     <span class="k">while</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="n">d</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">p</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">p</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
         <span class="n">r</span> <span class="o">=</span> <span class="n">legendre_symbol</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">r</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
             <span class="k">break</span>
@@ -406,7 +406,7 @@
         <span class="k">return</span></div>
 
 
-<span class="k">def</span> <span class="nf">sqrt_mod_iter</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">domain</span><span class="o">=</span><span class="nb">int</span><span class="p">):</span>
+<div class="viewcode-block" id="sqrt_mod_iter"><a class="viewcode-back" href="../../../modules/ntheory.html#diofant.ntheory.residue_ntheory.sqrt_mod_iter">[docs]</a><span class="k">def</span> <span class="nf">sqrt_mod_iter</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">domain</span><span class="o">=</span><span class="nb">int</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Iterate over solutions to ``x**2 = a mod p``.</span>
 
 <span class="sd">    Parameters</span>
@@ -462,7 +462,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">vx</span> <span class="ow">in</span> <span class="n">cantor_product</span><span class="p">(</span><span class="o">*</span><span class="n">v</span><span class="p">):</span>
                 <span class="n">r</span> <span class="o">=</span> <span class="n">gf_crt2</span><span class="p">(</span><span class="n">vx</span><span class="p">,</span> <span class="n">pv</span><span class="p">,</span> <span class="n">mm</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-                <span class="k">yield</span> <span class="n">domain</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+                <span class="k">yield</span> <span class="n">domain</span><span class="p">(</span><span class="n">r</span><span class="p">)</span></div>
 
 
 <span class="k">def</span> <span class="nf">_sqrt_mod_prime_power</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>

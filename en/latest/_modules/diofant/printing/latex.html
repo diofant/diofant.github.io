@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.printing.latex &mdash; Diofant 0.10.1.dev96+g5e3faef documentation</title>
+  <title>diofant.printing.latex &mdash; Diofant 0.10.1.dev120+ge2e3d84 documentation</title>
   
 
   
@@ -1524,6 +1524,33 @@
 
     <span class="k">def</span> <span class="nf">_print_Dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_print_dict</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_print_Infinity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">r</span><span class="s2">&quot;\infty&quot;</span>
+
+    <span class="k">def</span> <span class="nf">_print_NegativeInfinity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">r</span><span class="s2">&quot;-\infty&quot;</span>
+
+    <span class="k">def</span> <span class="nf">_print_NaN</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">r</span><span class="s2">&quot;\mathrm</span><span class="si">{NaN}</span><span class="s2">&quot;</span>
+
+    <span class="k">def</span> <span class="nf">_print_ComplexInfinity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">r</span><span class="s2">&quot;\tilde{\infty}&quot;</span>
+
+    <span class="k">def</span> <span class="nf">_print_Exp1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">r</span><span class="s2">&quot;e&quot;</span>
+
+    <span class="k">def</span> <span class="nf">_print_Pi</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">r</span><span class="s2">&quot;\pi&quot;</span>
+
+    <span class="k">def</span> <span class="nf">_print_GoldenRatio</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">r</span><span class="s2">&quot;\phi&quot;</span>
+
+    <span class="k">def</span> <span class="nf">_print_EulerGamma</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">r</span><span class="s2">&quot;\gamma&quot;</span>
+
+    <span class="k">def</span> <span class="nf">_print_ImaginaryUnit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">r</span><span class="s2">&quot;i&quot;</span>
 
     <span class="k">def</span> <span class="nf">_print_DiracDelta</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="n">exp</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.ntheory.factor_ &mdash; Diofant 0.10.1.dev96+g5e3faef documentation</title>
+  <title>diofant.ntheory.factor_ &mdash; Diofant 0.10.1.dev120+ge2e3d84 documentation</title>
   
 
   
@@ -1302,7 +1302,7 @@
         <span class="n">low</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="n">high</span><span class="p">,</span> <span class="n">high</span><span class="o">*</span><span class="mi">2</span></div>
 
 
-<span class="k">def</span> <span class="nf">factorrat</span><span class="p">(</span><span class="n">rat</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">use_trial</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">use_rho</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">use_pm1</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<div class="viewcode-block" id="factorrat"><a class="viewcode-back" href="../../../modules/ntheory.html#diofant.ntheory.factor_.factorrat">[docs]</a><span class="k">def</span> <span class="nf">factorrat</span><span class="p">(</span><span class="n">rat</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">use_trial</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">use_rho</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">use_pm1</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
               <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">visual</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Given a Rational ``r``, ``factorrat(r)`` returns a dict containing</span>
@@ -1347,7 +1347,7 @@
             <span class="n">args</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">args</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">Pow</span><span class="p">(</span><span class="o">*</span><span class="n">i</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
                      <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">items</span><span class="p">())])</span>
-        <span class="k">return</span> <span class="n">Mul</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Mul</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="primefactors"><a class="viewcode-back" href="../../../modules/ntheory.html#diofant.ntheory.factor_.primefactors">[docs]</a><span class="k">def</span> <span class="nf">primefactors</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -1507,10 +1507,10 @@
             <span class="k">yield</span> <span class="n">d</span>
 
 
-<span class="k">def</span> <span class="nf">antidivisors</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">generator</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="antidivisors"><a class="viewcode-back" href="../../../modules/ntheory.html#diofant.ntheory.factor_.antidivisors">[docs]</a><span class="k">def</span> <span class="nf">antidivisors</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">generator</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return all antidivisors of n sorted from 1..n by default.</span>
 
-<span class="sd">    Antidivisors [1]_ of n are numbers that do not divide n by the largest</span>
+<span class="sd">    Antidivisors of n are numbers that do not divide n by the largest</span>
 <span class="sd">    possible margin.  If generator is True an unordered generator is returned.</span>
 
 <span class="sd">    References</span>
@@ -1540,11 +1540,11 @@
     <span class="n">rv</span> <span class="o">=</span> <span class="n">_antidivisors</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">generator</span><span class="p">:</span>
         <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">rv</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">rv</span>
+    <span class="k">return</span> <span class="n">rv</span></div>
 
 
-<span class="k">def</span> <span class="nf">antidivisor_count</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return the number of antidivisors [1]_ of ``n``.</span>
+<div class="viewcode-block" id="antidivisor_count"><a class="viewcode-back" href="../../../modules/ntheory.html#diofant.ntheory.factor_.antidivisor_count">[docs]</a><span class="k">def</span> <span class="nf">antidivisor_count</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return the number of antidivisors of ``n``.</span>
 
 <span class="sd">    References</span>
 <span class="sd">    ==========</span>
@@ -1570,7 +1570,7 @@
     <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span>
         <span class="k">return</span> <span class="mi">0</span>
     <span class="k">return</span> <span class="n">divisor_count</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">divisor_count</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> \
-        <span class="n">divisor_count</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">-</span> <span class="n">divisor_count</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="mi">5</span>
+        <span class="n">divisor_count</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">-</span> <span class="n">divisor_count</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="mi">5</span></div>
 
 
 <div class="viewcode-block" id="totient"><a class="viewcode-back" href="../../../modules/ntheory.html#diofant.ntheory.factor_.totient">[docs]</a><span class="k">class</span> <span class="nc">totient</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
@@ -1605,7 +1605,7 @@
             <span class="k">return</span> <span class="kc">True</span></div>
 
 
-<span class="k">class</span> <span class="nc">divisor_sigma</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
+<div class="viewcode-block" id="divisor_sigma"><a class="viewcode-back" href="../../../modules/ntheory.html#diofant.ntheory.factor_.divisor_sigma">[docs]</a><span class="k">class</span> <span class="nc">divisor_sigma</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Calculate the divisor function `\sigma_k(n)` for positive integer n.</span>
 
 <span class="sd">    ``divisor_sigma(n, k)`` is equal to ``sum(x**k for x in divisors(n))``</span>
@@ -1667,7 +1667,7 @@
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;n must be a positive integer&quot;</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">Mul</span><span class="p">(</span><span class="o">*</span><span class="p">[(</span><span class="n">p</span><span class="o">**</span><span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="p">(</span><span class="n">e</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">p</span><span class="o">**</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">k</span> <span class="o">!=</span> <span class="mi">0</span>
-                             <span class="k">else</span> <span class="n">e</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">factorint</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">()])</span>
+                             <span class="k">else</span> <span class="n">e</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">factorint</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">()])</span></div>
 
 
 <div class="viewcode-block" id="core"><a class="viewcode-back" href="../../../modules/ntheory.html#diofant.ntheory.factor_.core">[docs]</a><span class="k">def</span> <span class="nf">core</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>

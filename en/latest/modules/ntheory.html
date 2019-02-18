@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Number Theory &mdash; Diofant 0.10.1.dev96+g5e3faef documentation</title>
+  <title>Number Theory &mdash; Diofant 0.10.1.dev120+ge2e3d84 documentation</title>
   
 
   
@@ -86,11 +86,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Reference</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="core.html">Core</a></li>
 <li class="toctree-l2"><a class="reference internal" href="combinatorics/index.html">Combinatorics</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Number Theory</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#ntheory-class-reference">Ntheory Class Reference</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#ntheory-functions-reference">Ntheory Functions Reference</a></li>
-</ul>
-</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Number Theory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="concrete.html">Concrete Mathematics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="functions/index.html">Mathematical Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geometry/index.html">Geometry</a></li>
@@ -188,8 +184,7 @@
             
   <div class="section" id="module-diofant.ntheory.generate">
 <span id="number-theory"></span><h1>Number Theory<a class="headerlink" href="#module-diofant.ntheory.generate" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="ntheory-class-reference">
-<h2>Ntheory Class Reference<a class="headerlink" href="#ntheory-class-reference" title="Permalink to this headline">¶</a></h2>
+<p>Generating and counting primes.</p>
 <dl class="class">
 <dt id="diofant.ntheory.generate.Sieve">
 <em class="property">class </em><code class="descclassname">diofant.ntheory.generate.</code><code class="descname">Sieve</code><a class="reference internal" href="../_modules/diofant/ntheory/generate.html#Sieve"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.generate.Sieve" title="Permalink to this definition">¶</a></dt>
@@ -271,9 +266,104 @@ it to an integer then an n error will be raised.</p>
 
 </dd></dl>
 
+<dl class="function">
+<dt id="diofant.ntheory.generate.cycle_length">
+<code class="descclassname">diofant.ntheory.generate.</code><code class="descname">cycle_length</code><span class="sig-paren">(</span><em>f</em>, <em>x0</em>, <em>nmax=None</em>, <em>values=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/generate.html#cycle_length"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.generate.cycle_length" title="Permalink to this definition">¶</a></dt>
+<dd><p>For a given iterated sequence, return a generator that gives
+the length of the iterated cycle (lambda) and the length of terms
+before the cycle begins (mu); if <code class="docutils literal notranslate"><span class="pre">values</span></code> is True then the
+terms of the sequence will be returned instead. The sequence is
+started with value <code class="docutils literal notranslate"><span class="pre">x0</span></code>.</p>
+<p>Note: more than the first lambda + mu terms may be returned and this
+is the cost of cycle detection with Brent’s method; there are, however,
+generally less terms calculated than would have been calculated if the
+proper ending point were determined, e.g. by using Floyd’s method.</p>
+<p>This will yield successive values of i &lt;– func(i):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">iter</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">while</span> <span class="mi">1</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="n">ii</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="k">yield</span> <span class="n">ii</span>
+<span class="gp">... </span>        <span class="n">i</span> <span class="o">=</span> <span class="n">ii</span>
+<span class="gp">...</span>
+</pre></div>
 </div>
-<div class="section" id="ntheory-functions-reference">
-<h2>Ntheory Functions Reference<a class="headerlink" href="#ntheory-functions-reference" title="Permalink to this headline">¶</a></h2>
+<p>A function is defined:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="p">(</span><span class="n">i</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">51</span>
+</pre></div>
+</div>
+<p>and given a seed of 4 and the mu and lambda terms calculated:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span><span class="n">cycle_length</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="go">(6, 2)</span>
+</pre></div>
+</div>
+<p>We can see what is meant by looking at the output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">cycle_length</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">ni</span> <span class="k">for</span> <span class="n">ni</span> <span class="ow">in</span> <span class="n">n</span><span class="p">)</span>
+<span class="go">[17, 35, 2, 5, 26, 14, 44, 50, 2, 5, 26, 14]</span>
+</pre></div>
+</div>
+<p>There are 6 repeating values after the first 2.</p>
+<p>If a sequence is suspected of being longer than you might wish, <code class="docutils literal notranslate"><span class="pre">nmax</span></code>
+can be used to exit early (and mu will be returned as None):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span><span class="n">cycle_length</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">nmax</span> <span class="o">=</span> <span class="mi">4</span><span class="p">))</span>
+<span class="go">(4, None)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">ni</span> <span class="k">for</span> <span class="n">ni</span> <span class="ow">in</span> <span class="n">cycle_length</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">nmax</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="kc">True</span><span class="p">)]</span>
+<span class="go">[17, 35, 2, 5]</span>
+</pre></div>
+</div>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><a class="reference external" href="https://en.wikipedia.org/wiki/Cycle_detection">https://en.wikipedia.org/wiki/Cycle_detection</a>.</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="diofant.ntheory.generate.nextprime">
+<code class="descclassname">diofant.ntheory.generate.</code><code class="descname">nextprime</code><span class="sig-paren">(</span><em>n</em>, <em>ith=1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/generate.html#nextprime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.generate.nextprime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the ith prime greater than n.</p>
+<p>i must be an integer.</p>
+<p class="rubric">Notes</p>
+<p>Potential primes are located at 6*j +/- 1. This
+property is used during searching.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">nextprime</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">)]</span>
+<span class="go">[(10, 11), (11, 13), (12, 13), (13, 17), (14, 17)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nextprime</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">ith</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># the 2nd prime after 2</span>
+<span class="go">5</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="#diofant.ntheory.generate.prevprime" title="diofant.ntheory.generate.prevprime"><code class="xref py py-func docutils literal notranslate"><span class="pre">prevprime()</span></code></a></dt>
+<dd>Return the largest prime smaller than n</dd>
+<dt><a class="reference internal" href="#diofant.ntheory.generate.primerange" title="diofant.ntheory.generate.primerange"><code class="xref py py-func docutils literal notranslate"><span class="pre">primerange()</span></code></a></dt>
+<dd>Generate all primes in a given range</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="diofant.ntheory.generate.prevprime">
+<code class="descclassname">diofant.ntheory.generate.</code><code class="descname">prevprime</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/generate.html#prevprime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.generate.prevprime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the largest prime smaller than n.</p>
+<p class="rubric">Notes</p>
+<p>Potential primes are located at 6*j +/- 1. This
+property is used during searching.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">prevprime</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">)]</span>
+<span class="go">[(10, 7), (11, 7), (12, 11), (13, 11), (14, 13)]</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="#diofant.ntheory.generate.nextprime" title="diofant.ntheory.generate.nextprime"><code class="xref py py-func docutils literal notranslate"><span class="pre">nextprime()</span></code></a></dt>
+<dd>Return the ith prime greater than n</dd>
+<dt><a class="reference internal" href="#diofant.ntheory.generate.primerange" title="diofant.ntheory.generate.primerange"><code class="xref py py-func docutils literal notranslate"><span class="pre">primerange()</span></code></a></dt>
+<dd>Generates all primes in a given range</dd>
+</dl>
+</div>
+</dd></dl>
+
 <dl class="function">
 <dt id="diofant.ntheory.generate.prime">
 <code class="descclassname">diofant.ntheory.generate.</code><code class="descname">prime</code><span class="sig-paren">(</span><em>nth</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/generate.html#prime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.generate.prime" title="Permalink to this definition">¶</a></dt>
@@ -323,53 +413,6 @@ of prime numbers less than or equal to n.</p>
 <dd>Generate all primes in a given range</dd>
 <dt><a class="reference internal" href="#diofant.ntheory.generate.prime" title="diofant.ntheory.generate.prime"><code class="xref py py-func docutils literal notranslate"><span class="pre">prime()</span></code></a></dt>
 <dd>Return the nth prime</dd>
-</dl>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.ntheory.generate.nextprime">
-<code class="descclassname">diofant.ntheory.generate.</code><code class="descname">nextprime</code><span class="sig-paren">(</span><em>n</em>, <em>ith=1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/generate.html#nextprime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.generate.nextprime" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the ith prime greater than n.</p>
-<p>i must be an integer.</p>
-<p class="rubric">Notes</p>
-<p>Potential primes are located at 6*j +/- 1. This
-property is used during searching.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">nextprime</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">)]</span>
-<span class="go">[(10, 11), (11, 13), (12, 13), (13, 17), (14, 17)]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">nextprime</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">ith</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># the 2nd prime after 2</span>
-<span class="go">5</span>
-</pre></div>
-</div>
-<div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<dl class="last docutils">
-<dt><a class="reference internal" href="#diofant.ntheory.generate.prevprime" title="diofant.ntheory.generate.prevprime"><code class="xref py py-func docutils literal notranslate"><span class="pre">prevprime()</span></code></a></dt>
-<dd>Return the largest prime smaller than n</dd>
-<dt><a class="reference internal" href="#diofant.ntheory.generate.primerange" title="diofant.ntheory.generate.primerange"><code class="xref py py-func docutils literal notranslate"><span class="pre">primerange()</span></code></a></dt>
-<dd>Generate all primes in a given range</dd>
-</dl>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.ntheory.generate.prevprime">
-<code class="descclassname">diofant.ntheory.generate.</code><code class="descname">prevprime</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/generate.html#prevprime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.generate.prevprime" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the largest prime smaller than n.</p>
-<p class="rubric">Notes</p>
-<p>Potential primes are located at 6*j +/- 1. This
-property is used during searching.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">prevprime</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">)]</span>
-<span class="go">[(10, 7), (11, 7), (12, 11), (13, 11), (14, 13)]</span>
-</pre></div>
-</div>
-<div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<dl class="last docutils">
-<dt><a class="reference internal" href="#diofant.ntheory.generate.nextprime" title="diofant.ntheory.generate.nextprime"><code class="xref py py-func docutils literal notranslate"><span class="pre">nextprime()</span></code></a></dt>
-<dd>Return the ith prime greater than n</dd>
-<dt><a class="reference internal" href="#diofant.ntheory.generate.primerange" title="diofant.ntheory.generate.primerange"><code class="xref py py-func docutils literal notranslate"><span class="pre">primerange()</span></code></a></dt>
-<dd>Generates all primes in a given range</dd>
 </dl>
 </div>
 </dd></dl>
@@ -445,32 +488,6 @@ instance of Sieve, named sieve, can be used:</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="diofant.ntheory.generate.randprime">
-<code class="descclassname">diofant.ntheory.generate.</code><code class="descname">randprime</code><span class="sig-paren">(</span><em>a</em>, <em>b</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/generate.html#randprime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.generate.randprime" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a random prime number in the range [a, b).</p>
-<p>Bertrand’s postulate assures that
-randprime(a, 2*a) will always succeed for a &gt; 1.</p>
-<p class="rubric">References</p>
-<ul class="simple">
-<li><a class="reference external" href="https://en.wikipedia.org/wiki/Bertrand's_postulate">https://en.wikipedia.org/wiki/Bertrand’s_postulate</a></li>
-</ul>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">randprime</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span> <span class="c1">#doctest: +SKIP</span>
-<span class="go">13</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">isprime</span><span class="p">(</span><span class="n">randprime</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">30</span><span class="p">))</span>
-<span class="go">True</span>
-</pre></div>
-</div>
-<div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<dl class="last docutils">
-<dt><a class="reference internal" href="#diofant.ntheory.generate.primerange" title="diofant.ntheory.generate.primerange"><code class="xref py py-func docutils literal notranslate"><span class="pre">primerange()</span></code></a></dt>
-<dd>Generate all primes in a given range</dd>
-</dl>
-</div>
-</dd></dl>
-
-<dl class="function">
 <dt id="diofant.ntheory.generate.primorial">
 <code class="descclassname">diofant.ntheory.generate.</code><code class="descname">primorial</code><span class="sig-paren">(</span><em>n</em>, <em>nth=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/generate.html#primorial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.generate.primorial" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the product of the first n primes (default) or
@@ -519,421 +536,215 @@ are obtained:</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="diofant.ntheory.generate.cycle_length">
-<code class="descclassname">diofant.ntheory.generate.</code><code class="descname">cycle_length</code><span class="sig-paren">(</span><em>f</em>, <em>x0</em>, <em>nmax=None</em>, <em>values=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/generate.html#cycle_length"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.generate.cycle_length" title="Permalink to this definition">¶</a></dt>
-<dd><p>For a given iterated sequence, return a generator that gives
-the length of the iterated cycle (lambda) and the length of terms
-before the cycle begins (mu); if <code class="docutils literal notranslate"><span class="pre">values</span></code> is True then the
-terms of the sequence will be returned instead. The sequence is
-started with value <code class="docutils literal notranslate"><span class="pre">x0</span></code>.</p>
-<p>Note: more than the first lambda + mu terms may be returned and this
-is the cost of cycle detection with Brent’s method; there are, however,
-generally less terms calculated than would have been calculated if the
-proper ending point were determined, e.g. by using Floyd’s method.</p>
-<p>This will yield successive values of i &lt;– func(i):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">iter</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="k">while</span> <span class="mi">1</span><span class="p">:</span>
-<span class="gp">... </span>        <span class="n">ii</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-<span class="gp">... </span>        <span class="k">yield</span> <span class="n">ii</span>
-<span class="gp">... </span>        <span class="n">i</span> <span class="o">=</span> <span class="n">ii</span>
-<span class="gp">...</span>
-</pre></div>
-</div>
-<p>A function is defined:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="p">(</span><span class="n">i</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">51</span>
-</pre></div>
-</div>
-<p>and given a seed of 4 and the mu and lambda terms calculated:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span><span class="n">cycle_length</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<span class="go">(6, 2)</span>
-</pre></div>
-</div>
-<p>We can see what is meant by looking at the output:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">cycle_length</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">ni</span> <span class="k">for</span> <span class="n">ni</span> <span class="ow">in</span> <span class="n">n</span><span class="p">)</span>
-<span class="go">[17, 35, 2, 5, 26, 14, 44, 50, 2, 5, 26, 14]</span>
-</pre></div>
-</div>
-<p>There are 6 repeating values after the first 2.</p>
-<p>If a sequence is suspected of being longer than you might wish, <code class="docutils literal notranslate"><span class="pre">nmax</span></code>
-can be used to exit early (and mu will be returned as None):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span><span class="n">cycle_length</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">nmax</span> <span class="o">=</span> <span class="mi">4</span><span class="p">))</span>
-<span class="go">(4, None)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">ni</span> <span class="k">for</span> <span class="n">ni</span> <span class="ow">in</span> <span class="n">cycle_length</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">nmax</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="kc">True</span><span class="p">)]</span>
-<span class="go">[17, 35, 2, 5]</span>
-</pre></div>
-</div>
+<dt id="diofant.ntheory.generate.randprime">
+<code class="descclassname">diofant.ntheory.generate.</code><code class="descname">randprime</code><span class="sig-paren">(</span><em>a</em>, <em>b</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/generate.html#randprime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.generate.randprime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a random prime number in the range [a, b).</p>
+<p>Bertrand’s postulate assures that
+randprime(a, 2*a) will always succeed for a &gt; 1.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><a class="reference external" href="https://en.wikipedia.org/wiki/Cycle_detection">https://en.wikipedia.org/wiki/Cycle_detection</a>.</li>
+<li><a class="reference external" href="https://en.wikipedia.org/wiki/Bertrand's_postulate">https://en.wikipedia.org/wiki/Bertrand’s_postulate</a></li>
 </ul>
-</dd></dl>
-
-<span class="target" id="module-diofant.ntheory.factor_"></span><dl class="function">
-<dt id="diofant.ntheory.factor_.smoothness">
-<code class="descclassname">diofant.ntheory.factor_.</code><code class="descname">smoothness</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/factor_.html#smoothness"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.factor_.smoothness" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the B-smooth and B-power smooth values of n.</p>
-<p>The smoothness of n is the largest prime factor of n; the power-
-smoothness is the largest divisor raised to its multiplicity.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">smoothness</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">7</span><span class="o">*</span><span class="mi">3</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-<span class="go">(3, 128)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">smoothness</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">4</span><span class="o">*</span><span class="mi">13</span><span class="p">)</span>
-<span class="go">(13, 16)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">smoothness</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="go">(2, 2)</span>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">randprime</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span> <span class="c1">#doctest: +SKIP</span>
+<span class="go">13</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">isprime</span><span class="p">(</span><span class="n">randprime</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">30</span><span class="p">))</span>
+<span class="go">True</span>
 </pre></div>
 </div>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#diofant.ntheory.factor_.factorint" title="diofant.ntheory.factor_.factorint"><code class="xref py py-func docutils literal notranslate"><span class="pre">factorint()</span></code></a>, <a class="reference internal" href="#diofant.ntheory.factor_.smoothness_p" title="diofant.ntheory.factor_.smoothness_p"><code class="xref py py-func docutils literal notranslate"><span class="pre">smoothness_p()</span></code></a></p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="#diofant.ntheory.generate.primerange" title="diofant.ntheory.generate.primerange"><code class="xref py py-func docutils literal notranslate"><span class="pre">primerange()</span></code></a></dt>
+<dd>Generate all primes in a given range</dd>
+</dl>
+</div>
+</dd></dl>
+
+<span class="target" id="module-diofant.ntheory.factor_"></span><p>Integer factorization</p>
+<dl class="function">
+<dt id="diofant.ntheory.factor_.antidivisor_count">
+<code class="descclassname">diofant.ntheory.factor_.</code><code class="descname">antidivisor_count</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/factor_.html#antidivisor_count"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.factor_.antidivisor_count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the number of antidivisors of <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
+<p class="rubric">References</p>
+<ul class="simple">
+<li>formula from <a class="reference external" href="https://oeis.org/A066272">https://oeis.org/A066272</a></li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">antidivisor_count</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span>
+<span class="go">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">antidivisor_count</span><span class="p">(</span><span class="mi">27</span><span class="p">)</span>
+<span class="go">5</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#diofant.ntheory.factor_.factorint" title="diofant.ntheory.factor_.factorint"><code class="xref py py-func docutils literal notranslate"><span class="pre">factorint()</span></code></a>, <a class="reference internal" href="#diofant.ntheory.factor_.divisors" title="diofant.ntheory.factor_.divisors"><code class="xref py py-func docutils literal notranslate"><span class="pre">divisors()</span></code></a>, <a class="reference internal" href="#diofant.ntheory.factor_.antidivisors" title="diofant.ntheory.factor_.antidivisors"><code class="xref py py-func docutils literal notranslate"><span class="pre">antidivisors()</span></code></a>, <a class="reference internal" href="#diofant.ntheory.factor_.divisor_count" title="diofant.ntheory.factor_.divisor_count"><code class="xref py py-func docutils literal notranslate"><span class="pre">divisor_count()</span></code></a>, <a class="reference internal" href="#diofant.ntheory.factor_.totient" title="diofant.ntheory.factor_.totient"><code class="xref py py-func docutils literal notranslate"><span class="pre">totient()</span></code></a></p>
 </div>
 </dd></dl>
 
 <dl class="function">
-<dt id="diofant.ntheory.factor_.smoothness_p">
-<code class="descclassname">diofant.ntheory.factor_.</code><code class="descname">smoothness_p</code><span class="sig-paren">(</span><em>n</em>, <em>m=-1</em>, <em>power=0</em>, <em>visual=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/factor_.html#smoothness_p"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.factor_.smoothness_p" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a list of [m, (p, (M, sm(p + m), psm(p + m)))…]
-where:</p>
-<ol class="arabic simple">
-<li>p**M is the base-p divisor of n</li>
-<li>sm(p + m) is the smoothness of p + m (m = -1 by default)</li>
-<li>psm(p + m) is the power smoothness of p + m</li>
-</ol>
-<p>The list is sorted according to smoothness (default) or by power smoothness
-if power=1.</p>
-<p>The smoothness of the numbers to the left (m = -1) or right (m = 1) of a
-factor govern the results that are obtained from the p +/- 1 type factoring
-methods.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">smoothness_p</span><span class="p">(</span><span class="mi">10431</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="go">(1, [(3, (2, 2, 4)), (19, (1, 5, 5)), (61, (1, 31, 31))])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">smoothness_p</span><span class="p">(</span><span class="mi">10431</span><span class="p">)</span>
-<span class="go">(-1, [(3, (2, 2, 2)), (19, (1, 3, 9)), (61, (1, 5, 5))])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">smoothness_p</span><span class="p">(</span><span class="mi">10431</span><span class="p">,</span> <span class="n">power</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="go">(-1, [(3, (2, 2, 2)), (61, (1, 5, 5)), (19, (1, 3, 9))])</span>
+<dt id="diofant.ntheory.factor_.antidivisors">
+<code class="descclassname">diofant.ntheory.factor_.</code><code class="descname">antidivisors</code><span class="sig-paren">(</span><em>n</em>, <em>generator=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/factor_.html#antidivisors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.factor_.antidivisors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all antidivisors of n sorted from 1..n by default.</p>
+<p>Antidivisors of n are numbers that do not divide n by the largest
+possible margin.  If generator is True an unordered generator is returned.</p>
+<p class="rubric">References</p>
+<ul class="simple">
+<li>definition is described in <a class="reference external" href="http://oeis.org/A066272/a066272a.html">http://oeis.org/A066272/a066272a.html</a></li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">antidivisors</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span>
+<span class="go">[7, 16]</span>
 </pre></div>
 </div>
-<p>If visual=True then an annotated string will be returned:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">smoothness_p</span><span class="p">(</span><span class="mi">21477639576571</span><span class="p">,</span> <span class="n">visual</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
-<span class="go">p**i=4410317**1 has p-1 B=1787, B-pow=1787</span>
-<span class="go">p**i=4869863**1 has p-1 B=2434931, B-pow=2434931</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">antidivisors</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">generator</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="go">[3, 5, 15, 17, 51, 85]</span>
 </pre></div>
 </div>
-<p>This string can also be generated directly from a factorization dictionary
-and vice versa:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">factorint</span><span class="p">(</span><span class="mi">17</span><span class="o">*</span><span class="mi">9</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span>
-<span class="go">{3: 2, 17: 1}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">smoothness_p</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-<span class="go">&#39;p**i=3**2 has p-1 B=2, B-pow=2\np**i=17**1 has p-1 B=2, B-pow=16&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">smoothness_p</span><span class="p">(</span><span class="n">_</span><span class="p">)</span>
-<span class="go">{3: 2, 17: 1}</span>
-</pre></div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#diofant.ntheory.factor_.primefactors" title="diofant.ntheory.factor_.primefactors"><code class="xref py py-func docutils literal notranslate"><span class="pre">primefactors()</span></code></a>, <a class="reference internal" href="#diofant.ntheory.factor_.factorint" title="diofant.ntheory.factor_.factorint"><code class="xref py py-func docutils literal notranslate"><span class="pre">factorint()</span></code></a>, <a class="reference internal" href="#diofant.ntheory.factor_.divisors" title="diofant.ntheory.factor_.divisors"><code class="xref py py-func docutils literal notranslate"><span class="pre">divisors()</span></code></a>, <a class="reference internal" href="#diofant.ntheory.factor_.divisor_count" title="diofant.ntheory.factor_.divisor_count"><code class="xref py py-func docutils literal notranslate"><span class="pre">divisor_count()</span></code></a>, <a class="reference internal" href="#diofant.ntheory.factor_.antidivisor_count" title="diofant.ntheory.factor_.antidivisor_count"><code class="xref py py-func docutils literal notranslate"><span class="pre">antidivisor_count()</span></code></a></p>
 </div>
-<p>The table of the output logic is:</p>
-<blockquote>
-<div><table border="1" class="docutils">
-<colgroup>
-<col width="23%" />
-<col width="23%" />
-<col width="27%" />
-<col width="27%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head"><div class="first last line-block">
-<div class="line"><br /></div>
-</div>
-</th>
-<th class="head" colspan="3">Visual</th>
-</tr>
-<tr class="row-even"><th class="head">Input</th>
-<th class="head">True</th>
-<th class="head">False</th>
-<th class="head">other</th>
-</tr>
-</thead>
+</dd></dl>
+
+<dl class="function">
+<dt id="diofant.ntheory.factor_.core">
+<code class="descclassname">diofant.ntheory.factor_.</code><code class="descname">core</code><span class="sig-paren">(</span><em>n</em>, <em>t=2</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/factor_.html#core"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.factor_.core" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate core(n,t) = <span class="math notranslate nohighlight">\(core_t(n)\)</span> of a positive integer n.</p>
+<p><code class="docutils literal notranslate"><span class="pre">core_2(n)</span></code> is equal to the squarefree part of n</p>
+<p>If n’s prime factorization is:</p>
+<div class="math notranslate nohighlight">
+\[n = \prod_{i=1}^\omega p_i^{m_i},\]</div>
+<p>then</p>
+<div class="math notranslate nohighlight">
+\[core_t(n) = \prod_{i=1}^\omega p_i^{m_i \mod t}.\]</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
 <tbody valign="top">
-<tr class="row-odd"><td>dict</td>
-<td>str</td>
-<td>tuple</td>
-<td>str</td>
-</tr>
-<tr class="row-even"><td>str</td>
-<td>str</td>
-<td>tuple</td>
-<td>dict</td>
-</tr>
-<tr class="row-odd"><td>tuple</td>
-<td>str</td>
-<td>tuple</td>
-<td>str</td>
-</tr>
-<tr class="row-even"><td>n</td>
-<td>str</td>
-<td>tuple</td>
-<td>tuple</td>
-</tr>
-<tr class="row-odd"><td>mul</td>
-<td>str</td>
-<td>tuple</td>
-<td>tuple</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>t</strong> (<em>core(n,t) calculates the t-th power free part of n</em>) – <code class="docutils literal notranslate"><span class="pre">core(n,</span> <span class="pre">2)</span></code> is the squarefree part of <code class="docutils literal notranslate"><span class="pre">n</span></code>
+<code class="docutils literal notranslate"><span class="pre">core(n,</span> <span class="pre">3)</span></code> is the cubefree part of <code class="docutils literal notranslate"><span class="pre">n</span></code></p>
+<p class="last">Default for t is 2.</p>
+</td>
 </tr>
 </tbody>
 </table>
-</div></blockquote>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><a class="reference external" href="https://en.wikipedia.org/wiki/Square-free_integer#Squarefree_core">https://en.wikipedia.org/wiki/Square-free_integer#Squarefree_core</a></li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.ntheory.factor_</span> <span class="k">import</span> <span class="n">core</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">core</span><span class="p">(</span><span class="mi">24</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">6</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">core</span><span class="p">(</span><span class="mi">9424</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">1178</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">core</span><span class="p">(</span><span class="mi">379238</span><span class="p">)</span>
+<span class="go">379238</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">core</span><span class="p">(</span><span class="mi">15</span><span class="o">**</span><span class="mi">11</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="go">15</span>
+</pre></div>
+</div>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#diofant.ntheory.factor_.factorint" title="diofant.ntheory.factor_.factorint"><code class="xref py py-func docutils literal notranslate"><span class="pre">factorint()</span></code></a>, <a class="reference internal" href="#diofant.ntheory.factor_.smoothness" title="diofant.ntheory.factor_.smoothness"><code class="xref py py-func docutils literal notranslate"><span class="pre">smoothness()</span></code></a></p>
+<p class="last"><a class="reference internal" href="#diofant.ntheory.factor_.factorint" title="diofant.ntheory.factor_.factorint"><code class="xref py py-func docutils literal notranslate"><span class="pre">factorint()</span></code></a>, <a class="reference internal" href="solvers/diophantine.html#diofant.solvers.diophantine.square_factor" title="diofant.solvers.diophantine.square_factor"><code class="xref py py-func docutils literal notranslate"><span class="pre">diofant.solvers.diophantine.square_factor()</span></code></a></p>
 </div>
 </dd></dl>
 
 <dl class="function">
-<dt id="diofant.ntheory.factor_.trailing">
-<code class="descclassname">diofant.ntheory.factor_.</code><code class="descname">trailing</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/factor_.html#trailing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.factor_.trailing" title="Permalink to this definition">¶</a></dt>
-<dd><p>Count the number of trailing zero digits in the binary
-representation of n, i.e. determine the largest power of 2
-that divides n.</p>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">trailing</span><span class="p">(</span><span class="mi">128</span><span class="p">)</span>
-<span class="go">7</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">trailing</span><span class="p">(</span><span class="mi">63</span><span class="p">)</span>
-<span class="go">0</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.ntheory.factor_.multiplicity">
-<code class="descclassname">diofant.ntheory.factor_.</code><code class="descname">multiplicity</code><span class="sig-paren">(</span><em>p</em>, <em>n</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/factor_.html#multiplicity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.factor_.multiplicity" title="Permalink to this definition">¶</a></dt>
-<dd><p>Find the greatest integer m such that p**m divides n.</p>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">multiplicity</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">125</span><span class="p">,</span> <span class="mi">250</span><span class="p">]]</span>
-<span class="go">[0, 1, 2, 3, 3]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">multiplicity</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
-<span class="go">-2</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.ntheory.factor_.perfect_power">
-<code class="descclassname">diofant.ntheory.factor_.</code><code class="descname">perfect_power</code><span class="sig-paren">(</span><em>n</em>, <em>candidates=None</em>, <em>big=True</em>, <em>factor=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/factor_.html#perfect_power"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.factor_.perfect_power" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return <code class="docutils literal notranslate"><span class="pre">(b,</span> <span class="pre">e)</span></code> such that <code class="docutils literal notranslate"><span class="pre">n</span></code> == <code class="docutils literal notranslate"><span class="pre">b**e</span></code> if <code class="docutils literal notranslate"><span class="pre">n</span></code> is a
-perfect power; otherwise return <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
-<p>By default, the base is recursively decomposed and the exponents
-collected so the largest possible <code class="docutils literal notranslate"><span class="pre">e</span></code> is sought. If <code class="docutils literal notranslate"><span class="pre">big=False</span></code>
-then the smallest possible <code class="docutils literal notranslate"><span class="pre">e</span></code> (thus prime) will be chosen.</p>
-<p>If <code class="docutils literal notranslate"><span class="pre">candidates</span></code> for exponents are given, they are assumed to be sorted
-and the first one that is larger than the computed maximum will signal
-failure for the routine.</p>
-<p>If <code class="docutils literal notranslate"><span class="pre">factor=True</span></code> then simultaneous factorization of n is attempted
-since finding a factor indicates the only possible root for n. This
-is True by default since only a few small factors will be tested in
-the course of searching for the perfect power.</p>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">perfect_power</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
-<span class="go">(2, 4)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">perfect_power</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="n">big</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
-<span class="go">(4, 2)</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.ntheory.factor_.pollard_rho">
-<code class="descclassname">diofant.ntheory.factor_.</code><code class="descname">pollard_rho</code><span class="sig-paren">(</span><em>n</em>, <em>s=2</em>, <em>a=1</em>, <em>retries=5</em>, <em>seed=1234</em>, <em>max_steps=None</em>, <em>F=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/factor_.html#pollard_rho"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.factor_.pollard_rho" title="Permalink to this definition">¶</a></dt>
-<dd><p>Use Pollard’s rho method to try to extract a nontrivial factor
-of <code class="docutils literal notranslate"><span class="pre">n</span></code>. The returned factor may be a composite number. If no
-factor is found, <code class="docutils literal notranslate"><span class="pre">None</span></code> is returned.</p>
-<p>The algorithm generates pseudo-random values of x with a generator
-function, replacing x with F(x). If F is not supplied then the
-function x**2 + <code class="docutils literal notranslate"><span class="pre">a</span></code> is used. The first value supplied to F(x) is <code class="docutils literal notranslate"><span class="pre">s</span></code>.
-Upon failure (if <code class="docutils literal notranslate"><span class="pre">retries</span></code> is &gt; 0) a new <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">s</span></code> will be
-supplied; the <code class="docutils literal notranslate"><span class="pre">a</span></code> will be ignored if F was supplied.</p>
-<p>The sequence of numbers generated by such functions generally have a
-a lead-up to some number and then loop around back to that number and
-begin to repeat the sequence, e.g. 1, 2, 3, 4, 5, 3, 4, 5 – this leader
-and loop look a bit like the Greek letter rho, and thus the name, ‘rho’.</p>
-<p>For a given function, very different leader-loop values can be obtained
-so it is a good idea to allow for retries:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="mi">16843009</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">F</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="mi">2048</span><span class="o">*</span><span class="nb">pow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="mi">32767</span><span class="p">)</span><span class="o">%</span><span class="n">n</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;loop length = </span><span class="si">%4i</span><span class="s1">; leader length = </span><span class="si">%3i</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">next</span><span class="p">(</span><span class="n">cycle_length</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">s</span><span class="p">)))</span>
-<span class="gp">...</span>
-<span class="go">loop length = 2489; leader length =  42</span>
-<span class="go">loop length =   78; leader length = 120</span>
-<span class="go">loop length = 1482; leader length =  99</span>
-<span class="go">loop length = 1482; leader length = 285</span>
-<span class="go">loop length = 1482; leader length = 100</span>
-</pre></div>
-</div>
-<p>Here is an explicit example where there is a two element leadup to
-a sequence of 3 numbers (11, 14, 4) that then repeat:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">12</span><span class="p">)</span><span class="o">%</span><span class="mi">17</span>
-<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="gp">...</span>
-<span class="go">16</span>
-<span class="go">13</span>
-<span class="go">11</span>
-<span class="go">14</span>
-<span class="go">4</span>
-<span class="go">11</span>
-<span class="go">14</span>
-<span class="go">4</span>
-<span class="go">11</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span><span class="n">cycle_length</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="mi">12</span><span class="p">)</span><span class="o">%</span><span class="mi">17</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-<span class="go">(3, 2)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">cycle_length</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="mi">12</span><span class="p">)</span><span class="o">%</span><span class="mi">17</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
-<span class="go">[16, 13, 11, 14, 4]</span>
-</pre></div>
-</div>
-<p>Instead of checking the differences of all generated values for a gcd
-with n, only the kth and 2*kth numbers are checked, e.g. 1st and 2nd,
-2nd and 4th, 3rd and 6th until it has been detected that the loop has been
-traversed. Loops may be many thousands of steps long before rho finds a
-factor or reports failure. If <code class="docutils literal notranslate"><span class="pre">max_steps</span></code> is specified, the iteration
-is cancelled with a failure after the specified number of steps.</p>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="mi">16843009</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">F</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="mi">2048</span><span class="o">*</span><span class="nb">pow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="mi">32767</span><span class="p">)</span> <span class="o">%</span> <span class="n">n</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pollard_rho</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">F</span><span class="o">=</span><span class="n">F</span><span class="p">)</span>
-<span class="go">257</span>
-</pre></div>
-</div>
-<p>Use the default setting with a bad value of <code class="docutils literal notranslate"><span class="pre">a</span></code> and no retries:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pollard_rho</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="n">retries</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>If retries is &gt; 0 then perhaps the problem will correct itself when
-new values are generated for a:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pollard_rho</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="n">retries</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="go">257</span>
-</pre></div>
-</div>
+<dt id="diofant.ntheory.factor_.divisor_count">
+<code class="descclassname">diofant.ntheory.factor_.</code><code class="descname">divisor_count</code><span class="sig-paren">(</span><em>n</em>, <em>modulus=1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/factor_.html#divisor_count"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.factor_.divisor_count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the number of divisors of <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">modulus</span></code> is not 1 then only those that are divisible by
+<code class="docutils literal notranslate"><span class="pre">modulus</span></code> are counted.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li>Richard Crandall &amp; Carl Pomerance (2005), “Prime Numbers:
-A Computational Perspective”, Springer, 2nd edition, 229-231</li>
+<li><a class="reference external" href="https://web.archive.org/web/20130629014824/http://www.mayer.dial.pipex.com:80/maths/formulae.htm">https://web.archive.org/web/20130629014824/http://www.mayer.dial.pipex.com:80/maths/formulae.htm</a></li>
 </ul>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">divisor_count</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="go">4</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#diofant.ntheory.factor_.factorint" title="diofant.ntheory.factor_.factorint"><code class="xref py py-func docutils literal notranslate"><span class="pre">factorint()</span></code></a>, <a class="reference internal" href="#diofant.ntheory.factor_.divisors" title="diofant.ntheory.factor_.divisors"><code class="xref py py-func docutils literal notranslate"><span class="pre">divisors()</span></code></a>, <a class="reference internal" href="#diofant.ntheory.factor_.totient" title="diofant.ntheory.factor_.totient"><code class="xref py py-func docutils literal notranslate"><span class="pre">totient()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="diofant.ntheory.factor_.divisor_sigma">
+<em class="property">class </em><code class="descclassname">diofant.ntheory.factor_.</code><code class="descname">divisor_sigma</code><a class="reference internal" href="../_modules/diofant/ntheory/factor_.html#divisor_sigma"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.factor_.divisor_sigma" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the divisor function <span class="math notranslate nohighlight">\(\sigma_k(n)\)</span> for positive integer n.</p>
+<p><code class="docutils literal notranslate"><span class="pre">divisor_sigma(n,</span> <span class="pre">k)</span></code> is equal to <code class="docutils literal notranslate"><span class="pre">sum(x**k</span> <span class="pre">for</span> <span class="pre">x</span> <span class="pre">in</span> <span class="pre">divisors(n))</span></code></p>
+<p>If n’s prime factorization is:</p>
+<div class="math notranslate nohighlight">
+\[n = \prod_{i=1}^\omega p_i^{m_i},\]</div>
+<p>then</p>
+<div class="math notranslate nohighlight">
+\[\sigma_k(n) = \prod_{i=1}^\omega (1+p_i^k+p_i^{2k}+\cdots
++ p_i^{m_ik}).\]</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>k</strong> (<em>power of divisors in the sum</em>) – for k = 0, 1:
+<code class="docutils literal notranslate"><span class="pre">divisor_sigma(n,</span> <span class="pre">0)</span></code> is equal to <code class="docutils literal notranslate"><span class="pre">divisor_count(n)</span></code>
+<code class="docutils literal notranslate"><span class="pre">divisor_sigma(n,</span> <span class="pre">1)</span></code> is equal to <code class="docutils literal notranslate"><span class="pre">sum(divisors(n))</span></code></p>
+<p class="last">Default for k is 1.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><a class="reference external" href="https://en.wikipedia.org/wiki/Divisor_function">https://en.wikipedia.org/wiki/Divisor_function</a></li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">divisor_sigma</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="go">6</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">divisor_sigma</span><span class="p">(</span><span class="mi">39</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">56</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">divisor_sigma</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">210</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">divisor_sigma</span><span class="p">(</span><span class="mi">37</span><span class="p">)</span>
+<span class="go">38</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#diofant.ntheory.factor_.divisor_count" title="diofant.ntheory.factor_.divisor_count"><code class="xref py py-class docutils literal notranslate"><span class="pre">divisor_count</span></code></a>, <a class="reference internal" href="#diofant.ntheory.factor_.totient" title="diofant.ntheory.factor_.totient"><code class="xref py py-class docutils literal notranslate"><span class="pre">totient</span></code></a>, <a class="reference internal" href="#diofant.ntheory.factor_.divisors" title="diofant.ntheory.factor_.divisors"><code class="xref py py-class docutils literal notranslate"><span class="pre">divisors</span></code></a>, <a class="reference internal" href="#diofant.ntheory.factor_.factorint" title="diofant.ntheory.factor_.factorint"><code class="xref py py-class docutils literal notranslate"><span class="pre">factorint</span></code></a></p>
+</div>
 </dd></dl>
 
 <dl class="function">
-<dt id="diofant.ntheory.factor_.pollard_pm1">
-<code class="descclassname">diofant.ntheory.factor_.</code><code class="descname">pollard_pm1</code><span class="sig-paren">(</span><em>n</em>, <em>B=10</em>, <em>a=2</em>, <em>retries=0</em>, <em>seed=1234</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/factor_.html#pollard_pm1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.factor_.pollard_pm1" title="Permalink to this definition">¶</a></dt>
-<dd><p>Use Pollard’s p-1 method to try to extract a nontrivial factor
-of <code class="docutils literal notranslate"><span class="pre">n</span></code>. Either a divisor (perhaps composite) or <code class="docutils literal notranslate"><span class="pre">None</span></code> is returned.</p>
-<p>The value of <code class="docutils literal notranslate"><span class="pre">a</span></code> is the base that is used in the test gcd(a**M - 1, n).
-The default is 2.  If <code class="docutils literal notranslate"><span class="pre">retries</span></code> &gt; 0 then if no factor is found after the
-first attempt, a new <code class="docutils literal notranslate"><span class="pre">a</span></code> will be generated randomly (using the <code class="docutils literal notranslate"><span class="pre">seed</span></code>)
-and the process repeated.</p>
-<p>Note: the value of M is lcm(1..B) = reduce(ilcm, range(2, B + 1)).</p>
-<p>A search is made for factors next to even numbers having a power smoothness
-less than <code class="docutils literal notranslate"><span class="pre">B</span></code>. Choosing a larger B increases the likelihood of finding a
-larger factor but takes longer. Whether a factor of n is found or not
-depends on <code class="docutils literal notranslate"><span class="pre">a</span></code> and the power smoothness of the even mumber just less than
-the factor p (hence the name p - 1).</p>
-<p>Although some discussion of what constitutes a good <code class="docutils literal notranslate"><span class="pre">a</span></code> some
-descriptions are hard to interpret. At the modular.math site referenced
-below it is stated that if gcd(a**M - 1, n) = N then a**M % q**r is 1
-for every prime power divisor of N. But consider the following:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="mi">257</span><span class="o">*</span><span class="mi">1009</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">smoothness_p</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-<span class="go">(-1, [(257, (1, 2, 256)), (1009, (1, 7, 16))])</span>
-</pre></div>
-</div>
-<p>So we should (and can) find a root with B=16:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pollard_pm1</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-<span class="go">1009</span>
-</pre></div>
-</div>
-<p>If we attempt to increase B to 256 we find that it doesn’t work:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pollard_pm1</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span>
-<span class="go">&gt;&gt;&gt;</span>
-</pre></div>
-</div>
-<p>But if the value of <code class="docutils literal notranslate"><span class="pre">a</span></code> is changed we find that only multiples of
-257 work, e.g.:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pollard_pm1</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">257</span><span class="p">)</span>
-<span class="go">1009</span>
-</pre></div>
-</div>
-<p>Checking different <code class="docutils literal notranslate"><span class="pre">a</span></code> values shows that all the ones that didn’t
-work had a gcd value not equal to <code class="docutils literal notranslate"><span class="pre">n</span></code> but equal to one of the
-factors:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">256</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="n">M</span> <span class="o">=</span> <span class="n">ilcm</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
-<span class="gp">...</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="p">{</span><span class="n">math</span><span class="o">.</span><span class="n">gcd</span><span class="p">(</span><span class="nb">pow</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">256</span><span class="p">)</span> <span class="k">if</span>
-<span class="gp">... </span> <span class="n">math</span><span class="o">.</span><span class="n">gcd</span><span class="p">(</span><span class="nb">pow</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">!=</span> <span class="n">n</span><span class="p">}</span>
-<span class="go">{1009}</span>
-</pre></div>
-</div>
-<p>But does aM % d for every divisor of n give 1?</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">aM</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="p">[(</span><span class="n">d</span><span class="p">,</span> <span class="n">aM</span><span class="o">%</span><span class="n">Pow</span><span class="p">(</span><span class="o">*</span><span class="n">d</span><span class="o">.</span><span class="n">args</span><span class="p">))</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">factorint</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">visual</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">args</span><span class="p">]</span>
-<span class="go">[(257**1, 1), (1009**1, 1)]</span>
-</pre></div>
-</div>
-<p>No, only one of them. So perhaps the principle is that a root will
-be found for a given value of B provided that:</p>
-<ol class="arabic simple">
-<li>the power smoothness of the p - 1 value next to the root
-does not exceed B</li>
-<li>a**M % p != 1 for any of the divisors of n.</li>
-</ol>
-<p>By trying more than one <code class="docutils literal notranslate"><span class="pre">a</span></code> it is possible that one of them
-will yield a factor.</p>
+<dt id="diofant.ntheory.factor_.divisors">
+<code class="descclassname">diofant.ntheory.factor_.</code><code class="descname">divisors</code><span class="sig-paren">(</span><em>n</em>, <em>generator=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/factor_.html#divisors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.factor_.divisors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all divisors of n.</p>
+<p>Divisors are sorted from 1..n by default.  If generator is True an
+unordered generator is returned.</p>
+<p>The number of divisors of n can be quite large if there are many
+prime factors (counting repeated factors). If only the number of
+factors is desired use divisor_count(n).</p>
 <p class="rubric">Examples</p>
-<p>With the default smoothness bound, this number can’t be cracked:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pollard_pm1</span><span class="p">(</span><span class="mi">21477639576571</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">divisors</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span>
+<span class="go">[1, 2, 3, 4, 6, 8, 12, 24]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">divisor_count</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span>
+<span class="go">8</span>
 </pre></div>
 </div>
-<p>Increasing the smoothness bound helps:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pollard_pm1</span><span class="p">(</span><span class="mi">21477639576571</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span>
-<span class="go">4410317</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">divisors</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span> <span class="n">generator</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="go">[1, 2, 4, 8, 3, 6, 12, 24, 5, 10, 20, 40, 15, 30, 60, 120]</span>
 </pre></div>
 </div>
-<p>Looking at the smoothness of the factors of this number we find:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">smoothness_p</span><span class="p">(</span><span class="mi">21477639576571</span><span class="p">,</span> <span class="n">visual</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
-<span class="go">p**i=4410317**1 has p-1 B=1787, B-pow=1787</span>
-<span class="go">p**i=4869863**1 has p-1 B=2434931, B-pow=2434931</span>
-</pre></div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#diofant.ntheory.factor_.primefactors" title="diofant.ntheory.factor_.primefactors"><code class="xref py py-func docutils literal notranslate"><span class="pre">primefactors()</span></code></a>, <a class="reference internal" href="#diofant.ntheory.factor_.factorint" title="diofant.ntheory.factor_.factorint"><code class="xref py py-func docutils literal notranslate"><span class="pre">factorint()</span></code></a>, <a class="reference internal" href="#diofant.ntheory.factor_.divisor_count" title="diofant.ntheory.factor_.divisor_count"><code class="xref py py-func docutils literal notranslate"><span class="pre">divisor_count()</span></code></a></p>
 </div>
-<p>The B and B-pow are the same for the p - 1 factorizations of the divisors
-because those factorizations had a very large prime factor:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">factorint</span><span class="p">(</span><span class="mi">4410317</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-<span class="go">{2: 2, 617: 1, 1787: 1}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">factorint</span><span class="p">(</span><span class="mi">4869863</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-<span class="go">{2: 1, 2434931: 1}</span>
-</pre></div>
-</div>
-<p>Note that until B reaches the B-pow value of 1787, the number is not cracked;</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pollard_pm1</span><span class="p">(</span><span class="mi">21477639576571</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mi">1786</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pollard_pm1</span><span class="p">(</span><span class="mi">21477639576571</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mi">1787</span><span class="p">)</span>
-<span class="go">4410317</span>
-</pre></div>
-</div>
-<p>The B value has to do with the factors of the number next to the divisor,
-not the divisors themselves. A worst case scenario is that the number next
-to the factor p has a large prime divisisor or is a perfect power. If these
-conditions apply then the power-smoothness will be about p/2 or p. The more
-realistic is that there will be a large prime factor next to p requiring
-a B value on the order of p/2. Although primes may have been searched for
-up to this level, the p/2 is a factor of p - 1, something that we don’t
-know. The modular.math reference below states that 15% of numbers in the
-range of 10**15 to 15**15 + 10**4 are 10**6 power smooth so a B of 10**6
-will fail 85% of the time in that range. From 10**8 to 10**8 + 10**3 the
-percentages are nearly reversed…but in that range the simple trial
-division is quite fast.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li>Richard Crandall &amp; Carl Pomerance (2005), “Prime Numbers:
-A Computational Perspective”, Springer, 2nd edition, 236-238</li>
-<li><a class="reference external" href="https://web.archive.org/web/20150716201437/http://modular.math.washington.edu/edu/2007/spring/ent/ent-html/node81.html">https://web.archive.org/web/20150716201437/http://modular.math.washington.edu/edu/2007/spring/ent/ent-html/node81.html</a></li>
-<li><a class="reference external" href="https://web.archive.org/web/20170830055619/http://www.cs.toronto.edu/~yuvalf/Factorization.pdf">https://web.archive.org/web/20170830055619/http://www.cs.toronto.edu/~yuvalf/Factorization.pdf</a></li>
+<li><a class="reference external" href="https://stackoverflow.com/questions/1010381/python-factorization">https://stackoverflow.com/questions/1010381/python-factorization</a></li>
 </ul>
 </dd></dl>
 
@@ -1093,6 +904,268 @@ a prime number or a perfect power, and in those cases stops.</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="diofant.ntheory.factor_.factorrat">
+<code class="descclassname">diofant.ntheory.factor_.</code><code class="descname">factorrat</code><span class="sig-paren">(</span><em>rat</em>, <em>limit=None</em>, <em>use_trial=True</em>, <em>use_rho=True</em>, <em>use_pm1=True</em>, <em>verbose=False</em>, <em>visual=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/factor_.html#factorrat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.factor_.factorrat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a Rational <code class="docutils literal notranslate"><span class="pre">r</span></code>, <code class="docutils literal notranslate"><span class="pre">factorrat(r)</span></code> returns a dict containing
+the prime factors of <code class="docutils literal notranslate"><span class="pre">r</span></code> as keys and their respective multiplicities
+as values. For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">factorrat</span><span class="p">(</span><span class="n">Rational</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>  <span class="c1"># = (2**3) * (3**-2)</span>
+<span class="go">{2: 3, 3: -2}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">factorrat</span><span class="p">(</span><span class="n">Rational</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">987</span><span class="p">))</span>  <span class="c1"># = -1 * (3**-1) * (7**-1) * (47**-1)</span>
+<span class="go">{-1: 1, 3: -1, 7: -1, 47: -1}</span>
+</pre></div>
+</div>
+<p>Please see the docstring for <code class="docutils literal notranslate"><span class="pre">factorint</span></code> for detailed explanations
+and examples of the following keywords:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">limit</span></code>: Integer limit up to which trial division is done</li>
+<li><code class="docutils literal notranslate"><span class="pre">use_trial</span></code>: Toggle use of trial division</li>
+<li><code class="docutils literal notranslate"><span class="pre">use_rho</span></code>: Toggle use of Pollard’s rho method</li>
+<li><code class="docutils literal notranslate"><span class="pre">use_pm1</span></code>: Toggle use of Pollard’s p-1 method</li>
+<li><code class="docutils literal notranslate"><span class="pre">verbose</span></code>: Toggle detailed printing of progress</li>
+<li><code class="docutils literal notranslate"><span class="pre">visual</span></code>: Toggle product form of output</li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="diofant.ntheory.factor_.multiplicity">
+<code class="descclassname">diofant.ntheory.factor_.</code><code class="descname">multiplicity</code><span class="sig-paren">(</span><em>p</em>, <em>n</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/factor_.html#multiplicity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.factor_.multiplicity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the greatest integer m such that p**m divides n.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">multiplicity</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">125</span><span class="p">,</span> <span class="mi">250</span><span class="p">]]</span>
+<span class="go">[0, 1, 2, 3, 3]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">multiplicity</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+<span class="go">-2</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="diofant.ntheory.factor_.perfect_power">
+<code class="descclassname">diofant.ntheory.factor_.</code><code class="descname">perfect_power</code><span class="sig-paren">(</span><em>n</em>, <em>candidates=None</em>, <em>big=True</em>, <em>factor=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/factor_.html#perfect_power"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.factor_.perfect_power" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return <code class="docutils literal notranslate"><span class="pre">(b,</span> <span class="pre">e)</span></code> such that <code class="docutils literal notranslate"><span class="pre">n</span></code> == <code class="docutils literal notranslate"><span class="pre">b**e</span></code> if <code class="docutils literal notranslate"><span class="pre">n</span></code> is a
+perfect power; otherwise return <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<p>By default, the base is recursively decomposed and the exponents
+collected so the largest possible <code class="docutils literal notranslate"><span class="pre">e</span></code> is sought. If <code class="docutils literal notranslate"><span class="pre">big=False</span></code>
+then the smallest possible <code class="docutils literal notranslate"><span class="pre">e</span></code> (thus prime) will be chosen.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">candidates</span></code> for exponents are given, they are assumed to be sorted
+and the first one that is larger than the computed maximum will signal
+failure for the routine.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">factor=True</span></code> then simultaneous factorization of n is attempted
+since finding a factor indicates the only possible root for n. This
+is True by default since only a few small factors will be tested in
+the course of searching for the perfect power.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">perfect_power</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
+<span class="go">(2, 4)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">perfect_power</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="n">big</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="go">(4, 2)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="diofant.ntheory.factor_.pollard_pm1">
+<code class="descclassname">diofant.ntheory.factor_.</code><code class="descname">pollard_pm1</code><span class="sig-paren">(</span><em>n</em>, <em>B=10</em>, <em>a=2</em>, <em>retries=0</em>, <em>seed=1234</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/factor_.html#pollard_pm1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.factor_.pollard_pm1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use Pollard’s p-1 method to try to extract a nontrivial factor
+of <code class="docutils literal notranslate"><span class="pre">n</span></code>. Either a divisor (perhaps composite) or <code class="docutils literal notranslate"><span class="pre">None</span></code> is returned.</p>
+<p>The value of <code class="docutils literal notranslate"><span class="pre">a</span></code> is the base that is used in the test gcd(a**M - 1, n).
+The default is 2.  If <code class="docutils literal notranslate"><span class="pre">retries</span></code> &gt; 0 then if no factor is found after the
+first attempt, a new <code class="docutils literal notranslate"><span class="pre">a</span></code> will be generated randomly (using the <code class="docutils literal notranslate"><span class="pre">seed</span></code>)
+and the process repeated.</p>
+<p>Note: the value of M is lcm(1..B) = reduce(ilcm, range(2, B + 1)).</p>
+<p>A search is made for factors next to even numbers having a power smoothness
+less than <code class="docutils literal notranslate"><span class="pre">B</span></code>. Choosing a larger B increases the likelihood of finding a
+larger factor but takes longer. Whether a factor of n is found or not
+depends on <code class="docutils literal notranslate"><span class="pre">a</span></code> and the power smoothness of the even mumber just less than
+the factor p (hence the name p - 1).</p>
+<p>Although some discussion of what constitutes a good <code class="docutils literal notranslate"><span class="pre">a</span></code> some
+descriptions are hard to interpret. At the modular.math site referenced
+below it is stated that if gcd(a**M - 1, n) = N then a**M % q**r is 1
+for every prime power divisor of N. But consider the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="mi">257</span><span class="o">*</span><span class="mi">1009</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">smoothness_p</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="go">(-1, [(257, (1, 2, 256)), (1009, (1, 7, 16))])</span>
+</pre></div>
+</div>
+<p>So we should (and can) find a root with B=16:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pollard_pm1</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">1009</span>
+</pre></div>
+</div>
+<p>If we attempt to increase B to 256 we find that it doesn’t work:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pollard_pm1</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+<p>But if the value of <code class="docutils literal notranslate"><span class="pre">a</span></code> is changed we find that only multiples of
+257 work, e.g.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pollard_pm1</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">257</span><span class="p">)</span>
+<span class="go">1009</span>
+</pre></div>
+</div>
+<p>Checking different <code class="docutils literal notranslate"><span class="pre">a</span></code> values shows that all the ones that didn’t
+work had a gcd value not equal to <code class="docutils literal notranslate"><span class="pre">n</span></code> but equal to one of the
+factors:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">256</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">M</span> <span class="o">=</span> <span class="n">ilcm</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">{</span><span class="n">math</span><span class="o">.</span><span class="n">gcd</span><span class="p">(</span><span class="nb">pow</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">256</span><span class="p">)</span> <span class="k">if</span>
+<span class="gp">... </span> <span class="n">math</span><span class="o">.</span><span class="n">gcd</span><span class="p">(</span><span class="nb">pow</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">!=</span> <span class="n">n</span><span class="p">}</span>
+<span class="go">{1009}</span>
+</pre></div>
+</div>
+<p>But does aM % d for every divisor of n give 1?</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">aM</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[(</span><span class="n">d</span><span class="p">,</span> <span class="n">aM</span><span class="o">%</span><span class="n">Pow</span><span class="p">(</span><span class="o">*</span><span class="n">d</span><span class="o">.</span><span class="n">args</span><span class="p">))</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">factorint</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">visual</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">args</span><span class="p">]</span>
+<span class="go">[(257**1, 1), (1009**1, 1)]</span>
+</pre></div>
+</div>
+<p>No, only one of them. So perhaps the principle is that a root will
+be found for a given value of B provided that:</p>
+<ol class="arabic simple">
+<li>the power smoothness of the p - 1 value next to the root
+does not exceed B</li>
+<li>a**M % p != 1 for any of the divisors of n.</li>
+</ol>
+<p>By trying more than one <code class="docutils literal notranslate"><span class="pre">a</span></code> it is possible that one of them
+will yield a factor.</p>
+<p class="rubric">Examples</p>
+<p>With the default smoothness bound, this number can’t be cracked:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pollard_pm1</span><span class="p">(</span><span class="mi">21477639576571</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Increasing the smoothness bound helps:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pollard_pm1</span><span class="p">(</span><span class="mi">21477639576571</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span>
+<span class="go">4410317</span>
+</pre></div>
+</div>
+<p>Looking at the smoothness of the factors of this number we find:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">smoothness_p</span><span class="p">(</span><span class="mi">21477639576571</span><span class="p">,</span> <span class="n">visual</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="go">p**i=4410317**1 has p-1 B=1787, B-pow=1787</span>
+<span class="go">p**i=4869863**1 has p-1 B=2434931, B-pow=2434931</span>
+</pre></div>
+</div>
+<p>The B and B-pow are the same for the p - 1 factorizations of the divisors
+because those factorizations had a very large prime factor:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">factorint</span><span class="p">(</span><span class="mi">4410317</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">{2: 2, 617: 1, 1787: 1}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">factorint</span><span class="p">(</span><span class="mi">4869863</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">{2: 1, 2434931: 1}</span>
+</pre></div>
+</div>
+<p>Note that until B reaches the B-pow value of 1787, the number is not cracked;</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pollard_pm1</span><span class="p">(</span><span class="mi">21477639576571</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mi">1786</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pollard_pm1</span><span class="p">(</span><span class="mi">21477639576571</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mi">1787</span><span class="p">)</span>
+<span class="go">4410317</span>
+</pre></div>
+</div>
+<p>The B value has to do with the factors of the number next to the divisor,
+not the divisors themselves. A worst case scenario is that the number next
+to the factor p has a large prime divisisor or is a perfect power. If these
+conditions apply then the power-smoothness will be about p/2 or p. The more
+realistic is that there will be a large prime factor next to p requiring
+a B value on the order of p/2. Although primes may have been searched for
+up to this level, the p/2 is a factor of p - 1, something that we don’t
+know. The modular.math reference below states that 15% of numbers in the
+range of 10**15 to 15**15 + 10**4 are 10**6 power smooth so a B of 10**6
+will fail 85% of the time in that range. From 10**8 to 10**8 + 10**3 the
+percentages are nearly reversed…but in that range the simple trial
+division is quite fast.</p>
+<p class="rubric">References</p>
+<ul class="simple">
+<li>Richard Crandall &amp; Carl Pomerance (2005), “Prime Numbers:
+A Computational Perspective”, Springer, 2nd edition, 236-238</li>
+<li><a class="reference external" href="https://web.archive.org/web/20150716201437/http://modular.math.washington.edu/edu/2007/spring/ent/ent-html/node81.html">https://web.archive.org/web/20150716201437/http://modular.math.washington.edu/edu/2007/spring/ent/ent-html/node81.html</a></li>
+<li><a class="reference external" href="https://web.archive.org/web/20170830055619/http://www.cs.toronto.edu/~yuvalf/Factorization.pdf">https://web.archive.org/web/20170830055619/http://www.cs.toronto.edu/~yuvalf/Factorization.pdf</a></li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="diofant.ntheory.factor_.pollard_rho">
+<code class="descclassname">diofant.ntheory.factor_.</code><code class="descname">pollard_rho</code><span class="sig-paren">(</span><em>n</em>, <em>s=2</em>, <em>a=1</em>, <em>retries=5</em>, <em>seed=1234</em>, <em>max_steps=None</em>, <em>F=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/factor_.html#pollard_rho"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.factor_.pollard_rho" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use Pollard’s rho method to try to extract a nontrivial factor
+of <code class="docutils literal notranslate"><span class="pre">n</span></code>. The returned factor may be a composite number. If no
+factor is found, <code class="docutils literal notranslate"><span class="pre">None</span></code> is returned.</p>
+<p>The algorithm generates pseudo-random values of x with a generator
+function, replacing x with F(x). If F is not supplied then the
+function x**2 + <code class="docutils literal notranslate"><span class="pre">a</span></code> is used. The first value supplied to F(x) is <code class="docutils literal notranslate"><span class="pre">s</span></code>.
+Upon failure (if <code class="docutils literal notranslate"><span class="pre">retries</span></code> is &gt; 0) a new <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">s</span></code> will be
+supplied; the <code class="docutils literal notranslate"><span class="pre">a</span></code> will be ignored if F was supplied.</p>
+<p>The sequence of numbers generated by such functions generally have a
+a lead-up to some number and then loop around back to that number and
+begin to repeat the sequence, e.g. 1, 2, 3, 4, 5, 3, 4, 5 – this leader
+and loop look a bit like the Greek letter rho, and thus the name, ‘rho’.</p>
+<p>For a given function, very different leader-loop values can be obtained
+so it is a good idea to allow for retries:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="mi">16843009</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">F</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="mi">2048</span><span class="o">*</span><span class="nb">pow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="mi">32767</span><span class="p">)</span><span class="o">%</span><span class="n">n</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;loop length = </span><span class="si">%4i</span><span class="s1">; leader length = </span><span class="si">%3i</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">next</span><span class="p">(</span><span class="n">cycle_length</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">s</span><span class="p">)))</span>
+<span class="gp">...</span>
+<span class="go">loop length = 2489; leader length =  42</span>
+<span class="go">loop length =   78; leader length = 120</span>
+<span class="go">loop length = 1482; leader length =  99</span>
+<span class="go">loop length = 1482; leader length = 285</span>
+<span class="go">loop length = 1482; leader length = 100</span>
+</pre></div>
+</div>
+<p>Here is an explicit example where there is a two element leadup to
+a sequence of 3 numbers (11, 14, 4) that then repeat:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">12</span><span class="p">)</span><span class="o">%</span><span class="mi">17</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="go">16</span>
+<span class="go">13</span>
+<span class="go">11</span>
+<span class="go">14</span>
+<span class="go">4</span>
+<span class="go">11</span>
+<span class="go">14</span>
+<span class="go">4</span>
+<span class="go">11</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span><span class="n">cycle_length</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="mi">12</span><span class="p">)</span><span class="o">%</span><span class="mi">17</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="go">(3, 2)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">cycle_length</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="mi">12</span><span class="p">)</span><span class="o">%</span><span class="mi">17</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="go">[16, 13, 11, 14, 4]</span>
+</pre></div>
+</div>
+<p>Instead of checking the differences of all generated values for a gcd
+with n, only the kth and 2*kth numbers are checked, e.g. 1st and 2nd,
+2nd and 4th, 3rd and 6th until it has been detected that the loop has been
+traversed. Loops may be many thousands of steps long before rho finds a
+factor or reports failure. If <code class="docutils literal notranslate"><span class="pre">max_steps</span></code> is specified, the iteration
+is cancelled with a failure after the specified number of steps.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="mi">16843009</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">F</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="mi">2048</span><span class="o">*</span><span class="nb">pow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="mi">32767</span><span class="p">)</span> <span class="o">%</span> <span class="n">n</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pollard_rho</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">F</span><span class="o">=</span><span class="n">F</span><span class="p">)</span>
+<span class="go">257</span>
+</pre></div>
+</div>
+<p>Use the default setting with a bad value of <code class="docutils literal notranslate"><span class="pre">a</span></code> and no retries:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pollard_rho</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="n">retries</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If retries is &gt; 0 then perhaps the problem will correct itself when
+new values are generated for a:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pollard_rho</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="n">retries</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">257</span>
+</pre></div>
+</div>
+<p class="rubric">References</p>
+<ul class="simple">
+<li>Richard Crandall &amp; Carl Pomerance (2005), “Prime Numbers:
+A Computational Perspective”, Springer, 2nd edition, 229-231</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
 <dt id="diofant.ntheory.factor_.primefactors">
 <code class="descclassname">diofant.ntheory.factor_.</code><code class="descname">primefactors</code><span class="sig-paren">(</span><em>n</em>, <em>limit=None</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/factor_.html#primefactors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.factor_.primefactors" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a sorted list of n’s prime factors, ignoring multiplicity
@@ -1127,59 +1200,125 @@ not return -1 or 0.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="diofant.ntheory.factor_.divisors">
-<code class="descclassname">diofant.ntheory.factor_.</code><code class="descname">divisors</code><span class="sig-paren">(</span><em>n</em>, <em>generator=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/factor_.html#divisors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.factor_.divisors" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return all divisors of n.</p>
-<p>Divisors are sorted from 1..n by default.  If generator is True an
-unordered generator is returned.</p>
-<p>The number of divisors of n can be quite large if there are many
-prime factors (counting repeated factors). If only the number of
-factors is desired use divisor_count(n).</p>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">divisors</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span>
-<span class="go">[1, 2, 3, 4, 6, 8, 12, 24]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">divisor_count</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span>
-<span class="go">8</span>
-</pre></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">divisors</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span> <span class="n">generator</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
-<span class="go">[1, 2, 4, 8, 3, 6, 12, 24, 5, 10, 20, 40, 15, 30, 60, 120]</span>
+<dt id="diofant.ntheory.factor_.smoothness">
+<code class="descclassname">diofant.ntheory.factor_.</code><code class="descname">smoothness</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/factor_.html#smoothness"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.factor_.smoothness" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the B-smooth and B-power smooth values of n.</p>
+<p>The smoothness of n is the largest prime factor of n; the power-
+smoothness is the largest divisor raised to its multiplicity.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">smoothness</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">7</span><span class="o">*</span><span class="mi">3</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">(3, 128)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">smoothness</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">4</span><span class="o">*</span><span class="mi">13</span><span class="p">)</span>
+<span class="go">(13, 16)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">smoothness</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">(2, 2)</span>
 </pre></div>
 </div>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#diofant.ntheory.factor_.primefactors" title="diofant.ntheory.factor_.primefactors"><code class="xref py py-func docutils literal notranslate"><span class="pre">primefactors()</span></code></a>, <a class="reference internal" href="#diofant.ntheory.factor_.factorint" title="diofant.ntheory.factor_.factorint"><code class="xref py py-func docutils literal notranslate"><span class="pre">factorint()</span></code></a>, <a class="reference internal" href="#diofant.ntheory.factor_.divisor_count" title="diofant.ntheory.factor_.divisor_count"><code class="xref py py-func docutils literal notranslate"><span class="pre">divisor_count()</span></code></a></p>
+<p class="last"><a class="reference internal" href="#diofant.ntheory.factor_.factorint" title="diofant.ntheory.factor_.factorint"><code class="xref py py-func docutils literal notranslate"><span class="pre">factorint()</span></code></a>, <a class="reference internal" href="#diofant.ntheory.factor_.smoothness_p" title="diofant.ntheory.factor_.smoothness_p"><code class="xref py py-func docutils literal notranslate"><span class="pre">smoothness_p()</span></code></a></p>
 </div>
-<p class="rubric">References</p>
-<ul class="simple">
-<li><a class="reference external" href="https://stackoverflow.com/questions/1010381/python-factorization">https://stackoverflow.com/questions/1010381/python-factorization</a></li>
-</ul>
 </dd></dl>
 
 <dl class="function">
-<dt id="diofant.ntheory.factor_.divisor_count">
-<code class="descclassname">diofant.ntheory.factor_.</code><code class="descname">divisor_count</code><span class="sig-paren">(</span><em>n</em>, <em>modulus=1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/factor_.html#divisor_count"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.factor_.divisor_count" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the number of divisors of <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
-<p>If <code class="docutils literal notranslate"><span class="pre">modulus</span></code> is not 1 then only those that are divisible by
-<code class="docutils literal notranslate"><span class="pre">modulus</span></code> are counted.</p>
-<p class="rubric">References</p>
-<ul class="simple">
-<li><a class="reference external" href="https://web.archive.org/web/20130629014824/http://www.mayer.dial.pipex.com:80/maths/formulae.htm">https://web.archive.org/web/20130629014824/http://www.mayer.dial.pipex.com:80/maths/formulae.htm</a></li>
-</ul>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">divisor_count</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
-<span class="go">4</span>
+<dt id="diofant.ntheory.factor_.smoothness_p">
+<code class="descclassname">diofant.ntheory.factor_.</code><code class="descname">smoothness_p</code><span class="sig-paren">(</span><em>n</em>, <em>m=-1</em>, <em>power=0</em>, <em>visual=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/factor_.html#smoothness_p"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.factor_.smoothness_p" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of [m, (p, (M, sm(p + m), psm(p + m)))…]
+where:</p>
+<ol class="arabic simple">
+<li>p**M is the base-p divisor of n</li>
+<li>sm(p + m) is the smoothness of p + m (m = -1 by default)</li>
+<li>psm(p + m) is the power smoothness of p + m</li>
+</ol>
+<p>The list is sorted according to smoothness (default) or by power smoothness
+if power=1.</p>
+<p>The smoothness of the numbers to the left (m = -1) or right (m = 1) of a
+factor govern the results that are obtained from the p +/- 1 type factoring
+methods.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">smoothness_p</span><span class="p">(</span><span class="mi">10431</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">(1, [(3, (2, 2, 4)), (19, (1, 5, 5)), (61, (1, 31, 31))])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">smoothness_p</span><span class="p">(</span><span class="mi">10431</span><span class="p">)</span>
+<span class="go">(-1, [(3, (2, 2, 2)), (19, (1, 3, 9)), (61, (1, 5, 5))])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">smoothness_p</span><span class="p">(</span><span class="mi">10431</span><span class="p">,</span> <span class="n">power</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">(-1, [(3, (2, 2, 2)), (61, (1, 5, 5)), (19, (1, 3, 9))])</span>
 </pre></div>
 </div>
+<p>If visual=True then an annotated string will be returned:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">smoothness_p</span><span class="p">(</span><span class="mi">21477639576571</span><span class="p">,</span> <span class="n">visual</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="go">p**i=4410317**1 has p-1 B=1787, B-pow=1787</span>
+<span class="go">p**i=4869863**1 has p-1 B=2434931, B-pow=2434931</span>
+</pre></div>
+</div>
+<p>This string can also be generated directly from a factorization dictionary
+and vice versa:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">factorint</span><span class="p">(</span><span class="mi">17</span><span class="o">*</span><span class="mi">9</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span>
+<span class="go">{3: 2, 17: 1}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">smoothness_p</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="go">&#39;p**i=3**2 has p-1 B=2, B-pow=2\np**i=17**1 has p-1 B=2, B-pow=16&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">smoothness_p</span><span class="p">(</span><span class="n">_</span><span class="p">)</span>
+<span class="go">{3: 2, 17: 1}</span>
+</pre></div>
+</div>
+<p>The table of the output logic is:</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="23%" />
+<col width="27%" />
+<col width="27%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head"><div class="first last line-block">
+<div class="line"><br /></div>
+</div>
+</th>
+<th class="head" colspan="3">Visual</th>
+</tr>
+<tr class="row-even"><th class="head">Input</th>
+<th class="head">True</th>
+<th class="head">False</th>
+<th class="head">other</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-odd"><td>dict</td>
+<td>str</td>
+<td>tuple</td>
+<td>str</td>
+</tr>
+<tr class="row-even"><td>str</td>
+<td>str</td>
+<td>tuple</td>
+<td>dict</td>
+</tr>
+<tr class="row-odd"><td>tuple</td>
+<td>str</td>
+<td>tuple</td>
+<td>str</td>
+</tr>
+<tr class="row-even"><td>n</td>
+<td>str</td>
+<td>tuple</td>
+<td>tuple</td>
+</tr>
+<tr class="row-odd"><td>mul</td>
+<td>str</td>
+<td>tuple</td>
+<td>tuple</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#diofant.ntheory.factor_.factorint" title="diofant.ntheory.factor_.factorint"><code class="xref py py-func docutils literal notranslate"><span class="pre">factorint()</span></code></a>, <a class="reference internal" href="#diofant.ntheory.factor_.divisors" title="diofant.ntheory.factor_.divisors"><code class="xref py py-func docutils literal notranslate"><span class="pre">divisors()</span></code></a>, <a class="reference internal" href="#diofant.ntheory.factor_.totient" title="diofant.ntheory.factor_.totient"><code class="xref py py-func docutils literal notranslate"><span class="pre">totient()</span></code></a></p>
+<p class="last"><a class="reference internal" href="#diofant.ntheory.factor_.factorint" title="diofant.ntheory.factor_.factorint"><code class="xref py py-func docutils literal notranslate"><span class="pre">factorint()</span></code></a>, <a class="reference internal" href="#diofant.ntheory.factor_.smoothness" title="diofant.ntheory.factor_.smoothness"><code class="xref py py-func docutils literal notranslate"><span class="pre">smoothness()</span></code></a></p>
 </div>
 </dd></dl>
 
-<dl class="function">
+<dl class="class">
 <dt id="diofant.ntheory.factor_.totient">
-<code class="descclassname">diofant.ntheory.factor_.</code><code class="descname">totient</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/factor_.html#totient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.factor_.totient" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">diofant.ntheory.factor_.</code><code class="descname">totient</code><a class="reference internal" href="../_modules/diofant/ntheory/factor_.html#totient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.factor_.totient" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the Euler totient function phi(n)</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">totient</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="go">1</span>
@@ -1189,67 +1328,26 @@ factors is desired use divisor_count(n).</p>
 </div>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#diofant.ntheory.factor_.divisor_count" title="diofant.ntheory.factor_.divisor_count"><code class="xref py py-func docutils literal notranslate"><span class="pre">divisor_count()</span></code></a></p>
+<p class="last"><a class="reference internal" href="#diofant.ntheory.factor_.divisor_count" title="diofant.ntheory.factor_.divisor_count"><code class="xref py py-class docutils literal notranslate"><span class="pre">divisor_count</span></code></a></p>
 </div>
 </dd></dl>
 
 <dl class="function">
-<dt id="diofant.ntheory.factor_.core">
-<code class="descclassname">diofant.ntheory.factor_.</code><code class="descname">core</code><span class="sig-paren">(</span><em>n</em>, <em>t=2</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/factor_.html#core"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.factor_.core" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate core(n,t) = <span class="math notranslate nohighlight">\(core_t(n)\)</span> of a positive integer n.</p>
-<p><code class="docutils literal notranslate"><span class="pre">core_2(n)</span></code> is equal to the squarefree part of n</p>
-<p>If n’s prime factorization is:</p>
-<div class="math notranslate nohighlight">
-\[n = \prod_{i=1}^\omega p_i^{m_i},\]</div>
-<p>then</p>
-<div class="math notranslate nohighlight">
-\[core_t(n) = \prod_{i=1}^\omega p_i^{m_i \mod t}.\]</div>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>t</strong> (<em>core(n,t) calculates the t-th power free part of n</em>) – <code class="docutils literal notranslate"><span class="pre">core(n,</span> <span class="pre">2)</span></code> is the squarefree part of <code class="docutils literal notranslate"><span class="pre">n</span></code>
-<code class="docutils literal notranslate"><span class="pre">core(n,</span> <span class="pre">3)</span></code> is the cubefree part of <code class="docutils literal notranslate"><span class="pre">n</span></code></p>
-<p class="last">Default for t is 2.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<p class="rubric">References</p>
-<ul class="simple">
-<li><a class="reference external" href="https://en.wikipedia.org/wiki/Square-free_integer#Squarefree_core">https://en.wikipedia.org/wiki/Square-free_integer#Squarefree_core</a></li>
-</ul>
+<dt id="diofant.ntheory.factor_.trailing">
+<code class="descclassname">diofant.ntheory.factor_.</code><code class="descname">trailing</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/factor_.html#trailing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.factor_.trailing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Count the number of trailing zero digits in the binary
+representation of n, i.e. determine the largest power of 2
+that divides n.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.ntheory.factor_</span> <span class="k">import</span> <span class="n">core</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">core</span><span class="p">(</span><span class="mi">24</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="go">6</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">core</span><span class="p">(</span><span class="mi">9424</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<span class="go">1178</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">core</span><span class="p">(</span><span class="mi">379238</span><span class="p">)</span>
-<span class="go">379238</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">core</span><span class="p">(</span><span class="mi">15</span><span class="o">**</span><span class="mi">11</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
-<span class="go">15</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">trailing</span><span class="p">(</span><span class="mi">128</span><span class="p">)</span>
+<span class="go">7</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">trailing</span><span class="p">(</span><span class="mi">63</span><span class="p">)</span>
+<span class="go">0</span>
 </pre></div>
-</div>
-<div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#diofant.ntheory.factor_.factorint" title="diofant.ntheory.factor_.factorint"><code class="xref py py-func docutils literal notranslate"><span class="pre">factorint()</span></code></a>, <a class="reference internal" href="solvers/diophantine.html#diofant.solvers.diophantine.square_factor" title="diofant.solvers.diophantine.square_factor"><code class="xref py py-func docutils literal notranslate"><span class="pre">diofant.solvers.diophantine.square_factor()</span></code></a></p>
 </div>
 </dd></dl>
 
 <span class="target" id="module-diofant.ntheory.modular"></span><dl class="function">
-<dt id="diofant.ntheory.modular.symmetric_residue">
-<code class="descclassname">diofant.ntheory.modular.</code><code class="descname">symmetric_residue</code><span class="sig-paren">(</span><em>a</em>, <em>m</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/modular.html#symmetric_residue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.modular.symmetric_residue" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the residual mod m such that it is within half of the modulus.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">symmetric_residue</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
-<span class="go">1</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">symmetric_residue</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
-<span class="go">-2</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
 <dt id="diofant.ntheory.modular.crt">
 <code class="descclassname">diofant.ntheory.modular.</code><code class="descname">crt</code><span class="sig-paren">(</span><em>m</em>, <em>v</em>, <em>symmetric=False</em>, <em>check=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/modular.html#crt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.modular.crt" title="Permalink to this definition">¶</a></dt>
 <dd><p>Chinese Remainder Theorem.</p>
@@ -1326,6 +1424,38 @@ indicated residuals is performed – an O(n) operation.</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="diofant.ntheory.modular.integer_rational_reconstruction">
+<code class="descclassname">diofant.ntheory.modular.</code><code class="descname">integer_rational_reconstruction</code><span class="sig-paren">(</span><em>c</em>, <em>m</em>, <em>domain</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/modular.html#integer_rational_reconstruction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.modular.integer_rational_reconstruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reconstruct a rational number <span class="math notranslate nohighlight">\(\frac a b\)</span> from</p>
+<div class="math notranslate nohighlight">
+\[c = \frac a b \; \mathrm{mod} \, m,\]</div>
+<p>where <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(m\)</span> are integers.</p>
+<p>The algorithm is based on the Euclidean Algorithm. In general, <span class="math notranslate nohighlight">\(m\)</span> is
+not a prime number, so it is possible that <span class="math notranslate nohighlight">\(b\)</span> is not invertible modulo
+<span class="math notranslate nohighlight">\(m\)</span>. In that case <code class="docutils literal notranslate"><span class="pre">None</span></code> is returned.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>c</strong> (<em>Integer</em>) – <span class="math notranslate nohighlight">\(c = \frac a b \; \mathrm{mod} \, m\)</span></li>
+<li><strong>m</strong> (<em>Integer</em>) – modulus, not necessarily prime</li>
+<li><strong>domain</strong> (<em>IntegerRing</em>) – <span class="math notranslate nohighlight">\(a, b, c\)</span> are elements of <code class="docutils literal notranslate"><span class="pre">domain</span></code></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>frac</strong> (<em>Rational</em>) – either <span class="math notranslate nohighlight">\(\frac a b\)</span> in <span class="math notranslate nohighlight">\(\mathbb Q\)</span> or <code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><a class="reference internal" href="../sources.html#wang1981partial" id="id1">[Wan81]</a></li>
+</ul>
+</dd></dl>
+
+<dl class="function">
 <dt id="diofant.ntheory.modular.solve_congruence">
 <code class="descclassname">diofant.ntheory.modular.</code><code class="descname">solve_congruence</code><span class="sig-paren">(</span><em>*remainder_modulus_pairs</em>, <em>**hint</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/modular.html#solve_congruence"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.modular.solve_congruence" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the integer <code class="docutils literal notranslate"><span class="pre">n</span></code> that has the residual <code class="docutils literal notranslate"><span class="pre">ai</span></code> when it is
@@ -1373,6 +1503,18 @@ may not be a solution:</p>
 <dt><a class="reference internal" href="#diofant.ntheory.modular.crt" title="diofant.ntheory.modular.crt"><code class="xref py py-func docutils literal notranslate"><span class="pre">crt()</span></code></a></dt>
 <dd>high level routine implementing the Chinese Remainder Theorem</dd>
 </dl>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="diofant.ntheory.modular.symmetric_residue">
+<code class="descclassname">diofant.ntheory.modular.</code><code class="descname">symmetric_residue</code><span class="sig-paren">(</span><em>a</em>, <em>m</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/modular.html#symmetric_residue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.modular.symmetric_residue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the residual mod m such that it is within half of the modulus.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">symmetric_residue</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">symmetric_residue</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">-2</span>
+</pre></div>
 </div>
 </dd></dl>
 
@@ -1472,7 +1614,8 @@ up to n = 8.</p>
 </ul>
 </dd></dl>
 
-<span class="target" id="module-diofant.ntheory.primetest"></span><dl class="function">
+<span class="target" id="module-diofant.ntheory.primetest"></span><p>Primality testing</p>
+<dl class="function">
 <dt id="diofant.ntheory.primetest.is_square">
 <code class="descclassname">diofant.ntheory.primetest.</code><code class="descname">is_square</code><span class="sig-paren">(</span><em>n</em>, <em>prep=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/primetest.html#is_square"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.primetest.is_square" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return True if n == a * a for some integer a, else False.</p>
@@ -1485,27 +1628,6 @@ quick method of confirming that it is not.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="core.html#diofant.core.power.integer_nthroot" title="diofant.core.power.integer_nthroot"><code class="xref py py-func docutils literal notranslate"><span class="pre">diofant.core.power.integer_nthroot()</span></code></a></p>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.ntheory.primetest.mr">
-<code class="descclassname">diofant.ntheory.primetest.</code><code class="descname">mr</code><span class="sig-paren">(</span><em>n</em>, <em>bases</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/primetest.html#mr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.primetest.mr" title="Permalink to this definition">¶</a></dt>
-<dd><p>Perform a Miller-Rabin strong pseudoprime test on n using a
-given list of bases/witnesses.</p>
-<p class="rubric">References</p>
-<ul class="simple">
-<li>Richard Crandall &amp; Carl Pomerance (2005), “Prime Numbers:
-A Computational Perspective”, Springer, 2nd edition, 135-138</li>
-<li>A list of thresholds and the bases they require are here:
-<a class="reference external" href="https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test#Deterministic_variants">https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test#Deterministic_variants</a></li>
-</ul>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mr</span><span class="p">(</span><span class="mi">1373651</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
-<span class="go">False</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">mr</span><span class="p">(</span><span class="mi">479001599</span><span class="p">,</span> <span class="p">[</span><span class="mi">31</span><span class="p">,</span> <span class="mi">73</span><span class="p">])</span>
-<span class="go">True</span>
-</pre></div>
 </div>
 </dd></dl>
 
@@ -1542,19 +1664,38 @@ error is about 2 x 10**-28.</p>
 </div>
 </dd></dl>
 
-<span class="target" id="module-diofant.ntheory.residue_ntheory"></span><dl class="function">
-<dt id="diofant.ntheory.residue_ntheory.n_order">
-<code class="descclassname">diofant.ntheory.residue_ntheory.</code><code class="descname">n_order</code><span class="sig-paren">(</span><em>a</em>, <em>n</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/residue_ntheory.html#n_order"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.residue_ntheory.n_order" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the order of <code class="docutils literal notranslate"><span class="pre">a</span></code> modulo <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
-<p>The order of <code class="docutils literal notranslate"><span class="pre">a</span></code> modulo <code class="docutils literal notranslate"><span class="pre">n</span></code> is the smallest integer
-<code class="docutils literal notranslate"><span class="pre">k</span></code> such that <code class="docutils literal notranslate"><span class="pre">a**k</span></code> leaves a remainder of 1 with <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
+<dl class="function">
+<dt id="diofant.ntheory.primetest.mr">
+<code class="descclassname">diofant.ntheory.primetest.</code><code class="descname">mr</code><span class="sig-paren">(</span><em>n</em>, <em>bases</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/primetest.html#mr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.primetest.mr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform a Miller-Rabin strong pseudoprime test on n using a
+given list of bases/witnesses.</p>
+<p class="rubric">References</p>
+<ul class="simple">
+<li>Richard Crandall &amp; Carl Pomerance (2005), “Prime Numbers:
+A Computational Perspective”, Springer, 2nd edition, 135-138</li>
+<li>A list of thresholds and the bases they require are here:
+<a class="reference external" href="https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test#Deterministic_variants">https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test#Deterministic_variants</a></li>
+</ul>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n_order</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
-<span class="go">6</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">n_order</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
-<span class="go">3</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mr</span><span class="p">(</span><span class="mi">1373651</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mr</span><span class="p">(</span><span class="mi">479001599</span><span class="p">,</span> <span class="p">[</span><span class="mi">31</span><span class="p">,</span> <span class="mi">73</span><span class="p">])</span>
+<span class="go">True</span>
 </pre></div>
 </div>
+</dd></dl>
+
+<span class="target" id="module-diofant.ntheory.residue_ntheory"></span><dl class="function">
+<dt id="diofant.ntheory.residue_ntheory.is_nthpow_residue">
+<code class="descclassname">diofant.ntheory.residue_ntheory.</code><code class="descname">is_nthpow_residue</code><span class="sig-paren">(</span><em>a</em>, <em>n</em>, <em>m</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/residue_ntheory.html#is_nthpow_residue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.residue_ntheory.is_nthpow_residue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if <code class="docutils literal notranslate"><span class="pre">x**n</span> <span class="pre">==</span> <span class="pre">a</span> <span class="pre">(mod</span> <span class="pre">m)</span></code> has solutions.</p>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><ol class="first upperalpha" start="16">
+<li>Hackman “Elementary Number Theory” (2009),  page 76</li>
+</ol>
+</li>
+</ul>
 </dd></dl>
 
 <dl class="function">
@@ -1580,121 +1721,6 @@ totient(p) is the smallest positive number s.t.:</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="diofant.ntheory.residue_ntheory.primitive_root">
-<code class="descclassname">diofant.ntheory.residue_ntheory.</code><code class="descname">primitive_root</code><span class="sig-paren">(</span><em>p</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/residue_ntheory.html#primitive_root"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.residue_ntheory.primitive_root" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the smallest primitive root or None.</p>
-<p class="rubric">References</p>
-<ul class="simple">
-<li><ol class="first upperalpha" start="23">
-<li>Stein “Elementary Number Theory” (2011), page 44</li>
-</ol>
-</li>
-<li><ol class="first upperalpha" start="16">
-<li>Hackman “Elementary Number Theory” (2009),  Chapter C</li>
-</ol>
-</li>
-</ul>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>p</strong> (<em>positive integer</em>)</td>
-</tr>
-</tbody>
-</table>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">primitive_root</span><span class="p">(</span><span class="mi">19</span><span class="p">)</span>
-<span class="go">2</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.ntheory.residue_ntheory.sqrt_mod">
-<code class="descclassname">diofant.ntheory.residue_ntheory.</code><code class="descname">sqrt_mod</code><span class="sig-paren">(</span><em>a</em>, <em>p</em>, <em>all_roots=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/residue_ntheory.html#sqrt_mod"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.residue_ntheory.sqrt_mod" title="Permalink to this definition">¶</a></dt>
-<dd><p>Find a root of <code class="docutils literal notranslate"><span class="pre">x**2</span> <span class="pre">=</span> <span class="pre">a</span> <span class="pre">mod</span> <span class="pre">p</span></code>.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>a</strong> (<em>integer</em>)</li>
-<li><strong>p</strong> (<em>positive integer</em>)</li>
-<li><strong>all_roots</strong> (<em>if True the list of roots is returned or None</em>)</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<p class="rubric">Notes</p>
-<p>If there is no root it is returned None; else the returned root
-is less or equal to <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">//</span> <span class="pre">2</span></code>; in general is not the smallest one.
-It is returned <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">//</span> <span class="pre">2</span></code> only if it is the only root.</p>
-<p>Use <code class="docutils literal notranslate"><span class="pre">all_roots</span></code> only when it is expected that all the roots fit
-in memory; otherwise use <code class="docutils literal notranslate"><span class="pre">sqrt_mod_iter</span></code>.</p>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sqrt_mod</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">43</span><span class="p">)</span>
-<span class="go">21</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">sqrt_mod</span><span class="p">(</span><span class="mi">17</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
-<span class="go">[7, 9, 23, 25]</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.ntheory.residue_ntheory.quadratic_residues">
-<code class="descclassname">diofant.ntheory.residue_ntheory.</code><code class="descname">quadratic_residues</code><span class="sig-paren">(</span><em>p</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/residue_ntheory.html#quadratic_residues"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.residue_ntheory.quadratic_residues" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the list of quadratic residues.</p>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">quadratic_residues</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
-<span class="go">[0, 1, 2, 4]</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.ntheory.residue_ntheory.nthroot_mod">
-<code class="descclassname">diofant.ntheory.residue_ntheory.</code><code class="descname">nthroot_mod</code><span class="sig-paren">(</span><em>a</em>, <em>n</em>, <em>p</em>, <em>all_roots=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/residue_ntheory.html#nthroot_mod"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.residue_ntheory.nthroot_mod" title="Permalink to this definition">¶</a></dt>
-<dd><p>Find the solutions to <code class="docutils literal notranslate"><span class="pre">x**n</span> <span class="pre">=</span> <span class="pre">a</span> <span class="pre">mod</span> <span class="pre">p</span></code>.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>a</strong> (<em>integer</em>)</li>
-<li><strong>n</strong> (<em>positive integer</em>)</li>
-<li><strong>p</strong> (<em>positive integer</em>)</li>
-<li><strong>all_roots</strong> (<em>if False returns the smallest root, else the list of roots</em>)</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nthroot_mod</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">19</span><span class="p">)</span>
-<span class="go">8</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">nthroot_mod</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
-<span class="go">[8, 11]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">nthroot_mod</span><span class="p">(</span><span class="mi">68</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">109</span><span class="p">)</span>
-<span class="go">23</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.ntheory.residue_ntheory.is_nthpow_residue">
-<code class="descclassname">diofant.ntheory.residue_ntheory.</code><code class="descname">is_nthpow_residue</code><span class="sig-paren">(</span><em>a</em>, <em>n</em>, <em>m</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/residue_ntheory.html#is_nthpow_residue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.residue_ntheory.is_nthpow_residue" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns True if <code class="docutils literal notranslate"><span class="pre">x**n</span> <span class="pre">==</span> <span class="pre">a</span> <span class="pre">(mod</span> <span class="pre">m)</span></code> has solutions.</p>
-<p class="rubric">References</p>
-<ul class="simple">
-<li><ol class="first upperalpha" start="16">
-<li>Hackman “Elementary Number Theory” (2009),  page 76</li>
-</ol>
-</li>
-</ul>
-</dd></dl>
-
-<dl class="function">
 <dt id="diofant.ntheory.residue_ntheory.is_quad_residue">
 <code class="descclassname">diofant.ntheory.residue_ntheory.</code><code class="descname">is_quad_residue</code><span class="sig-paren">(</span><em>a</em>, <em>p</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/residue_ntheory.html#is_quad_residue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.residue_ntheory.is_quad_residue" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns True if <code class="docutils literal notranslate"><span class="pre">a</span></code> (mod <code class="docutils literal notranslate"><span class="pre">p</span></code>) is in the set of squares mod <code class="docutils literal notranslate"><span class="pre">p</span></code>,
@@ -1710,47 +1736,6 @@ prime, an iterative method is used to make the determination:</p>
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="#diofant.ntheory.residue_ntheory.legendre_symbol" title="diofant.ntheory.residue_ntheory.legendre_symbol"><code class="xref py py-func docutils literal notranslate"><span class="pre">legendre_symbol()</span></code></a>, <a class="reference internal" href="#diofant.ntheory.residue_ntheory.jacobi_symbol" title="diofant.ntheory.residue_ntheory.jacobi_symbol"><code class="xref py py-func docutils literal notranslate"><span class="pre">jacobi_symbol()</span></code></a></p>
 </div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.ntheory.residue_ntheory.legendre_symbol">
-<code class="descclassname">diofant.ntheory.residue_ntheory.</code><code class="descname">legendre_symbol</code><span class="sig-paren">(</span><em>a</em>, <em>p</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/residue_ntheory.html#legendre_symbol"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.residue_ntheory.legendre_symbol" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the Legendre symbol <span class="math notranslate nohighlight">\((a / p)\)</span>.</p>
-<p>For an integer <code class="docutils literal notranslate"><span class="pre">a</span></code> and an odd prime <code class="docutils literal notranslate"><span class="pre">p</span></code>, the Legendre symbol is
-defined as</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\genfrac(){}{}{a}{p} = \begin{cases}
-     0 &amp; \text{if } p \text{ divides } a\\
-     1 &amp; \text{if } a \text{ is a quadratic residue modulo } p\\
-    -1 &amp; \text{if } a \text{ is a quadratic nonresidue modulo } p
-\end{cases}\end{split}\]</div>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>a</strong> (<em>integer</em>)</li>
-<li><strong>p</strong> (<em>odd prime</em>)</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">legendre_symbol</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">)]</span>
-<span class="go">[0, 1, 1, -1, 1, -1, -1]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">({</span><span class="n">i</span><span class="o">**</span><span class="mi">2</span> <span class="o">%</span> <span class="mi">7</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">)})</span>
-<span class="go">[0, 1, 2, 4]</span>
-</pre></div>
-</div>
-<div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#diofant.ntheory.residue_ntheory.is_quad_residue" title="diofant.ntheory.residue_ntheory.is_quad_residue"><code class="xref py py-func docutils literal notranslate"><span class="pre">is_quad_residue()</span></code></a>, <a class="reference internal" href="#diofant.ntheory.residue_ntheory.jacobi_symbol" title="diofant.ntheory.residue_ntheory.jacobi_symbol"><code class="xref py py-func docutils literal notranslate"><span class="pre">jacobi_symbol()</span></code></a></p>
-</div>
-<p class="rubric">References</p>
-<ul class="simple">
-<li><a class="reference external" href="https://en.wikipedia.org/wiki/Legendre_symbol">https://en.wikipedia.org/wiki/Legendre_symbol</a></li>
-</ul>
 </dd></dl>
 
 <dl class="function">
@@ -1807,6 +1792,232 @@ be demonstrated as follows:</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="#diofant.ntheory.residue_ntheory.is_quad_residue" title="diofant.ntheory.residue_ntheory.is_quad_residue"><code class="xref py py-func docutils literal notranslate"><span class="pre">is_quad_residue()</span></code></a>, <a class="reference internal" href="#diofant.ntheory.residue_ntheory.legendre_symbol" title="diofant.ntheory.residue_ntheory.legendre_symbol"><code class="xref py py-func docutils literal notranslate"><span class="pre">legendre_symbol()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="diofant.ntheory.residue_ntheory.legendre_symbol">
+<code class="descclassname">diofant.ntheory.residue_ntheory.</code><code class="descname">legendre_symbol</code><span class="sig-paren">(</span><em>a</em>, <em>p</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/residue_ntheory.html#legendre_symbol"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.residue_ntheory.legendre_symbol" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the Legendre symbol <span class="math notranslate nohighlight">\((a / p)\)</span>.</p>
+<p>For an integer <code class="docutils literal notranslate"><span class="pre">a</span></code> and an odd prime <code class="docutils literal notranslate"><span class="pre">p</span></code>, the Legendre symbol is
+defined as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\genfrac(){}{}{a}{p} = \begin{cases}
+     0 &amp; \text{if } p \text{ divides } a\\
+     1 &amp; \text{if } a \text{ is a quadratic residue modulo } p\\
+    -1 &amp; \text{if } a \text{ is a quadratic nonresidue modulo } p
+\end{cases}\end{split}\]</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>a</strong> (<em>integer</em>)</li>
+<li><strong>p</strong> (<em>odd prime</em>)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">legendre_symbol</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">)]</span>
+<span class="go">[0, 1, 1, -1, 1, -1, -1]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">({</span><span class="n">i</span><span class="o">**</span><span class="mi">2</span> <span class="o">%</span> <span class="mi">7</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">)})</span>
+<span class="go">[0, 1, 2, 4]</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#diofant.ntheory.residue_ntheory.is_quad_residue" title="diofant.ntheory.residue_ntheory.is_quad_residue"><code class="xref py py-func docutils literal notranslate"><span class="pre">is_quad_residue()</span></code></a>, <a class="reference internal" href="#diofant.ntheory.residue_ntheory.jacobi_symbol" title="diofant.ntheory.residue_ntheory.jacobi_symbol"><code class="xref py py-func docutils literal notranslate"><span class="pre">jacobi_symbol()</span></code></a></p>
+</div>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><a class="reference external" href="https://en.wikipedia.org/wiki/Legendre_symbol">https://en.wikipedia.org/wiki/Legendre_symbol</a></li>
+</ul>
+</dd></dl>
+
+<dl class="class">
+<dt id="diofant.ntheory.residue_ntheory.mobius">
+<em class="property">class </em><code class="descclassname">diofant.ntheory.residue_ntheory.</code><code class="descname">mobius</code><a class="reference internal" href="../_modules/diofant/ntheory/residue_ntheory.html#mobius"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.residue_ntheory.mobius" title="Permalink to this definition">¶</a></dt>
+<dd><p>Möbius function maps natural number to {-1, 0, 1}</p>
+<dl class="docutils">
+<dt>It is defined as follows:</dt>
+<dd><ol class="first last arabic simple">
+<li><span class="math notranslate nohighlight">\(1\)</span> if <span class="math notranslate nohighlight">\(n = 1\)</span>.</li>
+<li><span class="math notranslate nohighlight">\(0\)</span> if <span class="math notranslate nohighlight">\(n\)</span> has a squared prime factor.</li>
+<li><span class="math notranslate nohighlight">\((-1)^k\)</span> if <span class="math notranslate nohighlight">\(n\)</span> is a square-free positive integer with <span class="math notranslate nohighlight">\(k\)</span>
+number of prime factors.</li>
+</ol>
+</dd>
+</dl>
+<p>It is an important multiplicative function in number theory
+and combinatorics.  It has applications in mathematical series,
+algebraic number theory and also physics (Fermion operator has very
+concrete realization with Möbius Function model).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>n</strong> (<em>positive integer</em>)</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mobius</span><span class="p">(</span><span class="mi">13</span><span class="o">*</span><span class="mi">7</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mobius</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mobius</span><span class="p">(</span><span class="mi">13</span><span class="o">*</span><span class="mi">7</span><span class="o">*</span><span class="mi">5</span><span class="p">)</span>
+<span class="go">-1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mobius</span><span class="p">(</span><span class="mi">13</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">0</span>
+</pre></div>
+</div>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><a class="reference external" href="https://en.wikipedia.org/wiki/M%C3%B6bius_function">https://en.wikipedia.org/wiki/M%C3%B6bius_function</a></li>
+<li>Thomas Koshy “Elementary Number Theory with Applications”</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="diofant.ntheory.residue_ntheory.n_order">
+<code class="descclassname">diofant.ntheory.residue_ntheory.</code><code class="descname">n_order</code><span class="sig-paren">(</span><em>a</em>, <em>n</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/residue_ntheory.html#n_order"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.residue_ntheory.n_order" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the order of <code class="docutils literal notranslate"><span class="pre">a</span></code> modulo <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
+<p>The order of <code class="docutils literal notranslate"><span class="pre">a</span></code> modulo <code class="docutils literal notranslate"><span class="pre">n</span></code> is the smallest integer
+<code class="docutils literal notranslate"><span class="pre">k</span></code> such that <code class="docutils literal notranslate"><span class="pre">a**k</span></code> leaves a remainder of 1 with <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n_order</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+<span class="go">6</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n_order</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+<span class="go">3</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="diofant.ntheory.residue_ntheory.nthroot_mod">
+<code class="descclassname">diofant.ntheory.residue_ntheory.</code><code class="descname">nthroot_mod</code><span class="sig-paren">(</span><em>a</em>, <em>n</em>, <em>p</em>, <em>all_roots=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/residue_ntheory.html#nthroot_mod"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.residue_ntheory.nthroot_mod" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the solutions to <code class="docutils literal notranslate"><span class="pre">x**n</span> <span class="pre">=</span> <span class="pre">a</span> <span class="pre">mod</span> <span class="pre">p</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>a</strong> (<em>integer</em>)</li>
+<li><strong>n</strong> (<em>positive integer</em>)</li>
+<li><strong>p</strong> (<em>positive integer</em>)</li>
+<li><strong>all_roots</strong> (<em>if False returns the smallest root, else the list of roots</em>)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nthroot_mod</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">19</span><span class="p">)</span>
+<span class="go">8</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nthroot_mod</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="go">[8, 11]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nthroot_mod</span><span class="p">(</span><span class="mi">68</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">109</span><span class="p">)</span>
+<span class="go">23</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="diofant.ntheory.residue_ntheory.primitive_root">
+<code class="descclassname">diofant.ntheory.residue_ntheory.</code><code class="descname">primitive_root</code><span class="sig-paren">(</span><em>p</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/residue_ntheory.html#primitive_root"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.residue_ntheory.primitive_root" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the smallest primitive root or None.</p>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><ol class="first upperalpha" start="23">
+<li>Stein “Elementary Number Theory” (2011), page 44</li>
+</ol>
+</li>
+<li><ol class="first upperalpha" start="16">
+<li>Hackman “Elementary Number Theory” (2009),  Chapter C</li>
+</ol>
+</li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>p</strong> (<em>positive integer</em>)</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">primitive_root</span><span class="p">(</span><span class="mi">19</span><span class="p">)</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="diofant.ntheory.residue_ntheory.quadratic_residues">
+<code class="descclassname">diofant.ntheory.residue_ntheory.</code><code class="descname">quadratic_residues</code><span class="sig-paren">(</span><em>p</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/residue_ntheory.html#quadratic_residues"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.residue_ntheory.quadratic_residues" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the list of quadratic residues.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">quadratic_residues</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+<span class="go">[0, 1, 2, 4]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="diofant.ntheory.residue_ntheory.sqrt_mod">
+<code class="descclassname">diofant.ntheory.residue_ntheory.</code><code class="descname">sqrt_mod</code><span class="sig-paren">(</span><em>a</em>, <em>p</em>, <em>all_roots=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/residue_ntheory.html#sqrt_mod"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.residue_ntheory.sqrt_mod" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find a root of <code class="docutils literal notranslate"><span class="pre">x**2</span> <span class="pre">=</span> <span class="pre">a</span> <span class="pre">mod</span> <span class="pre">p</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>a</strong> (<em>integer</em>)</li>
+<li><strong>p</strong> (<em>positive integer</em>)</li>
+<li><strong>all_roots</strong> (<em>if True the list of roots is returned or None</em>)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>If there is no root it is returned None; else the returned root
+is less or equal to <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">//</span> <span class="pre">2</span></code>; in general is not the smallest one.
+It is returned <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">//</span> <span class="pre">2</span></code> only if it is the only root.</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">all_roots</span></code> only when it is expected that all the roots fit
+in memory; otherwise use <code class="docutils literal notranslate"><span class="pre">sqrt_mod_iter</span></code>.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sqrt_mod</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">43</span><span class="p">)</span>
+<span class="go">21</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sqrt_mod</span><span class="p">(</span><span class="mi">17</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="go">[7, 9, 23, 25]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="diofant.ntheory.residue_ntheory.sqrt_mod_iter">
+<code class="descclassname">diofant.ntheory.residue_ntheory.</code><code class="descname">sqrt_mod_iter</code><span class="sig-paren">(</span><em>a</em>, <em>p</em>, <em>domain=&lt;class 'int'&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/residue_ntheory.html#sqrt_mod_iter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.residue_ntheory.sqrt_mod_iter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterate over solutions to <code class="docutils literal notranslate"><span class="pre">x**2</span> <span class="pre">=</span> <span class="pre">a</span> <span class="pre">mod</span> <span class="pre">p</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>a</strong> (<em>integer</em>)</li>
+<li><strong>p</strong> (<em>positive integer</em>)</li>
+<li><strong>domain</strong> (integer domain, <code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">ZZ</span></code> or <code class="docutils literal notranslate"><span class="pre">Integer</span></code>)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">sqrt_mod_iter</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">43</span><span class="p">))</span>
+<span class="go">[21, 22]</span>
+</pre></div>
 </div>
 </dd></dl>
 
@@ -1971,50 +2182,6 @@ form (all terms positive except possibly the first).</p>
 </div>
 </dd></dl>
 
-<dl class="class">
-<dt id="diofant.ntheory.mobius">
-<em class="property">class </em><code class="descclassname">diofant.ntheory.</code><code class="descname">mobius</code><a class="reference internal" href="../_modules/diofant/ntheory/residue_ntheory.html#mobius"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.mobius" title="Permalink to this definition">¶</a></dt>
-<dd><p>Möbius function maps natural number to {-1, 0, 1}</p>
-<dl class="docutils">
-<dt>It is defined as follows:</dt>
-<dd><ol class="first last arabic simple">
-<li><span class="math notranslate nohighlight">\(1\)</span> if <span class="math notranslate nohighlight">\(n = 1\)</span>.</li>
-<li><span class="math notranslate nohighlight">\(0\)</span> if <span class="math notranslate nohighlight">\(n\)</span> has a squared prime factor.</li>
-<li><span class="math notranslate nohighlight">\((-1)^k\)</span> if <span class="math notranslate nohighlight">\(n\)</span> is a square-free positive integer with <span class="math notranslate nohighlight">\(k\)</span>
-number of prime factors.</li>
-</ol>
-</dd>
-</dl>
-<p>It is an important multiplicative function in number theory
-and combinatorics.  It has applications in mathematical series,
-algebraic number theory and also physics (Fermion operator has very
-concrete realization with Möbius Function model).</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>n</strong> (<em>positive integer</em>)</td>
-</tr>
-</tbody>
-</table>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mobius</span><span class="p">(</span><span class="mi">13</span><span class="o">*</span><span class="mi">7</span><span class="p">)</span>
-<span class="go">1</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">mobius</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="go">1</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">mobius</span><span class="p">(</span><span class="mi">13</span><span class="o">*</span><span class="mi">7</span><span class="o">*</span><span class="mi">5</span><span class="p">)</span>
-<span class="go">-1</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">mobius</span><span class="p">(</span><span class="mi">13</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-<span class="go">0</span>
-</pre></div>
-</div>
-<p class="rubric">References</p>
-<ul class="simple">
-<li><a class="reference external" href="https://en.wikipedia.org/wiki/M%C3%B6bius_function">https://en.wikipedia.org/wiki/M%C3%B6bius_function</a></li>
-<li>Thomas Koshy “Elementary Number Theory with Applications”</li>
-</ul>
-</dd></dl>
-
 <span class="target" id="module-diofant.ntheory.egyptian_fraction"></span><dl class="function">
 <dt id="diofant.ntheory.egyptian_fraction.egyptian_fraction">
 <code class="descclassname">diofant.ntheory.egyptian_fraction.</code><code class="descname">egyptian_fraction</code><span class="sig-paren">(</span><em>r</em>, <em>algorithm='Greedy'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/egyptian_fraction.html#egyptian_fraction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.egyptian_fraction.egyptian_fraction" title="Permalink to this definition">¶</a></dt>
@@ -2107,7 +2274,6 @@ The result of egyptian_fraction(Rational(8, 3), “Golomb”) is [1, 2, 3,
 </ul>
 </dd></dl>
 
-</div>
 </div>
 
 
