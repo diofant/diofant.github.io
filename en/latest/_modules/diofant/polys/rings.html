@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.rings &mdash; Diofant 0.10.1.dev120+ge2e3d84 documentation</title>
+  <title>diofant.polys.rings &mdash; Diofant 0.10.1.dev139+g0e52154 documentation</title>
   
 
   
@@ -497,8 +497,13 @@
                 <span class="n">i</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">symbols</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">Symbol</span><span class="p">(</span><span class="n">gen</span><span class="p">))</span>
             <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;invalid generator: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">gen</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">gen</span><span class="p">,</span> <span class="n">Expr</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">i</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">symbols</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">gen</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;invalid generator: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">gen</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;expected a polynomial generator, an integer, a string or None, got </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">gen</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;expected a polynomial generator, an integer, a string, an expression or None, got </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">gen</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">i</span></div>
 
@@ -832,29 +837,32 @@
 
             <span class="k">return</span> <span class="n">poly</span>
 
-    <span class="k">def</span> <span class="nf">_drop_to_ground</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gen</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_drop_to_ground</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">gens</span><span class="p">):</span>
         <span class="n">ring</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span>
-        <span class="n">i</span> <span class="o">=</span> <span class="n">ring</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">gen</span><span class="p">)</span>
 
         <span class="n">symbols</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">ring</span><span class="o">.</span><span class="n">symbols</span><span class="p">)</span>
-        <span class="n">symbol</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-        <span class="k">del</span> <span class="n">symbols</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">i</span><span class="p">,</span> <span class="n">ring</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="n">symbols</span><span class="p">,</span> <span class="n">domain</span><span class="o">=</span><span class="n">ring</span><span class="o">.</span><span class="n">clone</span><span class="p">([</span><span class="n">symbol</span><span class="p">]))</span>
+        <span class="n">indexes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ring</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">gen</span><span class="p">)</span> <span class="k">for</span> <span class="n">gen</span> <span class="ow">in</span> <span class="n">gens</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="nf">drop_to_ground</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gen</span><span class="p">):</span>
+        <span class="n">dropped</span> <span class="o">=</span> <span class="p">[</span><span class="n">symbols</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">indexes</span><span class="p">]</span>
+        <span class="n">symbols</span> <span class="o">=</span> <span class="p">[</span><span class="n">symbols</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ring</span><span class="o">.</span><span class="n">ngens</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">indexes</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">indexes</span><span class="p">,</span> <span class="n">ring</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="n">symbols</span><span class="p">,</span> <span class="n">domain</span><span class="o">=</span><span class="n">ring</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="n">dropped</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">drop_to_ground</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">gens</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">is_univariate</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;can&#39;t drop only generator to ground&quot;</span><span class="p">)</span>
 
-        <span class="n">i</span><span class="p">,</span> <span class="n">ring</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_drop_to_ground</span><span class="p">(</span><span class="n">gen</span><span class="p">)</span>
+        <span class="n">indexes</span><span class="p">,</span> <span class="n">ring</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_drop_to_ground</span><span class="p">(</span><span class="o">*</span><span class="n">gens</span><span class="p">)</span>
         <span class="n">poly</span> <span class="o">=</span> <span class="n">ring</span><span class="o">.</span><span class="n">zero</span>
-        <span class="n">gen</span> <span class="o">=</span> <span class="n">ring</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">gens</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">gens</span> <span class="o">=</span> <span class="n">ring</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">gens</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">indexes</span><span class="p">)]</span>
 
         <span class="k">for</span> <span class="n">monom</span><span class="p">,</span> <span class="n">coeff</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="n">mon</span> <span class="o">=</span> <span class="n">monom</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">monom</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span>
+            <span class="n">mon</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">monom</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">ngens</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">indexes</span><span class="p">)</span>
+            <span class="n">gc</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">operator</span><span class="o">.</span><span class="n">mul</span><span class="p">,</span> <span class="p">[</span><span class="n">x</span><span class="o">**</span><span class="n">n</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">gens</span><span class="p">,</span> <span class="p">(</span><span class="n">monom</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">indexes</span><span class="p">))])</span>
             <span class="k">if</span> <span class="n">mon</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">poly</span><span class="p">:</span>
-                <span class="n">poly</span><span class="p">[</span><span class="n">mon</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">gen</span><span class="o">**</span><span class="n">monom</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">.</span><span class="n">mul_ground</span><span class="p">(</span><span class="n">coeff</span><span class="p">)</span>
+                <span class="n">poly</span><span class="p">[</span><span class="n">mon</span><span class="p">]</span> <span class="o">=</span> <span class="n">gc</span><span class="o">.</span><span class="n">mul_ground</span><span class="p">(</span><span class="n">coeff</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">poly</span><span class="p">[</span><span class="n">mon</span><span class="p">]</span> <span class="o">+=</span> <span class="p">(</span><span class="n">gen</span><span class="o">**</span><span class="n">monom</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">.</span><span class="n">mul_ground</span><span class="p">(</span><span class="n">coeff</span><span class="p">)</span>
+                <span class="n">poly</span><span class="p">[</span><span class="n">mon</span><span class="p">]</span> <span class="o">+=</span> <span class="n">gc</span><span class="o">.</span><span class="n">mul_ground</span><span class="p">(</span><span class="n">coeff</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">poly</span>
 
@@ -1894,7 +1902,10 @@
         <span class="n">cont</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">is_negative</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">LC</span><span class="p">):</span>
             <span class="n">cont</span> <span class="o">=</span> <span class="o">-</span><span class="n">cont</span>
-        <span class="k">return</span> <span class="n">cont</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">quo_ground</span><span class="p">(</span><span class="n">cont</span><span class="p">)</span></div>
+        <span class="n">prim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">prim</span><span class="o">.</span><span class="n">is_zero</span><span class="p">:</span>
+            <span class="n">prim</span> <span class="o">=</span> <span class="n">prim</span><span class="o">.</span><span class="n">quo_ground</span><span class="p">(</span><span class="n">cont</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">cont</span><span class="p">,</span> <span class="n">prim</span></div>
 
 <div class="viewcode-block" id="PolyElement.monic"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.rings.PolyElement.monic">[docs]</a>    <span class="k">def</span> <span class="nf">monic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Divides all coefficients by the leading coefficient.&quot;&quot;&quot;</span>
@@ -2090,10 +2101,13 @@
 
     <span class="k">def</span> <span class="nf">_gcd_zero</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="n">one</span><span class="p">,</span> <span class="n">zero</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">one</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">zero</span>
-        <span class="k">if</span> <span class="n">other</span><span class="o">.</span><span class="n">is_nonnegative</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">other</span><span class="p">,</span> <span class="n">zero</span><span class="p">,</span> <span class="n">one</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">is_Field</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">other</span><span class="o">.</span><span class="n">monic</span><span class="p">(),</span> <span class="n">zero</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">LC</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="o">-</span><span class="n">other</span><span class="p">,</span> <span class="n">zero</span><span class="p">,</span> <span class="o">-</span><span class="n">one</span>
+            <span class="k">if</span> <span class="n">other</span><span class="o">.</span><span class="n">is_nonnegative</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">other</span><span class="p">,</span> <span class="n">zero</span><span class="p">,</span> <span class="n">one</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="o">-</span><span class="n">other</span><span class="p">,</span> <span class="n">zero</span><span class="p">,</span> <span class="o">-</span><span class="n">one</span>
 
     <span class="k">def</span> <span class="nf">_gcd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="n">ring</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span>

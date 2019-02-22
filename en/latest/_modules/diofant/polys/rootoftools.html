@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.rootoftools &mdash; Diofant 0.10.1.dev120+ge2e3d84 documentation</title>
+  <title>diofant.polys.rootoftools &mdash; Diofant 0.10.1.dev139+g0e52154 documentation</title>
   
 
   
@@ -389,7 +389,7 @@
     <span class="k">def</span> <span class="nf">_get_reals_sqf</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">factor</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Compute real root isolating intervals for a square-free polynomial.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">factor</span><span class="o">.</span><span class="n">rep</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_reals_cache</span><span class="p">:</span>
-            <span class="n">reals</span> <span class="o">=</span> <span class="n">dup_isolate_real_roots_sqf</span><span class="p">(</span><span class="n">factor</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">rep</span><span class="p">,</span> <span class="n">factor</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">blackbox</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">reals</span> <span class="o">=</span> <span class="n">dup_isolate_real_roots_sqf</span><span class="p">(</span><span class="n">factor</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">to_dense</span><span class="p">(),</span> <span class="n">factor</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">blackbox</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">reals</span><span class="p">:</span>
                 <span class="n">_reals_cache</span><span class="p">[</span><span class="n">factor</span><span class="o">.</span><span class="n">rep</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">return</span> <span class="n">reals</span>
@@ -399,7 +399,7 @@
     <span class="k">def</span> <span class="nf">_get_complexes_sqf</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">factor</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Compute complex root isolating intervals for a square-free polynomial.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">factor</span><span class="o">.</span><span class="n">rep</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_complexes_cache</span><span class="p">:</span>
-            <span class="n">complexes</span> <span class="o">=</span> <span class="n">dup_isolate_complex_roots_sqf</span><span class="p">(</span><span class="n">factor</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">rep</span><span class="p">,</span> <span class="n">factor</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">blackbox</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">complexes</span> <span class="o">=</span> <span class="n">dup_isolate_complex_roots_sqf</span><span class="p">(</span><span class="n">factor</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">to_dense</span><span class="p">(),</span> <span class="n">factor</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">blackbox</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">complexes</span><span class="p">:</span>
                 <span class="n">_complexes_cache</span><span class="p">[</span><span class="n">factor</span><span class="o">.</span><span class="n">rep</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">return</span> <span class="n">complexes</span>

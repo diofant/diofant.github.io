@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.functions.combinatorial.numbers &mdash; Diofant 0.10.1.dev120+ge2e3d84 documentation</title>
+  <title>diofant.functions.combinatorial.numbers &mdash; Diofant 0.10.1.dev139+g0e52154 documentation</title>
   
 
   
@@ -159,12 +159,14 @@
 <span class="sd">the separate &#39;factorials&#39; module.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
+<span class="kn">import</span> <span class="nn">numbers</span>
+
 <span class="kn">from</span> <span class="nn">mpmath</span> <span class="k">import</span> <span class="n">bernfrac</span><span class="p">,</span> <span class="n">mp</span><span class="p">,</span> <span class="n">workprec</span>
 <span class="kn">from</span> <span class="nn">mpmath.libmp</span> <span class="k">import</span> <span class="n">ifib</span> <span class="k">as</span> <span class="n">_ifib</span>
 
 <span class="kn">from</span> <span class="nn">...core</span> <span class="k">import</span> <span class="p">(</span><span class="n">Add</span><span class="p">,</span> <span class="n">Dummy</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">Expr</span><span class="p">,</span> <span class="n">Function</span><span class="p">,</span> <span class="n">GoldenRatio</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span>
                      <span class="n">Rational</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">cacheit</span><span class="p">,</span> <span class="n">expand_mul</span><span class="p">,</span> <span class="n">nan</span><span class="p">,</span> <span class="n">oo</span><span class="p">,</span> <span class="n">pi</span><span class="p">,</span> <span class="n">prod</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">...core.compatibility</span> <span class="k">import</span> <span class="n">DIOFANT_INTS</span><span class="p">,</span> <span class="n">as_int</span>
+<span class="kn">from</span> <span class="nn">...core.compatibility</span> <span class="k">import</span> <span class="n">as_int</span>
 <span class="kn">from</span> <span class="nn">...utilities.memoization</span> <span class="k">import</span> <span class="n">recurrence_memo</span>
 <span class="kn">from</span> <span class="nn">..elementary.exponential</span> <span class="k">import</span> <span class="n">log</span>
 <span class="kn">from</span> <span class="nn">..elementary.integers</span> <span class="k">import</span> <span class="n">floor</span>
@@ -1232,7 +1234,7 @@
 
     <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="mi">1</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">DIOFANT_INTS</span><span class="p">):</span>  <span class="c1"># n different items</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">numbers</span><span class="o">.</span><span class="n">Integral</span><span class="p">):</span>  <span class="c1"># n different items</span>
         <span class="c1"># assert n &gt;= 0</span>
         <span class="k">if</span> <span class="n">k</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">_nP</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">replacement</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
@@ -1399,7 +1401,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">.factorials</span> <span class="k">import</span> <span class="n">binomial</span>
 
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">DIOFANT_INTS</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">numbers</span><span class="o">.</span><span class="n">Integral</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">k</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">replacement</span><span class="p">:</span>
                 <span class="k">return</span> <span class="mi">2</span><span class="o">**</span><span class="n">n</span>
@@ -1646,7 +1648,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">...utilities.enumerative</span> <span class="k">import</span> <span class="n">MultisetPartitionTraverser</span>
 
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">DIOFANT_INTS</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">numbers</span><span class="o">.</span><span class="n">Integral</span><span class="p">):</span>
         <span class="c1"># assert n &gt;= 0</span>
         <span class="c1"># all the same</span>
         <span class="k">if</span> <span class="n">k</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
