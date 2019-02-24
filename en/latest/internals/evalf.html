@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Numerical evaluation &mdash; Diofant 0.10.1.dev189+g793799b documentation</title>
+  <title>Numerical evaluation &mdash; Diofant 0.10.1.dev195+gc9a8f80 documentation</title>
   
 
   
@@ -93,7 +93,6 @@
 <li class="toctree-l2"><a class="reference internal" href="g-functions.html#the-inverse-laplace-transform-of-a-g-function">The Inverse Laplace Transform of a G-function</a></li>
 <li class="toctree-l2"><a class="reference internal" href="g-functions.html#implemented-g-function-formulae">Implemented G-Function Formulae</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Numerical evaluation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#basics">Basics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#floating-point-numbers">Floating-point numbers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#accuracy-and-error-handling">Accuracy and error handling</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#sums-and-integrals">Sums and integrals</a></li>
@@ -176,65 +175,6 @@
             
   <div class="section" id="numerical-evaluation">
 <span id="evalf-label"></span><h1>Numerical evaluation<a class="headerlink" href="#numerical-evaluation" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="basics">
-<h2>Basics<a class="headerlink" href="#basics" title="Permalink to this headline">¶</a></h2>
-<p>Exact Diofant expressions can be converted to floating-point approximations
-(decimal numbers) using either the <code class="docutils literal notranslate"><span class="pre">.evalf()</span></code> method or the <code class="docutils literal notranslate"><span class="pre">N()</span></code> function.
-<code class="docutils literal notranslate"><span class="pre">N(expr,</span> <span class="pre">&lt;args&gt;)</span></code> is equivalent to <code class="docutils literal notranslate"><span class="pre">sympify(expr).evalf(&lt;args&gt;)</span></code>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">N</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">pi</span><span class="p">)</span>
-<span class="go">4.44288293815837</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">pi</span><span class="p">)</span><span class="o">.</span><span class="n">evalf</span><span class="p">()</span>
-<span class="go">4.44288293815837</span>
-</pre></div>
-</div>
-<p>By default, numerical evaluation is performed to an accuracy of 15 decimal
-digits. You can optionally pass a desired accuracy (which should be a positive
-integer) as an argument to <code class="docutils literal notranslate"><span class="pre">evalf</span></code> or <code class="docutils literal notranslate"><span class="pre">N</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">N</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">pi</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-<span class="go">4.4429</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">N</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">pi</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
-<span class="go">4.4428829381583662470158809900606936986146216893757</span>
-</pre></div>
-</div>
-<p>Complex numbers are supported:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">N</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">pi</span> <span class="o">+</span> <span class="n">I</span><span class="p">),</span> <span class="mi">20</span><span class="p">)</span>
-<span class="go">0.28902548222223624241 - 0.091999668350375232456*I</span>
-</pre></div>
-</div>
-<p>If the expression contains symbols or for some other reason cannot be evaluated
-numerically, calling <code class="docutils literal notranslate"><span class="pre">.evalf()</span></code> or <code class="docutils literal notranslate"><span class="pre">N()</span></code> returns the original expression, or
-in some cases a partially evaluated expression. For example, when the
-expression is a polynomial in expanded form, the coefficients are evaluated:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">evalf</span><span class="p">(</span><span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="go">3.14159265358979*x**2 + 0.333333333333333*x</span>
-</pre></div>
-</div>
-<p>You can also use the standard Python functions <code class="docutils literal notranslate"><span class="pre">float()</span></code>, <code class="docutils literal notranslate"><span class="pre">complex()</span></code> to
-convert Diofant expressions to regular Python numbers:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">float</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span>
-<span class="go">3.1415926535...</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">complex</span><span class="p">(</span><span class="n">pi</span><span class="o">+</span><span class="n">E</span><span class="o">*</span><span class="n">I</span><span class="p">)</span>
-<span class="go">(3.1415926535...+2.7182818284...j)</span>
-</pre></div>
-</div>
-<p>If these functions are used, failure to evaluate the expression to an explicit
-number (for example if the expression contains symbols) will raise an exception.</p>
-<p>There is essentially no upper precision limit. The following command, for
-example, computes the first 100,000 digits of π/e:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">N</span><span class="p">(</span><span class="n">pi</span><span class="o">/</span><span class="n">E</span><span class="p">,</span> <span class="mi">100000</span><span class="p">)</span>
-<span class="go">1.155727349790921717910...</span>
-</pre></div>
-</div>
-<p>This shows digits 999,951 through 1,000,000 of pi:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="n">N</span><span class="p">(</span><span class="n">pi</span><span class="p">,</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">))[</span><span class="o">-</span><span class="mi">50</span><span class="p">:]</span>
-<span class="go">&#39;95678796130331164628399634646042209010610577945815&#39;</span>
-</pre></div>
-</div>
-<p>High-precision calculations can be slow. It is recommended (but entirely
-optional) to install <a class="reference external" href="https://github.com/aleaxit/gmpy">gmpy2</a>, which will
-significantly speed up computations such as the one above.</p>
-</div>
 <div class="section" id="floating-point-numbers">
 <h2>Floating-point numbers<a class="headerlink" href="#floating-point-numbers" title="Permalink to this headline">¶</a></h2>
 <p>Floating-point numbers in Diofant are instances of the class <code class="docutils literal notranslate"><span class="pre">Float</span></code>. A <code class="docutils literal notranslate"><span class="pre">Float</span></code>
@@ -278,7 +218,7 @@ numerical algorithms.</p>
 <p>Function <a class="reference internal" href="../modules/core.html#diofant.core.evalf.N" title="diofant.core.evalf.N"><code class="xref py py-func docutils literal notranslate"><span class="pre">N()</span></code></a> (or
 <a class="reference internal" href="../modules/core.html#diofant.core.evalf.EvalfMixin.evalf" title="diofant.core.evalf.EvalfMixin.evalf"><code class="xref py py-meth docutils literal notranslate"><span class="pre">evalf()</span></code></a> method) can be used to
 change the precision of existing floating-point numbers:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">N</span><span class="p">(</span><span class="mf">3.5</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">N</span><span class="p">(</span><span class="mf">3.5</span><span class="p">)</span>
 <span class="go">3.50000000000000</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">N</span><span class="p">(</span><span class="mf">3.5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 <span class="go">3.5000</span>
