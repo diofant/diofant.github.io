@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.core.power &mdash; Diofant 0.10.1.dev139+g0e52154 documentation</title>
+  <title>diofant.core.power &mdash; Diofant 0.10.1.dev189+g793799b documentation</title>
   
 
   
@@ -781,6 +781,8 @@
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">base</span><span class="o">**</span><span class="n">adjoint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">exp</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_eval_conjugate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_extended_real</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span>
         <span class="kn">from</span> <span class="nn">..functions.elementary.complexes</span> <span class="k">import</span> <span class="n">conjugate</span> <span class="k">as</span> <span class="n">c</span>
         <span class="n">i</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">exp</span><span class="o">.</span><span class="n">is_integer</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">is_positive</span>
         <span class="k">if</span> <span class="n">i</span><span class="p">:</span>

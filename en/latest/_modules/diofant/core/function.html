@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.core.function &mdash; Diofant 0.10.1.dev139+g0e52154 documentation</title>
+  <title>diofant.core.function &mdash; Diofant 0.10.1.dev189+g793799b documentation</title>
   
 
   
@@ -192,6 +192,7 @@
                             <span class="n">ordered</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">.containers</span> <span class="k">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Tuple</span>
 <span class="kn">from</span> <span class="nn">.decorators</span> <span class="k">import</span> <span class="n">_sympifyit</span>
+<span class="kn">from</span> <span class="nn">.evalf</span> <span class="k">import</span> <span class="n">PrecisionExhausted</span>
 <span class="kn">from</span> <span class="nn">.evaluate</span> <span class="k">import</span> <span class="n">global_evaluate</span>
 <span class="kn">from</span> <span class="nn">.expr</span> <span class="k">import</span> <span class="n">AtomicExpr</span><span class="p">,</span> <span class="n">Expr</span>
 <span class="kn">from</span> <span class="nn">.logic</span> <span class="k">import</span> <span class="n">fuzzy_and</span>
@@ -576,8 +577,8 @@
             <span class="n">func</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">mpmath</span><span class="p">,</span> <span class="n">fname</span><span class="p">)</span>
         <span class="k">except</span> <span class="p">(</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="ne">KeyError</span><span class="p">):</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">Float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_imp_</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">),</span> <span class="n">prec</span><span class="p">)</span>
-            <span class="k">except</span> <span class="p">(</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">Float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_imp_</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">evalf</span><span class="p">(</span><span class="n">prec</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">]),</span> <span class="n">prec</span><span class="p">)</span>
+            <span class="k">except</span> <span class="p">(</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">,</span> <span class="n">PrecisionExhausted</span><span class="p">):</span>
                 <span class="k">return</span>
 
         <span class="c1"># Convert all args to mpf or mpc</span>

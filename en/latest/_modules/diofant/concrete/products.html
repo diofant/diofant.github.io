@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.concrete.products &mdash; Diofant 0.10.1.dev139+g0e52154 documentation</title>
+  <title>diofant.concrete.products &mdash; Diofant 0.10.1.dev189+g793799b documentation</title>
   
 
   
@@ -345,7 +345,6 @@
 
     <span class="k">def</span> <span class="nf">doit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">hints</span><span class="p">):</span>
         <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">function</span>
-
         <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">limit</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">limits</span><span class="p">):</span>
             <span class="n">i</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">limit</span>
             <span class="n">dif</span> <span class="o">=</span> <span class="n">b</span> <span class="o">-</span> <span class="n">a</span>
@@ -418,10 +417,13 @@
 
         <span class="k">elif</span> <span class="n">term</span><span class="o">.</span><span class="n">is_Add</span><span class="p">:</span>
             <span class="n">p</span><span class="p">,</span> <span class="n">q</span> <span class="o">=</span> <span class="n">term</span><span class="o">.</span><span class="n">as_numer_denom</span><span class="p">()</span>
-
-            <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eval_product</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
             <span class="n">q</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eval_product</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
-
+            <span class="k">if</span> <span class="n">q</span><span class="o">.</span><span class="n">is_Number</span><span class="p">:</span>
+                <span class="c1"># There is expression, which couldn&#39;t change by</span>
+                <span class="c1"># as_numer_denom(). E.g. n**(2/3) + 1 --&gt; (n**(2/3) + 1, 1).</span>
+                <span class="n">p</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_eval_product</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">p</span><span class="o">.</span><span class="n">as_coeff_Add</span><span class="p">())</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eval_product</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
             <span class="k">return</span> <span class="n">p</span> <span class="o">/</span> <span class="n">q</span>
 
         <span class="k">elif</span> <span class="n">term</span><span class="o">.</span><span class="n">is_Mul</span><span class="p">:</span>

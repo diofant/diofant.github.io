@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Core &mdash; Diofant 0.10.1.dev139+g0e52154 documentation</title>
+  <title>Core &mdash; Diofant 0.10.1.dev189+g793799b documentation</title>
   
 
   
@@ -411,7 +411,7 @@ names that are defined in abc).</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">_clash1</span>
 <span class="go">{&#39;E&#39;: E, &#39;I&#39;: I, &#39;N&#39;: N, &#39;O&#39;: O, &#39;S&#39;: S}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sympify</span><span class="p">(</span><span class="s1">&#39;E &amp; O&#39;</span><span class="p">,</span> <span class="n">_clash1</span><span class="p">)</span>
-<span class="go">And(E, O)</span>
+<span class="go">E &amp; O</span>
 </pre></div>
 </div>
 <p><em>Strict</em></p>
@@ -1993,10 +1993,11 @@ existing free symbols.</p>
 <dl class="method">
 <dt id="diofant.core.expr.Expr.coeff">
 <code class="descname">coeff</code><span class="sig-paren">(</span><em>x</em>, <em>n=1</em>, <em>right=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/core/expr.html#Expr.coeff"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.coeff" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the coefficient from the term(s) containing <code class="docutils literal notranslate"><span class="pre">x**n</span></code> or None. If <code class="docutils literal notranslate"><span class="pre">n</span></code>
+<dd><p>Returns the coefficient from the term(s) containing <code class="docutils literal notranslate"><span class="pre">x**n</span></code>. If <code class="docutils literal notranslate"><span class="pre">n</span></code>
 is zero then all terms independent of <code class="docutils literal notranslate"><span class="pre">x</span></code> will be returned.</p>
-<p>When x is noncommutative, the coeff to the left (default) or right of x
-can be returned. The keyword ‘right’ is ignored when x is commutative.</p>
+<p>When <code class="docutils literal notranslate"><span class="pre">x</span></code> is noncommutative, the coefficient to the left (default) or
+right of <code class="docutils literal notranslate"><span class="pre">x</span></code> can be returned. The keyword ‘right’ is ignored when
+<code class="docutils literal notranslate"><span class="pre">x</span></code> is commutative.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="#diofant.core.expr.Expr.as_coefficient" title="diofant.core.expr.Expr.as_coefficient"><code class="xref py py-meth docutils literal notranslate"><span class="pre">diofant.core.expr.Expr.as_coefficient()</span></code></a>, <a class="reference internal" href="#diofant.core.expr.Expr.as_coeff_Add" title="diofant.core.expr.Expr.as_coeff_Add"><code class="xref py py-meth docutils literal notranslate"><span class="pre">diofant.core.expr.Expr.as_coeff_Add()</span></code></a>, <a class="reference internal" href="#diofant.core.expr.Expr.as_coeff_Mul" title="diofant.core.expr.Expr.as_coeff_Mul"><code class="xref py py-meth docutils literal notranslate"><span class="pre">diofant.core.expr.Expr.as_coeff_Mul()</span></code></a>, <a class="reference internal" href="#diofant.core.expr.Expr.as_independent" title="diofant.core.expr.Expr.as_independent"><code class="xref py py-meth docutils literal notranslate"><span class="pre">diofant.core.expr.Expr.as_independent()</span></code></a>, <a class="reference internal" href="polys.html#diofant.polys.polytools.Poly.coeff_monomial" title="diofant.polys.polytools.Poly.coeff_monomial"><code class="xref py py-meth docutils literal notranslate"><span class="pre">diofant.polys.polytools.Poly.coeff_monomial()</span></code></a></p>
@@ -5390,7 +5391,7 @@ tempted to write statements like:</p>
 chained inequality, the only method currently available is to make use of
 And:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">And</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">y</span><span class="p">,</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">z</span><span class="p">)</span>
-<span class="go">And(x &lt; y, y &lt; z)</span>
+<span class="go">(x &lt; y) &amp; (y &lt; z)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -5591,7 +5592,7 @@ tempted to write statements like:</p>
 chained inequality, the only method currently available is to make use of
 And:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">And</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">y</span><span class="p">,</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">z</span><span class="p">)</span>
-<span class="go">And(x &lt; y, y &lt; z)</span>
+<span class="go">(x &lt; y) &amp; (y &lt; z)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -5820,7 +5821,7 @@ tempted to write statements like:</p>
 chained inequality, the only method currently available is to make use of
 And:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">And</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">y</span><span class="p">,</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">z</span><span class="p">)</span>
-<span class="go">And(x &lt; y, y &lt; z)</span>
+<span class="go">(x &lt; y) &amp; (y &lt; z)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -6021,7 +6022,7 @@ tempted to write statements like:</p>
 chained inequality, the only method currently available is to make use of
 And:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">And</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">y</span><span class="p">,</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">z</span><span class="p">)</span>
-<span class="go">And(x &lt; y, y &lt; z)</span>
+<span class="go">(x &lt; y) &amp; (y &lt; z)</span>
 </pre></div>
 </div>
 </dd></dl>

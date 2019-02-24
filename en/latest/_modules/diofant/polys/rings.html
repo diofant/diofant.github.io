@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.rings &mdash; Diofant 0.10.1.dev139+g0e52154 documentation</title>
+  <title>diofant.polys.rings &mdash; Diofant 0.10.1.dev189+g793799b documentation</title>
   
 
   
@@ -580,10 +580,10 @@
             <span class="k">return</span>
 
     <span class="k">def</span> <span class="nf">_from_FractionField</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">):</span>
-        <span class="n">denom</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">denominator</span>
+        <span class="n">q</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">numerator</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">denominator</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">denom</span><span class="o">.</span><span class="n">is_ground</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">numerator</span><span class="o">/</span><span class="n">denom</span><span class="p">,</span> <span class="n">K0</span><span class="o">.</span><span class="n">ring</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">is_zero</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">K0</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">ring</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">field</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.functions.special.bsplines &mdash; Diofant 0.10.1.dev139+g0e52154 documentation</title>
+  <title>diofant.functions.special.bsplines &mdash; Diofant 0.10.1.dev189+g793799b documentation</title>
   
 
   
@@ -189,7 +189,7 @@
 <span class="sd">        &gt;&gt;&gt; d = 0</span>
 <span class="sd">        &gt;&gt;&gt; knots = range(5)</span>
 <span class="sd">        &gt;&gt;&gt; bspline_basis(d, knots, 0, x)</span>
-<span class="sd">        Piecewise((1, And(x &lt;= 1, x &gt;= 0)), (0, true))</span>
+<span class="sd">        Piecewise((1, (x &gt;= 0) &amp; (x &lt;= 1)), (0, true))</span>
 
 <span class="sd">    For a given ``(d, knots)`` there are ``len(knots)-d-1`` B-splines defined, that</span>
 <span class="sd">    are indexed by ``n`` (starting at 0).</span>
@@ -197,10 +197,13 @@
 <span class="sd">    Here is an example of a cubic B-spline:</span>
 
 <span class="sd">        &gt;&gt;&gt; bspline_basis(3, range(5), 0, x)</span>
-<span class="sd">        Piecewise((x**3/6, And(x &lt; 1, x &gt;= 0)),</span>
-<span class="sd">                  (-x**3/2 + 2*x**2 - 2*x + 2/3, And(x &lt; 2, x &gt;= 1)),</span>
-<span class="sd">                  (x**3/2 - 4*x**2 + 10*x - 22/3, And(x &lt; 3, x &gt;= 2)),</span>
-<span class="sd">                  (-x**3/6 + 2*x**2 - 8*x + 32/3, And(x &lt;= 4, x &gt;= 3)),</span>
+<span class="sd">        Piecewise((x**3/6, (x &gt;= 0) &amp; (x &lt; 1)),</span>
+<span class="sd">                  (-x**3/2 + 2*x**2 - 2*x + 2/3,</span>
+<span class="sd">                   (x &gt;= 1) &amp; (x &lt; 2)),</span>
+<span class="sd">                  (x**3/2 - 4*x**2 + 10*x - 22/3,</span>
+<span class="sd">                   (x &gt;= 2) &amp; (x &lt; 3)),</span>
+<span class="sd">                  (-x**3/6 + 2*x**2 - 8*x + 32/3,</span>
+<span class="sd">                   (x &gt;= 3) &amp; (x &lt;= 4)),</span>
 <span class="sd">                  (0, true))</span>
 
 <span class="sd">    By repeating knot points, you can introduce discontinuities in the</span>
@@ -209,7 +212,7 @@
 <span class="sd">        &gt;&gt;&gt; d = 1</span>
 <span class="sd">        &gt;&gt;&gt; knots = [0, 0, 2, 3, 4]</span>
 <span class="sd">        &gt;&gt;&gt; bspline_basis(d, knots, 0, x)</span>
-<span class="sd">        Piecewise((-x/2 + 1, And(x &lt;= 2, x &gt;= 0)), (0, true))</span>
+<span class="sd">        Piecewise((-x/2 + 1, (x &gt;= 0) &amp; (x &lt;= 2)), (0, true))</span>
 
 <span class="sd">    It is quite time consuming to construct and evaluate B-splines. If you</span>
 <span class="sd">    need to evaluate a B-splines many times, it is best to lambdify them</span>
@@ -281,13 +284,13 @@
 <span class="sd">    &gt;&gt;&gt; knots = range(5)</span>
 <span class="sd">    &gt;&gt;&gt; splines = bspline_basis_set(d, knots, x)</span>
 <span class="sd">    &gt;&gt;&gt; splines</span>
-<span class="sd">    [Piecewise((x**2/2, And(x &lt; 1, x &gt;= 0)),</span>
-<span class="sd">               (-x**2 + 3*x - 3/2, And(x &lt; 2, x &gt;= 1)),</span>
-<span class="sd">               (x**2/2 - 3*x + 9/2, And(x &lt;= 3, x &gt;= 2)),</span>
+<span class="sd">    [Piecewise((x**2/2, (x &gt;= 0) &amp; (x &lt; 1)),</span>
+<span class="sd">               (-x**2 + 3*x - 3/2, (x &gt;= 1) &amp; (x &lt; 2)),</span>
+<span class="sd">               (x**2/2 - 3*x + 9/2, (x &gt;= 2) &amp; (x &lt;= 3)),</span>
 <span class="sd">               (0, true)),</span>
-<span class="sd">     Piecewise((x**2/2 - x + 1/2, And(x &lt; 2, x &gt;= 1)),</span>
-<span class="sd">               (-x**2 + 5*x - 11/2, And(x &lt; 3, x &gt;= 2)),</span>
-<span class="sd">               (x**2/2 - 4*x + 8, And(x &lt;= 4, x &gt;= 3)),</span>
+<span class="sd">     Piecewise((x**2/2 - x + 1/2, (x &gt;= 1) &amp; (x &lt; 2)),</span>
+<span class="sd">               (-x**2 + 5*x - 11/2, (x &gt;= 2) &amp; (x &lt; 3)),</span>
+<span class="sd">               (x**2/2 - 4*x + 8, (x &gt;= 3) &amp; (x &lt;= 4)),</span>
 <span class="sd">               (0, true))]</span>
 
 <span class="sd">    See Also</span>

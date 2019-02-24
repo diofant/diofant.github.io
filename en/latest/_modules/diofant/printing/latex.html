@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.printing.latex &mdash; Diofant 0.10.1.dev139+g0e52154 documentation</title>
+  <title>diofant.printing.latex &mdash; Diofant 0.10.1.dev189+g793799b documentation</title>
   
 
   
@@ -154,6 +154,7 @@
 <span class="sd">A Printer which converts an expression into its LaTeX equivalent.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
+<span class="kn">import</span> <span class="nn">itertools</span>
 <span class="kn">import</span> <span class="nn">re</span>
 
 <span class="kn">import</span> <span class="nn">mpmath.libmp</span> <span class="k">as</span> <span class="nn">mlib</span>
@@ -183,18 +184,29 @@
 <span class="n">tex_greek_dictionary</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;Alpha&#39;</span><span class="p">:</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span>
     <span class="s1">&#39;Beta&#39;</span><span class="p">:</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Gamma&#39;</span><span class="p">:</span> <span class="sa">r</span><span class="s1">&#39;\Gamma&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Delta&#39;</span><span class="p">:</span> <span class="sa">r</span><span class="s1">&#39;\Delta&#39;</span><span class="p">,</span>
     <span class="s1">&#39;Epsilon&#39;</span><span class="p">:</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span>
     <span class="s1">&#39;Zeta&#39;</span><span class="p">:</span> <span class="s1">&#39;Z&#39;</span><span class="p">,</span>
     <span class="s1">&#39;Eta&#39;</span><span class="p">:</span> <span class="s1">&#39;H&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Theta&#39;</span><span class="p">:</span> <span class="sa">r</span><span class="s1">&#39;\Theta&#39;</span><span class="p">,</span>
     <span class="s1">&#39;Iota&#39;</span><span class="p">:</span> <span class="s1">&#39;I&#39;</span><span class="p">,</span>
     <span class="s1">&#39;Kappa&#39;</span><span class="p">:</span> <span class="s1">&#39;K&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Lambda&#39;</span><span class="p">:</span> <span class="sa">r</span><span class="s1">&#39;\Lambda&#39;</span><span class="p">,</span>
     <span class="s1">&#39;Mu&#39;</span><span class="p">:</span> <span class="s1">&#39;M&#39;</span><span class="p">,</span>
     <span class="s1">&#39;Nu&#39;</span><span class="p">:</span> <span class="s1">&#39;N&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Xi&#39;</span><span class="p">:</span> <span class="sa">r</span><span class="s1">&#39;\Xi&#39;</span><span class="p">,</span>
     <span class="s1">&#39;omicron&#39;</span><span class="p">:</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span>
     <span class="s1">&#39;Omicron&#39;</span><span class="p">:</span> <span class="s1">&#39;O&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Pi&#39;</span><span class="p">:</span> <span class="sa">r</span><span class="s1">&#39;\Pi&#39;</span><span class="p">,</span>
     <span class="s1">&#39;Rho&#39;</span><span class="p">:</span> <span class="s1">&#39;P&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Sigma&#39;</span><span class="p">:</span> <span class="sa">r</span><span class="s1">&#39;\Sigma&#39;</span><span class="p">,</span>
     <span class="s1">&#39;Tau&#39;</span><span class="p">:</span> <span class="s1">&#39;T&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Upsilon&#39;</span><span class="p">:</span> <span class="sa">r</span><span class="s1">&#39;\Upsilon&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Phi&#39;</span><span class="p">:</span> <span class="sa">r</span><span class="s1">&#39;\Phi&#39;</span><span class="p">,</span>
     <span class="s1">&#39;Chi&#39;</span><span class="p">:</span> <span class="s1">&#39;X&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Psi&#39;</span><span class="p">:</span> <span class="sa">r</span><span class="s1">&#39;\Psi&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Omega&#39;</span><span class="p">:</span> <span class="sa">r</span><span class="s1">&#39;\Omega&#39;</span><span class="p">,</span>
     <span class="s1">&#39;lamda&#39;</span><span class="p">:</span> <span class="sa">r</span><span class="s1">&#39;\lambda&#39;</span><span class="p">,</span>
     <span class="s1">&#39;Lamda&#39;</span><span class="p">:</span> <span class="sa">r</span><span class="s1">&#39;\Lambda&#39;</span><span class="p">,</span>
     <span class="s1">&#39;khi&#39;</span><span class="p">:</span> <span class="sa">r</span><span class="s1">&#39;\chi&#39;</span><span class="p">,</span>
@@ -325,7 +337,6 @@
 <span class="sd">        specifies that this expr is the last to appear in a Mul.</span>
 <span class="sd">        ``first=True`` specifies that this expr is the first to appear in a Mul.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">..functions</span> <span class="k">import</span> <span class="n">Piecewise</span>
         <span class="kn">from</span> <span class="nn">..concrete</span> <span class="k">import</span> <span class="n">Product</span><span class="p">,</span> <span class="n">Sum</span>
         <span class="kn">from</span> <span class="nn">..integrals</span> <span class="k">import</span> <span class="n">Integral</span>
 
@@ -337,11 +348,13 @@
             <span class="k">if</span> <span class="ow">not</span> <span class="n">first</span> <span class="ow">and</span> <span class="n">_coeff_isneg</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
                 <span class="k">return</span> <span class="kc">True</span>
 
+        <span class="k">if</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_Piecewise</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+
         <span class="k">if</span> <span class="n">expr</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="n">Mod</span><span class="p">):</span>
             <span class="k">return</span> <span class="kc">True</span>
 
-        <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">last</span> <span class="ow">and</span> <span class="nb">any</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span>
-                             <span class="n">x</span> <span class="ow">in</span> <span class="p">(</span><span class="n">Integral</span><span class="p">,</span> <span class="n">Piecewise</span><span class="p">,</span> <span class="n">Product</span><span class="p">,</span> <span class="n">Sum</span><span class="p">))):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">last</span> <span class="ow">and</span> <span class="nb">any</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">(</span><span class="n">Integral</span><span class="p">,</span> <span class="n">Product</span><span class="p">,</span> <span class="n">Sum</span><span class="p">)):</span>
             <span class="k">return</span> <span class="kc">True</span>
 
         <span class="k">return</span> <span class="kc">False</span>
@@ -1501,6 +1514,55 @@
     <span class="k">def</span> <span class="nf">_print_Identity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">I</span><span class="p">):</span>
         <span class="k">return</span> <span class="sa">r</span><span class="s2">&quot;\mathbb</span><span class="si">{I}</span><span class="s2">&quot;</span>
 
+    <span class="k">def</span> <span class="nf">_print_NDimArray</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
+        <span class="n">mat_str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_settings</span><span class="p">[</span><span class="s1">&#39;mat_str&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">mat_str</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_settings</span><span class="p">[</span><span class="s1">&#39;mode&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;inline&#39;</span><span class="p">:</span>
+                <span class="n">mat_str</span> <span class="o">=</span> <span class="s1">&#39;smallmatrix&#39;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">rank</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">):</span>
+                    <span class="n">mat_str</span> <span class="o">=</span> <span class="s1">&#39;matrix&#39;</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">mat_str</span> <span class="o">=</span> <span class="s1">&#39;array&#39;</span>
+        <span class="n">block_str</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;\begin{%MATSTR%}</span><span class="si">%s</span><span class="s1">\end{%MATSTR%}&#39;</span>
+        <span class="n">block_str</span> <span class="o">=</span> <span class="n">block_str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;%MATSTR%&#39;</span><span class="p">,</span> <span class="n">mat_str</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_settings</span><span class="p">[</span><span class="s1">&#39;mat_delim&#39;</span><span class="p">]:</span>
+            <span class="n">left_delim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_settings</span><span class="p">[</span><span class="s1">&#39;mat_delim&#39;</span><span class="p">]</span>
+            <span class="n">right_delim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_delim_dict</span><span class="p">[</span><span class="n">left_delim</span><span class="p">]</span>
+            <span class="n">block_str</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;\left&#39;</span> <span class="o">+</span> <span class="n">left_delim</span> <span class="o">+</span> <span class="n">block_str</span> <span class="o">+</span> <span class="sa">r</span><span class="s1">&#39;\right&#39;</span> <span class="o">+</span> <span class="n">right_delim</span>
+
+        <span class="k">if</span> <span class="n">expr</span><span class="o">.</span><span class="n">rank</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">block_str</span> <span class="o">%</span> <span class="s2">&quot;&quot;</span>
+
+        <span class="n">level_str</span> <span class="o">=</span> <span class="p">[[]]</span> <span class="o">+</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">rank</span><span class="p">())]</span>
+        <span class="n">shape_ranges</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">expr</span><span class="o">.</span><span class="n">shape</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">outer_i</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="o">*</span><span class="n">shape_ranges</span><span class="p">):</span>
+            <span class="n">level_str</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_print</span><span class="p">(</span><span class="n">expr</span><span class="p">[</span><span class="n">outer_i</span><span class="p">]))</span>
+            <span class="n">even</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">for</span> <span class="n">back_outer_i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">rank</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">level_str</span><span class="p">[</span><span class="n">back_outer_i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">expr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="n">back_outer_i</span><span class="p">]:</span>
+                    <span class="k">break</span>
+                <span class="k">if</span> <span class="n">even</span><span class="p">:</span>
+                    <span class="n">level_str</span><span class="p">[</span><span class="n">back_outer_i</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot; &amp; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">level_str</span><span class="p">[</span><span class="n">back_outer_i</span><span class="o">+</span><span class="mi">1</span><span class="p">]))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">level_str</span><span class="p">[</span><span class="n">back_outer_i</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">block_str</span> <span class="o">%</span> <span class="p">(</span><span class="sa">r</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">level_str</span><span class="p">[</span><span class="n">back_outer_i</span><span class="o">+</span><span class="mi">1</span><span class="p">])))</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">level_str</span><span class="p">[</span><span class="n">back_outer_i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                        <span class="n">level_str</span><span class="p">[</span><span class="n">back_outer_i</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\left[&quot;</span> <span class="o">+</span> <span class="n">level_str</span><span class="p">[</span><span class="n">back_outer_i</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="sa">r</span><span class="s2">&quot;\right]&quot;</span>
+                <span class="n">even</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">even</span>
+                <span class="n">level_str</span><span class="p">[</span><span class="n">back_outer_i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">out_str</span> <span class="o">=</span> <span class="n">level_str</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">expr</span><span class="o">.</span><span class="n">rank</span><span class="p">()</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">out_str</span> <span class="o">=</span> <span class="n">block_str</span> <span class="o">%</span> <span class="n">out_str</span>
+
+        <span class="k">return</span> <span class="n">out_str</span>
+
+    <span class="n">_print_ImmutableDenseNDimArray</span> <span class="o">=</span> <span class="n">_print_NDimArray</span>
+    <span class="n">_print_ImmutableSparseNDimArray</span> <span class="o">=</span> <span class="n">_print_NDimArray</span>
+    <span class="n">_print_MutableDenseNDimArray</span> <span class="o">=</span> <span class="n">_print_NDimArray</span>
+    <span class="n">_print_MutableSparseNDimArray</span> <span class="o">=</span> <span class="n">_print_NDimArray</span>
+
     <span class="k">def</span> <span class="nf">_print_tuple</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
         <span class="k">return</span> <span class="sa">r</span><span class="s2">&quot;\left ( </span><span class="si">%s</span><span class="s2">\right )&quot;</span> <span class="o">%</span> \
             <span class="sa">r</span><span class="s2">&quot;, \quad &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span> <span class="bp">self</span><span class="o">.</span><span class="n">_print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">expr</span> <span class="p">])</span>
@@ -1823,7 +1885,9 @@
     <span class="n">tex</span> <span class="o">=</span> <span class="n">tex_greek_dictionary</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">tex</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">tex</span>
-    <span class="k">elif</span> <span class="n">s</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">greek_letters_set</span> <span class="ow">or</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">other_symbols</span><span class="p">:</span>
+    <span class="k">elif</span> <span class="n">s</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">greek_letters_set</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">s</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">other_symbols</span><span class="p">:</span>
         <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">s</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="c1"># Process modifiers, if any, and recurse</span>

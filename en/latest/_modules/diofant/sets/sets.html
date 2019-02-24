@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.sets.sets &mdash; Diofant 0.10.1.dev139+g0e52154 documentation</title>
+  <title>diofant.sets.sets &mdash; Diofant 0.10.1.dev189+g793799b documentation</title>
   
 
   
@@ -156,6 +156,7 @@
 
 <span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">Basic</span><span class="p">,</span> <span class="n">Eq</span><span class="p">,</span> <span class="n">Expr</span><span class="p">,</span> <span class="n">Mul</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">nan</span><span class="p">,</span> <span class="n">oo</span><span class="p">,</span> <span class="n">sympify</span><span class="p">,</span> <span class="n">zoo</span>
 <span class="kn">from</span> <span class="nn">..core.compatibility</span> <span class="k">import</span> <span class="n">iterable</span><span class="p">,</span> <span class="n">ordered</span>
+<span class="kn">from</span> <span class="nn">..core.decorators</span> <span class="k">import</span> <span class="n">_sympifyit</span>
 <span class="kn">from</span> <span class="nn">..core.evalf</span> <span class="k">import</span> <span class="n">EvalfMixin</span>
 <span class="kn">from</span> <span class="nn">..core.evaluate</span> <span class="k">import</span> <span class="n">global_evaluate</span>
 <span class="kn">from</span> <span class="nn">..core.singleton</span> <span class="k">import</span> <span class="n">Singleton</span>
@@ -349,8 +350,23 @@
                 <span class="n">ret</span> <span class="o">|=</span> <span class="n">Complement</span><span class="p">(</span><span class="n">FiniteSet</span><span class="p">(</span><span class="o">*</span><span class="n">unks</span><span class="p">),</span> <span class="bp">self</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">ret</span>
 
-    <span class="k">def</span> <span class="nf">symmetric_difference</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">SymmetricDifference</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
+<div class="viewcode-block" id="Set.symmetric_difference"><a class="viewcode-back" href="../../../modules/sets.html#diofant.sets.sets.Set.symmetric_difference">[docs]</a>    <span class="k">def</span> <span class="nf">symmetric_difference</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns symmetric difference of ``self`` and ``other``.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; Interval(1, 3).symmetric_difference(Reals)</span>
+<span class="sd">        (-oo, 1) U (3, oo)</span>
+
+<span class="sd">        References</span>
+<span class="sd">        ==========</span>
+
+<span class="sd">        * https://en.wikipedia.org/wiki/Symmetric_difference</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">SymmetricDifference</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_symmetric_difference</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">Union</span><span class="p">(</span><span class="n">Complement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">),</span> <span class="n">Complement</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="p">))</span>
@@ -395,7 +411,8 @@
     <span class="k">def</span> <span class="nf">_sup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;(</span><span class="si">%s</span><span class="s2">)._sup&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Set.contains"><a class="viewcode-back" href="../../../modules/sets.html#diofant.sets.sets.Set.contains">[docs]</a>    <span class="k">def</span> <span class="nf">contains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<div class="viewcode-block" id="Set.contains"><a class="viewcode-back" href="../../../modules/sets.html#diofant.sets.sets.Set.contains">[docs]</a>    <span class="nd">@_sympifyit</span><span class="p">(</span><span class="s1">&#39;other&#39;</span><span class="p">,</span> <span class="n">false</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">contains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns True if &#39;other&#39; is contained in &#39;self&#39; as an element.</span>
 
@@ -410,7 +427,6 @@
 <span class="sd">        True</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">other</span> <span class="o">=</span> <span class="n">sympify</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contains</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">ret</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">ret</span> <span class="o">=</span> <span class="n">Contains</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -595,14 +611,49 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">is_closed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test if a set is closed.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; Interval(0, 1).is_closed</span>
+<span class="sd">        True</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">boundary</span><span class="o">.</span><span class="n">is_subset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">closure</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the closure of a set.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; Interval(0, 1, right_open=True).closure</span>
+<span class="sd">        [0, 1]</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">boundary</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">interior</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the interior of a set.</span>
+
+<span class="sd">        The interior of a set consists all points of a set that do not</span>
+<span class="sd">        belong to its boundary.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; Interval(0, 1).interior</span>
+<span class="sd">        (0, 1)</span>
+<span class="sd">        &gt;&gt;&gt; Interval(0, 1).boundary.interior</span>
+<span class="sd">        EmptySet()</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">boundary</span>
 
     <span class="nd">@property</span>
@@ -1475,7 +1526,7 @@
         <span class="n">args</span> <span class="o">=</span> <span class="n">flatten</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Intersection expected at least one argument&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">UniversalSet</span>
 
         <span class="n">args</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">ordered</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">Set</span><span class="o">.</span><span class="n">_infimum_key</span><span class="p">))</span>
 

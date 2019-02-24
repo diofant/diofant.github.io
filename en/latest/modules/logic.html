@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Logic &mdash; Diofant 0.10.1.dev139+g0e52154 documentation</title>
+  <title>Logic &mdash; Diofant 0.10.1.dev189+g793799b documentation</title>
   
 
   
@@ -202,11 +202,11 @@ using symbolic and Boolean values.</p>
 (<a class="reference internal" href="#diofant.logic.boolalg.And" title="diofant.logic.boolalg.And"><code class="xref py py-class docutils literal notranslate"><span class="pre">And</span></code></a>), <code class="docutils literal notranslate"><span class="pre">|</span></code> (<a class="reference internal" href="#diofant.logic.boolalg.Or" title="diofant.logic.boolalg.Or"><code class="xref py py-class docutils literal notranslate"><span class="pre">Or</span></code></a>),
 <code class="docutils literal notranslate"><span class="pre">~</span></code> (<a class="reference internal" href="#diofant.logic.boolalg.Not" title="diofant.logic.boolalg.Not"><code class="xref py py-class docutils literal notranslate"><span class="pre">Not</span></code></a>):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">|</span> <span class="p">(</span><span class="n">x</span> <span class="o">&amp;</span> <span class="n">y</span><span class="p">)</span>
-<span class="go">Or(And(x, y), y)</span>
+<span class="go">y | (x &amp; y)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">|</span> <span class="n">y</span>
-<span class="go">Or(x, y)</span>
+<span class="go">x | y</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="o">~</span><span class="n">x</span>
-<span class="go">Not(x)</span>
+<span class="go">~x</span>
 </pre></div>
 </div>
 <p>You can also form implications with <code class="docutils literal notranslate"><span class="pre">&gt;&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;&lt;</span></code>:</p>
@@ -243,7 +243,7 @@ the conditions.</p>
 <span class="gp">... </span>            <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dontcares</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">SOPform</span><span class="p">([</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">],</span> <span class="n">minterms</span><span class="p">,</span> <span class="n">dontcares</span><span class="p">)</span>
-<span class="go">Or(And(Not(t), z), And(y, z))</span>
+<span class="go">(y &amp; z) | (z &amp; ~t)</span>
 </pre></div>
 </div>
 <p class="rubric">References</p>
@@ -269,7 +269,7 @@ the conditions.</p>
 <span class="gp">... </span>            <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dontcares</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">POSform</span><span class="p">([</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">],</span> <span class="n">minterms</span><span class="p">,</span> <span class="n">dontcares</span><span class="p">)</span>
-<span class="go">And(Or(Not(t), y), z)</span>
+<span class="go">z &amp; (y | ~t)</span>
 </pre></div>
 </div>
 <p class="rubric">References</p>
@@ -382,7 +382,7 @@ class when they evaluate to false.</p>
 if any of them are False, and True if they are all True.</p>
 <p class="rubric">Examples</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">&amp;</span> <span class="n">y</span>
-<span class="go">And(x, y)</span>
+<span class="go">x &amp; y</span>
 </pre></div>
 </div>
 <p class="rubric">Notes</p>
@@ -404,7 +404,7 @@ and. Hence, <code class="docutils literal notranslate"><span class="pre">And(a,<
 if any of them are True, and False if they are all False.</p>
 <p class="rubric">Examples</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">|</span> <span class="n">y</span>
-<span class="go">Or(x, y)</span>
+<span class="go">x | y</span>
 </pre></div>
 </div>
 <p class="rubric">Notes</p>
@@ -434,11 +434,11 @@ Returns False if the statement is True.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Not</span><span class="p">(</span><span class="n">Or</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">))</span>
 <span class="go">false</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Not</span><span class="p">(</span><span class="n">And</span><span class="p">(</span><span class="n">And</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">x</span><span class="p">),</span> <span class="n">Or</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="kc">False</span><span class="p">)))</span>
-<span class="go">Not(x)</span>
+<span class="go">~x</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="o">~</span><span class="n">x</span>
-<span class="go">Not(x)</span>
+<span class="go">~x</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Not</span><span class="p">(</span><span class="n">And</span><span class="p">(</span><span class="n">Or</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">Or</span><span class="p">(</span><span class="o">~</span><span class="n">x</span><span class="p">,</span> <span class="o">~</span><span class="n">y</span><span class="p">)))</span>
-<span class="go">Not(And(Or(Not(x), Not(y)), Or(x, y)))</span>
+<span class="go">~((x | y) &amp; (~x | ~y))</span>
 </pre></div>
 </div>
 <p class="rubric">Notes</p>
@@ -503,7 +503,7 @@ Returns False if all arguments are True.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Nand</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 <span class="go">false</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Nand</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-<span class="go">Not(And(x, y))</span>
+<span class="go">~(x &amp; y)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -526,7 +526,7 @@ Returns True if all arguments are False.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Nor</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 <span class="go">true</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Nor</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-<span class="go">Not(Or(x, y))</span>
+<span class="go">~(x | y)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -621,9 +621,9 @@ That is, of the form ((A | ~B | …) &amp; (B | C | …) &amp; …).
 If simplify is True, the expr is evaluated to its simplest CNF form.</p>
 <p class="rubric">Examples</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">to_cnf</span><span class="p">(</span><span class="o">~</span><span class="p">(</span><span class="n">a</span> <span class="o">|</span> <span class="n">b</span><span class="p">)</span> <span class="o">|</span> <span class="n">c</span><span class="p">)</span>
-<span class="go">And(Or(Not(a), c), Or(Not(b), c))</span>
+<span class="go">(c | ~a) &amp; (c | ~b)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">to_cnf</span><span class="p">((</span><span class="n">a</span> <span class="o">|</span> <span class="n">b</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">a</span> <span class="o">|</span> <span class="o">~</span><span class="n">a</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
-<span class="go">Or(a, b)</span>
+<span class="go">a | b</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -636,9 +636,9 @@ That is, of the form ((A &amp; ~B &amp; …) | (B &amp; C &amp; …) | …).
 If simplify is True, the expr is evaluated to its simplest DNF form.</p>
 <p class="rubric">Examples</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">to_dnf</span><span class="p">(</span><span class="n">b</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">a</span> <span class="o">|</span> <span class="n">c</span><span class="p">))</span>
-<span class="go">Or(And(a, b), And(b, c))</span>
+<span class="go">(a &amp; b) | (b &amp; c)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">to_dnf</span><span class="p">((</span><span class="n">a</span> <span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">a</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">b</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">b</span> <span class="o">&amp;</span> <span class="n">c</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="o">~</span><span class="n">b</span> <span class="o">&amp;</span> <span class="n">c</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
-<span class="go">Or(a, c)</span>
+<span class="go">a | c</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -702,13 +702,13 @@ non-boolean functions contained within the input.</li>
 <p class="rubric">Examples</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="o">~</span><span class="n">x</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">y</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">z</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="o">~</span><span class="n">x</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">y</span> <span class="o">&amp;</span> <span class="n">z</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">simplify_logic</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
-<span class="go">And(Not(x), Not(y))</span>
+<span class="go">~x &amp; ~y</span>
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sympify</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
-<span class="go">Or(And(Not(x), Not(y), Not(z)), And(Not(x), Not(y), z))</span>
+<span class="go">(z &amp; ~x &amp; ~y) | (~x &amp; ~y &amp; ~z)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">simplify_logic</span><span class="p">(</span><span class="n">_</span><span class="p">)</span>
-<span class="go">And(Not(x), Not(y))</span>
+<span class="go">~x &amp; ~y</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -731,7 +731,7 @@ If no such mapping exists, return False.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">function1</span> <span class="o">=</span> <span class="n">SOPform</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">y</span><span class="p">],</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">function2</span> <span class="o">=</span> <span class="n">SOPform</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">],</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bool_map</span><span class="p">(</span><span class="n">function1</span><span class="p">,</span> <span class="n">function2</span><span class="p">)</span>
-<span class="go">(And(Not(z), y), {y: a, z: b})</span>
+<span class="go">(y &amp; ~z, {y: a, z: b})</span>
 </pre></div>
 </div>
 <p>The results are not necessarily unique, but they are canonical. Here,
@@ -739,13 +739,10 @@ If no such mapping exists, return False.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eq</span> <span class="o">=</span>  <span class="n">Or</span><span class="p">(</span><span class="n">And</span><span class="p">(</span><span class="n">Not</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">t</span><span class="p">),</span> <span class="n">And</span><span class="p">(</span><span class="n">Not</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">z</span><span class="p">),</span> <span class="n">And</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">eq2</span> <span class="o">=</span> <span class="n">Or</span><span class="p">(</span><span class="n">And</span><span class="p">(</span><span class="n">Not</span><span class="p">(</span><span class="n">c</span><span class="p">),</span> <span class="n">a</span><span class="p">),</span> <span class="n">And</span><span class="p">(</span><span class="n">Not</span><span class="p">(</span><span class="n">c</span><span class="p">),</span> <span class="n">d</span><span class="p">),</span> <span class="n">And</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bool_map</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">eq2</span><span class="p">)</span>
-<span class="go">(Or(And(Not(y), t), And(Not(y), z),</span>
-<span class="go"> And(x, y)), {t: a, x: b, y: c, z: d})</span>
+<span class="go">((x &amp; y) | (t &amp; ~y) | (z &amp; ~y), {t: a, x: b, y: c, z: d})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">eq</span> <span class="o">=</span> <span class="n">And</span><span class="p">(</span><span class="n">Xor</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="n">c</span><span class="p">,</span> <span class="n">And</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bool_map</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">eq</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">c</span><span class="p">:</span> <span class="n">x</span><span class="p">}))</span>
-<span class="go">(And(Or(Not(a), Not(b)),</span>
-<span class="go"> Or(a, b), c, d),</span>
-<span class="go"> {a: a, b: b, c: d, d: x})</span>
+<span class="go">(c &amp; d &amp; (a | b) &amp; (~a | ~b), {a: a, b: b, c: d, d: x})</span>
 </pre></div>
 </div>
 </dd></dl>

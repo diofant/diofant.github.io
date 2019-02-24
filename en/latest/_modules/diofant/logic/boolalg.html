@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.logic.boolalg &mdash; Diofant 0.10.1.dev139+g0e52154 documentation</title>
+  <title>diofant.logic.boolalg &mdash; Diofant 0.10.1.dev189+g793799b documentation</title>
   
 
   
@@ -448,7 +448,7 @@
 <span class="sd">    ========</span>
 
 <span class="sd">    &gt;&gt;&gt; x &amp; y</span>
-<span class="sd">    And(x, y)</span>
+<span class="sd">    x &amp; y</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    =====</span>
@@ -518,7 +518,7 @@
 <span class="sd">    ========</span>
 
 <span class="sd">    &gt;&gt;&gt; x | y</span>
-<span class="sd">    Or(x, y)</span>
+<span class="sd">    x | y</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    =====</span>
@@ -594,11 +594,11 @@
 <span class="sd">    &gt;&gt;&gt; Not(Or(True, False))</span>
 <span class="sd">    false</span>
 <span class="sd">    &gt;&gt;&gt; Not(And(And(True, x), Or(x, False)))</span>
-<span class="sd">    Not(x)</span>
+<span class="sd">    ~x</span>
 <span class="sd">    &gt;&gt;&gt; ~x</span>
-<span class="sd">    Not(x)</span>
+<span class="sd">    ~x</span>
 <span class="sd">    &gt;&gt;&gt; Not(And(Or(x, y), Or(~x, ~y)))</span>
-<span class="sd">    Not(And(Or(Not(x), Not(y)), Or(x, y)))</span>
+<span class="sd">    ~((x | y) &amp; (~x | ~y))</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    =====</span>
@@ -812,7 +812,7 @@
 <span class="sd">    &gt;&gt;&gt; Nand(True, True)</span>
 <span class="sd">    false</span>
 <span class="sd">    &gt;&gt;&gt; Nand(x, y)</span>
-<span class="sd">    Not(And(x, y))</span>
+<span class="sd">    ~(x &amp; y)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -843,7 +843,7 @@
 <span class="sd">    &gt;&gt;&gt; Nor(False, False)</span>
 <span class="sd">    true</span>
 <span class="sd">    &gt;&gt;&gt; Nor(x, y)</span>
-<span class="sd">    Not(Or(x, y))</span>
+<span class="sd">    ~(x | y)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -1098,7 +1098,7 @@
 <span class="sd">    ========</span>
 
 <span class="sd">    &gt;&gt;&gt; distribute_and_over_or(Or(a, And(Not(b), Not(c))))</span>
-<span class="sd">    And(Or(Not(b), a), Or(Not(c), a))</span>
+<span class="sd">    (a | ~b) &amp; (a | ~c)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">_distribute</span><span class="p">((</span><span class="n">expr</span><span class="p">,</span> <span class="n">And</span><span class="p">,</span> <span class="n">Or</span><span class="p">))</span>
@@ -1115,7 +1115,7 @@
 <span class="sd">    ========</span>
 
 <span class="sd">    &gt;&gt;&gt; distribute_or_over_and(And(Or(Not(a), b), c))</span>
-<span class="sd">    Or(And(Not(a), c), And(b, c))</span>
+<span class="sd">    (b &amp; c) | (c &amp; ~a)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">_distribute</span><span class="p">((</span><span class="n">expr</span><span class="p">,</span> <span class="n">Or</span><span class="p">,</span> <span class="n">And</span><span class="p">))</span>
@@ -1145,15 +1145,15 @@
 <span class="sd">    Converts expr to Negation Normal Form.</span>
 <span class="sd">    A logical expression is in Negation Normal Form (NNF) if it</span>
 <span class="sd">    contains only And, Or and Not, and Not is applied only to literals.</span>
-<span class="sd">    If simpify is True, the result contains no redundant clauses.</span>
+<span class="sd">    If simplify is True, the result contains no redundant clauses.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    ========</span>
 
 <span class="sd">    &gt;&gt;&gt; to_nnf(Not((~a &amp; ~b) | (c &amp; d)))</span>
-<span class="sd">    And(Or(Not(c), Not(d)), Or(a, b))</span>
+<span class="sd">    (a | b) &amp; (~c | ~d)</span>
 <span class="sd">    &gt;&gt;&gt; to_nnf(Equivalent(a &gt;&gt; b, b &gt;&gt; a))</span>
-<span class="sd">    And(Or(And(Not(a), b), Not(a), b), Or(And(Not(b), a), Not(b), a))</span>
+<span class="sd">    (a | ~b | (a &amp; ~b)) &amp; (b | ~a | (b &amp; ~a))</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">is_nnf</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">simplify</span><span class="p">):</span>
@@ -1171,9 +1171,9 @@
 <span class="sd">    ========</span>
 
 <span class="sd">    &gt;&gt;&gt; to_cnf(~(a | b) | c)</span>
-<span class="sd">    And(Or(Not(a), c), Or(Not(b), c))</span>
+<span class="sd">    (c | ~a) &amp; (c | ~b)</span>
 <span class="sd">    &gt;&gt;&gt; to_cnf((a | b) &amp; (a | ~a), True)</span>
-<span class="sd">    Or(a, b)</span>
+<span class="sd">    a | b</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">expr</span> <span class="o">=</span> <span class="n">sympify</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
@@ -1201,9 +1201,9 @@
 <span class="sd">    ========</span>
 
 <span class="sd">    &gt;&gt;&gt; to_dnf(b &amp; (a | c))</span>
-<span class="sd">    Or(And(a, b), And(b, c))</span>
+<span class="sd">    (a &amp; b) | (b &amp; c)</span>
 <span class="sd">    &gt;&gt;&gt; to_dnf((a &amp; b) | (a &amp; ~b) | (b &amp; c) | (~b &amp; c), True)</span>
-<span class="sd">    Or(a, c)</span>
+<span class="sd">    a | c</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">expr</span> <span class="o">=</span> <span class="n">sympify</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
@@ -1226,7 +1226,7 @@
 <span class="sd">    Checks if expr is in Negation Normal Form.</span>
 <span class="sd">    A logical expression is in Negation Normal Form (NNF) if it</span>
 <span class="sd">    contains only And, Or and Not, and Not is applied only to literals.</span>
-<span class="sd">    If simpified is True, checks if result contains no redundant clauses.</span>
+<span class="sd">    If simplified is True, checks if result contains no redundant clauses.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    ========</span>
@@ -1360,11 +1360,11 @@
 <span class="sd">    ========</span>
 
 <span class="sd">    &gt;&gt;&gt; eliminate_implications(Implies(a, b))</span>
-<span class="sd">    Or(Not(a), b)</span>
+<span class="sd">    b | ~a</span>
 <span class="sd">    &gt;&gt;&gt; eliminate_implications(Equivalent(a, b))</span>
-<span class="sd">    And(Or(Not(a), b), Or(Not(b), a))</span>
+<span class="sd">    (a | ~b) &amp; (b | ~a)</span>
 <span class="sd">    &gt;&gt;&gt; eliminate_implications(Equivalent(a, b, c))</span>
-<span class="sd">    And(Or(Not(a), b), Or(Not(b), c), Or(Not(c), a))</span>
+<span class="sd">    (a | ~c) &amp; (b | ~a) &amp; (c | ~b)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">to_nnf</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
@@ -1549,7 +1549,7 @@
 <span class="sd">    ...             [0, 1, 1, 1], [1, 0, 1, 1], [1, 1, 1, 1]]</span>
 <span class="sd">    &gt;&gt;&gt; dontcares = [[0, 0, 0, 0], [0, 0, 1, 0], [0, 1, 0, 1]]</span>
 <span class="sd">    &gt;&gt;&gt; SOPform([t, x, y, z], minterms, dontcares)</span>
-<span class="sd">    Or(And(Not(t), z), And(y, z))</span>
+<span class="sd">    (y &amp; z) | (z &amp; ~t)</span>
 
 <span class="sd">    References</span>
 <span class="sd">    ==========</span>
@@ -1598,7 +1598,7 @@
 <span class="sd">    ...             [1, 0, 1, 1], [1, 1, 1, 1]]</span>
 <span class="sd">    &gt;&gt;&gt; dontcares = [[0, 0, 0, 0], [0, 0, 1, 0], [0, 1, 0, 1]]</span>
 <span class="sd">    &gt;&gt;&gt; POSform([t, x, y, z], minterms, dontcares)</span>
-<span class="sd">    And(Or(Not(t), y), z)</span>
+<span class="sd">    z &amp; (y | ~t)</span>
 
 <span class="sd">    References</span>
 <span class="sd">    ==========</span>
@@ -1664,12 +1664,12 @@
 
 <span class="sd">    &gt;&gt;&gt; b = (~x &amp; ~y &amp; ~z) | (~x &amp; ~y &amp; z)</span>
 <span class="sd">    &gt;&gt;&gt; simplify_logic(b)</span>
-<span class="sd">    And(Not(x), Not(y))</span>
+<span class="sd">    ~x &amp; ~y</span>
 
 <span class="sd">    &gt;&gt;&gt; sympify(b)</span>
-<span class="sd">    Or(And(Not(x), Not(y), Not(z)), And(Not(x), Not(y), z))</span>
+<span class="sd">    (z &amp; ~x &amp; ~y) | (~x &amp; ~y &amp; ~z)</span>
 <span class="sd">    &gt;&gt;&gt; simplify_logic(_)</span>
-<span class="sd">    And(Not(x), Not(y))</span>
+<span class="sd">    ~x &amp; ~y</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -1756,7 +1756,7 @@
 <span class="sd">    &gt;&gt;&gt; function1 = SOPform([x, z, y], [[1, 0, 1], [0, 0, 1]])</span>
 <span class="sd">    &gt;&gt;&gt; function2 = SOPform([a, b, c], [[1, 0, 1], [1, 0, 0]])</span>
 <span class="sd">    &gt;&gt;&gt; bool_map(function1, function2)</span>
-<span class="sd">    (And(Not(z), y), {y: a, z: b})</span>
+<span class="sd">    (y &amp; ~z, {y: a, z: b})</span>
 
 <span class="sd">    The results are not necessarily unique, but they are canonical. Here,</span>
 <span class="sd">    ``(t, z)`` could be ``(a, d)`` or ``(d, a)``:</span>
@@ -1764,13 +1764,10 @@
 <span class="sd">    &gt;&gt;&gt; eq =  Or(And(Not(y), t), And(Not(y), z), And(x, y))</span>
 <span class="sd">    &gt;&gt;&gt; eq2 = Or(And(Not(c), a), And(Not(c), d), And(b, c))</span>
 <span class="sd">    &gt;&gt;&gt; bool_map(eq, eq2)</span>
-<span class="sd">    (Or(And(Not(y), t), And(Not(y), z),</span>
-<span class="sd">     And(x, y)), {t: a, x: b, y: c, z: d})</span>
+<span class="sd">    ((x &amp; y) | (t &amp; ~y) | (z &amp; ~y), {t: a, x: b, y: c, z: d})</span>
 <span class="sd">    &gt;&gt;&gt; eq = And(Xor(a, b), c, And(c, d))</span>
 <span class="sd">    &gt;&gt;&gt; bool_map(eq, eq.subs({c: x}))</span>
-<span class="sd">    (And(Or(Not(a), Not(b)),</span>
-<span class="sd">     Or(a, b), c, d),</span>
-<span class="sd">     {a: a, b: b, c: d, d: x})</span>
+<span class="sd">    (c &amp; d &amp; (a | b) &amp; (~a | ~b), {a: a, b: b, c: d, d: x})</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 

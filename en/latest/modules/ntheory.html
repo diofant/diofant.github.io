@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Number Theory &mdash; Diofant 0.10.1.dev139+g0e52154 documentation</title>
+  <title>Number Theory &mdash; Diofant 0.10.1.dev189+g793799b documentation</title>
   
 
   
@@ -1686,6 +1686,33 @@ A Computational Perspective”, Springer, 2nd edition, 135-138</li>
 </dd></dl>
 
 <span class="target" id="module-diofant.ntheory.residue_ntheory"></span><dl class="function">
+<dt id="diofant.ntheory.residue_ntheory.discrete_log">
+<code class="descclassname">diofant.ntheory.residue_ntheory.</code><code class="descname">discrete_log</code><span class="sig-paren">(</span><em>n</em>, <em>a</em>, <em>b</em>, <em>order=None</em>, <em>prime_order=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/residue_ntheory.html#discrete_log"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.residue_ntheory.discrete_log" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the discrete logarithm of <code class="docutils literal notranslate"><span class="pre">a</span></code> to the base <code class="docutils literal notranslate"><span class="pre">b</span></code> modulo <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
+<p>This is a recursive function to reduce the discrete logarithm problem in
+cyclic groups of composite order to the problem in cyclic groups of
+prime order.</p>
+<p class="rubric">Notes</p>
+<p>It employs different algorithms depending on the problem (subgroup order
+size, prime order or not):</p>
+<ul class="simple">
+<li>Trial multiplication</li>
+<li>Baby-step giant-step</li>
+<li>Pohlig-Hellman</li>
+</ul>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><a class="reference external" href="http://mathworld.wolfram.com/DiscreteLogarithm.html">http://mathworld.wolfram.com/DiscreteLogarithm.html</a></li>
+<li><a class="reference internal" href="../sources.html#menezes97" id="id2">[MVV97]</a></li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">discrete_log</span><span class="p">(</span><span class="mi">41</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+<span class="go">3</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
 <dt id="diofant.ntheory.residue_ntheory.is_nthpow_residue">
 <code class="descclassname">diofant.ntheory.residue_ntheory.</code><code class="descname">is_nthpow_residue</code><span class="sig-paren">(</span><em>a</em>, <em>n</em>, <em>m</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/residue_ntheory.html#is_nthpow_residue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.residue_ntheory.is_nthpow_residue" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns True if <code class="docutils literal notranslate"><span class="pre">x**n</span> <span class="pre">==</span> <span class="pre">a</span> <span class="pre">(mod</span> <span class="pre">m)</span></code> has solutions.</p>
@@ -2017,6 +2044,33 @@ in memory; otherwise use <code class="docutils literal notranslate"><span class=
 <p class="rubric">Examples</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">sqrt_mod_iter</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">43</span><span class="p">))</span>
 <span class="go">[21, 22]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descclassname">diofant.ntheory.residue_ntheory.</code><code class="descname">discrete_log</code><span class="sig-paren">(</span><em>n</em>, <em>a</em>, <em>b</em>, <em>order=None</em>, <em>prime_order=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/residue_ntheory.html#discrete_log"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Compute the discrete logarithm of <code class="docutils literal notranslate"><span class="pre">a</span></code> to the base <code class="docutils literal notranslate"><span class="pre">b</span></code> modulo <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
+<p>This is a recursive function to reduce the discrete logarithm problem in
+cyclic groups of composite order to the problem in cyclic groups of
+prime order.</p>
+<p class="rubric">Notes</p>
+<p>It employs different algorithms depending on the problem (subgroup order
+size, prime order or not):</p>
+<ul class="simple">
+<li>Trial multiplication</li>
+<li>Baby-step giant-step</li>
+<li>Pohlig-Hellman</li>
+</ul>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><a class="reference external" href="http://mathworld.wolfram.com/DiscreteLogarithm.html">http://mathworld.wolfram.com/DiscreteLogarithm.html</a></li>
+<li><a class="reference internal" href="../sources.html#menezes97" id="id3">[MVV97]</a></li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">discrete_log</span><span class="p">(</span><span class="mi">41</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+<span class="go">3</span>
 </pre></div>
 </div>
 </dd></dl>

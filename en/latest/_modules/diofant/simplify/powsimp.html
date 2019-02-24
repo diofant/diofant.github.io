@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.simplify.powsimp &mdash; Diofant 0.10.1.dev139+g0e52154 documentation</title>
+  <title>diofant.simplify.powsimp &mdash; Diofant 0.10.1.dev189+g793799b documentation</title>
   
 
   
@@ -524,15 +524,6 @@
             <span class="k">if</span> <span class="n">term</span><span class="o">.</span><span class="n">is_commutative</span><span class="p">:</span>
                 <span class="n">c_powers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">term</span><span class="o">.</span><span class="n">as_base_exp</span><span class="p">()))</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="c1"># This is the logic that combines bases that are</span>
-                <span class="c1"># different and non-commutative, but with equal and</span>
-                <span class="c1"># commutative exponents: A**x*B**x == (A*B)**x.</span>
-                <span class="k">if</span> <span class="n">nc_part</span><span class="p">:</span>
-                    <span class="n">b1</span><span class="p">,</span> <span class="n">e1</span> <span class="o">=</span> <span class="n">nc_part</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">as_base_exp</span><span class="p">()</span>
-                    <span class="n">b2</span><span class="p">,</span> <span class="n">e2</span> <span class="o">=</span> <span class="n">term</span><span class="o">.</span><span class="n">as_base_exp</span><span class="p">()</span>
-                    <span class="k">if</span> <span class="p">(</span><span class="n">e1</span> <span class="o">==</span> <span class="n">e2</span> <span class="ow">and</span> <span class="n">e2</span><span class="o">.</span><span class="n">is_commutative</span><span class="p">):</span>
-                        <span class="n">nc_part</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">Pow</span><span class="p">(</span><span class="n">b1</span><span class="o">*</span><span class="n">b2</span><span class="p">,</span> <span class="n">e1</span><span class="p">)</span>
-                        <span class="k">continue</span>
                 <span class="n">nc_part</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">term</span><span class="p">)</span>
 
         <span class="c1"># Pull out numerical coefficients from exponent if assumptions allow</span>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.printing.pretty.pretty &mdash; Diofant 0.10.1.dev139+g0e52154 documentation</title>
+  <title>diofant.printing.pretty.pretty &mdash; Diofant 0.10.1.dev189+g793799b documentation</title>
   
 
   
@@ -150,7 +150,9 @@
            <div itemprop="articleBody">
             
   <h1>Source code for diofant.printing.pretty.pretty</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">...core</span> <span class="k">import</span> <span class="n">Add</span><span class="p">,</span> <span class="n">Equality</span><span class="p">,</span> <span class="n">Mul</span><span class="p">,</span> <span class="n">Pow</span><span class="p">,</span> <span class="n">Rational</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">Symbol</span><span class="p">,</span> <span class="n">oo</span>
+<span></span><span class="kn">import</span> <span class="nn">itertools</span>
+
+<span class="kn">from</span> <span class="nn">...core</span> <span class="k">import</span> <span class="n">Add</span><span class="p">,</span> <span class="n">Equality</span><span class="p">,</span> <span class="n">Mul</span><span class="p">,</span> <span class="n">Pow</span><span class="p">,</span> <span class="n">Rational</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">Symbol</span><span class="p">,</span> <span class="n">oo</span>
 <span class="kn">from</span> <span class="nn">...core.function</span> <span class="k">import</span> <span class="n">_coeff_isneg</span>
 <span class="kn">from</span> <span class="nn">...utilities</span> <span class="k">import</span> <span class="n">default_sort_key</span><span class="p">,</span> <span class="n">group</span>
 <span class="kn">from</span> <span class="nn">..conventions</span> <span class="k">import</span> <span class="n">requires_partial</span>
@@ -740,6 +742,7 @@
 
     <span class="k">def</span> <span class="nf">_print_MatrixBase</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
         <span class="n">D</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_print_matrix_contents</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        <span class="n">D</span><span class="o">.</span><span class="n">baseline</span> <span class="o">=</span> <span class="n">D</span><span class="o">.</span><span class="n">height</span><span class="p">()</span><span class="o">//</span><span class="mi">2</span>
         <span class="n">D</span> <span class="o">=</span> <span class="n">prettyForm</span><span class="p">(</span><span class="o">*</span><span class="n">D</span><span class="o">.</span><span class="n">parens</span><span class="p">(</span><span class="s1">&#39;[&#39;</span><span class="p">,</span> <span class="s1">&#39;]&#39;</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">D</span>
     <span class="n">_print_ImmutableMatrix</span> <span class="o">=</span> <span class="n">_print_MatrixBase</span>
@@ -883,6 +886,40 @@
                     <span class="n">strs</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="s1">&#39; &#39;</span><span class="o">*</span><span class="p">(</span><span class="n">lengths</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">prettyForm</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">s</span><span class="p">[:</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">strs</span><span class="p">]))</span>
+
+    <span class="k">def</span> <span class="nf">_print_NDimArray</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">...matrices</span> <span class="k">import</span> <span class="n">ImmutableMatrix</span>
+
+        <span class="k">if</span> <span class="n">expr</span><span class="o">.</span><span class="n">rank</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_print</span><span class="p">(</span><span class="n">expr</span><span class="p">[()])</span>
+
+        <span class="n">level_str</span> <span class="o">=</span> <span class="p">[[]]</span> <span class="o">+</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">rank</span><span class="p">())]</span>
+        <span class="n">shape_ranges</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">expr</span><span class="o">.</span><span class="n">shape</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">outer_i</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="o">*</span><span class="n">shape_ranges</span><span class="p">):</span>
+            <span class="n">level_str</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">expr</span><span class="p">[</span><span class="n">outer_i</span><span class="p">])</span>
+            <span class="n">even</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">for</span> <span class="n">back_outer_i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">rank</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">level_str</span><span class="p">[</span><span class="n">back_outer_i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">expr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="n">back_outer_i</span><span class="p">]:</span>
+                    <span class="k">break</span>
+                <span class="k">if</span> <span class="n">even</span><span class="p">:</span>
+                    <span class="n">level_str</span><span class="p">[</span><span class="n">back_outer_i</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">level_str</span><span class="p">[</span><span class="n">back_outer_i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">level_str</span><span class="p">[</span><span class="n">back_outer_i</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ImmutableMatrix</span><span class="p">(</span><span class="n">level_str</span><span class="p">[</span><span class="n">back_outer_i</span><span class="o">+</span><span class="mi">1</span><span class="p">]))</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">level_str</span><span class="p">[</span><span class="n">back_outer_i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                        <span class="n">level_str</span><span class="p">[</span><span class="n">back_outer_i</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">ImmutableMatrix</span><span class="p">([[</span><span class="n">level_str</span><span class="p">[</span><span class="n">back_outer_i</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]]])</span>
+                <span class="n">even</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">even</span>
+                <span class="n">level_str</span><span class="p">[</span><span class="n">back_outer_i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">out_expr</span> <span class="o">=</span> <span class="n">level_str</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">expr</span><span class="o">.</span><span class="n">rank</span><span class="p">()</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">out_expr</span> <span class="o">=</span> <span class="n">ImmutableMatrix</span><span class="p">([</span><span class="n">out_expr</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_print</span><span class="p">(</span><span class="n">out_expr</span><span class="p">)</span>
+
+    <span class="n">_print_ImmutableDenseNDimArray</span> <span class="o">=</span> <span class="n">_print_NDimArray</span>
+    <span class="n">_print_ImmutableSparseNDimArray</span> <span class="o">=</span> <span class="n">_print_NDimArray</span>
+    <span class="n">_print_MutableDenseNDimArray</span> <span class="o">=</span> <span class="n">_print_NDimArray</span>
+    <span class="n">_print_MutableSparseNDimArray</span> <span class="o">=</span> <span class="n">_print_NDimArray</span>
 
     <span class="k">def</span> <span class="nf">_print_Piecewise</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pexpr</span><span class="p">):</span>
 
