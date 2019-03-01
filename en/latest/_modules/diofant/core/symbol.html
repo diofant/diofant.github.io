@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.core.symbol &mdash; Diofant 0.10.1.dev215+g231dfbb documentation</title>
+  <title>diofant.core.symbol &mdash; Diofant 0.10.1.dev224+g168afa0 documentation</title>
   
 
   
@@ -156,10 +156,8 @@
 
 <span class="kn">from</span> <span class="nn">..logic.boolalg</span> <span class="k">import</span> <span class="n">Boolean</span>
 <span class="kn">from</span> <span class="nn">.assumptions</span> <span class="k">import</span> <span class="n">StdFactKB</span>
-<span class="kn">from</span> <span class="nn">.basic</span> <span class="k">import</span> <span class="n">Basic</span>
 <span class="kn">from</span> <span class="nn">.cache</span> <span class="k">import</span> <span class="n">cacheit</span>
 <span class="kn">from</span> <span class="nn">.expr</span> <span class="k">import</span> <span class="n">AtomicExpr</span><span class="p">,</span> <span class="n">Expr</span>
-<span class="kn">from</span> <span class="nn">.function</span> <span class="k">import</span> <span class="n">FunctionClass</span>
 <span class="kn">from</span> <span class="nn">.logic</span> <span class="k">import</span> <span class="n">fuzzy_bool</span>
 <span class="kn">from</span> <span class="nn">.singleton</span> <span class="k">import</span> <span class="n">S</span>
 <span class="kn">from</span> <span class="nn">.sympify</span> <span class="k">import</span> <span class="n">sympify</span>
@@ -791,32 +789,14 @@
 <span class="sd">    symbols</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">traverse</span><span class="p">(</span><span class="n">symbols</span><span class="p">,</span> <span class="n">frame</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Recursively inject symbols to the global namespace.&quot;&quot;&quot;</span>
-        <span class="k">for</span> <span class="n">symbol</span> <span class="ow">in</span> <span class="n">symbols</span><span class="p">:</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">symbol</span><span class="p">,</span> <span class="n">Basic</span><span class="p">):</span>
-                <span class="n">frame</span><span class="o">.</span><span class="n">f_globals</span><span class="p">[</span><span class="n">symbol</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">symbol</span>
-            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">symbol</span><span class="p">,</span> <span class="n">FunctionClass</span><span class="p">):</span>
-                <span class="n">frame</span><span class="o">.</span><span class="n">f_globals</span><span class="p">[</span><span class="n">symbol</span><span class="o">.</span><span class="vm">__name__</span><span class="p">]</span> <span class="o">=</span> <span class="n">symbol</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">traverse</span><span class="p">(</span><span class="n">symbol</span><span class="p">,</span> <span class="n">frame</span><span class="p">)</span>
+    <span class="kn">from</span> <span class="nn">..utilities</span> <span class="k">import</span> <span class="n">flatten</span>
+    <span class="kn">from</span> <span class="nn">..utilities.magic</span> <span class="k">import</span> <span class="n">pollute</span>
 
-    <span class="kn">from</span> <span class="nn">inspect</span> <span class="k">import</span> <span class="n">currentframe</span>
-    <span class="n">frame</span> <span class="o">=</span> <span class="n">currentframe</span><span class="p">()</span><span class="o">.</span><span class="n">f_back</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">)</span>
+    <span class="n">syms</span> <span class="o">=</span> <span class="n">flatten</span><span class="p">([</span><span class="n">ret</span><span class="p">])</span>
+    <span class="n">pollute</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">syms</span><span class="p">],</span> <span class="n">syms</span><span class="p">)</span>
 
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">syms</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">syms</span><span class="p">,</span> <span class="n">Basic</span><span class="p">):</span>
-            <span class="n">frame</span><span class="o">.</span><span class="n">f_globals</span><span class="p">[</span><span class="n">syms</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">syms</span>
-        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">syms</span><span class="p">,</span> <span class="n">FunctionClass</span><span class="p">):</span>
-            <span class="n">frame</span><span class="o">.</span><span class="n">f_globals</span><span class="p">[</span><span class="n">syms</span><span class="o">.</span><span class="vm">__name__</span><span class="p">]</span> <span class="o">=</span> <span class="n">syms</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">traverse</span><span class="p">(</span><span class="n">syms</span><span class="p">,</span> <span class="n">frame</span><span class="p">)</span>
-    <span class="k">finally</span><span class="p">:</span>
-        <span class="k">del</span> <span class="n">frame</span>  <span class="c1"># break cyclic dependencies as stated in inspect docs</span>
-
-    <span class="k">return</span> <span class="n">syms</span></div>
+    <span class="k">return</span> <span class="n">ret</span></div>
 </pre></div>
 
            </div>

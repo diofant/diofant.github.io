@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.densetools &mdash; Diofant 0.10.1.dev215+g231dfbb documentation</title>
+  <title>diofant.polys.densetools &mdash; Diofant 0.10.1.dev224+g168afa0 documentation</title>
   
 
   
@@ -529,6 +529,9 @@
             <span class="k">if</span> <span class="n">cont</span> <span class="o">==</span> <span class="n">K</span><span class="o">.</span><span class="n">one</span><span class="p">:</span>
                 <span class="k">break</span>
 
+    <span class="k">if</span> <span class="n">K</span><span class="o">.</span><span class="n">is_negative</span><span class="p">(</span><span class="n">dmp_ground_LC</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)):</span>
+        <span class="n">cont</span> <span class="o">=</span> <span class="o">-</span><span class="n">cont</span>
+
     <span class="k">return</span> <span class="n">cont</span></div>
 
 
@@ -559,10 +562,6 @@
 
     <span class="k">if</span> <span class="n">cont</span> <span class="o">!=</span> <span class="n">K</span><span class="o">.</span><span class="n">one</span><span class="p">:</span>
         <span class="n">f</span> <span class="o">=</span> <span class="n">dmp_quo_ground</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">cont</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">K</span><span class="o">.</span><span class="n">is_negative</span><span class="p">(</span><span class="n">dmp_ground_LC</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)):</span>
-        <span class="n">f</span> <span class="o">=</span> <span class="n">dmp_neg</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-        <span class="n">cont</span> <span class="o">=</span> <span class="o">-</span><span class="n">cont</span>
 
     <span class="k">return</span> <span class="n">cont</span><span class="p">,</span> <span class="n">f</span></div>
 

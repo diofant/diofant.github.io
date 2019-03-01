@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.polyfuncs &mdash; Diofant 0.10.1.dev215+g231dfbb documentation</title>
+  <title>diofant.polys.polyfuncs &mdash; Diofant 0.10.1.dev224+g168afa0 documentation</title>
   
 
   
@@ -209,17 +209,17 @@
         <span class="k">for</span> <span class="n">expr</span> <span class="ow">in</span> <span class="n">exc</span><span class="o">.</span><span class="n">exprs</span><span class="p">:</span>
             <span class="k">assert</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_Number</span>
             <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">expr</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="p">))</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">iterable</span><span class="p">:</span>
-                <span class="n">result</span><span class="p">,</span> <span class="o">=</span> <span class="n">result</span>
 
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">exc</span><span class="o">.</span><span class="n">opt</span><span class="o">.</span><span class="n">formal</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">result</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">iterable</span><span class="p">:</span>
+            <span class="n">result</span><span class="p">,</span> <span class="o">=</span> <span class="n">result</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">exc</span><span class="o">.</span><span class="n">opt</span><span class="o">.</span><span class="n">formal</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">result</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">iterable</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">result</span><span class="p">,</span> <span class="p">[]</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">iterable</span><span class="p">:</span>
-                    <span class="k">return</span> <span class="n">result</span><span class="p">,</span> <span class="p">[]</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="k">return</span> <span class="n">result</span> <span class="o">+</span> <span class="p">([],)</span>
+                <span class="k">return</span> <span class="n">result</span> <span class="o">+</span> <span class="p">([],)</span>
 
     <span class="n">polys</span><span class="p">,</span> <span class="n">symbols</span> <span class="o">=</span> <span class="p">[],</span> <span class="n">opt</span><span class="o">.</span><span class="n">symbols</span>
     <span class="n">gens</span><span class="p">,</span> <span class="n">dom</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">gens</span><span class="p">,</span> <span class="n">opt</span><span class="o">.</span><span class="n">domain</span>
