@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.domains.realfield &mdash; Diofant 0.10.1.dev224+g168afa0 documentation</title>
+  <title>diofant.domains.realfield &mdash; Diofant 0.10.1.dev230+g043df8d documentation</title>
   
 
   
@@ -230,7 +230,7 @@
 
 <div class="viewcode-block" id="RealField.from_expr"><a class="viewcode-back" href="../../../modules/domains.html#diofant.domains.RealField.from_expr">[docs]</a>    <span class="k">def</span> <span class="nf">from_expr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Convert Diofant&#39;s number to ``dtype``. &quot;&quot;&quot;</span>
-        <span class="n">number</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">evalf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dps</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">number</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">evalf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dps</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">number</span><span class="o">.</span><span class="n">is_Number</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
@@ -248,6 +248,9 @@
 
     <span class="k">def</span> <span class="nf">_from_GMPYRationalField</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">,</span> <span class="n">base</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">numerator</span><span class="p">))</span> <span class="o">/</span> <span class="nb">int</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">denominator</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_from_AlgebraicField</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">,</span> <span class="n">base</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">from_expr</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">to_expr</span><span class="p">(</span><span class="n">element</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">_from_RealField</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">,</span> <span class="n">base</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span> <span class="o">==</span> <span class="n">base</span><span class="p">:</span>

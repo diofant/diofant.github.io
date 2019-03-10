@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.core.expr &mdash; Diofant 0.10.1.dev224+g168afa0 documentation</title>
+  <title>diofant.core.expr &mdash; Diofant 0.10.1.dev230+g043df8d documentation</title>
   
 
   
@@ -160,7 +160,7 @@
 <span class="kn">from</span> <span class="nn">.cache</span> <span class="k">import</span> <span class="n">cacheit</span>
 <span class="kn">from</span> <span class="nn">.compatibility</span> <span class="k">import</span> <span class="n">as_int</span><span class="p">,</span> <span class="n">default_sort_key</span>
 <span class="kn">from</span> <span class="nn">.decorators</span> <span class="k">import</span> <span class="n">_sympifyit</span><span class="p">,</span> <span class="n">call_highest_priority</span>
-<span class="kn">from</span> <span class="nn">.evalf</span> <span class="k">import</span> <span class="n">EvalfMixin</span><span class="p">,</span> <span class="n">pure_complex</span>
+<span class="kn">from</span> <span class="nn">.evalf</span> <span class="k">import</span> <span class="n">EvalfMixin</span><span class="p">,</span> <span class="n">PrecisionExhausted</span><span class="p">,</span> <span class="n">pure_complex</span>
 <span class="kn">from</span> <span class="nn">.singleton</span> <span class="k">import</span> <span class="n">S</span>
 <span class="kn">from</span> <span class="nn">.sympify</span> <span class="k">import</span> <span class="n">sympify</span>
 
@@ -699,7 +699,11 @@
         <span class="c1"># don&#39;t worry about doing simplification steps one at a time</span>
         <span class="c1"># because if the expression ever goes to 0 then the subsequent</span>
         <span class="c1"># simplification steps that are done will be very fast.</span>
-        <span class="n">diff</span> <span class="o">=</span> <span class="n">factor_terms</span><span class="p">((</span><span class="bp">self</span> <span class="o">-</span> <span class="n">other</span><span class="p">)</span><span class="o">.</span><span class="n">simplify</span><span class="p">(),</span> <span class="n">radical</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">diff</span> <span class="o">=</span> <span class="bp">self</span> <span class="o">-</span> <span class="n">other</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">diff</span> <span class="o">=</span> <span class="n">factor_terms</span><span class="p">(</span><span class="n">diff</span><span class="o">.</span><span class="n">simplify</span><span class="p">(),</span> <span class="n">radical</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">PrecisionExhausted</span><span class="p">:</span>
+            <span class="k">pass</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">diff</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">True</span>
