@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.densearith &mdash; Diofant 0.10.1.dev234+g61fbd31 documentation</title>
+  <title>diofant.polys.densearith &mdash; Diofant 0.10.1.dev237+g6e97e3d documentation</title>
   
 
   
@@ -156,7 +156,7 @@
                          <span class="n">dmp_slice_in</span><span class="p">,</span> <span class="n">dmp_strip</span><span class="p">,</span> <span class="n">dmp_zero</span><span class="p">,</span> <span class="n">dmp_zero_p</span><span class="p">,</span>
                          <span class="n">dmp_zeros</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">.polyconfig</span> <span class="k">import</span> <span class="n">query</span>
-<span class="kn">from</span> <span class="nn">.polyerrors</span> <span class="k">import</span> <span class="n">ExactQuotientFailed</span><span class="p">,</span> <span class="n">PolynomialDivisionFailed</span>
+<span class="kn">from</span> <span class="nn">.polyerrors</span> <span class="k">import</span> <span class="n">ExactQuotientFailed</span>
 
 
 <div class="viewcode-block" id="dup_add_term"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.densearith.dup_add_term">[docs]</a><span class="k">def</span> <span class="nf">dup_add_term</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
@@ -1028,111 +1028,6 @@
         <span class="k">raise</span> <span class="n">ExactQuotientFailed</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="dmp_rr_div"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.densearith.dmp_rr_div">[docs]</a><span class="k">def</span> <span class="nf">dmp_rr_div</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Multivariate division with remainder over a ring.</span>
-
-<span class="sd">    Examples</span>
-<span class="sd">    ========</span>
-
-<span class="sd">    &gt;&gt;&gt; R, x, y = ring(&quot;x y&quot;, ZZ)</span>
-
-<span class="sd">    &gt;&gt;&gt; R.dmp_rr_div(x**2 + x*y, 2*x + 2)</span>
-<span class="sd">    (0, x**2 + x*y)</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">dmp_degree_in</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
-    <span class="n">dg</span> <span class="o">=</span> <span class="n">dmp_degree_in</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">dg</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ZeroDivisionError</span><span class="p">(</span><span class="s2">&quot;polynomial division&quot;</span><span class="p">)</span>
-
-    <span class="n">q</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">dr</span> <span class="o">=</span> <span class="n">dmp_zero</span><span class="p">(</span><span class="n">u</span><span class="p">),</span> <span class="n">f</span><span class="p">,</span> <span class="n">df</span>
-
-    <span class="k">if</span> <span class="n">df</span> <span class="o">&lt;</span> <span class="n">dg</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">q</span><span class="p">,</span> <span class="n">r</span>
-
-    <span class="n">lc_g</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">dmp_LC</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">K</span><span class="p">),</span> <span class="n">u</span> <span class="o">-</span> <span class="mi">1</span>
-
-    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-        <span class="n">lc_r</span> <span class="o">=</span> <span class="n">dmp_LC</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">v</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">c</span><span class="p">,</span> <span class="n">R</span> <span class="o">=</span> <span class="n">dmp_rr_div</span><span class="p">(</span><span class="n">lc_r</span><span class="p">,</span> <span class="n">lc_g</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">dmp_zero_p</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
-                <span class="k">break</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">lc_r</span> <span class="o">%</span> <span class="n">lc_g</span><span class="p">:</span>
-                <span class="k">break</span>
-            <span class="n">c</span> <span class="o">=</span> <span class="n">K</span><span class="o">.</span><span class="n">exquo</span><span class="p">(</span><span class="n">lc_r</span><span class="p">,</span> <span class="n">lc_g</span><span class="p">)</span>
-
-        <span class="n">j</span> <span class="o">=</span> <span class="n">dr</span> <span class="o">-</span> <span class="n">dg</span>
-
-        <span class="n">q</span> <span class="o">=</span> <span class="n">dmp_add_term</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-        <span class="n">h</span> <span class="o">=</span> <span class="n">dmp_mul_term</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="n">dmp_sub</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-
-        <span class="n">_dr</span><span class="p">,</span> <span class="n">dr</span> <span class="o">=</span> <span class="n">dr</span><span class="p">,</span> <span class="n">dmp_degree_in</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">dr</span> <span class="o">&lt;</span> <span class="n">dg</span><span class="p">:</span>
-            <span class="k">break</span>
-        <span class="k">assert</span> <span class="n">dr</span> <span class="o">&lt;</span> <span class="n">_dr</span>
-
-    <span class="k">return</span> <span class="n">q</span><span class="p">,</span> <span class="n">r</span></div>
-
-
-<div class="viewcode-block" id="dmp_ff_div"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.densearith.dmp_ff_div">[docs]</a><span class="k">def</span> <span class="nf">dmp_ff_div</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Polynomial division with remainder over a field.</span>
-
-<span class="sd">    Examples</span>
-<span class="sd">    ========</span>
-
-<span class="sd">    &gt;&gt;&gt; R, x, y = ring(&quot;x y&quot;, QQ)</span>
-
-<span class="sd">    &gt;&gt;&gt; R.dmp_ff_div(x**2 + x*y, 2*x + 2)</span>
-<span class="sd">    (1/2*x + 1/2*y - 1/2, -y + 1)</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">dmp_degree_in</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
-    <span class="n">dg</span> <span class="o">=</span> <span class="n">dmp_degree_in</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">dg</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ZeroDivisionError</span><span class="p">(</span><span class="s2">&quot;polynomial division&quot;</span><span class="p">)</span>
-
-    <span class="n">q</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">dr</span> <span class="o">=</span> <span class="n">dmp_zero</span><span class="p">(</span><span class="n">u</span><span class="p">),</span> <span class="n">f</span><span class="p">,</span> <span class="n">df</span>
-
-    <span class="k">if</span> <span class="n">df</span> <span class="o">&lt;</span> <span class="n">dg</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">q</span><span class="p">,</span> <span class="n">r</span>
-
-    <span class="n">lc_g</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">dmp_LC</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">K</span><span class="p">),</span> <span class="n">u</span> <span class="o">-</span> <span class="mi">1</span>
-
-    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-        <span class="n">lc_r</span> <span class="o">=</span> <span class="n">dmp_LC</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">v</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">c</span><span class="p">,</span> <span class="n">R</span> <span class="o">=</span> <span class="n">dmp_ff_div</span><span class="p">(</span><span class="n">lc_r</span><span class="p">,</span> <span class="n">lc_g</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">dmp_zero_p</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
-                <span class="k">break</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">c</span> <span class="o">=</span> <span class="n">K</span><span class="o">.</span><span class="n">exquo</span><span class="p">(</span><span class="n">lc_r</span><span class="p">,</span> <span class="n">lc_g</span><span class="p">)</span>
-
-        <span class="n">j</span> <span class="o">=</span> <span class="n">dr</span> <span class="o">-</span> <span class="n">dg</span>
-
-        <span class="n">q</span> <span class="o">=</span> <span class="n">dmp_add_term</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-        <span class="n">h</span> <span class="o">=</span> <span class="n">dmp_mul_term</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="n">dmp_sub</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-
-        <span class="n">_dr</span><span class="p">,</span> <span class="n">dr</span> <span class="o">=</span> <span class="n">dr</span><span class="p">,</span> <span class="n">dmp_degree_in</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">dr</span> <span class="o">&lt;</span> <span class="n">dg</span><span class="p">:</span>
-            <span class="k">break</span>
-        <span class="k">elif</span> <span class="ow">not</span> <span class="p">(</span><span class="n">dr</span> <span class="o">&lt;</span> <span class="n">_dr</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="n">PolynomialDivisionFailed</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">q</span><span class="p">,</span> <span class="n">r</span></div>
-
-
 <div class="viewcode-block" id="dmp_div"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.densearith.dmp_div">[docs]</a><span class="k">def</span> <span class="nf">dmp_div</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Polynomial division with remainder in ``K[X]``.</span>
@@ -1149,10 +1044,9 @@
 <span class="sd">    (1/2*x + 1/2*y - 1/2, -y + 1)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">K</span><span class="o">.</span><span class="n">is_Field</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">dmp_ff_div</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">dmp_rr_div</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span></div>
+    <span class="n">ring</span> <span class="o">=</span> <span class="n">K</span><span class="o">.</span><span class="n">poly_ring</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="s2">&quot;_</span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">u</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)])</span>
+    <span class="n">f</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="n">ring</span><span class="o">.</span><span class="n">from_dense</span><span class="p">,</span> <span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">))</span>
+    <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">ring</span><span class="o">.</span><span class="n">to_dense</span><span class="p">,</span> <span class="nb">divmod</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">)))</span></div>
 
 
 <div class="viewcode-block" id="dmp_rem"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.densearith.dmp_rem">[docs]</a><span class="k">def</span> <span class="nf">dmp_rem</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>

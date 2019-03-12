@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.rings &mdash; Diofant 0.10.1.dev234+g61fbd31 documentation</title>
+  <title>diofant.polys.rings &mdash; Diofant 0.10.1.dev237+g6e97e3d documentation</title>
   
 
   
@@ -178,7 +178,8 @@
 <span class="kn">from</span> <span class="nn">.polyconfig</span> <span class="k">import</span> <span class="n">query</span>
 <span class="kn">from</span> <span class="nn">.polyerrors</span> <span class="k">import</span> <span class="p">(</span><span class="n">CoercionFailed</span><span class="p">,</span> <span class="n">ExactQuotientFailed</span><span class="p">,</span> <span class="n">GeneratorsError</span><span class="p">,</span>
                          <span class="n">GeneratorsNeeded</span><span class="p">,</span> <span class="n">HeuristicGCDFailed</span><span class="p">,</span>
-                         <span class="n">MultivariatePolynomialError</span><span class="p">,</span> <span class="n">PolynomialError</span><span class="p">)</span>
+                         <span class="n">MultivariatePolynomialError</span><span class="p">,</span> <span class="n">PolynomialDivisionFailed</span><span class="p">,</span>
+                         <span class="n">PolynomialError</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">.polyoptions</span> <span class="k">import</span> <span class="n">Domain</span> <span class="k">as</span> <span class="n">DomainOpt</span>
 <span class="kn">from</span> <span class="nn">.polyoptions</span> <span class="k">import</span> <span class="n">Order</span> <span class="k">as</span> <span class="n">OrderOpt</span>
 <span class="kn">from</span> <span class="nn">.polyoptions</span> <span class="k">import</span> <span class="n">build_options</span>
@@ -1491,6 +1492,7 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">ring</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span>
+        <span class="n">order</span> <span class="o">=</span> <span class="n">ring</span><span class="o">.</span><span class="n">order</span>
         <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="ow">not</span> <span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fv</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ZeroDivisionError</span><span class="p">(</span><span class="s2">&quot;polynomial division&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">ring</span> <span class="o">!=</span> <span class="n">ring</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fv</span><span class="p">):</span>
@@ -1514,6 +1516,8 @@
                     <span class="n">qv</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">qv</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">_iadd_monom</span><span class="p">((</span><span class="n">expv1</span><span class="p">,</span> <span class="n">c</span><span class="p">))</span>
                     <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">_iadd_poly_monom</span><span class="p">(</span><span class="n">fv</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="p">(</span><span class="n">expv1</span><span class="p">,</span> <span class="o">-</span><span class="n">c</span><span class="p">))</span>
                     <span class="n">divoccurred</span> <span class="o">=</span> <span class="mi">1</span>
+                    <span class="k">if</span> <span class="n">p</span> <span class="ow">and</span> <span class="n">order</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">LM</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">order</span><span class="p">(</span><span class="n">expv</span><span class="p">):</span>
+                        <span class="k">raise</span> <span class="n">PolynomialDivisionFailed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fv</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">divoccurred</span><span class="p">:</span>
