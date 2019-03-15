@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.domains.algebraicfield &mdash; Diofant 0.10.1.dev240+gf7d7574 documentation</title>
+  <title>diofant.domains.algebraicfield &mdash; Diofant 0.10.1.dev245+g91213c3 documentation</title>
   
 
   
@@ -153,15 +153,14 @@
 <span></span><span class="sd">&quot;&quot;&quot;Implementation of :class:`AlgebraicField` class. &quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">functools</span>
-<span class="kn">import</span> <span class="nn">numbers</span>
 
 <span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">I</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">cacheit</span><span class="p">,</span> <span class="n">sympify</span>
 <span class="kn">from</span> <span class="nn">..core.sympify</span> <span class="k">import</span> <span class="n">CantSympify</span>
 <span class="kn">from</span> <span class="nn">..polys.densetools</span> <span class="k">import</span> <span class="n">dmp_compose</span><span class="p">,</span> <span class="n">dmp_diff_in</span><span class="p">,</span> <span class="n">dmp_eval_in</span>
 <span class="kn">from</span> <span class="nn">..polys.polyerrors</span> <span class="k">import</span> <span class="n">CoercionFailed</span><span class="p">,</span> <span class="n">DomainError</span><span class="p">,</span> <span class="n">NotAlgebraic</span>
 <span class="kn">from</span> <span class="nn">.characteristiczero</span> <span class="k">import</span> <span class="n">CharacteristicZero</span>
-<span class="kn">from</span> <span class="nn">.domainelement</span> <span class="k">import</span> <span class="n">DomainElement</span>
 <span class="kn">from</span> <span class="nn">.field</span> <span class="k">import</span> <span class="n">Field</span>
+<span class="kn">from</span> <span class="nn">.quotientring</span> <span class="k">import</span> <span class="n">QuotientRingElement</span>
 <span class="kn">from</span> <span class="nn">.rationalfield</span> <span class="k">import</span> <span class="n">RationalField</span>
 <span class="kn">from</span> <span class="nn">.simpledomain</span> <span class="k">import</span> <span class="n">SimpleDomain</span>
 
@@ -356,7 +355,7 @@
         <span class="k">return</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="mi">0</span></div></div>
 
 
-<span class="k">class</span> <span class="nc">AlgebraicElement</span><span class="p">(</span><span class="n">DomainElement</span><span class="p">,</span> <span class="n">CantSympify</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">AlgebraicElement</span><span class="p">(</span><span class="n">QuotientRingElement</span><span class="p">,</span> <span class="n">CantSympify</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Dense Algebraic Number Polynomials over a field. &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rep</span><span class="p">):</span>
@@ -373,14 +372,6 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">rep</span> <span class="o">=</span> <span class="n">rep</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">mod</span>
 
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">parent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parent</span>
-
-    <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">hash</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span>
-                     <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">ext</span><span class="p">))</span>
-
     <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Convert ``self`` to a dict representation with native coefficients. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
@@ -394,78 +385,6 @@
         <span class="sd">&quot;&quot;&quot;Returns ``True`` if ``self`` is an element of the ground domain. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">is_ground</span>
 
-    <span class="k">def</span> <span class="nf">__pos__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span>
-
-    <span class="k">def</span> <span class="nf">__neg__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">other</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
-        <span class="k">except</span> <span class="n">CoercionFailed</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">NotImplemented</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">rep</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">__radd__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__add__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">other</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
-        <span class="k">except</span> <span class="n">CoercionFailed</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">NotImplemented</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">rep</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">__rsub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__add__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">other</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
-        <span class="k">except</span> <span class="n">CoercionFailed</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">NotImplemented</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span> <span class="o">*</span> <span class="n">other</span><span class="o">.</span><span class="n">rep</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">__rmul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__mul__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">__pow__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exp</span><span class="p">):</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">exp</span><span class="p">,</span> <span class="n">numbers</span><span class="o">.</span><span class="n">Integral</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Integer exponent expected, got </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">type</span><span class="p">(</span><span class="n">exp</span><span class="p">))</span>
-        <span class="k">if</span> <span class="n">exp</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">rep</span><span class="p">,</span> <span class="n">exp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">invert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mod</span><span class="p">),</span> <span class="o">-</span><span class="n">exp</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">rep</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span><span class="n">rep</span><span class="o">**</span><span class="n">exp</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">__truediv__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">other</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
-        <span class="k">except</span> <span class="n">CoercionFailed</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">NotImplemented</span>
-        <span class="k">return</span> <span class="bp">self</span> <span class="o">*</span> <span class="n">other</span><span class="o">**-</span><span class="mi">1</span>
-
-    <span class="k">def</span> <span class="nf">__rtruediv__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">**-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="fm">__mul__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">other</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
-        <span class="k">except</span> <span class="n">CoercionFailed</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">False</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">rep</span>
-
-    <span class="k">def</span> <span class="nf">__bool__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">__int__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">QQ</span>
-            <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">QQ</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
-        <span class="k">except</span> <span class="n">CoercionFailed</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Can&#39;t convert algebraic number to int&quot;</span><span class="p">)</span>
-
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">numerator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">denominator</span>
@@ -473,8 +392,7 @@
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">denominator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">ZZ</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span><span class="n">functools</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">ZZ</span><span class="o">.</span><span class="n">lcm</span><span class="p">,</span> <span class="p">(</span><span class="n">ZZ</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">_</span><span class="o">.</span><span class="n">denominator</span><span class="p">)</span>
-                                                        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">to_dense</span><span class="p">()),</span> <span class="n">ZZ</span><span class="o">.</span><span class="n">one</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">ZZ</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">content</span><span class="p">()</span><span class="o">.</span><span class="n">denominator</span><span class="p">)</span>
 
 
 <span class="k">class</span> <span class="nc">ComplexAlgebraicElement</span><span class="p">(</span><span class="n">AlgebraicElement</span><span class="p">):</span>

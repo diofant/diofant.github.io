@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.matrices.matrices &mdash; Diofant 0.10.1.dev240+gf7d7574 documentation</title>
+  <title>diofant.matrices.matrices &mdash; Diofant 0.10.1.dev245+g91213c3 documentation</title>
   
 
   
@@ -2212,7 +2212,7 @@
 <span class="sd">        &gt;&gt;&gt; m.is_upper</span>
 <span class="sd">        True</span>
 
-<span class="sd">        &gt;&gt;&gt; m = Matrix(4, 3, [5, 1, 9, 0, 4 , 6, 0, 0, 5, 0, 0, 0])</span>
+<span class="sd">        &gt;&gt;&gt; m = Matrix(4, 3, [5, 1, 9, 0, 4, 6, 0, 0, 5, 0, 0, 0])</span>
 <span class="sd">        &gt;&gt;&gt; m</span>
 <span class="sd">        Matrix([</span>
 <span class="sd">        [5, 1, 9],</span>
@@ -2258,7 +2258,7 @@
 <span class="sd">        &gt;&gt;&gt; m.is_lower</span>
 <span class="sd">        True</span>
 
-<span class="sd">        &gt;&gt;&gt; m = Matrix(4, 3, [0, 0, 0, 2, 0, 0, 1, 4 , 0, 6, 6, 5])</span>
+<span class="sd">        &gt;&gt;&gt; m = Matrix(4, 3, [0, 0, 0, 2, 0, 0, 1, 4, 0, 6, 6, 5])</span>
 <span class="sd">        &gt;&gt;&gt; m</span>
 <span class="sd">        Matrix([</span>
 <span class="sd">        [0, 0, 0],</span>
@@ -2435,7 +2435,7 @@
 <span class="sd">        &gt;&gt;&gt; m.is_symmetric()</span>
 <span class="sd">        False</span>
 
-<span class="sd">        &gt;&gt;&gt; m = Matrix(3, 3, [1, x**2 + 2*x + 1, y, (x + 1)**2 , 2, 0, y, 0, 3])</span>
+<span class="sd">        &gt;&gt;&gt; m = Matrix(3, 3, [1, x**2 + 2*x + 1, y, (x + 1)**2, 2, 0, y, 0, 3])</span>
 <span class="sd">        &gt;&gt;&gt; m</span>
 <span class="sd">        Matrix([</span>
 <span class="sd">        [         1, x**2 + 2*x + 1, y],</span>
@@ -2495,7 +2495,7 @@
 <span class="sd">        False</span>
 
 <span class="sd">        &gt;&gt;&gt; m = Matrix(3, 3, [0, x**2 + 2*x + 1, y,</span>
-<span class="sd">        ...                   -(x + 1)**2 , 0, x*y,</span>
+<span class="sd">        ...                   -(x + 1)**2, 0, x*y,</span>
 <span class="sd">        ...                   -y, -x*y, 0])</span>
 
 <span class="sd">        Simplification of matrix elements is done by default so even</span>
@@ -3060,15 +3060,17 @@
 <span class="sd">        &gt;&gt;&gt; A.berkowitz_charpoly().as_expr()</span>
 <span class="sd">        _lambda**2 - _lambda - 6</span>
 
-<span class="sd">        No test is done to see that ``x`` doesn&#39;t clash with an existing</span>
-<span class="sd">        symbol, so using the default (``lambda``) or your own Dummy symbol is</span>
-<span class="sd">        the safest option:</span>
+<span class="sd">        Be sure your provided ``x`` doesn&#39;t clash with existing symbols:</span>
 
 <span class="sd">        &gt;&gt;&gt; A = Matrix([[1, 2], [x, 0]])</span>
 <span class="sd">        &gt;&gt;&gt; A.charpoly().as_expr()</span>
 <span class="sd">        -2*x + _lambda**2 - _lambda</span>
 <span class="sd">        &gt;&gt;&gt; A.charpoly(x).as_expr()</span>
-<span class="sd">        x**2 - 3*x</span>
+<span class="sd">        Traceback (most recent call last):</span>
+<span class="sd">        ...</span>
+<span class="sd">        GeneratorsError: polynomial ring and it&#39;s ground domain share generators</span>
+<span class="sd">        &gt;&gt;&gt; A.charpoly(y).as_expr()</span>
+<span class="sd">        -2*x + y**2 - y</span>
 
 <span class="sd">        See Also</span>
 <span class="sd">        ========</span>

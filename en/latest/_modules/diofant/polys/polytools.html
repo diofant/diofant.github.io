@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.polytools &mdash; Diofant 0.10.1.dev240+gf7d7574 documentation</title>
+  <title>diofant.polys.polytools &mdash; Diofant 0.10.1.dev245+g91213c3 documentation</title>
   
 
   
@@ -282,6 +282,9 @@
             <span class="k">for</span> <span class="n">monom</span><span class="p">,</span> <span class="n">coeff</span> <span class="ow">in</span> <span class="n">rep</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                 <span class="n">rep</span><span class="p">[</span><span class="n">monom</span><span class="p">]</span> <span class="o">=</span> <span class="n">domain</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">coeff</span><span class="p">)</span>
 
+        <span class="k">if</span> <span class="n">domain</span><span class="o">.</span><span class="n">is_Composite</span> <span class="ow">and</span> <span class="nb">set</span><span class="p">(</span><span class="n">gens</span><span class="p">)</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">domain</span><span class="o">.</span><span class="n">symbols</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">GeneratorsError</span><span class="p">(</span><span class="s2">&quot;polynomial ring and it&#39;s ground domain share generators&quot;</span><span class="p">)</span>
+
         <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">DMP</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">rep</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">domain</span><span class="p">),</span> <span class="o">*</span><span class="n">gens</span><span class="p">)</span>
 
     <span class="nd">@classmethod</span>
@@ -303,6 +306,9 @@
             <span class="n">domain</span><span class="p">,</span> <span class="n">rep</span> <span class="o">=</span> <span class="n">construct_domain</span><span class="p">(</span><span class="n">rep</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="n">opt</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">rep</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">domain</span><span class="o">.</span><span class="n">convert</span><span class="p">,</span> <span class="n">rep</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">domain</span><span class="o">.</span><span class="n">is_Composite</span> <span class="ow">and</span> <span class="nb">set</span><span class="p">(</span><span class="n">gens</span><span class="p">)</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">domain</span><span class="o">.</span><span class="n">symbols</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">GeneratorsError</span><span class="p">(</span><span class="s2">&quot;polynomial ring and it&#39;s ground domain share generators&quot;</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">DMP</span><span class="o">.</span><span class="n">from_list</span><span class="p">(</span><span class="n">rep</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">domain</span><span class="p">),</span> <span class="o">*</span><span class="n">gens</span><span class="p">)</span>
 
