@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.polytools &mdash; Diofant 0.10.1.dev245+g91213c3 documentation</title>
+  <title>diofant.polys.polytools &mdash; Diofant 0.10.1.dev249+gedb04ea documentation</title>
   
 
   
@@ -170,17 +170,15 @@
 <span class="kn">from</span> <span class="nn">.groebnertools</span> <span class="k">import</span> <span class="n">groebner</span> <span class="k">as</span> <span class="n">_groebner</span>
 <span class="kn">from</span> <span class="nn">.monomials</span> <span class="k">import</span> <span class="n">Monomial</span>
 <span class="kn">from</span> <span class="nn">.orderings</span> <span class="k">import</span> <span class="n">monomial_key</span>
-<span class="kn">from</span> <span class="nn">.polyclasses</span> <span class="k">import</span> <span class="n">DMP</span>
 <span class="kn">from</span> <span class="nn">.polyerrors</span> <span class="k">import</span> <span class="p">(</span><span class="n">CoercionFailed</span><span class="p">,</span> <span class="n">ComputationFailed</span><span class="p">,</span> <span class="n">DomainError</span><span class="p">,</span>
                          <span class="n">ExactQuotientFailed</span><span class="p">,</span> <span class="n">GeneratorsError</span><span class="p">,</span>
                          <span class="n">GeneratorsNeeded</span><span class="p">,</span> <span class="n">MultivariatePolynomialError</span><span class="p">,</span>
                          <span class="n">PolificationFailed</span><span class="p">,</span> <span class="n">PolynomialError</span><span class="p">,</span>
                          <span class="n">UnificationFailed</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">.polyutils</span> <span class="k">import</span> <span class="p">(</span><span class="n">_dict_from_expr</span><span class="p">,</span> <span class="n">_dict_reorder</span><span class="p">,</span>
-                        <span class="n">_parallel_dict_from_expr</span><span class="p">,</span> <span class="n">_sort_gens</span><span class="p">,</span> <span class="n">_unify_gens</span><span class="p">,</span>
-                        <span class="n">basic_from_dict</span><span class="p">)</span>
+                        <span class="n">_parallel_dict_from_expr</span><span class="p">,</span> <span class="n">_sort_gens</span><span class="p">,</span> <span class="n">basic_from_dict</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">.rationaltools</span> <span class="k">import</span> <span class="n">together</span>
-<span class="kn">from</span> <span class="nn">.rings</span> <span class="k">import</span> <span class="n">PolynomialRing</span><span class="p">,</span> <span class="n">ring</span>
+<span class="kn">from</span> <span class="nn">.rings</span> <span class="k">import</span> <span class="n">PolyElement</span><span class="p">,</span> <span class="n">PolynomialRing</span><span class="p">,</span> <span class="n">ring</span>
 <span class="kn">from</span> <span class="nn">.rootisolation</span> <span class="k">import</span> <span class="n">dup_isolate_real_roots_list</span>
 
 
@@ -227,10 +225,10 @@
 <div class="viewcode-block" id="Poly.new"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.polytools.Poly.new">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">new</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">rep</span><span class="p">,</span> <span class="o">*</span><span class="n">gens</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Construct :class:`Poly` instance from raw representation.&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">rep</span><span class="p">,</span> <span class="n">DMP</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">rep</span><span class="p">,</span> <span class="n">PolyElement</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">PolynomialError</span><span class="p">(</span>
                 <span class="s2">&quot;invalid polynomial representation: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">rep</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">rep</span><span class="o">.</span><span class="n">lev</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">gens</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">rep</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">ngens</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">gens</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">PolynomialError</span><span class="p">(</span><span class="s2">&quot;invalid arguments: </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">rep</span><span class="p">,</span> <span class="n">gens</span><span class="p">))</span>
 
         <span class="n">obj</span> <span class="o">=</span> <span class="n">Expr</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
@@ -273,7 +271,6 @@
             <span class="k">raise</span> <span class="n">GeneratorsNeeded</span><span class="p">(</span>
                 <span class="s2">&quot;can&#39;t initialize from &#39;dict&#39; without generators&quot;</span><span class="p">)</span>
 
-        <span class="n">level</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">gens</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
         <span class="n">domain</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">domain</span>
 
         <span class="k">if</span> <span class="n">domain</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -282,10 +279,9 @@
             <span class="k">for</span> <span class="n">monom</span><span class="p">,</span> <span class="n">coeff</span> <span class="ow">in</span> <span class="n">rep</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                 <span class="n">rep</span><span class="p">[</span><span class="n">monom</span><span class="p">]</span> <span class="o">=</span> <span class="n">domain</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">coeff</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">domain</span><span class="o">.</span><span class="n">is_Composite</span> <span class="ow">and</span> <span class="nb">set</span><span class="p">(</span><span class="n">gens</span><span class="p">)</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">domain</span><span class="o">.</span><span class="n">symbols</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="n">GeneratorsError</span><span class="p">(</span><span class="s2">&quot;polynomial ring and it&#39;s ground domain share generators&quot;</span><span class="p">)</span>
+        <span class="n">ring</span> <span class="o">=</span> <span class="n">domain</span><span class="o">.</span><span class="n">poly_ring</span><span class="p">(</span><span class="o">*</span><span class="n">gens</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">DMP</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">rep</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">domain</span><span class="p">),</span> <span class="o">*</span><span class="n">gens</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">ring</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">rep</span><span class="p">),</span> <span class="o">*</span><span class="n">gens</span><span class="p">)</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_from_list</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">rep</span><span class="p">,</span> <span class="n">opt</span><span class="p">):</span>
@@ -299,7 +295,6 @@
             <span class="k">raise</span> <span class="n">MultivariatePolynomialError</span><span class="p">(</span>
                 <span class="s2">&quot;&#39;list&#39; representation not supported&quot;</span><span class="p">)</span>
 
-        <span class="n">level</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">gens</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
         <span class="n">domain</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">domain</span>
 
         <span class="k">if</span> <span class="n">domain</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -307,10 +302,9 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">rep</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">domain</span><span class="o">.</span><span class="n">convert</span><span class="p">,</span> <span class="n">rep</span><span class="p">))</span>
 
-        <span class="k">if</span> <span class="n">domain</span><span class="o">.</span><span class="n">is_Composite</span> <span class="ow">and</span> <span class="nb">set</span><span class="p">(</span><span class="n">gens</span><span class="p">)</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">domain</span><span class="o">.</span><span class="n">symbols</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="n">GeneratorsError</span><span class="p">(</span><span class="s2">&quot;polynomial ring and it&#39;s ground domain share generators&quot;</span><span class="p">)</span>
+        <span class="n">ring</span> <span class="o">=</span> <span class="n">domain</span><span class="o">.</span><span class="n">poly_ring</span><span class="p">(</span><span class="o">*</span><span class="n">gens</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">DMP</span><span class="o">.</span><span class="n">from_list</span><span class="p">(</span><span class="n">rep</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">domain</span><span class="p">),</span> <span class="o">*</span><span class="n">gens</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">ring</span><span class="o">.</span><span class="n">from_list</span><span class="p">(</span><span class="n">rep</span><span class="p">),</span> <span class="o">*</span><span class="n">gens</span><span class="p">)</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_from_poly</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">rep</span><span class="p">,</span> <span class="n">opt</span><span class="p">):</span>
@@ -433,17 +427,17 @@
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">domain</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the ground domain of ``self``.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">domain</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">domain</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">zero</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return zero polynomial with ``self``&#39;s properties.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">zero</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">lev</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">),</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">gens</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">zero</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">gens</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">one</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return one polynomial with ``self``&#39;s properties.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">one</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">lev</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">),</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">gens</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">one</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">gens</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">unit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -481,37 +475,16 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="n">other</span><span class="o">.</span><span class="n">is_Poly</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">per</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="p">,</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">per</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">other</span><span class="p">)))</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">ring</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">other</span><span class="p">)))</span>
             <span class="k">except</span> <span class="n">CoercionFailed</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">UnificationFailed</span><span class="p">(</span><span class="s2">&quot;can&#39;t unify </span><span class="si">%s</span><span class="s2"> with </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">))</span>
 
-        <span class="n">gens</span> <span class="o">=</span> <span class="n">_unify_gens</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gens</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">gens</span><span class="p">)</span>
-
-        <span class="n">dom</span><span class="p">,</span> <span class="n">lev</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">unify</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">gens</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">gens</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">gens</span> <span class="o">!=</span> <span class="n">gens</span><span class="p">:</span>
-            <span class="n">self_monoms</span><span class="p">,</span> <span class="n">self_coeffs</span> <span class="o">=</span> <span class="n">_dict_reorder</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(),</span>
-                                                     <span class="bp">self</span><span class="o">.</span><span class="n">gens</span><span class="p">,</span> <span class="n">gens</span><span class="p">)</span>
-
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span> <span class="o">!=</span> <span class="n">dom</span><span class="p">:</span>
-                <span class="n">self_coeffs</span> <span class="o">=</span> <span class="p">[</span><span class="n">dom</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">self_coeffs</span><span class="p">]</span>
-
-            <span class="n">F</span> <span class="o">=</span> <span class="n">DMP</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">self_monoms</span><span class="p">,</span> <span class="n">self_coeffs</span><span class="p">)),</span> <span class="n">dom</span><span class="p">,</span> <span class="n">lev</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">F</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">dom</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">other</span><span class="o">.</span><span class="n">gens</span> <span class="o">!=</span> <span class="n">gens</span><span class="p">:</span>
-            <span class="n">other_monoms</span><span class="p">,</span> <span class="n">other_coeffs</span> <span class="o">=</span> <span class="n">_dict_reorder</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(),</span>
-                                                       <span class="n">other</span><span class="o">.</span><span class="n">gens</span><span class="p">,</span> <span class="n">gens</span><span class="p">)</span>
-
-            <span class="k">if</span> <span class="n">other</span><span class="o">.</span><span class="n">domain</span> <span class="o">!=</span> <span class="n">dom</span><span class="p">:</span>
-                <span class="n">other_coeffs</span> <span class="o">=</span> <span class="p">[</span><span class="n">dom</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">other_coeffs</span><span class="p">]</span>
-
-            <span class="n">G</span> <span class="o">=</span> <span class="n">DMP</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">other_monoms</span><span class="p">,</span> <span class="n">other_coeffs</span><span class="p">)),</span> <span class="n">dom</span><span class="p">,</span> <span class="n">lev</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">G</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">dom</span><span class="p">)</span>
+        <span class="n">newring</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">unify</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">ring</span><span class="p">)</span>
+        <span class="n">gens</span> <span class="o">=</span> <span class="n">newring</span><span class="o">.</span><span class="n">symbols</span>
+        <span class="n">F</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">set_ring</span><span class="p">(</span><span class="n">newring</span><span class="p">),</span> <span class="n">other</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">set_ring</span><span class="p">(</span><span class="n">newring</span><span class="p">)</span>
 
         <span class="bp">cls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span>
+        <span class="n">dom</span> <span class="o">=</span> <span class="n">newring</span><span class="o">.</span><span class="n">domain</span>
 
         <span class="k">def</span> <span class="nf">per</span><span class="p">(</span><span class="n">rep</span><span class="p">,</span> <span class="n">dom</span><span class="o">=</span><span class="n">dom</span><span class="p">,</span> <span class="n">gens</span><span class="o">=</span><span class="n">gens</span><span class="p">,</span> <span class="n">remove</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">remove</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -531,11 +504,10 @@
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
 
-<span class="sd">        &gt;&gt;&gt; from diofant.polys.polyclasses import DMP</span>
-
 <span class="sd">        &gt;&gt;&gt; a = Poly(x**2 + 1)</span>
+<span class="sd">        &gt;&gt;&gt; R = ZZ.poly_ring(x)</span>
 
-<span class="sd">        &gt;&gt;&gt; a.per(DMP([ZZ(1), ZZ(1)], ZZ), gens=[y])</span>
+<span class="sd">        &gt;&gt;&gt; a.per(R.from_dense([ZZ(1), ZZ(1)]), gens=[y])</span>
 <span class="sd">        Poly(y + 1, y, domain=&#39;ZZ&#39;)</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -553,7 +525,8 @@
 <div class="viewcode-block" id="Poly.set_domain"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.polytools.Poly.set_domain">[docs]</a>    <span class="k">def</span> <span class="nf">set_domain</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">domain</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set the ground domain of ``self``.&quot;&quot;&quot;</span>
         <span class="n">opt</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">build_options</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gens</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;domain&#39;</span><span class="p">:</span> <span class="n">domain</span><span class="p">})</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">per</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">opt</span><span class="o">.</span><span class="n">domain</span><span class="p">))</span></div>
+        <span class="n">newrep</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">set_domain</span><span class="p">(</span><span class="n">opt</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">per</span><span class="p">(</span><span class="n">newrep</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Poly.set_modulus"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.polytools.Poly.set_modulus">[docs]</a>    <span class="k">def</span> <span class="nf">set_modulus</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">modulus</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -611,14 +584,16 @@
 <span class="sd">        Poly(a + x, a, x, domain=&#39;ZZ&#39;)</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">J</span><span class="p">,</span> <span class="n">new</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">exclude</span><span class="p">()</span>
-        <span class="n">gens</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">rep</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span>
+        <span class="k">if</span> <span class="n">rep</span><span class="o">.</span><span class="n">is_ground</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">rep</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">symbols</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">rep</span> <span class="o">=</span> <span class="n">rep</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="k">pass</span>
 
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gens</span><span class="p">)):</span>
-            <span class="k">if</span> <span class="n">j</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">J</span><span class="p">:</span>
-                <span class="n">gens</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gens</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
-
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">per</span><span class="p">(</span><span class="n">new</span><span class="p">,</span> <span class="n">gens</span><span class="o">=</span><span class="n">gens</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">per</span><span class="p">(</span><span class="n">rep</span><span class="p">,</span> <span class="n">gens</span><span class="o">=</span><span class="n">rep</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">symbols</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Poly.replace"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.polytools.Poly.replace">[docs]</a>    <span class="k">def</span> <span class="nf">replace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -647,7 +622,8 @@
             <span class="k">if</span> <span class="ow">not</span> <span class="n">dom</span><span class="o">.</span><span class="n">is_Composite</span> <span class="ow">or</span> <span class="n">y</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">dom</span><span class="o">.</span><span class="n">symbols</span><span class="p">:</span>
                 <span class="n">gens</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gens</span><span class="p">)</span>
                 <span class="n">gens</span><span class="p">[</span><span class="n">gens</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">x</span><span class="p">)]</span> <span class="o">=</span> <span class="n">y</span>
-                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">per</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="p">,</span> <span class="n">gens</span><span class="o">=</span><span class="n">gens</span><span class="p">)</span>
+                <span class="n">rep</span> <span class="o">=</span> <span class="n">dom</span><span class="o">.</span><span class="n">poly_ring</span><span class="p">(</span><span class="o">*</span><span class="n">gens</span><span class="p">)</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="p">))</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">per</span><span class="p">(</span><span class="n">rep</span><span class="p">,</span> <span class="n">gens</span><span class="o">=</span><span class="n">gens</span><span class="p">)</span>
 
         <span class="k">raise</span> <span class="n">PolynomialError</span><span class="p">(</span><span class="s2">&quot;can&#39;t replace </span><span class="si">%s</span><span class="s2"> with </span><span class="si">%s</span><span class="s2"> in </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="p">))</span></div>
 
@@ -670,9 +646,12 @@
             <span class="k">raise</span> <span class="n">PolynomialError</span><span class="p">(</span>
                 <span class="s2">&quot;generators list can differ only up to order of elements&quot;</span><span class="p">)</span>
 
-        <span class="n">rep</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">_dict_reorder</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">gens</span><span class="p">,</span> <span class="n">gens</span><span class="p">)))</span>
+        <span class="n">rep</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">_dict_reorder</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">gens</span><span class="p">,</span> <span class="n">gens</span><span class="p">)))</span>
 
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">per</span><span class="p">(</span><span class="n">DMP</span><span class="p">(</span><span class="n">rep</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">gens</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">gens</span><span class="o">=</span><span class="n">gens</span><span class="p">)</span></div>
+        <span class="n">newring</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">poly_ring</span><span class="p">(</span><span class="o">*</span><span class="n">gens</span><span class="p">)</span>
+        <span class="n">rep</span> <span class="o">=</span> <span class="n">newring</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">rep</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">per</span><span class="p">(</span><span class="n">rep</span><span class="p">,</span> <span class="n">gens</span><span class="o">=</span><span class="n">gens</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Poly.ltrim"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.polytools.Poly.ltrim">[docs]</a>    <span class="k">def</span> <span class="nf">ltrim</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gen</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -699,7 +678,10 @@
 
         <span class="n">gens</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gens</span><span class="p">[</span><span class="n">j</span><span class="p">:]</span>
 
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">DMP</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">terms</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">gens</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">),</span> <span class="o">*</span><span class="n">gens</span><span class="p">)</span></div>
+        <span class="n">newring</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">poly_ring</span><span class="p">(</span><span class="o">*</span><span class="n">gens</span><span class="p">)</span>
+        <span class="n">rep</span> <span class="o">=</span> <span class="n">newring</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">terms</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">rep</span><span class="p">,</span> <span class="o">*</span><span class="n">gens</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Poly.has_only_gens"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.polytools.Poly.has_only_gens">[docs]</a>    <span class="k">def</span> <span class="nf">has_only_gens</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">gens</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -743,8 +725,7 @@
 <span class="sd">        Poly(x**2 + 1, x, domain=&#39;ZZ&#39;)</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">to_ring</span><span class="p">()</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">per</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_domain</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">ring</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Poly.to_field"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.polytools.Poly.to_field">[docs]</a>    <span class="k">def</span> <span class="nf">to_field</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -757,8 +738,7 @@
 <span class="sd">        Poly(x**2 + 1, x, domain=&#39;QQ&#39;)</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">to_field</span><span class="p">()</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">per</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_domain</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">field</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Poly.to_exact"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.polytools.Poly.to_exact">[docs]</a>    <span class="k">def</span> <span class="nf">to_exact</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -771,8 +751,7 @@
 <span class="sd">        Poly(x**2 + 1, x, domain=&#39;QQ&#39;)</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">to_exact</span><span class="p">()</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">per</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_domain</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">get_exact</span><span class="p">())</span></div>
 
 <div class="viewcode-block" id="Poly.retract"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.polytools.Poly.retract">[docs]</a>    <span class="k">def</span> <span class="nf">retract</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -926,7 +905,7 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">native</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+            <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">as_expr_dict</span><span class="p">()</span></div>
 
@@ -976,7 +955,7 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">J</span><span class="p">,</span> <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">deflate</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">J</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">per</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">J</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">per</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div>
 
 <div class="viewcode-block" id="Poly.inject"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.polytools.Poly.inject">[docs]</a>    <span class="k">def</span> <span class="nf">inject</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">front</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -998,12 +977,13 @@
         <span class="k">if</span> <span class="n">dom</span><span class="o">.</span><span class="n">is_Numerical</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span>
 
-        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">inject</span><span class="p">(</span><span class="n">front</span><span class="o">=</span><span class="n">front</span><span class="p">)</span>
-
         <span class="k">if</span> <span class="n">front</span><span class="p">:</span>
             <span class="n">gens</span> <span class="o">=</span> <span class="n">dom</span><span class="o">.</span><span class="n">symbols</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">gens</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">gens</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gens</span> <span class="o">+</span> <span class="n">dom</span><span class="o">.</span><span class="n">symbols</span>
+
+        <span class="n">newring</span> <span class="o">=</span> <span class="n">dom</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">poly_ring</span><span class="p">(</span><span class="o">*</span><span class="n">gens</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">newring</span><span class="o">.</span><span class="n">from_expr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">as_expr</span><span class="p">())</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="o">*</span><span class="n">gens</span><span class="p">)</span></div>
 
@@ -1027,20 +1007,10 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="n">dom</span><span class="o">.</span><span class="n">is_Numerical</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">DomainError</span><span class="p">(</span><span class="s2">&quot;can&#39;t eject generators over </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">dom</span><span class="p">)</span>
 
-        <span class="n">k</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">gens</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">drop_to_ground</span><span class="p">(</span><span class="o">*</span><span class="n">gens</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">gens</span><span class="p">[:</span><span class="n">k</span><span class="p">]</span> <span class="o">==</span> <span class="n">gens</span><span class="p">:</span>
-            <span class="n">_gens</span><span class="p">,</span> <span class="n">front</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gens</span><span class="p">[</span><span class="n">k</span><span class="p">:],</span> <span class="kc">True</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">gens</span><span class="p">[</span><span class="o">-</span><span class="n">k</span><span class="p">:]</span> <span class="o">==</span> <span class="n">gens</span><span class="p">:</span>
-            <span class="n">_gens</span><span class="p">,</span> <span class="n">front</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gens</span><span class="p">[:</span><span class="o">-</span><span class="n">k</span><span class="p">],</span> <span class="kc">False</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
-                <span class="s2">&quot;can only eject front or back generators&quot;</span><span class="p">)</span>
-
-        <span class="n">dom</span> <span class="o">=</span> <span class="n">dom</span><span class="o">.</span><span class="n">inject</span><span class="p">(</span><span class="o">*</span><span class="n">gens</span><span class="p">)</span>
-
-        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">eject</span><span class="p">(</span><span class="n">dom</span><span class="p">,</span> <span class="n">front</span><span class="o">=</span><span class="n">front</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="o">*</span><span class="n">_gens</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="o">*</span><span class="n">result</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">symbols</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Poly.terms_gcd"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.polytools.Poly.terms_gcd">[docs]</a>    <span class="k">def</span> <span class="nf">terms_gcd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -1186,14 +1156,14 @@
         <span class="n">retract</span> <span class="o">=</span> <span class="kc">False</span>
 
         <span class="k">if</span> <span class="n">auto</span> <span class="ow">and</span> <span class="n">dom</span><span class="o">.</span><span class="n">is_Ring</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">dom</span><span class="o">.</span><span class="n">is_Field</span><span class="p">:</span>
-            <span class="n">F</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">to_field</span><span class="p">(),</span> <span class="n">G</span><span class="o">.</span><span class="n">to_field</span><span class="p">()</span>
+            <span class="n">F</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">set_domain</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">field</span><span class="p">),</span> <span class="n">G</span><span class="o">.</span><span class="n">set_domain</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">field</span><span class="p">)</span>
             <span class="n">retract</span> <span class="o">=</span> <span class="kc">True</span>
 
         <span class="n">q</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">G</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">retract</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="n">Q</span><span class="p">,</span> <span class="n">R</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">to_ring</span><span class="p">(),</span> <span class="n">r</span><span class="o">.</span><span class="n">to_ring</span><span class="p">()</span>
+                <span class="n">Q</span><span class="p">,</span> <span class="n">R</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">set_domain</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">ring</span><span class="p">),</span> <span class="n">r</span><span class="o">.</span><span class="n">set_domain</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">ring</span><span class="p">)</span>
             <span class="k">except</span> <span class="n">CoercionFailed</span><span class="p">:</span>
                 <span class="k">pass</span>
             <span class="k">else</span><span class="p">:</span>
@@ -1219,14 +1189,14 @@
         <span class="n">retract</span> <span class="o">=</span> <span class="kc">False</span>
 
         <span class="k">if</span> <span class="n">auto</span> <span class="ow">and</span> <span class="n">dom</span><span class="o">.</span><span class="n">is_Ring</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">dom</span><span class="o">.</span><span class="n">is_Field</span><span class="p">:</span>
-            <span class="n">F</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">to_field</span><span class="p">(),</span> <span class="n">G</span><span class="o">.</span><span class="n">to_field</span><span class="p">()</span>
+            <span class="n">F</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">set_domain</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">field</span><span class="p">),</span> <span class="n">G</span><span class="o">.</span><span class="n">set_domain</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">field</span><span class="p">)</span>
             <span class="n">retract</span> <span class="o">=</span> <span class="kc">True</span>
 
         <span class="n">r</span> <span class="o">=</span> <span class="n">F</span> <span class="o">%</span> <span class="n">G</span>
 
         <span class="k">if</span> <span class="n">retract</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="n">r</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">to_ring</span><span class="p">()</span>
+                <span class="n">r</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">set_domain</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">ring</span><span class="p">)</span>
             <span class="k">except</span> <span class="n">CoercionFailed</span><span class="p">:</span>
                 <span class="k">pass</span>
 
@@ -1250,14 +1220,14 @@
         <span class="n">retract</span> <span class="o">=</span> <span class="kc">False</span>
 
         <span class="k">if</span> <span class="n">auto</span> <span class="ow">and</span> <span class="n">dom</span><span class="o">.</span><span class="n">is_Ring</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">dom</span><span class="o">.</span><span class="n">is_Field</span><span class="p">:</span>
-            <span class="n">F</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">to_field</span><span class="p">(),</span> <span class="n">G</span><span class="o">.</span><span class="n">to_field</span><span class="p">()</span>
+            <span class="n">F</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">set_domain</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">field</span><span class="p">),</span> <span class="n">G</span><span class="o">.</span><span class="n">set_domain</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">field</span><span class="p">)</span>
             <span class="n">retract</span> <span class="o">=</span> <span class="kc">True</span>
 
         <span class="n">q</span> <span class="o">=</span> <span class="n">F</span> <span class="o">//</span> <span class="n">G</span>
 
         <span class="k">if</span> <span class="n">retract</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="n">q</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">to_ring</span><span class="p">()</span>
+                <span class="n">q</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">set_domain</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">ring</span><span class="p">)</span>
             <span class="k">except</span> <span class="n">CoercionFailed</span><span class="p">:</span>
                 <span class="k">pass</span>
 
@@ -1283,7 +1253,7 @@
         <span class="n">retract</span> <span class="o">=</span> <span class="kc">False</span>
 
         <span class="k">if</span> <span class="n">auto</span> <span class="ow">and</span> <span class="n">dom</span><span class="o">.</span><span class="n">is_Ring</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">dom</span><span class="o">.</span><span class="n">is_Field</span><span class="p">:</span>
-            <span class="n">F</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">to_field</span><span class="p">(),</span> <span class="n">G</span><span class="o">.</span><span class="n">to_field</span><span class="p">()</span>
+            <span class="n">F</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">set_domain</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">field</span><span class="p">),</span> <span class="n">G</span><span class="o">.</span><span class="n">set_domain</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">field</span><span class="p">)</span>
             <span class="n">retract</span> <span class="o">=</span> <span class="kc">True</span>
 
         <span class="k">try</span><span class="p">:</span>
@@ -1293,7 +1263,7 @@
 
         <span class="k">if</span> <span class="n">retract</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="n">q</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">to_ring</span><span class="p">()</span>
+                <span class="n">q</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">set_domain</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">ring</span><span class="p">)</span>
             <span class="k">except</span> <span class="n">CoercionFailed</span><span class="p">:</span>
                 <span class="k">pass</span>
 
@@ -1382,7 +1352,7 @@
         <span class="k">if</span> <span class="n">order</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">coeffs</span><span class="p">(</span><span class="n">order</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 
-        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">LC</span><span class="p">()</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">LC</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">to_expr</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Poly.TC"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.polytools.Poly.TC">[docs]</a>    <span class="k">def</span> <span class="nf">TC</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1396,7 +1366,7 @@
 <span class="sd">        0</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">TC</span><span class="p">()</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">dmp_ground_TC</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">to_expr</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Poly.EC"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.polytools.Poly.EC">[docs]</a>    <span class="k">def</span> <span class="nf">EC</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -1795,7 +1765,7 @@
         <span class="n">dom</span><span class="p">,</span> <span class="n">per</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unify</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">auto</span> <span class="ow">and</span> <span class="n">dom</span><span class="o">.</span><span class="n">is_Ring</span><span class="p">:</span>
-            <span class="n">F</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">to_field</span><span class="p">(),</span> <span class="n">G</span><span class="o">.</span><span class="n">to_field</span><span class="p">()</span>
+            <span class="n">F</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">set_domain</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">field</span><span class="p">),</span> <span class="n">G</span><span class="o">.</span><span class="n">set_domain</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">field</span><span class="p">)</span>
 
         <span class="n">s</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">half_gcdex</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">per</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">per</span><span class="p">(</span><span class="n">h</span><span class="p">)</span></div>
@@ -1821,7 +1791,7 @@
         <span class="n">dom</span><span class="p">,</span> <span class="n">per</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unify</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">auto</span> <span class="ow">and</span> <span class="n">dom</span><span class="o">.</span><span class="n">is_Ring</span><span class="p">:</span>
-            <span class="n">F</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">to_field</span><span class="p">(),</span> <span class="n">G</span><span class="o">.</span><span class="n">to_field</span><span class="p">()</span>
+            <span class="n">F</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">set_domain</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">field</span><span class="p">),</span> <span class="n">G</span><span class="o">.</span><span class="n">set_domain</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">field</span><span class="p">)</span>
 
         <span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">gcdex</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">per</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">per</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">per</span><span class="p">(</span><span class="n">h</span><span class="p">)</span></div>
@@ -1845,9 +1815,9 @@
         <span class="n">dom</span><span class="p">,</span> <span class="n">per</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unify</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">auto</span> <span class="ow">and</span> <span class="n">dom</span><span class="o">.</span><span class="n">is_Ring</span><span class="p">:</span>
-            <span class="n">F</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">to_field</span><span class="p">(),</span> <span class="n">G</span><span class="o">.</span><span class="n">to_field</span><span class="p">()</span>
+            <span class="n">F</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">set_domain</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">field</span><span class="p">),</span> <span class="n">G</span><span class="o">.</span><span class="n">set_domain</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">field</span><span class="p">)</span>
 
-        <span class="n">result</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">invert</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">dup_invert</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">G</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">per</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Poly.subresultants"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.polytools.Poly.subresultants">[docs]</a>    <span class="k">def</span> <span class="nf">subresultants</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
@@ -1891,9 +1861,9 @@
         <span class="n">_</span><span class="p">,</span> <span class="n">per</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unify</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">includePRS</span><span class="p">:</span>
-            <span class="n">result</span><span class="p">,</span> <span class="n">R</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">resultant</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">includePRS</span><span class="o">=</span><span class="n">includePRS</span><span class="p">)</span>
+            <span class="n">result</span><span class="p">,</span> <span class="n">R</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">dmp_resultant</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">includePRS</span><span class="o">=</span><span class="n">includePRS</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">resultant</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">dmp_resultant</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">G</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">includePRS</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">per</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">remove</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">per</span><span class="p">,</span> <span class="n">R</span><span class="p">))</span>
@@ -2092,7 +2062,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">_</span><span class="p">,</span> <span class="n">per</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unify</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
-        <span class="n">result</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">compose</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">compose</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">gens</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">G</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">per</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Poly.decompose"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.polytools.Poly.decompose">[docs]</a>    <span class="k">def</span> <span class="nf">decompose</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -2255,8 +2225,27 @@
         <span class="k">if</span> <span class="n">sup</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">sup</span> <span class="o">=</span> <span class="n">QQ</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">sup</span><span class="p">)</span>
 
-        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">intervals</span><span class="p">(</span><span class="nb">all</span><span class="o">=</span><span class="nb">all</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="n">eps</span><span class="p">,</span> <span class="n">inf</span><span class="o">=</span><span class="n">inf</span><span class="p">,</span>
-                                    <span class="n">sup</span><span class="o">=</span><span class="n">sup</span><span class="p">,</span> <span class="n">fast</span><span class="o">=</span><span class="n">fast</span><span class="p">,</span> <span class="n">sqf</span><span class="o">=</span><span class="n">sqf</span><span class="p">)</span>
+        <span class="n">R</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">ring</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_univariate</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">sqf</span><span class="p">:</span>
+                    <span class="n">result</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">dup_isolate_real_roots</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="n">eps</span><span class="p">,</span>
+                                                      <span class="n">inf</span><span class="o">=</span><span class="n">inf</span><span class="p">,</span> <span class="n">sup</span><span class="o">=</span><span class="n">sup</span><span class="p">,</span> <span class="n">fast</span><span class="o">=</span><span class="n">fast</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">result</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">dup_isolate_real_roots_sqf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="p">,</span>
+                                                          <span class="n">eps</span><span class="o">=</span><span class="n">eps</span><span class="p">,</span> <span class="n">inf</span><span class="o">=</span><span class="n">inf</span><span class="p">,</span>
+                                                          <span class="n">sup</span><span class="o">=</span><span class="n">sup</span><span class="p">,</span> <span class="n">fast</span><span class="o">=</span><span class="n">fast</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">sqf</span><span class="p">:</span>
+                    <span class="n">result</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">dup_isolate_all_roots</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="n">eps</span><span class="p">,</span>
+                                                     <span class="n">inf</span><span class="o">=</span><span class="n">inf</span><span class="p">,</span> <span class="n">sup</span><span class="o">=</span><span class="n">sup</span><span class="p">,</span> <span class="n">fast</span><span class="o">=</span><span class="n">fast</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">result</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">dup_isolate_all_roots_sqf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="p">,</span>
+                                                         <span class="n">eps</span><span class="o">=</span><span class="n">eps</span><span class="p">,</span> <span class="n">inf</span><span class="o">=</span><span class="n">inf</span><span class="p">,</span> <span class="n">sup</span><span class="o">=</span><span class="n">sup</span><span class="p">,</span>
+                                                         <span class="n">fast</span><span class="o">=</span><span class="n">fast</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">MultivariatePolynomialError</span><span class="p">(</span><span class="s2">&quot;can&#39;t isolate roots of a multivariate polynomial&quot;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">sqf</span><span class="p">:</span>
             <span class="k">def</span> <span class="nf">_real</span><span class="p">(</span><span class="n">interval</span><span class="p">):</span>
@@ -2318,7 +2307,7 @@
         <span class="k">elif</span> <span class="n">eps</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">steps</span> <span class="o">=</span> <span class="mi">1</span>
 
-        <span class="n">S</span><span class="p">,</span> <span class="n">T</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">refine_root</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="n">eps</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="n">steps</span><span class="p">,</span> <span class="n">fast</span><span class="o">=</span><span class="n">fast</span><span class="p">)</span>
+        <span class="n">S</span><span class="p">,</span> <span class="n">T</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">dup_refine_real_root</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="n">eps</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="n">steps</span><span class="p">,</span> <span class="n">fast</span><span class="o">=</span><span class="n">fast</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">QQ</span><span class="o">.</span><span class="n">to_expr</span><span class="p">(</span><span class="n">S</span><span class="p">),</span> <span class="n">QQ</span><span class="o">.</span><span class="n">to_expr</span><span class="p">(</span><span class="n">T</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Poly.count_roots"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.polytools.Poly.count_roots">[docs]</a>    <span class="k">def</span> <span class="nf">count_roots</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inf</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sup</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -2363,7 +2352,7 @@
                     <span class="n">sup</span><span class="p">,</span> <span class="n">sup_real</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">QQ</span><span class="o">.</span><span class="n">convert</span><span class="p">,</span> <span class="p">(</span><span class="n">re</span><span class="p">,</span> <span class="n">im</span><span class="p">))),</span> <span class="kc">False</span>
 
         <span class="k">if</span> <span class="n">inf_real</span> <span class="ow">and</span> <span class="n">sup_real</span><span class="p">:</span>
-            <span class="n">count</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">count_real_roots</span><span class="p">(</span><span class="n">inf</span><span class="o">=</span><span class="n">inf</span><span class="p">,</span> <span class="n">sup</span><span class="o">=</span><span class="n">sup</span><span class="p">)</span>
+            <span class="n">count</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">dup_count_real_roots</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="p">,</span> <span class="n">inf</span><span class="o">=</span><span class="n">inf</span><span class="p">,</span> <span class="n">sup</span><span class="o">=</span><span class="n">sup</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">inf_real</span> <span class="ow">and</span> <span class="n">inf</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">inf</span> <span class="o">=</span> <span class="p">(</span><span class="n">inf</span><span class="p">,</span> <span class="n">QQ</span><span class="o">.</span><span class="n">zero</span><span class="p">)</span>
@@ -2371,7 +2360,7 @@
             <span class="k">if</span> <span class="n">sup_real</span> <span class="ow">and</span> <span class="n">sup</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">sup</span> <span class="o">=</span> <span class="p">(</span><span class="n">sup</span><span class="p">,</span> <span class="n">QQ</span><span class="o">.</span><span class="n">zero</span><span class="p">)</span>
 
-            <span class="n">count</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">count_complex_roots</span><span class="p">(</span><span class="n">inf</span><span class="o">=</span><span class="n">inf</span><span class="p">,</span> <span class="n">sup</span><span class="o">=</span><span class="n">sup</span><span class="p">)</span>
+            <span class="n">count</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">dup_count_complex_roots</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="p">,</span> <span class="n">inf</span><span class="o">=</span><span class="n">inf</span><span class="p">,</span> <span class="n">sup</span><span class="o">=</span><span class="n">sup</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="n">count</span><span class="p">)</span></div>
 
@@ -2592,7 +2581,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">dom</span><span class="p">,</span> <span class="n">per</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unify</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
-        <span class="n">result</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">cancel</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="n">include</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">dmp_cancel</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="n">include</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">include</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">dom</span><span class="o">.</span><span class="n">has_assoc_Ring</span><span class="p">:</span>
@@ -3023,7 +3012,7 @@
 
     <span class="k">def</span> <span class="nf">_hashable_content</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Allow Diofant to hash Poly instances.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="p">,</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="nb">frozenset</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
 
     <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__hash__</span><span class="p">()</span>
@@ -3068,7 +3057,7 @@
             <span class="n">f</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">set_domain</span><span class="p">(</span><span class="n">dom</span><span class="p">)</span>
             <span class="n">g</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">set_domain</span><span class="p">(</span><span class="n">dom</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">rep</span> <span class="o">==</span> <span class="n">g</span><span class="o">.</span><span class="n">rep</span>
+        <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="o">==</span> <span class="n">g</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">_unify</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="n">other</span> <span class="o">=</span> <span class="n">sympify</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
@@ -3076,20 +3065,19 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="n">other</span><span class="o">.</span><span class="n">is_Poly</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">per</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="p">,</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">per</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">other</span><span class="p">)))</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">ring</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">other</span><span class="p">)))</span>
             <span class="k">except</span> <span class="n">CoercionFailed</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">UnificationFailed</span><span class="p">(</span><span class="s2">&quot;can&#39;t unify </span><span class="si">%s</span><span class="s2"> with </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">))</span>
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gens</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">gens</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">UnificationFailed</span><span class="p">(</span><span class="s2">&quot;can&#39;t unify </span><span class="si">%s</span><span class="s2"> with </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">))</span>
 
+        <span class="n">newring</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">unify</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">ring</span><span class="p">)</span>
+        <span class="n">gens</span> <span class="o">=</span> <span class="n">newring</span><span class="o">.</span><span class="n">symbols</span>
+        <span class="n">F</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">set_ring</span><span class="p">(</span><span class="n">newring</span><span class="p">),</span> <span class="n">other</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">set_ring</span><span class="p">(</span><span class="n">newring</span><span class="p">)</span>
+
         <span class="bp">cls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span>
-        <span class="n">gens</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gens</span>
-
-        <span class="n">dom</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">unify</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">gens</span><span class="p">)</span>
-
-        <span class="n">F</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">dom</span><span class="p">)</span>
-        <span class="n">G</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">dom</span><span class="p">)</span>
+        <span class="n">dom</span> <span class="o">=</span> <span class="n">newring</span><span class="o">.</span><span class="n">domain</span>
 
         <span class="k">def</span> <span class="nf">per</span><span class="p">(</span><span class="n">rep</span><span class="p">,</span> <span class="n">dom</span><span class="o">=</span><span class="n">dom</span><span class="p">,</span> <span class="n">gens</span><span class="o">=</span><span class="n">gens</span><span class="p">,</span> <span class="n">remove</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">remove</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -5090,7 +5078,7 @@
     <span class="n">_ring</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="n">opt</span><span class="o">.</span><span class="n">gens</span><span class="p">,</span> <span class="n">opt</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">opt</span><span class="o">.</span><span class="n">order</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">poly</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">polys</span><span class="p">):</span>
-        <span class="n">poly</span> <span class="o">=</span> <span class="n">poly</span><span class="o">.</span><span class="n">set_domain</span><span class="p">(</span><span class="n">opt</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+        <span class="n">poly</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">poly</span><span class="o">.</span><span class="n">set_domain</span><span class="p">(</span><span class="n">opt</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span><span class="o">.</span><span class="n">rep</span><span class="p">)</span>
         <span class="n">polys</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">_ring</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
 
     <span class="n">Q</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">polys</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">polys</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
@@ -5183,7 +5171,7 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="n">ring</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">is_Exact</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Domain must be exact, got </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">ring</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
 
-        <span class="n">polys</span> <span class="o">=</span> <span class="p">[</span><span class="n">ring</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">_</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+        <span class="n">polys</span> <span class="o">=</span> <span class="p">[</span><span class="n">ring</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">_</span><span class="o">.</span><span class="n">rep</span><span class="p">))</span>
                  <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">polys</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">_</span><span class="o">.</span><span class="n">is_zero</span><span class="p">]</span>
 
         <span class="n">G</span> <span class="o">=</span> <span class="n">_groebner</span><span class="p">(</span><span class="n">polys</span><span class="p">,</span> <span class="n">ring</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">opt</span><span class="o">.</span><span class="n">method</span><span class="p">)</span>
@@ -5333,7 +5321,7 @@
         <span class="n">_ring</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="n">opt</span><span class="o">.</span><span class="n">gens</span><span class="p">,</span> <span class="n">opt</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">src_order</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">poly</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">polys</span><span class="p">):</span>
-            <span class="n">poly</span> <span class="o">=</span> <span class="n">poly</span><span class="o">.</span><span class="n">set_domain</span><span class="p">(</span><span class="n">opt</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+            <span class="n">poly</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">poly</span><span class="o">.</span><span class="n">set_domain</span><span class="p">(</span><span class="n">opt</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span><span class="o">.</span><span class="n">rep</span><span class="p">)</span>
             <span class="n">polys</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">_ring</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
 
         <span class="n">G</span> <span class="o">=</span> <span class="n">matrix_fglm</span><span class="p">(</span><span class="n">polys</span><span class="p">,</span> <span class="n">_ring</span><span class="p">,</span> <span class="n">dst_order</span><span class="p">)</span>
@@ -5385,7 +5373,7 @@
         <span class="n">_ring</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="n">opt</span><span class="o">.</span><span class="n">gens</span><span class="p">,</span> <span class="n">opt</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">opt</span><span class="o">.</span><span class="n">order</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">poly</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">polys</span><span class="p">):</span>
-            <span class="n">poly</span> <span class="o">=</span> <span class="n">poly</span><span class="o">.</span><span class="n">set_domain</span><span class="p">(</span><span class="n">opt</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+            <span class="n">poly</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">poly</span><span class="o">.</span><span class="n">set_domain</span><span class="p">(</span><span class="n">opt</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span><span class="o">.</span><span class="n">rep</span><span class="p">)</span>
             <span class="n">polys</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">_ring</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
 
         <span class="n">Q</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">polys</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">polys</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>

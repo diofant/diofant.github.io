@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Internals of the Polynomial Manipulation Module &mdash; Diofant 0.10.1.dev245+g91213c3 documentation</title>
+  <title>Internals of the Polynomial Manipulation Module &mdash; Diofant 0.10.1.dev249+gedb04ea documentation</title>
   
 
   
@@ -86,23 +86,20 @@
 <li class="toctree-l1"><a class="reference internal" href="../modules/index.html">Reference</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Internals</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Internals of the Polynomial Manipulation Module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#module-diofant.polys.polyclasses">Level One</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#level-zero">Level Zero</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#manipulation-of-dense-multivariate-polynomials">Manipulation of dense, multivariate polynomials</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#manipulation-of-dense-univariate-polynomials-with-finite-field-coefficients">Manipulation of dense, univariate polynomials with finite field coefficients</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#manipulation-of-sparse-distributed-polynomials">Manipulation of sparse, distributed polynomials</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#polynomial-factorization-algorithms">Polynomial factorization algorithms</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#grobner-basis-algorithms">Gröbner basis algorithms</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#algebraic-number-fields">Algebraic number fields</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#manipulation-of-dense-multivariate-polynomials">Manipulation of dense, multivariate polynomials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#manipulation-of-dense-univariate-polynomials-with-finite-field-coefficients">Manipulation of dense, univariate polynomials with finite field coefficients</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#manipulation-of-sparse-distributed-polynomials">Manipulation of sparse, distributed polynomials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#polynomial-factorization-algorithms">Polynomial factorization algorithms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#classical-remainder-sequence">Classical remainder sequence</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#simplified-remainder-sequences">Simplified remainder sequences</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#subresultant-sequence">Subresultant sequence</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#exceptions">Exceptions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#reference">Reference</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#module-diofant.polys.modulargcd">Modular GCD</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#module-diofant.polys.heuristicgcd">Heuristic GCD</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#manipulation-of-power-series">Manipulation of power series</a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="#grobner-basis-algorithms">Gröbner basis algorithms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#algebraic-number-fields">Algebraic number fields</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-diofant.polys.modulargcd">Modular GCD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-diofant.polys.heuristicgcd">Heuristic GCD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#manipulation-of-power-series">Manipulation of power series</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#undocumented">Undocumented</a></li>
 </ul>
 </li>
@@ -189,16 +186,7 @@
             
   <div class="section" id="internals-of-the-polynomial-manipulation-module">
 <span id="polys-internals"></span><h1>Internals of the Polynomial Manipulation Module<a class="headerlink" href="#internals-of-the-polynomial-manipulation-module" title="Permalink to this headline">¶</a></h1>
-<p>The implementation of the polynomials module is structured internally in
-“levels”. There are four levels, called L0, L1, L2 and L3. The levels three
-and four contain the user-facing functionality and were described in the
-previous section. This section focuses on levels zero and one.</p>
-<p>Level zero provides core polynomial manipulation functionality with C-like,
-low-level interfaces. Level one wraps this low-level functionality into object
-oriented structures. These are <em>not</em> the classes seen by the user, but rather
-classes used internally throughout the polys module.</p>
-<p>There is one additional complication in the implementation. This comes from the
-fact that all polynomial manipulations are relative to a <em>ground domain</em>. For
+<p>All polynomial manipulations are relative to a <em>ground domain</em>. For
 example, when factoring a polynomial like <span class="math notranslate nohighlight">\(x^{10} - 1\)</span>, one has to decide what
 ring the coefficients are supposed to belong to, or less trivially, what
 coefficients are allowed to appear in the factorization. This choice of
@@ -211,507 +199,13 @@ field.</p>
 complicated ones like factoring, and simpler ones like addition or
 multiplication) have to rely on other code to manipulate the coefficients.
 In the polynomial manipulation module, such code is encapsulated in so-called
-“domains”. A domain is basically a factory object: it takes various
+<a class="reference internal" href="../modules/domains.html#module-diofant.domains" title="diofant.domains"><code class="xref py py-mod docutils literal notranslate"><span class="pre">domains</span></code></a>.  A domain is basically a factory object: it takes various
 representations of data, and converts them into objects with unified interface.
 Every object created by a domain has to implement the arithmetic operations
 <span class="math notranslate nohighlight">\(+\)</span>, <span class="math notranslate nohighlight">\(-\)</span> and <span class="math notranslate nohighlight">\(\times\)</span>. Other operations are accessed through the domain, e.g.
 as in <code class="docutils literal notranslate"><span class="pre">ZZ.quo(ZZ(4),</span> <span class="pre">ZZ(2))</span></code>.</p>
-<p>Note that there is some amount of <em>circularity</em>: the polynomial ring domains
-use the level one classes, the level one classes use the level zero functions,
-and level zero functions use domains. It is possible, in principle, but not in
-the current implementation, to work in rings like <span class="math notranslate nohighlight">\(k[X][Y]\)</span>. This would create
-even more layers. For this reason, working in the isomorphic ring <span class="math notranslate nohighlight">\(k[X, Y]\)</span>
-is preferred.</p>
-<div class="section" id="module-diofant.polys.polyclasses">
-<span id="level-one"></span><h2>Level One<a class="headerlink" href="#module-diofant.polys.polyclasses" title="Permalink to this headline">¶</a></h2>
-<p>OO layer for several polynomial representations.</p>
-<dl class="class">
-<dt id="diofant.polys.polyclasses.DMP">
-<em class="property">class </em><code class="descclassname">diofant.polys.polyclasses.</code><code class="descname">DMP</code><span class="sig-paren">(</span><em>rep</em>, <em>dom</em>, <em>lev=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP" title="Permalink to this definition">¶</a></dt>
-<dd><p>Dense Multivariate Polynomials over <span class="math notranslate nohighlight">\(K\)</span>.</p>
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.LC">
-<code class="descname">LC</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.LC"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.LC" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the leading coefficient of <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.TC">
-<code class="descname">TC</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.TC"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.TC" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the trailing coefficient of <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.all_coeffs">
-<code class="descname">all_coeffs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.all_coeffs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.all_coeffs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns all coefficients from <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.as_expr_dict">
-<code class="descname">as_expr_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.as_expr_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.as_expr_dict" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convert <code class="docutils literal notranslate"><span class="pre">self</span></code> to a dict representation with Diofant coefficients.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.cancel">
-<code class="descname">cancel</code><span class="sig-paren">(</span><em>other</em>, <em>include=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.cancel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.cancel" title="Permalink to this definition">¶</a></dt>
-<dd><p>Cancel common factors in a rational function <code class="docutils literal notranslate"><span class="pre">self/other</span></code>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.clear_denoms">
-<code class="descname">clear_denoms</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.clear_denoms"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.clear_denoms" title="Permalink to this definition">¶</a></dt>
-<dd><p>Clear denominators, but keep the ground domain.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.coeff">
-<code class="descname">coeff</code><span class="sig-paren">(</span><em>N</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.coeff"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.coeff" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the <code class="docutils literal notranslate"><span class="pre">n</span></code>-th coefficient of <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.coeffs">
-<code class="descname">coeffs</code><span class="sig-paren">(</span><em>order=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.coeffs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.coeffs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns all non-zero coefficients from <code class="docutils literal notranslate"><span class="pre">self</span></code> in lex order.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.cofactors">
-<code class="descname">cofactors</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.cofactors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.cofactors" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns GCD of <code class="docutils literal notranslate"><span class="pre">self</span></code> and <code class="docutils literal notranslate"><span class="pre">other</span></code> and their cofactors.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.compose">
-<code class="descname">compose</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.compose"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.compose" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes functional composition of <code class="docutils literal notranslate"><span class="pre">self</span></code> and <code class="docutils literal notranslate"><span class="pre">other</span></code>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.content">
-<code class="descname">content</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.content"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.content" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns GCD of polynomial coefficients.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.convert">
-<code class="descname">convert</code><span class="sig-paren">(</span><em>dom</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.convert"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.convert" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convert the ground domain of <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.count_complex_roots">
-<code class="descname">count_complex_roots</code><span class="sig-paren">(</span><em>inf=None</em>, <em>sup=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.count_complex_roots"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.count_complex_roots" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the number of complex roots of <code class="docutils literal notranslate"><span class="pre">self</span></code> in <code class="docutils literal notranslate"><span class="pre">[inf,</span> <span class="pre">sup]</span></code>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.count_real_roots">
-<code class="descname">count_real_roots</code><span class="sig-paren">(</span><em>inf=None</em>, <em>sup=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.count_real_roots"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.count_real_roots" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the number of real roots of <code class="docutils literal notranslate"><span class="pre">self</span></code> in <code class="docutils literal notranslate"><span class="pre">[inf,</span> <span class="pre">sup]</span></code>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.decompose">
-<code class="descname">decompose</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.decompose"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.decompose" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes functional decomposition of <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.deflate">
-<code class="descname">deflate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.deflate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.deflate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reduce degree of <span class="math notranslate nohighlight">\(self\)</span> by mapping <span class="math notranslate nohighlight">\(x_i^m\)</span> to <span class="math notranslate nohighlight">\(y_i\)</span>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.degree">
-<code class="descname">degree</code><span class="sig-paren">(</span><em>j=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.degree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.degree" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the leading degree of <code class="docutils literal notranslate"><span class="pre">self</span></code> in <code class="docutils literal notranslate"><span class="pre">x_j</span></code>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.degree_list">
-<code class="descname">degree_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.degree_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.degree_list" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a list of degrees of <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.diff">
-<code class="descname">diff</code><span class="sig-paren">(</span><em>j=0</em>, <em>m=1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.diff"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.diff" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes the <code class="docutils literal notranslate"><span class="pre">m</span></code>-th order derivative of <code class="docutils literal notranslate"><span class="pre">self</span></code> in <code class="docutils literal notranslate"><span class="pre">x_j</span></code>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.discriminant">
-<code class="descname">discriminant</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.discriminant"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.discriminant" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes discriminant of <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.eject">
-<code class="descname">eject</code><span class="sig-paren">(</span><em>dom</em>, <em>front=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.eject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.eject" title="Permalink to this definition">¶</a></dt>
-<dd><p>Eject selected generators into the ground domain.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.eval">
-<code class="descname">eval</code><span class="sig-paren">(</span><em>j=0</em>, <em>a=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.eval"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.eval" title="Permalink to this definition">¶</a></dt>
-<dd><p>Evaluates <code class="docutils literal notranslate"><span class="pre">self</span></code> at the given point <code class="docutils literal notranslate"><span class="pre">a</span></code> in <code class="docutils literal notranslate"><span class="pre">x_j</span></code>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.exclude">
-<code class="descname">exclude</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.exclude"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.exclude" title="Permalink to this definition">¶</a></dt>
-<dd><p>Remove useless generators from <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p>
-<p>Returns the removed generators and the new excluded <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">DMP</span><span class="p">([[[</span><span class="n">ZZ</span><span class="p">(</span><span class="mi">1</span><span class="p">)]],</span> <span class="p">[[</span><span class="n">ZZ</span><span class="p">(</span><span class="mi">1</span><span class="p">)],</span> <span class="p">[</span><span class="n">ZZ</span><span class="p">(</span><span class="mi">2</span><span class="p">)]]],</span> <span class="n">ZZ</span><span class="p">)</span><span class="o">.</span><span class="n">exclude</span><span class="p">()</span>
-<span class="go">([2], DMP([[1], [1, 2]], ZZ))</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.exquo">
-<code class="descname">exquo</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.exquo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.exquo" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes polynomial exact quotient of <code class="docutils literal notranslate"><span class="pre">self</span></code> and <code class="docutils literal notranslate"><span class="pre">other</span></code>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.exquo_ground">
-<code class="descname">exquo_ground</code><span class="sig-paren">(</span><em>c</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.exquo_ground"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.exquo_ground" title="Permalink to this definition">¶</a></dt>
-<dd><p>Exact quotient of <code class="docutils literal notranslate"><span class="pre">self</span></code> by a an element of the ground domain.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.factor_list">
-<code class="descname">factor_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.factor_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.factor_list" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a list of irreducible factors of <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="diofant.polys.polyclasses.DMP.from_dict">
-<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>rep</em>, <em>lev</em>, <em>dom</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.from_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.from_dict" title="Permalink to this definition">¶</a></dt>
-<dd><p>Construct and instance of <code class="docutils literal notranslate"><span class="pre">cls</span></code> from a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> representation.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="diofant.polys.polyclasses.DMP.from_list">
-<em class="property">classmethod </em><code class="descname">from_list</code><span class="sig-paren">(</span><em>rep</em>, <em>lev</em>, <em>dom</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.from_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.from_list" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create an instance of <code class="docutils literal notranslate"><span class="pre">cls</span></code> given a list of native coefficients.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.gcd">
-<code class="descname">gcd</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.gcd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.gcd" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns polynomial GCD of <code class="docutils literal notranslate"><span class="pre">self</span></code> and <code class="docutils literal notranslate"><span class="pre">other</span></code>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.gcdex">
-<code class="descname">gcdex</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.gcdex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.gcdex" title="Permalink to this definition">¶</a></dt>
-<dd><p>Extended Euclidean algorithm, if univariate.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.half_gcdex">
-<code class="descname">half_gcdex</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.half_gcdex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.half_gcdex" title="Permalink to this definition">¶</a></dt>
-<dd><p>Half extended Euclidean algorithm, if univariate.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.inject">
-<code class="descname">inject</code><span class="sig-paren">(</span><em>front=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.inject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.inject" title="Permalink to this definition">¶</a></dt>
-<dd><p>Inject ground domain generators into <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.integrate">
-<code class="descname">integrate</code><span class="sig-paren">(</span><em>m=1</em>, <em>j=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.integrate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.integrate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes the <code class="docutils literal notranslate"><span class="pre">m</span></code>-th order indefinite integral of <code class="docutils literal notranslate"><span class="pre">self</span></code> in <code class="docutils literal notranslate"><span class="pre">x_j</span></code>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.intervals">
-<code class="descname">intervals</code><span class="sig-paren">(</span><em>all=False</em>, <em>eps=None</em>, <em>inf=None</em>, <em>sup=None</em>, <em>fast=False</em>, <em>sqf=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.intervals"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.intervals" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute isolating intervals for roots of <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.invert">
-<code class="descname">invert</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.invert"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.invert" title="Permalink to this definition">¶</a></dt>
-<dd><p>Invert <code class="docutils literal notranslate"><span class="pre">self</span></code> modulo <code class="docutils literal notranslate"><span class="pre">other</span></code>, if possible.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="diofant.polys.polyclasses.DMP.is_cyclotomic">
-<code class="descname">is_cyclotomic</code><a class="headerlink" href="#diofant.polys.polyclasses.DMP.is_cyclotomic" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if <code class="docutils literal notranslate"><span class="pre">self</span></code> is a cyclotomic polynomial.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="diofant.polys.polyclasses.DMP.is_ground">
-<code class="descname">is_ground</code><a class="headerlink" href="#diofant.polys.polyclasses.DMP.is_ground" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if <code class="docutils literal notranslate"><span class="pre">self</span></code> is an element of the ground domain.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="diofant.polys.polyclasses.DMP.is_homogeneous">
-<code class="descname">is_homogeneous</code><a class="headerlink" href="#diofant.polys.polyclasses.DMP.is_homogeneous" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if <code class="docutils literal notranslate"><span class="pre">self</span></code> is a homogeneous polynomial.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="diofant.polys.polyclasses.DMP.is_irreducible">
-<code class="descname">is_irreducible</code><a class="headerlink" href="#diofant.polys.polyclasses.DMP.is_irreducible" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if <code class="docutils literal notranslate"><span class="pre">self</span></code> has no factors over its domain.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="diofant.polys.polyclasses.DMP.is_linear">
-<code class="descname">is_linear</code><a class="headerlink" href="#diofant.polys.polyclasses.DMP.is_linear" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if <code class="docutils literal notranslate"><span class="pre">self</span></code> is linear in all its variables.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="diofant.polys.polyclasses.DMP.is_monic">
-<code class="descname">is_monic</code><a class="headerlink" href="#diofant.polys.polyclasses.DMP.is_monic" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if the leading coefficient of <code class="docutils literal notranslate"><span class="pre">self</span></code> is one.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="diofant.polys.polyclasses.DMP.is_one">
-<code class="descname">is_one</code><a class="headerlink" href="#diofant.polys.polyclasses.DMP.is_one" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if <code class="docutils literal notranslate"><span class="pre">self</span></code> is a unit polynomial.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="diofant.polys.polyclasses.DMP.is_primitive">
-<code class="descname">is_primitive</code><a class="headerlink" href="#diofant.polys.polyclasses.DMP.is_primitive" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if the GCD of the coefficients of <code class="docutils literal notranslate"><span class="pre">self</span></code> is one.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="diofant.polys.polyclasses.DMP.is_quadratic">
-<code class="descname">is_quadratic</code><a class="headerlink" href="#diofant.polys.polyclasses.DMP.is_quadratic" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if <code class="docutils literal notranslate"><span class="pre">self</span></code> is quadratic in all its variables.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="diofant.polys.polyclasses.DMP.is_squarefree">
-<code class="descname">is_squarefree</code><a class="headerlink" href="#diofant.polys.polyclasses.DMP.is_squarefree" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if <code class="docutils literal notranslate"><span class="pre">self</span></code> is a square-free polynomial.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="diofant.polys.polyclasses.DMP.is_term">
-<code class="descname">is_term</code><a class="headerlink" href="#diofant.polys.polyclasses.DMP.is_term" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if <code class="docutils literal notranslate"><span class="pre">self</span></code> is zero or has only one term.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="diofant.polys.polyclasses.DMP.is_zero">
-<code class="descname">is_zero</code><a class="headerlink" href="#diofant.polys.polyclasses.DMP.is_zero" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if <code class="docutils literal notranslate"><span class="pre">self</span></code> is a zero polynomial.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.l1_norm">
-<code class="descname">l1_norm</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.l1_norm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.l1_norm" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns l1 norm of <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.lcm">
-<code class="descname">lcm</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.lcm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.lcm" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns polynomial LCM of <code class="docutils literal notranslate"><span class="pre">self</span></code> and <code class="docutils literal notranslate"><span class="pre">other</span></code>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.max_norm">
-<code class="descname">max_norm</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.max_norm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.max_norm" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns maximum norm of <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.monic">
-<code class="descname">monic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.monic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.monic" title="Permalink to this definition">¶</a></dt>
-<dd><p>Divides all coefficients by <code class="docutils literal notranslate"><span class="pre">LC(self)</span></code>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.monoms">
-<code class="descname">monoms</code><span class="sig-paren">(</span><em>order=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.monoms"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.monoms" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns all non-zero monomials from <code class="docutils literal notranslate"><span class="pre">self</span></code> in lex order.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.pdiv">
-<code class="descname">pdiv</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.pdiv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.pdiv" title="Permalink to this definition">¶</a></dt>
-<dd><p>Polynomial pseudo-division of <code class="docutils literal notranslate"><span class="pre">self</span></code> and <code class="docutils literal notranslate"><span class="pre">other</span></code>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.per">
-<code class="descname">per</code><span class="sig-paren">(</span><em>rep</em>, <em>dom=None</em>, <em>kill=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.per"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.per" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create a DMP out of the given representation.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.pexquo">
-<code class="descname">pexquo</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.pexquo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.pexquo" title="Permalink to this definition">¶</a></dt>
-<dd><p>Polynomial exact pseudo-quotient of <code class="docutils literal notranslate"><span class="pre">self</span></code> and <code class="docutils literal notranslate"><span class="pre">other</span></code>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.pquo">
-<code class="descname">pquo</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.pquo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.pquo" title="Permalink to this definition">¶</a></dt>
-<dd><p>Polynomial pseudo-quotient of <code class="docutils literal notranslate"><span class="pre">self</span></code> and <code class="docutils literal notranslate"><span class="pre">other</span></code>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.prem">
-<code class="descname">prem</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.prem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.prem" title="Permalink to this definition">¶</a></dt>
-<dd><p>Polynomial pseudo-remainder of <code class="docutils literal notranslate"><span class="pre">self</span></code> and <code class="docutils literal notranslate"><span class="pre">other</span></code>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.primitive">
-<code class="descname">primitive</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.primitive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.primitive" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns content and a primitive form of <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.quo_ground">
-<code class="descname">quo_ground</code><span class="sig-paren">(</span><em>c</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.quo_ground"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.quo_ground" title="Permalink to this definition">¶</a></dt>
-<dd><p>Quotient of <code class="docutils literal notranslate"><span class="pre">self</span></code> by a an element of the ground domain.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.refine_root">
-<code class="descname">refine_root</code><span class="sig-paren">(</span><em>s</em>, <em>t</em>, <em>eps=None</em>, <em>steps=None</em>, <em>fast=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.refine_root"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.refine_root" title="Permalink to this definition">¶</a></dt>
-<dd><p>Refine an isolating interval to the given precision.</p>
-<p><code class="docutils literal notranslate"><span class="pre">eps</span></code> should be a rational number.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.resultant">
-<code class="descname">resultant</code><span class="sig-paren">(</span><em>other</em>, <em>includePRS=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.resultant"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.resultant" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes resultant of <code class="docutils literal notranslate"><span class="pre">self</span></code> and <code class="docutils literal notranslate"><span class="pre">other</span></code> via PRS.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.shift">
-<code class="descname">shift</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.shift"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.shift" title="Permalink to this definition">¶</a></dt>
-<dd><p>Efficiently compute Taylor shift <code class="docutils literal notranslate"><span class="pre">self(x</span> <span class="pre">+</span> <span class="pre">a)</span></code>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.slice">
-<code class="descname">slice</code><span class="sig-paren">(</span><em>m</em>, <em>n</em>, <em>j=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.slice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.slice" title="Permalink to this definition">¶</a></dt>
-<dd><p>Take a continuous subsequence of terms of <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.sqf_list">
-<code class="descname">sqf_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.sqf_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.sqf_list" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a list of square-free factors of <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.sqf_norm">
-<code class="descname">sqf_norm</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.sqf_norm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.sqf_norm" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes square-free norm of <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.sqf_part">
-<code class="descname">sqf_part</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.sqf_part"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.sqf_part" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes square-free part of <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.sturm">
-<code class="descname">sturm</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.sturm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.sturm" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes the Sturm sequence of <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.subresultants">
-<code class="descname">subresultants</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.subresultants"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.subresultants" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes subresultant PRS sequence of <code class="docutils literal notranslate"><span class="pre">self</span></code> and <code class="docutils literal notranslate"><span class="pre">other</span></code>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.terms">
-<code class="descname">terms</code><span class="sig-paren">(</span><em>order=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.terms"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.terms" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns all non-zero terms from <code class="docutils literal notranslate"><span class="pre">self</span></code> in lex order.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.terms_gcd">
-<code class="descname">terms_gcd</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.terms_gcd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.terms_gcd" title="Permalink to this definition">¶</a></dt>
-<dd><p>Remove GCD of terms from the polynomial <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.to_dense">
-<code class="descname">to_dense</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.to_dense"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.to_dense" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a list representation with native coefficients.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.to_dict">
-<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.to_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.to_dict" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convert <code class="docutils literal notranslate"><span class="pre">self</span></code> to a dict representation with native coefficients.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.to_exact">
-<code class="descname">to_exact</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.to_exact"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.to_exact" title="Permalink to this definition">¶</a></dt>
-<dd><p>Make the ground domain exact.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.to_field">
-<code class="descname">to_field</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.to_field"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.to_field" title="Permalink to this definition">¶</a></dt>
-<dd><p>Make the ground domain a field.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.to_ring">
-<code class="descname">to_ring</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.to_ring"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.to_ring" title="Permalink to this definition">¶</a></dt>
-<dd><p>Make the ground domain a ring.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.total_degree">
-<code class="descname">total_degree</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.total_degree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.total_degree" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the total degree of <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.trunc_ground">
-<code class="descname">trunc_ground</code><span class="sig-paren">(</span><em>p</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.trunc_ground"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.trunc_ground" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reduce <code class="docutils literal notranslate"><span class="pre">self</span></code> modulo a constant <code class="docutils literal notranslate"><span class="pre">p</span></code>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="diofant.polys.polyclasses.DMP.unify">
-<code class="descname">unify</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyclasses.html#DMP.unify"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyclasses.DMP.unify" title="Permalink to this definition">¶</a></dt>
-<dd><p>Unify representations of two multivariate polynomials.</p>
-</dd></dl>
-
-</dd></dl>
-
-</div>
-<div class="section" id="level-zero">
-<h2>Level Zero<a class="headerlink" href="#level-zero" title="Permalink to this headline">¶</a></h2>
-<p>Level zero contains the bulk code of the polynomial manipulation module.</p>
 <div class="section" id="manipulation-of-dense-multivariate-polynomials">
-<h3>Manipulation of dense, multivariate polynomials<a class="headerlink" href="#manipulation-of-dense-multivariate-polynomials" title="Permalink to this headline">¶</a></h3>
+<h2>Manipulation of dense, multivariate polynomials<a class="headerlink" href="#manipulation-of-dense-multivariate-polynomials" title="Permalink to this headline">¶</a></h2>
 <p>These functions can be used to manipulate polynomials in <span class="math notranslate nohighlight">\(K[X_0, \ldots, X_u]\)</span>.
 Functions for manipulating multivariate polynomials in the dense representation
 have the prefix <code class="docutils literal notranslate"><span class="pre">dmp_</span></code>. Functions which only apply to univariate polynomials
@@ -2480,7 +1974,7 @@ is a square-free polynomial over K, where <code class="docutils literal notransl
 
 </div>
 <div class="section" id="manipulation-of-dense-univariate-polynomials-with-finite-field-coefficients">
-<h3>Manipulation of dense, univariate polynomials with finite field coefficients<a class="headerlink" href="#manipulation-of-dense-univariate-polynomials-with-finite-field-coefficients" title="Permalink to this headline">¶</a></h3>
+<h2>Manipulation of dense, univariate polynomials with finite field coefficients<a class="headerlink" href="#manipulation-of-dense-univariate-polynomials-with-finite-field-coefficients" title="Permalink to this headline">¶</a></h2>
 <p>Functions in this module carry the prefix <code class="docutils literal notranslate"><span class="pre">gf_</span></code>, referring to the classical
 name “Galois Fields” for finite fields. Note that many polynomial
 factorization algorithms work by reduction to the finite field case, so having
@@ -3321,7 +2815,7 @@ This function returns only those values of x which are distinct mod(m).</p>
 
 </div>
 <div class="section" id="manipulation-of-sparse-distributed-polynomials">
-<h3>Manipulation of sparse, distributed polynomials<a class="headerlink" href="#manipulation-of-sparse-distributed-polynomials" title="Permalink to this headline">¶</a></h3>
+<h2>Manipulation of sparse, distributed polynomials<a class="headerlink" href="#manipulation-of-sparse-distributed-polynomials" title="Permalink to this headline">¶</a></h2>
 <p>Dense representations quickly require infeasible amounts of storage and
 computation time if the number of variables increases. For this reason,
 there is code to manipulate polynomials in a <em>sparse</em> representation.</p>
@@ -3703,10 +3197,10 @@ self = sum(fv[i]*qv[i]) + r</dd>
 
 </div>
 <div class="section" id="polynomial-factorization-algorithms">
-<h3>Polynomial factorization algorithms<a class="headerlink" href="#polynomial-factorization-algorithms" title="Permalink to this headline">¶</a></h3>
+<h2>Polynomial factorization algorithms<a class="headerlink" href="#polynomial-factorization-algorithms" title="Permalink to this headline">¶</a></h2>
 <p>Many variants of Euclid’s algorithm:</p>
 <div class="section" id="classical-remainder-sequence">
-<h4>Classical remainder sequence<a class="headerlink" href="#classical-remainder-sequence" title="Permalink to this headline">¶</a></h4>
+<h3>Classical remainder sequence<a class="headerlink" href="#classical-remainder-sequence" title="Permalink to this headline">¶</a></h3>
 <p>Let <span class="math notranslate nohighlight">\(K\)</span> be a field, and consider the ring <span class="math notranslate nohighlight">\(K[X]\)</span> of polynomials in a single
 indeterminate <span class="math notranslate nohighlight">\(X\)</span> with coefficients in <span class="math notranslate nohighlight">\(K\)</span>. Given two elements <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span>
 of <span class="math notranslate nohighlight">\(K[X]\)</span> with <span class="math notranslate nohighlight">\(g\neq 0\)</span> there are unique polynomials <span class="math notranslate nohighlight">\(q\)</span> and <span class="math notranslate nohighlight">\(r\)</span> such that
@@ -3793,7 +3287,7 @@ in the case of integers.</p>
 
 </div>
 <div class="section" id="simplified-remainder-sequences">
-<h4>Simplified remainder sequences<a class="headerlink" href="#simplified-remainder-sequences" title="Permalink to this headline">¶</a></h4>
+<h3>Simplified remainder sequences<a class="headerlink" href="#simplified-remainder-sequences" title="Permalink to this headline">¶</a></h3>
 <p>Assume, as is usual, that the coefficient field <span class="math notranslate nohighlight">\(K\)</span> is
 the field of fractions of an integral domain <span class="math notranslate nohighlight">\(A\)</span>.
 In this case the coefficients (numerators and denominators)
@@ -3853,7 +3347,7 @@ in order to simplify the results.</p>
 
 </div>
 <div class="section" id="subresultant-sequence">
-<h4>Subresultant sequence<a class="headerlink" href="#subresultant-sequence" title="Permalink to this headline">¶</a></h4>
+<h3>Subresultant sequence<a class="headerlink" href="#subresultant-sequence" title="Permalink to this headline">¶</a></h3>
 <p>The coefficients of the primitive polynomial sequence do not grow
 exceedingly, but the computation of the primitive parts requires
 extra processing effort. Besides, the method only works with fraction fields
@@ -4583,7 +4077,7 @@ and <span class="math notranslate nohighlight">\(t\)</span> such that:</p>
 </div>
 </div>
 <div class="section" id="grobner-basis-algorithms">
-<h3>Gröbner basis algorithms<a class="headerlink" href="#grobner-basis-algorithms" title="Permalink to this headline">¶</a></h3>
+<h2>Gröbner basis algorithms<a class="headerlink" href="#grobner-basis-algorithms" title="Permalink to this headline">¶</a></h2>
 <p>Gröbner bases can be used to answer many problems in computational
 commutative algebra. Their computation in rather complicated, and very
 performance-sensitive. We present here various low-level implementations of
@@ -4870,14 +4364,14 @@ w.r.t. <code class="docutils literal notranslate"><span class="pre">O_to</span><
 
 </div>
 <div class="section" id="algebraic-number-fields">
-<h3>Algebraic number fields<a class="headerlink" href="#algebraic-number-fields" title="Permalink to this headline">¶</a></h3>
+<h2>Algebraic number fields<a class="headerlink" href="#algebraic-number-fields" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="diofant.polys.numberfields.minpoly_groebner">
 <code class="descclassname">diofant.polys.numberfields.</code><code class="descname">minpoly_groebner</code><span class="sig-paren">(</span><em>ex</em>, <em>x</em>, <em>domain</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/numberfields.html#minpoly_groebner"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.numberfields.minpoly_groebner" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes the minimal polynomial of an algebraic number
 using Gröbner bases</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">minimal_polynomial</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;groebner&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">minimal_polynomial</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;groebner&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
 <span class="go">x**2 - 2*x - 1</span>
 </pre></div>
 </div>
@@ -4888,22 +4382,8 @@ using Gröbner bases</p>
 </dd></dl>
 
 </div>
-</div>
-<div class="section" id="exceptions">
-<h2>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this headline">¶</a></h2>
-<p>These are exceptions defined by the polynomials module.</p>
-<span class="target" id="module-diofant.polys.polyerrors"></span><p>Definitions of common exceptions for <a class="reference internal" href="../modules/polys.html#module-diofant.polys" title="diofant.polys"><code class="xref py py-mod docutils literal notranslate"><span class="pre">polys</span></code></a> module.</p>
-<dl class="exception">
-<dt id="diofant.polys.polyerrors.BasePolynomialError">
-<em class="property">exception </em><code class="descclassname">diofant.polys.polyerrors.</code><code class="descname">BasePolynomialError</code><a class="reference internal" href="../_modules/diofant/polys/polyerrors.html#BasePolynomialError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyerrors.BasePolynomialError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Base class for polynomial related exceptions.</p>
-</dd></dl>
-
-</div>
-<div class="section" id="reference">
-<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="module-diofant.polys.modulargcd">
-<span id="modular-gcd"></span><h3>Modular GCD<a class="headerlink" href="#module-diofant.polys.modulargcd" title="Permalink to this headline">¶</a></h3>
+<span id="modular-gcd"></span><h2>Modular GCD<a class="headerlink" href="#module-diofant.polys.modulargcd" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="diofant.polys.modulargcd.modgcd">
 <code class="descclassname">diofant.polys.modulargcd.</code><code class="descname">modgcd</code><span class="sig-paren">(</span><em>f</em>, <em>g</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/modulargcd.html#modgcd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.modulargcd.modgcd" title="Permalink to this definition">¶</a></dt>
@@ -5066,7 +4546,7 @@ is given, <span class="math notranslate nohighlight">\(\mathbb Z_p\)</span> is c
 
 </div>
 <div class="section" id="module-diofant.polys.heuristicgcd">
-<span id="heuristic-gcd"></span><h3>Heuristic GCD<a class="headerlink" href="#module-diofant.polys.heuristicgcd" title="Permalink to this headline">¶</a></h3>
+<span id="heuristic-gcd"></span><h2>Heuristic GCD<a class="headerlink" href="#module-diofant.polys.heuristicgcd" title="Permalink to this headline">¶</a></h2>
 <p>Heuristic polynomial GCD algorithm (HEUGCD).</p>
 <dl class="function">
 <dt id="diofant.polys.heuristicgcd.heugcd">
@@ -5104,7 +4584,7 @@ the input polynomials as a side effect.</p>
 
 </div>
 <div class="section" id="manipulation-of-power-series">
-<h3>Manipulation of power series<a class="headerlink" href="#manipulation-of-power-series" title="Permalink to this headline">¶</a></h3>
+<h2>Manipulation of power series<a class="headerlink" href="#manipulation-of-power-series" title="Permalink to this headline">¶</a></h2>
 <p>Functions in this module carry the prefix <code class="docutils literal notranslate"><span class="pre">rs_</span></code>, standing for “ring series”.
 They manipulate finite power series in the sparse representation provided
 by <code class="docutils literal notranslate"><span class="pre">polys.ring.ring</span></code>.</p>
@@ -5293,7 +4773,6 @@ that is modulo <code class="docutils literal notranslate"><span class="pre">O(x*
 </dd></dl>
 
 </div>
-</div>
 <div class="section" id="undocumented">
 <h2>Undocumented<a class="headerlink" href="#undocumented" title="Permalink to this headline">¶</a></h2>
 <p>Many parts of the polys module are still undocumented, and even where there is
@@ -5358,6 +4837,13 @@ documentation it is scarce. Please contribute!</p>
 <dt id="diofant.polys.polyconfig.setup">
 <code class="descclassname">diofant.polys.polyconfig.</code><code class="descname">setup</code><span class="sig-paren">(</span><em>key</em>, <em>value=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/polyconfig.html#setup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyconfig.setup" title="Permalink to this definition">¶</a></dt>
 <dd><p>Assign a value to (or reset) a configuration item.</p>
+</dd></dl>
+
+<span class="target" id="module-diofant.polys.polyerrors"></span><p>Definitions of common exceptions for <a class="reference internal" href="../modules/polys.html#module-diofant.polys" title="diofant.polys"><code class="xref py py-mod docutils literal notranslate"><span class="pre">polys</span></code></a> module.</p>
+<dl class="exception">
+<dt id="diofant.polys.polyerrors.BasePolynomialError">
+<em class="property">exception </em><code class="descclassname">diofant.polys.polyerrors.</code><code class="descname">BasePolynomialError</code><a class="reference internal" href="../_modules/diofant/polys/polyerrors.html#BasePolynomialError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyerrors.BasePolynomialError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for polynomial related exceptions.</p>
 </dd></dl>
 
 </div>
