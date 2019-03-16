@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.rings &mdash; Diofant 0.10.1.dev249+gedb04ea documentation</title>
+  <title>diofant.polys.rings &mdash; Diofant 0.10.1.dev252+gbb3e0ca documentation</title>
   
 
   
@@ -173,7 +173,7 @@
 <span class="kn">from</span> <span class="nn">.heuristicgcd</span> <span class="k">import</span> <span class="n">heugcd</span>
 <span class="kn">from</span> <span class="nn">.modulargcd</span> <span class="k">import</span> <span class="n">func_field_modgcd</span><span class="p">,</span> <span class="n">modgcd</span>
 <span class="kn">from</span> <span class="nn">.monomials</span> <span class="k">import</span> <span class="p">(</span><span class="n">monomial_div</span><span class="p">,</span> <span class="n">monomial_ldiv</span><span class="p">,</span> <span class="n">monomial_min</span><span class="p">,</span>
-                        <span class="n">monomial_mul</span><span class="p">,</span> <span class="n">monomial_pow</span><span class="p">)</span>
+                        <span class="n">monomial_mul</span><span class="p">,</span> <span class="n">monomial_pow</span><span class="p">,</span> <span class="n">term_div</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">.orderings</span> <span class="k">import</span> <span class="n">lex</span>
 <span class="kn">from</span> <span class="nn">.polyconfig</span> <span class="k">import</span> <span class="n">query</span>
 <span class="kn">from</span> <span class="nn">.polyerrors</span> <span class="k">import</span> <span class="p">(</span><span class="n">CoercionFailed</span><span class="p">,</span> <span class="n">ExactQuotientFailed</span><span class="p">,</span> <span class="n">GeneratorsError</span><span class="p">,</span>
@@ -1438,34 +1438,6 @@
     <span class="k">def</span> <span class="nf">__rtruediv__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">NotImplemented</span>
 
-    <span class="k">def</span> <span class="nf">_term_div</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">zm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">zero_monom</span>
-        <span class="n">domain</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">domain</span>
-        <span class="n">domain_quo</span> <span class="o">=</span> <span class="n">domain</span><span class="o">.</span><span class="n">quo</span>
-
-        <span class="k">if</span> <span class="n">domain</span><span class="o">.</span><span class="n">is_Field</span><span class="p">:</span>
-            <span class="k">def</span> <span class="nf">term_div</span><span class="p">(</span><span class="n">a_lm_a_lc</span><span class="p">,</span> <span class="n">b_lm_b_lc</span><span class="p">):</span>
-                <span class="n">a_lm</span><span class="p">,</span> <span class="n">a_lc</span> <span class="o">=</span> <span class="n">a_lm_a_lc</span>
-                <span class="n">b_lm</span><span class="p">,</span> <span class="n">b_lc</span> <span class="o">=</span> <span class="n">b_lm_b_lc</span>
-                <span class="k">if</span> <span class="n">b_lm</span> <span class="o">==</span> <span class="n">zm</span><span class="p">:</span>  <span class="c1"># apparently this is a very common case</span>
-                    <span class="n">monom</span> <span class="o">=</span> <span class="n">a_lm</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">monom</span> <span class="o">=</span> <span class="n">monomial_div</span><span class="p">(</span><span class="n">a_lm</span><span class="p">,</span> <span class="n">b_lm</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">monom</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                    <span class="k">return</span> <span class="n">monom</span><span class="p">,</span> <span class="n">domain_quo</span><span class="p">(</span><span class="n">a_lc</span><span class="p">,</span> <span class="n">b_lc</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">def</span> <span class="nf">term_div</span><span class="p">(</span><span class="n">a_lm_a_lc</span><span class="p">,</span> <span class="n">b_lm_b_lc</span><span class="p">):</span>
-                <span class="n">a_lm</span><span class="p">,</span> <span class="n">a_lc</span> <span class="o">=</span> <span class="n">a_lm_a_lc</span>
-                <span class="n">b_lm</span><span class="p">,</span> <span class="n">b_lc</span> <span class="o">=</span> <span class="n">b_lm_b_lc</span>
-                <span class="k">if</span> <span class="n">b_lm</span> <span class="o">==</span> <span class="n">zm</span><span class="p">:</span>  <span class="c1"># apparently this is a very common case</span>
-                    <span class="n">monom</span> <span class="o">=</span> <span class="n">a_lm</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">monom</span> <span class="o">=</span> <span class="n">monomial_div</span><span class="p">(</span><span class="n">a_lm</span><span class="p">,</span> <span class="n">b_lm</span><span class="p">)</span>
-                <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">monom</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">a_lc</span> <span class="o">%</span> <span class="n">b_lc</span><span class="p">):</span>
-                    <span class="k">return</span> <span class="n">monom</span><span class="p">,</span> <span class="n">domain_quo</span><span class="p">(</span><span class="n">a_lc</span><span class="p">,</span> <span class="n">b_lc</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="n">term_div</span>
-
 <div class="viewcode-block" id="PolyElement.div"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.rings.PolyElement.div">[docs]</a>    <span class="k">def</span> <span class="nf">div</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fv</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Division algorithm, see :cite:`Cox2015ideals`, p. 64.</span>
 
@@ -1503,14 +1475,13 @@
         <span class="n">qv</span> <span class="o">=</span> <span class="p">[</span><span class="n">ring</span><span class="o">.</span><span class="n">zero</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="p">)]</span>
         <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="n">r</span> <span class="o">=</span> <span class="n">ring</span><span class="o">.</span><span class="n">zero</span>
-        <span class="n">term_div</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_term_div</span><span class="p">()</span>
         <span class="n">expvs</span> <span class="o">=</span> <span class="p">[</span><span class="n">fx</span><span class="o">.</span><span class="n">leading_expv</span><span class="p">()</span> <span class="k">for</span> <span class="n">fx</span> <span class="ow">in</span> <span class="n">fv</span><span class="p">]</span>
         <span class="k">while</span> <span class="n">p</span><span class="p">:</span>
             <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="n">divoccurred</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">s</span> <span class="ow">and</span> <span class="n">divoccurred</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="n">expv</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">leading_expv</span><span class="p">()</span>
-                <span class="n">term</span> <span class="o">=</span> <span class="n">term_div</span><span class="p">((</span><span class="n">expv</span><span class="p">,</span> <span class="n">p</span><span class="p">[</span><span class="n">expv</span><span class="p">]),</span> <span class="p">(</span><span class="n">expvs</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">fv</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">expvs</span><span class="p">[</span><span class="n">i</span><span class="p">]]))</span>
+                <span class="n">term</span> <span class="o">=</span> <span class="n">term_div</span><span class="p">((</span><span class="n">expv</span><span class="p">,</span> <span class="n">p</span><span class="p">[</span><span class="n">expv</span><span class="p">]),</span> <span class="p">(</span><span class="n">expvs</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">fv</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">expvs</span><span class="p">[</span><span class="n">i</span><span class="p">]]),</span> <span class="n">ring</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">term</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                     <span class="n">expv1</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">term</span>
                     <span class="n">qv</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">qv</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">_iadd_monom</span><span class="p">((</span><span class="n">expv1</span><span class="p">,</span> <span class="n">c</span><span class="p">))</span>
@@ -1970,9 +1941,7 @@
         <span class="k">elif</span> <span class="n">monom</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">zero_monom</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">quo_ground</span><span class="p">(</span><span class="n">coeff</span><span class="p">)</span>
 
-        <span class="n">term_div</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_term_div</span><span class="p">()</span>
-
-        <span class="n">terms</span> <span class="o">=</span> <span class="p">[</span><span class="n">term_div</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">term</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+        <span class="n">terms</span> <span class="o">=</span> <span class="p">[</span><span class="n">term_div</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">term</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">new</span><span class="p">([</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">terms</span> <span class="k">if</span> <span class="n">t</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">trunc_ground</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
@@ -2094,7 +2063,7 @@
     <span class="k">def</span> <span class="nf">_gcd_zero</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="n">one</span><span class="p">,</span> <span class="n">zero</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">one</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">zero</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">is_Field</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">other</span><span class="o">.</span><span class="n">monic</span><span class="p">(),</span> <span class="n">zero</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">LC</span>
+            <span class="k">return</span> <span class="n">other</span><span class="o">.</span><span class="n">monic</span><span class="p">(),</span> <span class="n">zero</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">ground_new</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">LC</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">other</span><span class="o">.</span><span class="n">is_nonnegative</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">other</span><span class="p">,</span> <span class="n">zero</span><span class="p">,</span> <span class="n">one</span>
@@ -2170,7 +2139,7 @@
 
         <span class="k">return</span> <span class="n">G</span><span class="p">,</span> <span class="n">f</span>
 
-<div class="viewcode-block" id="PolyElement.cancel"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.rings.PolyElement.cancel">[docs]</a>    <span class="k">def</span> <span class="nf">cancel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
+<div class="viewcode-block" id="PolyElement.cancel"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.rings.PolyElement.cancel">[docs]</a>    <span class="k">def</span> <span class="nf">cancel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Cancel common factors in a rational function ``f/g``.</span>
 
@@ -2185,17 +2154,11 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span>
         <span class="n">ring</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">ring</span>
-
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">f</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">f</span><span class="p">,</span> <span class="n">ring</span><span class="o">.</span><span class="n">one</span>
-
         <span class="n">domain</span> <span class="o">=</span> <span class="n">ring</span><span class="o">.</span><span class="n">domain</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">domain</span><span class="o">.</span><span class="n">is_Field</span> <span class="ow">and</span> <span class="n">domain</span><span class="o">.</span><span class="n">has_assoc_Ring</span><span class="p">):</span>
             <span class="n">_</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">cofactors</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-
-            <span class="k">if</span> <span class="n">q</span><span class="o">.</span><span class="n">is_negative</span><span class="p">:</span>
-                <span class="n">p</span><span class="p">,</span> <span class="n">q</span> <span class="o">=</span> <span class="o">-</span><span class="n">p</span><span class="p">,</span> <span class="o">-</span><span class="n">q</span>
+            <span class="n">cp</span><span class="p">,</span> <span class="n">cq</span> <span class="o">=</span> <span class="n">domain</span><span class="o">.</span><span class="n">one</span><span class="p">,</span> <span class="n">domain</span><span class="o">.</span><span class="n">one</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">new_ring</span> <span class="o">=</span> <span class="n">ring</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="n">domain</span><span class="o">=</span><span class="n">domain</span><span class="o">.</span><span class="n">ring</span><span class="p">)</span>
 
@@ -2211,18 +2174,21 @@
             <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">set_ring</span><span class="p">(</span><span class="n">ring</span><span class="p">)</span>
             <span class="n">q</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">set_ring</span><span class="p">(</span><span class="n">ring</span><span class="p">)</span>
 
-            <span class="n">p_neg</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">is_negative</span>
-            <span class="n">q_neg</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">is_negative</span>
+        <span class="n">p_neg</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">is_negative</span>
+        <span class="n">q_neg</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">is_negative</span>
 
-            <span class="k">if</span> <span class="n">p_neg</span> <span class="ow">and</span> <span class="n">q_neg</span><span class="p">:</span>
-                <span class="n">p</span><span class="p">,</span> <span class="n">q</span> <span class="o">=</span> <span class="o">-</span><span class="n">p</span><span class="p">,</span> <span class="o">-</span><span class="n">q</span>
-            <span class="k">elif</span> <span class="n">p_neg</span><span class="p">:</span>
-                <span class="n">cp</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="o">-</span><span class="n">cp</span><span class="p">,</span> <span class="o">-</span><span class="n">p</span>
-            <span class="k">elif</span> <span class="n">q_neg</span><span class="p">:</span>
-                <span class="n">cp</span><span class="p">,</span> <span class="n">q</span> <span class="o">=</span> <span class="o">-</span><span class="n">cp</span><span class="p">,</span> <span class="o">-</span><span class="n">q</span>
+        <span class="k">if</span> <span class="n">p_neg</span> <span class="ow">and</span> <span class="n">q_neg</span><span class="p">:</span>
+            <span class="n">p</span><span class="p">,</span> <span class="n">q</span> <span class="o">=</span> <span class="o">-</span><span class="n">p</span><span class="p">,</span> <span class="o">-</span><span class="n">q</span>
+        <span class="k">elif</span> <span class="n">p_neg</span><span class="p">:</span>
+            <span class="n">cp</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="o">-</span><span class="n">cp</span><span class="p">,</span> <span class="o">-</span><span class="n">p</span>
+        <span class="k">elif</span> <span class="n">q_neg</span><span class="p">:</span>
+            <span class="n">cp</span><span class="p">,</span> <span class="n">q</span> <span class="o">=</span> <span class="o">-</span><span class="n">cp</span><span class="p">,</span> <span class="o">-</span><span class="n">q</span>
 
-            <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">mul_ground</span><span class="p">(</span><span class="n">cp</span><span class="p">)</span>
-            <span class="n">q</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">mul_ground</span><span class="p">(</span><span class="n">cq</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">include</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">cp</span><span class="p">,</span> <span class="n">cq</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span>
+
+        <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">mul_ground</span><span class="p">(</span><span class="n">cp</span><span class="p">)</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">mul_ground</span><span class="p">(</span><span class="n">cq</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span></div>
 
