@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.monomials &mdash; Diofant 0.10.1.dev253+g4a5e049 documentation</title>
+  <title>diofant.polys.monomials &mdash; Diofant 0.10.1.dev266+gbe1a3b2 documentation</title>
   
 
   
@@ -206,38 +206,6 @@
         <span class="k">return</span> <span class="n">monoms</span></div>
 
 
-<span class="k">def</span> <span class="nf">monomial_count</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Computes the number of monomials.</span>
-
-<span class="sd">    The number of monomials is given by the following formula:</span>
-
-<span class="sd">    .. math::</span>
-
-<span class="sd">        \frac{(\#V + N)!}{\#V! N!}</span>
-
-<span class="sd">    where `N` is a total degree and `V` is a set of variables.</span>
-
-<span class="sd">    Examples</span>
-<span class="sd">    ========</span>
-
-<span class="sd">    &gt;&gt;&gt; from diofant.polys.orderings import monomial_key</span>
-
-<span class="sd">    &gt;&gt;&gt; monomial_count(2, 2)</span>
-<span class="sd">    6</span>
-
-<span class="sd">    &gt;&gt;&gt; M = itermonomials([x, y], 2)</span>
-
-<span class="sd">    &gt;&gt;&gt; sorted(M, key=monomial_key(&#39;grlex&#39;, [y, x]))</span>
-<span class="sd">    [1, x, y, x**2, x*y, y**2]</span>
-<span class="sd">    &gt;&gt;&gt; len(M)</span>
-<span class="sd">    6</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">..functions</span> <span class="k">import</span> <span class="n">factorial</span>
-    <span class="k">return</span> <span class="n">factorial</span><span class="p">(</span><span class="n">V</span> <span class="o">+</span> <span class="n">N</span><span class="p">)</span> <span class="o">/</span> <span class="n">factorial</span><span class="p">(</span><span class="n">V</span><span class="p">)</span> <span class="o">/</span> <span class="n">factorial</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
-
-
 <span class="k">def</span> <span class="nf">monomial_mul</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Multiplication of tuples representing monomials.</span>
@@ -274,8 +242,6 @@
 
     <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">c</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">C</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span>
 
 
 <span class="k">def</span> <span class="nf">monomial_ldiv</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
@@ -345,27 +311,6 @@
     <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="n">a</span> <span class="o">&lt;=</span> <span class="n">b</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">))</span>
 
 
-<span class="k">def</span> <span class="nf">monomial_max</span><span class="p">(</span><span class="o">*</span><span class="n">monoms</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Returns maximal degree for each variable in a set of monomials.</span>
-
-<span class="sd">    Consider monomials `x**3*y**4*z**5`, `y**5*z` and `x**6*y**3*z**9`.</span>
-<span class="sd">    We wish to find out what is the maximal degree for each of `x`, `y`</span>
-<span class="sd">    and `z` variables::</span>
-
-<span class="sd">        &gt;&gt;&gt; monomial_max((3, 4, 5), (0, 5, 1), (6, 3, 9))</span>
-<span class="sd">        (6, 5, 9)</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">M</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">monoms</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-
-    <span class="k">for</span> <span class="n">N</span> <span class="ow">in</span> <span class="n">monoms</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
-        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
-            <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">n</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
-
-
 <span class="k">def</span> <span class="nf">monomial_min</span><span class="p">(</span><span class="o">*</span><span class="n">monoms</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns minimal degree for each variable in a set of monomials.</span>
@@ -385,18 +330,6 @@
             <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">n</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
-
-
-<span class="k">def</span> <span class="nf">monomial_deg</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Returns the total degree of a monomial.</span>
-
-<span class="sd">    For example, the total degree of `xy^2` is 3:</span>
-
-<span class="sd">    &gt;&gt;&gt; monomial_deg((1, 2))</span>
-<span class="sd">    3</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">term_div</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">domain</span><span class="p">):</span>

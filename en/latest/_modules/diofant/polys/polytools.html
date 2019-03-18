@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.polytools &mdash; Diofant 0.10.1.dev253+g4a5e049 documentation</title>
+  <title>diofant.polys.polytools &mdash; Diofant 0.10.1.dev266+gbe1a3b2 documentation</title>
   
 
   
@@ -176,7 +176,7 @@
                          <span class="n">PolificationFailed</span><span class="p">,</span> <span class="n">PolynomialError</span><span class="p">,</span>
                          <span class="n">UnificationFailed</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">.polyutils</span> <span class="k">import</span> <span class="p">(</span><span class="n">_dict_from_expr</span><span class="p">,</span> <span class="n">_dict_reorder</span><span class="p">,</span>
-                        <span class="n">_parallel_dict_from_expr</span><span class="p">,</span> <span class="n">_sort_gens</span><span class="p">,</span> <span class="n">basic_from_dict</span><span class="p">)</span>
+                        <span class="n">_parallel_dict_from_expr</span><span class="p">,</span> <span class="n">_sort_gens</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">.rationaltools</span> <span class="k">import</span> <span class="n">together</span>
 <span class="kn">from</span> <span class="nn">.rings</span> <span class="k">import</span> <span class="n">PolyElement</span><span class="p">,</span> <span class="n">PolynomialRing</span><span class="p">,</span> <span class="n">ring</span>
 <span class="kn">from</span> <span class="nn">.rootisolation</span> <span class="k">import</span> <span class="n">dup_isolate_real_roots_list</span>
@@ -907,7 +907,7 @@
         <span class="k">if</span> <span class="n">native</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">as_expr_dict</span><span class="p">()</span></div>
+            <span class="k">return</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">to_expr</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span></div>
 
 <div class="viewcode-block" id="Poly.as_expr"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.polytools.Poly.as_expr">[docs]</a>    <span class="k">def</span> <span class="nf">as_expr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">gens</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -941,7 +941,7 @@
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">gens</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
 
-        <span class="k">return</span> <span class="n">basic_from_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">as_expr_dict</span><span class="p">(),</span> <span class="o">*</span><span class="n">gens</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">as_expr</span><span class="p">(</span><span class="o">*</span><span class="n">gens</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Poly.deflate"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.polytools.Poly.deflate">[docs]</a>    <span class="k">def</span> <span class="nf">deflate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -3838,8 +3838,6 @@
 
                 <span class="k">return</span> <span class="n">domain</span><span class="o">.</span><span class="n">to_expr</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 
-        <span class="k">return</span>
-
     <span class="n">result</span> <span class="o">=</span> <span class="n">try_non_polynomial_gcd</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -3930,8 +3928,6 @@
                     <span class="n">result</span> <span class="o">=</span> <span class="n">domain</span><span class="o">.</span><span class="n">lcm</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">number</span><span class="p">)</span>
 
                 <span class="k">return</span> <span class="n">domain</span><span class="o">.</span><span class="n">to_expr</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-
-        <span class="k">return</span>
 
     <span class="n">result</span> <span class="o">=</span> <span class="n">try_non_polynomial_lcm</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
 

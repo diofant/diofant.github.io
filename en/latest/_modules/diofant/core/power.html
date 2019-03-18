@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.core.power &mdash; Diofant 0.10.1.dev253+g4a5e049 documentation</title>
+  <title>diofant.core.power &mdash; Diofant 0.10.1.dev266+gbe1a3b2 documentation</title>
   
 
   
@@ -1014,11 +1014,11 @@
                 <span class="c1"># so now it&#39;s easy to get the correct result -- we get the</span>
                 <span class="c1"># coefficients first:</span>
                 <span class="kn">from</span> <span class="nn">..ntheory</span> <span class="k">import</span> <span class="n">multinomial_coefficients</span>
-                <span class="kn">from</span> <span class="nn">..polys.polyutils</span> <span class="k">import</span> <span class="n">basic_from_dict</span>
+                <span class="kn">from</span> <span class="nn">..polys.polyutils</span> <span class="k">import</span> <span class="n">expr_from_dict</span>
                 <span class="n">expansion_dict</span> <span class="o">=</span> <span class="n">multinomial_coefficients</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="n">n</span><span class="p">)</span>
                 <span class="c1"># in our example: {(3, 0): 1, (1, 2): 3, (0, 3): 1, (2, 1): 3}</span>
                 <span class="c1"># and now construct the expression.</span>
-                <span class="k">return</span> <span class="n">basic_from_dict</span><span class="p">(</span><span class="n">expansion_dict</span><span class="p">,</span> <span class="o">*</span><span class="n">p</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">expr_from_dict</span><span class="p">(</span><span class="n">expansion_dict</span><span class="p">,</span> <span class="o">*</span><span class="n">p</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
                     <span class="k">return</span> <span class="n">Add</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">f</span><span class="o">*</span><span class="n">g</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">base</span><span class="o">.</span><span class="n">args</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">base</span><span class="o">.</span><span class="n">args</span><span class="p">])</span>
