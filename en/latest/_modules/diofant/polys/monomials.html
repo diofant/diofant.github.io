@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.monomials &mdash; Diofant 0.10.1.dev265+g89e8738 documentation</title>
+  <title>diofant.polys.monomials &mdash; Diofant 0.10.1.dev270+g8b01965 documentation</title>
   
 
   
@@ -330,25 +330,6 @@
             <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">n</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
-
-
-<span class="k">def</span> <span class="nf">term_div</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">domain</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Division of two terms in over a ring/field. &quot;&quot;&quot;</span>
-    <span class="n">a_lm</span><span class="p">,</span> <span class="n">a_lc</span> <span class="o">=</span> <span class="n">a</span>
-    <span class="n">b_lm</span><span class="p">,</span> <span class="n">b_lc</span> <span class="o">=</span> <span class="n">b</span>
-    <span class="n">zm</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,)</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">a_lm</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">b_lm</span> <span class="o">==</span> <span class="n">zm</span><span class="p">:</span>  <span class="c1"># apparently this is a very common case</span>
-        <span class="n">monom</span> <span class="o">=</span> <span class="n">a_lm</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">monom</span> <span class="o">=</span> <span class="n">monomial_div</span><span class="p">(</span><span class="n">a_lm</span><span class="p">,</span> <span class="n">b_lm</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">domain</span><span class="o">.</span><span class="n">is_Field</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">monom</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">monom</span><span class="p">,</span> <span class="n">domain</span><span class="o">.</span><span class="n">quo</span><span class="p">(</span><span class="n">a_lc</span><span class="p">,</span> <span class="n">b_lc</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">monom</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">a_lc</span> <span class="o">%</span> <span class="n">b_lc</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">monom</span><span class="p">,</span> <span class="n">domain</span><span class="o">.</span><span class="n">quo</span><span class="p">(</span><span class="n">a_lc</span><span class="p">,</span> <span class="n">b_lc</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="Monomial"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.monomials.Monomial">[docs]</a><span class="k">class</span> <span class="nc">Monomial</span><span class="p">:</span>

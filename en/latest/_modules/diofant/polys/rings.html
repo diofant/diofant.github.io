@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.rings &mdash; Diofant 0.10.1.dev265+g89e8738 documentation</title>
+  <title>diofant.polys.rings &mdash; Diofant 0.10.1.dev270+g8b01965 documentation</title>
   
 
   
@@ -173,7 +173,7 @@
 <span class="kn">from</span> <span class="nn">.heuristicgcd</span> <span class="k">import</span> <span class="n">heugcd</span>
 <span class="kn">from</span> <span class="nn">.modulargcd</span> <span class="k">import</span> <span class="n">func_field_modgcd</span><span class="p">,</span> <span class="n">modgcd</span>
 <span class="kn">from</span> <span class="nn">.monomials</span> <span class="k">import</span> <span class="p">(</span><span class="n">monomial_div</span><span class="p">,</span> <span class="n">monomial_ldiv</span><span class="p">,</span> <span class="n">monomial_min</span><span class="p">,</span>
-                        <span class="n">monomial_mul</span><span class="p">,</span> <span class="n">monomial_pow</span><span class="p">,</span> <span class="n">term_div</span><span class="p">)</span>
+                        <span class="n">monomial_mul</span><span class="p">,</span> <span class="n">monomial_pow</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">.orderings</span> <span class="k">import</span> <span class="n">lex</span>
 <span class="kn">from</span> <span class="nn">.polyconfig</span> <span class="k">import</span> <span class="n">query</span>
 <span class="kn">from</span> <span class="nn">.polyerrors</span> <span class="k">import</span> <span class="p">(</span><span class="n">CoercionFailed</span><span class="p">,</span> <span class="n">ExactQuotientFailed</span><span class="p">,</span> <span class="n">GeneratorsError</span><span class="p">,</span>
@@ -1372,14 +1372,14 @@
             <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="n">divoccurred</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">s</span> <span class="ow">and</span> <span class="n">divoccurred</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">expv</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">leading_expv</span><span class="p">()</span>
-                <span class="n">term</span> <span class="o">=</span> <span class="n">term_div</span><span class="p">((</span><span class="n">expv</span><span class="p">,</span> <span class="n">p</span><span class="p">[</span><span class="n">expv</span><span class="p">]),</span> <span class="p">(</span><span class="n">expvs</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">fv</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">expvs</span><span class="p">[</span><span class="n">i</span><span class="p">]]),</span> <span class="n">ring</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">term</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                    <span class="n">expv1</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">term</span>
+                <span class="n">lt</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">leading_term</span><span class="p">()</span>
+                <span class="n">term</span> <span class="o">=</span> <span class="n">lt</span><span class="o">.</span><span class="n">quo_term</span><span class="p">((</span><span class="n">expvs</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">fv</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">expvs</span><span class="p">[</span><span class="n">i</span><span class="p">]]))</span>
+                <span class="k">if</span> <span class="n">term</span><span class="p">:</span>
+                    <span class="n">expv1</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">term</span><span class="o">.</span><span class="n">LT</span>
                     <span class="n">qv</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">qv</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">_iadd_monom</span><span class="p">((</span><span class="n">expv1</span><span class="p">,</span> <span class="n">c</span><span class="p">))</span>
                     <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">_iadd_poly_monom</span><span class="p">(</span><span class="n">fv</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="p">(</span><span class="n">expv1</span><span class="p">,</span> <span class="o">-</span><span class="n">c</span><span class="p">))</span>
                     <span class="n">divoccurred</span> <span class="o">=</span> <span class="mi">1</span>
-                    <span class="k">if</span> <span class="n">p</span> <span class="ow">and</span> <span class="n">order</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">LM</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">order</span><span class="p">(</span><span class="n">expv</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">p</span> <span class="ow">and</span> <span class="n">order</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">LM</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">order</span><span class="p">(</span><span class="n">lt</span><span class="o">.</span><span class="n">LM</span><span class="p">):</span>
                         <span class="k">raise</span> <span class="n">PolynomialDivisionFailed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fv</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
@@ -1827,11 +1827,20 @@
             <span class="k">raise</span> <span class="ne">ZeroDivisionError</span><span class="p">(</span><span class="s2">&quot;polynomial division&quot;</span><span class="p">)</span>
         <span class="k">elif</span> <span class="ow">not</span> <span class="bp">self</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">zero</span>
-        <span class="k">elif</span> <span class="n">monom</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">zero_monom</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">quo_ground</span><span class="p">(</span><span class="n">coeff</span><span class="p">)</span>
 
-        <span class="n">terms</span> <span class="o">=</span> <span class="p">[</span><span class="n">term_div</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">term</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">([</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">terms</span> <span class="k">if</span> <span class="n">t</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">])</span>
+        <span class="n">ring</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span>
+        <span class="n">domain</span> <span class="o">=</span> <span class="n">ring</span><span class="o">.</span><span class="n">domain</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">ring</span><span class="o">.</span><span class="n">zero</span>
+
+        <span class="k">for</span> <span class="n">tm</span><span class="p">,</span> <span class="n">tc</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">monom</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">zero_monom</span><span class="p">:</span>
+                <span class="n">tm</span> <span class="o">=</span> <span class="n">monomial_ldiv</span><span class="p">(</span><span class="n">tm</span><span class="p">,</span> <span class="n">monom</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">_</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">tm</span><span class="p">):</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">domain</span><span class="o">.</span><span class="n">is_Field</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">tc</span> <span class="o">%</span> <span class="n">coeff</span><span class="p">:</span>
+                <span class="n">p</span><span class="p">[</span><span class="n">tm</span><span class="p">]</span> <span class="o">=</span> <span class="n">domain</span><span class="o">.</span><span class="n">quo</span><span class="p">(</span><span class="n">tc</span><span class="p">,</span> <span class="n">coeff</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">p</span>
 
     <span class="k">def</span> <span class="nf">trunc_ground</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">is_IntegerRing</span><span class="p">:</span>

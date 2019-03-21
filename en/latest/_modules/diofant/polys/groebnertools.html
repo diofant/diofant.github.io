@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.groebnertools &mdash; Diofant 0.10.1.dev265+g89e8738 documentation</title>
+  <title>diofant.polys.groebnertools &mdash; Diofant 0.10.1.dev270+g8b01965 documentation</title>
   
 
   
@@ -154,7 +154,7 @@
 
 <span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">Dummy</span>
 <span class="kn">from</span> <span class="nn">.monomials</span> <span class="k">import</span> <span class="p">(</span><span class="n">monomial_div</span><span class="p">,</span> <span class="n">monomial_divides</span><span class="p">,</span> <span class="n">monomial_lcm</span><span class="p">,</span>
-                        <span class="n">monomial_mul</span><span class="p">,</span> <span class="n">term_div</span><span class="p">)</span>
+                        <span class="n">monomial_mul</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">.orderings</span> <span class="k">import</span> <span class="n">lex</span>
 <span class="kn">from</span> <span class="nn">.polyconfig</span> <span class="k">import</span> <span class="n">query</span>
 
@@ -564,10 +564,10 @@
 
     <span class="n">ltf</span> <span class="o">=</span> <span class="n">Polyn</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="o">.</span><span class="n">LT</span>
     <span class="n">ltg</span> <span class="o">=</span> <span class="n">Polyn</span><span class="p">(</span><span class="n">g</span><span class="p">)</span><span class="o">.</span><span class="n">LT</span>
-    <span class="n">lt</span> <span class="o">=</span> <span class="p">(</span><span class="n">monomial_lcm</span><span class="p">(</span><span class="n">ltf</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ltg</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">domain</span><span class="o">.</span><span class="n">one</span><span class="p">)</span>
+    <span class="n">lt</span> <span class="o">=</span> <span class="n">ring</span><span class="o">.</span><span class="n">from_terms</span><span class="p">([(</span><span class="n">monomial_lcm</span><span class="p">(</span><span class="n">ltf</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ltg</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">domain</span><span class="o">.</span><span class="n">one</span><span class="p">)])</span>
 
-    <span class="n">um</span> <span class="o">=</span> <span class="n">term_div</span><span class="p">(</span><span class="n">lt</span><span class="p">,</span> <span class="n">ltf</span><span class="p">,</span> <span class="n">domain</span><span class="p">)</span>
-    <span class="n">vm</span> <span class="o">=</span> <span class="n">term_div</span><span class="p">(</span><span class="n">lt</span><span class="p">,</span> <span class="n">ltg</span><span class="p">,</span> <span class="n">domain</span><span class="p">)</span>
+    <span class="n">um</span> <span class="o">=</span> <span class="n">lt</span><span class="o">.</span><span class="n">quo_term</span><span class="p">(</span><span class="n">ltf</span><span class="p">)</span><span class="o">.</span><span class="n">LT</span>
+    <span class="n">vm</span> <span class="o">=</span> <span class="n">lt</span><span class="o">.</span><span class="n">quo_term</span><span class="p">(</span><span class="n">ltg</span><span class="p">)</span><span class="o">.</span><span class="n">LT</span>
 
     <span class="c1"># The full information is not needed (now), so only the product</span>
     <span class="c1"># with the leading term is considered:</span>
@@ -649,7 +649,6 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">order</span> <span class="o">=</span> <span class="n">Polyn</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">order</span>
-    <span class="n">domain</span> <span class="o">=</span> <span class="n">Polyn</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">domain</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">Polyn</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">f</span>
@@ -659,7 +658,7 @@
 
         <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">B</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">Polyn</span><span class="p">(</span><span class="n">h</span><span class="p">)</span> <span class="ow">and</span> <span class="n">monomial_divides</span><span class="p">(</span><span class="n">Polyn</span><span class="p">(</span><span class="n">h</span><span class="p">)</span><span class="o">.</span><span class="n">LM</span><span class="p">,</span> <span class="n">Polyn</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="o">.</span><span class="n">LM</span><span class="p">):</span>
-                <span class="n">t</span> <span class="o">=</span> <span class="n">term_div</span><span class="p">(</span><span class="n">Polyn</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="o">.</span><span class="n">LT</span><span class="p">,</span> <span class="n">Polyn</span><span class="p">(</span><span class="n">h</span><span class="p">)</span><span class="o">.</span><span class="n">LT</span><span class="p">,</span> <span class="n">domain</span><span class="p">)</span>
+                <span class="n">t</span> <span class="o">=</span> <span class="n">Polyn</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="o">.</span><span class="n">leading_term</span><span class="p">()</span><span class="o">.</span><span class="n">quo_term</span><span class="p">(</span><span class="n">Polyn</span><span class="p">(</span><span class="n">h</span><span class="p">)</span><span class="o">.</span><span class="n">LT</span><span class="p">)</span><span class="o">.</span><span class="n">LT</span>
                 <span class="k">if</span> <span class="n">sig_cmp</span><span class="p">(</span><span class="n">sig_mult</span><span class="p">(</span><span class="n">Sign</span><span class="p">(</span><span class="n">h</span><span class="p">),</span> <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">Sign</span><span class="p">(</span><span class="n">f</span><span class="p">),</span> <span class="n">order</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
                     <span class="c1"># The following check need not be done and is in general slower than without.</span>
                     <span class="c1"># if not is_rewritable_or_comparable(Sign(gp), Num(gp), B):</span>
