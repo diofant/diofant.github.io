@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.monomials &mdash; Diofant 0.10.1.dev270+g8b01965 documentation</title>
+  <title>diofant.polys.monomials &mdash; Diofant 0.10.1.dev279+g9894ab1 documentation</title>
   
 
   
@@ -154,7 +154,6 @@
 
 <span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">Mul</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">sympify</span>
 <span class="kn">from</span> <span class="nn">..core.compatibility</span> <span class="k">import</span> <span class="n">iterable</span>
-<span class="kn">from</span> <span class="nn">.polyerrors</span> <span class="k">import</span> <span class="n">ExactQuotientFailed</span>
 <span class="kn">from</span> <span class="nn">.polyutils</span> <span class="k">import</span> <span class="n">dict_from_expr</span>
 
 
@@ -182,15 +181,13 @@
 <span class="sd">    Examples</span>
 <span class="sd">    ========</span>
 
-<span class="sd">    Consider monomials in variables `x` and `y`::</span>
+<span class="sd">    &gt;&gt;&gt; from diofant.polys.orderings import monomial_key</span>
 
-<span class="sd">        &gt;&gt;&gt; from diofant.polys.orderings import monomial_key</span>
+<span class="sd">    &gt;&gt;&gt; sorted(itermonomials([x, y], 2), key=monomial_key(&#39;grlex&#39;, [y, x]))</span>
+<span class="sd">    [1, x, y, x**2, x*y, y**2]</span>
 
-<span class="sd">        &gt;&gt;&gt; sorted(itermonomials([x, y], 2), key=monomial_key(&#39;grlex&#39;, [y, x]))</span>
-<span class="sd">        [1, x, y, x**2, x*y, y**2]</span>
-
-<span class="sd">        &gt;&gt;&gt; sorted(itermonomials([x, y], 3), key=monomial_key(&#39;grlex&#39;, [y, x]))</span>
-<span class="sd">        [1, x, y, x**2, x*y, y**2, x**3, x**2*y, x*y**2, y**3]</span>
+<span class="sd">    &gt;&gt;&gt; sorted(itermonomials([x, y], 3), key=monomial_key(&#39;grlex&#39;, [y, x]))</span>
+<span class="sd">    [1, x, y, x**2, x*y, y**2, x**3, x**2*y, x*y**2, y**3]</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">variables</span><span class="p">:</span>
@@ -207,60 +204,12 @@
 
 
 <span class="k">def</span> <span class="nf">monomial_mul</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Multiplication of tuples representing monomials.</span>
-
-<span class="sd">    Lets multiply `x**3*y**4*z` with `x*y**2`::</span>
-
-<span class="sd">        &gt;&gt;&gt; monomial_mul((3, 4, 1), (1, 2, 0))</span>
-<span class="sd">        (4, 6, 1)</span>
-
-<span class="sd">    which gives `x**4*y**5*z`.</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Multiplication of tuples representing monomials.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">))</span>
 
 
 <span class="k">def</span> <span class="nf">monomial_div</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Division of tuples representing monomials.</span>
-
-<span class="sd">    Lets divide `x**3*y**4*z` by `x*y**2`::</span>
-
-<span class="sd">        &gt;&gt;&gt; monomial_div((3, 4, 1), (1, 2, 0))</span>
-<span class="sd">        (2, 2, 1)</span>
-
-<span class="sd">    which gives `x**2*y**2*z`. However::</span>
-
-<span class="sd">        &gt;&gt;&gt; monomial_div((3, 4, 1), (1, 2, 2)) is None</span>
-<span class="sd">        True</span>
-
-<span class="sd">    `x*y**2*z**2` does not divide `x**3*y**4*z`.</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">C</span> <span class="o">=</span> <span class="n">monomial_ldiv</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">c</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">C</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
-
-
-<span class="k">def</span> <span class="nf">monomial_ldiv</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Division of tuples representing monomials.</span>
-
-<span class="sd">    Lets divide `x**3*y**4*z` by `x*y**2`::</span>
-
-<span class="sd">        &gt;&gt;&gt; monomial_ldiv((3, 4, 1), (1, 2, 0))</span>
-<span class="sd">        (2, 2, 1)</span>
-
-<span class="sd">    which gives `x**2*y**2*z`.</span>
-
-<span class="sd">        &gt;&gt;&gt; monomial_ldiv((3, 4, 1), (1, 2, 2))</span>
-<span class="sd">        (2, 2, -1)</span>
-
-<span class="sd">    which gives `x**2*y**2*z**-1`.</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Division of tuples representing monomials.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">))</span>
 
 
@@ -270,66 +219,18 @@
 
 
 <span class="k">def</span> <span class="nf">monomial_gcd</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Greatest common divisor of tuples representing monomials.</span>
-
-<span class="sd">    Lets compute GCD of `x*y**4*z` and `x**3*y**2`::</span>
-
-<span class="sd">        &gt;&gt;&gt; monomial_gcd((1, 4, 1), (3, 2, 0))</span>
-<span class="sd">        (1, 2, 0)</span>
-
-<span class="sd">    which gives `x*y**2`.</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Greatest common divisor of tuples representing monomials.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">))</span>
 
 
 <span class="k">def</span> <span class="nf">monomial_lcm</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Least common multiple of tuples representing monomials.</span>
-
-<span class="sd">    Lets compute LCM of `x*y**4*z` and `x**3*y**2`::</span>
-
-<span class="sd">        &gt;&gt;&gt; monomial_lcm((1, 4, 1), (3, 2, 0))</span>
-<span class="sd">        (3, 4, 1)</span>
-
-<span class="sd">    which gives `x**3*y**4*z`.</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Least common multiple of tuples representing monomials.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">))</span>
 
 
 <span class="k">def</span> <span class="nf">monomial_divides</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Does there exist a monomial X such that XA == B?</span>
-
-<span class="sd">    &gt;&gt;&gt; monomial_divides((1, 2), (3, 4))</span>
-<span class="sd">    True</span>
-<span class="sd">    &gt;&gt;&gt; monomial_divides((1, 2), (0, 2))</span>
-<span class="sd">    False</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Does there exist a monomial X such that XA == B?&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="n">a</span> <span class="o">&lt;=</span> <span class="n">b</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">))</span>
-
-
-<span class="k">def</span> <span class="nf">monomial_min</span><span class="p">(</span><span class="o">*</span><span class="n">monoms</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Returns minimal degree for each variable in a set of monomials.</span>
-
-<span class="sd">    Consider monomials `x**3*y**4*z**5`, `y**5*z` and `x**6*y**3*z**9`.</span>
-<span class="sd">    We wish to find out what is the minimal degree for each of `x`, `y`</span>
-<span class="sd">    and `z` variables::</span>
-
-<span class="sd">        &gt;&gt;&gt; monomial_min((3, 4, 5), (0, 5, 1), (6, 3, 9))</span>
-<span class="sd">        (0, 3, 1)</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">M</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">monoms</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-
-    <span class="k">for</span> <span class="n">N</span> <span class="ow">in</span> <span class="n">monoms</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
-        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
-            <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">n</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="Monomial"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.monomials.Monomial">[docs]</a><span class="k">class</span> <span class="nc">Monomial</span><span class="p">:</span>
@@ -343,115 +244,99 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Expected a monomial got </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">monom</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">exponents</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">monom</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_exponents</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">monom</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">gens</span> <span class="o">=</span> <span class="n">gens</span>
 
-    <span class="k">def</span> <span class="nf">rebuild</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exponents</span><span class="p">,</span> <span class="n">gens</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span><span class="n">exponents</span><span class="p">,</span> <span class="n">gens</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">gens</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">exponents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exponents</span>
 
     <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">exponents</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_exponents</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">exponents</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_exponents</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">exponents</span><span class="p">[</span><span class="n">item</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exponents</span><span class="p">[</span><span class="n">item</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">hash</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">exponents</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">gens</span><span class="p">))</span>
+        <span class="k">return</span> <span class="nb">hash</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exponents</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">gens</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">gens</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s2">&quot;*&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">**</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">gen</span><span class="p">,</span> <span class="n">exp</span><span class="p">)</span> <span class="k">for</span> <span class="n">gen</span><span class="p">,</span> <span class="n">exp</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gens</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">exponents</span><span class="p">)])</span>
+            <span class="k">return</span> <span class="s2">&quot;*&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">**</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">_</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gens</span><span class="p">,</span> <span class="bp">self</span><span class="p">)])</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">(</span><span class="si">%s</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">exponents</span><span class="p">)</span>
+            <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">(</span><span class="si">%s</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exponents</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Monomial.as_expr"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.monomials.Monomial.as_expr">[docs]</a>    <span class="k">def</span> <span class="nf">as_expr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">gens</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Convert a monomial instance to a Diofant expression. &quot;&quot;&quot;</span>
         <span class="n">gens</span> <span class="o">=</span> <span class="n">gens</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">gens</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">gens</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s2">&quot;can&#39;t convert </span><span class="si">%s</span><span class="s2"> to an expression without generators&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;can&#39;t convert </span><span class="si">%s</span><span class="s2"> to an expression without generators&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">Mul</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">gen</span><span class="o">**</span><span class="n">exp</span> <span class="k">for</span> <span class="n">gen</span><span class="p">,</span> <span class="n">exp</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">gens</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">exponents</span><span class="p">)])</span></div>
+        <span class="k">return</span> <span class="n">Mul</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">gen</span><span class="o">**</span><span class="n">exp</span> <span class="k">for</span> <span class="n">gen</span><span class="p">,</span> <span class="n">exp</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">gens</span><span class="p">,</span> <span class="bp">self</span><span class="p">)])</span></div>
 
     <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Monomial</span><span class="p">):</span>
-            <span class="n">exponents</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">exponents</span>
+            <span class="n">exponents</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">)):</span>
             <span class="n">exponents</span> <span class="o">=</span> <span class="n">other</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">False</span>
 
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">exponents</span> <span class="o">==</span> <span class="n">exponents</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exponents</span> <span class="o">==</span> <span class="n">exponents</span>
 
     <span class="k">def</span> <span class="nf">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Monomial</span><span class="p">):</span>
-            <span class="n">exponents</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">exponents</span>
+            <span class="n">exponents</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">)):</span>
             <span class="n">exponents</span> <span class="o">=</span> <span class="n">other</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">NotImplemented</span>
 
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rebuild</span><span class="p">(</span><span class="n">monomial_mul</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">exponents</span><span class="p">,</span> <span class="n">exponents</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span><span class="n">monomial_mul</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exponents</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">gens</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__truediv__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Monomial</span><span class="p">):</span>
-            <span class="n">exponents</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">exponents</span>
+            <span class="n">exponents</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">)):</span>
             <span class="n">exponents</span> <span class="o">=</span> <span class="n">other</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">NotImplemented</span>
 
-        <span class="n">result</span> <span class="o">=</span> <span class="n">monomial_div</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">exponents</span><span class="p">,</span> <span class="n">exponents</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rebuild</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">ExactQuotientFailed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Monomial</span><span class="p">(</span><span class="n">other</span><span class="p">))</span>
-
-    <span class="fm">__floordiv__</span> <span class="o">=</span> <span class="fm">__truediv__</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span><span class="n">monomial_div</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exponents</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">gens</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__pow__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">n</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rebuild</span><span class="p">([</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
-        <span class="k">elif</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">exponents</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">exponents</span>
-
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-                <span class="n">exponents</span> <span class="o">=</span> <span class="n">monomial_mul</span><span class="p">(</span><span class="n">exponents</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">exponents</span><span class="p">)</span>
-
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rebuild</span><span class="p">(</span><span class="n">exponents</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span><span class="n">monomial_pow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">gens</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;a non-negative integer expected, got </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">other</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Monomial.gcd"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.monomials.Monomial.gcd">[docs]</a>    <span class="k">def</span> <span class="nf">gcd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Greatest common divisor of monomials. &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Monomial</span><span class="p">):</span>
-            <span class="n">exponents</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">exponents</span>
+            <span class="n">exponents</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">)):</span>
             <span class="n">exponents</span> <span class="o">=</span> <span class="n">other</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-                <span class="s2">&quot;an instance of Monomial class expected, got </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">other</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;an instance of Monomial class expected, got </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">other</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rebuild</span><span class="p">(</span><span class="n">monomial_gcd</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">exponents</span><span class="p">,</span> <span class="n">exponents</span><span class="p">))</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span><span class="n">monomial_gcd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exponents</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">gens</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Monomial.lcm"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.monomials.Monomial.lcm">[docs]</a>    <span class="k">def</span> <span class="nf">lcm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Least common multiple of monomials. &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Monomial</span><span class="p">):</span>
-            <span class="n">exponents</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">exponents</span>
+            <span class="n">exponents</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">)):</span>
             <span class="n">exponents</span> <span class="o">=</span> <span class="n">other</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-                <span class="s2">&quot;an instance of Monomial class expected, got </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">other</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;an instance of Monomial class expected, got </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">other</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rebuild</span><span class="p">(</span><span class="n">monomial_lcm</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">exponents</span><span class="p">,</span> <span class="n">exponents</span><span class="p">))</span></div></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span><span class="n">monomial_lcm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exponents</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">gens</span><span class="p">)</span></div></div>
 </pre></div>
 
            </div>
