@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.numberfields &mdash; Diofant 0.10.1.dev279+g9894ab1 documentation</title>
+  <title>diofant.polys.numberfields &mdash; Diofant 0.10.1.dev279+ge50bdf4 documentation</title>
   
 
   
@@ -172,9 +172,6 @@
 <span class="kn">from</span> <span class="nn">.polyerrors</span> <span class="k">import</span> <span class="n">NotAlgebraic</span>
 <span class="kn">from</span> <span class="nn">.polytools</span> <span class="k">import</span> <span class="p">(</span><span class="n">Poly</span><span class="p">,</span> <span class="n">PurePoly</span><span class="p">,</span> <span class="n">degree</span><span class="p">,</span> <span class="n">factor_list</span><span class="p">,</span> <span class="n">groebner</span><span class="p">,</span> <span class="n">lcm</span><span class="p">,</span>
                         <span class="n">parallel_poly_from_expr</span><span class="p">,</span> <span class="n">poly_from_expr</span><span class="p">,</span> <span class="n">resultant</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">.polyutils</span> <span class="k">import</span> <span class="n">dict_from_expr</span>
-<span class="kn">from</span> <span class="nn">.ring_series</span> <span class="k">import</span> <span class="n">rs_compose_add</span>
-<span class="kn">from</span> <span class="nn">.rings</span> <span class="k">import</span> <span class="n">ring</span>
 <span class="kn">from</span> <span class="nn">.rootoftools</span> <span class="k">import</span> <span class="n">RootOf</span>
 <span class="kn">from</span> <span class="nn">.specialpolys</span> <span class="k">import</span> <span class="n">cyclotomic_poly</span>
 
@@ -367,25 +364,16 @@
 
     <span class="k">if</span> <span class="n">op</span> <span class="ow">is</span> <span class="n">Add</span><span class="p">:</span>
         <span class="c1"># mp1a = mp1.subs({x: x - y})</span>
-        <span class="k">if</span> <span class="n">dom</span> <span class="o">==</span> <span class="n">QQ</span><span class="p">:</span>
-            <span class="n">R</span><span class="p">,</span> <span class="n">X</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="n">QQ</span><span class="p">)</span>
-            <span class="n">p1</span> <span class="o">=</span> <span class="n">R</span><span class="p">(</span><span class="n">dict_from_expr</span><span class="p">(</span><span class="n">mp1</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
-            <span class="n">p2</span> <span class="o">=</span> <span class="n">R</span><span class="p">(</span><span class="n">dict_from_expr</span><span class="p">(</span><span class="n">mp2</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">),</span> <span class="n">_</span> <span class="o">=</span> <span class="n">parallel_poly_from_expr</span><span class="p">((</span><span class="n">mp1</span><span class="p">,</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">),</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-            <span class="n">r</span> <span class="o">=</span> <span class="n">p1</span><span class="o">.</span><span class="n">compose</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span>
-            <span class="n">mp1a</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">as_expr</span><span class="p">()</span>
+        <span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">),</span> <span class="n">_</span> <span class="o">=</span> <span class="n">parallel_poly_from_expr</span><span class="p">((</span><span class="n">mp1</span><span class="p">,</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">),</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">p1</span><span class="o">.</span><span class="n">compose</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span>
+        <span class="n">mp1a</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">as_expr</span><span class="p">()</span>
 
     <span class="k">elif</span> <span class="n">op</span> <span class="ow">is</span> <span class="n">Mul</span><span class="p">:</span>
         <span class="n">mp1a</span> <span class="o">=</span> <span class="n">_muly</span><span class="p">(</span><span class="n">mp1</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;option not available&#39;</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">op</span> <span class="ow">is</span> <span class="n">Mul</span> <span class="ow">or</span> <span class="n">dom</span> <span class="o">!=</span> <span class="n">QQ</span><span class="p">:</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="n">resultant</span><span class="p">(</span><span class="n">mp1a</span><span class="p">,</span> <span class="n">mp2</span><span class="p">,</span> <span class="n">gens</span><span class="o">=</span><span class="p">[</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">])</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="n">rs_compose_add</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">)</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">as_expr</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">resultant</span><span class="p">(</span><span class="n">mp1a</span><span class="p">,</span> <span class="n">mp2</span><span class="p">,</span> <span class="n">gens</span><span class="o">=</span><span class="p">[</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">])</span>
 
     <span class="n">deg1</span> <span class="o">=</span> <span class="n">degree</span><span class="p">(</span><span class="n">mp1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
     <span class="n">deg2</span> <span class="o">=</span> <span class="n">degree</span><span class="p">(</span><span class="n">mp2</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
