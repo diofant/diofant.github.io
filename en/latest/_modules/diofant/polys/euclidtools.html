@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.euclidtools &mdash; Diofant 0.10.1.dev279+ge50bdf4 documentation</title>
+  <title>diofant.polys.euclidtools &mdash; Diofant 0.10.1.dev299+g5e6a61e documentation</title>
   
 
   
@@ -157,7 +157,7 @@
 <span class="kn">from</span> <span class="nn">..ntheory.modular</span> <span class="k">import</span> <span class="n">symmetric_residue</span>
 <span class="kn">from</span> <span class="nn">.densearith</span> <span class="k">import</span> <span class="p">(</span><span class="n">dmp_add</span><span class="p">,</span> <span class="n">dmp_div</span><span class="p">,</span> <span class="n">dmp_max_norm</span><span class="p">,</span> <span class="n">dmp_mul</span><span class="p">,</span>
                          <span class="n">dmp_mul_ground</span><span class="p">,</span> <span class="n">dmp_mul_term</span><span class="p">,</span> <span class="n">dmp_neg</span><span class="p">,</span> <span class="n">dmp_pow</span><span class="p">,</span>
-                         <span class="n">dmp_prem</span><span class="p">,</span> <span class="n">dmp_quo</span><span class="p">,</span> <span class="n">dmp_quo_ground</span><span class="p">,</span> <span class="n">dmp_rem</span><span class="p">,</span> <span class="n">dmp_sub</span><span class="p">,</span>
+                         <span class="n">dmp_quo</span><span class="p">,</span> <span class="n">dmp_quo_ground</span><span class="p">,</span> <span class="n">dmp_rem</span><span class="p">,</span> <span class="n">dmp_sub</span><span class="p">,</span>
                          <span class="n">dmp_sub_mul</span><span class="p">,</span> <span class="n">dup_mul</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">.densebasic</span> <span class="k">import</span> <span class="p">(</span><span class="n">dmp_apply_pairs</span><span class="p">,</span> <span class="n">dmp_convert</span><span class="p">,</span> <span class="n">dmp_degree_in</span><span class="p">,</span>
                          <span class="n">dmp_ground</span><span class="p">,</span> <span class="n">dmp_ground_LC</span><span class="p">,</span> <span class="n">dmp_inflate</span><span class="p">,</span> <span class="n">dmp_LC</span><span class="p">,</span>
@@ -187,7 +187,7 @@
 <span class="sd">    &gt;&gt;&gt; f = x**4 - 2*x**3 - 6*x**2 + 12*x + 15</span>
 <span class="sd">    &gt;&gt;&gt; g = x**3 + x**2 - 4*x - 4</span>
 
-<span class="sd">    &gt;&gt;&gt; R.dup_half_gcdex(f, g)</span>
+<span class="sd">    &gt;&gt;&gt; f.half_gcdex(g)</span>
 <span class="sd">    (-1/5*x + 3/5, x + 1)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -221,7 +221,7 @@
 <span class="sd">    &gt;&gt;&gt; f = x**4 - 2*x**3 - 6*x**2 + 12*x + 15</span>
 <span class="sd">    &gt;&gt;&gt; g = x**3 + x**2 - 4*x - 4</span>
 
-<span class="sd">    &gt;&gt;&gt; R.dup_gcdex(f, g)</span>
+<span class="sd">    &gt;&gt;&gt; f.gcdex(g)</span>
 <span class="sd">    (-1/5*x + 3/5, 1/5*x**2 - 6/5*x + 2, x + 1)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -261,6 +261,60 @@
         <span class="k">return</span> <span class="n">dmp_rem</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">NotInvertible</span><span class="p">(</span><span class="s2">&quot;zero divisor&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">dmp_prem</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Polynomial pseudo-remainder in ``K[X]``.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; R, x, y = ring(&quot;x y&quot;, ZZ)</span>
+
+<span class="sd">    &gt;&gt;&gt; (x**2 + x*y).prem(2*x + 2)</span>
+<span class="sd">    -4*y + 4</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ==========</span>
+
+<span class="sd">    * :cite:`Knuth1985seminumerical`, p. 407.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">dmp_degree_in</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
+    <span class="n">dg</span> <span class="o">=</span> <span class="n">dmp_degree_in</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">dg</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ZeroDivisionError</span><span class="p">(</span><span class="s2">&quot;polynomial division&quot;</span><span class="p">)</span>
+
+    <span class="n">r</span><span class="p">,</span> <span class="n">dr</span> <span class="o">=</span> <span class="n">f</span><span class="p">,</span> <span class="n">df</span>
+
+    <span class="k">if</span> <span class="n">df</span> <span class="o">&lt;</span> <span class="n">dg</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">r</span>
+
+    <span class="n">N</span> <span class="o">=</span> <span class="n">df</span> <span class="o">-</span> <span class="n">dg</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">lc_g</span> <span class="o">=</span> <span class="n">dmp_LC</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">lc_r</span> <span class="o">=</span> <span class="n">dmp_LC</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+        <span class="n">j</span><span class="p">,</span> <span class="n">N</span> <span class="o">=</span> <span class="n">dr</span> <span class="o">-</span> <span class="n">dg</span><span class="p">,</span> <span class="n">N</span> <span class="o">-</span> <span class="mi">1</span>
+
+        <span class="n">R</span> <span class="o">=</span> <span class="n">dmp_mul_term</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">lc_g</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+        <span class="n">G</span> <span class="o">=</span> <span class="n">dmp_mul_term</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">lc_r</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">dmp_sub</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+
+        <span class="n">_dr</span><span class="p">,</span> <span class="n">dr</span> <span class="o">=</span> <span class="n">dr</span><span class="p">,</span> <span class="n">dmp_degree_in</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">dr</span> <span class="o">&lt;</span> <span class="n">dg</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="k">assert</span> <span class="n">dr</span> <span class="o">&lt;</span> <span class="n">_dr</span>
+
+    <span class="k">if</span> <span class="n">u</span><span class="p">:</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">dmp_pow</span><span class="p">(</span><span class="n">lc_g</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">u</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">lc_g</span><span class="o">**</span><span class="n">N</span>
+
+    <span class="k">return</span> <span class="n">dmp_mul_term</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">dup_euclidean_prs</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
@@ -441,24 +495,6 @@
         <span class="k">return</span> <span class="n">K</span><span class="o">.</span><span class="n">zero</span><span class="p">,</span> <span class="n">R</span>
 
     <span class="k">return</span> <span class="n">S</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">R</span>
-
-
-<span class="k">def</span> <span class="nf">dup_resultant</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">includePRS</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Computes resultant of two polynomials in `K[x]`.</span>
-
-<span class="sd">    Examples</span>
-<span class="sd">    ========</span>
-
-<span class="sd">    &gt;&gt;&gt; R, x = ring(&quot;x&quot;, ZZ)</span>
-
-<span class="sd">    &gt;&gt;&gt; R.dmp_resultant(x**2 + 1, x**2 - 1)</span>
-<span class="sd">    4</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">includePRS</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">dup_prs_resultant</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">dup_prs_resultant</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">K</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="dmp_inner_subresultants"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.euclidtools.dmp_inner_subresultants">[docs]</a><span class="k">def</span> <span class="nf">dmp_inner_subresultants</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
@@ -791,9 +827,6 @@
 <span class="sd">    -3*y**10 - 12*y**7 + y**6 - 54*y**4 + 8*y**3 + 729*y**2 - 216*y + 16</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">u</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">dup_resultant</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">includePRS</span><span class="o">=</span><span class="n">includePRS</span><span class="p">)</span>
-
     <span class="k">if</span> <span class="n">includePRS</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">dmp_prs_resultant</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
 
@@ -1259,90 +1292,6 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">dmp_inner_gcd</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
-
-
-<span class="k">def</span> <span class="nf">dmp_rr_lcm</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Computes polynomial LCM over a ring in `K[X]`.</span>
-
-<span class="sd">    Examples</span>
-<span class="sd">    ========</span>
-
-<span class="sd">    &gt;&gt;&gt; R, x = ring(&quot;x&quot;, ZZ)</span>
-
-<span class="sd">    &gt;&gt;&gt; R.dmp_lcm(x**2 - 1, x**2 - 3*x + 2)</span>
-<span class="sd">    x**3 - 2*x**2 - x + 2</span>
-
-<span class="sd">    &gt;&gt;&gt; R, x, y = ring(&quot;x y&quot;, ZZ)</span>
-
-<span class="sd">    &gt;&gt;&gt; f = x**2 + 2*x*y + y**2</span>
-<span class="sd">    &gt;&gt;&gt; g = x**2 + x*y</span>
-
-<span class="sd">    &gt;&gt;&gt; R.dmp_lcm(f, g)</span>
-<span class="sd">    x**3 + 2*x**2*y + x*y**2</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">fc</span><span class="p">,</span> <span class="n">f</span> <span class="o">=</span> <span class="n">dmp_ground_primitive</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-    <span class="n">gc</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="n">dmp_ground_primitive</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-
-    <span class="n">c</span> <span class="o">=</span> <span class="n">K</span><span class="o">.</span><span class="n">lcm</span><span class="p">(</span><span class="n">fc</span><span class="p">,</span> <span class="n">gc</span><span class="p">)</span>
-
-    <span class="n">h</span> <span class="o">=</span> <span class="n">dmp_quo</span><span class="p">(</span><span class="n">dmp_mul</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">),</span>
-                <span class="n">dmp_gcd</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">),</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">dmp_mul_ground</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-
-
-<span class="k">def</span> <span class="nf">dmp_ff_lcm</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Computes polynomial LCM over a field in `K[X]`.</span>
-
-<span class="sd">    Examples</span>
-<span class="sd">    ========</span>
-
-<span class="sd">    &gt;&gt;&gt; R, x = ring(&quot;x&quot;, QQ)</span>
-
-<span class="sd">    &gt;&gt;&gt; f = (x**2 + 7*x/2 + 3)/2</span>
-<span class="sd">    &gt;&gt;&gt; g = x**2/2 + x</span>
-
-<span class="sd">    &gt;&gt;&gt; R.dmp_lcm(f, g)</span>
-<span class="sd">    x**3 + 7/2*x**2 + 3*x</span>
-
-<span class="sd">    &gt;&gt;&gt; R, x, y = ring(&quot;x y&quot;, QQ)</span>
-
-<span class="sd">    &gt;&gt;&gt; f = x**2/4 + x*y + y**2</span>
-<span class="sd">    &gt;&gt;&gt; g = x**2/2 + x*y</span>
-
-<span class="sd">    &gt;&gt;&gt; R.dmp_lcm(f, g)</span>
-<span class="sd">    x**3 + 4*x**2*y + 4*x*y**2</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">h</span> <span class="o">=</span> <span class="n">dmp_quo</span><span class="p">(</span><span class="n">dmp_mul</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">),</span>
-                <span class="n">dmp_gcd</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">),</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">dmp_ground_monic</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-
-
-<div class="viewcode-block" id="dmp_lcm"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.euclidtools.dmp_lcm">[docs]</a><span class="k">def</span> <span class="nf">dmp_lcm</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Computes polynomial LCM of `f` and `g` in `K[X]`.</span>
-
-<span class="sd">    Examples</span>
-<span class="sd">    ========</span>
-
-<span class="sd">    &gt;&gt;&gt; R, x, y = ring(&quot;x y&quot;, ZZ)</span>
-
-<span class="sd">    &gt;&gt;&gt; f = x**2 + 2*x*y + y**2</span>
-<span class="sd">    &gt;&gt;&gt; g = x**2 + x*y</span>
-
-<span class="sd">    &gt;&gt;&gt; R.dmp_lcm(f, g)</span>
-<span class="sd">    x**3 + 2*x**2*y + x*y**2</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">K</span><span class="o">.</span><span class="n">is_Field</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">dmp_ff_lcm</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">dmp_rr_lcm</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="dmp_content"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.euclidtools.dmp_content">[docs]</a><span class="k">def</span> <span class="nf">dmp_content</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>

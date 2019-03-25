@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.sqfreetools &mdash; Diofant 0.10.1.dev279+ge50bdf4 documentation</title>
+  <title>diofant.polys.sqfreetools &mdash; Diofant 0.10.1.dev299+g5e6a61e documentation</title>
   
 
   
@@ -153,12 +153,12 @@
 <span></span><span class="sd">&quot;&quot;&quot;Square-free decomposition algorithms and related tools. &quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">.densearith</span> <span class="k">import</span> <span class="n">dmp_mul</span><span class="p">,</span> <span class="n">dmp_quo</span><span class="p">,</span> <span class="n">dmp_sub</span>
-<span class="kn">from</span> <span class="nn">.densebasic</span> <span class="k">import</span> <span class="p">(</span><span class="n">dmp_convert</span><span class="p">,</span> <span class="n">dmp_ground_LC</span><span class="p">,</span> <span class="n">dmp_ground_p</span><span class="p">,</span> <span class="n">dmp_inject</span><span class="p">,</span>
-                         <span class="n">dmp_one_p</span><span class="p">,</span> <span class="n">dmp_raise</span><span class="p">,</span> <span class="n">dmp_swap</span><span class="p">,</span> <span class="n">dmp_zero_p</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">.densebasic</span> <span class="k">import</span> <span class="p">(</span><span class="n">dmp_degree_in</span><span class="p">,</span> <span class="n">dmp_ground_LC</span><span class="p">,</span> <span class="n">dmp_ground_p</span><span class="p">,</span>
+                         <span class="n">dmp_inject</span><span class="p">,</span> <span class="n">dmp_one_p</span><span class="p">,</span> <span class="n">dmp_raise</span><span class="p">,</span> <span class="n">dmp_swap</span><span class="p">,</span>
+                         <span class="n">dmp_zero_p</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">.densetools</span> <span class="k">import</span> <span class="p">(</span><span class="n">dmp_compose</span><span class="p">,</span> <span class="n">dmp_diff_in</span><span class="p">,</span> <span class="n">dmp_ground_monic</span><span class="p">,</span>
                          <span class="n">dmp_ground_primitive</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">.euclidtools</span> <span class="k">import</span> <span class="n">dmp_gcd</span><span class="p">,</span> <span class="n">dmp_resultant</span>
-<span class="kn">from</span> <span class="nn">.galoistools</span> <span class="k">import</span> <span class="n">gf_sqf_list</span>
 <span class="kn">from</span> <span class="nn">.polyerrors</span> <span class="k">import</span> <span class="n">DomainError</span>
 
 
@@ -267,19 +267,79 @@
 
 
 <div class="viewcode-block" id="dmp_gf_sqf_list"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.sqfreetools.dmp_gf_sqf_list">[docs]</a><span class="k">def</span> <span class="nf">dmp_gf_sqf_list</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Compute square-free decomposition of ``f`` in ``GF(p)[X]``.&quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">u</span><span class="p">:</span>
-        <span class="n">f</span> <span class="o">=</span> <span class="n">dmp_convert</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">K</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;Compute square-free decomposition of ``f`` in ``GF(p)[X]``.</span>
 
-        <span class="n">coeff</span><span class="p">,</span> <span class="n">factors</span> <span class="o">=</span> <span class="n">gf_sqf_list</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">K</span><span class="o">.</span><span class="n">mod</span><span class="p">,</span> <span class="n">K</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
+<span class="sd">    Returns the leading coefficient of ``f`` and a square-free decomposition</span>
+<span class="sd">    ``f_1**e_1 f_2**e_2 ... f_k**e_k`` such that all ``f_i`` are monic</span>
+<span class="sd">    polynomials and ``(f_i, f_j)`` for ``i != j`` are co-prime.</span>
 
-        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">factors</span><span class="p">):</span>
-            <span class="n">factors</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">dmp_convert</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">K</span><span class="p">),</span> <span class="n">k</span><span class="p">)</span>
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
 
-        <span class="k">return</span> <span class="n">K</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">coeff</span><span class="p">,</span> <span class="n">K</span><span class="o">.</span><span class="n">domain</span><span class="p">),</span> <span class="n">factors</span>
+<span class="sd">    &gt;&gt;&gt; R, x = ring(&#39;x&#39;, FF(11))</span>
+<span class="sd">    &gt;&gt;&gt; f = x**11 + 1</span>
 
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;multivariate polynomials over finite fields&#39;</span><span class="p">)</span></div>
+<span class="sd">    Note that:</span>
+
+<span class="sd">    &gt;&gt;&gt; f.diff()</span>
+<span class="sd">    0 mod 11</span>
+
+<span class="sd">    This phenomenon doesn&#39;t happen in characteristic zero. However we can</span>
+<span class="sd">    still compute square-free decomposition of ``f``:</span>
+
+<span class="sd">    &gt;&gt;&gt; R.dmp_sqf_list(f)</span>
+<span class="sd">    (1 mod 11, [(x + 1 mod 11, 11)])</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ==========</span>
+
+<span class="sd">    * :cite:`Geddes1992algorithms`</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">u</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;multivariate polynomials over finite fields&#39;</span><span class="p">)</span>
+
+    <span class="n">n</span><span class="p">,</span> <span class="n">sqf</span><span class="p">,</span> <span class="n">factors</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="p">[],</span> <span class="nb">int</span><span class="p">(</span><span class="n">K</span><span class="o">.</span><span class="n">characteristic</span><span class="p">)</span>
+
+    <span class="n">lc</span><span class="p">,</span> <span class="n">f</span> <span class="o">=</span> <span class="n">dmp_ground_primitive</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">dmp_degree_in</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">lc</span><span class="p">,</span> <span class="p">[]</span>
+
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">F</span> <span class="o">=</span> <span class="n">dmp_diff_in</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">F</span> <span class="o">!=</span> <span class="p">[]:</span>
+            <span class="n">g</span> <span class="o">=</span> <span class="n">dmp_gcd</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+            <span class="n">h</span> <span class="o">=</span> <span class="n">dmp_quo</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+
+            <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+
+            <span class="k">while</span> <span class="n">h</span> <span class="o">!=</span> <span class="p">[</span><span class="n">K</span><span class="o">.</span><span class="n">one</span><span class="p">]:</span>
+                <span class="n">G</span> <span class="o">=</span> <span class="n">dmp_gcd</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+                <span class="n">H</span> <span class="o">=</span> <span class="n">dmp_quo</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">dmp_degree_in</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">factors</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">H</span><span class="p">,</span> <span class="n">i</span><span class="o">*</span><span class="n">n</span><span class="p">))</span>
+
+                <span class="n">g</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="n">dmp_quo</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">K</span><span class="p">),</span> <span class="n">G</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+
+            <span class="k">if</span> <span class="n">g</span> <span class="o">==</span> <span class="p">[</span><span class="n">K</span><span class="o">.</span><span class="n">one</span><span class="p">]:</span>
+                <span class="n">sqf</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">f</span> <span class="o">=</span> <span class="n">g</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">sqf</span><span class="p">:</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">dmp_degree_in</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">//</span> <span class="n">r</span>
+
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="n">r</span><span class="p">]</span>
+
+            <span class="n">f</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">f</span><span class="p">[:</span><span class="n">d</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">n</span><span class="o">*</span><span class="n">r</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">break</span>
+
+    <span class="k">return</span> <span class="n">lc</span><span class="p">,</span> <span class="n">factors</span></div>
 
 
 <div class="viewcode-block" id="dmp_rr_yun0_sqf_list"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.sqfreetools.dmp_rr_yun0_sqf_list">[docs]</a><span class="k">def</span> <span class="nf">dmp_rr_yun0_sqf_list</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
@@ -332,14 +392,14 @@
 <span class="sd">    (1, [(x + y, 2), (x, 3)])</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">K</span><span class="o">.</span><span class="n">is_FiniteField</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">dmp_gf_sqf_list</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-
     <span class="k">if</span> <span class="n">K</span><span class="o">.</span><span class="n">is_Field</span><span class="p">:</span>
         <span class="n">coeff</span> <span class="o">=</span> <span class="n">dmp_ground_LC</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
         <span class="n">f</span> <span class="o">=</span> <span class="n">dmp_ground_monic</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">coeff</span><span class="p">,</span> <span class="n">f</span> <span class="o">=</span> <span class="n">dmp_ground_primitive</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">K</span><span class="o">.</span><span class="n">is_FiniteField</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">coeff</span><span class="p">,</span> <span class="n">dmp_gf_sqf_list</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
 
     <span class="k">return</span> <span class="n">coeff</span><span class="p">,</span> <span class="n">dmp_rr_yun0_sqf_list</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span></div>
 </pre></div>

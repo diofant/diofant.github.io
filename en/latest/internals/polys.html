@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Internals of the Polynomial Manipulation Module &mdash; Diofant 0.10.1.dev279+ge50bdf4 documentation</title>
+  <title>Internals of the Polynomial Manipulation Module &mdash; Diofant 0.10.1.dev299+g5e6a61e documentation</title>
   
 
   
@@ -940,45 +940,6 @@ the given percentage of elements will be non-zero.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="diofant.polys.densearith.dmp_pdiv">
-<code class="descclassname">diofant.polys.densearith.</code><code class="descname">dmp_pdiv</code><span class="sig-paren">(</span><em>f</em>, <em>g</em>, <em>u</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/densearith.html#dmp_pdiv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densearith.dmp_pdiv" title="Permalink to this definition">¶</a></dt>
-<dd><p>Polynomial pseudo-division in <code class="docutils literal notranslate"><span class="pre">K[X]</span></code>.</p>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s2">&quot;x y&quot;</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="o">.</span><span class="n">dmp_pdiv</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>
-<span class="go">(2*x + 2*y - 2, -4*y + 4)</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.polys.densearith.dmp_pexquo">
-<code class="descclassname">diofant.polys.densearith.</code><code class="descname">dmp_pexquo</code><span class="sig-paren">(</span><em>f</em>, <em>g</em>, <em>u</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/densearith.html#dmp_pexquo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densearith.dmp_pexquo" title="Permalink to this definition">¶</a></dt>
-<dd><p>Polynomial pseudo-quotient in <code class="docutils literal notranslate"><span class="pre">K[X]</span></code>.</p>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s2">&quot;x y&quot;</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">y</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">h</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">2</span>
-</pre></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="o">.</span><span class="n">dmp_pexquo</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
-<span class="go">2*x</span>
-</pre></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="o">.</span><span class="n">dmp_pexquo</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
-<span class="gt">Traceback (most recent call last):</span>
-<span class="c">...</span>
-<span class="gr">ExactQuotientFailed</span>: <span class="n">[[2], [2]] does not divide [[1], [1, 0], []]</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
 <dt id="diofant.polys.densearith.dmp_pow">
 <code class="descclassname">diofant.polys.densearith.</code><code class="descname">dmp_pow</code><span class="sig-paren">(</span><em>f</em>, <em>n</em>, <em>u</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/densearith.html#dmp_pow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densearith.dmp_pow" title="Permalink to this definition">¶</a></dt>
 <dd><p>Raise <code class="docutils literal notranslate"><span class="pre">f</span></code> to the <code class="docutils literal notranslate"><span class="pre">n</span></code>-th power in <code class="docutils literal notranslate"><span class="pre">K[X]</span></code>.</p>
@@ -988,43 +949,6 @@ the given percentage of elements will be non-zero.</p>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="o">.</span><span class="n">dmp_pow</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 <span class="go">x**3*y**3 + 3*x**2*y**2 + 3*x*y + 1</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.polys.densearith.dmp_pquo">
-<code class="descclassname">diofant.polys.densearith.</code><code class="descname">dmp_pquo</code><span class="sig-paren">(</span><em>f</em>, <em>g</em>, <em>u</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/densearith.html#dmp_pquo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densearith.dmp_pquo" title="Permalink to this definition">¶</a></dt>
-<dd><p>Polynomial exact pseudo-quotient in <code class="docutils literal notranslate"><span class="pre">K[X]</span></code>.</p>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s2">&quot;x y&quot;</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">y</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">h</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">2</span>
-</pre></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="o">.</span><span class="n">dmp_pquo</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
-<span class="go">2*x</span>
-</pre></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="o">.</span><span class="n">dmp_pquo</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
-<span class="go">2*x + 2*y - 2</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.polys.densearith.dmp_prem">
-<code class="descclassname">diofant.polys.densearith.</code><code class="descname">dmp_prem</code><span class="sig-paren">(</span><em>f</em>, <em>g</em>, <em>u</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/densearith.html#dmp_prem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densearith.dmp_prem" title="Permalink to this definition">¶</a></dt>
-<dd><p>Polynomial pseudo-remainder in <code class="docutils literal notranslate"><span class="pre">K[X]</span></code>.</p>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s2">&quot;x y&quot;</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="o">.</span><span class="n">dmp_prem</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>
-<span class="go">-4*y + 4</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1895,6 +1819,29 @@ associated Sturm sequence (see e.g. <a class="reference internal" href="../sourc
 <dt id="diofant.polys.sqfreetools.dmp_gf_sqf_list">
 <code class="descclassname">diofant.polys.sqfreetools.</code><code class="descname">dmp_gf_sqf_list</code><span class="sig-paren">(</span><em>f</em>, <em>u</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/sqfreetools.html#dmp_gf_sqf_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.sqfreetools.dmp_gf_sqf_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute square-free decomposition of <code class="docutils literal notranslate"><span class="pre">f</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(p)[X]</span></code>.</p>
+<p>Returns the leading coefficient of <code class="docutils literal notranslate"><span class="pre">f</span></code> and a square-free decomposition
+<code class="docutils literal notranslate"><span class="pre">f_1**e_1</span> <span class="pre">f_2**e_2</span> <span class="pre">...</span> <span class="pre">f_k**e_k</span></code> such that all <code class="docutils literal notranslate"><span class="pre">f_i</span></code> are monic
+polynomials and <code class="docutils literal notranslate"><span class="pre">(f_i,</span> <span class="pre">f_j)</span></code> for <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">!=</span> <span class="pre">j</span></code> are co-prime.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">FF</span><span class="p">(</span><span class="mi">11</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">11</span> <span class="o">+</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>Note that:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span>
+<span class="go">0 mod 11</span>
+</pre></div>
+</div>
+<p>This phenomenon doesn’t happen in characteristic zero. However we can
+still compute square-free decomposition of <code class="docutils literal notranslate"><span class="pre">f</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="o">.</span><span class="n">dmp_sqf_list</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="go">(1 mod 11, [(x + 1 mod 11, 11)])</span>
+</pre></div>
+</div>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><a class="reference internal" href="../sources.html#geddes1992algorithms" id="id7">[GCL92]</a></li>
+</ul>
 </dd></dl>
 
 <dl class="function">
@@ -1903,7 +1850,7 @@ associated Sturm sequence (see e.g. <a class="reference internal" href="../sourc
 <dd><p>Compute square-free decomposition of <code class="docutils literal notranslate"><span class="pre">f</span></code> in zero-characteristic ring <code class="docutils literal notranslate"><span class="pre">K</span></code>.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><a class="reference internal" href="../sources.html#leem2013factor" id="id7">[Lee13]</a>, page 8</li>
+<li><a class="reference internal" href="../sources.html#leem2013factor" id="id8">[Lee13]</a>, page 8</li>
 </ul>
 </dd></dl>
 
@@ -2174,7 +2121,7 @@ results returns the final answers.</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><a class="reference internal" href="../sources.html#nivenzuckerman" id="id8">[NZ91]</a></li>
+<li><a class="reference internal" href="../sources.html#nivenzuckerman" id="id9">[NZ91]</a></li>
 </ul>
 </dd></dl>
 
@@ -2199,9 +2146,9 @@ large <code class="docutils literal notranslate"><span class="pre">deg(f)</span>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><a class="reference internal" href="../sources.html#kaltofen1998subquadratic" id="id9">[KS98]</a></li>
-<li><a class="reference internal" href="../sources.html#shoup1995factor" id="id10">[Sho95]</a></li>
-<li><a class="reference internal" href="../sources.html#gathen1992frobenious" id="id11">[vzGS92]</a></li>
+<li><a class="reference internal" href="../sources.html#kaltofen1998subquadratic" id="id10">[KS98]</a></li>
+<li><a class="reference internal" href="../sources.html#shoup1995factor" id="id11">[Sho95]</a></li>
+<li><a class="reference internal" href="../sources.html#gathen1992frobenious" id="id12">[vzGS92]</a></li>
 </ul>
 </dd></dl>
 
@@ -2226,8 +2173,8 @@ is an argument to the equal degree factorization routine.</p>
 procedure (EDF) with each of the factors.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><a class="reference internal" href="../sources.html#gathen1999modern" id="id12">[vzGG99]</a></li>
-<li><a class="reference internal" href="../sources.html#geddes1992algorithms" id="id13">[GCL92]</a></li>
+<li><a class="reference internal" href="../sources.html#gathen1999modern" id="id13">[vzGG99]</a></li>
+<li><a class="reference internal" href="../sources.html#geddes1992algorithms" id="id14">[GCL92]</a></li>
 </ul>
 </dd></dl>
 
@@ -2258,8 +2205,8 @@ finite field with <code class="docutils literal notranslate"><span class="pre">p
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><a class="reference internal" href="../sources.html#monagan1993inplace" id="id14">[Mon93]</a></li>
-<li><a class="reference internal" href="../sources.html#gathen1999modern" id="id15">[vzGG99]</a></li>
+<li><a class="reference internal" href="../sources.html#monagan1993inplace" id="id15">[Mon93]</a></li>
+<li><a class="reference internal" href="../sources.html#gathen1999modern" id="id16">[vzGG99]</a></li>
 </ul>
 </dd></dl>
 
@@ -2280,8 +2227,8 @@ large <code class="docutils literal notranslate"><span class="pre">deg(f)</span>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><a class="reference internal" href="../sources.html#shoup1991ffactor" id="id16">[Sho91]</a></li>
-<li><a class="reference internal" href="../sources.html#gathen1992frobenious" id="id17">[vzGS92]</a></li>
+<li><a class="reference internal" href="../sources.html#shoup1991ffactor" id="id17">[Sho91]</a></li>
+<li><a class="reference internal" href="../sources.html#gathen1992frobenious" id="id18">[vzGS92]</a></li>
 </ul>
 </dd></dl>
 
@@ -2300,8 +2247,8 @@ EDF procedure gives complete factorization over Galois fields.</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><a class="reference internal" href="../sources.html#gathen1999modern" id="id18">[vzGG99]</a></li>
-<li><a class="reference internal" href="../sources.html#geddes1992algorithms" id="id19">[GCL92]</a></li>
+<li><a class="reference internal" href="../sources.html#gathen1999modern" id="id19">[vzGG99]</a></li>
+<li><a class="reference internal" href="../sources.html#geddes1992algorithms" id="id20">[GCL92]</a></li>
 </ul>
 </dd></dl>
 
@@ -2334,20 +2281,16 @@ EDF procedure gives complete factorization over Galois fields.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="diofant.polys.galoistools.gf_factor">
-<code class="descclassname">diofant.polys.galoistools.</code><code class="descname">gf_factor</code><span class="sig-paren">(</span><em>f</em>, <em>p</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/galoistools.html#gf_factor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_factor" title="Permalink to this definition">¶</a></dt>
-<dd><p>Factor (non square-free) polynomials in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code>.</p>
-<p>Given a possibly non square-free polynomial <code class="docutils literal notranslate"><span class="pre">f</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code>,
-returns its complete factorization into irreducibles:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f_1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="n">e_1</span> <span class="n">f_2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="n">e_2</span> <span class="o">...</span> <span class="n">f_d</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="n">e_d</span>
+<dt id="diofant.polys.galoistools.gf_factor_sqf">
+<code class="descclassname">diofant.polys.galoistools.</code><code class="descname">gf_factor_sqf</code><span class="sig-paren">(</span><em>f</em>, <em>p</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/galoistools.html#gf_factor_sqf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_factor_sqf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Factor a square-free polynomial <code class="docutils literal notranslate"><span class="pre">f</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code>.</p>
+<p>Returns its complete factorization into irreducibles:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f_1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">f_2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">...</span> <span class="n">f_d</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>where each <code class="docutils literal notranslate"><span class="pre">f_i</span></code> is a monic polynomial and <code class="docutils literal notranslate"><span class="pre">gcd(f_i,</span> <span class="pre">f_j)</span> <span class="pre">==</span> <span class="pre">1</span></code>,
 for <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">!=</span> <span class="pre">j</span></code>.  The result is given as a tuple consisting of the
-leading coefficient of <code class="docutils literal notranslate"><span class="pre">f</span></code> and a list of factors of <code class="docutils literal notranslate"><span class="pre">f</span></code> with
-their multiplicities.</p>
-<p>The algorithm proceeds by first computing square-free decomposition
-of <code class="docutils literal notranslate"><span class="pre">f</span></code> and then iteratively factoring each of square-free factors.</p>
+leading coefficient of <code class="docutils literal notranslate"><span class="pre">f</span></code> and a list of factors of <code class="docutils literal notranslate"><span class="pre">f</span></code>.</p>
 <p>Square-free factors of <code class="docutils literal notranslate"><span class="pre">f</span></code> can be factored into irreducibles over
 <code class="docutils literal notranslate"><span class="pre">GF(p)</span></code> using three very different methods:</p>
 <dl class="docutils">
@@ -2362,28 +2305,14 @@ of <code class="docutils literal notranslate"><span class="pre">f</span></code> 
 one, set <code class="docutils literal notranslate"><span class="pre">GF_FACTOR_METHOD</span></code> with one of <code class="docutils literal notranslate"><span class="pre">berlekamp</span></code>, <code class="docutils literal notranslate"><span class="pre">zassenhaus</span></code> or
 <code class="docutils literal notranslate"><span class="pre">shoup</span></code> values.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_factor</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="mi">11</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">(5, [([1, 2], 1), ([1, 8], 2)])</span>
-</pre></div>
-</div>
-<p>We arrived with factorization <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">=</span> <span class="pre">5</span> <span class="pre">(x</span> <span class="pre">+</span> <span class="pre">2)</span> <span class="pre">(x</span> <span class="pre">+</span> <span class="pre">8)**2</span></code>. We didn’t
-recover the exact form of the input polynomial because we requested to
-get monic factors of <code class="docutils literal notranslate"><span class="pre">f</span></code> and its leading coefficient separately.</p>
-<p class="rubric">References</p>
-<ul class="simple">
-<li><a class="reference internal" href="../sources.html#gathen1999modern" id="id20">[vzGG99]</a></li>
-</ul>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.polys.galoistools.gf_factor_sqf">
-<code class="descclassname">diofant.polys.galoistools.</code><code class="descname">gf_factor_sqf</code><span class="sig-paren">(</span><em>f</em>, <em>p</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/galoistools.html#gf_factor_sqf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_factor_sqf" title="Permalink to this definition">¶</a></dt>
-<dd><p>Factor a square-free polynomial <code class="docutils literal notranslate"><span class="pre">f</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code>.</p>
-<p class="rubric">Examples</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_factor_sqf</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
 <span class="go">(3, [[1, 1], [1, 3]])</span>
 </pre></div>
 </div>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><a class="reference internal" href="../sources.html#gathen1999modern" id="id21">[vzGG99]</a></li>
+</ul>
 </dd></dl>
 
 <dl class="function">
@@ -2482,7 +2411,7 @@ The typical application of EEA is solving polynomial diophantine equations.</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><a class="reference internal" href="../sources.html#gathen1999modern" id="id21">[vzGG99]</a></li>
+<li><a class="reference internal" href="../sources.html#gathen1999modern" id="id22">[vzGG99]</a></li>
 </ul>
 </dd></dl>
 
@@ -2499,7 +2428,7 @@ The typical application of EEA is solving polynomial diophantine equations.</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><a class="reference internal" href="../sources.html#ben-or1981ff" id="id22">[BO81]</a></li>
+<li><a class="reference internal" href="../sources.html#ben-or1981ff" id="id23">[BO81]</a></li>
 </ul>
 </dd></dl>
 
@@ -2620,7 +2549,7 @@ of <code class="docutils literal notranslate"><span class="pre">f**n</span></cod
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><a class="reference internal" href="../sources.html#gathen1999modern" id="id23">[vzGG99]</a></li>
+<li><a class="reference internal" href="../sources.html#gathen1999modern" id="id24">[vzGG99]</a></li>
 </ul>
 </dd></dl>
 
@@ -2679,38 +2608,6 @@ of <code class="docutils literal notranslate"><span class="pre">f**n</span></cod
 <span class="go">[[1, 1], [1, 3]]</span>
 </pre></div>
 </div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.polys.galoistools.gf_sqf_list">
-<code class="descclassname">diofant.polys.galoistools.</code><code class="descname">gf_sqf_list</code><span class="sig-paren">(</span><em>f</em>, <em>p</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/galoistools.html#gf_sqf_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_sqf_list" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the square-free decomposition of a <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code> polynomial.</p>
-<p>Given a polynomial <code class="docutils literal notranslate"><span class="pre">f</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code>, returns the leading coefficient
-of <code class="docutils literal notranslate"><span class="pre">f</span></code> and a square-free decomposition <code class="docutils literal notranslate"><span class="pre">f_1**e_1</span> <span class="pre">f_2**e_2</span> <span class="pre">...</span> <span class="pre">f_k**e_k</span></code>
-such that all <code class="docutils literal notranslate"><span class="pre">f_i</span></code> are monic polynomials and <code class="docutils literal notranslate"><span class="pre">(f_i,</span> <span class="pre">f_j)</span></code> for <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">!=</span> <span class="pre">j</span></code>
-are co-prime and <code class="docutils literal notranslate"><span class="pre">e_1</span> <span class="pre">...</span> <span class="pre">e_k</span></code> are given in increasing order. All trivial
-terms (i.e. <code class="docutils literal notranslate"><span class="pre">f_i</span> <span class="pre">=</span> <span class="pre">1</span></code>) aren’t included in the output.</p>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">gf_from_dict</span><span class="p">({</span><span class="mi">11</span><span class="p">:</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="mi">0</span><span class="p">:</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">1</span><span class="p">)},</span> <span class="mi">11</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Note that:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_diff</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">[]</span>
-</pre></div>
-</div>
-<p>This phenomenon doesn’t happen in characteristic zero. However we can
-still compute square-free decomposition of <code class="docutils literal notranslate"><span class="pre">f</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_sqf_list</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">(1, [([1, 1], 11)])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">gf_pow</span><span class="p">(</span><span class="o">*</span><span class="n">_</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="mi">11</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span> <span class="o">==</span> <span class="n">f</span>
-<span class="go">True</span>
-</pre></div>
-</div>
-<p class="rubric">References</p>
-<ul class="simple">
-<li><a class="reference internal" href="../sources.html#geddes1992algorithms" id="id24">[GCL92]</a></li>
-</ul>
 </dd></dl>
 
 <dl class="function">
@@ -3253,7 +3150,7 @@ in the case of integers.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="mi">4</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="o">.</span><span class="n">dup_half_gcdex</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">half_gcdex</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 <span class="go">(-1/5*x + 3/5, x + 1)</span>
 </pre></div>
 </div>
@@ -3272,7 +3169,7 @@ in the case of integers.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="mi">4</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="o">.</span><span class="n">dup_gcdex</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">gcdex</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 <span class="go">(-1/5*x + 3/5, 1/5*x**2 - 6/5*x + 2, x + 1)</span>
 </pre></div>
 </div>
@@ -3729,24 +3626,6 @@ and <code class="docutils literal notranslate"><span class="pre">cfg</span> <spa
 </dd></dl>
 
 <dl class="function">
-<dt id="diofant.polys.euclidtools.dmp_lcm">
-<code class="descclassname">diofant.polys.euclidtools.</code><code class="descname">dmp_lcm</code><span class="sig-paren">(</span><em>f</em>, <em>g</em>, <em>u</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/euclidtools.html#dmp_lcm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.euclidtools.dmp_lcm" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes polynomial LCM of <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span> in <span class="math notranslate nohighlight">\(K[X]\)</span>.</p>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s2">&quot;x y&quot;</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span>
-</pre></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="o">.</span><span class="n">dmp_lcm</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
-<span class="go">x**3 + 2*x**2*y + x*y**2</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
 <dt id="diofant.polys.euclidtools.dmp_content">
 <code class="descclassname">diofant.polys.euclidtools.</code><code class="descname">dmp_content</code><span class="sig-paren">(</span><em>f</em>, <em>u</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/euclidtools.html#dmp_content"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.euclidtools.dmp_content" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns GCD of multivariate coefficients.</p>
@@ -3806,12 +3685,6 @@ and <code class="docutils literal notranslate"><span class="pre">cfg</span> <spa
 <dt id="diofant.polys.factortools.dmp_gf_factor">
 <code class="descclassname">diofant.polys.factortools.</code><code class="descname">dmp_gf_factor</code><span class="sig-paren">(</span><em>f</em>, <em>u</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/factortools.html#dmp_gf_factor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.factortools.dmp_gf_factor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Factor multivariate polynomials over finite fields.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.polys.factortools.dmp_irreducible_p">
-<code class="descclassname">diofant.polys.factortools.</code><code class="descname">dmp_irreducible_p</code><span class="sig-paren">(</span><em>f</em>, <em>u</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/factortools.html#dmp_irreducible_p"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.factortools.dmp_irreducible_p" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if <code class="docutils literal notranslate"><span class="pre">f</span></code> has no factors over its domain.</p>
 </dd></dl>
 
 <dl class="function">
