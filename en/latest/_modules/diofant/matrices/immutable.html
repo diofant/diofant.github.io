@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.matrices.immutable &mdash; Diofant 0.10.1.dev299+g5e6a61e documentation</title>
+  <title>diofant.matrices.immutable &mdash; Diofant 0.10.1.dev310+g172db0a documentation</title>
   
 
   
@@ -150,8 +150,9 @@
            <div itemprop="articleBody">
             
   <h1>Source code for diofant.matrices.immutable</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">Basic</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Expr</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">sympify</span>
+<span></span><span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">Basic</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Expr</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">sympify</span>
 <span class="kn">from</span> <span class="nn">..core.sympify</span> <span class="k">import</span> <span class="n">converter</span> <span class="k">as</span> <span class="n">sympify_converter</span>
+<span class="kn">from</span> <span class="nn">..logic</span> <span class="k">import</span> <span class="n">false</span>
 <span class="kn">from</span> <span class="nn">.dense</span> <span class="k">import</span> <span class="n">DenseMatrix</span>
 <span class="kn">from</span> <span class="nn">.expressions</span> <span class="k">import</span> <span class="n">MatrixExpr</span>
 <span class="kn">from</span> <span class="nn">.matrices</span> <span class="k">import</span> <span class="n">MatrixBase</span>
@@ -225,7 +226,7 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="s1">&#39;shape&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">false</span>
+            <span class="k">return</span> <span class="n">false</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">MatrixExpr</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span>
                 <span class="n">other</span><span class="p">,</span> <span class="n">ImmutableMatrix</span><span class="p">):</span>
             <span class="k">return</span>

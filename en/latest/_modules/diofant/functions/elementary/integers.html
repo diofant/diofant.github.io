@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.functions.elementary.integers &mdash; Diofant 0.10.1.dev299+g5e6a61e documentation</title>
+  <title>diofant.functions.elementary.integers &mdash; Diofant 0.10.1.dev310+g172db0a documentation</title>
   
 
   
@@ -151,7 +151,8 @@
             
   <h1>Source code for diofant.functions.elementary.integers</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">...core</span> <span class="k">import</span> <span class="p">(</span><span class="n">Add</span><span class="p">,</span> <span class="n">Dummy</span><span class="p">,</span> <span class="n">Function</span><span class="p">,</span> <span class="n">Ge</span><span class="p">,</span> <span class="n">Gt</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">Le</span><span class="p">,</span> <span class="n">Lt</span><span class="p">,</span>
-                     <span class="n">PrecisionExhausted</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">Symbol</span><span class="p">)</span>
+                     <span class="n">PrecisionExhausted</span><span class="p">,</span> <span class="n">Symbol</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">...logic</span> <span class="k">import</span> <span class="n">false</span><span class="p">,</span> <span class="n">true</span>
 
 
 <span class="c1">###############################################################################</span>
@@ -180,7 +181,7 @@
             <span class="k">return</span> <span class="n">v</span>
 
         <span class="c1"># Integral, numerical, symbolic part</span>
-        <span class="n">ipart</span> <span class="o">=</span> <span class="n">npart</span> <span class="o">=</span> <span class="n">spart</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+        <span class="n">ipart</span> <span class="o">=</span> <span class="n">npart</span> <span class="o">=</span> <span class="n">spart</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
         <span class="c1"># Extract integral (or complex integral) terms</span>
         <span class="n">terms</span> <span class="o">=</span> <span class="n">Add</span><span class="o">.</span><span class="n">make_args</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
@@ -213,7 +214,7 @@
                             <span class="k">raise</span> <span class="n">PrecisionExhausted</span>
                         <span class="n">prec</span> <span class="o">+=</span> <span class="mi">10</span>
                 <span class="n">ipart</span> <span class="o">+=</span> <span class="n">Integer</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="o">+</span> <span class="n">Integer</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">*</span><span class="n">I</span>
-                <span class="n">npart</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+                <span class="n">npart</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
             <span class="k">except</span> <span class="p">(</span><span class="n">PrecisionExhausted</span><span class="p">,</span> <span class="ne">NotImplementedError</span><span class="p">):</span>
                 <span class="k">pass</span>
 
@@ -301,12 +302,12 @@
 
     <span class="k">def</span> <span class="nf">__le__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">other</span> <span class="ow">and</span> <span class="n">other</span><span class="o">.</span><span class="n">is_extended_real</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">true</span>
+            <span class="k">return</span> <span class="n">true</span>
         <span class="k">return</span> <span class="n">Le</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__gt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">other</span> <span class="ow">and</span> <span class="n">other</span><span class="o">.</span><span class="n">is_extended_real</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">false</span>
+            <span class="k">return</span> <span class="n">false</span>
         <span class="k">return</span> <span class="n">Gt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_eval_as_leading_term</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
@@ -377,12 +378,12 @@
 
     <span class="k">def</span> <span class="nf">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">other</span> <span class="ow">and</span> <span class="n">other</span><span class="o">.</span><span class="n">is_extended_real</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">false</span>
+            <span class="k">return</span> <span class="n">false</span>
         <span class="k">return</span> <span class="n">Lt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__ge__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">other</span> <span class="ow">and</span> <span class="n">other</span><span class="o">.</span><span class="n">is_extended_real</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">true</span>
+            <span class="k">return</span> <span class="n">true</span>
         <span class="k">return</span> <span class="n">Ge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
 </pre></div>
 

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.tensor.array.sparse_ndim_array &mdash; Diofant 0.10.1.dev299+g5e6a61e documentation</title>
+  <title>diofant.tensor.array.sparse_ndim_array &mdash; Diofant 0.10.1.dev310+g172db0a documentation</title>
   
 
   
@@ -153,7 +153,7 @@
 <span></span><span class="kn">import</span> <span class="nn">functools</span>
 <span class="kn">import</span> <span class="nn">itertools</span>
 
-<span class="kn">from</span> <span class="nn">...core</span> <span class="k">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Expr</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="kn">from</span> <span class="nn">...core</span> <span class="k">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Expr</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">Tuple</span>
 <span class="kn">from</span> <span class="nn">...core.sympify</span> <span class="k">import</span> <span class="n">sympify</span>
 <span class="kn">from</span> <span class="nn">...matrices</span> <span class="k">import</span> <span class="n">SparseMatrix</span>
 <span class="kn">from</span> <span class="nn">...utilities</span> <span class="k">import</span> <span class="n">flatten</span>
@@ -206,19 +206,19 @@
 
             <span class="n">sl_factors</span> <span class="o">=</span> <span class="p">[</span><span class="n">slice_expand</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">dim</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">dim</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">)]</span>
             <span class="n">eindices</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="o">*</span><span class="n">sl_factors</span><span class="p">)</span>
-            <span class="n">array</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_sparse_array</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_parse_index</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">eindices</span><span class="p">]</span>
+            <span class="n">array</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_sparse_array</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_parse_index</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">eindices</span><span class="p">]</span>
             <span class="n">nshape</span> <span class="o">=</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">el</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">el</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sl_factors</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">index</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="nb">slice</span><span class="p">)]</span>
             <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span><span class="n">array</span><span class="p">,</span> <span class="n">nshape</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># `index` is a single slice:</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="nb">slice</span><span class="p">):</span>
                 <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">indices</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_loop_size</span><span class="p">)</span>
-                <span class="n">retvec</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_sparse_array</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ind</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="p">)</span> <span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">)]</span>
+                <span class="n">retvec</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_sparse_array</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ind</span><span class="p">,</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span> <span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">)]</span>
                 <span class="k">return</span> <span class="n">retvec</span>
             <span class="c1"># `index` is a number or a tuple without any slice:</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_index</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
-                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sparse_array</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="p">)</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sparse_array</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">zeros</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">shape</span><span class="p">):</span>

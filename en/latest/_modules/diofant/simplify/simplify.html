@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.simplify.simplify &mdash; Diofant 0.10.1.dev299+g5e6a61e documentation</title>
+  <title>diofant.simplify.simplify &mdash; Diofant 0.10.1.dev310+g172db0a documentation</title>
   
 
   
@@ -155,7 +155,7 @@
 <span class="kn">import</span> <span class="nn">mpmath</span>
 
 <span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="p">(</span><span class="n">Add</span><span class="p">,</span> <span class="n">Basic</span><span class="p">,</span> <span class="n">Dummy</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">Expr</span><span class="p">,</span> <span class="n">Float</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">Mul</span><span class="p">,</span> <span class="n">Pow</span><span class="p">,</span>
-                    <span class="n">Rational</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">Symbol</span><span class="p">,</span> <span class="n">count_ops</span><span class="p">,</span> <span class="n">expand_func</span><span class="p">,</span> <span class="n">expand_log</span><span class="p">,</span>
+                    <span class="n">Rational</span><span class="p">,</span> <span class="n">Symbol</span><span class="p">,</span> <span class="n">count_ops</span><span class="p">,</span> <span class="n">expand_func</span><span class="p">,</span> <span class="n">expand_log</span><span class="p">,</span>
                     <span class="n">expand_mul</span><span class="p">,</span> <span class="n">expand_power_exp</span><span class="p">,</span> <span class="n">factor_terms</span><span class="p">,</span> <span class="n">oo</span><span class="p">,</span> <span class="n">pi</span><span class="p">,</span>
                     <span class="n">sympify</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">..core.compatibility</span> <span class="k">import</span> <span class="n">as_int</span><span class="p">,</span> <span class="n">iterable</span><span class="p">,</span> <span class="n">ordered</span>
@@ -405,9 +405,9 @@
     <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">coeff_muls</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">x</span><span class="o">.</span><span class="n">is_rational</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">p</span>
-        <span class="k">if</span> <span class="n">y</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">continue</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">is_Pow</span> <span class="ow">and</span> <span class="n">y</span><span class="o">.</span><span class="n">exp</span> <span class="o">==</span> <span class="n">S</span><span class="o">.</span><span class="n">Half</span> <span class="ow">and</span> <span class="n">y</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">is_integer</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">is_Pow</span> <span class="ow">and</span> <span class="n">y</span><span class="o">.</span><span class="n">exp</span> <span class="o">==</span> <span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="ow">and</span> <span class="n">y</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">is_integer</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">p</span>
         <span class="n">surds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
     <span class="n">surds</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
@@ -714,7 +714,7 @@
 <span class="sd">    ...     # Discourage powers by giving POW a weight of 10</span>
 <span class="sd">    ...     count = count_ops(expr, visual=True).subs({POW: 10})</span>
 <span class="sd">    ...     # Every other operation gets a weight of 1 (the default)</span>
-<span class="sd">    ...     count = count.replace(Symbol, type(S.One))</span>
+<span class="sd">    ...     count = count.replace(Symbol, type(Integer(1)))</span>
 <span class="sd">    ...     return count</span>
 <span class="sd">    &gt;&gt;&gt; my_measure(g)</span>
 <span class="sd">    8</span>
@@ -823,7 +823,7 @@
     <span class="n">numer</span><span class="p">,</span> <span class="n">denom</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">as_numer_denom</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">denom</span><span class="o">.</span><span class="n">is_Add</span><span class="p">:</span>
         <span class="n">n</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">fraction</span><span class="p">(</span><span class="n">radsimp</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">denom</span><span class="p">,</span> <span class="n">symbolic</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">max_terms</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
-        <span class="k">if</span> <span class="n">n</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">expr</span> <span class="o">=</span> <span class="p">(</span><span class="n">numer</span><span class="o">*</span><span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">()</span><span class="o">/</span><span class="n">d</span>
 
     <span class="k">if</span> <span class="n">expr</span><span class="o">.</span><span class="n">could_extract_minus_sign</span><span class="p">():</span>
@@ -1047,7 +1047,7 @@
         <span class="k">def</span> <span class="nf">gooda</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
             <span class="c1"># bool to tell whether the leading ``a`` in ``a*log(x)``</span>
             <span class="c1"># could appear as log(x**a)</span>
-            <span class="k">return</span> <span class="p">(</span><span class="n">a</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">S</span><span class="o">.</span><span class="n">NegativeOne</span> <span class="ow">and</span>  <span class="c1"># -1 *could* go, but we disallow</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">a</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">and</span>  <span class="c1"># -1 *could* go, but we disallow</span>
                     <span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">is_extended_real</span> <span class="ow">or</span> <span class="n">force</span> <span class="ow">and</span> <span class="n">a</span><span class="o">.</span><span class="n">is_extended_real</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">False</span><span class="p">))</span>
 
         <span class="k">def</span> <span class="nf">goodlog</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
@@ -1069,7 +1069,7 @@
                 <span class="n">lo</span> <span class="o">=</span> <span class="p">[]</span>
                 <span class="k">for</span> <span class="n">ai</span> <span class="ow">in</span> <span class="n">a</span><span class="o">.</span><span class="n">args</span><span class="p">:</span>
                     <span class="k">if</span> <span class="n">ai</span><span class="o">.</span><span class="n">is_Rational</span> <span class="ow">and</span> <span class="n">ai</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-                        <span class="n">ot</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">NegativeOne</span><span class="p">)</span>
+                        <span class="n">ot</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Integer</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
                         <span class="n">co</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="o">-</span><span class="n">ai</span><span class="p">)</span>
                     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ai</span><span class="p">,</span> <span class="n">log</span><span class="p">)</span> <span class="ow">and</span> <span class="n">goodlog</span><span class="p">(</span><span class="n">ai</span><span class="p">):</span>
                         <span class="n">lo</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ai</span><span class="p">)</span>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.euclidtools &mdash; Diofant 0.10.1.dev299+g5e6a61e documentation</title>
+  <title>diofant.polys.euclidtools &mdash; Diofant 0.10.1.dev310+g172db0a documentation</title>
   
 
   
@@ -163,9 +163,8 @@
                          <span class="n">dmp_ground</span><span class="p">,</span> <span class="n">dmp_ground_LC</span><span class="p">,</span> <span class="n">dmp_inflate</span><span class="p">,</span> <span class="n">dmp_LC</span><span class="p">,</span>
                          <span class="n">dmp_multi_deflate</span><span class="p">,</span> <span class="n">dmp_one</span><span class="p">,</span> <span class="n">dmp_one_p</span><span class="p">,</span> <span class="n">dmp_raise</span><span class="p">,</span>
                          <span class="n">dmp_strip</span><span class="p">,</span> <span class="n">dmp_zero</span><span class="p">,</span> <span class="n">dmp_zero_p</span><span class="p">,</span> <span class="n">dmp_zeros</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">.densetools</span> <span class="k">import</span> <span class="p">(</span><span class="n">dmp_clear_denoms</span><span class="p">,</span> <span class="n">dmp_diff_in</span><span class="p">,</span> <span class="n">dmp_eval_in</span><span class="p">,</span>
-                         <span class="n">dmp_ground_monic</span><span class="p">,</span> <span class="n">dmp_ground_primitive</span><span class="p">,</span>
-                         <span class="n">dmp_ground_trunc</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">.densetools</span> <span class="k">import</span> <span class="p">(</span><span class="n">dmp_clear_denoms</span><span class="p">,</span> <span class="n">dmp_eval_in</span><span class="p">,</span> <span class="n">dmp_ground_monic</span><span class="p">,</span>
+                         <span class="n">dmp_ground_primitive</span><span class="p">,</span> <span class="n">dmp_ground_trunc</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">.galoistools</span> <span class="k">import</span> <span class="n">gf_crt</span>
 <span class="kn">from</span> <span class="nn">.heuristicgcd</span> <span class="k">import</span> <span class="n">heugcd</span>
 <span class="kn">from</span> <span class="nn">.polyconfig</span> <span class="k">import</span> <span class="n">query</span>
@@ -482,7 +481,7 @@
 
 <span class="sd">    &gt;&gt;&gt; R, x = ring(&quot;x&quot;, ZZ)</span>
 
-<span class="sd">    &gt;&gt;&gt; R.dmp_resultant(x**2 + 1, x**2 - 1, includePRS=True)</span>
+<span class="sd">    &gt;&gt;&gt; (x**2 + 1).resultant(x**2 - 1, includePRS=True)</span>
 <span class="sd">    (4, [x**2 + 1, x**2 - 1, -2])</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -823,7 +822,7 @@
 <span class="sd">    &gt;&gt;&gt; f = 3*x**2*y - y**3 - 4</span>
 <span class="sd">    &gt;&gt;&gt; g = x**2 + x*y**3 - 9</span>
 
-<span class="sd">    &gt;&gt;&gt; R.dmp_resultant(f, g)</span>
+<span class="sd">    &gt;&gt;&gt; f.resultant(g)</span>
 <span class="sd">    -3*y**10 - 12*y**7 + y**6 - 54*y**4 + 8*y**3 + 729*y**2 - 216*y + 16</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -838,36 +837,6 @@
             <span class="k">return</span> <span class="n">dmp_zz_collins_resultant</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">dmp_prs_resultant</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
-
-
-<div class="viewcode-block" id="dmp_discriminant"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.euclidtools.dmp_discriminant">[docs]</a><span class="k">def</span> <span class="nf">dmp_discriminant</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Computes discriminant of a polynomial in `K[X]`.</span>
-
-<span class="sd">    Examples</span>
-<span class="sd">    ========</span>
-
-<span class="sd">    &gt;&gt;&gt; R, x, y, z, t = ring(&quot;x y z t&quot;, ZZ)</span>
-
-<span class="sd">    &gt;&gt;&gt; R.dmp_discriminant(x**2*y + x*z + t)</span>
-<span class="sd">    -4*y*t + z**2</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">d</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">dmp_degree_in</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">u</span><span class="p">),</span> <span class="n">u</span> <span class="o">-</span> <span class="mi">1</span>
-
-    <span class="k">if</span> <span class="n">d</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">dmp_zero</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">if</span> <span class="n">u</span> <span class="k">else</span> <span class="n">K</span><span class="o">.</span><span class="n">zero</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">s</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="p">((</span><span class="n">d</span><span class="o">*</span><span class="p">(</span><span class="n">d</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>
-        <span class="n">c</span> <span class="o">=</span> <span class="n">dmp_LC</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-
-        <span class="n">r</span> <span class="o">=</span> <span class="n">dmp_resultant</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">dmp_diff_in</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">),</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">u</span><span class="p">:</span>
-            <span class="n">c</span> <span class="o">=</span> <span class="n">dmp_mul_ground</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">K</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">v</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">dmp_quo</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">K</span><span class="o">.</span><span class="n">quo</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="o">*</span><span class="n">K</span><span class="p">(</span><span class="n">s</span><span class="p">))</span></div>
 
 
 <span class="k">def</span> <span class="nf">_dmp_rr_trivial_gcd</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
@@ -1343,58 +1312,6 @@
         <span class="k">return</span> <span class="n">cont</span><span class="p">,</span> <span class="n">f</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">cont</span><span class="p">,</span> <span class="p">[</span><span class="n">dmp_quo</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">cont</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">f</span><span class="p">]</span></div>
-
-
-<div class="viewcode-block" id="dmp_cancel"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.euclidtools.dmp_cancel">[docs]</a><span class="k">def</span> <span class="nf">dmp_cancel</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Cancel common factors in a rational function `f/g`.</span>
-
-<span class="sd">    Examples</span>
-<span class="sd">    ========</span>
-
-<span class="sd">    &gt;&gt;&gt; R, x, y = ring(&quot;x y&quot;, ZZ)</span>
-
-<span class="sd">    &gt;&gt;&gt; R.dmp_cancel(2*x**2 - 2, x**2 - 2*x + 1)</span>
-<span class="sd">    (2*x + 2, x - 1)</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">K0</span> <span class="o">=</span> <span class="kc">None</span>
-
-    <span class="k">if</span> <span class="n">K</span><span class="o">.</span><span class="n">is_Field</span> <span class="ow">and</span> <span class="n">K</span><span class="o">.</span><span class="n">has_assoc_Ring</span><span class="p">:</span>
-        <span class="n">K0</span><span class="p">,</span> <span class="n">K</span> <span class="o">=</span> <span class="n">K</span><span class="p">,</span> <span class="n">K</span><span class="o">.</span><span class="n">ring</span>
-
-        <span class="n">cq</span><span class="p">,</span> <span class="n">f</span> <span class="o">=</span> <span class="n">dmp_clear_denoms</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K0</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">convert</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">cp</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="n">dmp_clear_denoms</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K0</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">convert</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">cp</span><span class="p">,</span> <span class="n">cq</span> <span class="o">=</span> <span class="n">K</span><span class="o">.</span><span class="n">one</span><span class="p">,</span> <span class="n">K</span><span class="o">.</span><span class="n">one</span>
-
-    <span class="n">_</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span> <span class="o">=</span> <span class="n">dmp_inner_gcd</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">K0</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">_</span><span class="p">,</span> <span class="n">cp</span><span class="p">,</span> <span class="n">cq</span> <span class="o">=</span> <span class="n">K</span><span class="o">.</span><span class="n">cofactors</span><span class="p">(</span><span class="n">cp</span><span class="p">,</span> <span class="n">cq</span><span class="p">)</span>
-
-        <span class="n">p</span> <span class="o">=</span> <span class="n">dmp_convert</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">K0</span><span class="p">)</span>
-        <span class="n">q</span> <span class="o">=</span> <span class="n">dmp_convert</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">K0</span><span class="p">)</span>
-
-        <span class="n">K</span> <span class="o">=</span> <span class="n">K0</span>
-
-    <span class="n">p_neg</span> <span class="o">=</span> <span class="n">K</span><span class="o">.</span><span class="n">is_negative</span><span class="p">(</span><span class="n">dmp_ground_LC</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">))</span>
-    <span class="n">q_neg</span> <span class="o">=</span> <span class="n">K</span><span class="o">.</span><span class="n">is_negative</span><span class="p">(</span><span class="n">dmp_ground_LC</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">))</span>
-
-    <span class="k">if</span> <span class="n">p_neg</span> <span class="ow">and</span> <span class="n">q_neg</span><span class="p">:</span>
-        <span class="n">p</span><span class="p">,</span> <span class="n">q</span> <span class="o">=</span> <span class="n">dmp_neg</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">),</span> <span class="n">dmp_neg</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">p_neg</span><span class="p">:</span>
-        <span class="n">cp</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="o">-</span><span class="n">cp</span><span class="p">,</span> <span class="n">dmp_neg</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">q_neg</span><span class="p">:</span>
-        <span class="n">cp</span><span class="p">,</span> <span class="n">q</span> <span class="o">=</span> <span class="o">-</span><span class="n">cp</span><span class="p">,</span> <span class="n">dmp_neg</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">include</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">cp</span><span class="p">,</span> <span class="n">cq</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span>
-
-    <span class="n">p</span> <span class="o">=</span> <span class="n">dmp_mul_ground</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">cp</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-    <span class="n">q</span> <span class="o">=</span> <span class="n">dmp_mul_ground</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">cq</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span></div>
 </pre></div>
 
            </div>

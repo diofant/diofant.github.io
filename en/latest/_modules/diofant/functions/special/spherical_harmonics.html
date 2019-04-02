@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.functions.special.spherical_harmonics &mdash; Diofant 0.10.1.dev299+g5e6a61e documentation</title>
+  <title>diofant.functions.special.spherical_harmonics &mdash; Diofant 0.10.1.dev310+g172db0a documentation</title>
   
 
   
@@ -150,7 +150,7 @@
            <div itemprop="articleBody">
             
   <h1>Source code for diofant.functions.special.spherical_harmonics</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">...core</span> <span class="k">import</span> <span class="n">Dummy</span><span class="p">,</span> <span class="n">Function</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">pi</span><span class="p">,</span> <span class="n">sympify</span>
+<span></span><span class="kn">from</span> <span class="nn">...core</span> <span class="k">import</span> <span class="n">Dummy</span><span class="p">,</span> <span class="n">Function</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">pi</span><span class="p">,</span> <span class="n">sympify</span>
 <span class="kn">from</span> <span class="nn">...core.function</span> <span class="k">import</span> <span class="n">ArgumentIndexError</span>
 <span class="kn">from</span> <span class="nn">..combinatorial.factorials</span> <span class="k">import</span> <span class="n">factorial</span>
 <span class="kn">from</span> <span class="nn">..elementary.complexes</span> <span class="k">import</span> <span class="n">Abs</span>
@@ -289,7 +289,7 @@
         <span class="c1"># Handle negative index m and arguments theta, phi</span>
         <span class="k">if</span> <span class="n">m</span><span class="o">.</span><span class="n">could_extract_minus_sign</span><span class="p">():</span>
             <span class="n">m</span> <span class="o">=</span> <span class="o">-</span><span class="n">m</span>
-            <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">NegativeOne</span><span class="o">**</span><span class="n">m</span> <span class="o">*</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">I</span><span class="o">*</span><span class="n">m</span><span class="o">*</span><span class="n">phi</span><span class="p">)</span> <span class="o">*</span> <span class="n">Ynm</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">phi</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="n">m</span> <span class="o">*</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">I</span><span class="o">*</span><span class="n">m</span><span class="o">*</span><span class="n">phi</span><span class="p">)</span> <span class="o">*</span> <span class="n">Ynm</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">phi</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">theta</span><span class="o">.</span><span class="n">could_extract_minus_sign</span><span class="p">():</span>
             <span class="n">theta</span> <span class="o">=</span> <span class="o">-</span><span class="n">theta</span>
             <span class="k">return</span> <span class="n">Ynm</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">phi</span><span class="p">)</span>
@@ -335,7 +335,7 @@
     <span class="k">def</span> <span class="nf">_eval_conjugate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># TODO: Make sure theta \in R and phi \in R</span>
         <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">phi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span>
-        <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">NegativeOne</span><span class="o">**</span><span class="n">m</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="o">-</span><span class="n">m</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">phi</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="n">m</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="o">-</span><span class="n">m</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">phi</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">as_real_imag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">hints</span><span class="p">):</span>
         <span class="c1"># TODO: Handle deep and hints</span>

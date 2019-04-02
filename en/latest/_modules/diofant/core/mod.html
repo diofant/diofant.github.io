@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.core.mod &mdash; Diofant 0.10.1.dev299+g5e6a61e documentation</title>
+  <title>diofant.core.mod &mdash; Diofant 0.10.1.dev310+g172db0a documentation</title>
   
 
   
@@ -176,7 +176,7 @@
     <span class="k">def</span> <span class="nf">eval</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
         <span class="kn">from</span> <span class="nn">.add</span> <span class="k">import</span> <span class="n">Add</span>
         <span class="kn">from</span> <span class="nn">.mul</span> <span class="k">import</span> <span class="n">Mul</span>
-        <span class="kn">from</span> <span class="nn">.singleton</span> <span class="k">import</span> <span class="n">S</span>
+        <span class="kn">from</span> <span class="nn">.numbers</span> <span class="k">import</span> <span class="n">Integer</span>
         <span class="kn">from</span> <span class="nn">.exprtools</span> <span class="k">import</span> <span class="n">gcd_terms</span>
         <span class="kn">from</span> <span class="nn">..polys.polytools</span> <span class="k">import</span> <span class="n">gcd</span>
 
@@ -191,16 +191,16 @@
             <span class="k">if</span> <span class="p">(</span><span class="n">p</span> <span class="o">==</span> <span class="n">q</span> <span class="ow">or</span> <span class="n">p</span> <span class="o">==</span> <span class="o">-</span><span class="n">q</span> <span class="ow">or</span>
                     <span class="n">p</span><span class="o">.</span><span class="n">is_Pow</span> <span class="ow">and</span> <span class="n">p</span><span class="o">.</span><span class="n">exp</span><span class="o">.</span><span class="n">is_Integer</span> <span class="ow">and</span> <span class="n">p</span><span class="o">.</span><span class="n">base</span> <span class="o">==</span> <span class="n">q</span> <span class="ow">or</span>
                     <span class="n">p</span><span class="o">.</span><span class="n">is_integer</span> <span class="ow">and</span> <span class="n">q</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
-                <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+                <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="n">q</span><span class="o">.</span><span class="n">is_Number</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">is_Number</span><span class="p">:</span>
                     <span class="k">return</span> <span class="n">p</span> <span class="o">%</span> <span class="n">q</span>
                 <span class="k">if</span> <span class="n">q</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
                     <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">is_even</span><span class="p">:</span>
-                        <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+                        <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
                     <span class="k">elif</span> <span class="n">p</span><span class="o">.</span><span class="n">is_odd</span><span class="p">:</span>
-                        <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span>
+                        <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
             <span class="c1"># by ratio</span>
             <span class="n">r</span> <span class="o">=</span> <span class="n">p</span><span class="o">/</span><span class="n">q</span>

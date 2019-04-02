@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Lambdify &mdash; Diofant 0.10.1.dev299+g5e6a61e documentation</title>
+  <title>Lambdify &mdash; Diofant 0.10.1.dev310+g172db0a documentation</title>
   
 
   
@@ -210,22 +210,18 @@ name.</p>
 special symbolic functions. If you want to create a symbolic function to be
 used by all the machinery of Diofant you should subclass the <code class="docutils literal notranslate"><span class="pre">Function</span></code>
 class.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>symfunc</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code> or <code class="docutils literal notranslate"><span class="pre">UndefinedFunction</span></code> instance) – If <code class="docutils literal notranslate"><span class="pre">str</span></code>, then create new <code class="docutils literal notranslate"><span class="pre">UndefinedFunction</span></code> with this as
-name.  If <span class="math notranslate nohighlight">\(symfunc\)</span> is a diofant function, attach implementation to it.</li>
-<li><strong>implementation</strong> (<em>callable</em>) – numerical implementation to be called by <code class="docutils literal notranslate"><span class="pre">evalf()</span></code> or <code class="docutils literal notranslate"><span class="pre">lambdify</span></code></li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>symfunc</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code> or <code class="docutils literal notranslate"><span class="pre">UndefinedFunction</span></code> instance) – If <code class="docutils literal notranslate"><span class="pre">str</span></code>, then create new <code class="docutils literal notranslate"><span class="pre">UndefinedFunction</span></code> with this as
+name.  If <span class="math notranslate nohighlight">\(symfunc\)</span> is a diofant function, attach implementation to it.</p></li>
+<li><p><strong>implementation</strong> (<em>callable</em>) – numerical implementation to be called by <code class="docutils literal notranslate"><span class="pre">evalf()</span></code> or <code class="docutils literal notranslate"><span class="pre">lambdify</span></code></p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>afunc</strong> (<em>diofant.FunctionClass instance</em>) – function with attached implementation</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>afunc</strong> (<em>diofant.FunctionClass instance</em>) – function with attached implementation</p>
+</dd>
+</dl>
 <p class="rubric">Examples</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">implemented_function</span><span class="p">(</span><span class="n">Function</span><span class="p">(</span><span class="s1">&#39;f&#39;</span><span class="p">),</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lam_f</span> <span class="o">=</span> <span class="n">lambdify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
@@ -267,11 +263,11 @@ either <code class="docutils literal notranslate"><span class="pre">numpy</span>
 “modules” argument can be used. It accepts:</p>
 <blockquote>
 <div><ul class="simple">
-<li>the strings “math”, “mpmath”, “numpy”, “numexpr”, “diofant”</li>
-<li>any modules (e.g. math)</li>
-<li>dictionaries that map names of diofant functions to arbitrary functions</li>
-<li>lists that contain a mix of the arguments above, with higher priority
-given to entries appearing first.</li>
+<li><p>the strings “math”, “mpmath”, “numpy”, “numexpr”, “diofant”</p></li>
+<li><p>any modules (e.g. math)</p></li>
+<li><p>dictionaries that map names of diofant functions to arbitrary functions</p></li>
+<li><p>lists that contain a mix of the arguments above, with higher priority
+given to entries appearing first.</p></li>
 </ul>
 </div></blockquote>
 <p>The default behavior is to substitute all arguments in the provided
@@ -292,13 +288,12 @@ by default. As of release 0.7.7 <code class="docutils literal notranslate"><span
 To get the old default behavior you must pass in <code class="docutils literal notranslate"><span class="pre">[{'ImmutableMatrix':</span>
 <span class="pre">numpy.matrix},</span> <span class="pre">'numpy']</span></code> to the <code class="docutils literal notranslate"><span class="pre">modules</span></code> kwarg.</p>
 <ol class="arabic">
-<li><p class="first">Use one of the provided modules:</p>
+<li><p>Use one of the provided modules:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">lambdify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="s2">&quot;math&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<dl class="docutils">
-<dt>Attention: Functions that are not in the math module will throw a name</dt>
-<dd><p class="first last">error when the lambda function is evaluated! So this would
+<dl class="simple">
+<dt>Attention: Functions that are not in the math module will throw a name</dt><dd><p>error when the lambda function is evaluated! So this would
 be better:</p>
 </dd>
 </dl>
@@ -306,14 +301,13 @@ be better:</p>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Use some other module:</p>
+<li><p>Use some other module:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">lambdify</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">tan</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">),</span> <span class="n">numpy</span><span class="p">)</span>
 </pre></div>
 </div>
-<dl class="docutils">
-<dt>Attention: There are naming differences between numpy and diofant. So if</dt>
-<dd><p class="first last">you simply take the numpy module, e.g. diofant.atan will not be
+<dl class="simple">
+<dt>Attention: There are naming differences between numpy and diofant. So if</dt><dd><p>you simply take the numpy module, e.g. diofant.atan will not be
 translated to numpy.arctan. Use the modified module instead
 by passing the string “numpy”:</p>
 </dd>
@@ -327,7 +321,7 @@ by passing the string “numpy”:</p>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Use a dictionary defining custom functions:</p>
+<li><p>Use a dictionary defining custom functions:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">my_cool_function</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> <span class="k">return</span> <span class="s1">&#39;sin(</span><span class="si">%s</span><span class="s1">) is cool&#39;</span> <span class="o">%</span> <span class="n">x</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">myfuncs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;sin&quot;</span> <span class="p">:</span> <span class="n">my_cool_function</span><span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">lambdify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">myfuncs</span><span class="p">);</span> <span class="n">f</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>

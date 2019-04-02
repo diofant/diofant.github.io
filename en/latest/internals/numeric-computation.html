@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Numeric Computation &mdash; Diofant 0.10.1.dev299+g5e6a61e documentation</title>
+  <title>Numeric Computation &mdash; Diofant 0.10.1.dev310+g172db0a documentation</title>
   
 
   
@@ -236,17 +236,17 @@ time and introduces an overhead of a few microseconds.</p>
 <h2>uFuncify<a class="headerlink" href="#ufuncify" title="Permalink to this headline">¶</a></h2>
 <p>While NumPy operations are very efficient for vectorized data they sometimes
 incur unnecessary costs when chained together. Consider the following operation</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">get_numpy_array</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">get_numpy_array</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">x</span>
 </pre></div>
 </div>
 <p>The operators <code class="docutils literal notranslate"><span class="pre">sin</span></code> and <code class="docutils literal notranslate"><span class="pre">/</span></code> call routines that execute tight for loops in
 <code class="docutils literal notranslate"><span class="pre">C</span></code>. The resulting computation looks something like this</p>
-<div class="code c highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">temp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
 <span class="p">}</span>
-<span class="k">for</span><span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
 <span class="p">}</span>
@@ -254,11 +254,11 @@ incur unnecessary costs when chained together. Consider the following operation<
 </div>
 <p>This is slightly sub-optimal because</p>
 <ol class="arabic simple">
-<li>We allocate an extra <code class="docutils literal notranslate"><span class="pre">temp</span></code> array</li>
-<li>We walk over <code class="docutils literal notranslate"><span class="pre">x</span></code> memory twice when once would have been sufficient</li>
+<li><p>We allocate an extra <code class="docutils literal notranslate"><span class="pre">temp</span></code> array</p></li>
+<li><p>We walk over <code class="docutils literal notranslate"><span class="pre">x</span></code> memory twice when once would have been sufficient</p></li>
 </ol>
 <p>A better solution would fuse both element-wise operations into a single for loop</p>
-<div class="code c highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">/</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
 <span class="p">}</span>
@@ -287,40 +287,40 @@ on this topic.</p>
 <h2>So Which Should I Use?<a class="headerlink" href="#so-which-should-i-use" title="Permalink to this headline">¶</a></h2>
 <p>The options here were listed in order from slowest and least dependencies to
 fastest and most dependencies.</p>
-<table border="1" class="docutils">
+<table class="docutils align-center">
 <colgroup>
-<col width="25%" />
-<col width="10%" />
-<col width="43%" />
-<col width="22%" />
+<col style="width: 25%" />
+<col style="width: 10%" />
+<col style="width: 43%" />
+<col style="width: 22%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Tool</th>
-<th class="head">Speed</th>
-<th class="head">Qualities</th>
-<th class="head">Dependencies</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Tool</p></th>
+<th class="head"><p>Speed</p></th>
+<th class="head"><p>Qualities</p></th>
+<th class="head"><p>Dependencies</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>subs/evalf</td>
-<td>50us</td>
-<td>Simple</td>
-<td>None</td>
+<tbody>
+<tr class="row-even"><td><p>subs/evalf</p></td>
+<td><p>50us</p></td>
+<td><p>Simple</p></td>
+<td><p>None</p></td>
 </tr>
-<tr class="row-odd"><td>lambdify</td>
-<td>1us</td>
-<td>Scalar functions</td>
-<td>math</td>
+<tr class="row-odd"><td><p>lambdify</p></td>
+<td><p>1us</p></td>
+<td><p>Scalar functions</p></td>
+<td><p>math</p></td>
 </tr>
-<tr class="row-even"><td>lambdify-numpy</td>
-<td>10ns</td>
-<td>Vector functions</td>
-<td>numpy</td>
+<tr class="row-even"><td><p>lambdify-numpy</p></td>
+<td><p>10ns</p></td>
+<td><p>Vector functions</p></td>
+<td><p>numpy</p></td>
 </tr>
-<tr class="row-odd"><td>ufuncify</td>
-<td>10ns</td>
-<td>Complex vector expressions</td>
-<td>f2py, Cython</td>
+<tr class="row-odd"><td><p>ufuncify</p></td>
+<td><p>10ns</p></td>
+<td><p>Complex vector expressions</p></td>
+<td><p>f2py, Cython</p></td>
 </tr>
 </tbody>
 </table>

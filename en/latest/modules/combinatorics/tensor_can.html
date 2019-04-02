@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Tensor Canonicalization &mdash; Diofant 0.10.1.dev299+g5e6a61e documentation</title>
+  <title>Tensor Canonicalization &mdash; Diofant 0.10.1.dev310+g172db0a documentation</title>
   
 
   
@@ -204,57 +204,46 @@
 <dt id="diofant.combinatorics.tensor_can.canonicalize">
 <code class="descclassname">diofant.combinatorics.tensor_can.</code><code class="descname">canonicalize</code><span class="sig-paren">(</span><em>g</em>, <em>dummies</em>, <em>msym</em>, <em>*v</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/diofant/combinatorics/tensor_can.html#canonicalize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.combinatorics.tensor_can.canonicalize" title="Permalink to this definition">¶</a></dt>
 <dd><p>canonicalize tensor formed by tensors</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first">
-<li><p class="first"><strong>g</strong> (<em>permutation representing the tensor</em>)</p>
-</li>
-<li><p class="first"><strong>dummies</strong> (<em>list representing the dummy indices</em>) – it can be a list of dummy indices of the same type
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul>
+<li><p><strong>g</strong> (<em>permutation representing the tensor</em>)</p></li>
+<li><p><strong>dummies</strong> (<em>list representing the dummy indices</em>) – it can be a list of dummy indices of the same type
 or a list of lists of dummy indices, one list for each
 type of index;
 the dummy indices must come after the free indices,
 and put in order contravariant, covariant
-[d0, -d0, d1,-d1,…]</p>
-</li>
-<li><p class="first"><strong>msym</strong> (<em>symmetry of the metric(s)</em>) – it can be an integer or a list;
+[d0, -d0, d1,-d1,…]</p></li>
+<li><p><strong>msym</strong> (<em>symmetry of the metric(s)</em>) – it can be an integer or a list;
 in the first case it is the symmetry of the dummy index metric;
 in the second case it is the list of the symmetries of the
-index metric for each type</p>
-</li>
-<li><p class="first"><strong>v</strong> (list, (base_i, gens_i, n_i, sym_i) for tensors of type <span class="math notranslate nohighlight">\(i\)</span>)</p>
-</li>
-<li><p class="first"><strong>base_i, gens_i</strong> (<em>BSGS for tensors of this type.</em>) – The BSGS should have minimal base under lexicographic ordering;
+index metric for each type</p></li>
+<li><p><strong>v</strong> (list, (base_i, gens_i, n_i, sym_i) for tensors of type <span class="math notranslate nohighlight">\(i\)</span>)</p></li>
+<li><p><strong>base_i, gens_i</strong> (<em>BSGS for tensors of this type.</em>) – The BSGS should have minimal base under lexicographic ordering;
 if not, an attempt is made do get the minimal BSGS;
 in case of failure,
-canonicalize_naive is used, which is much slower.</p>
-</li>
-<li><p class="first"><strong>n_i</strong> (number of tensors of type <span class="math notranslate nohighlight">\(i\)</span>.)</p>
-</li>
-<li><p class="first"><strong>sym_i</strong> (symmetry under exchange of component tensors of type <span class="math notranslate nohighlight">\(i\)</span>.) –</p>
-<dl class="docutils">
-<dt>Both for msym and sym_i the cases are</dt>
-<dd><ul class="first last simple">
-<li>None  no symmetry</li>
-<li>0     commuting</li>
-<li>1     anticommuting</li>
+canonicalize_naive is used, which is much slower.</p></li>
+<li><p><strong>n_i</strong> (number of tensors of type <span class="math notranslate nohighlight">\(i\)</span>.)</p></li>
+<li><p><strong>sym_i</strong> (symmetry under exchange of component tensors of type <span class="math notranslate nohighlight">\(i\)</span>.) –</p>
+<dl class="simple">
+<dt>Both for msym and sym_i the cases are</dt><dd><ul class="simple">
+<li><p>None  no symmetry</p></li>
+<li><p>0     commuting</p></li>
+<li><p>1     anticommuting</p></li>
 </ul>
 </dd>
 </dl>
 </li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
-<li><em>0 if the tensor is zero, else return the array form of</em></li>
-<li><em>the permutation representing the canonical form of the tensor.</em></li>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>0 if the tensor is zero, else return the array form of</em></p></li>
+<li><p><em>the permutation representing the canonical form of the tensor.</em></p></li>
 </ul>
 </p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <p class="rubric">Notes</p>
 <p>First one uses canonical_free to get the minimum tensor under
 lexicographic order, using only the slot symmetries.
@@ -317,29 +306,28 @@ both with commuting metric</p>
 <code class="descclassname">diofant.combinatorics.tensor_can.</code><code class="descname">double_coset_can_rep</code><span class="sig-paren">(</span><em>dummies</em>, <em>sym</em>, <em>b_S</em>, <em>sgens</em>, <em>S_transversals</em>, <em>g</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/diofant/combinatorics/tensor_can.html#double_coset_can_rep"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.combinatorics.tensor_can.double_coset_can_rep" title="Permalink to this definition">¶</a></dt>
 <dd><p>Butler-Portugal algorithm for tensor canonicalization with dummy indices</p>
 <blockquote>
-<div><dl class="docutils">
-<dt>dummies</dt>
-<dd>list of lists of dummy indices,
+<div><dl class="simple">
+<dt>dummies</dt><dd><p>list of lists of dummy indices,
 one list for each type of index;
 the dummy indices are put in order contravariant, covariant
-[d0, -d0, d1, -d1, …].</dd>
-<dt>sym</dt>
-<dd>list of the symmetries of the index metric for each type.</dd>
-<dt>possible symmetries of the metrics</dt>
-<dd><ul class="first last simple">
-<li>0     symmetric</li>
-<li>1     antisymmetric</li>
-<li>None  no symmetry</li>
+[d0, -d0, d1, -d1, …].</p>
+</dd>
+<dt>sym</dt><dd><p>list of the symmetries of the index metric for each type.</p>
+</dd>
+<dt>possible symmetries of the metrics</dt><dd><ul class="simple">
+<li><p>0     symmetric</p></li>
+<li><p>1     antisymmetric</p></li>
+<li><p>None  no symmetry</p></li>
 </ul>
 </dd>
-<dt>b_S</dt>
-<dd>base of a minimal slot symmetry BSGS.</dd>
-<dt>sgens</dt>
-<dd>generators of the slot symmetry BSGS.</dd>
-<dt>S_transversals</dt>
-<dd>transversals for the slot BSGS.</dd>
-<dt>g</dt>
-<dd>permutation representing the tensor.</dd>
+<dt>b_S</dt><dd><p>base of a minimal slot symmetry BSGS.</p>
+</dd>
+<dt>sgens</dt><dd><p>generators of the slot symmetry BSGS.</p>
+</dd>
+<dt>S_transversals</dt><dd><p>transversals for the slot BSGS.</p>
+</dd>
+<dt>g</dt><dd><p>permutation representing the tensor.</p>
+</dd>
 </dl>
 </div></blockquote>
 <p>Return 0 if the tensor is zero, else return the array form of
@@ -376,10 +364,9 @@ these symmetries, one can represent the tensor by <span class="math notranslate 
 as</p>
 <p><span class="math notranslate nohighlight">\(g -&gt; d*g*s\)</span>, so it belongs to the coset <span class="math notranslate nohighlight">\(D*g*S\)</span>.</p>
 <p>Let us explain the conventions by an example.</p>
-<dl class="docutils">
-<dt>Given a tensor <span class="math notranslate nohighlight">\(T^{d3 d2 d1}{}_{d1 d2 d3}\)</span> with the slot symmetries</dt>
-<dd><p class="first"><span class="math notranslate nohighlight">\(T^{a0 a1 a2 a3 a4 a5} = -T^{a2 a1 a0 a3 a4 a5}\)</span></p>
-<p class="last"><span class="math notranslate nohighlight">\(T^{a0 a1 a2 a3 a4 a5} = -T^{a4 a1 a2 a3 a0 a5}\)</span></p>
+<dl>
+<dt>Given a tensor <span class="math notranslate nohighlight">\(T^{d3 d2 d1}{}_{d1 d2 d3}\)</span> with the slot symmetries</dt><dd><p><span class="math notranslate nohighlight">\(T^{a0 a1 a2 a3 a4 a5} = -T^{a2 a1 a0 a3 a4 a5}\)</span></p>
+<p><span class="math notranslate nohighlight">\(T^{a0 a1 a2 a3 a4 a5} = -T^{a4 a1 a2 a3 a0 a5}\)</span></p>
 </dd>
 </dl>
 <p>and symmetric metric, find the tensor equivalent to it which
@@ -469,11 +456,11 @@ otherwise there is an <span class="math notranslate nohighlight">\(i\)</span> wh
 for which <span class="math notranslate nohighlight">\(p_i\)</span> is fixed by the dummy symmetry only, while <span class="math notranslate nohighlight">\(i\)</span>
 is not invariant from the slot stabilizer, so <span class="math notranslate nohighlight">\(p_i\)</span> is not in
 general the minimal value.</p>
-<dl class="docutils">
-<dt>This algorithm differs slightly from the original algorithm [3]:</dt>
-<dd>the canonical form is minimal lexicographically, and
+<dl class="simple">
+<dt>This algorithm differs slightly from the original algorithm [3]:</dt><dd><p>the canonical form is minimal lexicographically, and
 the BSGS has minimal base under lexicographic order.
-Equal tensors <span class="math notranslate nohighlight">\(h\)</span> are eliminated from TAB.</dd>
+Equal tensors <span class="math notranslate nohighlight">\(h\)</span> are eliminated from TAB.</p>
+</dd>
 </dl>
 <p class="rubric">Examples</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gens</span> <span class="o">=</span> <span class="p">[</span><span class="n">Permutation</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">6</span><span class="p">]]]</span>

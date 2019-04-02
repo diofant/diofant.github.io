@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.solvers.recurr &mdash; Diofant 0.10.1.dev299+g5e6a61e documentation</title>
+  <title>diofant.solvers.recurr &mdash; Diofant 0.10.1.dev310+g172db0a documentation</title>
   
 
   
@@ -199,8 +199,8 @@
 <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">defaultdict</span>
 
 <span class="kn">from</span> <span class="nn">..concrete</span> <span class="k">import</span> <span class="n">product</span>
-<span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="p">(</span><span class="n">Add</span><span class="p">,</span> <span class="n">Dummy</span><span class="p">,</span> <span class="n">Equality</span><span class="p">,</span> <span class="n">Mul</span><span class="p">,</span> <span class="n">Rational</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">Symbol</span><span class="p">,</span> <span class="n">Wild</span><span class="p">,</span> <span class="n">oo</span><span class="p">,</span>
-                    <span class="n">sympify</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="p">(</span><span class="n">Add</span><span class="p">,</span> <span class="n">Dummy</span><span class="p">,</span> <span class="n">Equality</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">Mul</span><span class="p">,</span> <span class="n">Rational</span><span class="p">,</span> <span class="n">Symbol</span><span class="p">,</span> <span class="n">Wild</span><span class="p">,</span>
+                    <span class="n">oo</span><span class="p">,</span> <span class="n">sympify</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">..core.compatibility</span> <span class="k">import</span> <span class="n">default_sort_key</span>
 <span class="kn">from</span> <span class="nn">..functions</span> <span class="k">import</span> <span class="n">FallingFactorial</span><span class="p">,</span> <span class="n">RisingFactorial</span><span class="p">,</span> <span class="n">binomial</span><span class="p">,</span> <span class="n">factorial</span>
 <span class="kn">from</span> <span class="nn">..matrices</span> <span class="k">import</span> <span class="n">Matrix</span><span class="p">,</span> <span class="n">casoratian</span>
@@ -270,7 +270,7 @@
         <span class="n">f</span> <span class="o">=</span> <span class="n">quo</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">polys</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
     <span class="n">polys</span> <span class="o">=</span> <span class="p">[</span> <span class="n">Poly</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">r</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">terms</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="p">,</span> <span class="o">-</span><span class="n">oo</span><span class="p">)</span> <span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">r</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">terms</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="o">-</span><span class="n">oo</span><span class="p">)</span> <span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">r</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">r</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">r</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
@@ -293,7 +293,7 @@
 
     <span class="n">x</span> <span class="o">=</span> <span class="n">Dummy</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
 
-    <span class="n">degree_poly</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+    <span class="n">degree_poly</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">r</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">i</span> <span class="o">==</span> <span class="n">b</span><span class="p">:</span>
@@ -317,15 +317,15 @@
     <span class="k">if</span> <span class="n">N</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">homogeneous</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">hints</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;symbols&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-                <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="p">,</span> <span class="p">[]</span>
+                <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="p">[]</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+                <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span>
 
     <span class="k">if</span> <span class="n">N</span> <span class="o">&lt;=</span> <span class="n">r</span><span class="p">:</span>
         <span class="n">C</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">y</span> <span class="o">=</span> <span class="n">E</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">E</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
             <span class="n">C</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;C&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)))</span>
@@ -351,16 +351,16 @@
         <span class="k">if</span> <span class="n">nni_roots</span> <span class="o">!=</span> <span class="p">[]:</span>
             <span class="n">a</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">nni_roots</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">a</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
         <span class="k">def</span> <span class="nf">_zero_vector</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
-            <span class="k">return</span> <span class="p">[</span><span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="p">]</span> <span class="o">*</span> <span class="n">k</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)]</span> <span class="o">*</span> <span class="n">k</span>
 
         <span class="k">def</span> <span class="nf">_one_vector</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
-            <span class="k">return</span> <span class="p">[</span><span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">]</span> <span class="o">*</span> <span class="n">k</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)]</span> <span class="o">*</span> <span class="n">k</span>
 
         <span class="k">def</span> <span class="nf">_delta</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
-            <span class="n">B</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span>
+            <span class="n">B</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
             <span class="n">D</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">n</span><span class="p">:</span> <span class="n">a</span> <span class="o">+</span> <span class="n">k</span><span class="p">})</span>
 
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
@@ -377,7 +377,7 @@
             <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">d</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
                 <span class="n">I</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">I</span><span class="p">[</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">i</span> <span class="o">-</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">k</span>
 
-            <span class="n">alpha</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+            <span class="n">alpha</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
             <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">A</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
                 <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
@@ -410,7 +410,7 @@
 
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">U</span><span class="p">):</span>
                 <span class="n">v</span> <span class="o">=</span> <span class="n">_zero_vector</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-                <span class="n">g</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+                <span class="n">g</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
                 <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">A</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
                     <span class="k">if</span> <span class="n">i</span> <span class="o">-</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -458,7 +458,7 @@
             <span class="n">solutions</span> <span class="o">=</span> <span class="p">{}</span>
 
         <span class="k">if</span> <span class="n">homogeneous</span><span class="p">:</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">result</span> <span class="o">=</span> <span class="n">h</span>
 
@@ -549,7 +549,7 @@
     <span class="k">if</span> <span class="ow">not</span> <span class="n">nni_roots</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">rsolve_poly</span><span class="p">(</span><span class="n">coeffs</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="o">**</span><span class="n">hints</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">C</span><span class="p">,</span> <span class="n">numers</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">,</span> <span class="p">[</span><span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">r</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">C</span><span class="p">,</span> <span class="n">numers</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="p">[</span><span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)]</span><span class="o">*</span><span class="p">(</span><span class="n">r</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">nni_roots</span><span class="p">)),</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
             <span class="n">d</span> <span class="o">=</span> <span class="n">gcd</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">n</span><span class="p">:</span> <span class="n">n</span> <span class="o">+</span> <span class="n">i</span><span class="p">}),</span> <span class="n">n</span><span class="p">)</span>
@@ -648,7 +648,7 @@
                         <span class="n">similar</span><span class="p">[</span><span class="n">h</span><span class="p">]</span> <span class="o">+=</span> <span class="n">g</span>
                         <span class="k">break</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="n">similar</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+                    <span class="n">similar</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
             <span class="n">inhomogeneous</span> <span class="o">=</span> <span class="p">[]</span>
 
@@ -660,8 +660,8 @@
             <span class="k">return</span>
 
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">g</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">inhomogeneous</span><span class="p">):</span>
-            <span class="n">coeff</span><span class="p">,</span> <span class="n">polys</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">,</span> <span class="n">coeffs</span><span class="p">[:]</span>
-            <span class="n">denoms</span> <span class="o">=</span> <span class="p">[</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span> <span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">r</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">coeff</span><span class="p">,</span> <span class="n">polys</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">coeffs</span><span class="p">[:]</span>
+            <span class="n">denoms</span> <span class="o">=</span> <span class="p">[</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">r</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 
             <span class="n">g</span> <span class="o">=</span> <span class="n">simplify</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
             <span class="n">s</span> <span class="o">=</span> <span class="n">hypersimp</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
@@ -691,7 +691,7 @@
             <span class="n">result</span> <span class="o">=</span> <span class="n">Add</span><span class="p">(</span><span class="o">*</span><span class="n">inhomogeneous</span><span class="p">)</span>
             <span class="n">result</span> <span class="o">=</span> <span class="n">simplify</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
     <span class="n">Z</span> <span class="o">=</span> <span class="n">Dummy</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">)</span>
 
@@ -700,7 +700,7 @@
     <span class="n">p_factors</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">roots</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
     <span class="n">q_factors</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">roots</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
 
-    <span class="n">factors</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">)</span> <span class="p">]</span>
+    <span class="n">factors</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="p">]</span>
 
     <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">p_factors</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">q_factors</span><span class="p">:</span>
@@ -709,8 +709,8 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">factors</span> <span class="o">+=</span> <span class="p">[(</span><span class="n">n</span> <span class="o">-</span> <span class="n">p</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="n">q</span><span class="p">)]</span>
 
-    <span class="n">p</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">p</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">p_factors</span> <span class="p">]</span>
-    <span class="n">q</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="n">q</span><span class="p">)</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">q_factors</span> <span class="p">]</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">p</span><span class="p">,</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">p_factors</span> <span class="p">]</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">n</span> <span class="o">-</span> <span class="n">q</span><span class="p">)</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">q_factors</span> <span class="p">]</span>
 
     <span class="n">factors</span> <span class="o">=</span> <span class="n">p</span> <span class="o">+</span> <span class="n">factors</span> <span class="o">+</span> <span class="n">q</span>
 
@@ -728,12 +728,12 @@
             <span class="k">if</span> <span class="ow">not</span> <span class="n">poly</span><span class="o">.</span><span class="n">is_zero</span><span class="p">:</span>
                 <span class="n">degrees</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">polys</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">degree</span><span class="p">())</span>
 
-        <span class="n">d</span><span class="p">,</span> <span class="n">poly</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">degrees</span><span class="p">),</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+        <span class="n">d</span><span class="p">,</span> <span class="n">poly</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">degrees</span><span class="p">),</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">r</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
             <span class="n">coeff</span> <span class="o">=</span> <span class="n">polys</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">coeff_monomial</span><span class="p">((</span><span class="n">d</span><span class="p">,))</span>
 
-            <span class="k">if</span> <span class="n">coeff</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">coeff</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="n">poly</span> <span class="o">+=</span> <span class="n">coeff</span> <span class="o">*</span> <span class="n">Z</span><span class="o">**</span><span class="n">i</span>
 
         <span class="k">for</span> <span class="n">z</span> <span class="ow">in</span> <span class="n">roots</span><span class="p">(</span><span class="n">poly</span><span class="p">,</span> <span class="n">Z</span><span class="p">):</span>
@@ -828,8 +828,8 @@
 
     <span class="n">n</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-    <span class="n">h_part</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="p">)</span>
-    <span class="n">i_part</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+    <span class="n">h_part</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+    <span class="n">i_part</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">h</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">collect</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">Wild</span><span class="p">(</span><span class="s1">&#39;n&#39;</span><span class="p">)),</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="k">if</span> <span class="n">h</span><span class="o">.</span><span class="n">func</span> <span class="o">==</span> <span class="n">y</span><span class="o">.</span><span class="n">func</span><span class="p">:</span>
@@ -864,7 +864,7 @@
 
     <span class="n">common</span> <span class="o">=</span> <span class="n">lcm_list</span><span class="p">([</span><span class="n">x</span><span class="o">.</span><span class="n">as_numer_denom</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">h_part</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span> <span class="o">+</span> <span class="p">[</span><span class="n">i_denom</span><span class="p">])</span>
 
-    <span class="k">if</span> <span class="n">common</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">common</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">coeff</span> <span class="ow">in</span> <span class="n">h_part</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">numer</span><span class="p">,</span> <span class="n">denom</span> <span class="o">=</span> <span class="n">coeff</span><span class="o">.</span><span class="n">as_numer_denom</span><span class="p">()</span>
             <span class="n">h_part</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">numer</span><span class="o">*</span><span class="n">quo</span><span class="p">(</span><span class="n">common</span><span class="p">,</span> <span class="n">denom</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>

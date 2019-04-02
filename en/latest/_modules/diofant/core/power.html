@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.core.power &mdash; Diofant 0.10.1.dev299+g5e6a61e documentation</title>
+  <title>diofant.core.power &mdash; Diofant 0.10.1.dev310+g172db0a documentation</title>
   
 
   
@@ -150,12 +150,12 @@
            <div itemprop="articleBody">
             
   <h1>Source code for diofant.core.power</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">log</span> <span class="k">as</span> <span class="n">_log</span>
-<span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">sqrt</span> <span class="k">as</span> <span class="n">_sqrt</span>
+<span></span><span class="kn">import</span> <span class="nn">math</span>
 
 <span class="kn">from</span> <span class="nn">mpmath.libmp</span> <span class="k">import</span> <span class="n">sqrtrem</span> <span class="k">as</span> <span class="n">mpmath_sqrtrem</span>
 
-<span class="kn">from</span> <span class="nn">..utilities.iterables</span> <span class="k">import</span> <span class="n">sift</span>
+<span class="kn">from</span> <span class="nn">..logic</span> <span class="k">import</span> <span class="n">true</span>
+<span class="kn">from</span> <span class="nn">..utilities</span> <span class="k">import</span> <span class="n">sift</span>
 <span class="kn">from</span> <span class="nn">.add</span> <span class="k">import</span> <span class="n">Add</span>
 <span class="kn">from</span> <span class="nn">.cache</span> <span class="k">import</span> <span class="n">cacheit</span>
 <span class="kn">from</span> <span class="nn">.compatibility</span> <span class="k">import</span> <span class="n">as_int</span>
@@ -166,7 +166,7 @@
                        <span class="n">expand_multinomial</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">.logic</span> <span class="k">import</span> <span class="n">fuzzy_or</span>
 <span class="kn">from</span> <span class="nn">.mul</span> <span class="k">import</span> <span class="n">Mul</span><span class="p">,</span> <span class="n">_keep_coeff</span>
-<span class="kn">from</span> <span class="nn">.numbers</span> <span class="k">import</span> <span class="n">E</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">nan</span><span class="p">,</span> <span class="n">oo</span><span class="p">,</span> <span class="n">pi</span><span class="p">,</span> <span class="n">zoo</span>
+<span class="kn">from</span> <span class="nn">.numbers</span> <span class="k">import</span> <span class="n">E</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">Rational</span><span class="p">,</span> <span class="n">nan</span><span class="p">,</span> <span class="n">oo</span><span class="p">,</span> <span class="n">pi</span><span class="p">,</span> <span class="n">zoo</span>
 <span class="kn">from</span> <span class="nn">.singleton</span> <span class="k">import</span> <span class="n">S</span>
 <span class="kn">from</span> <span class="nn">.symbol</span> <span class="k">import</span> <span class="n">Dummy</span><span class="p">,</span> <span class="n">symbols</span>
 <span class="kn">from</span> <span class="nn">.sympify</span> <span class="k">import</span> <span class="n">sympify</span>
@@ -175,7 +175,7 @@
 <span class="k">def</span> <span class="nf">isqrt</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return the largest integer less than or equal to sqrt(n).&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">17984395633462800708566937239552</span><span class="p">:</span>
-        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">_sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">integer_nthroot</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="mi">2</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 
 
@@ -210,7 +210,7 @@
     <span class="k">try</span><span class="p">:</span>
         <span class="n">guess</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">y</span><span class="o">**</span><span class="p">(</span><span class="mf">1.</span><span class="o">/</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">OverflowError</span><span class="p">:</span>
-        <span class="n">exp</span> <span class="o">=</span> <span class="n">_log</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">n</span>
+        <span class="n">exp</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">n</span>
         <span class="k">if</span> <span class="n">exp</span> <span class="o">&gt;</span> <span class="mi">53</span><span class="p">:</span>
             <span class="n">shift</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">exp</span> <span class="o">-</span> <span class="mi">53</span><span class="p">)</span>
             <span class="n">guess</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">2.0</span><span class="o">**</span><span class="p">(</span><span class="n">exp</span> <span class="o">-</span> <span class="n">shift</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">shift</span>
@@ -257,7 +257,7 @@
 <span class="sd">    +--------------+---------+-----------------------------------------------+</span>
 <span class="sd">    | (-1)**-1     | -1      |                                               |</span>
 <span class="sd">    +--------------+---------+-----------------------------------------------+</span>
-<span class="sd">    | S.Zero**-1   | zoo     | This is not strictly true, as 0**-1 may be    |</span>
+<span class="sd">    | 0**-1        | zoo     | This is not strictly true, as 0**-1 may be    |</span>
 <span class="sd">    |              |         | undefined, but is convenient in some contexts |</span>
 <span class="sd">    |              |         | where the base is assumed to be positive.     |</span>
 <span class="sd">    +--------------+---------+-----------------------------------------------+</span>
@@ -335,7 +335,7 @@
         <span class="n">e</span> <span class="o">=</span> <span class="n">sympify</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">evaluate</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">e</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span>
+                <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
             <span class="k">elif</span> <span class="n">e</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">b</span>
             <span class="k">elif</span> <span class="n">e</span> <span class="ow">is</span> <span class="n">zoo</span><span class="p">:</span>
@@ -350,7 +350,7 @@
             <span class="k">elif</span> <span class="n">b</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">:</span>
                 <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="n">is_infinite</span><span class="p">:</span>
                     <span class="k">return</span> <span class="n">nan</span>
-                <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span>
+                <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="c1"># recognize base as E</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">e</span><span class="o">.</span><span class="n">is_Atom</span> <span class="ow">and</span> <span class="n">b</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">E</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">exp_polar</span><span class="p">):</span>
@@ -429,14 +429,14 @@
             <span class="c1"># ===================================================</span>
             <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">is_extended_real</span><span class="p">:</span>
                 <span class="c1"># we need _half(other) with constant floor or</span>
-                <span class="c1"># floor(S.Half - e*arg(b)/2/pi) == 0</span>
+                <span class="c1"># floor(Rational(1, 2) - e*arg(b)/2/pi) == 0</span>
 
                 <span class="c1"># handle -1 as special case</span>
                 <span class="k">if</span> <span class="p">(</span><span class="n">e</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
                     <span class="c1"># floor arg. is 1/2 + arg(b)/2/pi</span>
                     <span class="k">if</span> <span class="n">_half</span><span class="p">(</span><span class="n">other</span><span class="p">):</span>
                         <span class="k">if</span> <span class="n">b</span><span class="o">.</span><span class="n">is_negative</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
-                            <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">NegativeOne</span><span class="o">**</span><span class="n">other</span><span class="o">*</span><span class="n">Pow</span><span class="p">(</span><span class="o">-</span><span class="n">b</span><span class="p">,</span> <span class="n">e</span><span class="o">*</span><span class="n">other</span><span class="p">)</span>
+                            <span class="k">return</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="n">other</span><span class="o">*</span><span class="n">Pow</span><span class="p">(</span><span class="o">-</span><span class="n">b</span><span class="p">,</span> <span class="n">e</span><span class="o">*</span><span class="n">other</span><span class="p">)</span>
                         <span class="k">if</span> <span class="n">b</span><span class="o">.</span><span class="n">is_extended_real</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
                             <span class="k">return</span> <span class="n">Pow</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">conjugate</span><span class="p">()</span><span class="o">/</span><span class="n">Abs</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
                 <span class="k">elif</span> <span class="n">e</span><span class="o">.</span><span class="n">is_even</span><span class="p">:</span>
@@ -445,11 +445,11 @@
                     <span class="k">if</span> <span class="n">b</span><span class="o">.</span><span class="n">is_imaginary</span><span class="p">:</span>
                         <span class="n">b</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">im</span><span class="p">(</span><span class="n">b</span><span class="p">))</span><span class="o">*</span><span class="n">I</span>
 
-                <span class="k">if</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">true</span> <span class="ow">or</span> <span class="p">(</span><span class="n">e</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">true</span> <span class="ow">or</span> <span class="p">(</span><span class="n">e</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
                     <span class="n">s</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># floor = 0</span>
                 <span class="k">elif</span> <span class="n">b</span><span class="o">.</span><span class="n">is_nonnegative</span><span class="p">:</span>
                     <span class="n">s</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># floor = 0</span>
-                <span class="k">elif</span> <span class="n">re</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">is_nonnegative</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">)</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">true</span><span class="p">:</span>
+                <span class="k">elif</span> <span class="n">re</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">is_nonnegative</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="n">true</span><span class="p">:</span>
                     <span class="n">s</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># floor = 0</span>
                 <span class="k">elif</span> <span class="n">im</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">is_nonzero</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">):</span>
                     <span class="n">s</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># floor = 0</span>
@@ -457,7 +457,7 @@
                     <span class="n">s</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># floor = 0</span>
                 <span class="k">elif</span> <span class="n">_half</span><span class="p">(</span><span class="n">other</span><span class="p">):</span>
                     <span class="n">s</span> <span class="o">=</span> <span class="n">exp</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">I</span><span class="o">*</span><span class="n">other</span><span class="o">*</span><span class="n">floor</span><span class="p">(</span>
-                        <span class="n">S</span><span class="o">.</span><span class="n">Half</span> <span class="o">-</span> <span class="n">e</span><span class="o">*</span><span class="n">arg</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="p">)))</span>
+                        <span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="n">e</span><span class="o">*</span><span class="n">arg</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="p">)))</span>
                     <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">is_extended_real</span> <span class="ow">and</span> <span class="n">_n2</span><span class="p">(</span><span class="n">sign</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">-</span> <span class="n">s</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                         <span class="n">s</span> <span class="o">=</span> <span class="n">sign</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
                     <span class="k">else</span><span class="p">:</span>
@@ -465,8 +465,8 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="c1"># e.is_extended_real is False requires:</span>
                 <span class="c1">#     _half(other) with constant floor or</span>
-                <span class="c1">#     floor(S.Half - im(e*log(b))/2/pi) == 0</span>
-                <span class="n">s</span> <span class="o">=</span> <span class="n">exp</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">I</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">other</span><span class="o">*</span><span class="n">floor</span><span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">Half</span> <span class="o">-</span> <span class="n">im</span><span class="p">(</span><span class="n">e</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="n">b</span><span class="p">))</span><span class="o">/</span><span class="mi">2</span><span class="o">/</span><span class="n">pi</span><span class="p">))</span>
+                <span class="c1">#     floor(Rational(1, 2) - im(e*log(b))/2/pi) == 0</span>
+                <span class="n">s</span> <span class="o">=</span> <span class="n">exp</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">I</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">other</span><span class="o">*</span><span class="n">floor</span><span class="p">(</span><span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="n">im</span><span class="p">(</span><span class="n">e</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="n">b</span><span class="p">))</span><span class="o">/</span><span class="mi">2</span><span class="o">/</span><span class="n">pi</span><span class="p">))</span>
                 <span class="c1"># be careful to test that s is -1 or 1 b/c sign(I) == I:</span>
                 <span class="c1"># so check that s is real</span>
                 <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">is_extended_real</span> <span class="ow">and</span> <span class="n">_n2</span><span class="p">(</span><span class="n">sign</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">-</span> <span class="n">s</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -502,7 +502,7 @@
                 <span class="n">m</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">exp</span> <span class="o">%</span> <span class="mi">4</span>
                 <span class="k">if</span> <span class="n">m</span><span class="o">.</span><span class="n">is_zero</span><span class="p">:</span>
                     <span class="k">return</span> <span class="kc">True</span>
-                <span class="k">if</span> <span class="n">m</span><span class="o">.</span><span class="n">is_integer</span> <span class="ow">and</span> <span class="n">m</span><span class="o">.</span><span class="n">is_zero</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">m</span><span class="o">.</span><span class="n">is_integer</span> <span class="ow">and</span> <span class="n">m</span><span class="o">.</span><span class="n">is_nonzero</span><span class="p">:</span>
                     <span class="k">return</span> <span class="kc">False</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">exp</span><span class="o">.</span><span class="n">is_imaginary</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">base</span><span class="p">)</span><span class="o">.</span><span class="n">is_imaginary</span>
@@ -759,7 +759,7 @@
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
 
-<span class="sd">        &gt;&gt;&gt; p = Pow(S.Half, 2, evaluate=False)</span>
+<span class="sd">        &gt;&gt;&gt; p = Pow(Rational(1, 2), 2, evaluate=False)</span>
 <span class="sd">        &gt;&gt;&gt; p.as_base_exp()</span>
 <span class="sd">        (2, -2)</span>
 <span class="sd">        &gt;&gt;&gt; p.args</span>
@@ -872,14 +872,14 @@
                     <span class="k">if</span> <span class="n">nonn</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">:</span>
                         <span class="n">nonneg</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nonn</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="n">neg</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">NegativeOne</span><span class="p">)</span>
+                    <span class="n">neg</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Integer</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">neg</span><span class="p">:</span>
                     <span class="n">nonn</span> <span class="o">=</span> <span class="o">-</span><span class="n">neg</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
                     <span class="k">if</span> <span class="n">nonn</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">:</span>
                         <span class="n">nonneg</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nonn</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="n">neg</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">NegativeOne</span><span class="p">)</span>
+                    <span class="n">neg</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Integer</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
                 <span class="n">other</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">I</span><span class="p">)</span>
             <span class="k">del</span> <span class="n">imag</span>
 
@@ -899,7 +899,7 @@
             <span class="c1"># handle negatives by making them all positive and putting</span>
             <span class="c1"># the residual -1 in other</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">neg</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="n">o</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span>
+                <span class="n">o</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">other</span> <span class="ow">and</span> <span class="n">neg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">is_Number</span><span class="p">:</span>
                     <span class="n">o</span> <span class="o">*=</span> <span class="n">neg</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
                 <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">neg</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span><span class="p">:</span>
@@ -910,7 +910,7 @@
                     <span class="n">other</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">o</span><span class="p">)</span>
             <span class="k">elif</span> <span class="n">neg</span> <span class="ow">and</span> <span class="n">other</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">neg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">is_Number</span> <span class="ow">and</span> <span class="n">neg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">S</span><span class="o">.</span><span class="n">NegativeOne</span><span class="p">:</span>
-                    <span class="n">other</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">NegativeOne</span><span class="p">)</span>
+                    <span class="n">other</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Integer</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
                     <span class="n">nonneg</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="o">-</span><span class="n">neg</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">other</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">neg</span><span class="p">)</span>
@@ -921,7 +921,7 @@
             <span class="n">cargs</span> <span class="o">=</span> <span class="n">nonneg</span>
             <span class="n">other</span> <span class="o">+=</span> <span class="n">nc</span>
 
-        <span class="n">rv</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span>
+        <span class="n">rv</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">cargs</span><span class="p">:</span>
             <span class="n">rv</span> <span class="o">*=</span> <span class="n">Mul</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">cargs</span><span class="p">])</span>
         <span class="k">if</span> <span class="n">other</span><span class="p">:</span>
@@ -1033,7 +1033,7 @@
             <span class="c1">#  a + b      a  b</span>
             <span class="c1"># n      --&gt; n  n  , where n, a, b are Numbers</span>
 
-            <span class="n">coeff</span><span class="p">,</span> <span class="n">tail</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+            <span class="n">coeff</span><span class="p">,</span> <span class="n">tail</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">exp</span><span class="o">.</span><span class="n">args</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">term</span><span class="o">.</span><span class="n">is_Number</span><span class="p">:</span>
                     <span class="n">coeff</span> <span class="o">*=</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">term</span><span class="p">)</span>
@@ -1060,7 +1060,7 @@
             <span class="n">exp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">exp</span>
             <span class="n">re</span><span class="p">,</span> <span class="n">im</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">as_real_imag</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="n">deep</span><span class="p">)</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">im</span><span class="p">:</span>
-                <span class="k">return</span> <span class="bp">self</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="p">,</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
             <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;a b&#39;</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">Dummy</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">exp</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">is_Number</span> <span class="ow">and</span> <span class="n">im</span><span class="o">.</span><span class="n">is_Number</span><span class="p">:</span>
@@ -1097,14 +1097,14 @@
 
             <span class="k">if</span> <span class="n">im</span><span class="o">.</span><span class="n">is_zero</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">exp</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">Half</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">is_nonnegative</span><span class="p">:</span>
-                    <span class="k">return</span> <span class="bp">self</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+                    <span class="k">return</span> <span class="bp">self</span><span class="p">,</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">is_nonpositive</span><span class="p">:</span>
-                    <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">base</span><span class="p">)</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">exp</span>
+                    <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">base</span><span class="p">)</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">exp</span>
 
             <span class="c1"># XXX: This is not totally correct since for x**(p/q) with</span>
             <span class="c1">#      x being imaginary there are actually q roots, but</span>
             <span class="c1">#      only a single one is returned from here.</span>
-            <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">re</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">S</span><span class="o">.</span><span class="n">Half</span><span class="p">)</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">re</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
             <span class="n">t</span> <span class="o">=</span> <span class="n">arg</span><span class="p">(</span><span class="n">re</span> <span class="o">+</span> <span class="n">I</span><span class="o">*</span><span class="n">im</span><span class="p">)</span>
 
             <span class="n">rp</span><span class="p">,</span> <span class="n">tp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">exp</span><span class="p">),</span> <span class="n">t</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">exp</span>
@@ -1226,10 +1226,10 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_commutative</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="p">,</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">base</span><span class="p">,</span> <span class="n">exp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">as_base_exp</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">base</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="p">,</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">n</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">as_numer_denom</span><span class="p">()</span>
         <span class="n">neg_exp</span> <span class="o">=</span> <span class="n">exp</span><span class="o">.</span><span class="n">is_negative</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">neg_exp</span> <span class="ow">and</span> <span class="ow">not</span> <span class="p">(</span><span class="o">-</span><span class="n">exp</span><span class="p">)</span><span class="o">.</span><span class="n">is_negative</span><span class="p">:</span>
@@ -1242,20 +1242,20 @@
         <span class="c1"># be negated and the denominator (now positive) separated.</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">is_extended_real</span> <span class="ow">or</span> <span class="n">int_exp</span><span class="p">):</span>
             <span class="n">n</span> <span class="o">=</span> <span class="n">base</span>
-            <span class="n">d</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">dnonpos</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">is_nonpositive</span>
         <span class="k">if</span> <span class="n">dnonpos</span><span class="p">:</span>
             <span class="n">n</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="o">-</span><span class="n">n</span><span class="p">,</span> <span class="o">-</span><span class="n">d</span>
         <span class="k">elif</span> <span class="n">dnonpos</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">int_exp</span><span class="p">:</span>
             <span class="n">n</span> <span class="o">=</span> <span class="n">base</span>
-            <span class="n">d</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">neg_exp</span><span class="p">:</span>
             <span class="n">n</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">d</span><span class="p">,</span> <span class="n">n</span>
             <span class="n">exp</span> <span class="o">=</span> <span class="o">-</span><span class="n">exp</span>
         <span class="k">if</span> <span class="n">d</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">exp</span><span class="p">),</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">exp</span><span class="p">),</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">n</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">exp</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">exp</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">exp</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">exp</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_matches</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="n">repl_dict</span><span class="o">=</span><span class="p">{}):</span>
@@ -1272,7 +1272,7 @@
         <span class="c1"># special case, pattern = 1 and expr.exp can match to 0</span>
         <span class="k">if</span> <span class="n">expr</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">:</span>
             <span class="n">d</span> <span class="o">=</span> <span class="n">repl_dict</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-            <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">exp</span><span class="o">.</span><span class="n">_matches</span><span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">exp</span><span class="o">.</span><span class="n">_matches</span><span class="p">(</span><span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">d</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">d</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">d</span>
 
@@ -1339,10 +1339,10 @@
                 <span class="k">if</span> <span class="n">sig</span><span class="o">.</span><span class="n">is_positive</span><span class="p">:</span>
                     <span class="k">return</span> <span class="n">oo</span>
                 <span class="k">elif</span> <span class="n">sig</span><span class="o">.</span><span class="n">is_negative</span><span class="p">:</span>
-                    <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+                    <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="k">raise</span> <span class="ne">NotImplementedError</span>
-            <span class="n">pow_series</span> <span class="o">=</span> <span class="n">term</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span>
+            <span class="n">pow_series</span> <span class="o">=</span> <span class="n">term</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
             <span class="c1"># series of (1 + t)**e in t</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
                 <span class="n">term</span> <span class="o">*=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">exp</span> <span class="o">-</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">t</span><span class="o">/</span><span class="n">i</span>
@@ -1368,12 +1368,12 @@
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">exp</span><span class="o">.</span><span class="n">is_Mul</span><span class="p">:</span>
                 <span class="n">k</span><span class="p">,</span> <span class="n">arg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">exp</span><span class="o">.</span><span class="n">as_independent</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">k</span><span class="p">,</span> <span class="n">arg</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">exp</span>
+                <span class="n">k</span><span class="p">,</span> <span class="n">arg</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">exp</span>
             <span class="k">if</span> <span class="n">arg</span><span class="o">.</span><span class="n">is_Add</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">Mul</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">exp</span><span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="n">f</span><span class="p">)</span><span class="o">.</span><span class="n">as_leading_term</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">arg</span><span class="o">.</span><span class="n">args</span><span class="p">])</span>
             <span class="n">arg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">exp</span><span class="o">.</span><span class="n">as_leading_term</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">Order</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
-                <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span>
+                <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">exp</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">exp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">exp</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">base</span><span class="p">))</span><span class="o">.</span><span class="n">as_leading_term</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
@@ -1454,7 +1454,7 @@
             <span class="k">if</span> <span class="n">h</span><span class="o">.</span><span class="n">is_Rational</span><span class="p">:</span>
                 <span class="n">ceh</span> <span class="o">=</span> <span class="n">ce</span><span class="o">*</span><span class="n">h</span>
                 <span class="n">c</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">ceh</span><span class="p">)</span>
-                <span class="n">r</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+                <span class="n">r</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">c</span><span class="o">.</span><span class="n">is_Rational</span><span class="p">:</span>
                     <span class="n">iceh</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="n">ceh</span><span class="o">.</span><span class="n">numerator</span><span class="p">,</span> <span class="n">ceh</span><span class="o">.</span><span class="n">denominator</span><span class="p">)</span>
                     <span class="n">c</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">iceh</span><span class="p">)</span>
@@ -1472,7 +1472,7 @@
                 <span class="c1"># should it stay as sqrt(2 + 2*sqrt(5)) or become</span>
                 <span class="c1"># sqrt(2)*sqrt(1 + sqrt(5))</span>
                 <span class="k">return</span> <span class="n">c</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">_keep_coeff</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">t</span><span class="p">),</span> <span class="n">e</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span></div></div>
+        <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span></div></div>
 </pre></div>
 
            </div>

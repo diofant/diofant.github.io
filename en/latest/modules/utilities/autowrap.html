@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Autowrap Module &mdash; Diofant 0.10.1.dev299+g5e6a61e documentation</title>
+  <title>Autowrap Module &mdash; Diofant 0.10.1.dev310+g172db0a documentation</title>
   
 
   
@@ -276,29 +276,29 @@ computationally expensive.</p>
 <p>When is this useful?</p>
 <blockquote>
 <div><ol class="arabic simple">
-<li>For computations on large arrays, Python iterations may be too slow,
+<li><p>For computations on large arrays, Python iterations may be too slow,
 and depending on the mathematical expression, it may be difficult to
-exploit the advanced index operations provided by NumPy.</li>
-<li>For <em>really</em> long expressions that will be called repeatedly, the
-compiled binary should be significantly faster than Diofant’s .evalf()</li>
-<li>If you are generating code with the codegen utility in order to use
+exploit the advanced index operations provided by NumPy.</p></li>
+<li><p>For <em>really</em> long expressions that will be called repeatedly, the
+compiled binary should be significantly faster than Diofant’s .evalf()</p></li>
+<li><p>If you are generating code with the codegen utility in order to use
 it in another project, the automatic python wrappers let you test the
-binaries immediately from within Diofant.</li>
-<li>To create customized ufuncs for use with numpy arrays.
-See <em>ufuncify</em>.</li>
+binaries immediately from within Diofant.</p></li>
+<li><p>To create customized ufuncs for use with numpy arrays.
+See <em>ufuncify</em>.</p></li>
 </ol>
 </div></blockquote>
 <p>When is this module NOT the best approach?</p>
 <blockquote>
 <div><ol class="arabic simple">
-<li>If you are really concerned about speed or memory optimizations,
+<li><p>If you are really concerned about speed or memory optimizations,
 you will probably get better results by working directly with the
 wrapper tools and the low level code.  However, the files generated
 by this utility may provide a useful starting point and reference
 code. Temporary files will be left intact if you supply the keyword
-tempdir=”path/to/files/”.</li>
-<li>If the array computation can be handled easily by numpy, and you
-don’t need the binaries for another project.</li>
+tempdir=”path/to/files/”.</p></li>
+<li><p>If the array computation can be handled easily by numpy, and you
+don’t need the binaries for another project.</p></li>
 </ol>
 </div></blockquote>
 <dl class="class">
@@ -317,20 +317,16 @@ don’t need the binaries for another project.</li>
 <dd><p>Write a Cython file with python wrappers</p>
 <p>This file contains all the definitions of the routines in c code and
 refers to the header file.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>routines</strong> (<em>list</em>) – List of Routine instances</li>
-<li><strong>f</strong> (<em>file</em>) – File-like object to write the file to</li>
-<li><strong>prefix</strong> (<em>str</em>) – The filename prefix, used to refer to the proper header file.
-Only the basename of the prefix is used.</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>routines</strong> (<em>list</em>) – List of Routine instances</p></li>
+<li><p><strong>f</strong> (<em>file</em>) – File-like object to write the file to</p></li>
+<li><p><strong>prefix</strong> (<em>str</em>) – The filename prefix, used to refer to the proper header file.
+Only the basename of the prefix is used.</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -356,19 +352,15 @@ Only the basename of the prefix is used.</li>
 <code class="descname">dump_c</code><span class="sig-paren">(</span><em>routines</em>, <em>f</em>, <em>prefix</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/diofant/utilities/autowrap.html#UfuncifyCodeWrapper.dump_c"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.utilities.autowrap.UfuncifyCodeWrapper.dump_c" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write a C file with python wrappers</p>
 <p>This file contains all the definitions of the routines in c code.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>routines</strong> (<em>list</em>) – List of Routine instances</li>
-<li><strong>f</strong> (<em>file</em>) – File-like object to write the file to</li>
-<li><strong>prefix</strong> (<em>str</em>) – The filename prefix, used to name the imported module.</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>routines</strong> (<em>list</em>) – List of Routine instances</p></li>
+<li><p><strong>f</strong> (<em>file</em>) – File-like object to write the file to</p></li>
+<li><p><strong>prefix</strong> (<em>str</em>) – The filename prefix, used to name the imported module.</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -377,36 +369,32 @@ Only the basename of the prefix is used.</li>
 <dt id="diofant.utilities.autowrap.autowrap">
 <code class="descclassname">diofant.utilities.autowrap.</code><code class="descname">autowrap</code><span class="sig-paren">(</span><em>expr</em>, <em>language=None</em>, <em>backend='f2py'</em>, <em>tempdir=None</em>, <em>args=None</em>, <em>flags=None</em>, <em>verbose=False</em>, <em>helpers=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/diofant/utilities/autowrap.html#autowrap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.utilities.autowrap.autowrap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generates python callable binaries based on the math expression.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>expr</strong> – The Diofant expression that should be wrapped as a binary routine.</li>
-<li><strong>language</strong> (<em>string, optional</em>) – If supplied, (options: ‘C’ or ‘F95’), specifies the language of the
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>expr</strong> – The Diofant expression that should be wrapped as a binary routine.</p></li>
+<li><p><strong>language</strong> (<em>string, optional</em>) – If supplied, (options: ‘C’ or ‘F95’), specifies the language of the
 generated code. If <code class="docutils literal notranslate"><span class="pre">None</span></code> [default], the language is inferred based
-upon the specified backend.</li>
-<li><strong>backend</strong> (<em>string, optional</em>) – Backend used to wrap the generated code. Either ‘f2py’ [default],
-or ‘cython’.</li>
-<li><strong>tempdir</strong> (<em>string, optional</em>) – Path to directory for temporary files. If this argument is supplied,
+upon the specified backend.</p></li>
+<li><p><strong>backend</strong> (<em>string, optional</em>) – Backend used to wrap the generated code. Either ‘f2py’ [default],
+or ‘cython’.</p></li>
+<li><p><strong>tempdir</strong> (<em>string, optional</em>) – Path to directory for temporary files. If this argument is supplied,
 the generated code and the wrapper input files are left intact in the
-specified path.</li>
-<li><strong>args</strong> (<em>iterable, optional</em>) – An ordered iterable of symbols. Specifies the argument sequence for the
-function.</li>
-<li><strong>flags</strong> (<em>iterable, optional</em>) – Additional option flags that will be passed to the backend.</li>
-<li><strong>verbose</strong> (<em>bool, optional</em>) – If True, autowrap will not mute the command line backends. This can be
-helpful for debugging.</li>
-<li><strong>helpers</strong> (<em>iterable, optional</em>) – Used to define auxillary expressions needed for the main expr. If the
+specified path.</p></li>
+<li><p><strong>args</strong> (<em>iterable, optional</em>) – An ordered iterable of symbols. Specifies the argument sequence for the
+function.</p></li>
+<li><p><strong>flags</strong> (<em>iterable, optional</em>) – Additional option flags that will be passed to the backend.</p></li>
+<li><p><strong>verbose</strong> (<em>bool, optional</em>) – If True, autowrap will not mute the command line backends. This can be
+helpful for debugging.</p></li>
+<li><p><strong>helpers</strong> (<em>iterable, optional</em>) – Used to define auxillary expressions needed for the main expr. If the
 main expression needs to call a specialized function it should be put
 in the <code class="docutils literal notranslate"><span class="pre">helpers</span></code> iterable. Autowrap will then make sure that the
 compiled main expression can link to the helper routine. Items should
 be tuples with (&lt;function_name&gt;, &lt;diofant_expression&gt;, &lt;arguments&gt;). It
-is mandatory to supply an argument sequence to helper routines.</li>
+is mandatory to supply an argument sequence to helper routines.</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <p class="rubric">Examples</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span> <span class="o">=</span> <span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span><span class="p">)</span><span class="o">**</span><span class="mi">13</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">binary_func</span> <span class="o">=</span> <span class="n">autowrap</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
@@ -439,36 +427,32 @@ with implemented_function().</p>
 <dt id="diofant.utilities.autowrap.ufuncify">
 <code class="descclassname">diofant.utilities.autowrap.</code><code class="descname">ufuncify</code><span class="sig-paren">(</span><em>args</em>, <em>expr</em>, <em>language=None</em>, <em>backend='numpy'</em>, <em>tempdir=None</em>, <em>flags=None</em>, <em>verbose=False</em>, <em>helpers=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/diofant/utilities/autowrap.html#ufuncify"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.utilities.autowrap.ufuncify" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generates a binary function that supports broadcasting on numpy arrays.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>args</strong> (<em>iterable</em>) – Either a Symbol or an iterable of symbols. Specifies the argument
-sequence for the function.</li>
-<li><strong>expr</strong> – A Diofant expression that defines the element wise operation.</li>
-<li><strong>language</strong> (<em>string, optional</em>) – If supplied, (options: ‘C’ or ‘F95’), specifies the language of the
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args</strong> (<em>iterable</em>) – Either a Symbol or an iterable of symbols. Specifies the argument
+sequence for the function.</p></li>
+<li><p><strong>expr</strong> – A Diofant expression that defines the element wise operation.</p></li>
+<li><p><strong>language</strong> (<em>string, optional</em>) – If supplied, (options: ‘C’ or ‘F95’), specifies the language of the
 generated code. If <code class="docutils literal notranslate"><span class="pre">None</span></code> [default], the language is inferred based
-upon the specified backend.</li>
-<li><strong>backend</strong> (<em>string, optional</em>) – Backend used to wrap the generated code. Either ‘numpy’ [default],
-‘cython’, or ‘f2py’.</li>
-<li><strong>tempdir</strong> (<em>string, optional</em>) – Path to directory for temporary files. If this argument is supplied,
+upon the specified backend.</p></li>
+<li><p><strong>backend</strong> (<em>string, optional</em>) – Backend used to wrap the generated code. Either ‘numpy’ [default],
+‘cython’, or ‘f2py’.</p></li>
+<li><p><strong>tempdir</strong> (<em>string, optional</em>) – Path to directory for temporary files. If this argument is supplied,
 the generated code and the wrapper input files are left intact in the
-specified path.</li>
-<li><strong>flags</strong> (<em>iterable, optional</em>) – Additional option flags that will be passed to the backend</li>
-<li><strong>verbose</strong> (<em>bool, optional</em>) – If True, autowrap will not mute the command line backends. This can be
-helpful for debugging.</li>
-<li><strong>helpers</strong> (<em>iterable, optional</em>) – Used to define auxillary expressions needed for the main expr. If the
+specified path.</p></li>
+<li><p><strong>flags</strong> (<em>iterable, optional</em>) – Additional option flags that will be passed to the backend</p></li>
+<li><p><strong>verbose</strong> (<em>bool, optional</em>) – If True, autowrap will not mute the command line backends. This can be
+helpful for debugging.</p></li>
+<li><p><strong>helpers</strong> (<em>iterable, optional</em>) – Used to define auxillary expressions needed for the main expr. If the
 main expression needs to call a specialized function it should be put
 in the <code class="docutils literal notranslate"><span class="pre">helpers</span></code> iterable. Autowrap will then make sure that the
 compiled main expression can link to the helper routine. Items should
 be tuples with (&lt;function_name&gt;, &lt;diofant_expression&gt;, &lt;arguments&gt;). It
-is mandatory to supply an argument sequence to helper routines.</li>
+is mandatory to supply an argument sequence to helper routines.</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <p class="rubric">Notes</p>
 <p>The default backend (‘numpy’) will create actual instances of
 <code class="docutils literal notranslate"><span class="pre">numpy.ufunc</span></code>. These support ndimensional broadcasting, and implicit type
@@ -477,7 +461,7 @@ function, which requires equal length 1-dimensional arrays for all
 arguments, and will not perform any type conversions.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/ufuncs.html">https://docs.scipy.org/doc/numpy/reference/ufuncs.html</a></li>
+<li><p><a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/ufuncs.html">https://docs.scipy.org/doc/numpy/reference/ufuncs.html</a></p></li>
 </ul>
 <p class="rubric">Examples</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>

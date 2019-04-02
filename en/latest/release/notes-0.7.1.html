@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>SymPy 0.7.1 &mdash; Diofant 0.10.1.dev299+g5e6a61e documentation</title>
+  <title>SymPy 0.7.1 &mdash; Diofant 0.10.1.dev310+g172db0a documentation</title>
   
 
   
@@ -206,87 +206,92 @@
 <div class="section" id="major-changes">
 <h2>Major changes<a class="headerlink" href="#major-changes" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Python 2.4 is no longer supported.  SymPy will not work at all in
+<li><p>Python 2.4 is no longer supported.  SymPy will not work at all in
 Python 2.4.  If you still need to use SymPy under Python 2.4 for some
-reason, you will need to use SymPy 0.7.0 or earlier.</li>
-<li>The Pyglet plotting library is now an (optional) external dependency.
+reason, you will need to use SymPy 0.7.0 or earlier.</p></li>
+<li><p>The Pyglet plotting library is now an (optional) external dependency.
 Previously, we shipped a version of Pyglet with SymPy, but this was
 old and buggy.  The plan is to eventually make the plotting in SymPy
 much more modular, so that it supports many backends, but this has not
 been done yet.  For now, still only Pyglet is directly supported.
 Note that Pyglet is only an optional dependency and is only needed for
 plotting. The rest of SymPy can still be used without any dependencies
-(except for Python).</li>
-<li><code class="docutils literal notranslate"><span class="pre">isympy</span></code> now works with the new IPython 0.11.</li>
-<li>mpmath has been updated to 0.17.  See the corresponding mpmath <a class="reference external" href="https://github.com/fredrik-johansson/mpmath/blob/master/CHANGES">release
-notes</a>.</li>
-<li>Added a <code class="docutils literal notranslate"><span class="pre">Subs</span></code> object for representing unevaluated substitutions.  This
+(except for Python).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">isympy</span></code> now works with the new IPython 0.11.</p></li>
+<li><p>mpmath has been updated to 0.17.  See the corresponding mpmath <a class="reference external" href="https://github.com/fredrik-johansson/mpmath/blob/master/CHANGES">release
+notes</a>.</p></li>
+<li><p>Added a <code class="docutils literal notranslate"><span class="pre">Subs</span></code> object for representing unevaluated substitutions.  This
 finally lets us represent derivatives evaluated at a point, i.e.,
 <code class="docutils literal notranslate"><span class="pre">diff(f(x),</span> <span class="pre">x).subs(x,</span> <span class="pre">0)</span></code> returns <code class="docutils literal notranslate"><span class="pre">Subs(Derivative(f(_x),</span> <span class="pre">_x),</span> <span class="pre">(_x,),</span> <span class="pre">(0,))</span></code>.
 This also means that SymPy can now correctly compute the chain rule
-when this functionality is required, such as with <code class="docutils literal notranslate"><span class="pre">f(g(x)).diff(x)</span></code>.</li>
-<li>Hypergeometric functions/Meijer G-Functions<ul>
-<li>Added classes <code class="docutils literal notranslate"><span class="pre">hyper()</span></code> and <code class="docutils literal notranslate"><span class="pre">meijerg()</span></code> to represent Hypergeometric and Meijer G-functions, respectively. They support numerical evaluation (using mpmath) and symbolic differentiation (not with respect to the parameters).</li>
-<li>Added an algorithm for rewriting hypergeometric and meijer g-functions in terms of more familiar, named special functions. It is accessible via the function <code class="docutils literal notranslate"><span class="pre">hyperexpand()</span></code>, or also via <code class="docutils literal notranslate"><span class="pre">expand_func()</span></code>. This algorithm recognises many elementary functions, and also complete and incomplete gamma functions, bessel functions, and error functions. It can easily be extended to handle more classes of special functions.</li>
+when this functionality is required, such as with <code class="docutils literal notranslate"><span class="pre">f(g(x)).diff(x)</span></code>.</p></li>
+<li><p>Hypergeometric functions/Meijer G-Functions</p>
+<ul>
+<li><p>Added classes <code class="docutils literal notranslate"><span class="pre">hyper()</span></code> and <code class="docutils literal notranslate"><span class="pre">meijerg()</span></code> to represent Hypergeometric and Meijer G-functions, respectively. They support numerical evaluation (using mpmath) and symbolic differentiation (not with respect to the parameters).</p></li>
+<li><p>Added an algorithm for rewriting hypergeometric and meijer g-functions in terms of more familiar, named special functions. It is accessible via the function <code class="docutils literal notranslate"><span class="pre">hyperexpand()</span></code>, or also via <code class="docutils literal notranslate"><span class="pre">expand_func()</span></code>. This algorithm recognises many elementary functions, and also complete and incomplete gamma functions, bessel functions, and error functions. It can easily be extended to handle more classes of special functions.</p></li>
 </ul>
 </li>
-<li>Sets<ul>
-<li>Added FiniteSet class to mimic python set behavior while also interacting with existing Intervals and Unions</li>
-<li>FiniteSets and Intervals interact so that, for example <code class="docutils literal notranslate"><span class="pre">Interval(0,</span> <span class="pre">10)</span> <span class="pre">-</span> <span class="pre">FiniteSet(0,</span> <span class="pre">5)</span></code> produces <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">5)</span> <span class="pre">U</span> <span class="pre">(5,</span> <span class="pre">10]</span></code></li>
-<li>FiniteSets also handle non-numerical objects so the following is possible <code class="docutils literal notranslate"><span class="pre">{1,</span> <span class="pre">2,</span> <span class="pre">'one',</span> <span class="pre">'two',</span> <span class="pre">{a,</span> <span class="pre">b}}</span></code></li>
-<li>Added ProductSet to handle Cartesian products of sets</li>
-<li>Create using the <code class="docutils literal notranslate"><span class="pre">*</span></code> operator, i.e. <code class="docutils literal notranslate"><span class="pre">twodice</span> <span class="pre">=</span> <span class="pre">FiniteSet(1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">4,</span> <span class="pre">5,</span> <span class="pre">6)</span> <span class="pre">*</span> <span class="pre">FiniteSet(1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">4,</span> <span class="pre">5,</span> <span class="pre">6)</span></code> or <code class="docutils literal notranslate"><span class="pre">square</span> <span class="pre">=</span> <span class="pre">Interval(0,</span> <span class="pre">1)</span> <span class="pre">*</span> <span class="pre">Interval(0,</span> <span class="pre">1)</span></code></li>
-<li>pow operator also works as expected: <code class="docutils literal notranslate"><span class="pre">R3</span> <span class="pre">=</span> <span class="pre">Interval(-oo,</span> <span class="pre">oo)**3</span> <span class="pre">;</span> <span class="pre">(3,</span> <span class="pre">-5,</span> <span class="pre">0)</span> <span class="pre">in</span> <span class="pre">R3</span> <span class="pre">==</span> <span class="pre">True</span></code></li>
-<li>Subtraction, union, measurement all work taking complex intersections into account.</li>
-<li>Added as_relational method to sets, producing boolean statements using <code class="docutils literal notranslate"><span class="pre">And</span></code>, <code class="docutils literal notranslate"><span class="pre">Or</span></code>, <code class="docutils literal notranslate"><span class="pre">Eq</span></code>, <code class="docutils literal notranslate"><span class="pre">Lt</span></code>, <code class="docutils literal notranslate"><span class="pre">Gt</span></code>, etc.</li>
-<li>Changed <code class="docutils literal notranslate"><span class="pre">reduce_poly_inequalities</span></code> to return unions of sets rather than lists of sets</li>
+<li><p>Sets</p>
+<ul>
+<li><p>Added FiniteSet class to mimic python set behavior while also interacting with existing Intervals and Unions</p></li>
+<li><p>FiniteSets and Intervals interact so that, for example <code class="docutils literal notranslate"><span class="pre">Interval(0,</span> <span class="pre">10)</span> <span class="pre">-</span> <span class="pre">FiniteSet(0,</span> <span class="pre">5)</span></code> produces <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">5)</span> <span class="pre">U</span> <span class="pre">(5,</span> <span class="pre">10]</span></code></p></li>
+<li><p>FiniteSets also handle non-numerical objects so the following is possible <code class="docutils literal notranslate"><span class="pre">{1,</span> <span class="pre">2,</span> <span class="pre">'one',</span> <span class="pre">'two',</span> <span class="pre">{a,</span> <span class="pre">b}}</span></code></p></li>
+<li><p>Added ProductSet to handle Cartesian products of sets</p></li>
+<li><p>Create using the <code class="docutils literal notranslate"><span class="pre">*</span></code> operator, i.e. <code class="docutils literal notranslate"><span class="pre">twodice</span> <span class="pre">=</span> <span class="pre">FiniteSet(1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">4,</span> <span class="pre">5,</span> <span class="pre">6)</span> <span class="pre">*</span> <span class="pre">FiniteSet(1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">4,</span> <span class="pre">5,</span> <span class="pre">6)</span></code> or <code class="docutils literal notranslate"><span class="pre">square</span> <span class="pre">=</span> <span class="pre">Interval(0,</span> <span class="pre">1)</span> <span class="pre">*</span> <span class="pre">Interval(0,</span> <span class="pre">1)</span></code></p></li>
+<li><p>pow operator also works as expected: <code class="docutils literal notranslate"><span class="pre">R3</span> <span class="pre">=</span> <span class="pre">Interval(-oo,</span> <span class="pre">oo)**3</span> <span class="pre">;</span> <span class="pre">(3,</span> <span class="pre">-5,</span> <span class="pre">0)</span> <span class="pre">in</span> <span class="pre">R3</span> <span class="pre">==</span> <span class="pre">True</span></code></p></li>
+<li><p>Subtraction, union, measurement all work taking complex intersections into account.</p></li>
+<li><p>Added as_relational method to sets, producing boolean statements using <code class="docutils literal notranslate"><span class="pre">And</span></code>, <code class="docutils literal notranslate"><span class="pre">Or</span></code>, <code class="docutils literal notranslate"><span class="pre">Eq</span></code>, <code class="docutils literal notranslate"><span class="pre">Lt</span></code>, <code class="docutils literal notranslate"><span class="pre">Gt</span></code>, etc.</p></li>
+<li><p>Changed <code class="docutils literal notranslate"><span class="pre">reduce_poly_inequalities</span></code> to return unions of sets rather than lists of sets</p></li>
 </ul>
 </li>
-<li>Iterables<ul>
-<li>Added generating routines for integer partitions and binary partitions.  The routine for integer partitions takes 3 arguments, the number itself, the maximum possible element allowed in the partitions generated and the maximum possible number of elements that will be in the partition. Binary partitions are characterized by containing only powers of two.</li>
-<li>Added generating routine for multi-set partitions.  Given a multiset, the algorithm implemented will generate all possible partitions of that multi-set.</li>
-<li>Added generating routines for bell permutations, derangements, and involutions.  A bell permutation is one in which the cycles that compose it consist of integers in a decreasing order. A derangement is a permutation such that the ith element is not at the ith position. An involution is a permutation that when multiplied by itself gives the identity permutation.</li>
-<li>Added generating routine for unrestricted necklaces.  An unrestricted necklace is an a-ary string of n characters, each of a possible types. These have been characterized by the parameters n and k in the routine.</li>
-<li>Added generating routine for oriented forests. This is an implementation of algorithm S in TAOCP Vol 4A.</li>
+<li><p>Iterables</p>
+<ul>
+<li><p>Added generating routines for integer partitions and binary partitions.  The routine for integer partitions takes 3 arguments, the number itself, the maximum possible element allowed in the partitions generated and the maximum possible number of elements that will be in the partition. Binary partitions are characterized by containing only powers of two.</p></li>
+<li><p>Added generating routine for multi-set partitions.  Given a multiset, the algorithm implemented will generate all possible partitions of that multi-set.</p></li>
+<li><p>Added generating routines for bell permutations, derangements, and involutions.  A bell permutation is one in which the cycles that compose it consist of integers in a decreasing order. A derangement is a permutation such that the ith element is not at the ith position. An involution is a permutation that when multiplied by itself gives the identity permutation.</p></li>
+<li><p>Added generating routine for unrestricted necklaces.  An unrestricted necklace is an a-ary string of n characters, each of a possible types. These have been characterized by the parameters n and k in the routine.</p></li>
+<li><p>Added generating routine for oriented forests. This is an implementation of algorithm S in TAOCP Vol 4A.</p></li>
 </ul>
 </li>
-<li>xyz Spin bases<ul>
-<li>The represent, rewrite and InnerProduct logic has been improved to work between any two spin bases. This was done by utilizing the Wigner-D matrix, implemented in the WignerD class, in defining the changes between the various bases. Representing a state, i.e. <code class="docutils literal notranslate"><span class="pre">represent(JzKet(1,0),</span> <span class="pre">basis=Jx)</span></code>, can be used to give the vector representation of any get in any of the x/y/z bases for numerical values of j and m in the spin eigenstate. Similarly, rewriting states into different bases, i.e. <code class="docutils literal notranslate"><span class="pre">JzKet(1,0).rewrite('Jx')</span></code>, will write the states as a linear combination of elements of the given basis. Because this relies on the represent function, this only works for numerical j and m values. The inner product of two eigenstates in different bases can be evaluated, i.e. <code class="docutils literal notranslate"><span class="pre">InnerProduct(JzKet(1,0),JxKet(1,1))</span></code>. When two different bases are used, one state is rewritten into the other basis, so this requires numerical values of j and m, but innerproducts of states in the same basis can still be done symbolically.</li>
-<li>The <code class="docutils literal notranslate"><span class="pre">Rotation.D</span></code> and <code class="docutils literal notranslate"><span class="pre">Rotation.d</span></code> methods, representing the Wigner-D function and the Wigner small-d function, return an instance of the WignerD class, which can be evaluated with the <code class="docutils literal notranslate"><span class="pre">doit()</span></code> method to give the corresponding matrix element of the Wigner-D matrix.</li>
+<li><p>xyz Spin bases</p>
+<ul>
+<li><p>The represent, rewrite and InnerProduct logic has been improved to work between any two spin bases. This was done by utilizing the Wigner-D matrix, implemented in the WignerD class, in defining the changes between the various bases. Representing a state, i.e. <code class="docutils literal notranslate"><span class="pre">represent(JzKet(1,0),</span> <span class="pre">basis=Jx)</span></code>, can be used to give the vector representation of any get in any of the x/y/z bases for numerical values of j and m in the spin eigenstate. Similarly, rewriting states into different bases, i.e. <code class="docutils literal notranslate"><span class="pre">JzKet(1,0).rewrite('Jx')</span></code>, will write the states as a linear combination of elements of the given basis. Because this relies on the represent function, this only works for numerical j and m values. The inner product of two eigenstates in different bases can be evaluated, i.e. <code class="docutils literal notranslate"><span class="pre">InnerProduct(JzKet(1,0),JxKet(1,1))</span></code>. When two different bases are used, one state is rewritten into the other basis, so this requires numerical values of j and m, but innerproducts of states in the same basis can still be done symbolically.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">Rotation.D</span></code> and <code class="docutils literal notranslate"><span class="pre">Rotation.d</span></code> methods, representing the Wigner-D function and the Wigner small-d function, return an instance of the WignerD class, which can be evaluated with the <code class="docutils literal notranslate"><span class="pre">doit()</span></code> method to give the corresponding matrix element of the Wigner-D matrix.</p></li>
 </ul>
 </li>
-<li>Other changes<ul>
-<li>We now use MathJax in our docs. MathJax renders LaTeX math entierly in
+<li><p>Other changes</p>
+<ul>
+<li><p>We now use MathJax in our docs. MathJax renders LaTeX math entierly in
 the browser using Javascript.  This means that the math is much more
 readable than the previous png math, which uses images.  MathJax is
 only supported on modern browsers, so LaTeX math in the docs may not
-work on older browsers.</li>
-<li><code class="docutils literal notranslate"><span class="pre">nroots()</span></code> now lets you set the precision of computations</li>
-<li>Added support for gmpy and mpmath’s types to <code class="docutils literal notranslate"><span class="pre">sympify()</span></code></li>
-<li>Fix some bugs with <code class="docutils literal notranslate"><span class="pre">lambdify()</span></code></li>
-<li>Fix a bug with as_independent and non-commutative symbols.</li>
-<li>Fix a bug with collect (<a class="reference external" href="https://github.com/sympy/sympy/issues/5615">sympy/sympy#5615</a>)</li>
-<li>Many fixes relating to porting SymPy to Python 3.  Thanks to our GSoC
-student Vladimir Perić, this task is almost completed.</li>
-<li>Some people were retroactively added to the AUTHORS file.</li>
-<li>Added a solver for a special case of the Riccati equation in the ODE
-module.</li>
-<li>Iterated derivatives are pretty printed in a concise way.</li>
-<li>Fix a bug with integrating functions with multiple DiracDeltas.</li>
-<li>Add support for <code class="docutils literal notranslate"><span class="pre">Matrix.norm()</span></code> that works for Matrices (not just vectors).</li>
-<li>Improvements to the Gröbner bases algorithm.</li>
-<li>Plot.saveimage now supports a StringIO outfile</li>
-<li>Expr.as_ordered_terms now supports non lex orderings.</li>
-<li>diff now canonicalizes the order of differentiation symbols.  This is
+work on older browsers.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nroots()</span></code> now lets you set the precision of computations</p></li>
+<li><p>Added support for gmpy and mpmath’s types to <code class="docutils literal notranslate"><span class="pre">sympify()</span></code></p></li>
+<li><p>Fix some bugs with <code class="docutils literal notranslate"><span class="pre">lambdify()</span></code></p></li>
+<li><p>Fix a bug with as_independent and non-commutative symbols.</p></li>
+<li><p>Fix a bug with collect (<a class="reference external" href="https://github.com/sympy/sympy/issues/5615">sympy/sympy#5615</a>)</p></li>
+<li><p>Many fixes relating to porting SymPy to Python 3.  Thanks to our GSoC
+student Vladimir Perić, this task is almost completed.</p></li>
+<li><p>Some people were retroactively added to the AUTHORS file.</p></li>
+<li><p>Added a solver for a special case of the Riccati equation in the ODE
+module.</p></li>
+<li><p>Iterated derivatives are pretty printed in a concise way.</p></li>
+<li><p>Fix a bug with integrating functions with multiple DiracDeltas.</p></li>
+<li><p>Add support for <code class="docutils literal notranslate"><span class="pre">Matrix.norm()</span></code> that works for Matrices (not just vectors).</p></li>
+<li><p>Improvements to the Gröbner bases algorithm.</p></li>
+<li><p>Plot.saveimage now supports a StringIO outfile</p></li>
+<li><p>Expr.as_ordered_terms now supports non lex orderings.</p></li>
+<li><p>diff now canonicalizes the order of differentiation symbols.  This is
 so it can simplify expressions like <code class="docutils literal notranslate"><span class="pre">f(x,</span> <span class="pre">y).diff(x,</span> <span class="pre">y)</span> <span class="pre">-</span> <span class="pre">f(x,</span>
 <span class="pre">y).diff(y,</span> <span class="pre">x)</span></code>.  If you want to create a Derivative object without
 sorting the args, you should create it explicitly with <code class="docutils literal notranslate"><span class="pre">Derivative</span></code>,
 so that you will get <code class="docutils literal notranslate"><span class="pre">Derivative(f(x,</span> <span class="pre">y),</span> <span class="pre">x,</span> <span class="pre">y)</span> <span class="pre">!=</span> <span class="pre">Derivative(f(x,</span> <span class="pre">y),</span> <span class="pre">y,</span> <span class="pre">x)</span></code>.
 Note that internally, derivatives that can be computed are always
-computed in the order that they are given in.</li>
-<li>Added functions <code class="docutils literal notranslate"><span class="pre">is_sequence()</span></code> and <code class="docutils literal notranslate"><span class="pre">iterable()</span></code> for determining if
-something is an ordered iterable or normal iterable, respectively.</li>
-<li>Enabled an option in Sphinx that adds a <code class="docutils literal notranslate"><span class="pre">source</span></code> link next to each function, which links to a copy of the source code for that function.</li>
+computed in the order that they are given in.</p></li>
+<li><p>Added functions <code class="docutils literal notranslate"><span class="pre">is_sequence()</span></code> and <code class="docutils literal notranslate"><span class="pre">iterable()</span></code> for determining if
+something is an ordered iterable or normal iterable, respectively.</p></li>
+<li><p>Enabled an option in Sphinx that adds a <code class="docutils literal notranslate"><span class="pre">source</span></code> link next to each function, which links to a copy of the source code for that function.</p></li>
 </ul>
 </li>
 </ul>

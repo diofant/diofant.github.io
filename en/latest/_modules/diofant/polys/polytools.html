@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.polytools &mdash; Diofant 0.10.1.dev299+g5e6a61e documentation</title>
+  <title>diofant.polys.polytools &mdash; Diofant 0.10.1.dev310+g172db0a documentation</title>
   
 
   
@@ -155,7 +155,7 @@
 <span class="kn">import</span> <span class="nn">mpmath</span>
 <span class="kn">from</span> <span class="nn">mpmath.libmp.libhyper</span> <span class="k">import</span> <span class="n">NoConvergence</span>
 
-<span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="p">(</span><span class="n">Add</span><span class="p">,</span> <span class="n">Basic</span><span class="p">,</span> <span class="n">Derivative</span><span class="p">,</span> <span class="n">Dummy</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">Expr</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">Mul</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span>
+<span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="p">(</span><span class="n">Add</span><span class="p">,</span> <span class="n">Basic</span><span class="p">,</span> <span class="n">Derivative</span><span class="p">,</span> <span class="n">Dummy</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">Expr</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">Mul</span><span class="p">,</span>
                     <span class="n">Tuple</span><span class="p">,</span> <span class="n">oo</span><span class="p">,</span> <span class="n">preorder_traversal</span><span class="p">,</span> <span class="n">sympify</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">..core.compatibility</span> <span class="k">import</span> <span class="n">default_sort_key</span><span class="p">,</span> <span class="n">iterable</span>
 <span class="kn">from</span> <span class="nn">..core.decorators</span> <span class="k">import</span> <span class="n">_sympifyit</span>
@@ -773,7 +773,7 @@
         <span class="n">dom</span><span class="p">,</span> <span class="n">rep</span> <span class="o">=</span> <span class="n">construct_domain</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">as_dict</span><span class="p">(),</span>
                                     <span class="n">field</span><span class="o">=</span><span class="n">field</span><span class="p">,</span>
                                     <span class="n">composite</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">is_Composite</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span>
-                                    <span class="n">extension</span><span class="o">=</span><span class="kc">False</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">is_EX</span> <span class="k">else</span> <span class="kc">True</span><span class="p">)</span>
+                                    <span class="n">extension</span><span class="o">=</span><span class="kc">False</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">is_SymbolicDomain</span> <span class="k">else</span> <span class="kc">True</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">rep</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">gens</span><span class="p">,</span> <span class="n">domain</span><span class="o">=</span><span class="n">dom</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Poly.slice"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.polytools.Poly.slice">[docs]</a>    <span class="k">def</span> <span class="nf">slice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -1480,7 +1480,7 @@
         <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">f</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">is_Field</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">,</span> <span class="n">f</span>
+            <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">f</span>
 
         <span class="n">dom</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">domain</span>
         <span class="k">if</span> <span class="n">dom</span><span class="o">.</span><span class="n">has_assoc_Ring</span><span class="p">:</span>
@@ -1801,13 +1801,11 @@
         <span class="n">_</span><span class="p">,</span> <span class="n">per</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unify</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">includePRS</span><span class="p">:</span>
-            <span class="n">result</span><span class="p">,</span> <span class="n">R</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">dmp_resultant</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">includePRS</span><span class="o">=</span><span class="n">includePRS</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">dmp_resultant</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">G</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">includePRS</span><span class="p">:</span>
+            <span class="n">result</span><span class="p">,</span> <span class="n">R</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">resultant</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">includePRS</span><span class="o">=</span><span class="n">includePRS</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">per</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">remove</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">per</span><span class="p">,</span> <span class="n">R</span><span class="p">))</span>
-        <span class="k">return</span> <span class="n">per</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">remove</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></div>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">resultant</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">per</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">remove</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Poly.discriminant"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.polytools.Poly.discriminant">[docs]</a>    <span class="k">def</span> <span class="nf">discriminant</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -2128,7 +2126,7 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="n">coeff</span><span class="p">,</span> <span class="n">factors</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">factor_list</span><span class="p">()</span>
         <span class="k">except</span> <span class="n">DomainError</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">,</span> <span class="p">[(</span><span class="bp">self</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+            <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="p">[(</span><span class="bp">self</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
 
         <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">to_expr</span><span class="p">(</span><span class="n">coeff</span><span class="p">),</span>
                 <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">per</span><span class="p">(</span><span class="n">g</span><span class="p">),</span> <span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">g</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">factors</span><span class="p">])</span></div>
@@ -3712,7 +3710,7 @@
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">polys</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">opt</span><span class="o">.</span><span class="n">polys</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+            <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">Poly</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="n">opt</span><span class="p">)</span>
 
@@ -3803,7 +3801,7 @@
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">polys</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">opt</span><span class="o">.</span><span class="n">polys</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span>
+            <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">Poly</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="n">opt</span><span class="p">)</span>
 
@@ -3940,7 +3938,7 @@
 
     <span class="n">term</span> <span class="o">=</span> <span class="n">Mul</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">x</span><span class="o">**</span><span class="n">j</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">gens</span><span class="p">,</span> <span class="n">J</span><span class="p">)])</span>
     <span class="k">if</span> <span class="n">coeff</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="n">coeff</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span>
+        <span class="n">coeff</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">term</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">orig</span>
 
@@ -4224,7 +4222,7 @@
 
 <span class="k">def</span> <span class="nf">_symbolic_factor_list</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">opt</span><span class="p">,</span> <span class="n">method</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Helper function for :func:`_symbolic_factor`.&quot;&quot;&quot;</span>
-    <span class="n">coeff</span><span class="p">,</span> <span class="n">factors</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">,</span> <span class="p">[]</span>
+    <span class="n">coeff</span><span class="p">,</span> <span class="n">factors</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="p">[]</span>
 
     <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">_eval_factor</span><span class="p">()</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="s1">&#39;_eval_factor&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="n">i</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">Mul</span><span class="o">.</span><span class="n">make_args</span><span class="p">(</span><span class="n">expr</span><span class="p">)]</span>
@@ -4241,7 +4239,7 @@
                 <span class="n">factors</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">base</span><span class="p">,</span> <span class="n">exp</span><span class="p">))</span>
                 <span class="k">continue</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">base</span><span class="p">,</span> <span class="n">exp</span> <span class="o">=</span> <span class="n">arg</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span>
+            <span class="n">base</span><span class="p">,</span> <span class="n">exp</span> <span class="o">=</span> <span class="n">arg</span><span class="p">,</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
         <span class="k">try</span><span class="p">:</span>
             <span class="n">poly</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">_poly_from_expr</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">opt</span><span class="p">)</span>
@@ -4251,15 +4249,15 @@
             <span class="n">func</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">poly</span><span class="p">,</span> <span class="n">method</span> <span class="o">+</span> <span class="s1">&#39;_list&#39;</span><span class="p">)</span>
 
             <span class="n">_coeff</span><span class="p">,</span> <span class="n">_factors</span> <span class="o">=</span> <span class="n">func</span><span class="p">()</span>
-            <span class="k">if</span> <span class="n">_coeff</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">_coeff</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">exp</span><span class="o">.</span><span class="n">is_Integer</span><span class="p">:</span>
                     <span class="n">coeff</span> <span class="o">*=</span> <span class="n">_coeff</span><span class="o">**</span><span class="n">exp</span>
                 <span class="k">elif</span> <span class="n">_coeff</span><span class="o">.</span><span class="n">is_positive</span><span class="p">:</span>
                     <span class="n">factors</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">_coeff</span><span class="p">,</span> <span class="n">exp</span><span class="p">))</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="n">_factors</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">_coeff</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">))</span>
+                    <span class="n">_factors</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">_coeff</span><span class="p">,</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)))</span>
 
-            <span class="k">if</span> <span class="n">exp</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">exp</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="n">factors</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">_factors</span><span class="p">)</span>
             <span class="k">elif</span> <span class="n">exp</span><span class="o">.</span><span class="n">is_integer</span><span class="p">:</span>
                 <span class="n">factors</span><span class="o">.</span><span class="n">extend</span><span class="p">([(</span><span class="n">f</span><span class="p">,</span> <span class="n">k</span><span class="o">*</span><span class="n">exp</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">_factors</span><span class="p">])</span>
@@ -4864,7 +4862,7 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">)):</span>
             <span class="k">return</span> <span class="n">f</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span>
+            <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span>
     <span class="k">except</span> <span class="n">PolynomialError</span><span class="p">:</span>
         <span class="k">assert</span> <span class="ow">not</span> <span class="n">f</span><span class="o">.</span><span class="n">is_commutative</span> <span class="ow">or</span> <span class="n">f</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="n">Piecewise</span><span class="p">)</span>
         <span class="c1"># Handling of noncommutative and/or piecewise expressions</span>

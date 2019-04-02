@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.stats.rv &mdash; Diofant 0.10.1.dev299+g5e6a61e documentation</title>
+  <title>diofant.stats.rv &mdash; Diofant 0.10.1.dev310+g172db0a documentation</title>
   
 
   
@@ -166,11 +166,11 @@
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">..abc</span> <span class="k">import</span> <span class="n">x</span>
-<span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="p">(</span><span class="n">Add</span><span class="p">,</span> <span class="n">Eq</span><span class="p">,</span> <span class="n">Equality</span><span class="p">,</span> <span class="n">Expr</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">Lambda</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">Symbol</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span>
+<span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="p">(</span><span class="n">Add</span><span class="p">,</span> <span class="n">Eq</span><span class="p">,</span> <span class="n">Equality</span><span class="p">,</span> <span class="n">Expr</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">Lambda</span><span class="p">,</span> <span class="n">Symbol</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span>
                     <span class="n">oo</span><span class="p">,</span> <span class="n">sympify</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">..core.relational</span> <span class="k">import</span> <span class="n">Relational</span>
 <span class="kn">from</span> <span class="nn">..functions</span> <span class="k">import</span> <span class="n">DiracDelta</span>
-<span class="kn">from</span> <span class="nn">..logic.boolalg</span> <span class="k">import</span> <span class="n">Boolean</span>
+<span class="kn">from</span> <span class="nn">..logic.boolalg</span> <span class="k">import</span> <span class="n">Boolean</span><span class="p">,</span> <span class="n">false</span><span class="p">,</span> <span class="n">true</span>
 <span class="kn">from</span> <span class="nn">..sets</span> <span class="k">import</span> <span class="n">FiniteSet</span><span class="p">,</span> <span class="n">ProductSet</span>
 <span class="kn">from</span> <span class="nn">..solvers</span> <span class="k">import</span> <span class="n">solve</span>
 <span class="kn">from</span> <span class="nn">..utilities</span> <span class="k">import</span> <span class="n">lambdify</span>
@@ -523,7 +523,7 @@
         <span class="k">for</span> <span class="n">domain</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">domains</span><span class="p">:</span>
             <span class="c1"># Collect the parts of this event which associate to this domain</span>
             <span class="n">elem</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">(</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">other</span>
-                             <span class="k">if</span> <span class="n">domain</span><span class="o">.</span><span class="n">symbols</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="n">S</span><span class="o">.</span><span class="n">true</span><span class="p">)</span>
+                             <span class="k">if</span> <span class="n">domain</span><span class="o">.</span><span class="n">symbols</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="n">true</span><span class="p">)</span>
             <span class="c1"># Test this sub-event</span>
             <span class="k">if</span> <span class="n">elem</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">domain</span><span class="p">:</span>
                 <span class="k">return</span> <span class="kc">False</span>
@@ -745,15 +745,15 @@
             <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">given_condition</span><span class="p">,</span> <span class="p">(</span><span class="n">Relational</span><span class="p">,</span> <span class="n">Boolean</span><span class="p">)):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> is not a relational or combination of relationals&quot;</span>
                          <span class="o">%</span> <span class="p">(</span><span class="n">given_condition</span><span class="p">))</span>
-    <span class="k">if</span> <span class="n">given_condition</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">false</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+    <span class="k">if</span> <span class="n">given_condition</span> <span class="o">==</span> <span class="n">false</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">condition</span><span class="p">,</span> <span class="p">(</span><span class="n">Relational</span><span class="p">,</span> <span class="n">Boolean</span><span class="p">)):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> is not a relational or combination of relationals&quot;</span>
                          <span class="o">%</span> <span class="n">condition</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">condition</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">true</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span>
-    <span class="k">if</span> <span class="n">condition</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">false</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+    <span class="k">if</span> <span class="n">condition</span> <span class="o">==</span> <span class="n">true</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">condition</span> <span class="o">==</span> <span class="n">false</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">numsamples</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">sampling_P</span><span class="p">(</span><span class="n">condition</span><span class="p">,</span> <span class="n">given_condition</span><span class="p">,</span> <span class="n">numsamples</span><span class="o">=</span><span class="n">numsamples</span><span class="p">,</span>
@@ -1185,7 +1185,7 @@
 <span class="sd">    Raises ValueError with message if condition is not True</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">condition</span> <span class="o">!=</span> <span class="n">S</span><span class="o">.</span><span class="n">true</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">condition</span> <span class="o">!=</span> <span class="n">true</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
 </pre></div>
 

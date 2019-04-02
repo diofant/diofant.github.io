@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.rings &mdash; Diofant 0.10.1.dev299+g5e6a61e documentation</title>
+  <title>diofant.polys.rings &mdash; Diofant 0.10.1.dev310+g172db0a documentation</title>
   
 
   
@@ -803,6 +803,9 @@
 
     <span class="k">def</span> <span class="nf">drop_to_ground</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">gens</span><span class="p">):</span>
         <span class="n">ring</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">gens</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span>
 
         <span class="k">if</span> <span class="n">ring</span><span class="o">.</span><span class="n">is_univariate</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;can&#39;t drop only generator to ground&quot;</span><span class="p">)</span>
@@ -2267,11 +2270,22 @@
     <span class="k">def</span> <span class="nf">subresultants</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">dmp_subresultants</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">resultant</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">dmp_resultant</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">resultant</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">includePRS</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">dmp_resultant</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">includePRS</span><span class="o">=</span><span class="n">includePRS</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">discriminant</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">dmp_discriminant</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+<div class="viewcode-block" id="PolyElement.discriminant"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.rings.PolyElement.discriminant">[docs]</a>    <span class="k">def</span> <span class="nf">discriminant</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Computes discriminant of a polynomial.&quot;&quot;&quot;</span>
+        <span class="n">ring</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span>
+
+        <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">degree</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">d</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">ring</span><span class="o">.</span><span class="n">zero</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="p">((</span><span class="n">d</span><span class="o">*</span><span class="p">(</span><span class="n">d</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">drop_to_ground</span><span class="p">(</span><span class="o">*</span><span class="n">ring</span><span class="o">.</span><span class="n">gens</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span><span class="o">.</span><span class="n">LC</span>
+
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">resultant</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">diff</span><span class="p">())</span> <span class="o">//</span> <span class="p">(</span><span class="n">c</span><span class="o">*</span><span class="n">s</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">decompose</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">is_univariate</span><span class="p">:</span>

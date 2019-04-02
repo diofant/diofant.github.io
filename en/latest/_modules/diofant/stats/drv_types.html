@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.stats.drv_types &mdash; Diofant 0.10.1.dev299+g5e6a61e documentation</title>
+  <title>diofant.stats.drv_types &mdash; Diofant 0.10.1.dev310+g172db0a documentation</title>
   
 
   
@@ -150,8 +150,9 @@
            <div itemprop="articleBody">
             
   <h1>Source code for diofant.stats.drv_types</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">S</span><span class="p">,</span> <span class="n">sympify</span>
+<span></span><span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">sympify</span>
 <span class="kn">from</span> <span class="nn">..functions</span> <span class="k">import</span> <span class="n">exp</span><span class="p">,</span> <span class="n">factorial</span>
+<span class="kn">from</span> <span class="nn">..sets</span> <span class="k">import</span> <span class="n">Naturals</span><span class="p">,</span> <span class="n">Naturals0</span>
 <span class="kn">from</span> <span class="nn">.drv</span> <span class="k">import</span> <span class="n">SingleDiscreteDistribution</span><span class="p">,</span> <span class="n">SingleDiscretePSpace</span>
 <span class="kn">from</span> <span class="nn">.rv</span> <span class="k">import</span> <span class="n">_value_check</span>
 
@@ -169,7 +170,7 @@
 <span class="k">class</span> <span class="nc">PoissonDistribution</span><span class="p">(</span><span class="n">SingleDiscreteDistribution</span><span class="p">):</span>
     <span class="n">_argnames</span> <span class="o">=</span> <span class="s1">&#39;lamda&#39;</span><span class="p">,</span>
 
-    <span class="nb">set</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">Naturals0</span>
+    <span class="nb">set</span> <span class="o">=</span> <span class="n">Naturals0</span>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">check</span><span class="p">(</span><span class="n">lamda</span><span class="p">):</span>
@@ -229,7 +230,7 @@
 
 <span class="k">class</span> <span class="nc">GeometricDistribution</span><span class="p">(</span><span class="n">SingleDiscreteDistribution</span><span class="p">):</span>
     <span class="n">_argnames</span> <span class="o">=</span> <span class="s1">&#39;p&#39;</span><span class="p">,</span>
-    <span class="nb">set</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">Naturals</span>
+    <span class="nb">set</span> <span class="o">=</span> <span class="n">Naturals</span>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">check</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
@@ -263,7 +264,7 @@
 
 <span class="sd">    &gt;&gt;&gt; from diofant.stats import density, E, variance</span>
 
-<span class="sd">    &gt;&gt;&gt; p = S.One / 5</span>
+<span class="sd">    &gt;&gt;&gt; p = Rational(1, 5)</span>
 <span class="sd">    &gt;&gt;&gt; z = Symbol(&quot;z&quot;)</span>
 
 <span class="sd">    &gt;&gt;&gt; X = Geometric(&quot;x&quot;, p)</span>

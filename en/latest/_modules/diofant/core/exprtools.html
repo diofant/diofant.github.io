@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.core.exprtools &mdash; Diofant 0.10.1.dev299+g5e6a61e documentation</title>
+  <title>diofant.core.exprtools &mdash; Diofant 0.10.1.dev310+g172db0a documentation</title>
   
 
   
@@ -165,7 +165,6 @@
 <span class="kn">from</span> <span class="nn">.mul</span> <span class="k">import</span> <span class="n">Mul</span><span class="p">,</span> <span class="n">_keep_coeff</span>
 <span class="kn">from</span> <span class="nn">.numbers</span> <span class="k">import</span> <span class="n">I</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">Number</span><span class="p">,</span> <span class="n">Rational</span><span class="p">,</span> <span class="n">oo</span>
 <span class="kn">from</span> <span class="nn">.power</span> <span class="k">import</span> <span class="n">Pow</span>
-<span class="kn">from</span> <span class="nn">.singleton</span> <span class="k">import</span> <span class="n">S</span>
 <span class="kn">from</span> <span class="nn">.symbol</span> <span class="k">import</span> <span class="n">Dummy</span>
 <span class="kn">from</span> <span class="nn">.sympify</span> <span class="k">import</span> <span class="n">sympify</span>
 
@@ -209,9 +208,9 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="n">exp</span><span class="p">,</span> <span class="n">tail</span> <span class="o">=</span> <span class="n">exp</span><span class="o">.</span><span class="n">as_coeff_Mul</span><span class="p">(</span><span class="n">rational</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">exp</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">NegativeOne</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">exp</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
             <span class="n">base</span><span class="p">,</span> <span class="n">exp</span> <span class="o">=</span> <span class="n">Pow</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">tail</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span>
-        <span class="k">elif</span> <span class="n">exp</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">exp</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">tail</span> <span class="o">=</span> <span class="n">_keep_coeff</span><span class="p">(</span><span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">exp</span><span class="o">.</span><span class="n">denominator</span><span class="p">),</span> <span class="n">tail</span><span class="p">)</span>
             <span class="n">base</span><span class="p">,</span> <span class="n">exp</span> <span class="o">=</span> <span class="n">Pow</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">tail</span><span class="p">),</span> <span class="n">exp</span><span class="o">.</span><span class="n">numerator</span>
         <span class="k">else</span><span class="p">:</span>
@@ -256,30 +255,29 @@
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">factors</span><span class="p">,</span> <span class="n">Factors</span><span class="p">):</span>
             <span class="n">factors</span> <span class="o">=</span> <span class="n">factors</span><span class="o">.</span><span class="n">factors</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-        <span class="k">elif</span> <span class="n">factors</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">factors</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">factors</span> <span class="ow">in</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
             <span class="n">factors</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="k">elif</span> <span class="n">factors</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span> <span class="ow">or</span> <span class="n">factors</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">factors</span> <span class="o">=</span> <span class="p">{</span><span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="p">:</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">}</span>
+        <span class="k">elif</span> <span class="n">factors</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">factors</span> <span class="o">=</span> <span class="p">{</span><span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)}</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">factors</span><span class="p">,</span> <span class="n">Number</span><span class="p">):</span>
             <span class="n">n</span> <span class="o">=</span> <span class="n">factors</span>
             <span class="n">factors</span> <span class="o">=</span> <span class="p">{}</span>
             <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">factors</span><span class="p">[</span><span class="n">S</span><span class="o">.</span><span class="n">NegativeOne</span><span class="p">]</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span>
+                <span class="n">factors</span><span class="p">[</span><span class="n">Integer</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
                 <span class="n">n</span> <span class="o">=</span> <span class="o">-</span><span class="n">n</span>
-            <span class="k">if</span> <span class="n">n</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">is_Float</span> <span class="ow">or</span> <span class="n">n</span><span class="o">.</span><span class="n">is_Integer</span> <span class="ow">or</span> <span class="n">n</span> <span class="ow">is</span> <span class="n">oo</span><span class="p">:</span>
-                    <span class="n">factors</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span>
-                <span class="k">elif</span> <span class="n">n</span><span class="o">.</span><span class="n">is_Rational</span><span class="p">:</span>
-                    <span class="c1"># since we&#39;re processing Numbers, the denominator is</span>
-                    <span class="c1"># stored with a negative exponent; all other factors</span>
-                    <span class="c1"># are left .</span>
-                    <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">numerator</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
-                        <span class="n">factors</span><span class="p">[</span><span class="n">Integer</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">numerator</span><span class="p">)]</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span>
-                    <span class="n">factors</span><span class="p">[</span><span class="n">Integer</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">denominator</span><span class="p">)]</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">NegativeOne</span>
-                <span class="k">else</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
-                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Expected Float|Rational|Integer, not </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">n</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">is_Float</span> <span class="ow">or</span> <span class="n">n</span><span class="o">.</span><span class="n">is_Integer</span> <span class="ow">or</span> <span class="n">n</span> <span class="ow">is</span> <span class="n">oo</span><span class="p">:</span>
+                <span class="n">factors</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">n</span><span class="o">.</span><span class="n">is_Rational</span> <span class="ow">and</span> <span class="n">n</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="c1"># since we&#39;re processing Numbers, the denominator is</span>
+                <span class="c1"># stored with a negative exponent; all other factors</span>
+                <span class="c1"># are left .</span>
+                <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">numerator</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">factors</span><span class="p">[</span><span class="n">Integer</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">numerator</span><span class="p">)]</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">factors</span><span class="p">[</span><span class="n">Integer</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">denominator</span><span class="p">)]</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Expected Float|Rational|Integer, not </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">n</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">factors</span><span class="p">,</span> <span class="n">Basic</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">factors</span><span class="o">.</span><span class="n">args</span><span class="p">:</span>
-            <span class="n">factors</span> <span class="o">=</span> <span class="p">{</span><span class="n">factors</span><span class="p">:</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">}</span>
+            <span class="n">factors</span> <span class="o">=</span> <span class="p">{</span><span class="n">factors</span><span class="p">:</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)}</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">factors</span><span class="p">,</span> <span class="n">Expr</span><span class="p">):</span>
             <span class="n">c</span><span class="p">,</span> <span class="n">nc</span> <span class="o">=</span> <span class="n">factors</span><span class="o">.</span><span class="n">args_cnc</span><span class="p">()</span>
             <span class="n">i</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">I</span><span class="p">)</span>
@@ -287,9 +285,9 @@
                 <span class="n">c</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">I</span><span class="p">)</span>
             <span class="n">factors</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">Mul</span><span class="o">.</span><span class="n">_from_args</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="o">.</span><span class="n">as_powers_dict</span><span class="p">())</span>
             <span class="k">if</span> <span class="n">i</span><span class="p">:</span>
-                <span class="n">factors</span><span class="p">[</span><span class="n">I</span><span class="p">]</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="o">*</span><span class="n">i</span>
+                <span class="n">factors</span><span class="p">[</span><span class="n">I</span><span class="p">]</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">i</span>
             <span class="k">if</span> <span class="n">nc</span><span class="p">:</span>
-                <span class="n">factors</span><span class="p">[</span><span class="n">Mul</span><span class="p">(</span><span class="o">*</span><span class="n">nc</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">)]</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span>
+                <span class="n">factors</span><span class="p">[</span><span class="n">Mul</span><span class="p">(</span><span class="o">*</span><span class="n">nc</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">)]</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">factors</span> <span class="o">=</span> <span class="n">factors</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>  <span class="c1"># /!\ should be dict-like</span>
 
@@ -300,26 +298,26 @@
                 <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
                     <span class="n">handle</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">handle</span><span class="p">:</span>
-                <span class="n">i1</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span>
+                <span class="n">i1</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
                 <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">handle</span><span class="p">:</span>
                     <span class="k">if</span> <span class="ow">not</span> <span class="n">_isnumber</span><span class="p">(</span><span class="n">factors</span><span class="p">[</span><span class="n">k</span><span class="p">]):</span>
                         <span class="k">continue</span>
                     <span class="n">i1</span> <span class="o">*=</span> <span class="n">k</span><span class="o">**</span><span class="n">factors</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">i1</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">i1</span> <span class="o">!=</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">i1</span><span class="o">.</span><span class="n">is_Float</span><span class="p">:</span>
                     <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">i1</span><span class="o">.</span><span class="n">args</span> <span class="k">if</span> <span class="n">i1</span><span class="o">.</span><span class="n">is_Mul</span> <span class="k">else</span> <span class="p">[</span><span class="n">i1</span><span class="p">]:</span>  <span class="c1"># at worst, -1.0*I*(-1)**e</span>
-                        <span class="k">if</span> <span class="n">a</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">NegativeOne</span><span class="p">:</span>
-                            <span class="n">factors</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span>
+                        <span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">a</span><span class="o">.</span><span class="n">is_Float</span><span class="p">:</span>
+                            <span class="n">factors</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
                         <span class="k">elif</span> <span class="n">a</span> <span class="ow">is</span> <span class="n">I</span><span class="p">:</span>
-                            <span class="n">factors</span><span class="p">[</span><span class="n">I</span><span class="p">]</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span>
+                            <span class="n">factors</span><span class="p">[</span><span class="n">I</span><span class="p">]</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
                         <span class="k">elif</span> <span class="n">a</span><span class="o">.</span><span class="n">is_Pow</span><span class="p">:</span>
-                            <span class="k">if</span> <span class="n">S</span><span class="o">.</span><span class="n">NegativeOne</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">factors</span><span class="p">:</span>
-                                <span class="n">factors</span><span class="p">[</span><span class="n">S</span><span class="o">.</span><span class="n">NegativeOne</span><span class="p">]</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
-                            <span class="n">factors</span><span class="p">[</span><span class="n">S</span><span class="o">.</span><span class="n">NegativeOne</span><span class="p">]</span> <span class="o">+=</span> <span class="n">a</span><span class="o">.</span><span class="n">exp</span>
+                            <span class="k">if</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">factors</span><span class="p">:</span>
+                                <span class="n">factors</span><span class="p">[</span><span class="n">Integer</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+                            <span class="n">factors</span><span class="p">[</span><span class="n">Integer</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span> <span class="o">+=</span> <span class="n">a</span><span class="o">.</span><span class="n">exp</span>
                         <span class="k">elif</span> <span class="n">a</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-                            <span class="n">factors</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span>
+                            <span class="n">factors</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
                         <span class="k">elif</span> <span class="n">a</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-                            <span class="n">factors</span><span class="p">[</span><span class="o">-</span><span class="n">a</span><span class="p">]</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span>
-                            <span class="n">factors</span><span class="p">[</span><span class="n">S</span><span class="o">.</span><span class="n">NegativeOne</span><span class="p">]</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span>
+                            <span class="n">factors</span><span class="p">[</span><span class="o">-</span><span class="n">a</span><span class="p">]</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                            <span class="n">factors</span><span class="p">[</span><span class="n">Integer</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
                         <span class="k">else</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
                             <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s1">&#39;unexpected factor in i1: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">a</span><span class="p">)</span>
 
@@ -397,7 +395,7 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Factors</span><span class="p">):</span>
             <span class="n">other</span> <span class="o">=</span> <span class="n">Factors</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">is_zero</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)):</span>
-            <span class="k">return</span> <span class="n">Factors</span><span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">Factors</span><span class="p">(</span><span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
         <span class="n">factors</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">factors</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">factor</span><span class="p">,</span> <span class="n">exp</span> <span class="ow">in</span> <span class="n">other</span><span class="o">.</span><span class="n">factors</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -426,9 +424,9 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Factors</span><span class="p">):</span>
             <span class="n">other</span> <span class="o">=</span> <span class="n">Factors</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">other</span><span class="o">.</span><span class="n">is_zero</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">Factors</span><span class="p">(),</span> <span class="n">Factors</span><span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">Factors</span><span class="p">(),</span> <span class="n">Factors</span><span class="p">(</span><span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_zero</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">Factors</span><span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="p">),</span> <span class="n">Factors</span><span class="p">()</span>
+                <span class="k">return</span> <span class="n">Factors</span><span class="p">(</span><span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span> <span class="n">Factors</span><span class="p">()</span>
 
         <span class="n">self_factors</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">factors</span><span class="p">)</span>
         <span class="n">other_factors</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">factors</span><span class="p">)</span>
@@ -527,7 +525,7 @@
             <span class="k">if</span> <span class="n">other</span><span class="o">.</span><span class="n">is_zero</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ZeroDivisionError</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_zero</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">Factors</span><span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="p">),</span> <span class="n">Factors</span><span class="p">()</span>
+                <span class="k">return</span> <span class="n">Factors</span><span class="p">(</span><span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span> <span class="n">Factors</span><span class="p">()</span>
 
         <span class="k">for</span> <span class="n">factor</span><span class="p">,</span> <span class="n">exp</span> <span class="ow">in</span> <span class="n">other</span><span class="o">.</span><span class="n">factors</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">factor</span> <span class="ow">in</span> <span class="n">quo</span><span class="p">:</span>
@@ -676,7 +674,7 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Factors</span><span class="p">):</span>
             <span class="n">other</span> <span class="o">=</span> <span class="n">Factors</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
             <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">is_zero</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)):</span>
-                <span class="k">return</span> <span class="n">Factors</span><span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">Factors</span><span class="p">(</span><span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
 
         <span class="n">factors</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">factors</span><span class="p">)</span>
 
@@ -829,7 +827,7 @@
     <span class="c1"># here rather than duplicate it before the mapping of Term onto</span>
     <span class="c1"># the terms</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">terms</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span>
+        <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">terms</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
         <span class="n">cont</span> <span class="o">=</span> <span class="n">terms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">coeff</span>
@@ -1224,7 +1222,7 @@
         <span class="k">return</span> <span class="n">factor</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">rep</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">args_cnc</span><span class="p">()</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">Add</span><span class="o">.</span><span class="n">make_args</span><span class="p">(</span><span class="n">expr</span><span class="p">)]</span>
-        <span class="n">c</span> <span class="o">=</span> <span class="n">g</span> <span class="o">=</span> <span class="n">l</span> <span class="o">=</span> <span class="n">r</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">g</span> <span class="o">=</span> <span class="n">l</span> <span class="o">=</span> <span class="n">r</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">hit</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="c1"># find any commutative gcd term</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
@@ -1233,11 +1231,11 @@
             <span class="k">elif</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
                 <span class="n">c</span> <span class="o">=</span> <span class="n">gcd</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">Mul</span><span class="o">.</span><span class="n">_from_args</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">c</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span>
-        <span class="k">if</span> <span class="n">c</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">:</span>
+                <span class="n">c</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">c</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">hit</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="n">c</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">as_coeff_Mul</span><span class="p">()</span>
-            <span class="k">if</span> <span class="n">g</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">g</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">cc</span><span class="p">,</span> <span class="n">_</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
                     <span class="n">cc</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">Mul</span><span class="o">.</span><span class="n">make_args</span><span class="p">(</span><span class="n">Mul</span><span class="o">.</span><span class="n">_from_args</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">cc</span><span class="p">))</span><span class="o">/</span><span class="n">g</span><span class="p">))</span>
                     <span class="n">args</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">cc</span>

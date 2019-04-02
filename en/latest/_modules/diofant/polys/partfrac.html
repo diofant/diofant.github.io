@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.partfrac &mdash; Diofant 0.10.1.dev299+g5e6a61e documentation</title>
+  <title>diofant.polys.partfrac &mdash; Diofant 0.10.1.dev310+g172db0a documentation</title>
   
 
   
@@ -152,9 +152,11 @@
   <h1>Source code for diofant.polys.partfrac</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Algorithms for partial fraction decomposition of rational functions. &quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="p">(</span><span class="n">Add</span><span class="p">,</span> <span class="n">Dummy</span><span class="p">,</span> <span class="n">Function</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">Lambda</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span>
-                    <span class="n">preorder_traversal</span><span class="p">,</span> <span class="n">sympify</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">..utilities</span> <span class="k">import</span> <span class="n">numbered_symbols</span><span class="p">,</span> <span class="n">take</span>
+<span class="kn">import</span> <span class="nn">itertools</span>
+
+<span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="p">(</span><span class="n">Add</span><span class="p">,</span> <span class="n">Dummy</span><span class="p">,</span> <span class="n">Function</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">Lambda</span><span class="p">,</span> <span class="n">preorder_traversal</span><span class="p">,</span>
+                    <span class="n">sympify</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">..utilities</span> <span class="k">import</span> <span class="n">numbered_symbols</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">Poly</span><span class="p">,</span> <span class="n">RootSum</span><span class="p">,</span> <span class="n">cancel</span><span class="p">,</span> <span class="n">factor</span>
 <span class="kn">from</span> <span class="nn">.polyerrors</span> <span class="k">import</span> <span class="n">PolynomialError</span>
 <span class="kn">from</span> <span class="nn">.polyoptions</span> <span class="k">import</span> <span class="n">allowed_flags</span><span class="p">,</span> <span class="n">set_defaults</span>
@@ -279,7 +281,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">partial</span> <span class="o">=</span> <span class="n">apart_full_decomposition</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">Q</span><span class="p">)</span>
 
-    <span class="n">terms</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+    <span class="n">terms</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">Add</span><span class="o">.</span><span class="n">make_args</span><span class="p">(</span><span class="n">partial</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">term</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="n">RootSum</span><span class="p">):</span>
@@ -301,7 +303,7 @@
         <span class="n">n</span><span class="p">,</span> <span class="n">q</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">degree</span><span class="p">(),</span> <span class="n">Q</span>
 
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-            <span class="n">coeffs</span><span class="p">,</span> <span class="n">q</span> <span class="o">=</span> <span class="n">take</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="n">q</span><span class="o">.</span><span class="n">quo</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+            <span class="n">coeffs</span><span class="p">,</span> <span class="n">q</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">islice</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">n</span><span class="p">)),</span> <span class="n">q</span><span class="o">.</span><span class="n">quo</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
             <span class="n">partial</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">coeffs</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span>
             <span class="n">symbols</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">coeffs</span><span class="p">)</span>
 

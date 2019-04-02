@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.tensor.tensor &mdash; Diofant 0.10.1.dev299+g5e6a61e documentation</title>
+  <title>diofant.tensor.tensor &mdash; Diofant 0.10.1.dev310+g172db0a documentation</title>
   
 
   
@@ -186,7 +186,8 @@
 
 <span class="kn">from</span> <span class="nn">..combinatorics.tensor_can</span> <span class="k">import</span> <span class="p">(</span><span class="n">bsgs_direct_product</span><span class="p">,</span> <span class="n">canonicalize</span><span class="p">,</span>
                                         <span class="n">get_symmetric_group_sgs</span><span class="p">,</span> <span class="n">riemann_bsgs</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">Add</span><span class="p">,</span> <span class="n">Basic</span><span class="p">,</span> <span class="n">Rational</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">Symbol</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">symbols</span><span class="p">,</span> <span class="n">sympify</span>
+<span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="p">(</span><span class="n">Add</span><span class="p">,</span> <span class="n">Basic</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">Rational</span><span class="p">,</span> <span class="n">Symbol</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">symbols</span><span class="p">,</span>
+                    <span class="n">sympify</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">..core.sympify</span> <span class="k">import</span> <span class="n">CantSympify</span>
 <span class="kn">from</span> <span class="nn">..external</span> <span class="k">import</span> <span class="n">import_module</span>
 <span class="kn">from</span> <span class="nn">..matrices</span> <span class="k">import</span> <span class="n">Matrix</span><span class="p">,</span> <span class="n">eye</span>
@@ -969,7 +970,7 @@
             <span class="k">return</span> <span class="n">data_result</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">TensAdd</span><span class="p">):</span>
-            <span class="n">sumvar</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+            <span class="n">sumvar</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
             <span class="n">data_list</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="n">free_args_list</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">key</span><span class="o">.</span><span class="n">args</span><span class="p">:</span>
@@ -1050,7 +1051,7 @@
             <span class="n">data</span> <span class="o">=</span> <span class="n">_TensorDataLazyEvaluator</span><span class="o">.</span><span class="n">_contract_ndarray</span><span class="p">(</span><span class="n">tensmul1</span><span class="o">.</span><span class="n">free</span><span class="p">,</span> <span class="n">tensmul2</span><span class="o">.</span><span class="n">free</span><span class="p">,</span> <span class="n">data1</span><span class="p">,</span> <span class="n">data2</span><span class="p">)</span>
             <span class="c1"># TODO: do this more efficiently... maybe by just passing an index list</span>
             <span class="c1"># to .data_product_tensor(...)</span>
-            <span class="k">return</span> <span class="n">data</span><span class="p">,</span> <span class="n">TensMul</span><span class="o">.</span><span class="n">from_TIDS</span><span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">,</span> <span class="n">TIDS</span><span class="p">(</span><span class="n">components</span><span class="p">,</span> <span class="n">free</span><span class="p">,</span> <span class="n">dum</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">data</span><span class="p">,</span> <span class="n">TensMul</span><span class="o">.</span><span class="n">from_TIDS</span><span class="p">(</span><span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">TIDS</span><span class="p">(</span><span class="n">components</span><span class="p">,</span> <span class="n">free</span><span class="p">,</span> <span class="n">dum</span><span class="p">))</span>
 
         <span class="k">return</span> <span class="n">reduce</span><span class="p">(</span><span class="n">data_mul</span><span class="p">,</span> <span class="nb">zip</span><span class="p">(</span><span class="n">data_list</span><span class="p">,</span> <span class="n">tensmul_list</span><span class="p">))</span>
 
@@ -1535,7 +1536,7 @@
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">name</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-        <span class="n">obj</span> <span class="o">=</span> <span class="n">Basic</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span> <span class="k">if</span> <span class="n">metric</span> <span class="k">else</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="p">)</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="n">Basic</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">metric</span> <span class="k">else</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
         <span class="n">obj</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">dummy_fmt</span><span class="p">:</span>
             <span class="n">obj</span><span class="o">.</span><span class="n">_dummy_fmt</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">_</span><span class="si">%%</span><span class="s1">d&#39;</span> <span class="o">%</span> <span class="n">obj</span><span class="o">.</span><span class="n">name</span>
@@ -1732,7 +1733,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;invalid name&quot;</span><span class="p">)</span>
 
-        <span class="n">obj</span> <span class="o">=</span> <span class="n">Basic</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name_symbol</span><span class="p">,</span> <span class="n">tensortype</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span> <span class="k">if</span> <span class="n">is_up</span> <span class="k">else</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="p">)</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="n">Basic</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name_symbol</span><span class="p">,</span> <span class="n">tensortype</span><span class="p">,</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">is_up</span> <span class="k">else</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
         <span class="n">obj</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
         <span class="n">obj</span><span class="o">.</span><span class="n">_tensortype</span> <span class="o">=</span> <span class="n">tensortype</span>
         <span class="n">obj</span><span class="o">.</span><span class="n">_is_up</span> <span class="o">=</span> <span class="n">is_up</span>
@@ -2498,7 +2499,7 @@
     <span class="n">is_commutative</span> <span class="o">=</span> <span class="kc">False</span>
 
     <span class="k">def</span> <span class="nf">__neg__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">*</span><span class="n">S</span><span class="o">.</span><span class="n">NegativeOne</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">*</span><span class="n">Integer</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__abs__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span>
@@ -2670,7 +2671,7 @@
         <span class="n">args</span> <span class="o">=</span> <span class="n">TensAdd</span><span class="o">.</span><span class="n">_tensAdd_flatten</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">args</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+            <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">TensExpr</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -2697,7 +2698,7 @@
         <span class="c1"># if there are no more args (i.e. have cancelled out),</span>
         <span class="c1"># just return zero:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">args</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+            <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -2709,7 +2710,7 @@
         <span class="n">args</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">sort_key</span><span class="p">)</span>
         <span class="n">args</span> <span class="o">=</span> <span class="n">TensAdd</span><span class="o">.</span><span class="n">_tensAdd_collect_terms</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">args</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+            <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
         <span class="c1"># it there is only a component tensor return it</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -3149,7 +3150,7 @@
         <span class="n">g</span><span class="p">,</span> <span class="n">dummies</span><span class="p">,</span> <span class="n">msym</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tids</span><span class="o">.</span><span class="n">canon_args</span><span class="p">()</span>
         <span class="n">can</span> <span class="o">=</span> <span class="n">canonicalize</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">dummies</span><span class="p">,</span> <span class="n">msym</span><span class="p">,</span> <span class="o">*</span><span class="n">v</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">can</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+            <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
         <span class="n">tensor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">perm2tensor</span><span class="p">(</span><span class="n">can</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">tensor</span>
 
@@ -3159,7 +3160,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">coeff</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span>
+        <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">component</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -3252,7 +3253,7 @@
     <span class="k">def</span> <span class="nf">__truediv__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">TensExpr</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;cannot divide by a tensor&#39;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">TensMul</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="o">/</span><span class="n">other</span><span class="p">,</span> <span class="n">is_canon_bp</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">is_canon_bp</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">TensMul</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">other</span><span class="p">,</span> <span class="n">is_canon_bp</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">is_canon_bp</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__rtruediv__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;cannot divide by a tensor&#39;</span><span class="p">)</span>
@@ -3267,7 +3268,7 @@
         <span class="k">return</span> <span class="n">TensAdd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">-</span><span class="n">other</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__neg__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">TensMul</span><span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">NegativeOne</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">TensMul</span><span class="p">(</span><span class="n">Integer</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="bp">self</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_print</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">indices</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">ind</span><span class="p">)</span> <span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">indices</span><span class="p">]</span>
@@ -3283,7 +3284,7 @@
         <span class="n">other</span> <span class="o">=</span> <span class="n">sympify</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">TensExpr</span><span class="p">):</span>
             <span class="k">assert</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span>
-            <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span> <span class="o">==</span> <span class="n">other</span>
+            <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">other</span>
 
         <span class="k">def</span> <span class="nf">_get_compar_comp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
             <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">canon_bp</span><span class="p">()</span>
@@ -3362,7 +3363,7 @@
                     <span class="n">is_canon_bp</span> <span class="o">=</span> <span class="n">kw_args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;is_canon_bp&#39;</span><span class="p">,</span> <span class="n">arg</span><span class="o">.</span><span class="n">_is_canon_bp</span><span class="p">)</span>
             <span class="n">tids</span> <span class="o">=</span> <span class="n">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">,</span> <span class="n">tids_list</span><span class="p">)</span>
 
-        <span class="n">coeff</span> <span class="o">=</span> <span class="n">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">,</span> <span class="p">[</span><span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">arg</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">TensExpr</span><span class="p">)])</span>
+        <span class="n">coeff</span> <span class="o">=</span> <span class="n">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">,</span> <span class="p">[</span><span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)]</span> <span class="o">+</span> <span class="p">[</span><span class="n">arg</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">TensExpr</span><span class="p">)])</span>
         <span class="n">args</span> <span class="o">=</span> <span class="n">tids</span><span class="o">.</span><span class="n">get_tensors</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">coeff</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">coeff</span><span class="p">]</span> <span class="o">+</span> <span class="n">args</span>
@@ -3607,7 +3608,7 @@
         <span class="n">g</span><span class="p">,</span> <span class="n">dummies</span><span class="p">,</span> <span class="n">msym</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">_tids</span><span class="o">.</span><span class="n">canon_args</span><span class="p">()</span>
         <span class="n">can</span> <span class="o">=</span> <span class="n">canonicalize</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">dummies</span><span class="p">,</span> <span class="n">msym</span><span class="p">,</span> <span class="o">*</span><span class="n">v</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">can</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+            <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
         <span class="n">tmul</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">perm2tensor</span><span class="p">(</span><span class="n">can</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">tmul</span></div>
 
@@ -3753,7 +3754,7 @@
 <div class="viewcode-block" id="tensor_mul"><a class="viewcode-back" href="../../../modules/tensor/tensor.html#diofant.tensor.tensor.tensor_mul">[docs]</a><span class="k">def</span> <span class="nf">tensor_mul</span><span class="p">(</span><span class="o">*</span><span class="n">a</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Product of tensors.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">a</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">TensMul</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">,</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[])</span>
+        <span class="k">return</span> <span class="n">TensMul</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[])</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="k">for</span> <span class="n">tx</span> <span class="ow">in</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
         <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="o">*</span><span class="n">tx</span>
@@ -3821,7 +3822,7 @@
 
 <span class="k">def</span> <span class="nf">get_coeff</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">Tensor</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span>
+        <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">TensMul</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">coeff</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">TensExpr</span><span class="p">):</span>

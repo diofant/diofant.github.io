@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.matrices.expressions.blockmatrix &mdash; Diofant 0.10.1.dev299+g5e6a61e documentation</title>
+  <title>diofant.matrices.expressions.blockmatrix &mdash; Diofant 0.10.1.dev310+g172db0a documentation</title>
   
 
   
@@ -154,8 +154,9 @@
 <span class="kn">from</span> <span class="nn">strategies.core</span> <span class="k">import</span> <span class="n">typed</span>
 <span class="kn">from</span> <span class="nn">strategies.traverse</span> <span class="k">import</span> <span class="n">bottom_up</span>
 
-<span class="kn">from</span> <span class="nn">...core</span> <span class="k">import</span> <span class="n">Add</span><span class="p">,</span> <span class="n">Expr</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">sympify</span>
+<span class="kn">from</span> <span class="nn">...core</span> <span class="k">import</span> <span class="n">Add</span><span class="p">,</span> <span class="n">Expr</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">sympify</span>
 <span class="kn">from</span> <span class="nn">...core.strategies</span> <span class="k">import</span> <span class="n">unpack</span>
+<span class="kn">from</span> <span class="nn">...logic</span> <span class="k">import</span> <span class="n">false</span>
 <span class="kn">from</span> <span class="nn">...utilities</span> <span class="k">import</span> <span class="n">sift</span>
 <span class="kn">from</span> <span class="nn">.determinant</span> <span class="k">import</span> <span class="n">Determinant</span>
 <span class="kn">from</span> <span class="nn">.inverse</span> <span class="k">import</span> <span class="n">Inverse</span>
@@ -202,7 +203,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">shape</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">numrows</span> <span class="o">=</span> <span class="n">numcols</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+        <span class="n">numrows</span> <span class="o">=</span> <span class="n">numcols</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
         <span class="n">M</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">blocks</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">M</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
             <span class="n">numrows</span> <span class="o">+=</span> <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -293,12 +294,12 @@
     <span class="k">def</span> <span class="nf">_entry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
         <span class="c1"># Find row entry</span>
         <span class="k">for</span> <span class="n">row_block</span><span class="p">,</span> <span class="n">numrows</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rowblocksizes</span><span class="p">):</span>  <span class="c1"># pragma: no branch</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">numrows</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">S</span><span class="o">.</span><span class="n">false</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">numrows</span><span class="p">)</span> <span class="o">!=</span> <span class="n">false</span><span class="p">:</span>
                 <span class="k">break</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">i</span> <span class="o">-=</span> <span class="n">numrows</span>
         <span class="k">for</span> <span class="n">col_block</span><span class="p">,</span> <span class="n">numcols</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">colblocksizes</span><span class="p">):</span>  <span class="c1"># pragma: no branch</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">j</span> <span class="o">&lt;</span> <span class="n">numcols</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">S</span><span class="o">.</span><span class="n">false</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">j</span> <span class="o">&lt;</span> <span class="n">numcols</span><span class="p">)</span> <span class="o">!=</span> <span class="n">false</span><span class="p">:</span>
                 <span class="k">break</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">j</span> <span class="o">-=</span> <span class="n">numcols</span>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Enumerative &mdash; Diofant 0.10.1.dev299+g5e6a61e documentation</title>
+  <title>Enumerative &mdash; Diofant 0.10.1.dev310+g172db0a documentation</title>
   
 
   
@@ -203,32 +203,27 @@ counting multiset partitions.</p>
 <dt id="diofant.utilities.enumerative.multiset_partitions_taocp">
 <code class="descclassname">diofant.utilities.enumerative.</code><code class="descname">multiset_partitions_taocp</code><span class="sig-paren">(</span><em>multiplicities</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/diofant/utilities/enumerative.html#multiset_partitions_taocp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.utilities.enumerative.multiset_partitions_taocp" title="Permalink to this definition">¶</a></dt>
 <dd><p>Enumerates partitions of a multiset.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>multiplicities</strong> – list of integer multiplicities of the components of the multiset.</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Yields:</th><td class="field-body"><p class="first"><em>state</em> – Internal data structure which encodes a particular partition.
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>multiplicities</strong> – list of integer multiplicities of the components of the multiset.</p>
+</dd>
+<dt class="field-even">Yields</dt>
+<dd class="field-even"><p><em>state</em> – Internal data structure which encodes a particular partition.
 This output is then usually processed by a vistor function
 which combines the information from this data structure with
 the components themselves to produce an actual partition.</p>
 <p>Unless they wish to create their own visitor function, users will
 have little need to look inside this data structure.  But, for
 reference, it is a 3-element list with components:</p>
-<dl class="docutils">
-<dt>f</dt>
-<dd><p class="first last">is a frame array, which is used to divide pstack into parts.</p>
+<dl class="simple">
+<dt>f</dt><dd><p>is a frame array, which is used to divide pstack into parts.</p>
 </dd>
-<dt>lpart</dt>
-<dd><p class="first last">points to the base of the topmost part.</p>
+<dt>lpart</dt><dd><p>points to the base of the topmost part.</p>
 </dd>
-<dt>pstack</dt>
-<dd><p class="first last">is an array of PartComponent objects.</p>
+<dt>pstack</dt><dd><p>is an array of PartComponent objects.</p>
 </dd>
 </dl>
-<p class="last">The <code class="docutils literal notranslate"><span class="pre">state</span></code> output offers a peek into the internal data
+<p>The <code class="docutils literal notranslate"><span class="pre">state</span></code> output offers a peek into the internal data
 structures of the enumeration function.  The client should
 treat this as read-only; any modification of the data
 structure will cause unpredictable (and almost certainly
@@ -236,10 +231,8 @@ incorrect) results.  Also, the components of <code class="docutils literal notra
 modified in place at each iteration.  Hence, the visitor must
 be called at each loop iteration.  Accumulating the <code class="docutils literal notranslate"><span class="pre">state</span></code>
 instances and processing them later will not work.</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <p class="rubric">Examples</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># variables components and multiplicities represent the multiset &#39;abb&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">components</span> <span class="o">=</span> <span class="s1">&#39;ab&#39;</span>
@@ -306,8 +299,8 @@ and generalized by the class <code class="docutils literal notranslate"><span cl
 data structures which can be interpreted by the same visitor
 functions used for the output of <code class="docutils literal notranslate"><span class="pre">multiset_partitions_taocp</span></code>.</p>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#diofant.utilities.enumerative.multiset_partitions_taocp" title="diofant.utilities.enumerative.multiset_partitions_taocp"><code class="xref py py-class docutils literal notranslate"><span class="pre">multiset_partitions_taocp</span></code></a></p>
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#diofant.utilities.enumerative.multiset_partitions_taocp" title="diofant.utilities.enumerative.multiset_partitions_taocp"><code class="xref py py-class docutils literal notranslate"><span class="pre">multiset_partitions_taocp</span></code></a></p>
 </div>
 <p class="rubric">Examples</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">MultisetPartitionTraverser</span><span class="p">()</span>
@@ -319,15 +312,15 @@ functions used for the output of <code class="docutils literal notranslate"><spa
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li>Algorithm 7.1.2.5M in Volume 4A, Combinatoral Algorithms,
-Part 1, of The Art of Computer Programming, by Donald Knuth.</li>
-<li>On a Problem of Oppenheim concerning
+<li><p>Algorithm 7.1.2.5M in Volume 4A, Combinatoral Algorithms,
+Part 1, of The Art of Computer Programming, by Donald Knuth.</p></li>
+<li><p>On a Problem of Oppenheim concerning
 “Factorisatio Numerorum” E. R. Canfield, Paul Erdős, Carl
 Pomerance, JOURNAL OF NUMBER THEORY, Vol. 17, No. 1. August
 1983.  See section 7 for a description of an algorithm
-similar to Knuth’s.</li>
-<li>Generating Multiset Partitions, Brent Yorgey, The
-Monad.Reader, Issue 8, September 2007.</li>
+similar to Knuth’s.</p></li>
+<li><p>Generating Multiset Partitions, Brent Yorgey, The
+Monad.Reader, Issue 8, September 2007.</p></li>
 </ul>
 <dl class="method">
 <dt id="diofant.utilities.enumerative.MultisetPartitionTraverser.count_partitions">
@@ -375,16 +368,16 @@ potential to speed up the counting dramatically.</p>
 to the hypothetical memoized recursive function, but with two
 differences:</p>
 <ol class="arabic simple">
-<li>This method is iterative, borrowing its structure from the
+<li><p>This method is iterative, borrowing its structure from the
 other enumerations and maintaining an explicit stack of
 parts which are in the process of being counted.  (There
 may be multisets which can be counted reasonably quickly by
 this implementation, but which would overflow the default
-Python recursion limit with a recursive implementation.)</li>
-<li>Instead of using the part data structure directly, a more
+Python recursion limit with a recursive implementation.)</p></li>
+<li><p>Instead of using the part data structure directly, a more
 compact key is constructed.  This saves space, but more
 importantly coalesces some parts which would remain
-separate with physical keys.</li>
+separate with physical keys.</p></li>
 </ol>
 <p>Unlike the enumeration functions, there is currently no _range
 version of count_partitions.  If someone wants to stretch
@@ -393,8 +386,8 @@ memoizing with a histogram of counts rather than a single
 count, and combining the histograms.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li>Algorithm 7.1.2.5M in Volume 4A, Combinatoral Algorithms,
-Part 1, of The Art of Computer Programming, by Donald Knuth.</li>
+<li><p>Algorithm 7.1.2.5M in Volume 4A, Combinatoral Algorithms,
+Part 1, of The Art of Computer Programming, by Donald Knuth.</p></li>
 </ul>
 </dd></dl>
 
@@ -418,10 +411,10 @@ Part 1, of The Art of Computer Programming, by Donald Knuth.</li>
 </pre></div>
 </div>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<dl class="last docutils">
-<dt><a class="reference internal" href="#diofant.utilities.enumerative.multiset_partitions_taocp" title="diofant.utilities.enumerative.multiset_partitions_taocp"><code class="xref py py-meth docutils literal notranslate"><span class="pre">multiset_partitions_taocp()</span></code></a></dt>
-<dd>which provides the same result as this method, but is about twice as fast.  Hence, enum_all is primarily useful for testing.  Also see the function for a discussion of states and visitors.</dd>
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#diofant.utilities.enumerative.multiset_partitions_taocp" title="diofant.utilities.enumerative.multiset_partitions_taocp"><code class="xref py py-meth docutils literal notranslate"><span class="pre">multiset_partitions_taocp()</span></code></a></dt><dd><p>which provides the same result as this method, but is about twice as fast.  Hence, enum_all is primarily useful for testing.  Also see the function for a discussion of states and visitors.</p>
+</dd>
 </dl>
 </div>
 </dd></dl>
@@ -432,22 +425,18 @@ Part 1, of The Art of Computer Programming, by Donald Knuth.</li>
 <dd><p>Enumerate the partitions of a multiset with lb &lt; num(parts)</p>
 <p>Equivalent to enum_range(multiplicities, lb, sum(multiplicities))</p>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#diofant.utilities.enumerative.MultisetPartitionTraverser.enum_all" title="diofant.utilities.enumerative.MultisetPartitionTraverser.enum_all"><code class="xref py py-meth docutils literal notranslate"><span class="pre">enum_all()</span></code></a>, <a class="reference internal" href="#diofant.utilities.enumerative.MultisetPartitionTraverser.enum_small" title="diofant.utilities.enumerative.MultisetPartitionTraverser.enum_small"><code class="xref py py-meth docutils literal notranslate"><span class="pre">enum_small()</span></code></a>, <a class="reference internal" href="#diofant.utilities.enumerative.MultisetPartitionTraverser.enum_range" title="diofant.utilities.enumerative.MultisetPartitionTraverser.enum_range"><code class="xref py py-meth docutils literal notranslate"><span class="pre">enum_range()</span></code></a></p>
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#diofant.utilities.enumerative.MultisetPartitionTraverser.enum_all" title="diofant.utilities.enumerative.MultisetPartitionTraverser.enum_all"><code class="xref py py-meth docutils literal notranslate"><span class="pre">enum_all()</span></code></a>, <a class="reference internal" href="#diofant.utilities.enumerative.MultisetPartitionTraverser.enum_small" title="diofant.utilities.enumerative.MultisetPartitionTraverser.enum_small"><code class="xref py py-meth docutils literal notranslate"><span class="pre">enum_small()</span></code></a>, <a class="reference internal" href="#diofant.utilities.enumerative.MultisetPartitionTraverser.enum_range" title="diofant.utilities.enumerative.MultisetPartitionTraverser.enum_range"><code class="xref py py-meth docutils literal notranslate"><span class="pre">enum_range()</span></code></a></p>
 </div>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>multiplicities</strong> – list of multiplicities of the components of the multiset.</li>
-<li><strong>lb</strong> – Number of parts in the partition must be greater than
-this lower bound.</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>multiplicities</strong> – list of multiplicities of the components of the multiset.</p></li>
+<li><p><strong>lb</strong> – Number of parts in the partition must be greater than
+this lower bound.</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <p class="rubric">Examples</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">MultisetPartitionTraverser</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">states</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">enum_large</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
@@ -486,21 +475,17 @@ method generalizes enum_all, enum_small, and enum_large.</p>
 <dd><p>Enumerate multiset partitions with no more than <code class="docutils literal notranslate"><span class="pre">ub</span></code> parts.</p>
 <p>Equivalent to enum_range(multiplicities, 0, ub)</p>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#diofant.utilities.enumerative.MultisetPartitionTraverser.enum_all" title="diofant.utilities.enumerative.MultisetPartitionTraverser.enum_all"><code class="xref py py-meth docutils literal notranslate"><span class="pre">enum_all()</span></code></a>, <a class="reference internal" href="#diofant.utilities.enumerative.MultisetPartitionTraverser.enum_large" title="diofant.utilities.enumerative.MultisetPartitionTraverser.enum_large"><code class="xref py py-meth docutils literal notranslate"><span class="pre">enum_large()</span></code></a>, <a class="reference internal" href="#diofant.utilities.enumerative.MultisetPartitionTraverser.enum_range" title="diofant.utilities.enumerative.MultisetPartitionTraverser.enum_range"><code class="xref py py-meth docutils literal notranslate"><span class="pre">enum_range()</span></code></a></p>
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#diofant.utilities.enumerative.MultisetPartitionTraverser.enum_all" title="diofant.utilities.enumerative.MultisetPartitionTraverser.enum_all"><code class="xref py py-meth docutils literal notranslate"><span class="pre">enum_all()</span></code></a>, <a class="reference internal" href="#diofant.utilities.enumerative.MultisetPartitionTraverser.enum_large" title="diofant.utilities.enumerative.MultisetPartitionTraverser.enum_large"><code class="xref py py-meth docutils literal notranslate"><span class="pre">enum_large()</span></code></a>, <a class="reference internal" href="#diofant.utilities.enumerative.MultisetPartitionTraverser.enum_range" title="diofant.utilities.enumerative.MultisetPartitionTraverser.enum_range"><code class="xref py py-meth docutils literal notranslate"><span class="pre">enum_range()</span></code></a></p>
 </div>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>multiplicities</strong> – list of multiplicities of the components of the multiset.</li>
-<li><strong>ub</strong> – Maximum number of parts</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>multiplicities</strong> – list of multiplicities of the components of the multiset.</p></li>
+<li><p><strong>ub</strong> – Maximum number of parts</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <p class="rubric">Examples</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">MultisetPartitionTraverser</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">states</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">enum_small</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
@@ -516,8 +501,8 @@ method generalizes enum_all, enum_small, and enum_large.</p>
 exercise 69, in Knuth.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li>Algorithm 7.1.2.5M in Volume 4A, Combinatoral Algorithms,
-Part 1, of The Art of Computer Programming, by Donald Knuth.</li>
+<li><p>Algorithm 7.1.2.5M in Volume 4A, Combinatoral Algorithms,
+Part 1, of The Art of Computer Programming, by Donald Knuth.</p></li>
 </ul>
 </dd></dl>
 

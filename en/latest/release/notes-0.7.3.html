@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>SymPy 0.7.3 &mdash; Diofant 0.10.1.dev299+g5e6a61e documentation</title>
+  <title>SymPy 0.7.3 &mdash; Diofant 0.10.1.dev310+g172db0a documentation</title>
   
 
   
@@ -208,8 +208,9 @@
 <div class="section" id="major-changes">
 <h2>Major changes<a class="headerlink" href="#major-changes" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Integration<ul>
-<li>This release includes Risch integration algorithm from
+<li><p>Integration</p>
+<ul>
+<li><p>This release includes Risch integration algorithm from
 <a class="reference external" href="https://github.com/sympy/sympy/wiki/GSoC-2010-Report-Aaron-Meurer:-Risch-Integration">Aaron Meurer’s 2010 Google Summer of Code project</a>.
 This makes <code class="docutils literal notranslate"><span class="pre">integrate</span></code> much more powerful and much faster for the supported
 functions.  The algorithm is called automatically from <code class="docutils literal notranslate"><span class="pre">integrate()</span></code>.  For
@@ -219,24 +220,28 @@ supported.  To access the algorithm directly, use <code class="docutils literal 
 nonelementary.  To determine if a function is nonelementary, integrate using
 <code class="docutils literal notranslate"><span class="pre">risch=True</span></code>.  If the resulting <code class="docutils literal notranslate"><span class="pre">Integral</span></code> class is an instance of
 <code class="docutils literal notranslate"><span class="pre">NonElementaryIntegral</span></code>, then it is not elementary (otherwise, that part of
-the algorithm has just not been implemented yet).</li>
+the algorithm has just not been implemented yet).</p></li>
 </ul>
 </li>
-<li>ODE<ul>
-<li>Built basic infrastructure of the PDE module (<a class="reference external" href="https://github.com/sympy/sympy/pull/1970">sympy/sympy#1970</a>)</li>
+<li><p>ODE</p>
+<ul>
+<li><p>Built basic infrastructure of the PDE module (<a class="reference external" href="https://github.com/sympy/sympy/pull/1970">sympy/sympy#1970</a>)</p></li>
 </ul>
 </li>
-<li>Theano Interaction<ul>
-<li>SymPy expressions can now be translated into <a class="reference external" href="http://deeplearning.net/software/theano/">Theano</a> expressions for numeric evaluation.  This includes most standard scalar operations (e.g. <code class="docutils literal notranslate"><span class="pre">sin</span></code>, <code class="docutils literal notranslate"><span class="pre">exp</span></code>, <code class="docutils literal notranslate"><span class="pre">gamma</span></code>, but not <code class="docutils literal notranslate"><span class="pre">beta</span></code> or <code class="docutils literal notranslate"><span class="pre">MeijerG</span></code>) and matrices.  This system generally outperforms <code class="docutils literal notranslate"><span class="pre">lambdify</span></code> and <code class="docutils literal notranslate"><span class="pre">autowrap</span></code> but does require Theano to be installed.</li>
+<li><p>Theano Interaction</p>
+<ul>
+<li><p>SymPy expressions can now be translated into <a class="reference external" href="http://deeplearning.net/software/theano/">Theano</a> expressions for numeric evaluation.  This includes most standard scalar operations (e.g. <code class="docutils literal notranslate"><span class="pre">sin</span></code>, <code class="docutils literal notranslate"><span class="pre">exp</span></code>, <code class="docutils literal notranslate"><span class="pre">gamma</span></code>, but not <code class="docutils literal notranslate"><span class="pre">beta</span></code> or <code class="docutils literal notranslate"><span class="pre">MeijerG</span></code>) and matrices.  This system generally outperforms <code class="docutils literal notranslate"><span class="pre">lambdify</span></code> and <code class="docutils literal notranslate"><span class="pre">autowrap</span></code> but does require Theano to be installed.</p></li>
 </ul>
 </li>
-<li>Matrix Expressions<ul>
-<li>Matrix expressions now support inference using the new assumptions system.  New predicates include <code class="docutils literal notranslate"><span class="pre">invertible</span></code>, <code class="docutils literal notranslate"><span class="pre">symmetric</span></code>, <code class="docutils literal notranslate"><span class="pre">positive_definite</span></code>, <code class="docutils literal notranslate"><span class="pre">orthogonal</span></code>, ….</li>
-<li>New operators include <code class="docutils literal notranslate"><span class="pre">Adjoint</span></code>, <code class="docutils literal notranslate"><span class="pre">HadamardProduct</span></code>, <code class="docutils literal notranslate"><span class="pre">Determinant</span></code>, <code class="docutils literal notranslate"><span class="pre">MatrixSlice</span></code>, <code class="docutils literal notranslate"><span class="pre">DFT</span></code>.  Also, preliminary support exists for factorizations like <code class="docutils literal notranslate"><span class="pre">SVD</span></code> and <code class="docutils literal notranslate"><span class="pre">LU</span></code>.</li>
+<li><p>Matrix Expressions</p>
+<ul>
+<li><p>Matrix expressions now support inference using the new assumptions system.  New predicates include <code class="docutils literal notranslate"><span class="pre">invertible</span></code>, <code class="docutils literal notranslate"><span class="pre">symmetric</span></code>, <code class="docutils literal notranslate"><span class="pre">positive_definite</span></code>, <code class="docutils literal notranslate"><span class="pre">orthogonal</span></code>, ….</p></li>
+<li><p>New operators include <code class="docutils literal notranslate"><span class="pre">Adjoint</span></code>, <code class="docutils literal notranslate"><span class="pre">HadamardProduct</span></code>, <code class="docutils literal notranslate"><span class="pre">Determinant</span></code>, <code class="docutils literal notranslate"><span class="pre">MatrixSlice</span></code>, <code class="docutils literal notranslate"><span class="pre">DFT</span></code>.  Also, preliminary support exists for factorizations like <code class="docutils literal notranslate"><span class="pre">SVD</span></code> and <code class="docutils literal notranslate"><span class="pre">LU</span></code>.</p></li>
 </ul>
 </li>
-<li>Context manager for New Assumptions<ul>
-<li>Added the <code class="docutils literal notranslate"><span class="pre">with</span> <span class="pre">assuming(*facts)</span></code> context manager for new assumptions.  See <a class="reference external" href="https://matthewrocklin.com/blog/work/2013/02/05/Assuming">blogpost</a>.</li>
+<li><p>Context manager for New Assumptions</p>
+<ul>
+<li><p>Added the <code class="docutils literal notranslate"><span class="pre">with</span> <span class="pre">assuming(*facts)</span></code> context manager for new assumptions.  See <a class="reference external" href="https://matthewrocklin.com/blog/work/2013/02/05/Assuming">blogpost</a>.</p></li>
 </ul>
 </li>
 </ul>
@@ -244,93 +249,98 @@ the algorithm has just not been implemented yet).</li>
 <div class="section" id="compatibility-breaks">
 <h2>Compatibility breaks<a class="headerlink" href="#compatibility-breaks" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>This is the last version of SymPy to support Python 2.5.</li>
-<li>The IPython extension, i.e., <code class="docutils literal notranslate"><span class="pre">%load_ext</span> <span class="pre">sympy.interactive.ipythonprinting</span></code>
+<li><p>This is the last version of SymPy to support Python 2.5.</p></li>
+<li><p>The IPython extension, i.e., <code class="docutils literal notranslate"><span class="pre">%load_ext</span> <span class="pre">sympy.interactive.ipythonprinting</span></code>
 is deprecated.  Use <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">sympy</span> <span class="pre">import</span> <span class="pre">init_printing;</span> <span class="pre">init_printing()</span></code>
-instead. See <a class="reference external" href="https://github.com/sympy/sympy/issues/7013">sympy/sympy#7013</a>.</li>
-<li>The <code class="docutils literal notranslate"><span class="pre">viewer='file'</span></code> option to <code class="docutils literal notranslate"><span class="pre">preview</span></code> without a file name is
+instead. See <a class="reference external" href="https://github.com/sympy/sympy/issues/7013">sympy/sympy#7013</a>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">viewer='file'</span></code> option to <code class="docutils literal notranslate"><span class="pre">preview</span></code> without a file name is
 deprecated. Use <code class="docutils literal notranslate"><span class="pre">filename='name'</span></code> in addition to <code class="docutils literal notranslate"><span class="pre">viewer='file'</span></code>. See
-<a class="reference external" href="https://github.com/sympy/sympy/issues/7018">sympy/sympy#7018</a>.</li>
-<li>The deprecated syntax <code class="docutils literal notranslate"><span class="pre">Symbol('x',</span> <span class="pre">dummy=True)</span></code>, which had been deprecated
+<a class="reference external" href="https://github.com/sympy/sympy/issues/7018">sympy/sympy#7018</a>.</p></li>
+<li><p>The deprecated syntax <code class="docutils literal notranslate"><span class="pre">Symbol('x',</span> <span class="pre">dummy=True)</span></code>, which had been deprecated
 since 0.7.0, has been removed. Use <code class="docutils literal notranslate"><span class="pre">Dummy('x')</span></code> or <code class="docutils literal notranslate"><span class="pre">symbols('x',</span> <span class="pre">cls=Dummy)</span></code>
-instead. See <a class="reference external" href="https://github.com/sympy/sympy/issues/6477">sympy/sympy#6477</a>.</li>
-<li>The deprecated <code class="docutils literal notranslate"><span class="pre">Expr</span></code> methods <code class="docutils literal notranslate"><span class="pre">as_coeff_terms</span></code> and <code class="docutils literal notranslate"><span class="pre">as_coeff_factors</span></code>, which
+instead. See <a class="reference external" href="https://github.com/sympy/sympy/issues/6477">sympy/sympy#6477</a>.</p></li>
+<li><p>The deprecated <code class="docutils literal notranslate"><span class="pre">Expr</span></code> methods <code class="docutils literal notranslate"><span class="pre">as_coeff_terms</span></code> and <code class="docutils literal notranslate"><span class="pre">as_coeff_factors</span></code>, which
 have been deprecated in favor of <code class="docutils literal notranslate"><span class="pre">as_coeff_mul</span></code> and <code class="docutils literal notranslate"><span class="pre">as_coeff_add</span></code>,
 respectively (see also <code class="docutils literal notranslate"><span class="pre">as_coeff_Mul</span></code> and <code class="docutils literal notranslate"><span class="pre">as_coeff_Add</span></code>), were removed.
 The methods had been deprecated since SymPy 0.7.0.  See
-<a class="reference external" href="https://github.com/sympy/sympy/issues/6476">sympy/sympy#6476</a>.</li>
-<li>The spherical harmonics have been completely rewritten. See <a class="reference external" href="https://github.com/sympy/sympy/pull/1510">sympy/sympy#1510</a>.</li>
+<a class="reference external" href="https://github.com/sympy/sympy/issues/6476">sympy/sympy#6476</a>.</p></li>
+<li><p>The spherical harmonics have been completely rewritten. See <a class="reference external" href="https://github.com/sympy/sympy/pull/1510">sympy/sympy#1510</a>.</p></li>
 </ul>
 </div>
 <div class="section" id="minor-changes">
 <h2>Minor changes<a class="headerlink" href="#minor-changes" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Solvers<ul>
-<li>Added enhancements and improved the methods of solving exact differential equation.  See <a class="reference external" href="https://github.com/sympy/sympy/pull/1955">sympy/sympy#1955</a> and <a class="reference external" href="https://github.com/sympy/sympy/pull/1823">sympy/sympy#1823</a>.</li>
-<li>Support for differential equations with linear coefficients and those that can be reduced to separable and linear form.  See <a class="reference external" href="https://github.com/sympy/sympy/pull/1940">sympy/sympy#1940</a>, <a class="reference external" href="https://github.com/sympy/sympy/pull/1864">sympy/sympy#1864</a> and <a class="reference external" href="https://github.com/sympy/sympy/pull/1883">sympy/sympy#1883</a>.</li>
-<li>Support for first order linear general PDE’s with constant coefficients (<a class="reference external" href="https://github.com/sympy/sympy/pull/2109">sympy/sympy#2109</a>).</li>
-<li>Return all found independent solutions for underdetermined systems.</li>
-<li>Handle recursive problems for which <code class="docutils literal notranslate"><span class="pre">y(0)</span> <span class="pre">=</span> <span class="pre">0</span></code>.</li>
-<li>Handle matrix equations.</li>
+<li><p>Solvers</p>
+<ul>
+<li><p>Added enhancements and improved the methods of solving exact differential equation.  See <a class="reference external" href="https://github.com/sympy/sympy/pull/1955">sympy/sympy#1955</a> and <a class="reference external" href="https://github.com/sympy/sympy/pull/1823">sympy/sympy#1823</a>.</p></li>
+<li><p>Support for differential equations with linear coefficients and those that can be reduced to separable and linear form.  See <a class="reference external" href="https://github.com/sympy/sympy/pull/1940">sympy/sympy#1940</a>, <a class="reference external" href="https://github.com/sympy/sympy/pull/1864">sympy/sympy#1864</a> and <a class="reference external" href="https://github.com/sympy/sympy/pull/1883">sympy/sympy#1883</a>.</p></li>
+<li><p>Support for first order linear general PDE’s with constant coefficients (<a class="reference external" href="https://github.com/sympy/sympy/pull/2109">sympy/sympy#2109</a>).</p></li>
+<li><p>Return all found independent solutions for underdetermined systems.</p></li>
+<li><p>Handle recursive problems for which <code class="docutils literal notranslate"><span class="pre">y(0)</span> <span class="pre">=</span> <span class="pre">0</span></code>.</p></li>
+<li><p>Handle matrix equations.</p></li>
 </ul>
 </li>
-<li>Integration<ul>
-<li><code class="docutils literal notranslate"><span class="pre">integrate</span></code> will split out integrals into Piecewise expressions when
+<li><p>Integration</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">integrate</span></code> will split out integrals into Piecewise expressions when
 conditions must hold for the answer to be true. For example,
 <code class="docutils literal notranslate"><span class="pre">integrate(x**n,</span> <span class="pre">x)</span></code> now gives <code class="docutils literal notranslate"><span class="pre">Piecewise((log(x),</span> <span class="pre">Eq(n,</span> <span class="pre">-1),</span> <span class="pre">(x**(n</span> <span class="pre">+</span>
-<span class="pre">1)/(n</span> <span class="pre">+</span> <span class="pre">1),</span> <span class="pre">True))</span></code> (previously it just gave <code class="docutils literal notranslate"><span class="pre">x**(n</span> <span class="pre">+</span> <span class="pre">1)/(n</span> <span class="pre">+</span> <span class="pre">1)</span></code>).</li>
-<li>Calculate Gauss-Legendre and Gauss-Laguerre points and weights (<a class="reference external" href="https://github.com/sympy/sympy/pull/1497">sympy/sympy#1497</a>).</li>
-<li>Various new error and inverse error functions (<a class="reference external" href="https://github.com/sympy/sympy/pull/1703">sympy/sympy#1703</a>).</li>
-<li>Use in heurisch for more symmetric and nicer results.</li>
-<li>Gruntz for expintegrals and all new erf*.</li>
-<li>Li, li logarithmic integrals (<a class="reference external" href="https://github.com/sympy/sympy/pull/1708">sympy/sympy#1708</a>).</li>
-<li>Integration of li/Li by heurisch (<a class="reference external" href="https://github.com/sympy/sympy/pull/1712">sympy/sympy#1712</a>).</li>
-<li>elliptic integrals, complete and incomplete.</li>
-<li>Integration of complete elliptic integrals by meijerg.</li>
-<li>Integration of Piecewise with symbolic conditions.</li>
-<li>Fixed many wrong results of DiracDelta integrals.</li>
+<span class="pre">1)/(n</span> <span class="pre">+</span> <span class="pre">1),</span> <span class="pre">True))</span></code> (previously it just gave <code class="docutils literal notranslate"><span class="pre">x**(n</span> <span class="pre">+</span> <span class="pre">1)/(n</span> <span class="pre">+</span> <span class="pre">1)</span></code>).</p></li>
+<li><p>Calculate Gauss-Legendre and Gauss-Laguerre points and weights (<a class="reference external" href="https://github.com/sympy/sympy/pull/1497">sympy/sympy#1497</a>).</p></li>
+<li><p>Various new error and inverse error functions (<a class="reference external" href="https://github.com/sympy/sympy/pull/1703">sympy/sympy#1703</a>).</p></li>
+<li><p>Use in heurisch for more symmetric and nicer results.</p></li>
+<li><p>Gruntz for expintegrals and all new erf*.</p></li>
+<li><p>Li, li logarithmic integrals (<a class="reference external" href="https://github.com/sympy/sympy/pull/1708">sympy/sympy#1708</a>).</p></li>
+<li><p>Integration of li/Li by heurisch (<a class="reference external" href="https://github.com/sympy/sympy/pull/1712">sympy/sympy#1712</a>).</p></li>
+<li><p>elliptic integrals, complete and incomplete.</p></li>
+<li><p>Integration of complete elliptic integrals by meijerg.</p></li>
+<li><p>Integration of Piecewise with symbolic conditions.</p></li>
+<li><p>Fixed many wrong results of DiracDelta integrals.</p></li>
 </ul>
 </li>
-<li>Logic<ul>
-<li>Addition of SOPform and POSform functions to sympy.logic to generate boolean expressions from truth tables.</li>
-<li>Addition of simplify_logic function and enabling <code class="docutils literal notranslate"><span class="pre">simplify()</span></code> to reduce logic expressions to their simplest forms.</li>
-<li>Addition of bool_equals function to check equality of boolean expressions and return a mapping of variables from one expr to other that leads to the equality.</li>
-<li>Addition of disjunctive normal form methods - to_dnf, is_dnf</li>
+<li><p>Logic</p>
+<ul>
+<li><p>Addition of SOPform and POSform functions to sympy.logic to generate boolean expressions from truth tables.</p></li>
+<li><p>Addition of simplify_logic function and enabling <code class="docutils literal notranslate"><span class="pre">simplify()</span></code> to reduce logic expressions to their simplest forms.</p></li>
+<li><p>Addition of bool_equals function to check equality of boolean expressions and return a mapping of variables from one expr to other that leads to the equality.</p></li>
+<li><p>Addition of disjunctive normal form methods - to_dnf, is_dnf</p></li>
 </ul>
 </li>
-<li>Others<ul>
-<li>gmpy version 2 is now supported</li>
-<li>Added <code class="docutils literal notranslate"><span class="pre">is_algebraic_expr()</span></code> method (<a class="reference external" href="https://github.com/sympy/sympy/pull/2176">sympy/sympy#2176</a>).</li>
-<li>Many improvements to the handling of noncommutative symbols:<ul>
-<li>Better support in simplification functions, e.g. <code class="docutils literal notranslate"><span class="pre">factor</span></code>, <code class="docutils literal notranslate"><span class="pre">trigsimp</span></code></li>
-<li>Better integration with <code class="docutils literal notranslate"><span class="pre">Order()</span></code></li>
-<li>Better pattern matching</li>
+<li><p>Others</p>
+<ul>
+<li><p>gmpy version 2 is now supported</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">is_algebraic_expr()</span></code> method (<a class="reference external" href="https://github.com/sympy/sympy/pull/2176">sympy/sympy#2176</a>).</p></li>
+<li><p>Many improvements to the handling of noncommutative symbols:</p>
+<ul>
+<li><p>Better support in simplification functions, e.g. <code class="docutils literal notranslate"><span class="pre">factor</span></code>, <code class="docutils literal notranslate"><span class="pre">trigsimp</span></code></p></li>
+<li><p>Better integration with <code class="docutils literal notranslate"><span class="pre">Order()</span></code></p></li>
+<li><p>Better pattern matching</p></li>
 </ul>
 </li>
-<li>Improved pattern matching including matching the identity.</li>
-<li>normalizes Jacobi polynomials</li>
-<li>Quadrature rules for orthogonal polynomials in arbitrary precision
-(hermite, laguerre, legendre, gen_legendre, jacobi)</li>
-<li>summation of harmonic numbers</li>
-<li>Many improvements of the polygamma functions</li>
-<li>evaluation at special arguments</li>
-<li>Connections to harmonic numbers</li>
-<li>structured full partial fraction decomposition (mainly interesting for developers)</li>
-<li>besselsimp improvements</li>
-<li>Karr summation convention</li>
-<li>New spherical harmonics</li>
-<li>improved minimal_polynomial using composition of algebraic numbers (<a class="reference external" href="https://github.com/sympy/sympy/pull/2038">sympy/sympy#2038</a>).</li>
-<li>faster integer polynomial factorization (<a class="reference external" href="https://github.com/sympy/sympy/pull/2148">sympy/sympy#2148</a>).</li>
-<li>Euler-Descartes method for quartic equations (<a class="reference external" href="https://github.com/sympy/sympy/pull/1947">sympy/sympy#1947</a>)</li>
-<li>algebraic operations on tensors (<a class="reference external" href="https://github.com/sympy/sympy/pull/1700">sympy/sympy#1700</a>).</li>
-<li>tensor canonicalization (<a class="reference external" href="https://github.com/sympy/sympy/pull/1644">sympy/sympy#1644</a>).</li>
-<li>Handle the simplification of summations and products over a KroneckerDelta.</li>
-<li>Implemented LaTeX printing of DiracDelta, Heaviside, KroneckerDelta and LeviCivita, also many Matrix expressions.</li>
-<li>Improved LaTeX printing of fractions, Mul in general.</li>
-<li>IPython integration and printing issues have been ironed out.</li>
-<li>Stats now supports discrete distributions (e.g. <code class="docutils literal notranslate"><span class="pre">Poisson</span></code>) by relying on <code class="docutils literal notranslate"><span class="pre">Summation</span></code> objects</li>
-<li>Added DOT printing for visualization of expression trees</li>
-<li>Added information about solvability and nilpotency of named groups.</li>
+<li><p>Improved pattern matching including matching the identity.</p></li>
+<li><p>normalizes Jacobi polynomials</p></li>
+<li><p>Quadrature rules for orthogonal polynomials in arbitrary precision
+(hermite, laguerre, legendre, gen_legendre, jacobi)</p></li>
+<li><p>summation of harmonic numbers</p></li>
+<li><p>Many improvements of the polygamma functions</p></li>
+<li><p>evaluation at special arguments</p></li>
+<li><p>Connections to harmonic numbers</p></li>
+<li><p>structured full partial fraction decomposition (mainly interesting for developers)</p></li>
+<li><p>besselsimp improvements</p></li>
+<li><p>Karr summation convention</p></li>
+<li><p>New spherical harmonics</p></li>
+<li><p>improved minimal_polynomial using composition of algebraic numbers (<a class="reference external" href="https://github.com/sympy/sympy/pull/2038">sympy/sympy#2038</a>).</p></li>
+<li><p>faster integer polynomial factorization (<a class="reference external" href="https://github.com/sympy/sympy/pull/2148">sympy/sympy#2148</a>).</p></li>
+<li><p>Euler-Descartes method for quartic equations (<a class="reference external" href="https://github.com/sympy/sympy/pull/1947">sympy/sympy#1947</a>)</p></li>
+<li><p>algebraic operations on tensors (<a class="reference external" href="https://github.com/sympy/sympy/pull/1700">sympy/sympy#1700</a>).</p></li>
+<li><p>tensor canonicalization (<a class="reference external" href="https://github.com/sympy/sympy/pull/1644">sympy/sympy#1644</a>).</p></li>
+<li><p>Handle the simplification of summations and products over a KroneckerDelta.</p></li>
+<li><p>Implemented LaTeX printing of DiracDelta, Heaviside, KroneckerDelta and LeviCivita, also many Matrix expressions.</p></li>
+<li><p>Improved LaTeX printing of fractions, Mul in general.</p></li>
+<li><p>IPython integration and printing issues have been ironed out.</p></li>
+<li><p>Stats now supports discrete distributions (e.g. <code class="docutils literal notranslate"><span class="pre">Poisson</span></code>) by relying on <code class="docutils literal notranslate"><span class="pre">Summation</span></code> objects</p></li>
+<li><p>Added DOT printing for visualization of expression trees</p></li>
+<li><p>Added information about solvability and nilpotency of named groups.</p></li>
 </ul>
 </li>
 </ul>

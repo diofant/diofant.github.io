@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.core.basic &mdash; Diofant 0.10.1.dev299+g5e6a61e documentation</title>
+  <title>diofant.core.basic &mdash; Diofant 0.10.1.dev310+g172db0a documentation</title>
   
 
   
@@ -158,7 +158,6 @@
 <span class="kn">from</span> <span class="nn">.cache</span> <span class="k">import</span> <span class="n">cacheit</span>
 <span class="kn">from</span> <span class="nn">.compatibility</span> <span class="k">import</span> <span class="n">iterable</span><span class="p">,</span> <span class="n">ordered</span>
 <span class="kn">from</span> <span class="nn">.decorators</span> <span class="k">import</span> <span class="n">_sympifyit</span>
-<span class="kn">from</span> <span class="nn">.singleton</span> <span class="k">import</span> <span class="n">S</span>
 <span class="kn">from</span> <span class="nn">.sympify</span> <span class="k">import</span> <span class="n">SympifyError</span><span class="p">,</span> <span class="n">sympify</span>
 
 
@@ -258,16 +257,16 @@
 <span class="sd">        &gt;&gt;&gt; sorted([Rational(1, 2), I, -I], key=lambda x: x.sort_key())</span>
 <span class="sd">        [1/2, -I, I]</span>
 
-<span class="sd">        &gt;&gt;&gt; [x, 1/x, 1/x**2, x**2, x**S.Half, x**Rational(1, 4), x**Rational(3, 2)]</span>
+<span class="sd">        &gt;&gt;&gt; [x, 1/x, 1/x**2, x**2, sqrt(x), root(x, 4), x**Rational(3, 2)]</span>
 <span class="sd">        [x, 1/x, x**(-2), x**2, sqrt(x), x**(1/4), x**(3/2)]</span>
 <span class="sd">        &gt;&gt;&gt; sorted(_, key=lambda x: x.sort_key())</span>
 <span class="sd">        [x**(-2), 1/x, x**(1/4), sqrt(x), x, x**(3/2), x**2]</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-
+        <span class="kn">from</span> <span class="nn">.numbers</span> <span class="k">import</span> <span class="n">Integer</span>
         <span class="n">args</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">),</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">arg</span><span class="o">.</span><span class="n">sort_key</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
                                      <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sorted_args</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">class_key</span><span class="p">(),</span> <span class="n">args</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="o">.</span><span class="n">sort_key</span><span class="p">(),</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">class_key</span><span class="p">(),</span> <span class="n">args</span><span class="p">,</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sort_key</span><span class="p">(),</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></div>
 
     <span class="nd">@_sympifyit</span><span class="p">(</span><span class="s1">&#39;other&#39;</span><span class="p">,</span> <span class="bp">NotImplemented</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
@@ -583,6 +582,7 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">..utilities</span> <span class="k">import</span> <span class="n">default_sort_key</span>
+        <span class="kn">from</span> <span class="nn">.numbers</span> <span class="k">import</span> <span class="n">Integer</span>
         <span class="kn">from</span> <span class="nn">.symbol</span> <span class="k">import</span> <span class="n">Dummy</span>
 
         <span class="n">unordered</span> <span class="o">=</span> <span class="kc">False</span>
@@ -633,7 +633,7 @@
                 <span class="c1"># is both free and bound</span>
                 <span class="n">rv</span> <span class="o">=</span> <span class="n">rv</span><span class="o">.</span><span class="n">_subs</span><span class="p">(</span><span class="n">old</span><span class="p">,</span> <span class="n">d</span><span class="o">*</span><span class="n">m</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
                 <span class="n">reps</span><span class="p">[</span><span class="n">d</span><span class="p">]</span> <span class="o">=</span> <span class="n">new</span>
-            <span class="n">reps</span><span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span>  <span class="c1"># get rid of m</span>
+            <span class="n">reps</span><span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># get rid of m</span>
             <span class="k">return</span> <span class="n">rv</span><span class="o">.</span><span class="n">xreplace</span><span class="p">(</span><span class="n">reps</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">rv</span> <span class="o">=</span> <span class="bp">self</span>
@@ -1310,8 +1310,8 @@
 <div class="viewcode-block" id="Atom.sort_key"><a class="viewcode-back" href="../../../modules/core.html#diofant.core.basic.Atom.sort_key">[docs]</a>    <span class="nd">@cacheit</span>
     <span class="k">def</span> <span class="nf">sort_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return a sort key.&quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">S</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">class_key</span><span class="p">(),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">),)),</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="o">.</span><span class="n">sort_key</span><span class="p">(),</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span></div>
+        <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">Integer</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">class_key</span><span class="p">(),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">),)),</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sort_key</span><span class="p">(),</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_eval_simplify</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ratio</span><span class="p">,</span> <span class="n">measure</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.geometry.ellipse &mdash; Diofant 0.10.1.dev299+g5e6a61e documentation</title>
+  <title>diofant.geometry.ellipse &mdash; Diofant 0.10.1.dev310+g172db0a documentation</title>
   
 
   
@@ -159,9 +159,10 @@
 
 <span class="kn">import</span> <span class="nn">random</span>
 
-<span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">Dummy</span><span class="p">,</span> <span class="n">Rational</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">oo</span><span class="p">,</span> <span class="n">pi</span><span class="p">,</span> <span class="n">sympify</span>
+<span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">Dummy</span><span class="p">,</span> <span class="n">Rational</span><span class="p">,</span> <span class="n">oo</span><span class="p">,</span> <span class="n">pi</span><span class="p">,</span> <span class="n">sympify</span>
 <span class="kn">from</span> <span class="nn">..core.logic</span> <span class="k">import</span> <span class="n">fuzzy_bool</span>
 <span class="kn">from</span> <span class="nn">..functions</span> <span class="k">import</span> <span class="n">cos</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">sqrt</span>
+<span class="kn">from</span> <span class="nn">..logic</span> <span class="k">import</span> <span class="n">false</span><span class="p">,</span> <span class="n">true</span>
 <span class="kn">from</span> <span class="nn">..polys</span> <span class="k">import</span> <span class="n">DomainError</span><span class="p">,</span> <span class="n">Poly</span><span class="p">,</span> <span class="n">PolynomialError</span>
 <span class="kn">from</span> <span class="nn">..polys.polyutils</span> <span class="k">import</span> <span class="n">_not_a_coeff</span><span class="p">,</span> <span class="n">_nsort</span>
 <span class="kn">from</span> <span class="nn">..simplify</span> <span class="k">import</span> <span class="n">simplify</span><span class="p">,</span> <span class="n">trigsimp</span>
@@ -391,9 +392,9 @@
             <span class="k">return</span> <span class="n">ab</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">ab</span>
         <span class="n">o</span> <span class="o">=</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="mi">0</span>
-        <span class="k">if</span> <span class="n">o</span> <span class="o">==</span> <span class="n">S</span><span class="o">.</span><span class="n">true</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">o</span> <span class="o">==</span> <span class="n">true</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">a</span>
-        <span class="k">elif</span> <span class="n">o</span> <span class="o">==</span> <span class="n">S</span><span class="o">.</span><span class="n">false</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">o</span> <span class="o">==</span> <span class="n">false</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">b</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">vradius</span>
 
@@ -437,9 +438,9 @@
             <span class="k">return</span> <span class="n">ab</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">ab</span>
         <span class="n">o</span> <span class="o">=</span> <span class="n">b</span> <span class="o">-</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="mi">0</span>
-        <span class="k">if</span> <span class="n">o</span> <span class="o">==</span> <span class="n">S</span><span class="o">.</span><span class="n">true</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">o</span> <span class="o">==</span> <span class="n">true</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">a</span>
-        <span class="k">elif</span> <span class="n">o</span> <span class="o">==</span> <span class="n">S</span><span class="o">.</span><span class="n">false</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">o</span> <span class="o">==</span> <span class="n">false</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">b</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">hradius</span>
 
@@ -744,7 +745,7 @@
 <span class="sd">        &gt;&gt;&gt; e = Ellipse((0, 0), 3, 2)</span>
 <span class="sd">        &gt;&gt;&gt; e.encloses_point((0, 0))</span>
 <span class="sd">        True</span>
-<span class="sd">        &gt;&gt;&gt; e.encloses_point(e.arbitrary_point(t).subs({t: S.Half}))</span>
+<span class="sd">        &gt;&gt;&gt; e.encloses_point(e.arbitrary_point(t).subs({t: Rational(1, 2)}))</span>
 <span class="sd">        False</span>
 <span class="sd">        &gt;&gt;&gt; e.encloses_point((4, 0))</span>
 <span class="sd">        False</span>
@@ -1187,7 +1188,7 @@
             <span class="n">t</span> <span class="o">=</span> <span class="o">-</span><span class="n">b</span> <span class="o">/</span> <span class="n">a</span>
             <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">lp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">lp</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
         <span class="c1"># Definite and potential symbolic intersections are allowed.</span>
-        <span class="k">elif</span> <span class="p">(</span><span class="n">det</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">S</span><span class="o">.</span><span class="n">false</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">det</span><span class="o">.</span><span class="n">is_positive</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">False</span><span class="p">:</span>
             <span class="n">root</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">det</span><span class="p">)</span>
             <span class="n">t_a</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">b</span> <span class="o">-</span> <span class="n">root</span><span class="p">)</span> <span class="o">/</span> <span class="n">a</span>
             <span class="n">t_b</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">b</span> <span class="o">+</span> <span class="n">root</span><span class="p">)</span> <span class="o">/</span> <span class="n">a</span>
@@ -1331,7 +1332,7 @@
             <span class="n">y</span> <span class="o">=</span> <span class="n">Dummy</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">extended_real</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
             <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">equation</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span> <span class="n">o</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">o</span><span class="o">.</span><span class="n">y</span><span class="p">})</span>
-            <span class="k">return</span> <span class="n">trigsimp</span><span class="p">(</span><span class="n">simplify</span><span class="p">(</span><span class="n">res</span><span class="p">))</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+            <span class="k">return</span> <span class="n">trigsimp</span><span class="p">(</span><span class="n">simplify</span><span class="p">(</span><span class="n">res</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">Ellipse</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">self</span> <span class="o">==</span> <span class="n">o</span>
         <span class="k">return</span> <span class="kc">False</span></div>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.calculus.optimization &mdash; Diofant 0.10.1.dev299+g5e6a61e documentation</title>
+  <title>diofant.calculus.optimization &mdash; Diofant 0.10.1.dev310+g172db0a documentation</title>
   
 
   
@@ -150,7 +150,7 @@
            <div itemprop="articleBody">
             
   <h1>Source code for diofant.calculus.optimization</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">Eq</span><span class="p">,</span> <span class="n">Ge</span><span class="p">,</span> <span class="n">Gt</span><span class="p">,</span> <span class="n">Le</span><span class="p">,</span> <span class="n">Lt</span><span class="p">,</span> <span class="n">Ne</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">diff</span><span class="p">,</span> <span class="n">nan</span><span class="p">,</span> <span class="n">oo</span><span class="p">,</span> <span class="n">sympify</span>
+<span></span><span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">Eq</span><span class="p">,</span> <span class="n">Ge</span><span class="p">,</span> <span class="n">Gt</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">Le</span><span class="p">,</span> <span class="n">Lt</span><span class="p">,</span> <span class="n">Ne</span><span class="p">,</span> <span class="n">diff</span><span class="p">,</span> <span class="n">nan</span><span class="p">,</span> <span class="n">oo</span><span class="p">,</span> <span class="n">sympify</span>
 <span class="kn">from</span> <span class="nn">..core.compatibility</span> <span class="k">import</span> <span class="n">is_sequence</span><span class="p">,</span> <span class="n">ordered</span>
 <span class="kn">from</span> <span class="nn">..functions</span> <span class="k">import</span> <span class="n">Min</span>
 <span class="kn">from</span> <span class="nn">..matrices</span> <span class="k">import</span> <span class="n">eye</span><span class="p">,</span> <span class="n">zeros</span>
@@ -417,7 +417,7 @@
     <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">oo</span><span class="p">,</span> <span class="p">(</span><span class="n">oo</span><span class="p">,)</span><span class="o">*</span><span class="n">cols</span>
 
-    <span class="n">ans</span> <span class="o">=</span> <span class="p">[</span><span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="p">]</span><span class="o">*</span><span class="n">cols</span>
+    <span class="n">ans</span> <span class="o">=</span> <span class="p">[</span><span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)]</span><span class="o">*</span><span class="n">cols</span>
     <span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">basis</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="n">cols</span><span class="p">:</span>
             <span class="n">ans</span><span class="p">[</span><span class="n">b</span><span class="p">]</span> <span class="o">=</span> <span class="n">tableau</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">c</span><span class="p">]</span>

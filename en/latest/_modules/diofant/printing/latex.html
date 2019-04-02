@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.printing.latex &mdash; Diofant 0.10.1.dev299+g5e6a61e documentation</title>
+  <title>diofant.printing.latex &mdash; Diofant 0.10.1.dev310+g172db0a documentation</title>
   
 
   
@@ -160,7 +160,7 @@
 <span class="kn">import</span> <span class="nn">mpmath.libmp</span> <span class="k">as</span> <span class="nn">mlib</span>
 <span class="kn">from</span> <span class="nn">mpmath.libmp</span> <span class="k">import</span> <span class="n">prec_to_dps</span>
 
-<span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">Add</span><span class="p">,</span> <span class="n">Mod</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">Symbol</span><span class="p">,</span> <span class="n">oo</span>
+<span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">Add</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">Mod</span><span class="p">,</span> <span class="n">Symbol</span><span class="p">,</span> <span class="n">oo</span>
 <span class="kn">from</span> <span class="nn">..core.alphabets</span> <span class="k">import</span> <span class="n">greeks</span>
 <span class="kn">from</span> <span class="nn">..core.compatibility</span> <span class="k">import</span> <span class="n">default_sort_key</span>
 <span class="kn">from</span> <span class="nn">..core.function</span> <span class="k">import</span> <span class="n">_coeff_isneg</span>
@@ -494,7 +494,7 @@
                     <span class="n">last_term_tex</span> <span class="o">=</span> <span class="n">term_tex</span>
                 <span class="k">return</span> <span class="n">_tex</span>
 
-        <span class="k">if</span> <span class="n">denom</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">denom</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="c1"># use the original expression here, since fraction() may have</span>
             <span class="c1"># altered it when producing numer and denom</span>
             <span class="n">tex</span> <span class="o">+=</span> <span class="n">convert</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
@@ -517,8 +517,8 @@
                         <span class="o">%</span> <span class="p">(</span><span class="n">sdenom</span><span class="p">,</span> <span class="n">separator</span><span class="p">,</span> <span class="n">snumer</span><span class="p">)</span>
                 <span class="k">elif</span> <span class="n">numer</span><span class="o">.</span><span class="n">is_Mul</span><span class="p">:</span>
                     <span class="c1"># split a long numerator</span>
-                    <span class="n">a</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span>
-                    <span class="n">b</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span>
+                    <span class="n">a</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                    <span class="n">b</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
                     <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">numer</span><span class="o">.</span><span class="n">args</span><span class="p">:</span>
                         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_needs_mul_brackets</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">last</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="ow">or</span> \
                                 <span class="nb">len</span><span class="p">(</span><span class="n">convert</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">())</span> <span class="o">&gt;</span> <span class="n">ratio</span><span class="o">*</span><span class="n">ldenom</span> <span class="ow">or</span> \

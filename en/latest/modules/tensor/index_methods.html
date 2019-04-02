@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Methods &mdash; Diofant 0.10.1.dev299+g5e6a61e documentation</title>
+  <title>Methods &mdash; Diofant 0.10.1.dev310+g172db0a documentation</title>
   
 
   
@@ -194,8 +194,8 @@
 <span id="methods"></span><h1>Methods<a class="headerlink" href="#module-diofant.tensor.index_methods" title="Permalink to this headline">¶</a></h1>
 <p>Module with functions operating on IndexedBase, Indexed and Idx objects</p>
 <ul class="simple">
-<li>Check shape conformance</li>
-<li>Determine indices in resulting expression</li>
+<li><p>Check shape conformance</p></li>
+<li><p>Determine indices in resulting expression</p></li>
 </ul>
 <p>etc.</p>
 <p>Methods in this module could be implemented by calling methods on Expr
@@ -208,12 +208,11 @@ refactoring.</p>
 <p>By <em>dummy</em> we mean indices that are summation indices.</p>
 <p>The structure of the expression is determined and described as follows:</p>
 <ol class="arabic">
-<li><p class="first">A conforming summation of Indexed objects is described with a dict where
+<li><p>A conforming summation of Indexed objects is described with a dict where
 the keys are summation indices and the corresponding values are sets
 containing all terms for which the summation applies.  All Add objects
-in the Diofant expression tree are described like this.</p>
-</li>
-<li><p class="first">For all nodes in the Diofant expression tree that are <em>not</em> of type Add, the
+in the Diofant expression tree are described like this.</p></li>
+<li><p>For all nodes in the Diofant expression tree that are <em>not</em> of type Add, the
 following applies:</p>
 <p>If a node discovers contractions in one of its arguments, the node
 itself will be stored as a key in the dict.  For that key, the
@@ -224,8 +223,8 @@ as the one and only key.</p>
 </li>
 </ol>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The presence of expressions among the dictionary keys indicates
+<p class="admonition-title">Note</p>
+<p>The presence of expressions among the dictionary keys indicates
 multiple levels of index contractions.  A nested dict displays nested
 contractions and may itself contain dicts from a deeper level.  In
 practical calculations the summation in the deepest nested level must be
@@ -322,14 +321,10 @@ outer indices.  Else an IndexConformanceException is raised.</p>
 <span class="go">({i}, {})</span>
 </pre></div>
 </div>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Exceptions:</th><td class="field-body"></td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Exceptions</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
 <p>An IndexConformanceException means that the terms are not compatible, e.g.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_indices</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">y</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
 <span class="gt">Traceback (most recent call last):</span>
@@ -338,7 +333,7 @@ outer indices.  Else an IndexConformanceException is raised.</p>
 </pre></div>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
+<p class="admonition-title">Warning</p>
 <p>The concept of <em>outer</em> indices applies recursively, starting on the deepest
 level.  This implies that dummies inside parenthesis are assumed to be
 summed first, so that the following expression is handled gracefully:</p>
@@ -346,7 +341,7 @@ summed first, so that the following expression is handled gracefully:</p>
 <span class="go">({i, j}, {})</span>
 </pre></div>
 </div>
-<p class="last">This is correct and may appear convenient, but you need to be careful
+<p>This is correct and may appear convenient, but you need to be careful
 with this as Diofant will happily .expand() the product, if requested.  The
 resulting expression would mix the outer <code class="docutils literal notranslate"><span class="pre">j</span></code> with the dummies inside
 the parenthesis, which makes it a different expression.  To be on the

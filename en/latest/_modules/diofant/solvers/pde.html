@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.solvers.pde &mdash; Diofant 0.10.1.dev299+g5e6a61e documentation</title>
+  <title>diofant.solvers.pde &mdash; Diofant 0.10.1.dev310+g172db0a documentation</title>
   
 
   
@@ -189,7 +189,7 @@
 <span class="kn">from</span> <span class="nn">functools</span> <span class="k">import</span> <span class="n">reduce</span>
 <span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">combinations_with_replacement</span>
 
-<span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="p">(</span><span class="n">Add</span><span class="p">,</span> <span class="n">Eq</span><span class="p">,</span> <span class="n">Equality</span><span class="p">,</span> <span class="n">Function</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">Subs</span><span class="p">,</span> <span class="n">Symbol</span><span class="p">,</span> <span class="n">Wild</span><span class="p">,</span> <span class="n">expand</span><span class="p">,</span>
+<span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="p">(</span><span class="n">Add</span><span class="p">,</span> <span class="n">Eq</span><span class="p">,</span> <span class="n">Equality</span><span class="p">,</span> <span class="n">Function</span><span class="p">,</span> <span class="n">Subs</span><span class="p">,</span> <span class="n">Symbol</span><span class="p">,</span> <span class="n">Wild</span><span class="p">,</span> <span class="n">expand</span><span class="p">,</span>
                     <span class="n">symbols</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">..core.compatibility</span> <span class="k">import</span> <span class="n">is_sequence</span>
 <span class="kn">from</span> <span class="nn">..functions</span> <span class="k">import</span> <span class="n">exp</span>
@@ -584,7 +584,7 @@
     <span class="k">if</span> <span class="n">sol</span><span class="o">.</span><span class="n">lhs</span> <span class="o">==</span> <span class="n">func</span><span class="p">:</span>
         <span class="n">pde</span> <span class="o">=</span> <span class="n">pde</span><span class="o">.</span><span class="n">lhs</span> <span class="o">-</span> <span class="n">pde</span><span class="o">.</span><span class="n">rhs</span>
         <span class="n">s</span> <span class="o">=</span> <span class="n">simplify</span><span class="p">(</span><span class="n">pde</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">func</span><span class="p">:</span> <span class="n">sol</span><span class="o">.</span><span class="n">rhs</span><span class="p">})</span><span class="o">.</span><span class="n">doit</span><span class="p">())</span>
-        <span class="k">return</span> <span class="n">s</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="p">,</span> <span class="n">s</span>
+        <span class="k">return</span> <span class="n">s</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="n">s</span>
 
     <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="n">filldedent</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
 <span class="s1">        Unable to test if </span><span class="si">%s</span><span class="s1"> is a solution to </span><span class="si">%s</span><span class="s1">.&#39;&#39;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">sol</span><span class="p">,</span> <span class="n">pde</span><span class="p">)))</span></div>

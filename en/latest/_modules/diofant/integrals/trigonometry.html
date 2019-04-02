@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.integrals.trigonometry &mdash; Diofant 0.10.1.dev299+g5e6a61e documentation</title>
+  <title>diofant.integrals.trigonometry &mdash; Diofant 0.10.1.dev310+g172db0a documentation</title>
   
 
   
@@ -150,7 +150,7 @@
            <div itemprop="articleBody">
             
   <h1>Source code for diofant.integrals.trigonometry</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">Dummy</span><span class="p">,</span> <span class="n">Eq</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">Rational</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">Wild</span><span class="p">,</span> <span class="n">cacheit</span>
+<span></span><span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">Dummy</span><span class="p">,</span> <span class="n">Eq</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">Rational</span><span class="p">,</span> <span class="n">Wild</span><span class="p">,</span> <span class="n">cacheit</span>
 <span class="kn">from</span> <span class="nn">..functions</span> <span class="k">import</span> <span class="n">Piecewise</span><span class="p">,</span> <span class="n">binomial</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">sin</span>
 
 
@@ -219,9 +219,9 @@
         <span class="k">return</span>
 
     <span class="n">n</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="n">M</span><span class="p">[</span><span class="n">m</span><span class="p">]</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span> <span class="ow">and</span> <span class="n">m</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">m</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">x</span>
-    <span class="n">zz</span> <span class="o">=</span> <span class="n">x</span> <span class="k">if</span> <span class="n">n</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span> <span class="k">else</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+    <span class="n">zz</span> <span class="o">=</span> <span class="n">x</span> <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
     <span class="n">a</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="n">a</span><span class="p">]</span>
 
@@ -269,7 +269,7 @@
     <span class="c1"># take largest n or m -- to choose simplest substitution</span>
     <span class="n">n_</span> <span class="o">=</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">abs</span><span class="p">(</span><span class="n">m</span><span class="p">))</span>
     <span class="n">m_</span> <span class="o">=</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">abs</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
-    <span class="n">res</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">n_</span><span class="p">:</span>
         <span class="c1">#  2k         2 k             i             2i</span>

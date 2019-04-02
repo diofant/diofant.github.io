@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Printing &mdash; Diofant 0.10.1.dev299+g5e6a61e documentation</title>
+  <title>Printing &mdash; Diofant 0.10.1.dev310+g172db0a documentation</title>
   
 
   
@@ -214,18 +214,17 @@ internally.</p>
 <p>Diofant’s printing system works the following way: Any expression can be
 passed to a designated Printer who then is responsible to return an
 adequate representation of that expression.</p>
-<dl class="docutils">
-<dt>The basic concept is the following:</dt>
-<dd><ol class="first last arabic simple">
-<li>Let the object print itself if it knows how.</li>
-<li>Take the best fitting method defined in the printer.</li>
-<li>As fall-back use the emptyPrinter method for the printer.</li>
+<dl class="simple">
+<dt>The basic concept is the following:</dt><dd><ol class="arabic simple">
+<li><p>Let the object print itself if it knows how.</p></li>
+<li><p>Take the best fitting method defined in the printer.</p></li>
+<li><p>As fall-back use the emptyPrinter method for the printer.</p></li>
 </ol>
 </dd>
 </dl>
 <p>Some more information how the single concepts work and who should use which:</p>
 <ol class="arabic">
-<li><p class="first">The object prints itself</p>
+<li><p>The object prints itself</p>
 <blockquote>
 <div><p>This was the original way of doing printing in diofant. Every class had
 its own latex, mathml, str and repr methods, but it turned out that it
@@ -241,7 +240,7 @@ depends on the specific printer and is defined under
 Printer.printmethod.</p>
 </div></blockquote>
 </li>
-<li><p class="first">Take the best fitting method defined in the printer.</p>
+<li><p>Take the best fitting method defined in the printer.</p>
 <blockquote>
 <div><p>The printer loops through expr classes (class + its bases), and tries
 to dispatch the work to _print_&lt;EXPR_CLASS&gt;</p>
@@ -274,7 +273,7 @@ and the result is returned back.</p>
 order.</p>
 </div></blockquote>
 </li>
-<li><p class="first">As fall-back use the emptyPrinter method for the printer.</p>
+<li><p>As fall-back use the emptyPrinter method for the printer.</p>
 <blockquote>
 <div><p>As fall-back self.emptyPrinter will be called with the expression. If
 not defined in the Printer subclass this will be the same as str(expr).</p>
@@ -290,13 +289,11 @@ not defined in the Printer subclass this will be the same as str(expr).</p>
 <p>Its job is to provide infrastructure for implementing new printers easily.</p>
 <p>Basically, if you want to implement a printer, all you have to do is:</p>
 <ol class="arabic">
-<li><p class="first">Subclass Printer.</p>
-</li>
-<li><p class="first">Define Printer.printmethod in your subclass.
+<li><p>Subclass Printer.</p></li>
+<li><p>Define Printer.printmethod in your subclass.
 If a object has a method with that name, this method will be used
-for printing.</p>
-</li>
-<li><p class="first">In your subclass, define <code class="docutils literal notranslate"><span class="pre">_print_&lt;CLASS&gt;</span></code> methods</p>
+for printing.</p></li>
+<li><p>In your subclass, define <code class="docutils literal notranslate"><span class="pre">_print_&lt;CLASS&gt;</span></code> methods</p>
 <p>For each class you want to provide printing to, define an appropriate
 method how to do it. For example if you want a class FOO to be printed in
 its own way, define _print_FOO:</p>
@@ -317,7 +314,7 @@ only defines <code class="docutils literal notranslate"><span class="pre">_print
 separate routines for <code class="docutils literal notranslate"><span class="pre">Symbol</span></code>, <code class="docutils literal notranslate"><span class="pre">Atom</span></code>, <code class="docutils literal notranslate"><span class="pre">Number</span></code>, <code class="docutils literal notranslate"><span class="pre">Integral</span></code>,
 <code class="docutils literal notranslate"><span class="pre">Limit</span></code>, etc…</p>
 </li>
-<li><p class="first">If convenient, override <code class="docutils literal notranslate"><span class="pre">self.emptyPrinter</span></code></p>
+<li><p>If convenient, override <code class="docutils literal notranslate"><span class="pre">self.emptyPrinter</span></code></p>
 <p>This callable will be called to obtain printing result as a last resort,
 that is when no appropriate print method was found for an expression.</p>
 </li>
@@ -347,12 +344,11 @@ that is when no appropriate print method was found for an expression.</p>
 <dt id="diofant.printing.printer.Printer._print">
 <code class="descname">_print</code><span class="sig-paren">(</span><em>expr</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/printing/printer.html#Printer._print"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.printing.printer.Printer._print" title="Permalink to this definition">¶</a></dt>
 <dd><p>Internal dispatcher</p>
-<dl class="docutils">
-<dt>Tries the following concepts to print an expression:</dt>
-<dd><ol class="first last arabic simple">
-<li>Let the object print itself if it knows how.</li>
-<li>Take the best fitting method defined in the printer.</li>
-<li>As fall-back use the emptyPrinter method for the printer.</li>
+<dl class="simple">
+<dt>Tries the following concepts to print an expression:</dt><dd><ol class="arabic simple">
+<li><p>Let the object print itself if it knows how.</p></li>
+<li><p>Take the best fitting method defined in the printer.</p></li>
+<li><p>As fall-back use the emptyPrinter method for the printer.</p></li>
 </ol>
 </dd>
 </dl>
@@ -409,24 +405,20 @@ when possible.</p>
 <code class="descclassname">diofant.printing.pretty.pretty.</code><code class="descname">pretty_print</code><span class="sig-paren">(</span><em>expr</em>, <em>**settings</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/printing/pretty/pretty.html#pretty_print"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.printing.pretty.pretty.pretty_print" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prints expr in pretty form.</p>
 <p>pprint is just a shortcut for this function.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>expr</strong> (<em>expression</em>) – the expression to print</li>
-<li><strong>wrap_line</strong> (<em>bool, optional</em>) – line wrapping enabled/disabled, defaults to True</li>
-<li><strong>num_columns</strong> (<em>int or None, optional</em>) – number of columns before line breaking (default to None which reads
-the terminal width), useful when using Diofant without terminal.</li>
-<li><strong>use_unicode</strong> (<em>bool or None, optional</em>) – use unicode characters, such as the Greek letter pi instead of
-the string pi.</li>
-<li><strong>full_prec</strong> (<em>bool or string, optional</em>) – use full precision. Default to “auto”</li>
-<li><strong>order</strong> (<em>bool or string, optional</em>) – set to ‘none’ for long expressions if slow; default is None</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>expr</strong> (<em>expression</em>) – the expression to print</p></li>
+<li><p><strong>wrap_line</strong> (<em>bool, optional</em>) – line wrapping enabled/disabled, defaults to True</p></li>
+<li><p><strong>num_columns</strong> (<em>int or None, optional</em>) – number of columns before line breaking (default to None which reads
+the terminal width), useful when using Diofant without terminal.</p></li>
+<li><p><strong>use_unicode</strong> (<em>bool or None, optional</em>) – use unicode characters, such as the Greek letter pi instead of
+the string pi.</p></li>
+<li><p><strong>full_prec</strong> (<em>bool or string, optional</em>) – use full precision. Default to “auto”</p></li>
+<li><p><strong>order</strong> (<em>bool or string, optional</em>) – set to ‘none’ for long expressions if slow; default is None</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -464,41 +456,37 @@ to strings of C code).</p>
 <dt id="diofant.printing.ccode.ccode">
 <code class="descclassname">diofant.printing.ccode.</code><code class="descname">ccode</code><span class="sig-paren">(</span><em>expr</em>, <em>assign_to=None</em>, <em>**settings</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/printing/ccode.html#ccode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.printing.ccode.ccode" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts an expr to a string of c code</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>expr</strong> (<em>Expr</em>) – A diofant expression to be converted.</li>
-<li><strong>assign_to</strong> (<em>optional</em>) – When given, the argument is used as the name of the variable to which
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>expr</strong> (<em>Expr</em>) – A diofant expression to be converted.</p></li>
+<li><p><strong>assign_to</strong> (<em>optional</em>) – When given, the argument is used as the name of the variable to which
 the expression is assigned. Can be a string, <code class="docutils literal notranslate"><span class="pre">Symbol</span></code>,
 <code class="docutils literal notranslate"><span class="pre">MatrixSymbol</span></code>, or <code class="docutils literal notranslate"><span class="pre">Indexed</span></code> type. This is helpful in case of
-line-wrapping, or for expressions that generate multi-line statements.</li>
-<li><strong>precision</strong> (<em>integer, optional</em>) – The precision for numbers such as pi [default=15].</li>
-<li><strong>user_functions</strong> (<em>dict, optional</em>) – A dictionary where the keys are string representations of either
+line-wrapping, or for expressions that generate multi-line statements.</p></li>
+<li><p><strong>precision</strong> (<em>integer, optional</em>) – The precision for numbers such as pi [default=15].</p></li>
+<li><p><strong>user_functions</strong> (<em>dict, optional</em>) – A dictionary where the keys are string representations of either
 <code class="docutils literal notranslate"><span class="pre">FunctionClass</span></code> or <code class="docutils literal notranslate"><span class="pre">UndefinedFunction</span></code> instances and the values
 are their desired C string representations. Alternatively, the
 dictionary value can be a list of tuples i.e. [(argument_test,
 cfunction_string)] or [(argument_test, cfunction_formater)]. See below
-for examples.</li>
-<li><strong>dereference</strong> (<em>iterable, optional</em>) – An iterable of symbols that should be dereferenced in the printed code
+for examples.</p></li>
+<li><p><strong>dereference</strong> (<em>iterable, optional</em>) – An iterable of symbols that should be dereferenced in the printed code
 expression. These would be values passed by address to the function.
 For example, if <code class="docutils literal notranslate"><span class="pre">dereference=[a]</span></code>, the resulting code would print
-<code class="docutils literal notranslate"><span class="pre">(*a)</span></code> instead of <code class="docutils literal notranslate"><span class="pre">a</span></code>.</li>
-<li><strong>human</strong> (<em>bool, optional</em>) – If True, the result is a single string that may contain some constant
+<code class="docutils literal notranslate"><span class="pre">(*a)</span></code> instead of <code class="docutils literal notranslate"><span class="pre">a</span></code>.</p></li>
+<li><p><strong>human</strong> (<em>bool, optional</em>) – If True, the result is a single string that may contain some constant
 declarations for the number symbols. If False, the same information is
 returned in a tuple of (symbols_to_declare, not_supported_functions,
-code_text). [default=True].</li>
-<li><strong>contract</strong> (<em>bool, optional</em>) – If True, <code class="docutils literal notranslate"><span class="pre">Indexed</span></code> instances are assumed to obey tensor contraction
+code_text). [default=True].</p></li>
+<li><p><strong>contract</strong> (<em>bool, optional</em>) – If True, <code class="docutils literal notranslate"><span class="pre">Indexed</span></code> instances are assumed to obey tensor contraction
 rules and the corresponding nested loops over indices are generated.
 Setting contract=False will not generate loops, instead the user is
 responsible to provide values for the indices in the code.
-[default=True].</li>
+[default=True].</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <p class="rubric">Examples</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">,</span> <span class="n">tau</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;x, tau&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ccode</span><span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">tau</span><span class="p">)</span><span class="o">**</span><span class="n">Rational</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
@@ -596,41 +584,37 @@ that manual changes in the result are no longer needed.</p>
 <dt id="diofant.printing.fcode.fcode">
 <code class="descclassname">diofant.printing.fcode.</code><code class="descname">fcode</code><span class="sig-paren">(</span><em>expr</em>, <em>assign_to=None</em>, <em>**settings</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/printing/fcode.html#fcode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.printing.fcode.fcode" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts an expr to a string of fortran code</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>expr</strong> (<em>Expr</em>) – A diofant expression to be converted.</li>
-<li><strong>assign_to</strong> (<em>optional</em>) – When given, the argument is used as the name of the variable to which
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>expr</strong> (<em>Expr</em>) – A diofant expression to be converted.</p></li>
+<li><p><strong>assign_to</strong> (<em>optional</em>) – When given, the argument is used as the name of the variable to which
 the expression is assigned. Can be a string, <code class="docutils literal notranslate"><span class="pre">Symbol</span></code>,
 <code class="docutils literal notranslate"><span class="pre">MatrixSymbol</span></code>, or <code class="docutils literal notranslate"><span class="pre">Indexed</span></code> type. This is helpful in case of
-line-wrapping, or for expressions that generate multi-line statements.</li>
-<li><strong>precision</strong> (<em>integer, optional</em>) – The precision for numbers such as pi [default=15].</li>
-<li><strong>user_functions</strong> (<em>dict, optional</em>) – A dictionary where keys are <code class="docutils literal notranslate"><span class="pre">FunctionClass</span></code> instances and values are
+line-wrapping, or for expressions that generate multi-line statements.</p></li>
+<li><p><strong>precision</strong> (<em>integer, optional</em>) – The precision for numbers such as pi [default=15].</p></li>
+<li><p><strong>user_functions</strong> (<em>dict, optional</em>) – A dictionary where keys are <code class="docutils literal notranslate"><span class="pre">FunctionClass</span></code> instances and values are
 their string representations. Alternatively, the dictionary value can
 be a list of tuples i.e. [(argument_test, cfunction_string)]. See below
-for examples.</li>
-<li><strong>human</strong> (<em>bool, optional</em>) – If True, the result is a single string that may contain some constant
+for examples.</p></li>
+<li><p><strong>human</strong> (<em>bool, optional</em>) – If True, the result is a single string that may contain some constant
 declarations for the number symbols. If False, the same information is
 returned in a tuple of (symbols_to_declare, not_supported_functions,
-code_text). [default=True].</li>
-<li><strong>contract</strong> (<em>bool, optional</em>) – If True, <code class="docutils literal notranslate"><span class="pre">Indexed</span></code> instances are assumed to obey tensor contraction
+code_text). [default=True].</p></li>
+<li><p><strong>contract</strong> (<em>bool, optional</em>) – If True, <code class="docutils literal notranslate"><span class="pre">Indexed</span></code> instances are assumed to obey tensor contraction
 rules and the corresponding nested loops over indices are generated.
 Setting contract=False will not generate loops, instead the user is
 responsible to provide values for the indices in the code.
-[default=True].</li>
-<li><strong>source_format</strong> (<em>optional</em>) – The source format can be either ‘fixed’ or ‘free’. [default=’fixed’]</li>
-<li><strong>standard</strong> (<em>integer, optional</em>) – The Fortran standard to be followed. This is specified as an integer.
+[default=True].</p></li>
+<li><p><strong>source_format</strong> (<em>optional</em>) – The source format can be either ‘fixed’ or ‘free’. [default=’fixed’]</p></li>
+<li><p><strong>standard</strong> (<em>integer, optional</em>) – The Fortran standard to be followed. This is specified as an integer.
 Acceptable standards are 66, 77, 90, 95, 2003, and 2008. Default is 77.
 Note that currently the only distinction internally is between
 standards before 95, and those 95 and after. This may change later as
-more features are added.</li>
+more features are added.</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <p class="rubric">Examples</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">,</span> <span class="n">tau</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;x, tau&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fcode</span><span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">tau</span><span class="p">)</span><span class="o">**</span><span class="n">Rational</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
@@ -1039,7 +1023,7 @@ dictionary.</p>
 <p>Whenever possible tries to use Content markup and not Presentation markup.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><a class="reference external" href="http://www.w3.org/TR/MathML2/">http://www.w3.org/TR/MathML2/</a></li>
+<li><p><a class="reference external" href="http://www.w3.org/TR/MathML2/">http://www.w3.org/TR/MathML2/</a></p></li>
 </ul>
 <dl class="attribute">
 <dt id="diofant.printing.mathml.MathMLPrinter.printmethod">
@@ -1281,17 +1265,15 @@ information.</p>
 (I hate spammers: mail me at pietjepuk314 at the reverse of ku.oc.oohay).
 All objects have a method that create a “stringPict”,
 that can be used in the str method for pretty printing.</p>
-<dl class="docutils">
-<dt>Updates by Jason Gedge (email &lt;my last name&gt; at cs mun ca)</dt>
-<dd><ul class="first last simple">
-<li>terminal_string() method</li>
-<li>minor fixes and changes (mostly to prettyForm)</li>
+<dl class="simple">
+<dt>Updates by Jason Gedge (email &lt;my last name&gt; at cs mun ca)</dt><dd><ul class="simple">
+<li><p>terminal_string() method</p></li>
+<li><p>minor fixes and changes (mostly to prettyForm)</p></li>
 </ul>
 </dd>
-<dt>TODO:</dt>
-<dd><ul class="first last simple">
-<li>Allow left/center/right alignment options for above/below and
-top/center/bottom alignment options for left/right</li>
+<dt>TODO:</dt><dd><ul class="simple">
+<li><p>Allow left/center/right alignment options for above/below and
+top/center/bottom alignment options for left/right</p></li>
 </ul>
 </dd>
 </dl>
@@ -1440,24 +1422,24 @@ OPEN this is an open object: parenthesize if added, multiplied, or
 (Expr, {&#39;color&#39;: &#39;black&#39;})]``
 </pre></div>
 </div>
-<dl class="docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">atom</span></code>: Function used to determine if an arg is an atom.  The default is</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">lambda</span> <span class="pre">x:</span> <span class="pre">not</span> <span class="pre">isinstance(x,</span> <span class="pre">Basic)</span></code>.  Another good choice is
-<code class="docutils literal notranslate"><span class="pre">lambda</span> <span class="pre">x:</span> <span class="pre">not</span> <span class="pre">x.args</span></code>.</dd>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">atom</span></code>: Function used to determine if an arg is an atom.  The default is</dt><dd><p><code class="docutils literal notranslate"><span class="pre">lambda</span> <span class="pre">x:</span> <span class="pre">not</span> <span class="pre">isinstance(x,</span> <span class="pre">Basic)</span></code>.  Another good choice is
+<code class="docutils literal notranslate"><span class="pre">lambda</span> <span class="pre">x:</span> <span class="pre">not</span> <span class="pre">x.args</span></code>.</p>
+</dd>
 </dl>
 <p><code class="docutils literal notranslate"><span class="pre">maxdepth</span></code>: The maximum depth.  The default is None, meaning no limit.</p>
-<dl class="docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">repeat</span></code>: Whether to different nodes for separate common subexpressions.</dt>
-<dd>The default is True.  For example, for <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+</span> <span class="pre">x*y</span></code> with
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">repeat</span></code>: Whether to different nodes for separate common subexpressions.</dt><dd><p>The default is True.  For example, for <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+</span> <span class="pre">x*y</span></code> with
 <code class="docutils literal notranslate"><span class="pre">repeat=True</span></code>, it will have two nodes for <code class="docutils literal notranslate"><span class="pre">x</span></code> and with
 <code class="docutils literal notranslate"><span class="pre">repeat=False</span></code>, it will have one (warning: even if it appears
 twice in the same object, like Pow(x, x), it will still only appear
 only once.  Hence, with repeat=False, the number of arrows out of an
-object might not equal the number of args it has).</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">labelfunc</span></code>: How to label leaf nodes.  The default is <code class="docutils literal notranslate"><span class="pre">str</span></code>.  Another</dt>
-<dd>good option is <code class="docutils literal notranslate"><span class="pre">repr</span></code>. For example with <code class="docutils literal notranslate"><span class="pre">str</span></code>, the leaf nodes
+object might not equal the number of args it has).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">labelfunc</span></code>: How to label leaf nodes.  The default is <code class="docutils literal notranslate"><span class="pre">str</span></code>.  Another</dt><dd><p>good option is <code class="docutils literal notranslate"><span class="pre">repr</span></code>. For example with <code class="docutils literal notranslate"><span class="pre">str</span></code>, the leaf nodes
 of <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+</span> <span class="pre">1</span></code> are labeled, <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">1</span></code>.  With <code class="docutils literal notranslate"><span class="pre">repr</span></code>, they
-are labeled <code class="docutils literal notranslate"><span class="pre">Symbol('x')</span></code> and <code class="docutils literal notranslate"><span class="pre">Integer(1)</span></code>.</dd>
+are labeled <code class="docutils literal notranslate"><span class="pre">Symbol('x')</span></code> and <code class="docutils literal notranslate"><span class="pre">Integer(1)</span></code>.</p>
+</dd>
 </dl>
 <p>Additional keyword arguments are included as styles for the graph.</p>
 <p class="rubric">Examples</p>

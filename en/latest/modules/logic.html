@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Logic &mdash; Diofant 0.10.1.dev299+g5e6a61e documentation</title>
+  <title>Logic &mdash; Diofant 0.10.1.dev310+g172db0a documentation</title>
   
 
   
@@ -248,7 +248,7 @@ the conditions.</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><a class="reference external" href="https://en.wikipedia.org/wiki/Quine-McCluskey_algorithm">https://en.wikipedia.org/wiki/Quine-McCluskey_algorithm</a></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Quine-McCluskey_algorithm">https://en.wikipedia.org/wiki/Quine-McCluskey_algorithm</a></p></li>
 </ul>
 </dd></dl>
 
@@ -274,7 +274,7 @@ the conditions.</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><a class="reference external" href="https://en.wikipedia.org/wiki/Quine-McCluskey_algorithm">https://en.wikipedia.org/wiki/Quine-McCluskey_algorithm</a></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Quine-McCluskey_algorithm">https://en.wikipedia.org/wiki/Quine-McCluskey_algorithm</a></p></li>
 </ul>
 </dd></dl>
 
@@ -284,7 +284,7 @@ the conditions.</p>
 <dl class="class">
 <dt id="diofant.logic.boolalg.BooleanTrue">
 <em class="property">class </em><code class="descclassname">diofant.logic.boolalg.</code><code class="descname">BooleanTrue</code><a class="reference internal" href="../_modules/diofant/logic/boolalg.html#BooleanTrue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.logic.boolalg.BooleanTrue" title="Permalink to this definition">¶</a></dt>
-<dd><p>Diofant version of True, a singleton that can be accessed via S.true.</p>
+<dd><p>Diofant version of True, a singleton that can be accessed via <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
 <p>This is the Diofant version of True, for use in the logic module. The
 primary advantage of using true instead of True is that shorthand boolean
 operations like ~ and &gt;&gt; will work as expected on this class, whereas with
@@ -292,20 +292,20 @@ True they act bitwise on 1. Functions in the logic module will return this
 class when they evaluate to true.</p>
 <p class="rubric">Notes</p>
 <p>There is liable to be some confusion as to when <code class="docutils literal notranslate"><span class="pre">True</span></code> should
-be used and when <code class="docutils literal notranslate"><span class="pre">S.true</span></code> should be used in various contexts
+be used and when <code class="docutils literal notranslate"><span class="pre">true</span></code> should be used in various contexts
 throughout Diofant. An important thing to remember is that
-<code class="docutils literal notranslate"><span class="pre">sympify(True)</span></code> returns <code class="docutils literal notranslate"><span class="pre">S.true</span></code>. This means that for the most
+<code class="docutils literal notranslate"><span class="pre">sympify(True)</span></code> returns <code class="docutils literal notranslate"><span class="pre">true</span></code>. This means that for the most
 part, you can just use <code class="docutils literal notranslate"><span class="pre">True</span></code> and it will automatically be converted
-to <code class="docutils literal notranslate"><span class="pre">S.true</span></code> when necessary, similar to how you can generally use 1
-instead of <code class="docutils literal notranslate"><span class="pre">S.One</span></code>.</p>
+to <code class="docutils literal notranslate"><span class="pre">true</span></code> when necessary, similar to how you can generally use 1
+instead of <code class="docutils literal notranslate"><span class="pre">Integer(1)</span></code>.</p>
 <p>The rule of thumb is:</p>
 <p>“If the boolean in question can be replaced by an arbitrary symbolic
-<code class="docutils literal notranslate"><span class="pre">Boolean</span></code>, like <code class="docutils literal notranslate"><span class="pre">Or(x,</span> <span class="pre">y)</span></code> or <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&gt;</span> <span class="pre">1</span></code>, use <code class="docutils literal notranslate"><span class="pre">S.true</span></code>.
+<code class="docutils literal notranslate"><span class="pre">Boolean</span></code>, like <code class="docutils literal notranslate"><span class="pre">Or(x,</span> <span class="pre">y)</span></code> or <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&gt;</span> <span class="pre">1</span></code>, use <code class="docutils literal notranslate"><span class="pre">true</span></code>.
 Otherwise, use <code class="docutils literal notranslate"><span class="pre">True</span></code>”.</p>
-<p>In other words, use <code class="docutils literal notranslate"><span class="pre">S.true</span></code> only on those contexts where the
+<p>In other words, use <code class="docutils literal notranslate"><span class="pre">true</span></code> only on those contexts where the
 boolean is being used as a symbolic representation of truth.
 For example, if the object ends up in the <code class="docutils literal notranslate"><span class="pre">.args</span></code> of any expression,
-then it must necessarily be <code class="docutils literal notranslate"><span class="pre">S.true</span></code> instead of <code class="docutils literal notranslate"><span class="pre">True</span></code>, as
+then it must necessarily be <code class="docutils literal notranslate"><span class="pre">true</span></code> instead of <code class="docutils literal notranslate"><span class="pre">True</span></code>, as
 elements of <code class="docutils literal notranslate"><span class="pre">.args</span></code> must be <code class="docutils literal notranslate"><span class="pre">Basic</span></code>. On the other hand,
 <code class="docutils literal notranslate"><span class="pre">==</span></code> is not a symbolic operation in Diofant, since it always returns
 <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code>, and does so in terms of structural equality
@@ -313,21 +313,21 @@ rather than mathematical, so it should return <code class="docutils literal notr
 system should use <code class="docutils literal notranslate"><span class="pre">True</span></code> and <code class="docutils literal notranslate"><span class="pre">False</span></code>. Aside from not satisfying
 the above rule of thumb, the
 assumptions system uses a three-valued logic (<code class="docutils literal notranslate"><span class="pre">True</span></code>, <code class="docutils literal notranslate"><span class="pre">False</span></code>, <code class="docutils literal notranslate"><span class="pre">None</span></code>),
-whereas <code class="docutils literal notranslate"><span class="pre">S.true</span></code> and <code class="docutils literal notranslate"><span class="pre">S.false</span></code> represent a two-valued logic. When in
+whereas <code class="docutils literal notranslate"><span class="pre">true</span></code> and <code class="docutils literal notranslate"><span class="pre">false</span></code> represent a two-valued logic. When in
 doubt, use <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
-<p>“<code class="docutils literal notranslate"><span class="pre">S.true</span> <span class="pre">==</span> <span class="pre">True</span> <span class="pre">is</span> <span class="pre">True</span></code>.”</p>
-<p>While “<code class="docutils literal notranslate"><span class="pre">S.true</span> <span class="pre">is</span> <span class="pre">True</span></code>” is <code class="docutils literal notranslate"><span class="pre">False</span></code>, “<code class="docutils literal notranslate"><span class="pre">S.true</span> <span class="pre">==</span> <span class="pre">True</span></code>”
+<p>“<code class="docutils literal notranslate"><span class="pre">true</span> <span class="pre">==</span> <span class="pre">True</span> <span class="pre">is</span> <span class="pre">True</span></code>.”</p>
+<p>While “<code class="docutils literal notranslate"><span class="pre">true</span> <span class="pre">is</span> <span class="pre">True</span></code>” is <code class="docutils literal notranslate"><span class="pre">False</span></code>, “<code class="docutils literal notranslate"><span class="pre">true</span> <span class="pre">==</span> <span class="pre">True</span></code>”
 is <code class="docutils literal notranslate"><span class="pre">True</span></code>, so if there is any doubt over whether a function or
-expression will return <code class="docutils literal notranslate"><span class="pre">S.true</span></code> or <code class="docutils literal notranslate"><span class="pre">True</span></code>, just use <code class="docutils literal notranslate"><span class="pre">==</span></code>
+expression will return <code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">True</span></code>, just use <code class="docutils literal notranslate"><span class="pre">==</span></code>
 instead of <code class="docutils literal notranslate"><span class="pre">is</span></code> to do the comparison, and it will work in either
 case.  Finally, for boolean flags, it’s better to just use <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">x</span></code>
 instead of <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">x</span> <span class="pre">is</span> <span class="pre">True</span></code>. To quote PEP 8:</p>
 <p>Don’t compare boolean values to <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code>
 using <code class="docutils literal notranslate"><span class="pre">==</span></code>.</p>
 <ul class="simple">
-<li>Yes:   <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">greeting:</span></code></li>
-<li>No:    <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">greeting</span> <span class="pre">==</span> <span class="pre">True:</span></code></li>
-<li>Worse: <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">greeting</span> <span class="pre">is</span> <span class="pre">True:</span></code></li>
+<li><p>Yes:   <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">greeting:</span></code></p></li>
+<li><p>No:    <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">greeting</span> <span class="pre">==</span> <span class="pre">True:</span></code></p></li>
+<li><p>Worse: <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">greeting</span> <span class="pre">is</span> <span class="pre">True:</span></code></p></li>
 </ul>
 <p class="rubric">Examples</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sympify</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
@@ -341,15 +341,15 @@ using <code class="docutils literal notranslate"><span class="pre">==</span></co
 </pre></div>
 </div>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#diofant.logic.boolalg.BooleanFalse" title="diofant.logic.boolalg.BooleanFalse"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.logic.boolalg.BooleanFalse</span></code></a></p>
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#diofant.logic.boolalg.BooleanFalse" title="diofant.logic.boolalg.BooleanFalse"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.logic.boolalg.BooleanFalse</span></code></a></p>
 </div>
 </dd></dl>
 
 <dl class="class">
 <dt id="diofant.logic.boolalg.BooleanFalse">
 <em class="property">class </em><code class="descclassname">diofant.logic.boolalg.</code><code class="descname">BooleanFalse</code><a class="reference internal" href="../_modules/diofant/logic/boolalg.html#BooleanFalse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.logic.boolalg.BooleanFalse" title="Permalink to this definition">¶</a></dt>
-<dd><p>Diofant version of False, a singleton that can be accessed via S.false.</p>
+<dd><p>Diofant version of False, a singleton that can be accessed via <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
 <p>This is the Diofant version of False, for use in the logic module. The
 primary advantage of using false instead of False is that shorthand boolean
 operations like ~ and &gt;&gt; will work as expected on this class, whereas with
@@ -369,8 +369,8 @@ class when they evaluate to false.</p>
 </pre></div>
 </div>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#diofant.logic.boolalg.BooleanTrue" title="diofant.logic.boolalg.BooleanTrue"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.logic.boolalg.BooleanTrue</span></code></a></p>
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#diofant.logic.boolalg.BooleanTrue" title="diofant.logic.boolalg.BooleanTrue"><code class="xref py py-class docutils literal notranslate"><span class="pre">diofant.logic.boolalg.BooleanTrue</span></code></a></p>
 </div>
 </dd></dl>
 
@@ -683,22 +683,18 @@ If simplify is True, the expr is evaluated to its simplest DNF form.</p>
 <code class="descclassname">diofant.logic.boolalg.</code><code class="descname">simplify_logic</code><span class="sig-paren">(</span><em>expr</em>, <em>form=None</em>, <em>deep=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/logic/boolalg.html#simplify_logic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.logic.boolalg.simplify_logic" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function simplifies a boolean function to its simplified version
 in SOP or POS form. The return type is an Or or And object in Diofant.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>expr</strong> (<em>string or boolean expression</em>)</li>
-<li><strong>form</strong> (<em>string (‘cnf’ or ‘dnf’) or None (default).</em>) – If ‘cnf’ or ‘dnf’, the simplest expression in the corresponding
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>expr</strong> (<em>string or boolean expression</em>)</p></li>
+<li><p><strong>form</strong> (<em>string (‘cnf’ or ‘dnf’) or None (default).</em>) – If ‘cnf’ or ‘dnf’, the simplest expression in the corresponding
 normal form is returned; if None, the answer is returned
-according to the form with fewest args (in CNF by default).</li>
-<li><strong>deep</strong> (<em>boolean (default True)</em>) – indicates whether to recursively simplify any
-non-boolean functions contained within the input.</li>
+according to the form with fewest args (in CNF by default).</p></li>
+<li><p><strong>deep</strong> (<em>boolean (default True)</em>) – indicates whether to recursively simplify any
+non-boolean functions contained within the input.</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <p class="rubric">Examples</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="o">~</span><span class="n">x</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">y</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">z</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="o">~</span><span class="n">x</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">y</span> <span class="o">&amp;</span> <span class="n">z</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">simplify_logic</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>

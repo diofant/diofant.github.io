@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.concrete.products &mdash; Diofant 0.10.1.dev299+g5e6a61e documentation</title>
+  <title>diofant.concrete.products &mdash; Diofant 0.10.1.dev310+g172db0a documentation</title>
   
 
   
@@ -150,7 +150,7 @@
            <div itemprop="articleBody">
             
   <h1>Source code for diofant.concrete.products</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">Mul</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">nan</span>
+<span></span><span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">Mul</span><span class="p">,</span> <span class="n">nan</span>
 <span class="kn">from</span> <span class="nn">..functions</span> <span class="k">import</span> <span class="n">exp</span><span class="p">,</span> <span class="n">log</span>
 <span class="kn">from</span> <span class="nn">..polys</span> <span class="k">import</span> <span class="n">quo</span><span class="p">,</span> <span class="n">roots</span>
 <span class="kn">from</span> <span class="nn">..simplify</span> <span class="k">import</span> <span class="n">powsimp</span>
@@ -380,7 +380,7 @@
 
         <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">term</span><span class="o">.</span><span class="n">free_symbols</span><span class="p">:</span>
             <span class="k">if</span> <span class="p">(</span><span class="n">term</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">is_zero</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span>
+                <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">term</span><span class="o">**</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="n">n</span><span class="p">:</span>
@@ -396,7 +396,7 @@
         <span class="k">elif</span> <span class="n">term</span><span class="o">.</span><span class="n">is_polynomial</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
             <span class="n">poly</span> <span class="o">=</span> <span class="n">term</span><span class="o">.</span><span class="n">as_poly</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
 
-            <span class="n">A</span> <span class="o">=</span> <span class="n">B</span> <span class="o">=</span> <span class="n">Q</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span>
+            <span class="n">A</span> <span class="o">=</span> <span class="n">B</span> <span class="o">=</span> <span class="n">Q</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
             <span class="n">all_roots</span> <span class="o">=</span> <span class="n">roots</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
 
@@ -499,14 +499,14 @@
 <span class="sd">        to reverse, the index counting notation comes in handy in case there</span>
 <span class="sd">        are several symbols with the same name.</span>
 
-<span class="sd">        &gt;&gt;&gt; S = Sum(x*y, (x, a, b), (y, c, d))</span>
-<span class="sd">        &gt;&gt;&gt; S</span>
+<span class="sd">        &gt;&gt;&gt; s = Sum(x*y, (x, a, b), (y, c, d))</span>
+<span class="sd">        &gt;&gt;&gt; s</span>
 <span class="sd">        Sum(x*y, (x, a, b), (y, c, d))</span>
-<span class="sd">        &gt;&gt;&gt; S0 = S.reverse_order(0)</span>
-<span class="sd">        &gt;&gt;&gt; S0</span>
+<span class="sd">        &gt;&gt;&gt; s0 = s.reverse_order(0)</span>
+<span class="sd">        &gt;&gt;&gt; s0</span>
 <span class="sd">        Sum(-x*y, (x, b + 1, a - 1), (y, c, d))</span>
-<span class="sd">        &gt;&gt;&gt; S1 = S0.reverse_order(1)</span>
-<span class="sd">        &gt;&gt;&gt; S1</span>
+<span class="sd">        &gt;&gt;&gt; s1 = s0.reverse_order(1)</span>
+<span class="sd">        &gt;&gt;&gt; s1</span>
 <span class="sd">        Sum(x*y, (x, b + 1, a - 1), (y, d + 1, c - 1))</span>
 
 <span class="sd">        Of course we can mix both notations:</span>

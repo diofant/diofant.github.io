@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.ntheory.residue_ntheory &mdash; Diofant 0.10.1.dev299+g5e6a61e documentation</title>
+  <title>diofant.ntheory.residue_ntheory &mdash; Diofant 0.10.1.dev310+g172db0a documentation</title>
   
 
   
@@ -154,7 +154,7 @@
 <span class="kn">import</span> <span class="nn">math</span>
 <span class="kn">import</span> <span class="nn">random</span>
 
-<span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">Function</span><span class="p">,</span> <span class="n">S</span>
+<span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">Function</span><span class="p">,</span> <span class="n">Integer</span>
 <span class="kn">from</span> <span class="nn">..core.compatibility</span> <span class="k">import</span> <span class="n">as_int</span>
 <span class="kn">from</span> <span class="nn">..core.numbers</span> <span class="k">import</span> <span class="n">igcdex</span><span class="p">,</span> <span class="n">mod_inverse</span>
 <span class="kn">from</span> <span class="nn">..core.power</span> <span class="k">import</span> <span class="n">isqrt</span>
@@ -1110,14 +1110,14 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;n should be an integer&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">is_prime</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">NegativeOne</span>
-        <span class="k">elif</span> <span class="n">n</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span>
+            <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">n</span><span class="o">.</span><span class="n">is_Integer</span><span class="p">:</span>
             <span class="n">a</span> <span class="o">=</span> <span class="n">factorint</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
             <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">i</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">a</span><span class="o">.</span><span class="n">values</span><span class="p">()):</span>
-                <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
-            <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">NegativeOne</span><span class="o">**</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span></div>
+                <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span></div>
 
 
 <span class="k">def</span> <span class="nf">_discrete_log_trial_mul</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>

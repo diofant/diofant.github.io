@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.core.relational &mdash; Diofant 0.10.1.dev299+g5e6a61e documentation</title>
+  <title>diofant.core.relational &mdash; Diofant 0.10.1.dev310+g172db0a documentation</title>
   
 
   
@@ -150,8 +150,7 @@
            <div itemprop="articleBody">
             
   <h1>Source code for diofant.core.relational</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">..logic.boolalg</span> <span class="k">import</span> <span class="n">Boolean</span><span class="p">,</span> <span class="n">BooleanAtom</span>
-<span class="kn">from</span> <span class="nn">.basic</span> <span class="k">import</span> <span class="n">S</span>
+<span></span><span class="kn">from</span> <span class="nn">..logic.boolalg</span> <span class="k">import</span> <span class="n">Boolean</span><span class="p">,</span> <span class="n">BooleanAtom</span><span class="p">,</span> <span class="n">false</span><span class="p">,</span> <span class="n">true</span>
 <span class="kn">from</span> <span class="nn">.compatibility</span> <span class="k">import</span> <span class="n">ordered</span>
 <span class="kn">from</span> <span class="nn">.evalf</span> <span class="k">import</span> <span class="n">EvalfMixin</span>
 <span class="kn">from</span> <span class="nn">.evaluate</span> <span class="k">import</span> <span class="n">global_evaluate</span>
@@ -445,9 +444,9 @@
                     <span class="k">return</span> <span class="n">r</span>
             <span class="c1"># If expressions have the same structure, they must be equal.</span>
             <span class="k">if</span> <span class="n">lhs</span> <span class="o">==</span> <span class="n">rhs</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">true</span>
+                <span class="k">return</span> <span class="n">true</span>
             <span class="k">elif</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">BooleanAtom</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">(</span><span class="n">rhs</span><span class="p">,</span> <span class="n">lhs</span><span class="p">)):</span>
-                <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">false</span>  <span class="c1"># equal args already evaluated</span>
+                <span class="k">return</span> <span class="n">false</span>  <span class="c1"># equal args already evaluated</span>
 
             <span class="c1"># If appropriate, check if the difference evaluates.  Detect</span>
             <span class="c1"># incompatibility such as lhs real and rhs not real.</span>
@@ -501,7 +500,7 @@
 
         <span class="k">if</span> <span class="n">evaluate</span><span class="p">:</span>
             <span class="n">is_equal</span> <span class="o">=</span> <span class="n">Equality</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">is_equal</span> <span class="o">==</span> <span class="n">S</span><span class="o">.</span><span class="n">true</span> <span class="ow">or</span> <span class="n">is_equal</span> <span class="o">==</span> <span class="n">S</span><span class="o">.</span><span class="n">false</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">is_equal</span> <span class="o">==</span> <span class="n">true</span> <span class="ow">or</span> <span class="n">is_equal</span> <span class="o">==</span> <span class="n">false</span><span class="p">:</span>
                 <span class="k">return</span> <span class="o">~</span><span class="n">is_equal</span>
 
         <span class="k">return</span> <span class="n">Relational</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span></div>

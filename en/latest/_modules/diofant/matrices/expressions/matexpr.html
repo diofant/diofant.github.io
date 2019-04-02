@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.matrices.expressions.matexpr &mdash; Diofant 0.10.1.dev299+g5e6a61e documentation</title>
+  <title>diofant.matrices.expressions.matexpr &mdash; Diofant 0.10.1.dev310+g172db0a documentation</title>
   
 
   
@@ -150,11 +150,12 @@
            <div itemprop="articleBody">
             
   <h1>Source code for diofant.matrices.expressions.matexpr</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">...core</span> <span class="k">import</span> <span class="n">AtomicExpr</span><span class="p">,</span> <span class="n">Expr</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">Symbol</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">sympify</span>
+<span></span><span class="kn">from</span> <span class="nn">...core</span> <span class="k">import</span> <span class="n">AtomicExpr</span><span class="p">,</span> <span class="n">Expr</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">Symbol</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">sympify</span>
 <span class="kn">from</span> <span class="nn">...core.assumptions</span> <span class="k">import</span> <span class="n">StdFactKB</span>
 <span class="kn">from</span> <span class="nn">...core.decorators</span> <span class="k">import</span> <span class="n">_sympifyit</span><span class="p">,</span> <span class="n">call_highest_priority</span>
 <span class="kn">from</span> <span class="nn">...core.logic</span> <span class="k">import</span> <span class="n">fuzzy_bool</span>
 <span class="kn">from</span> <span class="nn">...functions</span> <span class="k">import</span> <span class="n">adjoint</span><span class="p">,</span> <span class="n">conjugate</span>
+<span class="kn">from</span> <span class="nn">...logic</span> <span class="k">import</span> <span class="n">false</span>
 <span class="kn">from</span> <span class="nn">...simplify</span> <span class="k">import</span> <span class="n">simplify</span>
 <span class="kn">from</span> <span class="nn">..matrices</span> <span class="k">import</span> <span class="n">ShapeError</span>
 
@@ -200,7 +201,7 @@
     <span class="c1"># The following is adapted from the core Expr object</span>
     <span class="k">def</span> <span class="nf">__neg__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="kn">from</span> <span class="nn">.matmul</span> <span class="k">import</span> <span class="n">MatMul</span>
-        <span class="k">return</span> <span class="n">MatMul</span><span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">NegativeOne</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">MatMul</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">__abs__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span>
@@ -250,11 +251,11 @@
             <span class="k">raise</span> <span class="n">ShapeError</span><span class="p">(</span><span class="s2">&quot;Power of non-square matrix </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="p">)</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_Identity</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span>
-        <span class="k">elif</span> <span class="n">other</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">NegativeOne</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">other</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">Inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">other</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">other</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">Identity</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">other</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">other</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span>
         <span class="k">return</span> <span class="n">MatPow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
 
@@ -266,13 +267,13 @@
     <span class="nd">@_sympifyit</span><span class="p">(</span><span class="s1">&#39;other&#39;</span><span class="p">,</span> <span class="bp">NotImplemented</span><span class="p">)</span>
     <span class="nd">@call_highest_priority</span><span class="p">(</span><span class="s1">&#39;__rtruediv__&#39;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">__truediv__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span> <span class="o">*</span> <span class="n">other</span><span class="o">**</span><span class="n">S</span><span class="o">.</span><span class="n">NegativeOne</span>
+        <span class="k">return</span> <span class="bp">self</span> <span class="o">*</span> <span class="n">other</span><span class="o">**</span><span class="n">Integer</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 
     <span class="nd">@_sympifyit</span><span class="p">(</span><span class="s1">&#39;other&#39;</span><span class="p">,</span> <span class="bp">NotImplemented</span><span class="p">)</span>
     <span class="nd">@call_highest_priority</span><span class="p">(</span><span class="s1">&#39;__truediv__&#39;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">__rtruediv__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
-        <span class="c1"># return MatMul(other, Pow(self, S.NegativeOne))</span>
+        <span class="c1"># return MatMul(other, Pow(self, -1))</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">rows</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -336,8 +337,8 @@
         <span class="k">def</span> <span class="nf">is_valid</span><span class="p">(</span><span class="n">idx</span><span class="p">):</span>
             <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">Symbol</span><span class="p">,</span> <span class="n">Expr</span><span class="p">))</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">is_valid</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="ow">and</span> <span class="n">is_valid</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="ow">and</span>
-                <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">i</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">S</span><span class="o">.</span><span class="n">false</span> <span class="ow">and</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">S</span><span class="o">.</span><span class="n">false</span> <span class="ow">and</span>
-                <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">j</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">S</span><span class="o">.</span><span class="n">false</span> <span class="ow">and</span> <span class="p">(</span><span class="n">j</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">S</span><span class="o">.</span><span class="n">false</span><span class="p">)</span>
+                <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">i</span><span class="p">)</span> <span class="o">!=</span> <span class="n">false</span> <span class="ow">and</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">)</span> <span class="o">!=</span> <span class="n">false</span> <span class="ow">and</span>
+                <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">j</span><span class="p">)</span> <span class="o">!=</span> <span class="n">false</span> <span class="ow">and</span> <span class="p">(</span><span class="n">j</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span><span class="p">)</span> <span class="o">!=</span> <span class="n">false</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">slice</span><span class="p">):</span>
@@ -581,12 +582,12 @@
 
     <span class="k">def</span> <span class="nf">_entry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span>
+            <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+            <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_eval_determinant</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span></div>
+        <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ZeroMatrix"><a class="viewcode-back" href="../../../../modules/matrices/expressions.html#diofant.matrices.expressions.ZeroMatrix">[docs]</a><span class="k">class</span> <span class="nc">ZeroMatrix</span><span class="p">(</span><span class="n">MatrixExpr</span><span class="p">):</span>
@@ -625,16 +626,16 @@
         <span class="k">return</span> <span class="n">ZeroMatrix</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cols</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_eval_trace</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+        <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_eval_determinant</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+        <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">conjugate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span>
 
     <span class="k">def</span> <span class="nf">_entry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+        <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__bool__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="kc">False</span></div>

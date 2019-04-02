@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.concrete.gosper &mdash; Diofant 0.10.1.dev299+g5e6a61e documentation</title>
+  <title>diofant.concrete.gosper &mdash; Diofant 0.10.1.dev310+g172db0a documentation</title>
   
 
   
@@ -152,7 +152,7 @@
   <h1>Source code for diofant.concrete.gosper</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Gosper&#39;s algorithm for hypergeometric summation. &quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">Dummy</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">nan</span><span class="p">,</span> <span class="n">symbols</span>
+<span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">Dummy</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">nan</span><span class="p">,</span> <span class="n">symbols</span>
 <span class="kn">from</span> <span class="nn">..core.compatibility</span> <span class="k">import</span> <span class="n">is_sequence</span>
 <span class="kn">from</span> <span class="nn">..polys</span> <span class="k">import</span> <span class="n">Poly</span><span class="p">,</span> <span class="n">factor</span><span class="p">,</span> <span class="n">parallel_poly_from_expr</span>
 <span class="kn">from</span> <span class="nn">..simplify</span> <span class="k">import</span> <span class="n">hypersimp</span>
@@ -283,7 +283,7 @@
         <span class="k">if</span> <span class="n">coeff</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">solution</span><span class="p">:</span>
             <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">coeff</span><span class="p">:</span> <span class="mi">0</span><span class="p">})</span>
 
-    <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span>  <span class="c1"># &#39;f(n)&#39; is *not* Gosper-summable</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">B</span><span class="o">.</span><span class="n">as_expr</span><span class="p">()</span><span class="o">*</span><span class="n">x</span><span class="o">/</span><span class="n">C</span><span class="o">.</span><span class="n">as_expr</span><span class="p">()</span></div>

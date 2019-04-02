@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.geometry.point &mdash; Diofant 0.10.1.dev299+g5e6a61e documentation</title>
+  <title>diofant.geometry.point &mdash; Diofant 0.10.1.dev310+g172db0a documentation</title>
   
 
   
@@ -159,7 +159,7 @@
 <span class="sd">Point3D</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">Add</span><span class="p">,</span> <span class="n">Float</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">sympify</span>
+<span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">Add</span><span class="p">,</span> <span class="n">Float</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">sympify</span>
 <span class="kn">from</span> <span class="nn">..core.compatibility</span> <span class="k">import</span> <span class="n">iterable</span>
 <span class="kn">from</span> <span class="nn">..core.evaluate</span> <span class="k">import</span> <span class="n">global_evaluate</span>
 <span class="kn">from</span> <span class="nn">..functions</span> <span class="k">import</span> <span class="n">im</span><span class="p">,</span> <span class="n">sqrt</span>
@@ -351,7 +351,7 @@
 <span class="sd">        0</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+        <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">origin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -436,7 +436,7 @@
 <span class="sd">        Point2D(7, 3)</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">Point</span><span class="p">([</span><span class="n">simplify</span><span class="p">((</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="n">S</span><span class="o">.</span><span class="n">Half</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">args</span><span class="p">)])</span></div>
+        <span class="k">return</span> <span class="n">Point</span><span class="p">([</span><span class="n">simplify</span><span class="p">((</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">args</span><span class="p">)])</span></div>
 
 <div class="viewcode-block" id="Point.evalf"><a class="viewcode-back" href="../../../modules/geometry/points.html#diofant.geometry.point.Point.evalf">[docs]</a>    <span class="k">def</span> <span class="nf">evalf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dps</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Evaluate the coordinates of the point.</span>
@@ -914,7 +914,7 @@
                     <span class="s2">&quot;Enter a 2 or 3 dimensional point&quot;</span><span class="p">)</span>
         <span class="n">coords</span> <span class="o">=</span> <span class="n">Tuple</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">coords</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-            <span class="n">coords</span> <span class="o">+=</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="p">,</span>
+            <span class="n">coords</span> <span class="o">+=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
         <span class="k">if</span> <span class="nb">eval</span><span class="p">:</span>
             <span class="n">coords</span> <span class="o">=</span> <span class="n">coords</span><span class="o">.</span><span class="n">xreplace</span><span class="p">({</span><span class="n">f</span><span class="p">:</span> <span class="n">simplify</span><span class="p">(</span><span class="n">nsimplify</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">rational</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
                                       <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">coords</span><span class="o">.</span><span class="n">atoms</span><span class="p">(</span><span class="n">Float</span><span class="p">)})</span>

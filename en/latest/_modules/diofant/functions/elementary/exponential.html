@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.functions.elementary.exponential &mdash; Diofant 0.10.1.dev299+g5e6a61e documentation</title>
+  <title>diofant.functions.elementary.exponential &mdash; Diofant 0.10.1.dev310+g172db0a documentation</title>
   
 
   
@@ -150,8 +150,8 @@
            <div itemprop="articleBody">
             
   <h1>Source code for diofant.functions.elementary.exponential</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">...core</span> <span class="k">import</span> <span class="p">(</span><span class="n">Add</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">Function</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">Mul</span><span class="p">,</span> <span class="n">Pow</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">expand_log</span><span class="p">,</span>
-                     <span class="n">nan</span><span class="p">,</span> <span class="n">oo</span><span class="p">,</span> <span class="n">pi</span><span class="p">,</span> <span class="n">sympify</span><span class="p">,</span> <span class="n">zoo</span><span class="p">)</span>
+<span></span><span class="kn">from</span> <span class="nn">...core</span> <span class="k">import</span> <span class="p">(</span><span class="n">Add</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">Function</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">Mul</span><span class="p">,</span> <span class="n">Pow</span><span class="p">,</span> <span class="n">expand_log</span><span class="p">,</span> <span class="n">nan</span><span class="p">,</span>
+                     <span class="n">oo</span><span class="p">,</span> <span class="n">pi</span><span class="p">,</span> <span class="n">sympify</span><span class="p">,</span> <span class="n">zoo</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">...core.function</span> <span class="k">import</span> <span class="n">ArgumentIndexError</span><span class="p">,</span> <span class="n">_coeff_isneg</span>
 <span class="kn">from</span> <span class="nn">...ntheory</span> <span class="k">import</span> <span class="n">multiplicity</span><span class="p">,</span> <span class="n">perfect_power</span>
 <span class="kn">from</span> <span class="nn">.miscellaneous</span> <span class="k">import</span> <span class="n">sqrt</span>
@@ -213,8 +213,8 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="n">neg_exp</span> <span class="ow">and</span> <span class="ow">not</span> <span class="p">(</span><span class="o">-</span><span class="n">exp</span><span class="p">)</span><span class="o">.</span><span class="n">is_negative</span><span class="p">:</span>
             <span class="n">neg_exp</span> <span class="o">=</span> <span class="n">_coeff_isneg</span><span class="p">(</span><span class="n">exp</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">neg_exp</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="o">-</span><span class="n">exp</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span>
+            <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="o">-</span><span class="n">exp</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">,</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">exp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -235,7 +235,7 @@
             <span class="k">return</span> <span class="kc">True</span>
 
     <span class="k">def</span> <span class="nf">_eval_is_rational</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">exp</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">exp</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">True</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">exp</span><span class="o">.</span><span class="n">is_rational</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">exp</span><span class="o">.</span><span class="n">is_nonzero</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">False</span>
@@ -356,10 +356,10 @@
                 <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">arg</span><span class="o">.</span><span class="n">is_Number</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">arg</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">arg</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">zoo</span>
-            <span class="k">elif</span> <span class="n">arg</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+            <span class="k">elif</span> <span class="n">arg</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
             <span class="k">elif</span> <span class="n">arg</span> <span class="ow">in</span> <span class="p">(</span><span class="n">oo</span><span class="p">,</span> <span class="o">-</span><span class="n">oo</span><span class="p">):</span>
                 <span class="k">return</span> <span class="n">oo</span>
             <span class="k">elif</span> <span class="n">arg</span><span class="o">.</span><span class="n">is_Rational</span><span class="p">:</span>
@@ -377,7 +377,7 @@
             <span class="k">elif</span> <span class="n">arg</span> <span class="ow">is</span> <span class="n">zoo</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">zoo</span>
             <span class="k">elif</span> <span class="n">arg</span> <span class="ow">is</span> <span class="n">E</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span>
+                <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
         <span class="c1"># don&#39;t autoexpand Pow or Mul (see the issue sympy/sympy#3351):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">arg</span><span class="o">.</span><span class="n">is_Add</span><span class="p">:</span>
@@ -388,13 +388,13 @@
                     <span class="k">return</span> <span class="n">oo</span>
                 <span class="k">elif</span> <span class="n">coeff</span><span class="o">.</span><span class="n">is_Rational</span><span class="p">:</span>
                     <span class="k">if</span> <span class="n">coeff</span><span class="o">.</span><span class="n">is_nonnegative</span><span class="p">:</span>
-                        <span class="k">return</span> <span class="n">pi</span> <span class="o">*</span> <span class="n">I</span> <span class="o">*</span> <span class="n">S</span><span class="o">.</span><span class="n">Half</span> <span class="o">+</span> <span class="bp">cls</span><span class="p">(</span><span class="n">coeff</span><span class="p">)</span>
+                        <span class="k">return</span> <span class="o">+</span><span class="n">pi</span><span class="o">*</span><span class="n">I</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="bp">cls</span><span class="p">(</span><span class="o">+</span><span class="n">coeff</span><span class="p">)</span>
                     <span class="k">else</span><span class="p">:</span>
-                        <span class="k">return</span> <span class="o">-</span><span class="n">pi</span> <span class="o">*</span> <span class="n">I</span> <span class="o">*</span> <span class="n">S</span><span class="o">.</span><span class="n">Half</span> <span class="o">+</span> <span class="bp">cls</span><span class="p">(</span><span class="o">-</span><span class="n">coeff</span><span class="p">)</span>
+                        <span class="k">return</span> <span class="o">-</span><span class="n">pi</span><span class="o">*</span><span class="n">I</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="bp">cls</span><span class="p">(</span><span class="o">-</span><span class="n">coeff</span><span class="p">)</span>
 
 <div class="viewcode-block" id="log.as_base_exp"><a class="viewcode-back" href="../../../../modules/functions/elementary.html#diofant.functions.elementary.exponential.log.as_base_exp">[docs]</a>    <span class="k">def</span> <span class="nf">as_base_exp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns this function in the form (base, exponent).&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">,</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_eval_expand_log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">hints</span><span class="p">):</span>
         <span class="kn">from</span> <span class="nn">.complexes</span> <span class="k">import</span> <span class="n">unpolarify</span>
@@ -421,7 +421,7 @@
                 <span class="k">elif</span> <span class="n">x</span><span class="o">.</span><span class="n">is_negative</span><span class="p">:</span>
                     <span class="n">a</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">)</span>
                     <span class="n">expr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-                    <span class="n">nonpos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">NegativeOne</span><span class="p">)</span>
+                    <span class="n">nonpos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Integer</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">nonpos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">Add</span><span class="p">(</span><span class="o">*</span><span class="n">expr</span><span class="p">)</span> <span class="o">+</span> <span class="n">log</span><span class="p">(</span><span class="n">Mul</span><span class="p">(</span><span class="o">*</span><span class="n">nonpos</span><span class="p">))</span>
@@ -548,7 +548,7 @@
 
     <span class="k">def</span> <span class="nf">_eval_as_leading_term</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="n">arg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">as_leading_term</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">arg</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">arg</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">as_leading_term</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span></div>
 
@@ -588,31 +588,31 @@
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">eval</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">k</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">k</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">k</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">k</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+        <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="n">E</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span>
+                <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="n">E</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">NegativeOne</span>
+                <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="o">-</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">:</span>
                 <span class="k">return</span> <span class="o">-</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="n">oo</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">oo</span>
 
         <span class="k">if</span> <span class="n">k</span><span class="o">.</span><span class="n">is_nonzero</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="k">return</span> <span class="o">-</span><span class="n">oo</span>
-        <span class="k">if</span> <span class="n">k</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">NegativeOne</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="o">-</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">:</span>
                 <span class="k">return</span> <span class="o">-</span><span class="n">I</span><span class="o">*</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span>
             <span class="k">elif</span> <span class="n">x</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="n">E</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">NegativeOne</span>
+                <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
             <span class="k">elif</span> <span class="n">x</span> <span class="o">==</span> <span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">):</span>
                 <span class="k">return</span> <span class="o">-</span><span class="n">Integer</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 
@@ -635,7 +635,7 @@
     <span class="k">def</span> <span class="nf">_eval_is_extended_real</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">k</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">k</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">k</span><span class="o">.</span><span class="n">is_zero</span><span class="p">:</span>
@@ -663,7 +663,7 @@
             <span class="kn">from</span> <span class="nn">..</span> <span class="k">import</span> <span class="n">factorial</span>
             <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
             <span class="n">o</span> <span class="o">=</span> <span class="n">Order</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="n">n</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
-            <span class="n">l</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+            <span class="n">l</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="n">l</span> <span class="o">+=</span> <span class="n">Add</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">Integer</span><span class="p">(</span><span class="o">-</span><span class="n">k</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="n">k</span><span class="o">/</span><span class="n">factorial</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
                            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)])</span>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.logic.boolalg &mdash; Diofant 0.10.1.dev299+g5e6a61e documentation</title>
+  <title>diofant.logic.boolalg &mdash; Diofant 0.10.1.dev310+g172db0a documentation</title>
   
 
   
@@ -241,7 +241,7 @@
 
 
 <div class="viewcode-block" id="BooleanTrue"><a class="viewcode-back" href="../../../modules/logic.html#diofant.logic.boolalg.BooleanTrue">[docs]</a><span class="k">class</span> <span class="nc">BooleanTrue</span><span class="p">(</span><span class="n">BooleanAtom</span><span class="p">,</span> <span class="n">metaclass</span><span class="o">=</span><span class="n">Singleton</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Diofant version of True, a singleton that can be accessed via S.true.</span>
+    <span class="sd">&quot;&quot;&quot;Diofant version of True, a singleton that can be accessed via ``true``.</span>
 
 <span class="sd">    This is the Diofant version of True, for use in the logic module. The</span>
 <span class="sd">    primary advantage of using true instead of True is that shorthand boolean</span>
@@ -253,23 +253,23 @@
 <span class="sd">    =====</span>
 
 <span class="sd">    There is liable to be some confusion as to when ``True`` should</span>
-<span class="sd">    be used and when ``S.true`` should be used in various contexts</span>
+<span class="sd">    be used and when ``true`` should be used in various contexts</span>
 <span class="sd">    throughout Diofant. An important thing to remember is that</span>
-<span class="sd">    ``sympify(True)`` returns ``S.true``. This means that for the most</span>
+<span class="sd">    ``sympify(True)`` returns ``true``. This means that for the most</span>
 <span class="sd">    part, you can just use ``True`` and it will automatically be converted</span>
-<span class="sd">    to ``S.true`` when necessary, similar to how you can generally use 1</span>
-<span class="sd">    instead of ``S.One``.</span>
+<span class="sd">    to ``true`` when necessary, similar to how you can generally use 1</span>
+<span class="sd">    instead of ``Integer(1)``.</span>
 
 <span class="sd">    The rule of thumb is:</span>
 
 <span class="sd">    &quot;If the boolean in question can be replaced by an arbitrary symbolic</span>
-<span class="sd">    ``Boolean``, like ``Or(x, y)`` or ``x &gt; 1``, use ``S.true``.</span>
+<span class="sd">    ``Boolean``, like ``Or(x, y)`` or ``x &gt; 1``, use ``true``.</span>
 <span class="sd">    Otherwise, use ``True``&quot;.</span>
 
-<span class="sd">    In other words, use ``S.true`` only on those contexts where the</span>
+<span class="sd">    In other words, use ``true`` only on those contexts where the</span>
 <span class="sd">    boolean is being used as a symbolic representation of truth.</span>
 <span class="sd">    For example, if the object ends up in the ``.args`` of any expression,</span>
-<span class="sd">    then it must necessarily be ``S.true`` instead of ``True``, as</span>
+<span class="sd">    then it must necessarily be ``true`` instead of ``True``, as</span>
 <span class="sd">    elements of ``.args`` must be ``Basic``. On the other hand,</span>
 <span class="sd">    ``==`` is not a symbolic operation in Diofant, since it always returns</span>
 <span class="sd">    ``True`` or ``False``, and does so in terms of structural equality</span>
@@ -277,14 +277,14 @@
 <span class="sd">    system should use ``True`` and ``False``. Aside from not satisfying</span>
 <span class="sd">    the above rule of thumb, the</span>
 <span class="sd">    assumptions system uses a three-valued logic (``True``, ``False``, ``None``),</span>
-<span class="sd">    whereas ``S.true`` and ``S.false`` represent a two-valued logic. When in</span>
+<span class="sd">    whereas ``true`` and ``false`` represent a two-valued logic. When in</span>
 <span class="sd">    doubt, use ``True``.</span>
 
-<span class="sd">    &quot;``S.true == True is True``.&quot;</span>
+<span class="sd">    &quot;``true == True is True``.&quot;</span>
 
-<span class="sd">    While &quot;``S.true is True``&quot; is ``False``, &quot;``S.true == True``&quot;</span>
+<span class="sd">    While &quot;``true is True``&quot; is ``False``, &quot;``true == True``&quot;</span>
 <span class="sd">    is ``True``, so if there is any doubt over whether a function or</span>
-<span class="sd">    expression will return ``S.true`` or ``True``, just use ``==``</span>
+<span class="sd">    expression will return ``true`` or ``True``, just use ``==``</span>
 <span class="sd">    instead of ``is`` to do the comparison, and it will work in either</span>
 <span class="sd">    case.  Finally, for boolean flags, it&#39;s better to just use ``if x``</span>
 <span class="sd">    instead of ``if x is True``. To quote PEP 8:</span>
@@ -336,7 +336,7 @@
 
 
 <div class="viewcode-block" id="BooleanFalse"><a class="viewcode-back" href="../../../modules/logic.html#diofant.logic.boolalg.BooleanFalse">[docs]</a><span class="k">class</span> <span class="nc">BooleanFalse</span><span class="p">(</span><span class="n">BooleanAtom</span><span class="p">,</span> <span class="n">metaclass</span><span class="o">=</span><span class="n">Singleton</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Diofant version of False, a singleton that can be accessed via S.false.</span>
+    <span class="sd">&quot;&quot;&quot;Diofant version of False, a singleton that can be accessed via ``false``.</span>
 
 <span class="sd">    This is the Diofant version of False, for use in the logic module. The</span>
 <span class="sd">    primary advantage of using false instead of False is that shorthand boolean</span>
@@ -398,7 +398,7 @@
 <span class="n">S</span><span class="o">.</span><span class="n">true</span> <span class="o">=</span> <span class="n">true</span>
 <span class="n">S</span><span class="o">.</span><span class="n">false</span> <span class="o">=</span> <span class="n">false</span>
 
-<span class="n">converter</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">S</span><span class="o">.</span><span class="n">true</span> <span class="k">if</span> <span class="n">x</span> <span class="k">else</span> <span class="n">S</span><span class="o">.</span><span class="n">false</span>
+<span class="n">converter</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">true</span> <span class="k">if</span> <span class="n">x</span> <span class="k">else</span> <span class="n">false</span>
 
 
 <span class="k">class</span> <span class="nc">BooleanFunction</span><span class="p">(</span><span class="n">Application</span><span class="p">,</span> <span class="n">Boolean</span><span class="p">):</span>
@@ -482,7 +482,7 @@
                     <span class="k">continue</span>
                 <span class="n">nc</span> <span class="o">=</span> <span class="p">(</span><span class="o">~</span><span class="n">c</span><span class="p">)</span><span class="o">.</span><span class="n">canonical</span>
                 <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">r</span> <span class="o">==</span> <span class="n">nc</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">rel</span><span class="p">):</span>
-                    <span class="k">return</span> <span class="p">[</span><span class="n">S</span><span class="o">.</span><span class="n">false</span><span class="p">]</span>
+                    <span class="k">return</span> <span class="p">[</span><span class="n">false</span><span class="p">]</span>
                 <span class="n">rel</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
             <span class="n">newargs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">LatticeOp</span><span class="o">.</span><span class="n">_new_args_filter</span><span class="p">(</span><span class="n">newargs</span><span class="p">,</span> <span class="n">And</span><span class="p">)</span>
@@ -550,7 +550,7 @@
                     <span class="k">continue</span>
                 <span class="n">nc</span> <span class="o">=</span> <span class="p">(</span><span class="o">~</span><span class="n">c</span><span class="p">)</span><span class="o">.</span><span class="n">canonical</span>
                 <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">r</span> <span class="o">==</span> <span class="n">nc</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">rel</span><span class="p">):</span>
-                    <span class="k">return</span> <span class="p">[</span><span class="n">S</span><span class="o">.</span><span class="n">true</span><span class="p">]</span>
+                    <span class="k">return</span> <span class="p">[</span><span class="n">true</span><span class="p">]</span>
                 <span class="n">rel</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
             <span class="n">newargs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">LatticeOp</span><span class="o">.</span><span class="n">_new_args_filter</span><span class="p">(</span><span class="n">newargs</span><span class="p">,</span> <span class="n">Or</span><span class="p">)</span>
@@ -910,13 +910,13 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> operand(s) used for an Implies &quot;</span>
                 <span class="s2">&quot;(pairs are required): </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">args</span><span class="p">)))</span>
-        <span class="k">if</span> <span class="n">A</span> <span class="o">==</span> <span class="n">S</span><span class="o">.</span><span class="n">true</span> <span class="ow">or</span> <span class="n">A</span> <span class="o">==</span> <span class="n">S</span><span class="o">.</span><span class="n">false</span> <span class="ow">or</span> <span class="n">B</span> <span class="o">==</span> <span class="n">S</span><span class="o">.</span><span class="n">true</span> <span class="ow">or</span> <span class="n">B</span> <span class="o">==</span> <span class="n">S</span><span class="o">.</span><span class="n">false</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">A</span> <span class="o">==</span> <span class="n">true</span> <span class="ow">or</span> <span class="n">A</span> <span class="o">==</span> <span class="n">false</span> <span class="ow">or</span> <span class="n">B</span> <span class="o">==</span> <span class="n">true</span> <span class="ow">or</span> <span class="n">B</span> <span class="o">==</span> <span class="n">false</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">Or</span><span class="p">(</span><span class="n">Not</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">B</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">A</span> <span class="o">==</span> <span class="n">B</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">true</span>
+            <span class="k">return</span> <span class="n">true</span>
         <span class="k">elif</span> <span class="n">A</span><span class="o">.</span><span class="n">is_Relational</span> <span class="ow">and</span> <span class="n">B</span><span class="o">.</span><span class="n">is_Relational</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">A</span><span class="o">.</span><span class="n">canonical</span> <span class="o">==</span> <span class="n">B</span><span class="o">.</span><span class="n">canonical</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">true</span>
+                <span class="k">return</span> <span class="n">true</span>
             <span class="k">elif</span> <span class="p">(</span><span class="o">~</span><span class="n">A</span><span class="p">)</span><span class="o">.</span><span class="n">canonical</span> <span class="o">==</span> <span class="n">B</span><span class="o">.</span><span class="n">canonical</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">B</span>
         <span class="k">else</span><span class="p">:</span>
@@ -1031,15 +1031,15 @@
             <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">args</span>
         <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;ITE expects exactly 3 arguments&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="n">S</span><span class="o">.</span><span class="n">true</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="n">true</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">b</span>
-        <span class="k">elif</span> <span class="n">a</span> <span class="o">==</span> <span class="n">S</span><span class="o">.</span><span class="n">false</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">a</span> <span class="o">==</span> <span class="n">false</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">c</span>
         <span class="k">elif</span> <span class="n">b</span> <span class="o">==</span> <span class="n">c</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">b</span>
-        <span class="k">elif</span> <span class="n">b</span> <span class="o">==</span> <span class="n">S</span><span class="o">.</span><span class="n">true</span> <span class="ow">and</span> <span class="n">c</span> <span class="o">==</span> <span class="n">S</span><span class="o">.</span><span class="n">false</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">b</span> <span class="o">==</span> <span class="n">true</span> <span class="ow">and</span> <span class="n">c</span> <span class="o">==</span> <span class="n">false</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">a</span>
-        <span class="k">elif</span> <span class="n">b</span> <span class="o">==</span> <span class="n">S</span><span class="o">.</span><span class="n">false</span> <span class="ow">and</span> <span class="n">c</span> <span class="o">==</span> <span class="n">S</span><span class="o">.</span><span class="n">true</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">b</span> <span class="o">==</span> <span class="n">false</span> <span class="ow">and</span> <span class="n">c</span> <span class="o">==</span> <span class="n">true</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">Not</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">to_nnf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">simplify</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>

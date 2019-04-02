@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.concrete.expr_with_intlimits &mdash; Diofant 0.10.1.dev299+g5e6a61e documentation</title>
+  <title>diofant.concrete.expr_with_intlimits &mdash; Diofant 0.10.1.dev310+g172db0a documentation</title>
   
 
   
@@ -150,8 +150,7 @@
            <div itemprop="articleBody">
             
   <h1>Source code for diofant.concrete.expr_with_intlimits</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">S</span>
-<span class="kn">from</span> <span class="nn">.expr_with_limits</span> <span class="k">import</span> <span class="n">ExprWithLimits</span>
+<span></span><span class="kn">from</span> <span class="nn">.expr_with_limits</span> <span class="k">import</span> <span class="n">ExprWithLimits</span>
 
 
 <span class="k">class</span> <span class="nc">ReorderError</span><span class="p">(</span><span class="ne">NotImplementedError</span><span class="p">):</span>
@@ -186,57 +185,57 @@
 
 <span class="sd">        &gt;&gt;&gt; from diofant.abc import u, v, i, j, l</span>
 
-<span class="sd">        &gt;&gt;&gt; S = Sum(x, (x, a, b))</span>
-<span class="sd">        &gt;&gt;&gt; S.doit()</span>
+<span class="sd">        &gt;&gt;&gt; s = Sum(x, (x, a, b))</span>
+<span class="sd">        &gt;&gt;&gt; s.doit()</span>
 <span class="sd">        -a**2/2 + a/2 + b**2/2 + b/2</span>
 
-<span class="sd">        &gt;&gt;&gt; Sn = S.change_index(x, x + 1, y)</span>
-<span class="sd">        &gt;&gt;&gt; Sn</span>
+<span class="sd">        &gt;&gt;&gt; sn = s.change_index(x, x + 1, y)</span>
+<span class="sd">        &gt;&gt;&gt; sn</span>
 <span class="sd">        Sum(y - 1, (y, a + 1, b + 1))</span>
-<span class="sd">        &gt;&gt;&gt; Sn.doit()</span>
+<span class="sd">        &gt;&gt;&gt; sn.doit()</span>
 <span class="sd">        -a**2/2 + a/2 + b**2/2 + b/2</span>
 
-<span class="sd">        &gt;&gt;&gt; Sn = S.change_index(x, -x, y)</span>
-<span class="sd">        &gt;&gt;&gt; Sn</span>
+<span class="sd">        &gt;&gt;&gt; sn = s.change_index(x, -x, y)</span>
+<span class="sd">        &gt;&gt;&gt; sn</span>
 <span class="sd">        Sum(-y, (y, -b, -a))</span>
-<span class="sd">        &gt;&gt;&gt; Sn.doit()</span>
+<span class="sd">        &gt;&gt;&gt; sn.doit()</span>
 <span class="sd">        -a**2/2 + a/2 + b**2/2 + b/2</span>
 
-<span class="sd">        &gt;&gt;&gt; Sn = S.change_index(x, x+u)</span>
-<span class="sd">        &gt;&gt;&gt; Sn</span>
+<span class="sd">        &gt;&gt;&gt; sn = s.change_index(x, x+u)</span>
+<span class="sd">        &gt;&gt;&gt; sn</span>
 <span class="sd">        Sum(-u + x, (x, a + u, b + u))</span>
-<span class="sd">        &gt;&gt;&gt; Sn.doit()</span>
+<span class="sd">        &gt;&gt;&gt; sn.doit()</span>
 <span class="sd">        -a**2/2 - a*u + a/2 + b**2/2 + b*u + b/2 - u*(-a + b + 1) + u</span>
-<span class="sd">        &gt;&gt;&gt; simplify(Sn.doit())</span>
+<span class="sd">        &gt;&gt;&gt; simplify(sn.doit())</span>
 <span class="sd">        -a**2/2 + a/2 + b**2/2 + b/2</span>
 
-<span class="sd">        &gt;&gt;&gt; Sn = S.change_index(x, -x - u, y)</span>
-<span class="sd">        &gt;&gt;&gt; Sn</span>
+<span class="sd">        &gt;&gt;&gt; sn = s.change_index(x, -x - u, y)</span>
+<span class="sd">        &gt;&gt;&gt; sn</span>
 <span class="sd">        Sum(-u - y, (y, -b - u, -a - u))</span>
-<span class="sd">        &gt;&gt;&gt; Sn.doit()</span>
+<span class="sd">        &gt;&gt;&gt; sn.doit()</span>
 <span class="sd">        -a**2/2 - a*u + a/2 + b**2/2 + b*u + b/2 - u*(-a + b + 1) + u</span>
-<span class="sd">        &gt;&gt;&gt; simplify(Sn.doit())</span>
+<span class="sd">        &gt;&gt;&gt; simplify(sn.doit())</span>
 <span class="sd">        -a**2/2 + a/2 + b**2/2 + b/2</span>
 
-<span class="sd">        &gt;&gt;&gt; P = Product(i*j**2, (i, a, b), (j, c, d))</span>
-<span class="sd">        &gt;&gt;&gt; P</span>
+<span class="sd">        &gt;&gt;&gt; p = Product(i*j**2, (i, a, b), (j, c, d))</span>
+<span class="sd">        &gt;&gt;&gt; p</span>
 <span class="sd">        Product(i*j**2, (i, a, b), (j, c, d))</span>
-<span class="sd">        &gt;&gt;&gt; P2 = P.change_index(i, i+3, k)</span>
-<span class="sd">        &gt;&gt;&gt; P2</span>
+<span class="sd">        &gt;&gt;&gt; p2 = p.change_index(i, i+3, k)</span>
+<span class="sd">        &gt;&gt;&gt; p2</span>
 <span class="sd">        Product(j**2*(k - 3), (k, a + 3, b + 3), (j, c, d))</span>
-<span class="sd">        &gt;&gt;&gt; P3 = P2.change_index(j, -j, l)</span>
-<span class="sd">        &gt;&gt;&gt; P3</span>
+<span class="sd">        &gt;&gt;&gt; p3 = p2.change_index(j, -j, l)</span>
+<span class="sd">        &gt;&gt;&gt; p3</span>
 <span class="sd">        Product(l**2*(k - 3), (k, a + 3, b + 3), (l, -d, -c))</span>
 
 <span class="sd">        When dealing with symbols only, we can make a</span>
 <span class="sd">        general linear transformation:</span>
 
-<span class="sd">        &gt;&gt;&gt; Sn = S.change_index(x, u*x+v, y)</span>
-<span class="sd">        &gt;&gt;&gt; Sn</span>
+<span class="sd">        &gt;&gt;&gt; sn = s.change_index(x, u*x+v, y)</span>
+<span class="sd">        &gt;&gt;&gt; sn</span>
 <span class="sd">        Sum((-v + y)/u, (y, b*u + v, a*u + v))</span>
-<span class="sd">        &gt;&gt;&gt; Sn.doit()</span>
+<span class="sd">        &gt;&gt;&gt; sn.doit()</span>
 <span class="sd">        -v*(a*u - b*u + 1)/u + (a**2*u**2/2 + a*u*v + a*u/2 - b**2*u**2/2 - b*u*v + b*u/2 + v)/u</span>
-<span class="sd">        &gt;&gt;&gt; simplify(Sn.doit())</span>
+<span class="sd">        &gt;&gt;&gt; simplify(sn.doit())</span>
 <span class="sd">        a**2*u/2 + a/2 - b**2*u/2 + b/2</span>
 
 <span class="sd">        However, the last result can be inconsistent with usual</span>
@@ -264,7 +263,7 @@
                 <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">degree</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
                     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Index transformation is not linear&quot;</span><span class="p">)</span>
                 <span class="n">alpha</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">coeff_monomial</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
-                <span class="n">beta</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">coeff_monomial</span><span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">)</span>
+                <span class="n">beta</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">coeff_monomial</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">alpha</span><span class="o">.</span><span class="n">is_number</span><span class="p">:</span>
                     <span class="k">if</span> <span class="n">alpha</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                         <span class="n">limits</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">newvar</span><span class="p">,</span> <span class="n">alpha</span><span class="o">*</span><span class="n">limit</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">beta</span><span class="p">,</span> <span class="n">alpha</span><span class="o">*</span><span class="n">limit</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">beta</span><span class="p">))</span>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.printing.str &mdash; Diofant 0.10.1.dev299+g5e6a61e documentation</title>
+  <title>diofant.printing.str &mdash; Diofant 0.10.1.dev310+g172db0a documentation</title>
   
 
   
@@ -157,7 +157,7 @@
 <span class="kn">import</span> <span class="nn">mpmath.libmp</span> <span class="k">as</span> <span class="nn">mlib</span>
 <span class="kn">from</span> <span class="nn">mpmath.libmp</span> <span class="k">import</span> <span class="n">prec_to_dps</span>
 
-<span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">Mul</span><span class="p">,</span> <span class="n">Pow</span><span class="p">,</span> <span class="n">Rational</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">oo</span>
+<span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">Mul</span><span class="p">,</span> <span class="n">Pow</span><span class="p">,</span> <span class="n">Rational</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">oo</span>
 <span class="kn">from</span> <span class="nn">..core.mul</span> <span class="k">import</span> <span class="n">_keep_coeff</span>
 <span class="kn">from</span> <span class="nn">..utilities</span> <span class="k">import</span> <span class="n">default_sort_key</span>
 <span class="kn">from</span> <span class="nn">.defaults</span> <span class="k">import</span> <span class="n">DefaultPrinting</span>
@@ -416,7 +416,7 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">a</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
 
-        <span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="ow">or</span> <span class="p">[</span><span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">]</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="ow">or</span> <span class="p">[</span><span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)]</span>
 
         <span class="n">a_str</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">parenthesize</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">prec</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">a</span><span class="p">]</span>
         <span class="n">b_str</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">parenthesize</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">prec</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">b</span><span class="p">]</span>
@@ -447,7 +447,7 @@
         <span class="k">return</span> <span class="s1">&#39;-oo&#39;</span>
 
     <span class="k">def</span> <span class="nf">_print_Order</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
-        <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">p</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">expr</span><span class="o">.</span><span class="n">point</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">variables</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">p</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">expr</span><span class="o">.</span><span class="n">point</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">variables</span><span class="p">):</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">variables</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="k">return</span> <span class="s1">&#39;O(</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_print</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">expr</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
@@ -548,11 +548,11 @@
                     <span class="n">s_coeff</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_print</span><span class="p">(</span><span class="n">coeff</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">s_monom</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="n">coeff</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">coeff</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                         <span class="n">terms</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="s1">&#39;+&#39;</span><span class="p">,</span> <span class="n">s_monom</span><span class="p">])</span>
                         <span class="k">continue</span>
 
-                    <span class="k">if</span> <span class="n">coeff</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">NegativeOne</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">coeff</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
                         <span class="n">terms</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">s_monom</span><span class="p">])</span>
                         <span class="k">continue</span>
 
@@ -602,16 +602,13 @@
     <span class="k">def</span> <span class="nf">_print_Pow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="n">rational</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="n">PREC</span> <span class="o">=</span> <span class="n">precedence</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">expr</span><span class="o">.</span><span class="n">exp</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">Half</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">rational</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">expr</span><span class="o">.</span><span class="n">exp</span><span class="o">.</span><span class="n">is_Float</span> <span class="ow">and</span> <span class="n">expr</span><span class="o">.</span><span class="n">exp</span> <span class="o">==</span> <span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">rational</span><span class="p">:</span>
             <span class="k">return</span> <span class="s2">&quot;sqrt(</span><span class="si">%s</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_print</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">base</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_commutative</span><span class="p">:</span>
-            <span class="k">if</span> <span class="o">-</span><span class="n">expr</span><span class="o">.</span><span class="n">exp</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">Half</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">rational</span><span class="p">:</span>
-                <span class="c1"># Note: Don&#39;t test &quot;expr.exp == -S.Half&quot; here, because that will</span>
-                <span class="c1"># match -0.5, which we don&#39;t want.</span>
+        <span class="k">if</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_commutative</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">expr</span><span class="o">.</span><span class="n">exp</span><span class="o">.</span><span class="n">is_Float</span><span class="p">:</span>
+            <span class="k">if</span> <span class="o">-</span><span class="n">expr</span><span class="o">.</span><span class="n">exp</span> <span class="o">==</span> <span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">rational</span><span class="p">:</span>
                 <span class="k">return</span> <span class="s2">&quot;1/sqrt(</span><span class="si">%s</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_print</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">base</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">expr</span><span class="o">.</span><span class="n">exp</span> <span class="ow">is</span> <span class="o">-</span><span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">:</span>
-                <span class="c1"># Similarly to the S.Half case, don&#39;t test with &quot;==&quot; here.</span>
+            <span class="k">if</span> <span class="n">expr</span><span class="o">.</span><span class="n">exp</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
                 <span class="k">return</span> <span class="s1">&#39;1/</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">parenthesize</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">base</span><span class="p">,</span> <span class="n">PREC</span><span class="p">)</span>
 
         <span class="n">e</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parenthesize</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">exp</span><span class="p">,</span> <span class="n">PREC</span><span class="p">)</span>

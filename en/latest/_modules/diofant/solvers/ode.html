@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.solvers.ode &mdash; Diofant 0.10.1.dev299+g5e6a61e documentation</title>
+  <title>diofant.solvers.ode &mdash; Diofant 0.10.1.dev310+g172db0a documentation</title>
   
 
   
@@ -382,7 +382,7 @@
 <span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">islice</span>
 
 <span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="p">(</span><span class="n">Add</span><span class="p">,</span> <span class="n">AtomicExpr</span><span class="p">,</span> <span class="n">Derivative</span><span class="p">,</span> <span class="n">Dummy</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">Eq</span><span class="p">,</span> <span class="n">Equality</span><span class="p">,</span> <span class="n">Expr</span><span class="p">,</span>
-                    <span class="n">Function</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">Mul</span><span class="p">,</span> <span class="n">Number</span><span class="p">,</span> <span class="n">Pow</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">Subs</span><span class="p">,</span> <span class="n">Symbol</span><span class="p">,</span>
+                    <span class="n">Function</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">Mul</span><span class="p">,</span> <span class="n">Number</span><span class="p">,</span> <span class="n">Pow</span><span class="p">,</span> <span class="n">Subs</span><span class="p">,</span> <span class="n">Symbol</span><span class="p">,</span>
                     <span class="n">Tuple</span><span class="p">,</span> <span class="n">Wild</span><span class="p">,</span> <span class="n">diff</span><span class="p">,</span> <span class="n">expand</span><span class="p">,</span> <span class="n">expand_mul</span><span class="p">,</span> <span class="n">factor_terms</span><span class="p">,</span> <span class="n">nan</span><span class="p">,</span>
                     <span class="n">oo</span><span class="p">,</span> <span class="n">symbols</span><span class="p">,</span> <span class="n">sympify</span><span class="p">,</span> <span class="n">zoo</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">..core.compatibility</span> <span class="k">import</span> <span class="n">is_sequence</span><span class="p">,</span> <span class="n">iterable</span><span class="p">,</span> <span class="n">ordered</span>
@@ -1391,7 +1391,7 @@
         <span class="n">r</span> <span class="o">=</span> <span class="n">collect</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="p">[</span><span class="n">df</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)])</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">e</span><span class="o">*</span><span class="n">df</span> <span class="o">+</span> <span class="n">d</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">r</span><span class="p">:</span>
             <span class="n">r2</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-            <span class="n">r2</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+            <span class="n">r2</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">r2</span><span class="p">[</span><span class="n">d</span><span class="p">]</span><span class="o">.</span><span class="n">is_Add</span><span class="p">:</span>
                 <span class="c1"># Separate the terms having f(x) to r[d] and</span>
                 <span class="c1"># remaining to r[c]</span>
@@ -1970,7 +1970,7 @@
     <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
         <span class="k">return</span>
 
-    <span class="n">r</span><span class="p">[</span><span class="s1">&#39;forcing&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="p">]</span><span class="o">*</span><span class="n">n</span>
+    <span class="n">r</span><span class="p">[</span><span class="s1">&#39;forcing&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)]</span><span class="o">*</span><span class="n">n</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">Add</span><span class="o">.</span><span class="n">make_args</span><span class="p">(</span><span class="n">eq</span><span class="p">[</span><span class="n">i</span><span class="p">]):</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">j</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="o">*</span><span class="n">func</span><span class="p">):</span>
@@ -2532,7 +2532,7 @@
 
                     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ode_or_bool</span><span class="p">,</span> <span class="p">(</span><span class="nb">bool</span><span class="p">,</span> <span class="n">BooleanAtom</span><span class="p">)):</span>
                         <span class="k">if</span> <span class="n">ode_or_bool</span><span class="p">:</span>
-                            <span class="n">lhs</span> <span class="o">=</span> <span class="n">rhs</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+                            <span class="n">lhs</span> <span class="o">=</span> <span class="n">rhs</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
                     <span class="k">else</span><span class="p">:</span>
                         <span class="n">lhs</span> <span class="o">=</span> <span class="n">ode_or_bool</span><span class="o">.</span><span class="n">lhs</span>
                         <span class="n">rhs</span> <span class="o">=</span> <span class="n">ode_or_bool</span><span class="o">.</span><span class="n">rhs</span>
@@ -2945,10 +2945,10 @@
         <span class="n">symbolname</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">startnumber</span><span class="p">,</span>
                                               <span class="n">endnumber</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
 
-    <span class="c1"># make a mapping to send all constantsymbols to S.One and use</span>
+    <span class="c1"># make a mapping to send all constantsymbols to Integer(1) and use</span>
     <span class="c1"># that to make sure that term ordering is not dependent on</span>
     <span class="c1"># the indexed value of C</span>
-    <span class="n">C_1</span> <span class="o">=</span> <span class="p">[(</span><span class="n">ci</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">)</span> <span class="k">for</span> <span class="n">ci</span> <span class="ow">in</span> <span class="n">constantsymbols</span><span class="p">]</span>
+    <span class="n">C_1</span> <span class="o">=</span> <span class="p">[(</span><span class="n">ci</span><span class="p">,</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="k">for</span> <span class="n">ci</span> <span class="ow">in</span> <span class="n">constantsymbols</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">sort_key</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">default_sort_key</span><span class="p">(</span><span class="n">arg</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">C_1</span><span class="p">))</span>
@@ -3383,7 +3383,7 @@
 
     <span class="c1"># These are all constants</span>
     <span class="k">if</span> <span class="n">eq</span><span class="o">.</span><span class="n">is_Number</span> <span class="ow">or</span> <span class="n">eq</span><span class="o">.</span><span class="n">is_NumberSymbol</span> <span class="ow">or</span> <span class="n">eq</span><span class="o">.</span><span class="n">is_number</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+        <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
     <span class="c1"># Replace all functions with dummy variables</span>
     <span class="n">dum</span> <span class="o">=</span> <span class="n">numbered_symbols</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">Dummy</span><span class="p">)</span>
@@ -3405,13 +3405,13 @@
     <span class="c1"># assuming order of a nested function can only be equal to zero</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">Function</span><span class="p">):</span>
         <span class="k">return</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">homogeneous_order</span><span class="p">(</span>
-            <span class="n">eq</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">*</span><span class="nb">tuple</span><span class="p">(</span><span class="n">symset</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+            <span class="n">eq</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">*</span><span class="nb">tuple</span><span class="p">(</span><span class="n">symset</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
     <span class="c1"># make the replacement of x with x*t and see if t can be factored out</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">Dummy</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="n">positive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># It is sufficient that t &gt; 0</span>
     <span class="n">eqs</span> <span class="o">=</span> <span class="n">separatevars</span><span class="p">(</span><span class="n">eq</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">i</span><span class="p">:</span> <span class="n">t</span><span class="o">*</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">symset</span><span class="p">}),</span> <span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="nb">dict</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="n">t</span><span class="p">]</span>
-    <span class="k">if</span> <span class="n">eqs</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>  <span class="c1"># there was no term with only t</span>
+    <span class="k">if</span> <span class="n">eqs</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># there was no term with only t</span>
     <span class="n">i</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">eqs</span><span class="o">.</span><span class="n">as_independent</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">as_Add</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">b</span><span class="p">,</span> <span class="n">e</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">as_base_exp</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">b</span> <span class="o">==</span> <span class="n">t</span><span class="p">:</span>
@@ -4006,7 +4006,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">one_x</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span><span class="p">}</span>
-    <span class="n">terms</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">order</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)}</span>
+    <span class="n">terms</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">order</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)}</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">Add</span><span class="o">.</span><span class="n">make_args</span><span class="p">(</span><span class="n">eq</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">i</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
             <span class="n">terms</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">i</span>
@@ -4089,7 +4089,7 @@
     <span class="n">r</span> <span class="o">=</span> <span class="n">match</span>
 
     <span class="c1"># First, set up characteristic equation.</span>
-    <span class="n">chareq</span><span class="p">,</span> <span class="n">symbol</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="p">,</span> <span class="n">Dummy</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+    <span class="n">chareq</span><span class="p">,</span> <span class="n">symbol</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">Dummy</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">r</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
@@ -4203,7 +4203,7 @@
     <span class="n">f</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="n">func</span>
     <span class="n">r</span> <span class="o">=</span> <span class="n">match</span>
 
-    <span class="n">chareq</span><span class="p">,</span> <span class="n">eq</span><span class="p">,</span> <span class="n">symbol</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="p">,</span> <span class="n">Dummy</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+    <span class="n">chareq</span><span class="p">,</span> <span class="n">eq</span><span class="p">,</span> <span class="n">symbol</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">Dummy</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">r</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
@@ -4704,7 +4704,7 @@
     <span class="n">r</span> <span class="o">=</span> <span class="n">match</span>
 
     <span class="c1"># First, set up characteristic equation.</span>
-    <span class="n">chareq</span><span class="p">,</span> <span class="n">symbol</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="p">,</span> <span class="n">Dummy</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+    <span class="n">chareq</span><span class="p">,</span> <span class="n">symbol</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">Dummy</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">r</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span> <span class="ow">or</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -5039,7 +5039,7 @@
 <span class="sd">            multiplicatively.</span>
 
 <span class="sd">            &quot;&quot;&quot;</span>
-            <span class="n">term</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span>
+            <span class="n">term</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_Mul</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">:</span>
                     <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
