@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.solvers.pde &mdash; Diofant 0.10.1.dev310+g172db0a documentation</title>
+  <title>diofant.solvers.pde &mdash; Diofant 0.10.1.dev312+gbe9b72f documentation</title>
   
 
   
@@ -299,7 +299,7 @@
 <span class="sd">    &gt;&gt;&gt; u = f(x, y)</span>
 <span class="sd">    &gt;&gt;&gt; ux = u.diff(x)</span>
 <span class="sd">    &gt;&gt;&gt; uy = u.diff(y)</span>
-<span class="sd">    &gt;&gt;&gt; eq = Eq(1 + (2*(ux/u)) + (3*(uy/u)))</span>
+<span class="sd">    &gt;&gt;&gt; eq = Eq(1 + (2*(ux/u)) + (3*(uy/u)), 0)</span>
 <span class="sd">    &gt;&gt;&gt; pdsolve(eq)</span>
 <span class="sd">    Eq(f(x, y), E**(-2*x/13 - 3*y/13)*F(3*x - 2*y))</span>
 
@@ -402,7 +402,7 @@
 <span class="sd">    &gt;&gt;&gt; u = f(x, y)</span>
 <span class="sd">    &gt;&gt;&gt; ux = u.diff(x)</span>
 <span class="sd">    &gt;&gt;&gt; uy = u.diff(y)</span>
-<span class="sd">    &gt;&gt;&gt; eq = Eq(1 + (2*(ux/u)) + (3*(uy/u)))</span>
+<span class="sd">    &gt;&gt;&gt; eq = Eq(1 + (2*(ux/u)) + (3*(uy/u)), 0)</span>
 <span class="sd">    &gt;&gt;&gt; classify_pde(eq)</span>
 <span class="sd">    (&#39;1st_linear_constant_coeff_homogeneous&#39;,)</span>
 
@@ -928,9 +928,9 @@
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">Equality</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">eq</span><span class="o">.</span><span class="n">rhs</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">pde_separate</span><span class="p">(</span><span class="n">Eq</span><span class="p">(</span><span class="n">eq</span><span class="o">.</span><span class="n">lhs</span> <span class="o">-</span> <span class="n">eq</span><span class="o">.</span><span class="n">rhs</span><span class="p">),</span> <span class="n">fun</span><span class="p">,</span> <span class="n">sep</span><span class="p">,</span> <span class="n">strategy</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">pde_separate</span><span class="p">(</span><span class="n">Eq</span><span class="p">(</span><span class="n">eq</span><span class="o">.</span><span class="n">lhs</span> <span class="o">-</span> <span class="n">eq</span><span class="o">.</span><span class="n">rhs</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">fun</span><span class="p">,</span> <span class="n">sep</span><span class="p">,</span> <span class="n">strategy</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">eq</span> <span class="o">=</span> <span class="n">Eq</span><span class="p">(</span><span class="n">eq</span><span class="p">)</span>
+        <span class="n">eq</span> <span class="o">=</span> <span class="n">Eq</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
     <span class="c1"># Handle arguments</span>
     <span class="n">orig_args</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">fun</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
