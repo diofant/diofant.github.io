@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Polynomials &mdash; Diofant 0.10.1.dev312+gbe9b72f documentation</title>
+  <title>Polynomials &mdash; Diofant 0.10.1.dev313+g01c0c0e documentation</title>
   
 
   
@@ -2787,26 +2787,9 @@ from the expression.</p></li>
 <dt id="diofant.polys.monomials.itermonomials">
 <code class="descclassname">diofant.polys.monomials.</code><code class="descname">itermonomials</code><span class="sig-paren">(</span><em>variables</em>, <em>degree</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/monomials.html#itermonomials"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.monomials.itermonomials" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate a set of monomials of the given total degree or less.</p>
-<p>Given a set of variables <span class="math notranslate nohighlight">\(V\)</span> and a total degree <span class="math notranslate nohighlight">\(N\)</span> generate
-a set of monomials of degree at most <span class="math notranslate nohighlight">\(N\)</span>. The total number of
-monomials is huge and is given by the following formula:</p>
-<div class="math notranslate nohighlight">
-\[\frac{(\#V + N)!}{\#V! N!}\]</div>
-<p>For example if we would like to generate a dense polynomial of
-a total degree <span class="math notranslate nohighlight">\(N = 50\)</span> in 5 variables, assuming that exponents
-and all of coefficients are 32-bit long and stored in an array we
-would need almost 80 GiB of memory! Fortunately most polynomials,
-that we will encounter, are sparse.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.polys.orderings</span> <span class="k">import</span> <span class="n">monomial_key</span>
-</pre></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">itermonomials</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">],</span> <span class="mi">2</span><span class="p">),</span> <span class="n">key</span><span class="o">=</span><span class="n">monomial_key</span><span class="p">(</span><span class="s1">&#39;grlex&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">]))</span>
-<span class="go">[1, x, y, x**2, x*y, y**2]</span>
-</pre></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">itermonomials</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">],</span> <span class="mi">3</span><span class="p">),</span> <span class="n">key</span><span class="o">=</span><span class="n">monomial_key</span><span class="p">(</span><span class="s1">&#39;grlex&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">]))</span>
-<span class="go">[1, x, y, x**2, x*y, y**2, x**3, x**2*y, x*y**2, y**3]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">set</span><span class="p">(</span><span class="n">itermonomials</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">],</span> <span class="mi">2</span><span class="p">))</span>
+<span class="go">{1, x, x**2, y, y**2, x*y}</span>
 </pre></div>
 </div>
 </dd></dl>

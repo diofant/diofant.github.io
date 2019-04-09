@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.integrals.heurisch &mdash; Diofant 0.10.1.dev312+gbe9b72f documentation</title>
+  <title>diofant.integrals.heurisch &mdash; Diofant 0.10.1.dev313+g01c0c0e documentation</title>
   
 
   
@@ -156,8 +156,8 @@
 <span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">Add</span><span class="p">,</span> <span class="n">Basic</span><span class="p">,</span> <span class="n">Dummy</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">Eq</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">Mul</span><span class="p">,</span> <span class="n">Wild</span><span class="p">,</span> <span class="n">pi</span><span class="p">,</span> <span class="n">sympify</span>
 <span class="kn">from</span> <span class="nn">..core.compatibility</span> <span class="k">import</span> <span class="n">ordered</span>
 <span class="kn">from</span> <span class="nn">..functions</span> <span class="k">import</span> <span class="p">(</span><span class="n">Ei</span><span class="p">,</span> <span class="n">LambertW</span><span class="p">,</span> <span class="n">Piecewise</span><span class="p">,</span> <span class="n">acosh</span><span class="p">,</span> <span class="n">asin</span><span class="p">,</span> <span class="n">asinh</span><span class="p">,</span> <span class="n">atan</span><span class="p">,</span>
-                         <span class="n">cos</span><span class="p">,</span> <span class="n">cosh</span><span class="p">,</span> <span class="n">cot</span><span class="p">,</span> <span class="n">coth</span><span class="p">,</span> <span class="n">erf</span><span class="p">,</span> <span class="n">erfi</span><span class="p">,</span> <span class="n">exp</span><span class="p">,</span> <span class="n">li</span><span class="p">,</span> <span class="n">log</span><span class="p">,</span> <span class="n">root</span><span class="p">,</span>
-                         <span class="n">sin</span><span class="p">,</span> <span class="n">sinh</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">,</span> <span class="n">tan</span><span class="p">,</span> <span class="n">tanh</span><span class="p">)</span>
+                         <span class="n">binomial</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">cosh</span><span class="p">,</span> <span class="n">cot</span><span class="p">,</span> <span class="n">coth</span><span class="p">,</span> <span class="n">erf</span><span class="p">,</span> <span class="n">erfi</span><span class="p">,</span> <span class="n">exp</span><span class="p">,</span> <span class="n">li</span><span class="p">,</span>
+                         <span class="n">log</span><span class="p">,</span> <span class="n">root</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">sinh</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">,</span> <span class="n">tan</span><span class="p">,</span> <span class="n">tanh</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">..logic</span> <span class="k">import</span> <span class="n">And</span>
 <span class="kn">from</span> <span class="nn">..polys</span> <span class="k">import</span> <span class="n">PolynomialError</span><span class="p">,</span> <span class="n">cancel</span><span class="p">,</span> <span class="n">factor</span><span class="p">,</span> <span class="n">gcd</span><span class="p">,</span> <span class="n">lcm</span><span class="p">,</span> <span class="n">quo</span>
 <span class="kn">from</span> <span class="nn">..polys.constructor</span> <span class="k">import</span> <span class="n">construct_domain</span>
@@ -576,13 +576,12 @@
 
     <span class="n">A</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">_exponent</span><span class="p">(</span><span class="n">f</span><span class="p">),</span> <span class="n">a</span> <span class="o">+</span> <span class="nb">max</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
 
+    <span class="n">degree</span> <span class="o">=</span> <span class="n">A</span> <span class="o">+</span> <span class="n">B</span> <span class="o">+</span> <span class="n">degree_offset</span>
     <span class="k">if</span> <span class="n">A</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">B</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="n">monoms</span> <span class="o">=</span> <span class="n">itermonomials</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">A</span> <span class="o">+</span> <span class="n">B</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">degree_offset</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">monoms</span> <span class="o">=</span> <span class="n">itermonomials</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">A</span> <span class="o">+</span> <span class="n">B</span> <span class="o">+</span> <span class="n">degree_offset</span><span class="p">)</span>
+        <span class="n">degree</span> <span class="o">-=</span> <span class="mi">1</span>
 
-    <span class="n">poly_coeffs</span> <span class="o">=</span> <span class="n">_symbols</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">monoms</span><span class="p">))</span>
-
+    <span class="n">monoms</span> <span class="o">=</span> <span class="n">itermonomials</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">degree</span><span class="p">)</span>
+    <span class="n">poly_coeffs</span> <span class="o">=</span> <span class="n">_symbols</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">binomial</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">V</span><span class="p">)</span> <span class="o">+</span> <span class="n">degree</span><span class="p">,</span> <span class="n">degree</span><span class="p">))</span>
     <span class="n">poly_part</span> <span class="o">=</span> <span class="n">Add</span><span class="p">(</span><span class="o">*</span><span class="p">[</span> <span class="n">poly_coeffs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">monomial</span>
                        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">monomial</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ordered</span><span class="p">(</span><span class="n">monoms</span><span class="p">))</span> <span class="p">])</span>
 
