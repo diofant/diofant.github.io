@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.euclidtools &mdash; Diofant 0.10.1.dev313+g01c0c0e documentation</title>
+  <title>diofant.polys.euclidtools &mdash; Diofant 0.10.1.dev316+gc3b9579 documentation</title>
   
 
   
@@ -154,7 +154,7 @@
 
 <span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">cacheit</span>
 <span class="kn">from</span> <span class="nn">..ntheory</span> <span class="k">import</span> <span class="n">nextprime</span>
-<span class="kn">from</span> <span class="nn">..ntheory.modular</span> <span class="k">import</span> <span class="n">symmetric_residue</span>
+<span class="kn">from</span> <span class="nn">..ntheory.modular</span> <span class="k">import</span> <span class="n">crt</span><span class="p">,</span> <span class="n">symmetric_residue</span>
 <span class="kn">from</span> <span class="nn">.densearith</span> <span class="k">import</span> <span class="p">(</span><span class="n">dmp_add</span><span class="p">,</span> <span class="n">dmp_div</span><span class="p">,</span> <span class="n">dmp_max_norm</span><span class="p">,</span> <span class="n">dmp_mul</span><span class="p">,</span>
                          <span class="n">dmp_mul_ground</span><span class="p">,</span> <span class="n">dmp_mul_term</span><span class="p">,</span> <span class="n">dmp_neg</span><span class="p">,</span> <span class="n">dmp_pow</span><span class="p">,</span>
                          <span class="n">dmp_quo</span><span class="p">,</span> <span class="n">dmp_quo_ground</span><span class="p">,</span> <span class="n">dmp_rem</span><span class="p">,</span> <span class="n">dmp_sub</span><span class="p">,</span>
@@ -165,7 +165,6 @@
                          <span class="n">dmp_strip</span><span class="p">,</span> <span class="n">dmp_zero</span><span class="p">,</span> <span class="n">dmp_zero_p</span><span class="p">,</span> <span class="n">dmp_zeros</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">.densetools</span> <span class="k">import</span> <span class="p">(</span><span class="n">dmp_clear_denoms</span><span class="p">,</span> <span class="n">dmp_eval_in</span><span class="p">,</span> <span class="n">dmp_ground_monic</span><span class="p">,</span>
                          <span class="n">dmp_ground_primitive</span><span class="p">,</span> <span class="n">dmp_ground_trunc</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">.galoistools</span> <span class="k">import</span> <span class="n">gf_crt</span>
 <span class="kn">from</span> <span class="nn">.heuristicgcd</span> <span class="k">import</span> <span class="n">heugcd</span>
 <span class="kn">from</span> <span class="nn">.polyconfig</span> <span class="k">import</span> <span class="n">query</span>
 <span class="kn">from</span> <span class="nn">.polyerrors</span> <span class="k">import</span> <span class="p">(</span><span class="n">DomainError</span><span class="p">,</span> <span class="n">HeuristicGCDFailed</span><span class="p">,</span> <span class="n">HomomorphismFailed</span><span class="p">,</span>
@@ -710,7 +709,7 @@
 
 <span class="k">def</span> <span class="nf">_collins_crt</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Wrapper of CRT for Collins&#39;s resultant algorithm.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">symmetric_residue</span><span class="p">(</span><span class="n">gf_crt</span><span class="p">([</span><span class="n">r</span><span class="p">,</span> <span class="n">R</span><span class="p">],</span> <span class="p">[</span><span class="n">P</span><span class="p">,</span> <span class="n">p</span><span class="p">],</span> <span class="n">K</span><span class="p">),</span> <span class="n">P</span><span class="o">*</span><span class="n">p</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">K</span><span class="p">(</span><span class="n">crt</span><span class="p">([</span><span class="n">P</span><span class="p">,</span> <span class="n">p</span><span class="p">],</span> <span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="n">R</span><span class="p">],</span> <span class="n">check</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">symmetric</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
 
 
 <div class="viewcode-block" id="dmp_zz_collins_resultant"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.euclidtools.dmp_zz_collins_resultant">[docs]</a><span class="k">def</span> <span class="nf">dmp_zz_collins_resultant</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>

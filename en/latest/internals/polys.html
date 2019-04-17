@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Internals of the Polynomial Manipulation Module &mdash; Diofant 0.10.1.dev313+g01c0c0e documentation</title>
+  <title>Internals of the Polynomial Manipulation Module &mdash; Diofant 0.10.1.dev316+gc3b9579 documentation</title>
   
 
   
@@ -1620,7 +1620,7 @@ intervals are disjoint.</p></li>
 
 <dl class="method">
 <dt id="diofant.polys.rootisolation.ComplexInterval.refine">
-<code class="descname">refine</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/rootisolation.html#ComplexInterval.refine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.ComplexInterval.refine" title="Permalink to this definition">¶</a></dt>
+<code class="descname">refine</code><span class="sig-paren">(</span><em>vertical=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/rootisolation.html#ComplexInterval.refine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.ComplexInterval.refine" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform one step of complex root refinement algorithm.</p>
 </dd></dl>
 
@@ -1925,19 +1925,6 @@ the necessity of certain methods which do not even make sense over general
 fields.</p>
 <span class="target" id="module-diofant.polys.galoistools"></span><p>Dense univariate polynomials with coefficients in Galois fields.</p>
 <dl class="function">
-<dt id="diofant.polys.galoistools.csolve_prime">
-<code class="descclassname">diofant.polys.galoistools.</code><code class="descname">csolve_prime</code><span class="sig-paren">(</span><em>f</em>, <em>p</em>, <em>e=1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/galoistools.html#csolve_prime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.csolve_prime" title="Permalink to this definition">¶</a></dt>
-<dd><p>Solutions of f(x) congruent 0 mod(p**e).</p>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">csolve_prime</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="go">[1]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">csolve_prime</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="go">[1, 4, 7]</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
 <dt id="diofant.polys.galoistools.gf_Qbasis">
 <code class="descclassname">diofant.polys.galoistools.</code><code class="descname">gf_Qbasis</code><span class="sig-paren">(</span><em>Q</em>, <em>p</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/galoistools.html#gf_Qbasis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_Qbasis" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute a basis of the kernel of <code class="docutils literal notranslate"><span class="pre">Q</span></code>.</p>
@@ -2016,28 +2003,6 @@ fields.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="diofant.polys.galoistools.gf_cofactors">
-<code class="descclassname">diofant.polys.galoistools.</code><code class="descname">gf_cofactors</code><span class="sig-paren">(</span><em>f</em>, <em>g</em>, <em>p</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/galoistools.html#gf_cofactors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_cofactors" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute polynomial GCD and cofactors in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code>.</p>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_cofactors</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">([1, 3], [3, 3], [2, 1])</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.polys.galoistools.gf_compose">
-<code class="descclassname">diofant.polys.galoistools.</code><code class="descname">gf_compose</code><span class="sig-paren">(</span><em>f</em>, <em>g</em>, <em>p</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/galoistools.html#gf_compose"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_compose" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute polynomial composition <code class="docutils literal notranslate"><span class="pre">f(g)</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code>.</p>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_compose</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">[2, 4, 0, 3, 0]</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
 <dt id="diofant.polys.galoistools.gf_compose_mod">
 <code class="descclassname">diofant.polys.galoistools.</code><code class="descname">gf_compose_mod</code><span class="sig-paren">(</span><em>g</em>, <em>h</em>, <em>f</em>, <em>p</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/galoistools.html#gf_compose_mod"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_compose_mod" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute polynomial composition <code class="docutils literal notranslate"><span class="pre">g(h)</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]/(f)</span></code>.</p>
@@ -2104,24 +2069,6 @@ co-prime integer moduli <code class="docutils literal notranslate"><span class="
 </dd></dl>
 
 <dl class="function">
-<dt id="diofant.polys.galoistools.gf_csolve">
-<code class="descclassname">diofant.polys.galoistools.</code><code class="descname">gf_csolve</code><span class="sig-paren">(</span><em>f</em>, <em>n</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/galoistools.html#gf_csolve"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_csolve" title="Permalink to this definition">¶</a></dt>
-<dd><p>To solve f(x) congruent 0 mod(n).</p>
-<p>n is divided into canonical factors and f(x) cong 0 mod(p**e) will be
-solved for each factor. Applying the Chinese Remainder Theorem to the
-results returns the final answers.</p>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_csolve</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="mi">189</span><span class="p">)</span>
-<span class="go">[13, 49, 76, 112, 139, 175]</span>
-</pre></div>
-</div>
-<p class="rubric">References</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#nivenzuckerman" id="id9">[NZ91]</a></p></li>
-</ul>
-</dd></dl>
-
-<dl class="function">
 <dt id="diofant.polys.galoistools.gf_ddf_shoup">
 <code class="descclassname">diofant.polys.galoistools.</code><code class="descname">gf_ddf_shoup</code><span class="sig-paren">(</span><em>f</em>, <em>p</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/galoistools.html#gf_ddf_shoup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_ddf_shoup" title="Permalink to this definition">¶</a></dt>
 <dd><p>Kaltofen-Shoup: Deterministic Distinct Degree Factorization</p>
@@ -2142,9 +2089,9 @@ large <code class="docutils literal notranslate"><span class="pre">deg(f)</span>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#kaltofen1998subquadratic" id="id10">[KS98]</a></p></li>
-<li><p><a class="reference internal" href="../sources.html#shoup1995factor" id="id11">[Sho95]</a></p></li>
-<li><p><a class="reference internal" href="../sources.html#gathen1992frobenious" id="id12">[vzGS92]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#kaltofen1998subquadratic" id="id9">[KS98]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#shoup1995factor" id="id10">[Sho95]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#gathen1992frobenious" id="id11">[vzGS92]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -2169,20 +2116,9 @@ is an argument to the equal degree factorization routine.</p>
 procedure (EDF) with each of the factors.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#gathen1999modern" id="id13">[vzGG99]</a></p></li>
-<li><p><a class="reference internal" href="../sources.html#geddes1992algorithms" id="id14">[GCL92]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#gathen1999modern" id="id12">[vzGG99]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#geddes1992algorithms" id="id13">[GCL92]</a></p></li>
 </ul>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.polys.galoistools.gf_diff">
-<code class="descclassname">diofant.polys.galoistools.</code><code class="descname">gf_diff</code><span class="sig-paren">(</span><em>f</em>, <em>p</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/galoistools.html#gf_diff"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_diff" title="Permalink to this definition">¶</a></dt>
-<dd><p>Differentiate polynomial in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code>.</p>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_diff</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">[1, 2]</span>
-</pre></div>
-</div>
 </dd></dl>
 
 <dl class="function">
@@ -2201,8 +2137,8 @@ finite field with <code class="docutils literal notranslate"><span class="pre">p
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#monagan1993inplace" id="id15">[Mon93]</a></p></li>
-<li><p><a class="reference internal" href="../sources.html#gathen1999modern" id="id16">[vzGG99]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#monagan1993inplace" id="id14">[Mon93]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#gathen1999modern" id="id15">[vzGG99]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -2223,8 +2159,8 @@ large <code class="docutils literal notranslate"><span class="pre">deg(f)</span>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#shoup1991ffactor" id="id17">[Sho91]</a></p></li>
-<li><p><a class="reference internal" href="../sources.html#gathen1992frobenious" id="id18">[vzGS92]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#shoup1991ffactor" id="id16">[Sho91]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#gathen1992frobenious" id="id17">[vzGS92]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -2243,20 +2179,9 @@ EDF procedure gives complete factorization over Galois fields.</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#gathen1999modern" id="id19">[vzGG99]</a></p></li>
-<li><p><a class="reference internal" href="../sources.html#geddes1992algorithms" id="id20">[GCL92]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#gathen1999modern" id="id18">[vzGG99]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#geddes1992algorithms" id="id19">[GCL92]</a></p></li>
 </ul>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.polys.galoistools.gf_eval">
-<code class="descclassname">diofant.polys.galoistools.</code><code class="descname">gf_eval</code><span class="sig-paren">(</span><em>f</em>, <em>a</em>, <em>p</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/galoistools.html#gf_eval"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_eval" title="Permalink to this definition">¶</a></dt>
-<dd><p>Evaluate <code class="docutils literal notranslate"><span class="pre">f(a)</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(p)</span></code> using Horner scheme.</p>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_eval</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">0</span>
-</pre></div>
-</div>
 </dd></dl>
 
 <dl class="function">
@@ -2307,7 +2232,7 @@ one, set <code class="docutils literal notranslate"><span class="pre">GF_FACTOR_
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#gathen1999modern" id="id21">[vzGG99]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#gathen1999modern" id="id20">[vzGG99]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -2403,7 +2328,7 @@ The typical application of EEA is solving polynomial diophantine equations.</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#gathen1999modern" id="id22">[vzGG99]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#gathen1999modern" id="id21">[vzGG99]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -2420,7 +2345,7 @@ The typical application of EEA is solving polynomial diophantine equations.</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#ben-or1981ff" id="id23">[BO81]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#ben-or1981ff" id="id22">[BO81]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -2517,17 +2442,6 @@ The typical application of EEA is solving polynomial diophantine equations.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="diofant.polys.galoistools.gf_pow">
-<code class="descclassname">diofant.polys.galoistools.</code><code class="descname">gf_pow</code><span class="sig-paren">(</span><em>f</em>, <em>n</em>, <em>p</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/galoistools.html#gf_pow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_pow" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute <code class="docutils literal notranslate"><span class="pre">f**n</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code> using repeated squaring.</p>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_pow</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">[2, 4, 4, 2, 2, 1, 4]</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
 <dt id="diofant.polys.galoistools.gf_pow_mod">
 <code class="descclassname">diofant.polys.galoistools.</code><code class="descname">gf_pow_mod</code><span class="sig-paren">(</span><em>f</em>, <em>n</em>, <em>g</em>, <em>p</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/galoistools.html#gf_pow_mod"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_pow_mod" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute <code class="docutils literal notranslate"><span class="pre">f**n</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]/(g)</span></code> using repeated squaring.</p>
@@ -2541,7 +2455,7 @@ of <code class="docutils literal notranslate"><span class="pre">f**n</span></cod
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#gathen1999modern" id="id24">[vzGG99]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#gathen1999modern" id="id23">[vzGG99]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -2668,7 +2582,7 @@ like iterated Frobenius algorithm, for large degrees.</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#gathen1992frobenious" id="id25">[vzGS92]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#gathen1992frobenious" id="id24">[vzGS92]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -2681,24 +2595,6 @@ like iterated Frobenius algorithm, for large degrees.</p>
 <span class="go">[[1, 1], [1, 3]]</span>
 </pre></div>
 </div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.polys.galoistools.linear_congruence">
-<code class="descclassname">diofant.polys.galoistools.</code><code class="descname">linear_congruence</code><span class="sig-paren">(</span><em>a</em>, <em>b</em>, <em>m</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/galoistools.html#linear_congruence"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.linear_congruence" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the values of x satisfying a*x congruent b mod(m)</p>
-<p>Here m is positive integer and a, b are natural numbers.
-This function returns only those values of x which are distinct mod(m).</p>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">linear_congruence</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
-<span class="go">[4, 9, 14]</span>
-</pre></div>
-</div>
-<p>There are 3 solutions distinct mod(15) since gcd(a, m) = gcd(3, 15) = 3.</p>
-<p class="rubric">References</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Linear_congruence_theorem">https://en.wikipedia.org/wiki/Linear_congruence_theorem</a></p></li>
-</ul>
 </dd></dl>
 
 </div>
@@ -2921,7 +2817,7 @@ can copy the polynomial. This method makes a shallow copy.</p>
 <dl class="method">
 <dt id="diofant.polys.rings.PolyElement.div">
 <code class="descname">div</code><span class="sig-paren">(</span><em>fv</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/rings.html#PolyElement.div"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rings.PolyElement.div" title="Permalink to this definition">¶</a></dt>
-<dd><p>Division algorithm, see <a class="reference internal" href="../sources.html#cox2015ideals" id="id26">[CLOShea15]</a>, p. 64.</p>
+<dd><p>Division algorithm, see <a class="reference internal" href="../sources.html#cox2015ideals" id="id25">[CLOShea15]</a>, p. 64.</p>
 <dl class="simple">
 <dt>fv array of polynomials</dt><dd><p>return qv, r such that
 self = sum(fv[i]*qv[i]) + r</p>
@@ -3217,7 +3113,7 @@ exceedingly, but the computation of the primitive parts requires
 extra processing effort. Besides, the method only works with fraction fields
 of unique factorization domains, excluding, for example, the general number
 fields.</p>
-<p>Collins <a class="reference internal" href="../sources.html#collins1967subr" id="id27">[Col67]</a> realized that the so-called <em>subresultant polynomials</em>
+<p>Collins <a class="reference internal" href="../sources.html#collins1967subr" id="id26">[Col67]</a> realized that the so-called <em>subresultant polynomials</em>
 of a pair of polynomials also form a generalized remainder sequence.
 The coefficients of these polynomials
 are expressible as determinants in the coefficients of the given
@@ -3296,12 +3192,12 @@ formulas</p>
 \[\gamma_i f_i = \mathrm{rem}(f_{i-2},f_{i-1})\]</div>
 <p>in terms of the leading coefficients of <span class="math notranslate nohighlight">\(f_1,\ldots,f_{i-1}\)</span>, working
 in the field <span class="math notranslate nohighlight">\(K\)</span>.</p>
-<p>Brown and Traub <a class="reference internal" href="../sources.html#brown1971subres" id="id28">[BT71]</a> later developed a recursive procedure
+<p>Brown and Traub <a class="reference internal" href="../sources.html#brown1971subres" id="id27">[BT71]</a> later developed a recursive procedure
 for computing the coefficients <span class="math notranslate nohighlight">\(\gamma_i\)</span>. Their algorithm deals with elements
 of the domain <span class="math notranslate nohighlight">\(A\)</span> exclusively (assuming <span class="math notranslate nohighlight">\(f,g\in A[X]\)</span>). However, in the
 abnormal case there was a problem, a division in <span class="math notranslate nohighlight">\(A\)</span>
 which could only be conjectured to be exact.</p>
-<p>This was subsequently justified by Brown <a class="reference internal" href="../sources.html#brown1978prs" id="id29">[Bro78]</a> who showed that
+<p>This was subsequently justified by Brown <a class="reference internal" href="../sources.html#brown1978prs" id="id28">[Bro78]</a> who showed that
 the result of the division is, in fact, a scalar subresultant.
 More specifically, the constant appearing in the computation of <span class="math notranslate nohighlight">\(f_i\)</span> is
 <span class="math notranslate nohighlight">\(s_{n_{i-2}}(f,g)\)</span> (Theorem 3).
@@ -3523,7 +3419,7 @@ and <code class="docutils literal notranslate"><span class="pre">cfg</span> <spa
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#liao1995heuristic" id="id30">[LF95]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#liao1995heuristic" id="id29">[LF95]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -3672,7 +3568,7 @@ is used to recover the multiplicities of factors.</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#gathen1999modern" id="id31">[vzGG99]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#gathen1999modern" id="id30">[vzGG99]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -3704,8 +3600,8 @@ factors. For this purpose a parallel Hensel lifting procedure is used.</p>
 (when an integer) or (for testing purposes) can be a sequence of numbers.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#wang1978improved" id="id32">[Wan78]</a></p></li>
-<li><p><a class="reference internal" href="../sources.html#geddes1992algorithms" id="id33">[GCL92]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#wang1978improved" id="id31">[Wan78]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#geddes1992algorithms" id="id32">[GCL92]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -3765,7 +3661,7 @@ which makes this method much faster that any other direct factorization
 approach (e.g. Zassenhaus’s).</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#mathworld-cyclotomic-poly" id="id34">[Mat]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#mathworld-cyclotomic-poly" id="id33">[Mat]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -3813,7 +3709,7 @@ using cyclotomic decomposition to speedup computations. To
 disable this behaviour set cyclotomic=False.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#gathen1999modern" id="id35">[vzGG99]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#gathen1999modern" id="id34">[vzGG99]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -3842,7 +3738,7 @@ over <span class="math notranslate nohighlight">\(Z[x]\)</span> satisfying:</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#gathen1999modern" id="id36">[vzGG99]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#gathen1999modern" id="id35">[vzGG99]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -3870,7 +3766,7 @@ and <span class="math notranslate nohighlight">\(t\)</span> such that:</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#gathen1999modern" id="id37">[vzGG99]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#gathen1999modern" id="id36">[vzGG99]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -3918,15 +3814,15 @@ variable at a time, provided that the ideal is zero-dimensional
 (finite number of solutions).</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#bose03" id="id38">[NKBG03]</a></p></li>
-<li><p><a class="reference internal" href="../sources.html#giovini1991sugar" id="id39">[GMN+91]</a></p></li>
-<li><p><a class="reference internal" href="../sources.html#ajwa95groebner" id="id40">[ALW95]</a></p></li>
-<li><p><a class="reference internal" href="../sources.html#cox2015ideals" id="id41">[CLOShea15]</a></p></li>
-<li><p><a class="reference internal" href="../sources.html#beckerweispfenning93" id="id42">[BW93]</a>, page 232</p></li>
+<li><p><a class="reference internal" href="../sources.html#bose03" id="id37">[NKBG03]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#giovini1991sugar" id="id38">[GMN+91]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#ajwa95groebner" id="id39">[ALW95]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#cox2015ideals" id="id40">[CLOShea15]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#beckerweispfenning93" id="id41">[BW93]</a>, page 232</p></li>
 </ul>
 <p class="rubric">Notes</p>
 <p>Used an improved version of Buchberger’s algorithm
-as presented in <a class="reference internal" href="../sources.html#beckerweispfenning93" id="id43">[BW93]</a>.</p>
+as presented in <a class="reference internal" href="../sources.html#beckerweispfenning93" id="id42">[BW93]</a>.</p>
 </dd></dl>
 
 <dl class="function">
@@ -3997,8 +3893,8 @@ the current basis.</p>
 <p>Once a Gröbner basis has been found, it gets reduced.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#sunwang2010f5" id="id44">[SW10]</a></p></li>
-<li><p><a class="reference internal" href="../sources.html#beckerweispfenning93" id="id45">[BW93]</a>, pp. 203, 216.</p></li>
+<li><p><a class="reference internal" href="../sources.html#sunwang2010f5" id="id43">[SW10]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#beckerweispfenning93" id="id44">[BW93]</a>, pp. 203, 216.</p></li>
 </ul>
 </dd></dl>
 
@@ -4029,7 +3925,7 @@ of <span class="math notranslate nohighlight">\(t*f\)</span> and <span class="ma
 then filtering out the solution that doesn’t contain <span class="math notranslate nohighlight">\(t\)</span>.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#cox2015ideals" id="id46">[CLOShea15]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#cox2015ideals" id="id45">[CLOShea15]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -4105,7 +4001,7 @@ and number of the maximum of f and g, w.r.t. lbp_cmp.</p>
 and computes a reduced Gröbner basis for them.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#beckerweispfenning93" id="id47">[BW93]</a>, page 216.</p></li>
+<li><p><a class="reference internal" href="../sources.html#beckerweispfenning93" id="id46">[BW93]</a>, page 216.</p></li>
 </ul>
 </dd></dl>
 
@@ -4166,7 +4062,7 @@ ideal w.r.t. <code class="docutils literal notranslate"><span class="pre">O_from
 w.r.t. <code class="docutils literal notranslate"><span class="pre">O_to</span></code>.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#faugere1993groebner" id="id48">[FaugereGLM93]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#faugere1993groebner" id="id47">[FaugereGLM93]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -4185,7 +4081,7 @@ using Gröbner bases</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#adams1994intro" id="id49">[AL94]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#adams1994intro" id="id48">[AL94]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -4238,8 +4134,8 @@ candidates which are very likely the desired GCD.</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#monagan2000brown" id="id50">[MW00]</a></p></li>
-<li><p><a class="reference internal" href="../sources.html#brown1971gcd" id="id51">[Bro71]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#monagan2000brown" id="id49">[MW00]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#brown1971gcd" id="id50">[Bro71]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -4310,7 +4206,7 @@ called recursively.</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#monagan2004algebraic" id="id52">[MvH04]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#monagan2004algebraic" id="id51">[MvH04]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -4338,7 +4234,7 @@ is given, <span class="math notranslate nohighlight">\(\mathbb Z_p\)</span> is c
 </dl>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#vanhoeij2002modgcd" id="id53">[vHM02]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#vanhoeij2002modgcd" id="id52">[vHM02]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -4376,7 +4272,7 @@ the input polynomials as a side effect.</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#liao1995heuristic" id="id54">[LF95]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#liao1995heuristic" id="id53">[LF95]</a></p></li>
 </ul>
 </dd></dl>
 
