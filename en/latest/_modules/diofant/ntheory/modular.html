@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.ntheory.modular &mdash; Diofant 0.10.1.dev316+gc3b9579 documentation</title>
+  <title>diofant.ntheory.modular &mdash; Diofant 0.10.1.dev314+g3ac2fee documentation</title>
   
 
   
@@ -154,10 +154,9 @@
 
 <span class="kn">import</span> <span class="nn">mpmath</span>
 
+<span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">igcd</span><span class="p">,</span> <span class="n">prod</span>
 <span class="kn">from</span> <span class="nn">..core.compatibility</span> <span class="k">import</span> <span class="n">as_int</span>
-<span class="kn">from</span> <span class="nn">..core.mul</span> <span class="k">import</span> <span class="n">prod</span>
-<span class="kn">from</span> <span class="nn">..core.numbers</span> <span class="k">import</span> <span class="n">igcd</span><span class="p">,</span> <span class="n">igcdex</span>
-<span class="kn">from</span> <span class="nn">..polys.galoistools</span> <span class="k">import</span> <span class="n">gf_crt</span><span class="p">,</span> <span class="n">gf_crt1</span><span class="p">,</span> <span class="n">gf_crt2</span>
+<span class="kn">from</span> <span class="nn">..core.numbers</span> <span class="k">import</span> <span class="n">igcdex</span>
 <span class="kn">from</span> <span class="nn">.primetest</span> <span class="k">import</span> <span class="n">isprime</span>
 
 
@@ -175,12 +174,12 @@
     <span class="k">return</span> <span class="n">a</span> <span class="o">-</span> <span class="n">m</span></div>
 
 
-<div class="viewcode-block" id="crt"><a class="viewcode-back" href="../../../modules/ntheory.html#diofant.ntheory.modular.crt">[docs]</a><span class="k">def</span> <span class="nf">crt</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">symmetric</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="crt"><a class="viewcode-back" href="../../../modules/ntheory.html#diofant.ntheory.modular.crt">[docs]</a><span class="k">def</span> <span class="nf">crt</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">symmetric</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Chinese Remainder Theorem.</span>
 
-<span class="sd">    The moduli in m are assumed to be pairwise coprime.  The output</span>
-<span class="sd">    is then an integer f, such that f = v_i mod m_i for each pair out</span>
-<span class="sd">    of v and m. If ``symmetric`` is False a positive integer will be</span>
+<span class="sd">    The moduli in M are assumed to be pairwise coprime.  The output</span>
+<span class="sd">    is then an integer f, such that f = u_i mod m_i for each pair out</span>
+<span class="sd">    of U and M. If ``symmetric`` is False a positive integer will be</span>
 <span class="sd">    returned, else \|f\| will be less than or equal to the LCM of the</span>
 <span class="sd">    moduli, and thus f may be negative.</span>
 
@@ -191,33 +190,33 @@
 <span class="sd">    The keyword ``check`` can be set to False if it is known that the moduli</span>
 <span class="sd">    are coprime.</span>
 
-<span class="sd">    As an example consider a set of residues ``U = [49, 76, 65]``</span>
-<span class="sd">    and a set of moduli ``M = [99, 97, 95]``. Then we have::</span>
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
 
-<span class="sd">       &gt;&gt;&gt; crt([99, 97, 95], [49, 76, 65])</span>
-<span class="sd">       (639985, 912285)</span>
+<span class="sd">    &gt;&gt;&gt; crt([99, 97, 95], [49, 76, 65])</span>
+<span class="sd">    (639985, 912285)</span>
 
-<span class="sd">    This is the correct result because::</span>
+<span class="sd">    This is the correct result because:</span>
 
-<span class="sd">       &gt;&gt;&gt; [639985 % m for m in [99, 97, 95]]</span>
-<span class="sd">       [49, 76, 65]</span>
+<span class="sd">    &gt;&gt;&gt; [639985 % m for m in [99, 97, 95]]</span>
+<span class="sd">    [49, 76, 65]</span>
 
 <span class="sd">    If the moduli are not co-prime, you may receive an incorrect result</span>
 <span class="sd">    if you use ``check=False``:</span>
 
-<span class="sd">       &gt;&gt;&gt; crt([12, 6, 17], [3, 4, 2], check=False)</span>
-<span class="sd">       (954, 1224)</span>
-<span class="sd">       &gt;&gt;&gt; [954 % m for m in [12, 6, 17]]</span>
-<span class="sd">       [6, 0, 2]</span>
-<span class="sd">       &gt;&gt;&gt; crt([12, 6, 17], [3, 4, 2]) is None</span>
-<span class="sd">       True</span>
-<span class="sd">       &gt;&gt;&gt; crt([3, 6], [2, 5])</span>
-<span class="sd">       (5, 6)</span>
+<span class="sd">    &gt;&gt;&gt; crt([12, 6, 17], [3, 4, 2], check=False)</span>
+<span class="sd">    (954, 1224)</span>
+<span class="sd">    &gt;&gt;&gt; [954 % m for m in [12, 6, 17]]</span>
+<span class="sd">    [6, 0, 2]</span>
+<span class="sd">    &gt;&gt;&gt; crt([12, 6, 17], [3, 4, 2]) is None</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; crt([3, 6], [2, 5])</span>
+<span class="sd">    (5, 6)</span>
 
-<span class="sd">    Note: the order of gf_crt&#39;s arguments is reversed relative to crt,</span>
-<span class="sd">    and that solve_congruence takes residue, modulus pairs.</span>
+<span class="sd">    Notes</span>
+<span class="sd">    =====</span>
 
-<span class="sd">    Programmer&#39;s note: rather than checking that all pairs of moduli share</span>
+<span class="sd">    Rather than checking that all pairs of moduli share</span>
 <span class="sd">    no GCD (an O(n**2) test) and rather than factoring all moduli and seeing</span>
 <span class="sd">    that there is no factor in common, a check that the result gives the</span>
 <span class="sd">    indicated residuals is performed -- an O(n) operation.</span>
@@ -226,21 +225,28 @@
 <span class="sd">    ========</span>
 
 <span class="sd">    solve_congruence</span>
-<span class="sd">    diofant.polys.galoistools.gf_crt : low level crt routine used by this routine</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">..domains</span> <span class="k">import</span> <span class="n">ZZ</span>
 
     <span class="k">if</span> <span class="n">check</span><span class="p">:</span>
-        <span class="n">m</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">as_int</span><span class="p">,</span> <span class="n">m</span><span class="p">))</span>
-        <span class="n">v</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">as_int</span><span class="p">,</span> <span class="n">v</span><span class="p">))</span>
+        <span class="n">M</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">as_int</span><span class="p">,</span> <span class="n">M</span><span class="p">))</span>
+        <span class="n">U</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">as_int</span><span class="p">,</span> <span class="n">U</span><span class="p">))</span>
 
-    <span class="n">result</span> <span class="o">=</span> <span class="n">gf_crt</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-    <span class="n">mm</span> <span class="o">=</span> <span class="n">prod</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">prod</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">ZZ</span><span class="o">.</span><span class="n">one</span><span class="p">)</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">ZZ</span><span class="o">.</span><span class="n">zero</span>
+
+    <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">M</span><span class="p">):</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="n">p</span> <span class="o">//</span> <span class="n">m</span>
+        <span class="n">s</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">ZZ</span><span class="o">.</span><span class="n">gcdex</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+        <span class="n">v</span> <span class="o">+=</span> <span class="n">e</span><span class="o">*</span><span class="p">(</span><span class="n">u</span><span class="o">*</span><span class="n">s</span> <span class="o">%</span> <span class="n">m</span><span class="p">)</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="n">v</span> <span class="o">%</span> <span class="n">p</span>
+    <span class="n">mm</span> <span class="o">=</span> <span class="n">prod</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">check</span><span class="p">:</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">v</span> <span class="o">%</span> <span class="n">m</span> <span class="o">==</span> <span class="n">result</span> <span class="o">%</span> <span class="n">m</span> <span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">m</span><span class="p">)):</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="n">solve_congruence</span><span class="p">(</span><span class="o">*</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">m</span><span class="p">)),</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">v</span> <span class="o">%</span> <span class="n">m</span> <span class="o">==</span> <span class="n">result</span> <span class="o">%</span> <span class="n">m</span> <span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">M</span><span class="p">)):</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">solve_congruence</span><span class="p">(</span><span class="o">*</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">M</span><span class="p">)),</span>
                                       <span class="n">check</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">symmetric</span><span class="o">=</span><span class="n">symmetric</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">result</span>
@@ -251,7 +257,7 @@
     <span class="k">return</span> <span class="n">result</span><span class="p">,</span> <span class="n">mm</span></div>
 
 
-<div class="viewcode-block" id="crt1"><a class="viewcode-back" href="../../../modules/ntheory.html#diofant.ntheory.modular.crt1">[docs]</a><span class="k">def</span> <span class="nf">crt1</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+<div class="viewcode-block" id="crt1"><a class="viewcode-back" href="../../../modules/ntheory.html#diofant.ntheory.modular.crt1">[docs]</a><span class="k">def</span> <span class="nf">crt1</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;First part of Chinese Remainder Theorem, for multiple application.</span>
 
 <span class="sd">    Examples</span>
@@ -263,10 +269,17 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">..domains</span> <span class="k">import</span> <span class="n">ZZ</span>
 
-    <span class="k">return</span> <span class="n">gf_crt1</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span></div>
+    <span class="n">E</span><span class="p">,</span> <span class="n">S</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">prod</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">ZZ</span><span class="o">.</span><span class="n">one</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">M</span><span class="p">:</span>
+        <span class="n">E</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span> <span class="o">//</span> <span class="n">m</span><span class="p">)</span>
+        <span class="n">S</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ZZ</span><span class="o">.</span><span class="n">gcdex</span><span class="p">(</span><span class="n">E</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">m</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">%</span> <span class="n">m</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">p</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">S</span></div>
 
 
-<div class="viewcode-block" id="crt2"><a class="viewcode-back" href="../../../modules/ntheory.html#diofant.ntheory.modular.crt2">[docs]</a><span class="k">def</span> <span class="nf">crt2</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">mm</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">symmetric</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="crt2"><a class="viewcode-back" href="../../../modules/ntheory.html#diofant.ntheory.modular.crt2">[docs]</a><span class="k">def</span> <span class="nf">crt2</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">symmetric</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Second part of Chinese Remainder Theorem, for multiple application.</span>
 
 <span class="sd">    Examples</span>
@@ -279,11 +292,16 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">..domains</span> <span class="k">import</span> <span class="n">ZZ</span>
 
-    <span class="n">result</span> <span class="o">=</span> <span class="n">gf_crt2</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">mm</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">ZZ</span><span class="o">.</span><span class="n">zero</span>
+
+    <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">S</span><span class="p">):</span>
+        <span class="n">v</span> <span class="o">+=</span> <span class="n">e</span><span class="o">*</span><span class="p">(</span><span class="n">u</span><span class="o">*</span><span class="n">s</span> <span class="o">%</span> <span class="n">m</span><span class="p">)</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="n">v</span> <span class="o">%</span> <span class="n">p</span>
 
     <span class="k">if</span> <span class="n">symmetric</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">symmetric_residue</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">mm</span><span class="p">),</span> <span class="n">mm</span>
-    <span class="k">return</span> <span class="n">result</span><span class="p">,</span> <span class="n">mm</span></div>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">symmetric_residue</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span><span class="p">,</span> <span class="n">p</span></div>
 
 
 <div class="viewcode-block" id="solve_congruence"><a class="viewcode-back" href="../../../modules/ntheory.html#diofant.ntheory.modular.solve_congruence">[docs]</a><span class="k">def</span> <span class="nf">solve_congruence</span><span class="p">(</span><span class="o">*</span><span class="n">remainder_modulus_pairs</span><span class="p">,</span> <span class="o">**</span><span class="n">hint</span><span class="p">):</span>
@@ -366,7 +384,7 @@
         <span class="n">rm</span> <span class="o">=</span> <span class="p">[(</span><span class="n">as_int</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">as_int</span><span class="p">(</span><span class="n">m</span><span class="p">))</span> <span class="k">for</span> <span class="n">r</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">rm</span><span class="p">]</span>
 
         <span class="c1"># ignore redundant pairs but raise an error otherwise; also</span>
-        <span class="c1"># make sure that a unique set of bases is sent to gf_crt if</span>
+        <span class="c1"># make sure that a unique set of bases is sent to crt() if</span>
         <span class="c1"># they are all prime.</span>
         <span class="c1">#</span>
         <span class="c1"># The routine will work out less-trivial violations and</span>

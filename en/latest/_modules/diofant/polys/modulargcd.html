@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.modulargcd &mdash; Diofant 0.10.1.dev316+gc3b9579 documentation</title>
+  <title>diofant.polys.modulargcd &mdash; Diofant 0.10.1.dev314+g3ac2fee documentation</title>
   
 
   
@@ -156,7 +156,8 @@
 <span class="kn">from</span> <span class="nn">..ntheory</span> <span class="k">import</span> <span class="n">nextprime</span>
 <span class="kn">from</span> <span class="nn">..ntheory.modular</span> <span class="k">import</span> <span class="n">crt</span><span class="p">,</span> <span class="n">integer_rational_reconstruction</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">rings</span>
-<span class="kn">from</span> <span class="nn">.galoistools</span> <span class="k">import</span> <span class="n">gf_div</span><span class="p">,</span> <span class="n">gf_from_dict</span><span class="p">,</span> <span class="n">gf_gcd</span><span class="p">,</span> <span class="n">gf_gcdex</span><span class="p">,</span> <span class="n">gf_lcm</span>
+<span class="kn">from</span> <span class="nn">.densebasic</span> <span class="k">import</span> <span class="n">dmp_from_dict</span><span class="p">,</span> <span class="n">dmp_normal</span>
+<span class="kn">from</span> <span class="nn">.euclidtools</span> <span class="k">import</span> <span class="n">dmp_gcd</span>
 <span class="kn">from</span> <span class="nn">.polyerrors</span> <span class="k">import</span> <span class="n">ModularGCDFailed</span>
 
 
@@ -254,9 +255,13 @@
             <span class="n">coeffs</span><span class="p">[</span><span class="n">monom</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">coeffs</span><span class="p">[</span><span class="n">monom</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]][</span><span class="n">monom</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">coeff</span>
 
+    <span class="n">domp</span> <span class="o">=</span> <span class="n">dom</span><span class="o">.</span><span class="n">finite_field</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
     <span class="n">cont</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">coeff</span> <span class="ow">in</span> <span class="n">coeffs</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-        <span class="n">cont</span> <span class="o">=</span> <span class="n">gf_gcd</span><span class="p">(</span><span class="n">cont</span><span class="p">,</span> <span class="n">gf_from_dict</span><span class="p">(</span><span class="n">coeff</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">dom</span><span class="p">),</span> <span class="n">p</span><span class="p">,</span> <span class="n">dom</span><span class="p">)</span>
+        <span class="n">coeff</span> <span class="o">=</span> <span class="n">dmp_from_dict</span><span class="p">(</span><span class="n">coeff</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">dom</span><span class="p">)</span>
+        <span class="n">coeff</span> <span class="o">=</span> <span class="n">dmp_normal</span><span class="p">(</span><span class="n">coeff</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">domp</span><span class="p">)</span>
+        <span class="n">cont</span> <span class="o">=</span> <span class="n">dmp_gcd</span><span class="p">(</span><span class="n">cont</span><span class="p">,</span> <span class="n">coeff</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">domp</span><span class="p">)</span>
+    <span class="n">cont</span> <span class="o">=</span> <span class="n">dmp_normal</span><span class="p">(</span><span class="n">cont</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">dom</span><span class="p">)</span>
 
     <span class="n">yring</span> <span class="o">=</span> <span class="n">ring</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="n">ring</span><span class="o">.</span><span class="n">symbols</span><span class="p">[</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
     <span class="n">contf</span> <span class="o">=</span> <span class="n">yring</span><span class="o">.</span><span class="n">from_dense</span><span class="p">(</span><span class="n">cont</span><span class="p">)</span><span class="o">.</span><span class="n">trunc_ground</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
@@ -806,8 +811,10 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">ring</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">ring</span>
-    <span class="n">densequo</span><span class="p">,</span> <span class="n">denserem</span> <span class="o">=</span> <span class="n">gf_div</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">to_dense</span><span class="p">(),</span> <span class="n">g</span><span class="o">.</span><span class="n">to_dense</span><span class="p">(),</span> <span class="n">p</span><span class="p">,</span> <span class="n">ring</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">ring</span><span class="o">.</span><span class="n">from_dense</span><span class="p">(</span><span class="n">densequo</span><span class="p">),</span> <span class="n">ring</span><span class="o">.</span><span class="n">from_dense</span><span class="p">(</span><span class="n">denserem</span><span class="p">)</span>
+    <span class="n">dom</span> <span class="o">=</span> <span class="n">ring</span><span class="o">.</span><span class="n">domain</span>
+    <span class="n">domp</span> <span class="o">=</span> <span class="n">dom</span><span class="o">.</span><span class="n">finite_field</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+    <span class="n">f</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">set_domain</span><span class="p">(</span><span class="n">domp</span><span class="p">),</span> <span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">))</span>
+    <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">set_domain</span><span class="p">(</span><span class="n">dom</span><span class="p">),</span> <span class="nb">divmod</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">)))</span>
 
 
 <span class="k">def</span> <span class="nf">_rational_function_reconstruction</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
@@ -956,8 +963,10 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">ring</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">ring</span>
-    <span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">gf_gcdex</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">to_dense</span><span class="p">(),</span> <span class="n">g</span><span class="o">.</span><span class="n">to_dense</span><span class="p">(),</span> <span class="n">p</span><span class="p">,</span> <span class="n">ring</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">ring</span><span class="o">.</span><span class="n">from_dense</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">ring</span><span class="o">.</span><span class="n">from_dense</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">ring</span><span class="o">.</span><span class="n">from_dense</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+    <span class="n">dom</span> <span class="o">=</span> <span class="n">ring</span><span class="o">.</span><span class="n">domain</span>
+    <span class="n">domp</span> <span class="o">=</span> <span class="n">dom</span><span class="o">.</span><span class="n">finite_field</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+    <span class="n">f</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">set_domain</span><span class="p">(</span><span class="n">domp</span><span class="p">),</span> <span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">))</span>
+    <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">set_domain</span><span class="p">(</span><span class="n">dom</span><span class="p">),</span> <span class="n">f</span><span class="o">.</span><span class="n">gcdex</span><span class="p">(</span><span class="n">g</span><span class="p">)))</span>
 
 
 <span class="k">def</span> <span class="nf">_trunc</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">minpoly</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
@@ -1273,18 +1282,28 @@
             <span class="n">dom</span> <span class="o">=</span> <span class="n">qring</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">field</span>
             <span class="n">den</span> <span class="o">=</span> <span class="n">dom</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">one</span>
 
+            <span class="n">domp</span> <span class="o">=</span> <span class="n">dom</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">finite_field</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+            <span class="n">den</span> <span class="o">=</span> <span class="n">den</span><span class="o">.</span><span class="n">set_domain</span><span class="p">(</span><span class="n">domp</span><span class="p">)</span>
+
             <span class="k">for</span> <span class="n">coeff</span> <span class="ow">in</span> <span class="n">h</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-                <span class="n">den</span> <span class="o">=</span> <span class="n">dom</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">from_dense</span><span class="p">(</span><span class="n">gf_lcm</span><span class="p">(</span><span class="n">den</span><span class="o">.</span><span class="n">to_dense</span><span class="p">(),</span> <span class="n">coeff</span><span class="o">.</span><span class="n">denom</span><span class="o">.</span><span class="n">to_dense</span><span class="p">(),</span>
-                                                 <span class="n">p</span><span class="p">,</span> <span class="n">dom</span><span class="o">.</span><span class="n">domain</span><span class="p">))</span>
+                <span class="n">coeff</span> <span class="o">=</span> <span class="n">coeff</span><span class="o">.</span><span class="n">denom</span><span class="o">.</span><span class="n">set_domain</span><span class="p">(</span><span class="n">domp</span><span class="p">)</span>
+                <span class="n">den</span> <span class="o">=</span> <span class="n">den</span><span class="o">.</span><span class="n">lcm</span><span class="p">(</span><span class="n">coeff</span><span class="p">)</span>
+
+            <span class="n">den</span> <span class="o">=</span> <span class="n">den</span><span class="o">.</span><span class="n">set_ring</span><span class="p">(</span><span class="n">dom</span><span class="o">.</span><span class="n">ring</span><span class="p">)</span>
 
         <span class="k">else</span><span class="p">:</span>
             <span class="n">dom</span> <span class="o">=</span> <span class="n">qring</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">field</span>
             <span class="n">den</span> <span class="o">=</span> <span class="n">dom</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">one</span>
 
+            <span class="n">domp</span> <span class="o">=</span> <span class="n">dom</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">finite_field</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+            <span class="n">den</span> <span class="o">=</span> <span class="n">den</span><span class="o">.</span><span class="n">set_domain</span><span class="p">(</span><span class="n">domp</span><span class="p">)</span>
+
             <span class="k">for</span> <span class="n">coeff</span> <span class="ow">in</span> <span class="n">h</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
                 <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">coeff</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-                    <span class="n">den</span> <span class="o">=</span> <span class="n">dom</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">from_dense</span><span class="p">(</span><span class="n">gf_lcm</span><span class="p">(</span><span class="n">den</span><span class="o">.</span><span class="n">to_dense</span><span class="p">(),</span> <span class="n">c</span><span class="o">.</span><span class="n">denom</span><span class="o">.</span><span class="n">to_dense</span><span class="p">(),</span>
-                                                     <span class="n">p</span><span class="p">,</span> <span class="n">dom</span><span class="o">.</span><span class="n">domain</span><span class="p">))</span>
+                    <span class="n">c</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">denom</span><span class="o">.</span><span class="n">set_domain</span><span class="p">(</span><span class="n">domp</span><span class="p">)</span>
+                    <span class="n">den</span> <span class="o">=</span> <span class="n">den</span><span class="o">.</span><span class="n">lcm</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+
+            <span class="n">den</span> <span class="o">=</span> <span class="n">den</span><span class="o">.</span><span class="n">set_ring</span><span class="p">(</span><span class="n">dom</span><span class="o">.</span><span class="n">ring</span><span class="p">)</span>
 
         <span class="n">den</span> <span class="o">=</span> <span class="n">qring</span><span class="o">.</span><span class="n">domain_new</span><span class="p">(</span><span class="n">den</span><span class="o">.</span><span class="n">trunc_ground</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>
         <span class="n">h</span> <span class="o">=</span> <span class="n">ring</span><span class="p">((</span><span class="n">h</span><span class="o">*</span><span class="n">den</span><span class="p">)</span><span class="o">.</span><span class="n">as_expr</span><span class="p">())</span><span class="o">.</span><span class="n">trunc_ground</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Internals of the Polynomial Manipulation Module &mdash; Diofant 0.10.1.dev316+gc3b9579 documentation</title>
+  <title>Internals of the Polynomial Manipulation Module &mdash; Diofant 0.10.1.dev314+g3ac2fee documentation</title>
   
 
   
@@ -1981,17 +1981,6 @@ fields.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="diofant.polys.galoistools.gf_add_mul">
-<code class="descclassname">diofant.polys.galoistools.</code><code class="descname">gf_add_mul</code><span class="sig-paren">(</span><em>f</em>, <em>g</em>, <em>h</em>, <em>p</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/galoistools.html#gf_add_mul"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_add_mul" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">+</span> <span class="pre">g*h</span></code> where <code class="docutils literal notranslate"><span class="pre">f</span></code>, <code class="docutils literal notranslate"><span class="pre">g</span></code>, <code class="docutils literal notranslate"><span class="pre">h</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code>.</p>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_add_mul</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">[2, 3, 2, 2]</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
 <dt id="diofant.polys.galoistools.gf_berlekamp">
 <code class="descclassname">diofant.polys.galoistools.</code><code class="descname">gf_berlekamp</code><span class="sig-paren">(</span><em>f</em>, <em>p</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/galoistools.html#gf_berlekamp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_berlekamp" title="Permalink to this definition">¶</a></dt>
 <dd><p>Factor a square-free <code class="docutils literal notranslate"><span class="pre">f</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code> for small <code class="docutils literal notranslate"><span class="pre">p</span></code>.</p>
@@ -2009,61 +1998,6 @@ fields.</p>
 <p class="rubric">Examples</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_compose_mod</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
 <span class="go">[4]</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.polys.galoistools.gf_crt">
-<code class="descclassname">diofant.polys.galoistools.</code><code class="descname">gf_crt</code><span class="sig-paren">(</span><em>U</em>, <em>M</em>, <em>K=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/galoistools.html#gf_crt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_crt" title="Permalink to this definition">¶</a></dt>
-<dd><p>Chinese Remainder Theorem.</p>
-<p>Given a set of integer residues <code class="docutils literal notranslate"><span class="pre">u_0,...,u_n</span></code> and a set of
-co-prime integer moduli <code class="docutils literal notranslate"><span class="pre">m_0,...,m_n</span></code>, returns an integer
-<code class="docutils literal notranslate"><span class="pre">u</span></code>, such that <code class="docutils literal notranslate"><span class="pre">u</span> <span class="pre">=</span> <span class="pre">u_i</span> <span class="pre">mod</span> <span class="pre">m_i</span></code> for <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">=</span> <span class="pre">``0,...,n</span></code>.</p>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_crt</span><span class="p">([</span><span class="mi">49</span><span class="p">,</span> <span class="mi">76</span><span class="p">,</span> <span class="mi">65</span><span class="p">],</span> <span class="p">[</span><span class="mi">99</span><span class="p">,</span> <span class="mi">97</span><span class="p">,</span> <span class="mi">95</span><span class="p">],</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">639985</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">_</span> <span class="o">%</span> <span class="n">m</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">99</span><span class="p">,</span> <span class="mi">97</span><span class="p">,</span> <span class="mi">95</span><span class="p">]]</span>
-<span class="go">[49, 76, 65]</span>
-</pre></div>
-</div>
-<p class="rubric">Notes</p>
-<p>This is a low-level routine with no error checking.</p>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<dl class="simple">
-<dt><a class="reference internal" href="../modules/ntheory.html#diofant.ntheory.modular.crt" title="diofant.ntheory.modular.crt"><code class="xref py py-func docutils literal notranslate"><span class="pre">diofant.ntheory.modular.crt()</span></code></a></dt><dd><p>a higher level crt routine</p>
-</dd>
-</dl>
-<p><a class="reference internal" href="../modules/ntheory.html#diofant.ntheory.modular.solve_congruence" title="diofant.ntheory.modular.solve_congruence"><code class="xref py py-func docutils literal notranslate"><span class="pre">diofant.ntheory.modular.solve_congruence()</span></code></a></p>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.polys.galoistools.gf_crt1">
-<code class="descclassname">diofant.polys.galoistools.</code><code class="descname">gf_crt1</code><span class="sig-paren">(</span><em>M</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/galoistools.html#gf_crt1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_crt1" title="Permalink to this definition">¶</a></dt>
-<dd><p>First part of the Chinese Remainder Theorem.</p>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_crt1</span><span class="p">([</span><span class="mi">99</span><span class="p">,</span> <span class="mi">97</span><span class="p">,</span> <span class="mi">95</span><span class="p">],</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">(912285, [9215, 9405, 9603], [62, 24, 12])</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.polys.galoistools.gf_crt2">
-<code class="descclassname">diofant.polys.galoistools.</code><code class="descname">gf_crt2</code><span class="sig-paren">(</span><em>U</em>, <em>M</em>, <em>p</em>, <em>E</em>, <em>S</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/galoistools.html#gf_crt2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_crt2" title="Permalink to this definition">¶</a></dt>
-<dd><p>Second part of the Chinese Remainder Theorem.</p>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">U</span> <span class="o">=</span> <span class="p">[</span><span class="mi">49</span><span class="p">,</span> <span class="mi">76</span><span class="p">,</span> <span class="mi">65</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="p">[</span><span class="mi">99</span><span class="p">,</span> <span class="mi">97</span><span class="p">,</span> <span class="mi">95</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="mi">912285</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">E</span> <span class="o">=</span> <span class="p">[</span><span class="mi">9215</span><span class="p">,</span> <span class="mi">9405</span><span class="p">,</span> <span class="mi">9603</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">S</span> <span class="o">=</span> <span class="p">[</span><span class="mi">62</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">12</span><span class="p">]</span>
-</pre></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_crt2</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">639985</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -2131,8 +2065,6 @@ finite field with <code class="docutils literal notranslate"><span class="pre">p
 <p class="rubric">Examples</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_div</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="mi">2</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
 <span class="go">([1, 1], [1])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">gf_add_mul</span><span class="p">(</span><span class="n">_</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">_</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="mi">2</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">[1, 0, 1, 1]</span>
 </pre></div>
 </div>
 <p class="rubric">References</p>
@@ -2286,17 +2218,6 @@ where <code class="docutils literal notranslate"><span class="pre">n</span> <spa
 </dd></dl>
 
 <dl class="function">
-<dt id="diofant.polys.galoistools.gf_from_int_poly">
-<code class="descclassname">diofant.polys.galoistools.</code><code class="descname">gf_from_int_poly</code><span class="sig-paren">(</span><em>f</em>, <em>p</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/galoistools.html#gf_from_int_poly"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_from_int_poly" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create a <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code> polynomial from <code class="docutils literal notranslate"><span class="pre">Z[x]</span></code>.</p>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_from_int_poly</span><span class="p">([</span><span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="mi">5</span><span class="p">)</span>
-<span class="go">[2, 3, 3]</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
 <dt id="diofant.polys.galoistools.gf_gcd">
 <code class="descclassname">diofant.polys.galoistools.</code><code class="descname">gf_gcd</code><span class="sig-paren">(</span><em>f</em>, <em>g</em>, <em>p</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/galoistools.html#gf_gcd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_gcd" title="Permalink to this definition">¶</a></dt>
 <dd><p>Euclidean Algorithm in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code>.</p>
@@ -2305,31 +2226,6 @@ where <code class="docutils literal notranslate"><span class="pre">n</span> <spa
 <span class="go">[1, 3]</span>
 </pre></div>
 </div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.polys.galoistools.gf_gcdex">
-<code class="descclassname">diofant.polys.galoistools.</code><code class="descname">gf_gcdex</code><span class="sig-paren">(</span><em>f</em>, <em>g</em>, <em>p</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/galoistools.html#gf_gcdex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_gcdex" title="Permalink to this definition">¶</a></dt>
-<dd><p>Extended Euclidean Algorithm in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code>.</p>
-<p>Given polynomials <code class="docutils literal notranslate"><span class="pre">f</span></code> and <code class="docutils literal notranslate"><span class="pre">g</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code>, computes polynomials
-<code class="docutils literal notranslate"><span class="pre">s</span></code>, <code class="docutils literal notranslate"><span class="pre">t</span></code> and <code class="docutils literal notranslate"><span class="pre">h</span></code>, such that <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">=</span> <span class="pre">gcd(f,</span> <span class="pre">g)</span></code> and <code class="docutils literal notranslate"><span class="pre">s*f</span> <span class="pre">+</span> <span class="pre">t*g</span> <span class="pre">=</span> <span class="pre">h</span></code>.
-The typical application of EEA is solving polynomial diophantine equations.</p>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="n">gf_gcdex</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="mi">11</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
-<span class="go">([5, 6], [6], [1, 7])</span>
-</pre></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">S</span> <span class="o">=</span> <span class="n">gf_mul</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="mi">11</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">T</span> <span class="o">=</span> <span class="n">gf_mul</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="mi">11</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">gf_add</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">[1, 7]</span>
-</pre></div>
-</div>
-<p class="rubric">References</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#gathen1999modern" id="id21">[vzGG99]</a></p></li>
-</ul>
 </dd></dl>
 
 <dl class="function">
@@ -2345,7 +2241,7 @@ The typical application of EEA is solving polynomial diophantine equations.</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#ben-or1981ff" id="id22">[BO81]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#ben-or1981ff" id="id21">[BO81]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -2382,17 +2278,6 @@ The typical application of EEA is solving polynomial diophantine equations.</p>
 <span class="go">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">gf_irreducible_p</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
 <span class="go">False</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.polys.galoistools.gf_lcm">
-<code class="descclassname">diofant.polys.galoistools.</code><code class="descname">gf_lcm</code><span class="sig-paren">(</span><em>f</em>, <em>g</em>, <em>p</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/galoistools.html#gf_lcm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_lcm" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute polynomial LCM in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code>.</p>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_lcm</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">[1, 2, 0, 4]</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -2455,7 +2340,7 @@ of <code class="docutils literal notranslate"><span class="pre">f**n</span></cod
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#gathen1999modern" id="id23">[vzGG99]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#gathen1999modern" id="id22">[vzGG99]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -2550,17 +2435,6 @@ of <code class="docutils literal notranslate"><span class="pre">f**n</span></cod
 </dd></dl>
 
 <dl class="function">
-<dt id="diofant.polys.galoistools.gf_sub_mul">
-<code class="descclassname">diofant.polys.galoistools.</code><code class="descname">gf_sub_mul</code><span class="sig-paren">(</span><em>f</em>, <em>g</em>, <em>h</em>, <em>p</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/galoistools.html#gf_sub_mul"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_sub_mul" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">-</span> <span class="pre">g*h</span></code> where <code class="docutils literal notranslate"><span class="pre">f</span></code>, <code class="docutils literal notranslate"><span class="pre">g</span></code>, <code class="docutils literal notranslate"><span class="pre">h</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code>.</p>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_sub_mul</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">[3, 3, 2, 1]</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
 <dt id="diofant.polys.galoistools.gf_trace_map">
 <code class="descclassname">diofant.polys.galoistools.</code><code class="descname">gf_trace_map</code><span class="sig-paren">(</span><em>a</em>, <em>b</em>, <em>c</em>, <em>n</em>, <em>f</em>, <em>p</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/galoistools.html#gf_trace_map"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_trace_map" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute polynomial trace map in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]/(f)</span></code>.</p>
@@ -2582,7 +2456,7 @@ like iterated Frobenius algorithm, for large degrees.</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#gathen1992frobenious" id="id24">[vzGS92]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#gathen1992frobenious" id="id23">[vzGS92]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -2817,7 +2691,7 @@ can copy the polynomial. This method makes a shallow copy.</p>
 <dl class="method">
 <dt id="diofant.polys.rings.PolyElement.div">
 <code class="descname">div</code><span class="sig-paren">(</span><em>fv</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/rings.html#PolyElement.div"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rings.PolyElement.div" title="Permalink to this definition">¶</a></dt>
-<dd><p>Division algorithm, see <a class="reference internal" href="../sources.html#cox2015ideals" id="id25">[CLOShea15]</a>, p. 64.</p>
+<dd><p>Division algorithm, see <a class="reference internal" href="../sources.html#cox2015ideals" id="id24">[CLOShea15]</a>, p. 64.</p>
 <dl class="simple">
 <dt>fv array of polynomials</dt><dd><p>return qv, r such that
 self = sum(fv[i]*qv[i]) + r</p>
@@ -3113,7 +2987,7 @@ exceedingly, but the computation of the primitive parts requires
 extra processing effort. Besides, the method only works with fraction fields
 of unique factorization domains, excluding, for example, the general number
 fields.</p>
-<p>Collins <a class="reference internal" href="../sources.html#collins1967subr" id="id26">[Col67]</a> realized that the so-called <em>subresultant polynomials</em>
+<p>Collins <a class="reference internal" href="../sources.html#collins1967subr" id="id25">[Col67]</a> realized that the so-called <em>subresultant polynomials</em>
 of a pair of polynomials also form a generalized remainder sequence.
 The coefficients of these polynomials
 are expressible as determinants in the coefficients of the given
@@ -3192,12 +3066,12 @@ formulas</p>
 \[\gamma_i f_i = \mathrm{rem}(f_{i-2},f_{i-1})\]</div>
 <p>in terms of the leading coefficients of <span class="math notranslate nohighlight">\(f_1,\ldots,f_{i-1}\)</span>, working
 in the field <span class="math notranslate nohighlight">\(K\)</span>.</p>
-<p>Brown and Traub <a class="reference internal" href="../sources.html#brown1971subres" id="id27">[BT71]</a> later developed a recursive procedure
+<p>Brown and Traub <a class="reference internal" href="../sources.html#brown1971subres" id="id26">[BT71]</a> later developed a recursive procedure
 for computing the coefficients <span class="math notranslate nohighlight">\(\gamma_i\)</span>. Their algorithm deals with elements
 of the domain <span class="math notranslate nohighlight">\(A\)</span> exclusively (assuming <span class="math notranslate nohighlight">\(f,g\in A[X]\)</span>). However, in the
 abnormal case there was a problem, a division in <span class="math notranslate nohighlight">\(A\)</span>
 which could only be conjectured to be exact.</p>
-<p>This was subsequently justified by Brown <a class="reference internal" href="../sources.html#brown1978prs" id="id28">[Bro78]</a> who showed that
+<p>This was subsequently justified by Brown <a class="reference internal" href="../sources.html#brown1978prs" id="id27">[Bro78]</a> who showed that
 the result of the division is, in fact, a scalar subresultant.
 More specifically, the constant appearing in the computation of <span class="math notranslate nohighlight">\(f_i\)</span> is
 <span class="math notranslate nohighlight">\(s_{n_{i-2}}(f,g)\)</span> (Theorem 3).
@@ -3419,7 +3293,7 @@ and <code class="docutils literal notranslate"><span class="pre">cfg</span> <spa
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#liao1995heuristic" id="id29">[LF95]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#liao1995heuristic" id="id28">[LF95]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -3568,7 +3442,7 @@ is used to recover the multiplicities of factors.</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#gathen1999modern" id="id30">[vzGG99]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#gathen1999modern" id="id29">[vzGG99]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -3600,8 +3474,8 @@ factors. For this purpose a parallel Hensel lifting procedure is used.</p>
 (when an integer) or (for testing purposes) can be a sequence of numbers.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#wang1978improved" id="id31">[Wan78]</a></p></li>
-<li><p><a class="reference internal" href="../sources.html#geddes1992algorithms" id="id32">[GCL92]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#wang1978improved" id="id30">[Wan78]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#geddes1992algorithms" id="id31">[GCL92]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -3661,7 +3535,7 @@ which makes this method much faster that any other direct factorization
 approach (e.g. Zassenhaus’s).</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#mathworld-cyclotomic-poly" id="id33">[Mat]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#mathworld-cyclotomic-poly" id="id32">[Mat]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -3709,7 +3583,7 @@ using cyclotomic decomposition to speedup computations. To
 disable this behaviour set cyclotomic=False.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#gathen1999modern" id="id34">[vzGG99]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#gathen1999modern" id="id33">[vzGG99]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -3738,7 +3612,7 @@ over <span class="math notranslate nohighlight">\(Z[x]\)</span> satisfying:</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#gathen1999modern" id="id35">[vzGG99]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#gathen1999modern" id="id34">[vzGG99]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -3766,7 +3640,7 @@ and <span class="math notranslate nohighlight">\(t\)</span> such that:</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#gathen1999modern" id="id36">[vzGG99]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#gathen1999modern" id="id35">[vzGG99]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -3814,15 +3688,15 @@ variable at a time, provided that the ideal is zero-dimensional
 (finite number of solutions).</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#bose03" id="id37">[NKBG03]</a></p></li>
-<li><p><a class="reference internal" href="../sources.html#giovini1991sugar" id="id38">[GMN+91]</a></p></li>
-<li><p><a class="reference internal" href="../sources.html#ajwa95groebner" id="id39">[ALW95]</a></p></li>
-<li><p><a class="reference internal" href="../sources.html#cox2015ideals" id="id40">[CLOShea15]</a></p></li>
-<li><p><a class="reference internal" href="../sources.html#beckerweispfenning93" id="id41">[BW93]</a>, page 232</p></li>
+<li><p><a class="reference internal" href="../sources.html#bose03" id="id36">[NKBG03]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#giovini1991sugar" id="id37">[GMN+91]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#ajwa95groebner" id="id38">[ALW95]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#cox2015ideals" id="id39">[CLOShea15]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#beckerweispfenning93" id="id40">[BW93]</a>, page 232</p></li>
 </ul>
 <p class="rubric">Notes</p>
 <p>Used an improved version of Buchberger’s algorithm
-as presented in <a class="reference internal" href="../sources.html#beckerweispfenning93" id="id42">[BW93]</a>.</p>
+as presented in <a class="reference internal" href="../sources.html#beckerweispfenning93" id="id41">[BW93]</a>.</p>
 </dd></dl>
 
 <dl class="function">
@@ -3893,8 +3767,8 @@ the current basis.</p>
 <p>Once a Gröbner basis has been found, it gets reduced.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#sunwang2010f5" id="id43">[SW10]</a></p></li>
-<li><p><a class="reference internal" href="../sources.html#beckerweispfenning93" id="id44">[BW93]</a>, pp. 203, 216.</p></li>
+<li><p><a class="reference internal" href="../sources.html#sunwang2010f5" id="id42">[SW10]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#beckerweispfenning93" id="id43">[BW93]</a>, pp. 203, 216.</p></li>
 </ul>
 </dd></dl>
 
@@ -3925,7 +3799,7 @@ of <span class="math notranslate nohighlight">\(t*f\)</span> and <span class="ma
 then filtering out the solution that doesn’t contain <span class="math notranslate nohighlight">\(t\)</span>.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#cox2015ideals" id="id45">[CLOShea15]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#cox2015ideals" id="id44">[CLOShea15]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -4001,7 +3875,7 @@ and number of the maximum of f and g, w.r.t. lbp_cmp.</p>
 and computes a reduced Gröbner basis for them.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#beckerweispfenning93" id="id46">[BW93]</a>, page 216.</p></li>
+<li><p><a class="reference internal" href="../sources.html#beckerweispfenning93" id="id45">[BW93]</a>, page 216.</p></li>
 </ul>
 </dd></dl>
 
@@ -4062,7 +3936,7 @@ ideal w.r.t. <code class="docutils literal notranslate"><span class="pre">O_from
 w.r.t. <code class="docutils literal notranslate"><span class="pre">O_to</span></code>.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#faugere1993groebner" id="id47">[FaugereGLM93]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#faugere1993groebner" id="id46">[FaugereGLM93]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -4081,7 +3955,7 @@ using Gröbner bases</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#adams1994intro" id="id48">[AL94]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#adams1994intro" id="id47">[AL94]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -4134,8 +4008,8 @@ candidates which are very likely the desired GCD.</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#monagan2000brown" id="id49">[MW00]</a></p></li>
-<li><p><a class="reference internal" href="../sources.html#brown1971gcd" id="id50">[Bro71]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#monagan2000brown" id="id48">[MW00]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#brown1971gcd" id="id49">[Bro71]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -4206,7 +4080,7 @@ called recursively.</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#monagan2004algebraic" id="id51">[MvH04]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#monagan2004algebraic" id="id50">[MvH04]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -4234,7 +4108,7 @@ is given, <span class="math notranslate nohighlight">\(\mathbb Z_p\)</span> is c
 </dl>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#vanhoeij2002modgcd" id="id52">[vHM02]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#vanhoeij2002modgcd" id="id51">[vHM02]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -4272,7 +4146,7 @@ the input polynomials as a side effect.</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../sources.html#liao1995heuristic" id="id53">[LF95]</a></p></li>
+<li><p><a class="reference internal" href="../sources.html#liao1995heuristic" id="id52">[LF95]</a></p></li>
 </ul>
 </dd></dl>
 

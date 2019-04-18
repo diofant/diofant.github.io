@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Number Theory &mdash; Diofant 0.10.1.dev316+gc3b9579 documentation</title>
+  <title>Number Theory &mdash; Diofant 0.10.1.dev314+g3ac2fee documentation</title>
   
 
   
@@ -1341,11 +1341,11 @@ that divides n.</p>
 
 <span class="target" id="module-diofant.ntheory.modular"></span><dl class="function">
 <dt id="diofant.ntheory.modular.crt">
-<code class="descclassname">diofant.ntheory.modular.</code><code class="descname">crt</code><span class="sig-paren">(</span><em>m</em>, <em>v</em>, <em>symmetric=False</em>, <em>check=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/modular.html#crt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.modular.crt" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">diofant.ntheory.modular.</code><code class="descname">crt</code><span class="sig-paren">(</span><em>M</em>, <em>U</em>, <em>symmetric=False</em>, <em>check=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/modular.html#crt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.modular.crt" title="Permalink to this definition">¶</a></dt>
 <dd><p>Chinese Remainder Theorem.</p>
-<p>The moduli in m are assumed to be pairwise coprime.  The output
-is then an integer f, such that f = v_i mod m_i for each pair out
-of v and m. If <code class="docutils literal notranslate"><span class="pre">symmetric</span></code> is False a positive integer will be
+<p>The moduli in M are assumed to be pairwise coprime.  The output
+is then an integer f, such that f = u_i mod m_i for each pair out
+of U and M. If <code class="docutils literal notranslate"><span class="pre">symmetric</span></code> is False a positive integer will be
 returned, else |f| will be less than or equal to the LCM of the
 moduli, and thus f may be negative.</p>
 <p>If the moduli are not co-prime the correct result will be returned
@@ -1353,8 +1353,7 @@ if/when the test of the result is found to be incorrect. This result
 will be None if there is no solution.</p>
 <p>The keyword <code class="docutils literal notranslate"><span class="pre">check</span></code> can be set to False if it is known that the moduli
 are coprime.</p>
-<p>As an example consider a set of residues <code class="docutils literal notranslate"><span class="pre">U</span> <span class="pre">=</span> <span class="pre">[49,</span> <span class="pre">76,</span> <span class="pre">65]</span></code>
-and a set of moduli <code class="docutils literal notranslate"><span class="pre">M</span> <span class="pre">=</span> <span class="pre">[99,</span> <span class="pre">97,</span> <span class="pre">95]</span></code>. Then we have:</p>
+<p class="rubric">Examples</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">crt</span><span class="p">([</span><span class="mi">99</span><span class="p">,</span> <span class="mi">97</span><span class="p">,</span> <span class="mi">95</span><span class="p">],</span> <span class="p">[</span><span class="mi">49</span><span class="p">,</span> <span class="mi">76</span><span class="p">,</span> <span class="mi">65</span><span class="p">])</span>
 <span class="go">(639985, 912285)</span>
 </pre></div>
@@ -1376,25 +1375,20 @@ if you use <code class="docutils literal notranslate"><span class="pre">check=Fa
 <span class="go">(5, 6)</span>
 </pre></div>
 </div>
-<p>Note: the order of gf_crt’s arguments is reversed relative to crt,
-and that solve_congruence takes residue, modulus pairs.</p>
-<p>Programmer’s note: rather than checking that all pairs of moduli share
+<p class="rubric">Notes</p>
+<p>Rather than checking that all pairs of moduli share
 no GCD (an O(n**2) test) and rather than factoring all moduli and seeing
 that there is no factor in common, a check that the result gives the
 indicated residuals is performed – an O(n) operation.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p><a class="reference internal" href="#diofant.ntheory.modular.solve_congruence" title="diofant.ntheory.modular.solve_congruence"><code class="xref py py-func docutils literal notranslate"><span class="pre">solve_congruence()</span></code></a></p>
-<dl class="simple">
-<dt><a class="reference internal" href="../internals/polys.html#diofant.polys.galoistools.gf_crt" title="diofant.polys.galoistools.gf_crt"><code class="xref py py-func docutils literal notranslate"><span class="pre">diofant.polys.galoistools.gf_crt()</span></code></a></dt><dd><p>low level crt routine used by this routine</p>
-</dd>
-</dl>
 </div>
 </dd></dl>
 
 <dl class="function">
 <dt id="diofant.ntheory.modular.crt1">
-<code class="descclassname">diofant.ntheory.modular.</code><code class="descname">crt1</code><span class="sig-paren">(</span><em>m</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/modular.html#crt1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.modular.crt1" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">diofant.ntheory.modular.</code><code class="descname">crt1</code><span class="sig-paren">(</span><em>M</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/modular.html#crt1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.modular.crt1" title="Permalink to this definition">¶</a></dt>
 <dd><p>First part of Chinese Remainder Theorem, for multiple application.</p>
 <p class="rubric">Examples</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">crt1</span><span class="p">([</span><span class="mi">18</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
@@ -1405,7 +1399,7 @@ indicated residuals is performed – an O(n) operation.</p>
 
 <dl class="function">
 <dt id="diofant.ntheory.modular.crt2">
-<code class="descclassname">diofant.ntheory.modular.</code><code class="descname">crt2</code><span class="sig-paren">(</span><em>m</em>, <em>v</em>, <em>mm</em>, <em>e</em>, <em>s</em>, <em>symmetric=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/modular.html#crt2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.modular.crt2" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">diofant.ntheory.modular.</code><code class="descname">crt2</code><span class="sig-paren">(</span><em>M</em>, <em>U</em>, <em>p</em>, <em>E</em>, <em>S</em>, <em>symmetric=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/ntheory/modular.html#crt2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.ntheory.modular.crt2" title="Permalink to this definition">¶</a></dt>
 <dd><p>Second part of Chinese Remainder Theorem, for multiple application.</p>
 <p class="rubric">Examples</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mm</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="n">crt1</span><span class="p">([</span><span class="mi">18</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>

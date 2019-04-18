@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.ntheory.residue_ntheory &mdash; Diofant 0.10.1.dev316+gc3b9579 documentation</title>
+  <title>diofant.ntheory.residue_ntheory &mdash; Diofant 0.10.1.dev314+g3ac2fee documentation</title>
   
 
   
@@ -160,7 +160,7 @@
 <span class="kn">from</span> <span class="nn">..core.power</span> <span class="k">import</span> <span class="n">isqrt</span>
 <span class="kn">from</span> <span class="nn">..utilities.iterables</span> <span class="k">import</span> <span class="n">cantor_product</span>
 <span class="kn">from</span> <span class="nn">.factor_</span> <span class="k">import</span> <span class="n">factorint</span><span class="p">,</span> <span class="n">multiplicity</span><span class="p">,</span> <span class="n">totient</span><span class="p">,</span> <span class="n">trailing</span>
-<span class="kn">from</span> <span class="nn">.modular</span> <span class="k">import</span> <span class="n">crt</span>
+<span class="kn">from</span> <span class="nn">.modular</span> <span class="k">import</span> <span class="n">crt</span><span class="p">,</span> <span class="n">crt1</span><span class="p">,</span> <span class="n">crt2</span>
 <span class="kn">from</span> <span class="nn">.primetest</span> <span class="k">import</span> <span class="n">isprime</span>
 
 
@@ -425,7 +425,6 @@
 <span class="sd">    [21, 22]</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">..polys.galoistools</span> <span class="k">import</span> <span class="n">gf_crt1</span><span class="p">,</span> <span class="n">gf_crt2</span>
     <span class="kn">from</span> <span class="nn">..domains</span> <span class="k">import</span> <span class="n">ZZ</span>
     <span class="n">a</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">as_int</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="nb">abs</span><span class="p">(</span><span class="n">as_int</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>
     <span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
@@ -456,14 +455,14 @@
                     <span class="k">return</span>
             <span class="n">v</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rx</span><span class="p">)</span>
             <span class="n">pv</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">px</span><span class="o">**</span><span class="n">ex</span><span class="p">)</span>
-        <span class="n">mm</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="n">gf_crt1</span><span class="p">(</span><span class="n">pv</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
+        <span class="n">mm</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="n">crt1</span><span class="p">(</span><span class="n">pv</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">domain</span> <span class="ow">is</span> <span class="n">ZZ</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">vx</span> <span class="ow">in</span> <span class="n">cantor_product</span><span class="p">(</span><span class="o">*</span><span class="n">v</span><span class="p">):</span>
-                <span class="n">r</span> <span class="o">=</span> <span class="n">gf_crt2</span><span class="p">(</span><span class="n">vx</span><span class="p">,</span> <span class="n">pv</span><span class="p">,</span> <span class="n">mm</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
+                <span class="n">r</span> <span class="o">=</span> <span class="n">crt2</span><span class="p">(</span><span class="n">pv</span><span class="p">,</span> <span class="n">vx</span><span class="p">,</span> <span class="n">mm</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">s</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
                 <span class="k">yield</span> <span class="n">r</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">vx</span> <span class="ow">in</span> <span class="n">cantor_product</span><span class="p">(</span><span class="o">*</span><span class="n">v</span><span class="p">):</span>
-                <span class="n">r</span> <span class="o">=</span> <span class="n">gf_crt2</span><span class="p">(</span><span class="n">vx</span><span class="p">,</span> <span class="n">pv</span><span class="p">,</span> <span class="n">mm</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
+                <span class="n">r</span> <span class="o">=</span> <span class="n">crt2</span><span class="p">(</span><span class="n">pv</span><span class="p">,</span> <span class="n">vx</span><span class="p">,</span> <span class="n">mm</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">s</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
                 <span class="k">yield</span> <span class="n">domain</span><span class="p">(</span><span class="n">r</span><span class="p">)</span></div>
 
 
