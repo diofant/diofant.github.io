@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.densetools &mdash; Diofant 0.10.1.dev314+g3ac2fee documentation</title>
+  <title>diofant.polys.densetools &mdash; Diofant 0.10.1.dev321+gbfd2d7d documentation</title>
   
 
   
@@ -154,58 +154,11 @@
 
 <span class="kn">from</span> <span class="nn">.densearith</span> <span class="k">import</span> <span class="p">(</span><span class="n">dmp_add</span><span class="p">,</span> <span class="n">dmp_add_term</span><span class="p">,</span> <span class="n">dmp_div</span><span class="p">,</span> <span class="n">dmp_exquo_ground</span><span class="p">,</span>
                          <span class="n">dmp_mul</span><span class="p">,</span> <span class="n">dmp_mul_ground</span><span class="p">,</span> <span class="n">dmp_neg</span><span class="p">,</span> <span class="n">dmp_quo_ground</span><span class="p">,</span>
-                         <span class="n">dmp_rem</span><span class="p">,</span> <span class="n">dmp_sub</span><span class="p">,</span> <span class="n">dup_add</span><span class="p">,</span> <span class="n">dup_mul</span><span class="p">)</span>
+                         <span class="n">dmp_sub</span><span class="p">,</span> <span class="n">dup_add</span><span class="p">,</span> <span class="n">dup_mul</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">.densebasic</span> <span class="k">import</span> <span class="p">(</span><span class="n">dmp_convert</span><span class="p">,</span> <span class="n">dmp_degree_in</span><span class="p">,</span> <span class="n">dmp_from_dict</span><span class="p">,</span> <span class="n">dmp_ground</span><span class="p">,</span>
                          <span class="n">dmp_ground_LC</span><span class="p">,</span> <span class="n">dmp_LC</span><span class="p">,</span> <span class="n">dmp_strip</span><span class="p">,</span> <span class="n">dmp_TC</span><span class="p">,</span> <span class="n">dmp_to_dict</span><span class="p">,</span>
-                         <span class="n">dmp_zero</span><span class="p">,</span> <span class="n">dmp_zero_p</span><span class="p">,</span> <span class="n">dmp_zeros</span><span class="p">)</span>
+                         <span class="n">dmp_zero</span><span class="p">,</span> <span class="n">dmp_zero_p</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">.polyerrors</span> <span class="k">import</span> <span class="n">DomainError</span>
-
-
-<div class="viewcode-block" id="dmp_integrate_in"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.densetools.dmp_integrate_in">[docs]</a><span class="k">def</span> <span class="nf">dmp_integrate_in</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Compute the indefinite integral of ``f`` in ``x_j`` in ``K[X]``.</span>
-
-<span class="sd">    Examples</span>
-<span class="sd">    ========</span>
-
-<span class="sd">    &gt;&gt;&gt; R, x, y = ring(&quot;x y&quot;, QQ)</span>
-
-<span class="sd">    &gt;&gt;&gt; R.dmp_integrate_in(x + 2*y, 1, 0)</span>
-<span class="sd">    1/2*x**2 + 2*x*y</span>
-<span class="sd">    &gt;&gt;&gt; R.dmp_integrate_in(x + 2*y, 1, 1)</span>
-<span class="sd">    x*y + y**2</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="n">u</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s2">&quot;0 &lt;= j &lt;= </span><span class="si">%s</span><span class="s2"> expected, got </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span>
-
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">j</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">m</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">dmp_zero_p</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">f</span>
-
-        <span class="n">v</span> <span class="o">=</span> <span class="n">u</span> <span class="o">-</span> <span class="mi">1</span>
-        <span class="n">g</span> <span class="o">=</span> <span class="n">dmp_zeros</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span> <span class="k">if</span> <span class="n">u</span> <span class="k">else</span> <span class="p">[</span><span class="n">K</span><span class="o">.</span><span class="n">zero</span><span class="p">]</span><span class="o">*</span><span class="n">m</span>
-
-        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">f</span><span class="p">)):</span>
-            <span class="n">n</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
-
-            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
-                <span class="n">n</span> <span class="o">*=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span>
-
-            <span class="n">t</span> <span class="o">=</span> <span class="n">dmp_quo_ground</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">K</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">v</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span> <span class="k">if</span> <span class="n">u</span> <span class="k">else</span> <span class="n">K</span><span class="o">.</span><span class="n">exquo</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">K</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
-            <span class="n">g</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="n">g</span>
-
-    <span class="k">def</span> <span class="nf">integrate_in</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">dmp_integrate_in</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-
-        <span class="n">v</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="n">u</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
-
-        <span class="k">return</span> <span class="n">dmp_strip</span><span class="p">([</span><span class="n">integrate_in</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">f</span><span class="p">],</span> <span class="n">u</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">integrate_in</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="dmp_diff_in"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.densetools.dmp_diff_in">[docs]</a><span class="k">def</span> <span class="nf">dmp_diff_in</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
@@ -419,25 +372,6 @@
     <span class="k">return</span> <span class="n">dmp_strip</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="dmp_trunc"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.densetools.dmp_trunc">[docs]</a><span class="k">def</span> <span class="nf">dmp_trunc</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Reduce a ``K[X]`` polynomial modulo a polynomial ``p`` in ``K[Y]``.</span>
-
-<span class="sd">    Examples</span>
-<span class="sd">    ========</span>
-
-<span class="sd">    &gt;&gt;&gt; R, x, y = ring(&quot;x y&quot;, ZZ)</span>
-
-<span class="sd">    &gt;&gt;&gt; f = 3*x**2*y + 8*x**2 + 5*x*y + 6*x + 2*y + 3</span>
-<span class="sd">    &gt;&gt;&gt; g = (y - 1).drop(x)</span>
-
-<span class="sd">    &gt;&gt;&gt; R.dmp_trunc(f, g)</span>
-<span class="sd">    11*x**2 + 11*x + 5</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">dmp_strip</span><span class="p">([</span><span class="n">dmp_rem</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">u</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">f</span><span class="p">],</span> <span class="n">u</span><span class="p">)</span></div>
-
-
 <div class="viewcode-block" id="dmp_ground_trunc"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.densetools.dmp_ground_trunc">[docs]</a><span class="k">def</span> <span class="nf">dmp_ground_trunc</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Reduce a ``K[X]`` polynomial modulo a constant ``p`` in ``K``.</span>
@@ -565,31 +499,6 @@
         <span class="n">f</span> <span class="o">=</span> <span class="n">dmp_quo_ground</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">cont</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">cont</span><span class="p">,</span> <span class="n">f</span></div>
-
-
-<div class="viewcode-block" id="dmp_ground_extract"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.densetools.dmp_ground_extract">[docs]</a><span class="k">def</span> <span class="nf">dmp_ground_extract</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Extract common content from a pair of polynomials in ``K[X]``.</span>
-
-<span class="sd">    Examples</span>
-<span class="sd">    ========</span>
-
-<span class="sd">    &gt;&gt;&gt; R, x, y = ring(&quot;x y&quot;, ZZ)</span>
-
-<span class="sd">    &gt;&gt;&gt; R.dmp_ground_extract(6*x*y + 12*x + 18, 4*x*y + 8*x + 12)</span>
-<span class="sd">    (2, 3*x*y + 6*x + 9, 2*x*y + 4*x + 6)</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">fc</span> <span class="o">=</span> <span class="n">dmp_ground_content</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-    <span class="n">gc</span> <span class="o">=</span> <span class="n">dmp_ground_content</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-
-    <span class="n">gcd</span> <span class="o">=</span> <span class="n">K</span><span class="o">.</span><span class="n">gcd</span><span class="p">(</span><span class="n">fc</span><span class="p">,</span> <span class="n">gc</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">gcd</span> <span class="o">!=</span> <span class="n">K</span><span class="o">.</span><span class="n">one</span><span class="p">:</span>
-        <span class="n">f</span> <span class="o">=</span> <span class="n">dmp_quo_ground</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">gcd</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-        <span class="n">g</span> <span class="o">=</span> <span class="n">dmp_quo_ground</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">gcd</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">gcd</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">g</span></div>
 
 
 <div class="viewcode-block" id="dup_real_imag"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.densetools.dup_real_imag">[docs]</a><span class="k">def</span> <span class="nf">dup_real_imag</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Internals of the Polynomial Manipulation Module &mdash; Diofant 0.10.1.dev314+g3ac2fee documentation</title>
+  <title>Internals of the Polynomial Manipulation Module &mdash; Diofant 0.10.1.dev321+gbfd2d7d documentation</title>
   
 
   
@@ -276,24 +276,16 @@ may be slightly more efficient.)</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="diofant.polys.densebasic.dmp_copy">
-<code class="descclassname">diofant.polys.densebasic.</code><code class="descname">dmp_copy</code><span class="sig-paren">(</span><em>f</em>, <em>u</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/densebasic.html#dmp_copy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densebasic.dmp_copy" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create a new copy of a polynomial <code class="docutils literal notranslate"><span class="pre">f</span></code> in <code class="docutils literal notranslate"><span class="pre">K[X]</span></code>.</p>
+<dt id="diofant.polys.densebasic.dmp_deflate">
+<code class="descclassname">diofant.polys.densebasic.</code><code class="descname">dmp_deflate</code><span class="sig-paren">(</span><em>polys</em>, <em>u</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/densebasic.html#dmp_deflate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densebasic.dmp_deflate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Map <code class="docutils literal notranslate"><span class="pre">x_i**m_i</span></code> to <code class="docutils literal notranslate"><span class="pre">y_i</span></code> in a set of polynomials in <code class="docutils literal notranslate"><span class="pre">K[X]</span></code>.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dmp_copy</span><span class="p">([[</span><span class="n">ZZ</span><span class="p">(</span><span class="mi">1</span><span class="p">)],</span> <span class="p">[</span><span class="n">ZZ</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">2</span><span class="p">)]],</span> <span class="mi">1</span><span class="p">)</span>
-<span class="go">[[1], [1, 2]]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="p">[[</span><span class="n">ZZ</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">2</span><span class="p">)],</span> <span class="p">[],</span> <span class="p">[</span><span class="n">ZZ</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">4</span><span class="p">)]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="p">[[</span><span class="n">ZZ</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">2</span><span class="p">)],</span> <span class="p">[],</span> <span class="p">[</span><span class="n">ZZ</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">4</span><span class="p">)]]</span>
 </pre></div>
 </div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.polys.densebasic.dmp_deflate">
-<code class="descclassname">diofant.polys.densebasic.</code><code class="descname">dmp_deflate</code><span class="sig-paren">(</span><em>f</em>, <em>u</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/densebasic.html#dmp_deflate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densebasic.dmp_deflate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Map <code class="docutils literal notranslate"><span class="pre">x_i**m_i</span></code> to <code class="docutils literal notranslate"><span class="pre">y_i</span></code> in a polynomial in <code class="docutils literal notranslate"><span class="pre">K[X]</span></code>.</p>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dmp_deflate</span><span class="p">([[</span><span class="n">ZZ</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">2</span><span class="p">)],</span> <span class="p">[],</span>
-<span class="gp">... </span>             <span class="p">[</span><span class="n">ZZ</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">4</span><span class="p">)]],</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">((2, 3), [[1, 2], [3, 4]])</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dmp_deflate</span><span class="p">((</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
+<span class="go">((2, 1), ([[1, 0, 0, 2], [3, 0, 0, 4]], [[1, 0, 2], [3, 0, 4]]))</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -402,17 +394,6 @@ may be slightly more efficient.)</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="diofant.polys.densebasic.dmp_ground_nth">
-<code class="descclassname">diofant.polys.densebasic.</code><code class="descname">dmp_ground_nth</code><span class="sig-paren">(</span><em>f</em>, <em>N</em>, <em>u</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/densebasic.html#dmp_ground_nth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densebasic.dmp_ground_nth" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the ground <code class="docutils literal notranslate"><span class="pre">n</span></code>-th coefficient of <code class="docutils literal notranslate"><span class="pre">f</span></code> in <code class="docutils literal notranslate"><span class="pre">K[x]</span></code>.</p>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dmp_ground_nth</span><span class="p">([[</span><span class="n">ZZ</span><span class="p">(</span><span class="mi">1</span><span class="p">)],</span> <span class="p">[</span><span class="n">ZZ</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">3</span><span class="p">)]],</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">2</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
 <dt id="diofant.polys.densebasic.dmp_ground_p">
 <code class="descclassname">diofant.polys.densebasic.</code><code class="descname">dmp_ground_p</code><span class="sig-paren">(</span><em>f</em>, <em>c</em>, <em>u</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/densebasic.html#dmp_ground_p"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densebasic.dmp_ground_p" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return True if <code class="docutils literal notranslate"><span class="pre">f</span></code> is constant in <code class="docutils literal notranslate"><span class="pre">K[X]</span></code>.</p>
@@ -459,34 +440,6 @@ may be slightly more efficient.)</p>
 <span class="go">([[[1]], [[1], [2]]], 2)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dmp_inject</span><span class="p">([</span><span class="n">R</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">2</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">front</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go">([[[1]], [[1, 2]]], 2)</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.polys.densebasic.dmp_list_terms">
-<code class="descclassname">diofant.polys.densebasic.</code><code class="descname">dmp_list_terms</code><span class="sig-paren">(</span><em>f</em>, <em>u</em>, <em>K</em>, <em>order=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/densebasic.html#dmp_list_terms"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densebasic.dmp_list_terms" title="Permalink to this definition">¶</a></dt>
-<dd><p>List all non-zero terms from <code class="docutils literal notranslate"><span class="pre">f</span></code> in the given order <code class="docutils literal notranslate"><span class="pre">order</span></code>.</p>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dmp_list_terms</span><span class="p">([[</span><span class="n">ZZ</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">1</span><span class="p">)],</span> <span class="p">[</span><span class="n">ZZ</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">3</span><span class="p">)]],</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">[((1, 1), 1), ((1, 0), 1), ((0, 1), 2), ((0, 0), 3)]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dmp_list_terms</span><span class="p">([[</span><span class="n">ZZ</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">1</span><span class="p">)],</span> <span class="p">[</span><span class="n">ZZ</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">3</span><span class="p">)]],</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;grevlex&#39;</span><span class="p">)</span>
-<span class="go">[((1, 1), 1), ((1, 0), 1), ((0, 1), 2), ((0, 0), 3)]</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.polys.densebasic.dmp_multi_deflate">
-<code class="descclassname">diofant.polys.densebasic.</code><code class="descname">dmp_multi_deflate</code><span class="sig-paren">(</span><em>polys</em>, <em>u</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/densebasic.html#dmp_multi_deflate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densebasic.dmp_multi_deflate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Map <code class="docutils literal notranslate"><span class="pre">x_i**m_i</span></code> to <code class="docutils literal notranslate"><span class="pre">y_i</span></code> in a set of polynomials in <code class="docutils literal notranslate"><span class="pre">K[X]</span></code>.</p>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="p">[[</span><span class="n">ZZ</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">2</span><span class="p">)],</span> <span class="p">[],</span> <span class="p">[</span><span class="n">ZZ</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">4</span><span class="p">)]]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="p">[[</span><span class="n">ZZ</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">2</span><span class="p">)],</span> <span class="p">[],</span> <span class="p">[</span><span class="n">ZZ</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">4</span><span class="p">)]]</span>
-</pre></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dmp_multi_deflate</span><span class="p">((</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">((2, 1), ([[1, 0, 0, 2], [3, 0, 0, 4]], [[1, 0, 2], [3, 0, 4]]))</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -619,27 +572,6 @@ may be slightly more efficient.)</p>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dmp_to_tuple</span><span class="p">([[</span><span class="n">ZZ</span><span class="p">(</span><span class="mi">1</span><span class="p">)],</span> <span class="p">[</span><span class="n">ZZ</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">2</span><span class="p">)]],</span> <span class="mi">1</span><span class="p">)</span>
 <span class="go">((1,), (1, 2))</span>
-</pre></div>
-</div>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<p><a class="reference internal" href="#diofant.polys.densebasic.dmp_copy" title="diofant.polys.densebasic.dmp_copy"><code class="xref py py-func docutils literal notranslate"><span class="pre">dmp_copy()</span></code></a></p>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.polys.densebasic.dmp_validate">
-<code class="descclassname">diofant.polys.densebasic.</code><code class="descname">dmp_validate</code><span class="sig-paren">(</span><em>f</em>, <em>K=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/densebasic.html#dmp_validate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densebasic.dmp_validate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the number of levels in <code class="docutils literal notranslate"><span class="pre">f</span></code> and recursively strip it.</p>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dmp_validate</span><span class="p">([[],</span> <span class="p">[</span><span class="n">ZZ</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">2</span><span class="p">)],</span> <span class="p">[</span><span class="n">ZZ</span><span class="p">(</span><span class="mi">1</span><span class="p">)]])</span>
-<span class="go">([[1, 2], [1]], 1)</span>
-</pre></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dmp_validate</span><span class="p">([[</span><span class="n">ZZ</span><span class="p">(</span><span class="mi">1</span><span class="p">)],</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">1</span><span class="p">)])</span>
-<span class="gt">Traceback (most recent call last):</span>
-<span class="c">...</span>
-<span class="gr">ValueError</span>: <span class="n">invalid data structure for a multivariate polynomial</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -812,31 +744,6 @@ the given percentage of elements will be non-zero.</p>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="o">.</span><span class="n">dmp_expand</span><span class="p">([</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
 <span class="go">x**3 + x**2 + x*y**2 + y**2</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.polys.densearith.dmp_exquo">
-<code class="descclassname">diofant.polys.densearith.</code><code class="descname">dmp_exquo</code><span class="sig-paren">(</span><em>f</em>, <em>g</em>, <em>u</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/densearith.html#dmp_exquo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densearith.dmp_exquo" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return polynomial quotient in <code class="docutils literal notranslate"><span class="pre">K[X]</span></code>.</p>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s2">&quot;x y&quot;</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">h</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">2</span>
-</pre></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="o">.</span><span class="n">dmp_exquo</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
-<span class="go">x</span>
-</pre></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="o">.</span><span class="n">dmp_exquo</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
-<span class="gt">Traceback (most recent call last):</span>
-<span class="c">...</span>
-<span class="gr">ExactQuotientFailed</span>: <span class="n">[[2], [2]] does not divide [[1], [1, 0], []]</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1042,20 +949,6 @@ the given percentage of elements will be non-zero.</p>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="o">.</span><span class="n">dmp_sub_mul</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>
 <span class="go">-2*x + y</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.polys.densearith.dmp_sub_term">
-<code class="descclassname">diofant.polys.densearith.</code><code class="descname">dmp_sub_term</code><span class="sig-paren">(</span><em>f</em>, <em>c</em>, <em>i</em>, <em>u</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/densearith.html#dmp_sub_term"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densearith.dmp_sub_term" title="Permalink to this definition">¶</a></dt>
-<dd><p>Subtract <code class="docutils literal notranslate"><span class="pre">c(x_2..x_u)*x_0**i</span></code> from <code class="docutils literal notranslate"><span class="pre">f</span></code> in <code class="docutils literal notranslate"><span class="pre">K[X]</span></code>.</p>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s2">&quot;x y&quot;</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="o">.</span><span class="n">dmp_sub_term</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="go">x*y + 1</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1319,20 +1212,6 @@ the given percentage of elements will be non-zero.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="diofant.polys.densetools.dmp_ground_extract">
-<code class="descclassname">diofant.polys.densetools.</code><code class="descname">dmp_ground_extract</code><span class="sig-paren">(</span><em>f</em>, <em>g</em>, <em>u</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/densetools.html#dmp_ground_extract"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densetools.dmp_ground_extract" title="Permalink to this definition">¶</a></dt>
-<dd><p>Extract common content from a pair of polynomials in <code class="docutils literal notranslate"><span class="pre">K[X]</span></code>.</p>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s2">&quot;x y&quot;</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="o">.</span><span class="n">dmp_ground_extract</span><span class="p">(</span><span class="mi">6</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="mi">12</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="mi">8</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">12</span><span class="p">)</span>
-<span class="go">(2, 3*x*y + 6*x + 9, 2*x*y + 4*x + 6)</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
 <dt id="diofant.polys.densetools.dmp_ground_monic">
 <code class="descclassname">diofant.polys.densetools.</code><code class="descname">dmp_ground_monic</code><span class="sig-paren">(</span><em>f</em>, <em>u</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/densetools.html#dmp_ground_monic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densetools.dmp_ground_monic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Divide all coefficients by <code class="docutils literal notranslate"><span class="pre">LC(f)</span></code> in <code class="docutils literal notranslate"><span class="pre">K[X]</span></code>.</p>
@@ -1391,40 +1270,6 @@ the given percentage of elements will be non-zero.</p>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="o">.</span><span class="n">dmp_ground_trunc</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
 <span class="go">-x**2 - x*y - y</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.polys.densetools.dmp_integrate_in">
-<code class="descclassname">diofant.polys.densetools.</code><code class="descname">dmp_integrate_in</code><span class="sig-paren">(</span><em>f</em>, <em>m</em>, <em>j</em>, <em>u</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/densetools.html#dmp_integrate_in"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densetools.dmp_integrate_in" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute the indefinite integral of <code class="docutils literal notranslate"><span class="pre">f</span></code> in <code class="docutils literal notranslate"><span class="pre">x_j</span></code> in <code class="docutils literal notranslate"><span class="pre">K[X]</span></code>.</p>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s2">&quot;x y&quot;</span><span class="p">,</span> <span class="n">QQ</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="o">.</span><span class="n">dmp_integrate_in</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">y</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-<span class="go">1/2*x**2 + 2*x*y</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="o">.</span><span class="n">dmp_integrate_in</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">y</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="go">x*y + y**2</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.polys.densetools.dmp_trunc">
-<code class="descclassname">diofant.polys.densetools.</code><code class="descname">dmp_trunc</code><span class="sig-paren">(</span><em>f</em>, <em>p</em>, <em>u</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/densetools.html#dmp_trunc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densetools.dmp_trunc" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reduce a <code class="docutils literal notranslate"><span class="pre">K[X]</span></code> polynomial modulo a polynomial <code class="docutils literal notranslate"><span class="pre">p</span></code> in <code class="docutils literal notranslate"><span class="pre">K[Y]</span></code>.</p>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s2">&quot;x y&quot;</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="mi">8</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">5</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="mi">6</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="mi">3</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="o">.</span><span class="n">dmp_trunc</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
-<span class="go">11*x**2 + 11*x + 5</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1682,37 +1527,37 @@ intervals are disjoint.</p></li>
 
 <dl class="function">
 <dt id="diofant.polys.rootisolation.dup_inner_isolate_negative_roots">
-<code class="descclassname">diofant.polys.rootisolation.</code><code class="descname">dup_inner_isolate_negative_roots</code><span class="sig-paren">(</span><em>f</em>, <em>K</em>, <em>inf=None</em>, <em>sup=None</em>, <em>eps=None</em>, <em>fast=False</em>, <em>mobius=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/rootisolation.html#dup_inner_isolate_negative_roots"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.dup_inner_isolate_negative_roots" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">diofant.polys.rootisolation.</code><code class="descname">dup_inner_isolate_negative_roots</code><span class="sig-paren">(</span><em>f</em>, <em>K</em>, <em>inf=None</em>, <em>sup=None</em>, <em>eps=None</em>, <em>mobius=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/rootisolation.html#dup_inner_isolate_negative_roots"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.dup_inner_isolate_negative_roots" title="Permalink to this definition">¶</a></dt>
 <dd><p>Iteratively compute disjoint negative root isolation intervals.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="diofant.polys.rootisolation.dup_inner_isolate_positive_roots">
-<code class="descclassname">diofant.polys.rootisolation.</code><code class="descname">dup_inner_isolate_positive_roots</code><span class="sig-paren">(</span><em>f</em>, <em>K</em>, <em>eps=None</em>, <em>inf=None</em>, <em>sup=None</em>, <em>fast=False</em>, <em>mobius=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/rootisolation.html#dup_inner_isolate_positive_roots"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.dup_inner_isolate_positive_roots" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">diofant.polys.rootisolation.</code><code class="descname">dup_inner_isolate_positive_roots</code><span class="sig-paren">(</span><em>f</em>, <em>K</em>, <em>eps=None</em>, <em>inf=None</em>, <em>sup=None</em>, <em>mobius=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/rootisolation.html#dup_inner_isolate_positive_roots"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.dup_inner_isolate_positive_roots" title="Permalink to this definition">¶</a></dt>
 <dd><p>Iteratively compute disjoint positive root isolation intervals.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="diofant.polys.rootisolation.dup_inner_isolate_real_roots">
-<code class="descclassname">diofant.polys.rootisolation.</code><code class="descname">dup_inner_isolate_real_roots</code><span class="sig-paren">(</span><em>f</em>, <em>K</em>, <em>eps=None</em>, <em>fast=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/rootisolation.html#dup_inner_isolate_real_roots"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.dup_inner_isolate_real_roots" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">diofant.polys.rootisolation.</code><code class="descname">dup_inner_isolate_real_roots</code><span class="sig-paren">(</span><em>f</em>, <em>K</em>, <em>eps=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/rootisolation.html#dup_inner_isolate_real_roots"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.dup_inner_isolate_real_roots" title="Permalink to this definition">¶</a></dt>
 <dd><p>Internal function for isolation positive roots up to given precision.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="diofant.polys.rootisolation.dup_inner_refine_real_root">
-<code class="descclassname">diofant.polys.rootisolation.</code><code class="descname">dup_inner_refine_real_root</code><span class="sig-paren">(</span><em>f</em>, <em>M</em>, <em>K</em>, <em>eps=None</em>, <em>steps=None</em>, <em>disjoint=None</em>, <em>fast=False</em>, <em>mobius=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/rootisolation.html#dup_inner_refine_real_root"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.dup_inner_refine_real_root" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">diofant.polys.rootisolation.</code><code class="descname">dup_inner_refine_real_root</code><span class="sig-paren">(</span><em>f</em>, <em>M</em>, <em>K</em>, <em>eps=None</em>, <em>steps=None</em>, <em>disjoint=None</em>, <em>mobius=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/rootisolation.html#dup_inner_refine_real_root"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.dup_inner_refine_real_root" title="Permalink to this definition">¶</a></dt>
 <dd><p>Refine a positive root of <span class="math notranslate nohighlight">\(f\)</span> given a Mobius transform or an interval.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="diofant.polys.rootisolation.dup_isolate_all_roots">
-<code class="descclassname">diofant.polys.rootisolation.</code><code class="descname">dup_isolate_all_roots</code><span class="sig-paren">(</span><em>f</em>, <em>K</em>, <em>eps=None</em>, <em>inf=None</em>, <em>sup=None</em>, <em>fast=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/rootisolation.html#dup_isolate_all_roots"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.dup_isolate_all_roots" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">diofant.polys.rootisolation.</code><code class="descname">dup_isolate_all_roots</code><span class="sig-paren">(</span><em>f</em>, <em>K</em>, <em>eps=None</em>, <em>inf=None</em>, <em>sup=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/rootisolation.html#dup_isolate_all_roots"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.dup_isolate_all_roots" title="Permalink to this definition">¶</a></dt>
 <dd><p>Isolate real and complex roots of a non-square-free polynomial <code class="docutils literal notranslate"><span class="pre">f</span></code>.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="diofant.polys.rootisolation.dup_isolate_all_roots_sqf">
-<code class="descclassname">diofant.polys.rootisolation.</code><code class="descname">dup_isolate_all_roots_sqf</code><span class="sig-paren">(</span><em>f</em>, <em>K</em>, <em>eps=None</em>, <em>inf=None</em>, <em>sup=None</em>, <em>fast=False</em>, <em>blackbox=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/rootisolation.html#dup_isolate_all_roots_sqf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.dup_isolate_all_roots_sqf" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">diofant.polys.rootisolation.</code><code class="descname">dup_isolate_all_roots_sqf</code><span class="sig-paren">(</span><em>f</em>, <em>K</em>, <em>eps=None</em>, <em>inf=None</em>, <em>sup=None</em>, <em>blackbox=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/rootisolation.html#dup_isolate_all_roots_sqf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.dup_isolate_all_roots_sqf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Isolate real and complex roots of a square-free polynomial <code class="docutils literal notranslate"><span class="pre">f</span></code>.</p>
 </dd></dl>
 
@@ -1724,13 +1569,13 @@ intervals are disjoint.</p></li>
 
 <dl class="function">
 <dt id="diofant.polys.rootisolation.dup_isolate_imaginary_roots">
-<code class="descclassname">diofant.polys.rootisolation.</code><code class="descname">dup_isolate_imaginary_roots</code><span class="sig-paren">(</span><em>f</em>, <em>K</em>, <em>eps=None</em>, <em>inf=None</em>, <em>sup=None</em>, <em>fast=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/rootisolation.html#dup_isolate_imaginary_roots"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.dup_isolate_imaginary_roots" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">diofant.polys.rootisolation.</code><code class="descname">dup_isolate_imaginary_roots</code><span class="sig-paren">(</span><em>f</em>, <em>K</em>, <em>eps=None</em>, <em>inf=None</em>, <em>sup=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/rootisolation.html#dup_isolate_imaginary_roots"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.dup_isolate_imaginary_roots" title="Permalink to this definition">¶</a></dt>
 <dd><p>Isolate imaginary roots.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="diofant.polys.rootisolation.dup_isolate_real_roots">
-<code class="descclassname">diofant.polys.rootisolation.</code><code class="descname">dup_isolate_real_roots</code><span class="sig-paren">(</span><em>f</em>, <em>K</em>, <em>eps=None</em>, <em>inf=None</em>, <em>sup=None</em>, <em>fast=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/rootisolation.html#dup_isolate_real_roots"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.dup_isolate_real_roots" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">diofant.polys.rootisolation.</code><code class="descname">dup_isolate_real_roots</code><span class="sig-paren">(</span><em>f</em>, <em>K</em>, <em>eps=None</em>, <em>inf=None</em>, <em>sup=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/rootisolation.html#dup_isolate_real_roots"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.dup_isolate_real_roots" title="Permalink to this definition">¶</a></dt>
 <dd><p>Isolate real roots.</p>
 <p class="rubric">Notes</p>
 <p>Implemented algorithms use Vincent-Akritas-Strzebonski (VAS) continued
@@ -1739,25 +1584,25 @@ fractions approach <a class="reference internal" href="../sources.html#alkiviadi
 
 <dl class="function">
 <dt id="diofant.polys.rootisolation.dup_isolate_real_roots_list">
-<code class="descclassname">diofant.polys.rootisolation.</code><code class="descname">dup_isolate_real_roots_list</code><span class="sig-paren">(</span><em>polys</em>, <em>K</em>, <em>eps=None</em>, <em>inf=None</em>, <em>sup=None</em>, <em>strict=False</em>, <em>basis=False</em>, <em>fast=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/rootisolation.html#dup_isolate_real_roots_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.dup_isolate_real_roots_list" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">diofant.polys.rootisolation.</code><code class="descname">dup_isolate_real_roots_list</code><span class="sig-paren">(</span><em>polys</em>, <em>K</em>, <em>eps=None</em>, <em>inf=None</em>, <em>sup=None</em>, <em>strict=False</em>, <em>basis=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/rootisolation.html#dup_isolate_real_roots_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.dup_isolate_real_roots_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>Isolate real roots of a list of polynomials.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="diofant.polys.rootisolation.dup_isolate_real_roots_sqf">
-<code class="descclassname">diofant.polys.rootisolation.</code><code class="descname">dup_isolate_real_roots_sqf</code><span class="sig-paren">(</span><em>f</em>, <em>K</em>, <em>eps=None</em>, <em>inf=None</em>, <em>sup=None</em>, <em>fast=False</em>, <em>blackbox=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/rootisolation.html#dup_isolate_real_roots_sqf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.dup_isolate_real_roots_sqf" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">diofant.polys.rootisolation.</code><code class="descname">dup_isolate_real_roots_sqf</code><span class="sig-paren">(</span><em>f</em>, <em>K</em>, <em>eps=None</em>, <em>inf=None</em>, <em>sup=None</em>, <em>blackbox=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/rootisolation.html#dup_isolate_real_roots_sqf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.dup_isolate_real_roots_sqf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Isolate real roots of a square-free polynomial.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="diofant.polys.rootisolation.dup_outer_refine_real_root">
-<code class="descclassname">diofant.polys.rootisolation.</code><code class="descname">dup_outer_refine_real_root</code><span class="sig-paren">(</span><em>f</em>, <em>s</em>, <em>t</em>, <em>K</em>, <em>eps=None</em>, <em>steps=None</em>, <em>disjoint=None</em>, <em>fast=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/rootisolation.html#dup_outer_refine_real_root"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.dup_outer_refine_real_root" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">diofant.polys.rootisolation.</code><code class="descname">dup_outer_refine_real_root</code><span class="sig-paren">(</span><em>f</em>, <em>s</em>, <em>t</em>, <em>K</em>, <em>eps=None</em>, <em>steps=None</em>, <em>disjoint=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/rootisolation.html#dup_outer_refine_real_root"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.dup_outer_refine_real_root" title="Permalink to this definition">¶</a></dt>
 <dd><p>Refine a positive root of <span class="math notranslate nohighlight">\(f\)</span> given an interval <span class="math notranslate nohighlight">\((s, t)\)</span>.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="diofant.polys.rootisolation.dup_refine_real_root">
-<code class="descclassname">diofant.polys.rootisolation.</code><code class="descname">dup_refine_real_root</code><span class="sig-paren">(</span><em>f</em>, <em>s</em>, <em>t</em>, <em>K</em>, <em>eps=None</em>, <em>steps=None</em>, <em>disjoint=None</em>, <em>fast=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/rootisolation.html#dup_refine_real_root"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.dup_refine_real_root" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">diofant.polys.rootisolation.</code><code class="descname">dup_refine_real_root</code><span class="sig-paren">(</span><em>f</em>, <em>s</em>, <em>t</em>, <em>K</em>, <em>eps=None</em>, <em>steps=None</em>, <em>disjoint=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/rootisolation.html#dup_refine_real_root"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.dup_refine_real_root" title="Permalink to this definition">¶</a></dt>
 <dd><p>Refine real root’s approximating interval to the given precision.</p>
 </dd></dl>
 
@@ -1785,7 +1630,7 @@ Akritas-Strzebonski-Vigklas <a class="reference internal" href="../sources.html#
 
 <dl class="function">
 <dt id="diofant.polys.rootisolation.dup_step_refine_real_root">
-<code class="descclassname">diofant.polys.rootisolation.</code><code class="descname">dup_step_refine_real_root</code><span class="sig-paren">(</span><em>f</em>, <em>M</em>, <em>K</em>, <em>fast=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/rootisolation.html#dup_step_refine_real_root"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.dup_step_refine_real_root" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">diofant.polys.rootisolation.</code><code class="descname">dup_step_refine_real_root</code><span class="sig-paren">(</span><em>f</em>, <em>M</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/rootisolation.html#dup_step_refine_real_root"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.dup_step_refine_real_root" title="Permalink to this definition">¶</a></dt>
 <dd><p>One step of positive real root refinement algorithm.</p>
 </dd></dl>
 
@@ -2715,6 +2560,12 @@ self = sum(fv[i]*qv[i]) + r</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="diofant.polys.rings.PolyElement.integrate">
+<code class="descname">integrate</code><span class="sig-paren">(</span><em>x=0</em>, <em>m=1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/rings.html#PolyElement.integrate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rings.PolyElement.integrate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes indefinite integral in <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="diofant.polys.rings.PolyElement.leading_expv">
 <code class="descname">leading_expv</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/rings.html#PolyElement.leading_expv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rings.PolyElement.leading_expv" title="Permalink to this definition">¶</a></dt>
 <dd><p>Leading monomial tuple according to the monomial ordering.</p>
@@ -2948,37 +2799,6 @@ the Euclidean remainder sequence, including the primitive
 It is an example of <em>general polynomial remainder sequences</em> where
 the computed remainders are modified by constant multipliers (or divisors)
 in order to simplify the results.</p>
-<dl class="function">
-<dt id="diofant.polys.euclidtools.dup_primitive_prs">
-<code class="descclassname">diofant.polys.euclidtools.</code><code class="descname">dup_primitive_prs</code><span class="sig-paren">(</span><em>f</em>, <em>g</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/euclidtools.html#dup_primitive_prs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.euclidtools.dup_primitive_prs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Primitive polynomial remainder sequence (PRS) in <span class="math notranslate nohighlight">\(K[x]\)</span>.</p>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">8</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">6</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">4</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">8</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="mi">5</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">6</span> <span class="o">+</span> <span class="mi">5</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">4</span> <span class="o">-</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">9</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">21</span>
-</pre></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">prs</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">dup_primitive_prs</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">prs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="go">x**8 + x**6 - 3*x**4 - 3*x**3 + 8*x**2 + 2*x - 5</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">prs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-<span class="go">3*x**6 + 5*x**4 - 4*x**2 - 9*x + 21</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">prs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-<span class="go">5*x**4 - x**2 + 3</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">prs</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
-<span class="go">13*x**2 + 25*x - 49</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">prs</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
-<span class="go">4663*x - 6150</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">prs</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
-<span class="go">1</span>
-</pre></div>
-</div>
-</dd></dl>
-
 </div>
 <div class="section" id="subresultant-sequence">
 <h3>Subresultant sequence<a class="headerlink" href="#subresultant-sequence" title="Permalink to this headline">¶</a></h3>
@@ -3122,36 +2942,7 @@ including the last one which is the resultant if this does not vanish.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">10</span> <span class="o">-</span> <span class="mi">12</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">7</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">6</span> <span class="o">-</span> <span class="mi">54</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">4</span> <span class="o">+</span> <span class="mi">8</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">729</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">216</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="mi">16</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="o">.</span><span class="n">dmp_subresultants</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">]</span>
-<span class="go">True</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.polys.euclidtools.dmp_prs_resultant">
-<code class="descclassname">diofant.polys.euclidtools.</code><code class="descname">dmp_prs_resultant</code><span class="sig-paren">(</span><em>f</em>, <em>g</em>, <em>u</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/diofant/polys/euclidtools.html#dmp_prs_resultant"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.euclidtools.dmp_prs_resultant" title="Permalink to this definition">¶</a></dt>
-<dd><p>Resultant algorithm in <span class="math notranslate nohighlight">\(K[X]\)</span> using subresultant PRS.</p>
-<p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s2">&quot;x y&quot;</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="n">y</span><span class="o">**</span><span class="mi">3</span> <span class="o">-</span> <span class="mi">4</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">3</span> <span class="o">-</span> <span class="mi">9</span>
-</pre></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">4</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">3</span> <span class="o">-</span> <span class="mi">27</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="mi">4</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">10</span> <span class="o">-</span> <span class="mi">12</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">7</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">6</span> <span class="o">-</span> <span class="mi">54</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">4</span> <span class="o">+</span> <span class="mi">8</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">729</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">216</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="mi">16</span>
-</pre></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">res</span><span class="p">,</span> <span class="n">prs</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">dmp_prs_resultant</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">res</span> <span class="o">==</span> <span class="n">b</span>             <span class="c1"># resultant has n-1 variables</span>
-<span class="go">False</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">res</span> <span class="o">==</span> <span class="n">b</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">prs</span> <span class="o">==</span> <span class="p">[</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">subresultants</span><span class="p">(</span><span class="n">g</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">]</span>
 <span class="go">True</span>
 </pre></div>
 </div>
