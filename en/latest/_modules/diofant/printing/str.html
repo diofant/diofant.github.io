@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.printing.str &mdash; Diofant 0.1.dev327+g8e5e8fd documentation</title>
+  <title>diofant.printing.str &mdash; Diofant 0.1.dev321+g47970d4 documentation</title>
   
 
   
@@ -754,6 +754,13 @@
 
     <span class="k">def</span> <span class="nf">_print_Tuple</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_print_tuple</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_print_Monomial</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">expr</span><span class="o">.</span><span class="n">gens</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;*&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">**</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">gen</span><span class="p">,</span> <span class="n">exp</span><span class="p">)</span>
+                             <span class="k">for</span> <span class="n">gen</span><span class="p">,</span> <span class="n">exp</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">gens</span><span class="p">,</span> <span class="n">expr</span><span class="p">)])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_print_tuple</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_print_Transpose</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
         <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">.T&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">parenthesize</span><span class="p">(</span><span class="n">T</span><span class="o">.</span><span class="n">arg</span><span class="p">,</span> <span class="n">PRECEDENCE</span><span class="p">[</span><span class="s2">&quot;Pow&quot;</span><span class="p">])</span>

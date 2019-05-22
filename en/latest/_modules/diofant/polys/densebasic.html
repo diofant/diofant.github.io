@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.densebasic &mdash; Diofant 0.1.dev327+g8e5e8fd documentation</title>
+  <title>diofant.polys.densebasic &mdash; Diofant 0.1.dev321+g47970d4 documentation</title>
   
 
   
@@ -157,7 +157,7 @@
 <span class="kn">import</span> <span class="nn">random</span>
 
 <span class="kn">from</span> <span class="nn">..core</span> <span class="k">import</span> <span class="n">oo</span>
-<span class="kn">from</span> <span class="nn">.monomials</span> <span class="k">import</span> <span class="n">monomial_div</span><span class="p">,</span> <span class="n">monomial_gcd</span>
+<span class="kn">from</span> <span class="nn">.monomials</span> <span class="k">import</span> <span class="n">Monomial</span>
 
 
 <div class="viewcode-block" id="dmp_LC"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.densebasic.dmp_LC">[docs]</a><span class="k">def</span> <span class="nf">dmp_LC</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
@@ -623,9 +623,9 @@
             <span class="k">if</span> <span class="n">u</span><span class="p">:</span>
                 <span class="n">h</span> <span class="o">=</span> <span class="n">dmp_to_dict</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="n">k</span><span class="p">],</span> <span class="n">v</span><span class="p">)</span>
                 <span class="k">for</span> <span class="n">exp</span><span class="p">,</span> <span class="n">coeff</span> <span class="ow">in</span> <span class="n">h</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-                    <span class="n">result</span><span class="p">[(</span><span class="n">k</span><span class="p">,)</span> <span class="o">+</span> <span class="n">exp</span><span class="p">]</span> <span class="o">=</span> <span class="n">coeff</span>
+                    <span class="n">result</span><span class="p">[</span><span class="n">Monomial</span><span class="p">((</span><span class="n">k</span><span class="p">,)</span> <span class="o">+</span> <span class="n">exp</span><span class="p">)]</span> <span class="o">=</span> <span class="n">coeff</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">result</span><span class="p">[(</span><span class="n">k</span><span class="p">,)]</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="n">k</span><span class="p">]</span>
+                <span class="n">result</span><span class="p">[</span><span class="n">Monomial</span><span class="p">((</span><span class="n">k</span><span class="p">,))]</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="n">k</span><span class="p">]</span>
 
     <span class="k">return</span> <span class="n">result</span></div>
 
@@ -992,7 +992,7 @@
         <span class="k">return</span> <span class="p">(</span><span class="mi">0</span><span class="p">,)</span><span class="o">*</span><span class="p">(</span><span class="n">u</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">f</span>
 
     <span class="n">F</span> <span class="o">=</span> <span class="n">dmp_to_dict</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
-    <span class="n">G</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">monomial_gcd</span><span class="p">,</span> <span class="n">F</span><span class="p">)</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">Monomial</span><span class="o">.</span><span class="n">gcd</span><span class="p">,</span> <span class="n">F</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">g</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">G</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">G</span><span class="p">,</span> <span class="n">f</span>
@@ -1000,7 +1000,7 @@
     <span class="n">f</span> <span class="o">=</span> <span class="p">{}</span>
 
     <span class="k">for</span> <span class="n">monom</span><span class="p">,</span> <span class="n">coeff</span> <span class="ow">in</span> <span class="n">F</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="n">f</span><span class="p">[</span><span class="n">monomial_div</span><span class="p">(</span><span class="n">monom</span><span class="p">,</span> <span class="n">G</span><span class="p">)]</span> <span class="o">=</span> <span class="n">coeff</span>
+        <span class="n">f</span><span class="p">[</span><span class="n">monom</span><span class="o">/</span><span class="n">G</span><span class="p">]</span> <span class="o">=</span> <span class="n">coeff</span>
 
     <span class="k">return</span> <span class="n">G</span><span class="p">,</span> <span class="n">dmp_from_dict</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span></div>
 
