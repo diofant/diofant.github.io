@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.core.numbers &mdash; Diofant 0.1.dev321+g47970d4 documentation</title>
+  <title>diofant.core.numbers &mdash; Diofant 0.1.dev318+gf893a66 documentation</title>
   
 
   
@@ -245,11 +245,7 @@
     <span class="k">except</span> <span class="n">decimal</span><span class="o">.</span><span class="n">InvalidOperation</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;string-float not recognized: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">s</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">dps</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">num</span><span class="o">.</span><span class="n">as_tuple</span><span class="p">()</span><span class="o">.</span><span class="n">digits</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">num</span><span class="o">.</span><span class="n">is_finite</span><span class="p">():</span>
-            <span class="k">if</span> <span class="n">num</span><span class="o">.</span><span class="n">as_integer_ratio</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="s1">&#39;.&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
-                <span class="n">dps</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">dps</span><span class="p">,</span> <span class="n">num</span><span class="o">.</span><span class="n">adjusted</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">num</span><span class="p">,</span> <span class="n">dps</span>
+        <span class="k">return</span> <span class="n">num</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">num</span><span class="o">.</span><span class="n">as_tuple</span><span class="p">()</span><span class="o">.</span><span class="n">digits</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="igcd"><a class="viewcode-back" href="../../../modules/core.html#diofant.core.numbers.igcd">[docs]</a><span class="nd">@cacheit</span>
@@ -594,18 +590,18 @@
 <span class="sd">    &gt;&gt;&gt; Float(3.5)</span>
 <span class="sd">    3.50000000000000</span>
 <span class="sd">    &gt;&gt;&gt; Float(3)</span>
-<span class="sd">    3.00000000000000</span>
+<span class="sd">    3.</span>
 
 <span class="sd">    Creating Floats from strings (and Python ``int`` type) will</span>
 <span class="sd">    give a minimum precision of 15 digits, but the precision</span>
 <span class="sd">    will automatically increase to capture all digits entered.</span>
 
 <span class="sd">    &gt;&gt;&gt; Float(1)</span>
-<span class="sd">    1.00000000000000</span>
+<span class="sd">    1.</span>
 <span class="sd">    &gt;&gt;&gt; Float(10**20)</span>
 <span class="sd">    100000000000000000000.</span>
 <span class="sd">    &gt;&gt;&gt; Float(&#39;1e20&#39;)</span>
-<span class="sd">    100000000000000000000.</span>
+<span class="sd">    1.e+20</span>
 
 <span class="sd">    However, *floating-point* numbers (Python ``float`` types) retain</span>
 <span class="sd">    only 15 digits of precision:</span>
@@ -628,23 +624,18 @@
 <span class="sd">    &gt;&gt;&gt; Float(100, 4)</span>
 <span class="sd">    100.0</span>
 
-<span class="sd">    Float can automatically count significant figures if a null string is sent</span>
-<span class="sd">    for the precision. (Auto-counting is only allowed for strings and ints).</span>
+<span class="sd">    Float can automatically count significant figures if decimal precision</span>
+<span class="sd">    argument is omitted. (Auto-counting is only allowed for strings and ints).</span>
 
-<span class="sd">    &gt;&gt;&gt; Float(&#39;12e-3&#39;, &#39;&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; Float(&#39;12e-3&#39;)</span>
 <span class="sd">    0.012</span>
-<span class="sd">    &gt;&gt;&gt; Float(3, &#39;&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; Float(3)</span>
 <span class="sd">    3.</span>
-
-<span class="sd">    If a number is written in scientific notation, only the digits before the</span>
-<span class="sd">    exponent are considered significant if a decimal appears, otherwise the</span>
-<span class="sd">    &quot;e&quot; signifies only how to move the decimal:</span>
-
-<span class="sd">    &gt;&gt;&gt; Float(&#39;60.e2&#39;, &#39;&#39;)  # 2 digits significant</span>
+<span class="sd">    &gt;&gt;&gt; Float(&#39;60.e2&#39;)  # 2 digits significant</span>
 <span class="sd">    6.0e+3</span>
-<span class="sd">    &gt;&gt;&gt; Float(&#39;60e2&#39;, &#39;&#39;)  # 4 digits significant</span>
+<span class="sd">    &gt;&gt;&gt; Float(&#39;6000.&#39;)  # 4 digits significant</span>
 <span class="sd">    6000.</span>
-<span class="sd">    &gt;&gt;&gt; Float(&#39;600e-2&#39;, &#39;&#39;)  # 3 digits significant</span>
+<span class="sd">    &gt;&gt;&gt; Float(&#39;600e-2&#39;)  # 3 digits significant</span>
 <span class="sd">    6.00</span>
 
 <span class="sd">    Notes</span>
@@ -732,17 +723,12 @@
             <span class="n">num</span> <span class="o">=</span> <span class="s1">&#39;nan&#39;</span>
 
         <span class="k">if</span> <span class="n">dps</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dps</span> <span class="o">=</span> <span class="mi">15</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">Float</span><span class="p">):</span>
                 <span class="k">return</span> <span class="n">num</span>
             <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">numbers</span><span class="o">.</span><span class="n">Integral</span><span class="p">)):</span>
                 <span class="n">num</span><span class="p">,</span> <span class="n">dps</span> <span class="o">=</span> <span class="n">_str_to_Decimal_dps</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">num</span><span class="p">))</span>
-                <span class="n">dps</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="n">dps</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">dps</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">numbers</span><span class="o">.</span><span class="n">Integral</span><span class="p">)):</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;The null string can only be used when &#39;</span>
-                                 <span class="s1">&#39;the number to Float is passed as a string or an integer.&#39;</span><span class="p">)</span>
-            <span class="n">num</span><span class="p">,</span> <span class="n">dps</span> <span class="o">=</span> <span class="n">_str_to_Decimal_dps</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">num</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">dps</span> <span class="o">=</span> <span class="mi">15</span>
 
         <span class="n">prec</span> <span class="o">=</span> <span class="n">mlib</span><span class="o">.</span><span class="n">libmpf</span><span class="o">.</span><span class="n">dps_to_prec</span><span class="p">(</span><span class="n">dps</span><span class="p">)</span>
 
