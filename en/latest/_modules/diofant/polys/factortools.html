@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.factortools &mdash; Diofant 0.1.dev318+gf893a66 documentation</title>
+  <title>diofant.polys.factortools &mdash; Diofant 0.1.dev315+gb161eb4 documentation</title>
   
 
   
@@ -26,6 +26,7 @@
         <script type="text/javascript" src="../../../_static/doctools.js"></script>
         <script type="text/javascript" src="../../../_static/language_data.js"></script>
         <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"CommonHTML": {"linebreaks": {"automatic": true}}, "HTML-CSS": {"linebreaks": {"automatic": true}}, "SVG": {"linebreaks": {"automatic": true}}})</script>
     
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
@@ -1196,6 +1197,9 @@
         <span class="k">return</span> <span class="n">lc</span><span class="p">,</span> <span class="n">factors</span></div>
 
 
+<span class="n">_factor_aa_methods</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;trager&#39;</span><span class="p">:</span> <span class="n">dmp_ext_factor</span><span class="p">}</span>
+
+
 <div class="viewcode-block" id="dmp_factor_list"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.factortools.dmp_factor_list">[docs]</a><span class="k">def</span> <span class="nf">dmp_factor_list</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K0</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Factor polynomials into irreducibles in `K[X]`.&quot;&quot;&quot;</span>
     <span class="n">J</span><span class="p">,</span> <span class="n">f</span> <span class="o">=</span> <span class="n">dmp_terms_gcd</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K0</span><span class="p">)</span>
@@ -1204,7 +1208,8 @@
     <span class="k">if</span> <span class="n">K0</span><span class="o">.</span><span class="n">is_FiniteField</span><span class="p">:</span>
         <span class="n">coeff</span><span class="p">,</span> <span class="n">factors</span> <span class="o">=</span> <span class="n">dmp_gf_factor</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K0</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">K0</span><span class="o">.</span><span class="n">is_AlgebraicField</span><span class="p">:</span>
-        <span class="n">coeff</span><span class="p">,</span> <span class="n">factors</span> <span class="o">=</span> <span class="n">dmp_ext_factor</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K0</span><span class="p">)</span>
+        <span class="n">method</span> <span class="o">=</span> <span class="n">_factor_aa_methods</span><span class="p">[</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;AA_FACTOR_METHOD&#39;</span><span class="p">)]</span>
+        <span class="n">coeff</span><span class="p">,</span> <span class="n">factors</span> <span class="o">=</span> <span class="n">method</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">K0</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">K0</span><span class="o">.</span><span class="n">is_Exact</span><span class="p">:</span>
             <span class="n">K0_inexact</span><span class="p">,</span> <span class="n">K0</span> <span class="o">=</span> <span class="n">K0</span><span class="p">,</span> <span class="n">K0</span><span class="o">.</span><span class="n">get_exact</span><span class="p">()</span>
