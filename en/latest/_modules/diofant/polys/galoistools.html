@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.galoistools &mdash; Diofant 0.11.0a6.dev1+g92c4bf0 documentation</title>
+  <title>diofant.polys.galoistools &mdash; Diofant 0.11.0a6.dev6+g4099a9d documentation</title>
   
 
   
@@ -157,11 +157,11 @@
 <span class="kn">import</span> <span class="nn">random</span>
 
 <span class="kn">from</span> <span class="nn">..ntheory</span> <span class="k">import</span> <span class="n">factorint</span>
-<span class="kn">from</span> <span class="nn">.densearith</span> <span class="k">import</span> <span class="n">dup_lshift</span>
+<span class="kn">from</span> <span class="nn">.densearith</span> <span class="k">import</span> <span class="p">(</span><span class="n">dmp_add</span><span class="p">,</span> <span class="n">dmp_add_term</span><span class="p">,</span> <span class="n">dmp_mul</span><span class="p">,</span> <span class="n">dmp_mul_ground</span><span class="p">,</span>
+                         <span class="n">dmp_sqr</span><span class="p">,</span> <span class="n">dmp_sub</span><span class="p">,</span> <span class="n">dup_lshift</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">.densebasic</span> <span class="k">import</span> <span class="p">(</span><span class="n">dmp_convert</span><span class="p">,</span> <span class="n">dmp_degree_in</span><span class="p">,</span> <span class="n">dmp_from_dict</span><span class="p">,</span> <span class="n">dmp_normal</span><span class="p">,</span>
                          <span class="n">dmp_strip</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">.polyconfig</span> <span class="k">import</span> <span class="n">query</span>
-<span class="kn">from</span> <span class="nn">.polyerrors</span> <span class="k">import</span> <span class="n">ExactQuotientFailed</span>
 <span class="kn">from</span> <span class="nn">.polyutils</span> <span class="k">import</span> <span class="n">_sort_factors</span>
 
 
@@ -182,18 +182,18 @@
     <span class="k">return</span> <span class="n">dmp_convert</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">K</span><span class="o">.</span><span class="n">finite_field</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="n">K</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="gf_neg"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.galoistools.gf_neg">[docs]</a><span class="k">def</span> <span class="nf">gf_neg</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
+<div class="viewcode-block" id="gf_trunc"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.galoistools.gf_trunc">[docs]</a><span class="k">def</span> <span class="nf">gf_trunc</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Negate a polynomial in ``GF(p)[x]``.</span>
+<span class="sd">    Reduce all coefficients modulo ``p``.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    ========</span>
 
-<span class="sd">    &gt;&gt;&gt; gf_neg([3, 2, 1, 0], 5, ZZ)</span>
-<span class="sd">    [2, 3, 4, 0]</span>
+<span class="sd">    &gt;&gt;&gt; gf_trunc([7, -2, 3], 5)</span>
+<span class="sd">    [2, 3, 3]</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="p">[</span><span class="o">-</span><span class="n">coeff</span> <span class="o">%</span> <span class="n">p</span> <span class="k">for</span> <span class="n">coeff</span> <span class="ow">in</span> <span class="n">f</span><span class="p">]</span></div>
+    <span class="k">return</span> <span class="n">dmp_strip</span><span class="p">([</span><span class="n">a</span> <span class="o">%</span> <span class="n">p</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">f</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="gf_add_ground"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.galoistools.gf_add_ground">[docs]</a><span class="k">def</span> <span class="nf">gf_add_ground</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
@@ -207,18 +207,7 @@
 <span class="sd">    [3, 2, 1]</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">f</span><span class="p">:</span>
-        <span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">%</span> <span class="n">p</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">a</span><span class="p">)</span> <span class="o">%</span> <span class="n">p</span>
-
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">f</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span>
-
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">a</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">[]</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span></div>
+    <span class="k">return</span> <span class="n">gf_trunc</span><span class="p">(</span><span class="n">dmp_add_term</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">K</span><span class="p">),</span> <span class="n">p</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="gf_sub_ground"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.galoistools.gf_sub_ground">[docs]</a><span class="k">def</span> <span class="nf">gf_sub_ground</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
@@ -232,18 +221,7 @@
 <span class="sd">    [3, 2, 2]</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">f</span><span class="p">:</span>
-        <span class="n">a</span> <span class="o">=</span> <span class="o">-</span><span class="n">a</span> <span class="o">%</span> <span class="n">p</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">%</span> <span class="n">p</span>
-
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">f</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span>
-
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">a</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">[]</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span></div>
+    <span class="k">return</span> <span class="n">gf_trunc</span><span class="p">(</span><span class="n">dmp_add_term</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="o">-</span><span class="n">a</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">K</span><span class="p">),</span> <span class="n">p</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="gf_mul_ground"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.galoistools.gf_mul_ground">[docs]</a><span class="k">def</span> <span class="nf">gf_mul_ground</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
@@ -257,10 +235,7 @@
 <span class="sd">    [1, 4, 3]</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">a</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">[]</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">[(</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">)</span> <span class="o">%</span> <span class="n">p</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">f</span><span class="p">]</span></div>
+    <span class="k">return</span> <span class="n">gf_trunc</span><span class="p">(</span><span class="n">dmp_mul_ground</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">K</span><span class="p">),</span> <span class="n">p</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="gf_quo_ground"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.galoistools.gf_quo_ground">[docs]</a><span class="k">def</span> <span class="nf">gf_quo_ground</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
@@ -288,25 +263,7 @@
 <span class="sd">    [4, 1]</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">f</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">g</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">g</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">f</span>
-
-    <span class="n">df</span> <span class="o">=</span> <span class="n">dmp_degree_in</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-    <span class="n">dg</span> <span class="o">=</span> <span class="n">dmp_degree_in</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">df</span> <span class="o">==</span> <span class="n">dg</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">dmp_strip</span><span class="p">([(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span> <span class="o">%</span> <span class="n">p</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">)],</span> <span class="mi">0</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">k</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">df</span> <span class="o">-</span> <span class="n">dg</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">df</span> <span class="o">&gt;</span> <span class="n">dg</span><span class="p">:</span>
-            <span class="n">h</span><span class="p">,</span> <span class="n">f</span> <span class="o">=</span> <span class="n">f</span><span class="p">[:</span><span class="n">k</span><span class="p">],</span> <span class="n">f</span><span class="p">[</span><span class="n">k</span><span class="p">:]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">h</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="n">g</span><span class="p">[:</span><span class="n">k</span><span class="p">],</span> <span class="n">g</span><span class="p">[</span><span class="n">k</span><span class="p">:]</span>
-
-        <span class="k">return</span> <span class="n">h</span> <span class="o">+</span> <span class="p">[(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span> <span class="o">%</span> <span class="n">p</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">)]</span></div>
+    <span class="k">return</span> <span class="n">gf_trunc</span><span class="p">(</span><span class="n">dmp_add</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">K</span><span class="p">),</span> <span class="n">p</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="gf_sub"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.galoistools.gf_sub">[docs]</a><span class="k">def</span> <span class="nf">gf_sub</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
@@ -320,25 +277,7 @@
 <span class="sd">    [1, 0, 2]</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">g</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">f</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">f</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">gf_neg</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-
-    <span class="n">df</span> <span class="o">=</span> <span class="n">dmp_degree_in</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-    <span class="n">dg</span> <span class="o">=</span> <span class="n">dmp_degree_in</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">df</span> <span class="o">==</span> <span class="n">dg</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">dmp_strip</span><span class="p">([(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span> <span class="o">%</span> <span class="n">p</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">)],</span> <span class="mi">0</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">k</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">df</span> <span class="o">-</span> <span class="n">dg</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">df</span> <span class="o">&gt;</span> <span class="n">dg</span><span class="p">:</span>
-            <span class="n">h</span><span class="p">,</span> <span class="n">f</span> <span class="o">=</span> <span class="n">f</span><span class="p">[:</span><span class="n">k</span><span class="p">],</span> <span class="n">f</span><span class="p">[</span><span class="n">k</span><span class="p">:]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">h</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="n">gf_neg</span><span class="p">(</span><span class="n">g</span><span class="p">[:</span><span class="n">k</span><span class="p">],</span> <span class="n">p</span><span class="p">,</span> <span class="n">K</span><span class="p">),</span> <span class="n">g</span><span class="p">[</span><span class="n">k</span><span class="p">:]</span>
-
-        <span class="k">return</span> <span class="n">h</span> <span class="o">+</span> <span class="p">[(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span> <span class="o">%</span> <span class="n">p</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">)]</span></div>
+    <span class="k">return</span> <span class="n">gf_trunc</span><span class="p">(</span><span class="n">dmp_sub</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">K</span><span class="p">),</span> <span class="n">p</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="gf_mul"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.galoistools.gf_mul">[docs]</a><span class="k">def</span> <span class="nf">gf_mul</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
@@ -352,24 +291,7 @@
 <span class="sd">    [1, 0, 3, 2, 3]</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">dmp_degree_in</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-    <span class="n">dg</span> <span class="o">=</span> <span class="n">dmp_degree_in</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-
-    <span class="n">dh</span> <span class="o">=</span> <span class="n">df</span> <span class="o">+</span> <span class="n">dg</span>
-    <span class="k">if</span> <span class="n">dh</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">[]</span>
-
-    <span class="n">h</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">dh</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dh</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="n">coeff</span> <span class="o">=</span> <span class="n">K</span><span class="o">.</span><span class="n">zero</span>
-
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span> <span class="o">-</span> <span class="n">dg</span><span class="p">),</span> <span class="nb">min</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-            <span class="n">coeff</span> <span class="o">+=</span> <span class="n">f</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">g</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">j</span><span class="p">]</span>
-
-        <span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">coeff</span> <span class="o">%</span> <span class="n">p</span>
-
-    <span class="k">return</span> <span class="n">dmp_strip</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">gf_trunc</span><span class="p">(</span><span class="n">dmp_mul</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">K</span><span class="p">),</span> <span class="n">p</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="gf_sqr"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.galoistools.gf_sqr">[docs]</a><span class="k">def</span> <span class="nf">gf_sqr</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
@@ -383,35 +305,7 @@
 <span class="sd">    [4, 2, 3, 1, 1]</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">dmp_degree_in</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">df</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">[]</span>
-
-    <span class="n">dh</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">df</span>
-    <span class="n">h</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">dh</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dh</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="n">coeff</span> <span class="o">=</span> <span class="n">K</span><span class="o">.</span><span class="n">zero</span>
-
-        <span class="n">jmin</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span> <span class="o">-</span> <span class="n">df</span><span class="p">)</span>
-        <span class="n">jmax</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
-
-        <span class="n">n</span> <span class="o">=</span> <span class="n">jmax</span> <span class="o">-</span> <span class="n">jmin</span> <span class="o">+</span> <span class="mi">1</span>
-
-        <span class="n">jmax</span> <span class="o">=</span> <span class="n">jmin</span> <span class="o">+</span> <span class="n">n</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span>
-
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">jmin</span><span class="p">,</span> <span class="n">jmax</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-            <span class="n">coeff</span> <span class="o">+=</span> <span class="n">f</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">f</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">j</span><span class="p">]</span>
-
-        <span class="n">coeff</span> <span class="o">+=</span> <span class="n">coeff</span>
-
-        <span class="k">if</span> <span class="n">n</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">elem</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">jmax</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
-            <span class="n">coeff</span> <span class="o">+=</span> <span class="n">elem</span><span class="o">**</span><span class="mi">2</span>
-
-        <span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">coeff</span> <span class="o">%</span> <span class="n">p</span>
-
-    <span class="k">return</span> <span class="n">dmp_strip</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">gf_trunc</span><span class="p">(</span><span class="n">dmp_sqr</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">K</span><span class="p">),</span> <span class="n">p</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="gf_div"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.galoistools.gf_div">[docs]</a><span class="k">def</span> <span class="nf">gf_div</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
@@ -488,51 +382,7 @@
 <span class="sd">    [3, 2, 4]</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">dmp_degree_in</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-    <span class="n">dg</span> <span class="o">=</span> <span class="n">dmp_degree_in</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">g</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ZeroDivisionError</span><span class="p">(</span><span class="s2">&quot;polynomial division&quot;</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">df</span> <span class="o">&lt;</span> <span class="n">dg</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">[]</span>
-
-    <span class="n">inv</span> <span class="o">=</span> <span class="n">K</span><span class="o">.</span><span class="n">invert</span><span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">p</span><span class="p">)</span>
-
-    <span class="n">h</span><span class="p">,</span> <span class="n">dq</span><span class="p">,</span> <span class="n">dr</span> <span class="o">=</span> <span class="n">f</span><span class="p">[:],</span> <span class="n">df</span> <span class="o">-</span> <span class="n">dg</span><span class="p">,</span> <span class="n">dg</span> <span class="o">-</span> <span class="mi">1</span>
-
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dq</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="n">coeff</span> <span class="o">=</span> <span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dg</span> <span class="o">-</span> <span class="n">i</span><span class="p">),</span> <span class="nb">min</span><span class="p">(</span><span class="n">df</span> <span class="o">-</span> <span class="n">i</span><span class="p">,</span> <span class="n">dr</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-            <span class="n">coeff</span> <span class="o">-=</span> <span class="n">h</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span> <span class="o">-</span> <span class="n">dg</span><span class="p">]</span> <span class="o">*</span> <span class="n">g</span><span class="p">[</span><span class="n">dg</span> <span class="o">-</span> <span class="n">j</span><span class="p">]</span>
-
-        <span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">coeff</span> <span class="o">*</span> <span class="n">inv</span><span class="p">)</span> <span class="o">%</span> <span class="n">p</span>
-
-    <span class="k">return</span> <span class="n">h</span><span class="p">[:</span><span class="n">dq</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span></div>
-
-
-<div class="viewcode-block" id="gf_exquo"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.galoistools.gf_exquo">[docs]</a><span class="k">def</span> <span class="nf">gf_exquo</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Compute polynomial quotient in ``GF(p)[x]``.</span>
-
-<span class="sd">    Examples</span>
-<span class="sd">    ========</span>
-
-<span class="sd">    &gt;&gt;&gt; gf_exquo([1, 0, 3, 2, 3], [2, 2, 2], 5, ZZ)</span>
-<span class="sd">    [3, 2, 4]</span>
-
-<span class="sd">    &gt;&gt;&gt; gf_exquo([1, 0, 1, 1], [1, 1, 0], 2, ZZ)</span>
-<span class="sd">    Traceback (most recent call last):</span>
-<span class="sd">    ...</span>
-<span class="sd">    ExactQuotientFailed: [1, 1, 0] does not divide [1, 0, 1, 1]</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">q</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">gf_div</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">r</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">q</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">ExactQuotientFailed</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">gf_div</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">K</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
 
 
 <div class="viewcode-block" id="gf_frobenius_monomial_base"><a class="viewcode-back" href="../../../internals/polys.html#diofant.polys.galoistools.gf_frobenius_monomial_base">[docs]</a><span class="k">def</span> <span class="nf">gf_frobenius_monomial_base</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
