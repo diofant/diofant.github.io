@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.core.power &mdash; Diofant 0.11.0a6.dev6+g4099a9d documentation</title>
+  <title>diofant.core.power &mdash; Diofant 0.11.0a6.dev10+g1145488 documentation</title>
   
 
   
@@ -175,9 +175,22 @@
 
 <span class="k">def</span> <span class="nf">isqrt</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return the largest integer less than or equal to sqrt(n).&quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">17984395633462800708566937239552</span><span class="p">:</span>
-        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">integer_nthroot</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="mi">2</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;n argument must be nonnegative&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+
+    <span class="n">c</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">bit_length</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">bit_length</span><span class="p">())):</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="n">d</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">c</span> <span class="o">&gt;&gt;</span> <span class="n">s</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="n">d</span> <span class="o">-</span> <span class="n">e</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">n</span> <span class="o">&gt;&gt;</span> <span class="mi">2</span><span class="o">*</span><span class="n">c</span> <span class="o">-</span> <span class="n">e</span> <span class="o">-</span> <span class="n">d</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="n">a</span>
+
+    <span class="k">return</span> <span class="n">a</span> <span class="o">-</span> <span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">a</span> <span class="o">&gt;</span> <span class="n">n</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="integer_nthroot"><a class="viewcode-back" href="../../../modules/core.html#diofant.core.power.integer_nthroot">[docs]</a><span class="k">def</span> <span class="nf">integer_nthroot</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
