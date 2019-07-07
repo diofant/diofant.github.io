@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Simplification &mdash; Diofant 0.11.0a6.dev34+g605c700 documentation</title>
+  <title>Simplification &mdash; Diofant 0.11.0a6.dev39+g5960c6d documentation</title>
   
 
   
@@ -98,6 +98,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#trigonometric-functions">Trigonometric Functions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#powers-and-logarithms">Powers and Logarithms</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#special-functions">Special Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cse">CSE</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="calculus.html">Calculus</a></li>
@@ -514,6 +515,20 @@ of more standard functions.</p>
 <span class="go">╲╱ ℯ</span>
 </pre></div>
 </div>
+<p>Another type of expand rule is expanding complex valued expressions and putting
+them into a normal form. For this <a class="reference internal" href="../modules/core.html#diofant.core.function.expand_complex" title="diofant.core.function.expand_complex"><code class="xref py py-func docutils literal notranslate"><span class="pre">expand_complex()</span></code></a>
+is used.   Note that it will always perform arithmetic expand to obtain the
+desired normal form.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">expand_complex</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">I</span><span class="o">*</span><span class="n">y</span><span class="p">)</span>
+<span class="go">ⅈ⋅(re(y) + im(x)) + re(x) - im(y)</span>
+</pre></div>
+</div>
+<p>The same behavior can be obtained by using
+<a class="reference internal" href="../modules/core.html#diofant.core.expr.Expr.as_real_imag" title="diofant.core.expr.Expr.as_real_imag"><code class="xref py py-meth docutils literal notranslate"><span class="pre">as_real_imag()</span></code></a> method.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">I</span><span class="o">*</span><span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">as_real_imag</span><span class="p">()</span>
+<span class="go">(re(x) - im(y), re(y) + im(x))</span>
+</pre></div>
+</div>
 <p>To simplify combinatorial expressions, involving
 <a class="reference internal" href="../modules/functions/combinatorial.html#diofant.functions.combinatorial.factorials.factorial" title="diofant.functions.combinatorial.factorials.factorial"><code class="xref py py-class docutils literal notranslate"><span class="pre">factorial</span></code></a>,
 <a class="reference internal" href="../modules/functions/combinatorial.html#diofant.functions.combinatorial.factorials.binomial" title="diofant.functions.combinatorial.factorials.binomial"><code class="xref py py-class docutils literal notranslate"><span class="pre">binomial</span></code></a> or
@@ -531,6 +546,44 @@ of more standard functions.</p>
 <span class="go">sin(π⋅x)</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="cse">
+<h2>CSE<a class="headerlink" href="#cse" title="Permalink to this headline">¶</a></h2>
+<p>Before evaluating a large expression, it is often useful to identify common
+subexpressions, collect them and evaluate them at once. This is called common
+subexpression elimination (CSE) and implemented in the
+<a class="reference internal" href="../modules/simplify/simplify.html#diofant.simplify.cse_main.cse" title="diofant.simplify.cse_main.cse"><code class="xref py py-func docutils literal notranslate"><span class="pre">cse()</span></code></a> function.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cse</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
+<span class="go">⎛    ⎡  ________⎤⎞</span>
+<span class="go">⎝[], ⎣╲╱ sin(x) ⎦⎠</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cse</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="mi">4</span><span class="p">))</span>
+<span class="go">⎛                ⎡  ________   ________⎤⎞</span>
+<span class="go">⎝[(x₀, sin(x))], ⎣╲╱ x₀ + 4 ⋅╲╱ x₀ + 5 ⎦⎠</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cse</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">+</span> <span class="n">cos</span><span class="p">(</span><span class="n">y</span><span class="p">))</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">+</span> <span class="n">cos</span><span class="p">(</span><span class="n">y</span><span class="p">)))</span>
+<span class="go">⎛                             ⎡  ________   ________⎤⎞</span>
+<span class="go">⎝[(x₀, sin(x + 1) + cos(y))], ⎣╲╱ x₀ + 4 ⋅╲╱ x₀ + 5 ⎦⎠</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cse</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">z</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">+</span> <span class="n">sqrt</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">z</span> <span class="o">-</span> <span class="n">y</span><span class="p">)))</span>
+<span class="go">⎛                                     ⎡  ____     ⎤⎞</span>
+<span class="go">⎝[(x₀, -y), (x₁, (x + x₀)⋅(x₀ + z))], ⎣╲╱ x₁  + x₁⎦⎠</span>
+</pre></div>
+</div>
+<p>Optimizations to be performed before and after common subexpressions
+elimination can be passed in the``optimizations`` optional argument.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cse</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">z</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">+</span> <span class="n">sqrt</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">z</span> <span class="o">-</span> <span class="n">y</span><span class="p">)),</span> <span class="n">optimizations</span><span class="o">=</span><span class="s1">&#39;basic&#39;</span><span class="p">)</span>
+<span class="go">⎛                          ⎡  ____     ⎤⎞</span>
+<span class="go">⎝[(x₀, -(x - y)⋅(y - z))], ⎣╲╱ x₀  + x₀⎦⎠</span>
+</pre></div>
+</div>
+<p>However, these optimizations can be very slow for large expressions. Moreover,
+if speed is a concern, one can pass the option <code class="docutils literal notranslate"><span class="pre">order='none'</span></code>. Order of
+terms will then be dependent on hashing algorithm implementation, but speed
+will be greatly improved.</p>
 </div>
 </div>
 

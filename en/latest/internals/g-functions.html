@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Computing Integrals using Meijer G-Functions &mdash; Diofant 0.11.0a6.dev34+g605c700 documentation</title>
+  <title>Computing Integrals using Meijer G-Functions &mdash; Diofant 0.11.0a6.dev39+g5960c6d documentation</title>
   
 
   
@@ -100,23 +100,22 @@
 <li class="toctree-l3"><a class="reference internal" href="#representing-branched-functions-on-the-argand-plane">Representing Branched Functions on the Argand Plane</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#table-lookups-and-inverse-mellin-transforms">Table Lookups and Inverse Mellin Transforms</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#applying-the-integral-theorems">Applying the Integral Theorems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-g-function-integration-theorems">The G-Function Integration Theorems</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#conditions-of-convergence-for-integral-1">Conditions of Convergence for Integral (1)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#conditions-of-convergence-for-integral-2">Conditions of Convergence for Integral (2)</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#the-g-function-integration-theorems">The G-Function Integration Theorems</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#conditions-of-convergence-for-integral-1">Conditions of Convergence for Integral (1)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#conditions-of-convergence-for-integral-2">Conditions of Convergence for Integral (2)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-inverse-laplace-transform-of-a-g-function">The Inverse Laplace Transform of a G-function</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#how-to-compute-the-integral">How to compute the integral</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#when-this-computation-is-valid">When this computation is valid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#when-the-integral-exists">When the integral exists</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#the-inverse-laplace-transform-of-a-g-function">The Inverse Laplace Transform of a G-function</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#how-to-compute-the-integral">How to compute the integral</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#when-this-computation-is-valid">When this computation is valid</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#when-the-integral-exists">When the integral exists</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#implemented-g-function-formulae">Implemented G-Function Formulae</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#implemented-g-function-formulae">Implemented G-Function Formulae</a></li>
 <li class="toctree-l2"><a class="reference internal" href="evalf.html">Numerical evaluation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="numeric-computation.html">Numeric Computation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rewriting.html">Term rewriting</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../guide.html">Development</a></li>
@@ -335,9 +334,8 @@ is satisfies <span class="math notranslate nohighlight">\(G(\operatorname{Exp}(2
 be used to exploit the information. This is done transparently by the
 integration code.</p>
 </div>
-</div>
 <div class="section" id="the-g-function-integration-theorems">
-<h1>The G-Function Integration Theorems<a class="headerlink" href="#the-g-function-integration-theorems" title="Permalink to this headline">¶</a></h1>
+<h2>The G-Function Integration Theorems<a class="headerlink" href="#the-g-function-integration-theorems" title="Permalink to this headline">¶</a></h2>
 <p>This section intends to display in detail the definite integration theorems
 used in the code. The following two formulae go back to Meijer (In fact he
 proved more general formulae; indeed in the literature formulae are usually
@@ -374,7 +372,7 @@ valid. Below we detail the conditions implemented in Diofant. They are an
 amalgamation of conditions found in <a class="reference internal" href="../sources.html#prudnikov1990" id="id1">[APPM90]</a> and <a class="reference internal" href="../sources.html#luke1969" id="id2">[Luk69]</a>; please
 let us know if you find any errors.</p>
 <div class="section" id="conditions-of-convergence-for-integral-1">
-<h2>Conditions of Convergence for Integral (1)<a class="headerlink" href="#conditions-of-convergence-for-integral-1" title="Permalink to this headline">¶</a></h2>
+<h3>Conditions of Convergence for Integral (1)<a class="headerlink" href="#conditions-of-convergence-for-integral-1" title="Permalink to this headline">¶</a></h3>
 <p>We can without loss of generality assume <span class="math notranslate nohighlight">\(p \le q\)</span>, since the G-functions
 of indices <span class="math notranslate nohighlight">\(m, n, p, q\)</span> and of indices <span class="math notranslate nohighlight">\(n, m, q, p\)</span> can be related easily
 (see e.g. <a class="reference internal" href="../sources.html#luke1969" id="id3">[Luk69]</a>, section 5.3). We introduce the following notation:</p>
@@ -451,7 +449,7 @@ particular much harder to control.</p>
 </ol>
 </div>
 <div class="section" id="conditions-of-convergence-for-integral-2">
-<h2>Conditions of Convergence for Integral (2)<a class="headerlink" href="#conditions-of-convergence-for-integral-2" title="Permalink to this headline">¶</a></h2>
+<h3>Conditions of Convergence for Integral (2)<a class="headerlink" href="#conditions-of-convergence-for-integral-2" title="Permalink to this headline">¶</a></h3>
 <p>We introduce the following notation:</p>
 <div class="math notranslate nohighlight">
 \[b^* = s + t - \frac{u + v}{2}\]</div>
@@ -670,7 +668,7 @@ as follows:</p>
 </div>
 </div>
 <div class="section" id="the-inverse-laplace-transform-of-a-g-function">
-<h1>The Inverse Laplace Transform of a G-function<a class="headerlink" href="#the-inverse-laplace-transform-of-a-g-function" title="Permalink to this headline">¶</a></h1>
+<h2>The Inverse Laplace Transform of a G-function<a class="headerlink" href="#the-inverse-laplace-transform-of-a-g-function" title="Permalink to this headline">¶</a></h2>
 <p>The inverse laplace transform of a Meijer G-function can be expressed as
 another G-function. This is a fairly versatile method for computing this
 transform. However, I could not find the details in the literature, so I work
@@ -687,7 +685,7 @@ are also given. However, we need a formula for argument <span class="math notran
 <li><p>When is our computation valid?</p></li>
 </ol>
 <div class="section" id="how-to-compute-the-integral">
-<h2>How to compute the integral<a class="headerlink" href="#how-to-compute-the-integral" title="Permalink to this headline">¶</a></h2>
+<h3>How to compute the integral<a class="headerlink" href="#how-to-compute-the-integral" title="Permalink to this headline">¶</a></h3>
 <p>We shall work formally for now. Denote by <span class="math notranslate nohighlight">\(\Delta(s)\)</span> the product of gamma
 functions appearing in the definition of <span class="math notranslate nohighlight">\(G\)</span>, so that</p>
 <div class="math notranslate nohighlight">
@@ -719,7 +717,7 @@ Hence we find</p>
 multiplication theorem.</p>
 </div>
 <div class="section" id="when-this-computation-is-valid">
-<h2>When this computation is valid<a class="headerlink" href="#when-this-computation-is-valid" title="Permalink to this headline">¶</a></h2>
+<h3>When this computation is valid<a class="headerlink" href="#when-this-computation-is-valid" title="Permalink to this headline">¶</a></h3>
 <p>There are a number of obstacles in this computation. Interchange of integrals
 is only valid if all integrals involved are absolutely convergent. In
 particular the inner integral has to converge. Also, for our identification of
@@ -738,7 +736,7 @@ fulfilled if <span class="math notranslate nohighlight">\(G\)</span> converges a
 section 5.2, i.e. either <span class="math notranslate nohighlight">\(\delta &gt;= \frac{a}{2}\)</span> or <span class="math notranslate nohighlight">\(p \ge 1, p \ge q\)</span>.</p>
 </div>
 <div class="section" id="when-the-integral-exists">
-<h2>When the integral exists<a class="headerlink" href="#when-the-integral-exists" title="Permalink to this headline">¶</a></h2>
+<h3>When the integral exists<a class="headerlink" href="#when-the-integral-exists" title="Permalink to this headline">¶</a></h3>
 <p>Using <a class="reference internal" href="../sources.html#luke1969" id="id6">[Luk69]</a>, section 5.10, for any given meijer G-function we can find a
 dominant term of the form <span class="math notranslate nohighlight">\(z^a e^{bz^c}\)</span> (although this expression might not be
 the best possible, because of cancellation).</p>
@@ -765,7 +763,7 @@ Here the same condition as in (1) applies.</p></li>
 </div>
 </div>
 <div class="section" id="implemented-g-function-formulae">
-<h1>Implemented G-Function Formulae<a class="headerlink" href="#implemented-g-function-formulae" title="Permalink to this headline">¶</a></h1>
+<h2>Implemented G-Function Formulae<a class="headerlink" href="#implemented-g-function-formulae" title="Permalink to this headline">¶</a></h2>
 <p>An important part of the algorithm is a table expressing various functions
 as Meijer G-functions. This is essentially a table of Mellin Transforms in
 disguise. The following automatically generated table shows the formulae
@@ -888,6 +886,7 @@ of special functions is to be dealt with.</p>
 \[\log^{n}{\left (p z^{q} \right )} \theta\left(- p z^{q} + 1\right) = \text{generated}\]</div>
 <div class="math notranslate nohighlight">
 \[\log^{n}{\left (p z^{q} \right )} \theta\left(p z^{q} - 1\right) = \text{generated}\]</div>
+</div>
 </div>
 
 
