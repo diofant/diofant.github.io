@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.utilities.misc &mdash; Diofant 0.11.0a6.dev39+g5960c6d documentation</title>
+  <title>diofant.utilities.misc &mdash; Diofant 0.11.0a6.dev45+g3c0c949 documentation</title>
   
 
   
@@ -159,7 +159,7 @@
 <span></span><span class="sd">&quot;&quot;&quot;Miscellaneous stuff that doesn&#39;t really fit anywhere else.&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">from</span> <span class="nn">textwrap</span> <span class="k">import</span> <span class="n">dedent</span><span class="p">,</span> <span class="n">fill</span>
+<span class="kn">import</span> <span class="nn">textwrap</span>
 
 
 <div class="viewcode-block" id="filldedent"><a class="viewcode-back" href="../../../modules/utilities/misc.html#diofant.utilities.misc.filldedent">[docs]</a><span class="k">def</span> <span class="nf">filldedent</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="mi">70</span><span class="p">):</span>
@@ -171,11 +171,7 @@
 <span class="sd">    start with a newline after the initial triple quote, inserting an empty</span>
 <span class="sd">    line at the beginning of the string.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">fill</span><span class="p">(</span><span class="n">dedent</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">))</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">),</span> <span class="n">width</span><span class="o">=</span><span class="n">w</span><span class="p">)</span></div>
-
-
-<span class="c1"># XXX: PyPy doesn&#39;t support hash randomization</span>
-<span class="n">HASH_RANDOMIZATION</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">flags</span><span class="p">,</span> <span class="s1">&#39;hash_randomization&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">textwrap</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">textwrap</span><span class="o">.</span><span class="n">dedent</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">))</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">),</span> <span class="n">width</span><span class="o">=</span><span class="n">w</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="debug"><a class="viewcode-back" href="../../../modules/utilities/misc.html#diofant.utilities.misc.debug">[docs]</a><span class="k">def</span> <span class="nf">debug</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>

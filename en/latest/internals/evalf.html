@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Numerical evaluation &mdash; Diofant 0.11.0a6.dev39+g5960c6d documentation</title>
+  <title>Numerical evaluation &mdash; Diofant 0.11.0a6.dev45+g3c0c949 documentation</title>
   
 
   
@@ -41,7 +41,7 @@
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Numeric Computation" href="numeric-computation.html" />
+    <link rel="next" title="Development" href="../guide.html" />
     <link rel="prev" title="Computing Integrals using Meijer G-Functions" href="g-functions.html" /> 
 </head>
 
@@ -100,9 +100,9 @@
 <li class="toctree-l3"><a class="reference internal" href="#accuracy-and-error-handling">Accuracy and error handling</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#sums-and-integrals">Sums and integrals</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#numerical-simplification">Numerical simplification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ufuncify">uFuncify</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="numeric-computation.html">Numeric Computation</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../guide.html">Development</a></li>
@@ -499,6 +499,57 @@ and a minimum numerical tolerance. Here are some elementary examples:</p>
 </pre></div>
 </div>
 </div>
+<div class="section" id="ufuncify">
+<h2>uFuncify<a class="headerlink" href="#ufuncify" title="Permalink to this headline">¶</a></h2>
+<p>While NumPy operations are very efficient for vectorized data they sometimes
+incur unnecessary costs when chained together. Consider the following operation</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">get_numpy_array</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">x</span>
+</pre></div>
+</div>
+<p>The operators <code class="docutils literal notranslate"><span class="pre">sin</span></code> and <code class="docutils literal notranslate"><span class="pre">/</span></code> call routines that execute tight for loops in
+<code class="docutils literal notranslate"><span class="pre">C</span></code>. The resulting computation looks something like this</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">temp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="p">}</span>
+<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This is slightly sub-optimal because</p>
+<ol class="arabic simple">
+<li><p>We allocate an extra <code class="docutils literal notranslate"><span class="pre">temp</span></code> array</p></li>
+<li><p>We walk over <code class="docutils literal notranslate"><span class="pre">x</span></code> memory twice when once would have been sufficient</p></li>
+</ol>
+<p>A better solution would fuse both element-wise operations into a single for loop</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">/</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Statically compiled projects like NumPy are unable to take advantage of such
+optimizations. Fortunately, Diofant is able to generate efficient low-level C
+or Fortran code. It can then depend on projects like <code class="docutils literal notranslate"><span class="pre">Cython</span></code> or <code class="docutils literal notranslate"><span class="pre">f2py</span></code> to
+compile and reconnect that code back up to Python. Fortunately this process is
+well automated and a Diofant user wishing to make use of this code generation
+should call the <code class="docutils literal notranslate"><span class="pre">ufuncify</span></code> function</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">x</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.utilities.autowrap</span> <span class="k">import</span> <span class="n">ufuncify</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">ufuncify</span><span class="p">((</span><span class="n">x</span><span class="p">,),</span> <span class="n">expr</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This function <code class="docutils literal notranslate"><span class="pre">f</span></code> consumes and returns a NumPy array. Generally <code class="docutils literal notranslate"><span class="pre">ufuncify</span></code>
+performs at least as well as <code class="docutils literal notranslate"><span class="pre">lambdify</span></code>. If the expression is complicated
+then <code class="docutils literal notranslate"><span class="pre">ufuncify</span></code> often significantly outperforms the NumPy backed solution.
+Jensen has a good <a class="reference external" href="https://ojensen.wordpress.com/2010/08/10/fast-ufunc-ish-hydrogen-solutions/">blog post</a>
+on this topic.</p>
+</div>
 </div>
 
 
@@ -509,7 +560,7 @@ and a minimum numerical tolerance. Here are some elementary examples:</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="numeric-computation.html" class="btn btn-neutral float-right" title="Numeric Computation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../guide.html" class="btn btn-neutral float-right" title="Development" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="g-functions.html" class="btn btn-neutral float-left" title="Computing Integrals using Meijer G-Functions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
