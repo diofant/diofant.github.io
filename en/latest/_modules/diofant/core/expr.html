@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.core.expr &mdash; Diofant 0.11.0a6.dev53+g08c9b60 documentation</title>
+  <title>diofant.core.expr &mdash; Diofant 0.11.0a6 documentation</title>
   
 
   
@@ -862,13 +862,8 @@
         <span class="k">return</span> <span class="n">c</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_eval_transpose</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">..functions.elementary.complexes</span> <span class="k">import</span> <span class="n">conjugate</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_complex</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_extended_real</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_hermitian</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">conjugate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_antihermitian</span><span class="p">:</span>
-            <span class="k">return</span> <span class="o">-</span><span class="n">conjugate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Expr.transpose"><a class="viewcode-back" href="../../../modules/core.html#diofant.core.expr.Expr.transpose">[docs]</a>    <span class="k">def</span> <span class="nf">transpose</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Transpose self.</span>
@@ -884,10 +879,6 @@
 
     <span class="k">def</span> <span class="nf">_eval_adjoint</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="kn">from</span> <span class="nn">..functions.elementary.complexes</span> <span class="k">import</span> <span class="n">conjugate</span><span class="p">,</span> <span class="n">transpose</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_hermitian</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_antihermitian</span><span class="p">:</span>
-            <span class="k">return</span> <span class="o">-</span><span class="bp">self</span>
         <span class="n">obj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eval_conjugate</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">obj</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">transpose</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
