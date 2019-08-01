@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.polys.polytools &mdash; Diofant 0.11.0a6 documentation</title>
+  <title>diofant.polys.polytools &mdash; Diofant 0.11.0a7.dev2+gc4d7f7e documentation</title>
   
 
   
@@ -4646,43 +4646,12 @@
 <span class="sd">    [((-26/15, -19/11), 1), ((19/11, 26/15), 1)]</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="s1">&#39;__iter__&#39;</span><span class="p">):</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">F</span> <span class="o">=</span> <span class="n">Poly</span><span class="p">(</span><span class="n">F</span><span class="p">)</span>
-        <span class="k">except</span> <span class="n">GeneratorsNeeded</span><span class="p">:</span>
-            <span class="k">return</span> <span class="p">[]</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">F</span> <span class="o">=</span> <span class="n">Poly</span><span class="p">(</span><span class="n">F</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">GeneratorsNeeded</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>
 
-        <span class="k">return</span> <span class="n">F</span><span class="o">.</span><span class="n">intervals</span><span class="p">(</span><span class="nb">all</span><span class="o">=</span><span class="nb">all</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="n">eps</span><span class="p">,</span> <span class="n">inf</span><span class="o">=</span><span class="n">inf</span><span class="p">,</span> <span class="n">sup</span><span class="o">=</span><span class="n">sup</span><span class="p">,</span> <span class="n">sqf</span><span class="o">=</span><span class="n">sqf</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">polys</span><span class="p">,</span> <span class="n">opt</span> <span class="o">=</span> <span class="n">parallel_poly_from_expr</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">domain</span><span class="o">=</span><span class="s1">&#39;QQ&#39;</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">opt</span><span class="o">.</span><span class="n">gens</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">MultivariatePolynomialError</span>
-
-        <span class="n">R</span> <span class="o">=</span> <span class="n">polys</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">ring</span>
-        <span class="n">polys</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">rep</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">polys</span><span class="p">]</span>
-
-        <span class="k">if</span> <span class="n">eps</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">eps</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">eps</span><span class="p">)</span>
-
-            <span class="k">if</span> <span class="n">eps</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;eps&#39; must be a positive rational&quot;</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">inf</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">inf</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">inf</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">sup</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">sup</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">sup</span><span class="p">)</span>
-
-        <span class="n">intervals</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">dup_isolate_real_roots_list</span><span class="p">(</span><span class="n">polys</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="n">eps</span><span class="p">,</span> <span class="n">inf</span><span class="o">=</span><span class="n">inf</span><span class="p">,</span> <span class="n">sup</span><span class="o">=</span><span class="n">sup</span><span class="p">,</span>
-                                                  <span class="n">strict</span><span class="o">=</span><span class="n">strict</span><span class="p">)</span>
-
-        <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
-
-        <span class="k">for</span> <span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">),</span> <span class="n">indices</span> <span class="ow">in</span> <span class="n">intervals</span><span class="p">:</span>
-            <span class="n">s</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">to_expr</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">opt</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">to_expr</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(((</span><span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">),</span> <span class="n">indices</span><span class="p">))</span>
-
-        <span class="k">return</span> <span class="n">result</span></div>
+    <span class="k">return</span> <span class="n">F</span><span class="o">.</span><span class="n">intervals</span><span class="p">(</span><span class="nb">all</span><span class="o">=</span><span class="nb">all</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="n">eps</span><span class="p">,</span> <span class="n">inf</span><span class="o">=</span><span class="n">inf</span><span class="p">,</span> <span class="n">sup</span><span class="o">=</span><span class="n">sup</span><span class="p">,</span> <span class="n">sqf</span><span class="o">=</span><span class="n">sqf</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="refine_root"><a class="viewcode-back" href="../../../modules/polys.html#diofant.polys.polytools.refine_root">[docs]</a><span class="k">def</span> <span class="nf">refine_root</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">check_sqf</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
