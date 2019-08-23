@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>diofant.functions.elementary.hyperbolic &mdash; Diofant 0.11.0a7.dev17+g5474caf documentation</title>
+  <title>diofant.functions.elementary.hyperbolic &mdash; Diofant 0.11.0a7.dev22+g4a2ff9b documentation</title>
   
 
   
@@ -1075,7 +1075,17 @@
 
 <div class="viewcode-block" id="acosh.inverse"><a class="viewcode-back" href="../../../../modules/functions/elementary.html#diofant.functions.elementary.hyperbolic.acosh.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argindex</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns the inverse of this function.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">cosh</span></div></div>
+        <span class="k">return</span> <span class="n">cosh</span></div>
+
+    <span class="k">def</span> <span class="nf">_eval_rewrite_as_log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">log</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">_eval_nseries</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">logx</span><span class="p">):</span>
+        <span class="n">x0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">x0</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eval_rewrite_as_log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">_eval_nseries</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">logx</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_eval_nseries</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">logx</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="atanh"><a class="viewcode-back" href="../../../../modules/functions/elementary.html#diofant.functions.elementary.hyperbolic.atanh">[docs]</a><span class="k">class</span> <span class="nc">atanh</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
