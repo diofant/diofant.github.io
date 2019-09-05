@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Details on the Hypergeometric Function Expansion &mdash; Diofant 0.11.0a7.dev30+gcbab876 documentation</title>
+  <title>Details on the Hypergeometric Function Expansion &mdash; Diofant 0.11.0a7.dev34+g8283ed3 documentation</title>
   
 
   
@@ -468,7 +468,8 @@ A computation shows</p>
           = -\frac{(-1)^{l_u}}{l_u!} \frac{(-1)^t}{(l_u+1)_t}.\]</div>
 <p>Hence</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}res_{s = b + l_u + t} =&amp; -z^{b + l_u}
+\[\begin{split}\begin{aligned}
+res_{s = b + l_u + t} =&amp; -z^{b + l_u}
    \frac{(-1)^{l_u}}{l_u!}
    \prod_{i=1}^{u} \frac{(-1)^{\delta_i}}{(l_u - k_i + 1)_{\delta_i}}
    \frac{\prod_{j=1}^n \Gamma(1 - a_j + l_u + b)
@@ -482,7 +483,8 @@ A computation shows</p>
    \frac{\prod_{j=1}^n (1 - a_j + l_u + b)_t
          \prod_{j=n+1}^p (-1)^t (l_u + b + 1 - a_j)_t^*}
         {\prod_{j=1}^m (-1)^t (l_u + b + 1 - b_j)_t^*
-         \prod_{j=m+1}^q (1 - b_j + l_u + b)_t},\end{split}\]</div>
+         \prod_{j=m+1}^q (1 - b_j + l_u + b)_t},
+\end{aligned}\end{split}\]</div>
 <p>where the <span class="math notranslate nohighlight">\(*\)</span> means to omit the terms we treated specially.</p>
 <p>We thus arrive at</p>
 <div class="math notranslate nohighlight">
@@ -550,11 +552,13 @@ In the case of our example the function <span class="math notranslate nohighligh
 <p>We get these functions mainly by guessing and testing the result. Hence
 we proceed by computing <span class="math notranslate nohighlight">\(f(g(w))\)</span> (and simplifying naively)</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}f(g(w)) &amp;= -\frac{\pi^2 g(w)^4}{16} \\
+\[\begin{split}\begin{aligned}
+f(g(w)) &amp;= -\frac{\pi^2 g(w)^4}{16} \\
         &amp;= -\frac{\pi^2 g\left(\frac{2}{\sqrt{\pi}} \exp\left(\frac{i \pi}{4}\right) w^{\frac{1}{4}}\right)^4}{16} \\
         &amp;= -\frac{\pi^2 \frac{2^4}{\sqrt{\pi}^4} \exp\left(\frac{i \pi}{4}\right)^4 {w^{\frac{1}{4}}}^4}{16} \\
         &amp;= -\exp\left(i \pi\right) w \\
-        &amp;= w\end{split}\]</div>
+        &amp;= w
+\end{aligned}\end{split}\]</div>
 <p>and indeed get back <span class="math notranslate nohighlight">\(w\)</span>. (In case of branched functions we have to be
 aware of branch cuts. In that case we take <span class="math notranslate nohighlight">\(w\)</span> to be a positive real
 number and check the formula. If what we have found works for positive
