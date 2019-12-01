@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Diofant 0.11 &mdash; Diofant 0.11.0a14.dev98+g1fa1812a1 documentation</title>
+  <title>Diofant 0.11 &mdash; Diofant 0.11.0a14.dev129+g549cebbbb documentation</title>
   
 
   
@@ -183,6 +183,7 @@
 <h2>New features<a class="headerlink" href="#new-features" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Added <a class="reference internal" href="../modules/ntheory.html#diofant.ntheory.residue_ntheory.discrete_log" title="diofant.ntheory.residue_ntheory.discrete_log"><code class="xref py py-func docutils literal notranslate"><span class="pre">discrete_log()</span></code></a> to compute discrete logarithms, see <a class="reference external" href="https://github.com/diofant/diofant/pull/785">#785</a>.  Thanks to Gabriel Orisaka.</p></li>
+<li><p>Function <a class="reference internal" href="../modules/solvers/recurr.html#diofant.solvers.recurr.rsolve" title="diofant.solvers.recurr.rsolve"><code class="xref py py-func docutils literal notranslate"><span class="pre">rsolve()</span></code></a> got initial support for systems of equations, see <a class="reference external" href="https://github.com/diofant/diofant/pull/921">#921</a>.</p></li>
 </ul>
 </div>
 <div class="section" id="major-changes">
@@ -213,6 +214,9 @@
 <li><p>Removed <code class="docutils literal notranslate"><span class="pre">generate_oriented_forest()</span></code>, <code class="docutils literal notranslate"><span class="pre">kbins()</span></code> and <code class="docutils literal notranslate"><span class="pre">ibin()</span></code> functions, see <a class="reference external" href="https://github.com/diofant/diofant/pull/903">#903</a>.</p></li>
 <li><p>Drop support for <code class="docutils literal notranslate"><span class="pre">numexpr</span></code> module in <a class="reference internal" href="../modules/utilities/lambdify.html#diofant.utilities.lambdify.lambdify" title="diofant.utilities.lambdify.lambdify"><code class="xref py py-func docutils literal notranslate"><span class="pre">lambdify()</span></code></a> and <code class="docutils literal notranslate"><span class="pre">NumExprPrinter</span></code> printer class, see <a class="reference external" href="https://github.com/diofant/diofant/pull/903">#903</a>.</p></li>
 <li><p>Removed <code class="docutils literal notranslate"><span class="pre">DeferredVector</span></code> class, see <a class="reference external" href="https://github.com/diofant/diofant/pull/905">#905</a>.</p></li>
+<li><p>Don’t export too much from <a class="reference internal" href="../modules/solvers/index.html#module-diofant.solvers" title="diofant.solvers"><code class="xref py py-mod docutils literal notranslate"><span class="pre">solvers</span></code></a> to the default namespace, keep only <a class="reference internal" href="../modules/solvers/solvers.html#diofant.solvers.solvers.solve" title="diofant.solvers.solvers.solve"><code class="xref py py-func docutils literal notranslate"><span class="pre">solve()</span></code></a>, <a class="reference internal" href="../modules/solvers/recurr.html#diofant.solvers.recurr.rsolve" title="diofant.solvers.recurr.rsolve"><code class="xref py py-func docutils literal notranslate"><span class="pre">rsolve()</span></code></a> and <a class="reference internal" href="../modules/solvers/ode.html#diofant.solvers.ode.dsolve" title="diofant.solvers.ode.dsolve"><code class="xref py py-func docutils literal notranslate"><span class="pre">dsolve()</span></code></a> functions, see <a class="reference external" href="https://github.com/diofant/diofant/pull/921">#921</a>.</p></li>
+<li><p>Make <a class="reference internal" href="../modules/solvers/recurr.html#diofant.solvers.recurr.rsolve" title="diofant.solvers.recurr.rsolve"><code class="xref py py-func docutils literal notranslate"><span class="pre">rsolve()</span></code></a>’s <code class="docutils literal notranslate"><span class="pre">init</span></code> parameter more compatible with <a class="reference internal" href="../modules/solvers/ode.html#diofant.solvers.ode.dsolve" title="diofant.solvers.ode.dsolve"><code class="xref py py-func docutils literal notranslate"><span class="pre">dsolve()</span></code></a>’s one, e.g. drop accepting <code class="docutils literal notranslate"><span class="pre">init=[1,</span> <span class="pre">2,</span> <span class="pre">3]</span></code> and <code class="docutils literal notranslate"><span class="pre">init={0:</span> <span class="pre">1,</span> <span class="pre">1:</span> <span class="pre">2,</span> <span class="pre">2:</span> <span class="pre">3}</span></code> forms, see <a class="reference external" href="https://github.com/diofant/diofant/pull/921">#921</a>.</p></li>
+<li><p>Removed <code class="docutils literal notranslate"><span class="pre">dict_merge()</span></code>, <code class="docutils literal notranslate"><span class="pre">generate_bell()</span></code> and <code class="docutils literal notranslate"><span class="pre">reshape()</span></code> functions, see <a class="reference external" href="https://github.com/diofant/diofant/pull/921">#921</a>.</p></li>
 </ul>
 </div>
 <div class="section" id="minor-changes">
@@ -223,6 +227,7 @@
 <li><p>Added <code class="docutils literal notranslate"><span class="pre">AA_FACTOR_METHOD</span></code> configuration option to specify factorization algorithm for polynomials with algebraic coefficients, see <a class="reference external" href="https://github.com/diofant/diofant/pull/844">#844</a>.</p></li>
 <li><p><a class="reference internal" href="../modules/utilities/codegen.html#diofant.utilities.codegen.CCodeGen" title="diofant.utilities.codegen.CCodeGen"><code class="xref py py-class docutils literal notranslate"><span class="pre">CCodeGen</span></code></a> got support for common subexpression replacement, see <a class="reference external" href="https://github.com/diofant/diofant/pull/893">#893</a>.  Thanks to James Cotton.</p></li>
 <li><p>100% test coverage for <a class="reference internal" href="../modules/utilities/index.html#module-diofant.utilities" title="diofant.utilities"><code class="xref py py-mod docutils literal notranslate"><span class="pre">utilities</span></code></a> module.</p></li>
+<li><p><a class="reference internal" href="../modules/solvers/recurr.html#diofant.solvers.recurr.rsolve" title="diofant.solvers.recurr.rsolve"><code class="xref py py-func docutils literal notranslate"><span class="pre">rsolve()</span></code></a> got <code class="docutils literal notranslate"><span class="pre">simplify</span></code> option to control default output simplification, see <a class="reference external" href="https://github.com/diofant/diofant/pull/921">#921</a>.</p></li>
 </ul>
 </div>
 <div class="section" id="developer-changes">
@@ -302,6 +307,7 @@ for complete list of issues and pull requests involved in this release.</p>
 <li><p><a class="reference external" href="https://github.com/sympy/sympy/issues/17789">sympy/sympy#17789</a> Intermittent test failure in assumptions</p></li>
 <li><p><a class="reference external" href="https://github.com/sympy/sympy/issues/17841">sympy/sympy#17841</a> integrate throws error for rational functions involving I</p></li>
 <li><p><a class="reference external" href="https://github.com/sympy/sympy/issues/17847">sympy/sympy#17847</a> Wrong result for as_leading_term()</p></li>
+<li><p><a class="reference external" href="https://github.com/sympy/sympy/issues/17982">sympy/sympy#17982</a> Wrong result from rsolve</p></li>
 </ul>
 </div>
 </div>

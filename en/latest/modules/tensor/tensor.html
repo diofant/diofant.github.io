@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Tensor &mdash; Diofant 0.11.0a14.dev98+g1fa1812a1 documentation</title>
+  <title>Tensor &mdash; Diofant 0.11.0a14.dev129+g549cebbbb documentation</title>
   
 
   
@@ -418,7 +418,7 @@ fixed basis:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Lorentz</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">sstr</span><span class="p">(</span><span class="n">Lorentz</span><span class="p">))</span>
 <span class="go">TensorIndexType(Lorentz, 0)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">sstr</span><span class="p">(</span><span class="n">Lorentz</span><span class="o">.</span><span class="n">data</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">Lorentz</span><span class="o">.</span><span class="n">data</span><span class="p">))</span>
 <span class="go">[[1 0 0 0]</span>
 <span class="go">[0 -1 0 0]</span>
 <span class="go">[0 0 -1 0]</span>
@@ -744,7 +744,7 @@ enclosed by round brackets, then numerical indices inside square brackets.</p>
 </pre></div>
 </div>
 <p>To view the data, just type:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">sstr</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">data</span><span class="p">))</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">data</span><span class="p">))</span>
 <span class="go">[[0 1 2 3]</span>
 <span class="go"> [2 3 4 5]</span>
 <span class="go"> [4 5 6 7]</span>
@@ -753,14 +753,14 @@ enclosed by round brackets, then numerical indices inside square brackets.</p>
 </div>
 <p>Turning to a tensor expression, covariant indices get the corresponding
 components data corrected by the metric:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">sstr</span><span class="p">(</span><span class="n">A</span><span class="p">(</span><span class="n">i0</span><span class="p">,</span> <span class="o">-</span><span class="n">i1</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">))</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">A</span><span class="p">(</span><span class="n">i0</span><span class="p">,</span> <span class="o">-</span><span class="n">i1</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">))</span>
 <span class="go">[[0 -1 -2 -3]</span>
 <span class="go"> [2 -3 -4 -5]</span>
 <span class="go"> [4 -5 -6 -7]</span>
 <span class="go"> [6 -7 -8 -9]]</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">sstr</span><span class="p">(</span><span class="n">A</span><span class="p">(</span><span class="o">-</span><span class="n">i0</span><span class="p">,</span> <span class="o">-</span><span class="n">i1</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">))</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">A</span><span class="p">(</span><span class="o">-</span><span class="n">i0</span><span class="p">,</span> <span class="o">-</span><span class="n">i1</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">))</span>
 <span class="go">[[0 -1 -2 -3]</span>
 <span class="go"> [-2 3 4 5]</span>
 <span class="go"> [-4 5 6 7]</span>
@@ -768,7 +768,7 @@ components data corrected by the metric:</p>
 </pre></div>
 </div>
 <p>while if all indices are contravariant, the <code class="docutils literal notranslate"><span class="pre">ndarray</span></code> remains the same</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">sstr</span><span class="p">(</span><span class="n">A</span><span class="p">(</span><span class="n">i0</span><span class="p">,</span> <span class="n">i1</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">))</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">A</span><span class="p">(</span><span class="n">i0</span><span class="p">,</span> <span class="n">i1</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">))</span>
 <span class="go"> [[0 1 2 3]</span>
 <span class="go"> [2 3 4 5]</span>
 <span class="go"> [4 5 6 7]</span>
@@ -805,7 +805,7 @@ representation of an antisymmetric set of two elements:</p>
 </div>
 <p>Now it is possible to retrieve the contravariant form of the Electromagnetic
 tensor:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">sstr</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="n">i0</span><span class="p">,</span> <span class="n">i1</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">))</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="n">i0</span><span class="p">,</span> <span class="n">i1</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">))</span>
 <span class="go">[[0 -E_x/c -E_y/c -E_z/c]</span>
 <span class="go"> [E_x/c 0 -B_z B_y]</span>
 <span class="go"> [E_y/c B_z 0 -B_x]</span>
@@ -813,7 +813,7 @@ tensor:</p>
 </pre></div>
 </div>
 <p>and the mixed contravariant-covariant form:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">sstr</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="n">i0</span><span class="p">,</span> <span class="o">-</span><span class="n">i1</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">))</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="n">i0</span><span class="p">,</span> <span class="o">-</span><span class="n">i1</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">))</span>
 <span class="go">[[0 E_x/c E_y/c E_z/c]</span>
 <span class="go"> [E_x/c 0 B_z -B_y]</span>
 <span class="go"> [E_y/c -B_z 0 B_x]</span>
@@ -840,9 +840,9 @@ example, define a four-momentum-like tensor:</p>
 </pre></div>
 </div>
 <p>The contravariant and covariant components are, respectively:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">sstr</span><span class="p">(</span><span class="n">P</span><span class="p">(</span><span class="n">i0</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">))</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">P</span><span class="p">(</span><span class="n">i0</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">))</span>
 <span class="go">[E p_x p_y p_z]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">sstr</span><span class="p">(</span><span class="n">P</span><span class="p">(</span><span class="o">-</span><span class="n">i0</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">P</span><span class="p">(</span><span class="o">-</span><span class="n">i0</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">))</span>
 <span class="go">[E -p_x -p_y -p_z]</span>
 </pre></div>
 </div>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Core &mdash; Diofant 0.11.0a14.dev98+g1fa1812a1 documentation</title>
+  <title>Core &mdash; Diofant 0.11.0a14.dev129+g549cebbbb documentation</title>
   
 
   
@@ -412,7 +412,7 @@ then you can use the clashing-symbols dictionaries that have been defined
 there as private variables: _clash1 (single-letter variables), _clash2
 (the multi-letter Greek names) or _clash (both single and multi-letter
 names that are defined in abc).</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.abc</span> <span class="k">import</span> <span class="n">_clash1</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.abc</span> <span class="kn">import</span> <span class="n">_clash1</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">_clash1</span>
 <span class="go">{&#39;E&#39;: E, &#39;I&#39;: I, &#39;N&#39;: N, &#39;O&#39;: O, &#39;S&#39;: S}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sympify</span><span class="p">(</span><span class="s1">&#39;E &amp; O&#39;</span><span class="p">,</span> <span class="n">_clash1</span><span class="p">)</span>
@@ -462,11 +462,11 @@ not do so when <code class="docutils literal notranslate"><span class="pre">eval
 just define a <code class="docutils literal notranslate"><span class="pre">_diofant_</span></code> method to your class. You can do that even to
 classes that you do not own by subclassing or adding the method at runtime.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">MyList1</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="gp">... </span>        <span class="k">yield</span> <span class="mi">1</span>
 <span class="gp">... </span>        <span class="k">yield</span> <span class="mi">2</span>
 <span class="gp">... </span>        <span class="k">return</span>
-<span class="gp">... </span>    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span> <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="p">)[</span><span class="n">i</span><span class="p">]</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span> <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="p">)[</span><span class="n">i</span><span class="p">]</span>
 <span class="gp">... </span>    <span class="k">def</span> <span class="nf">_diofant_</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sympify</span><span class="p">(</span><span class="n">MyList1</span><span class="p">())</span>
 <span class="go">Matrix([</span>
@@ -479,11 +479,11 @@ classes that you do not own by subclassing or adding the method at runtime.</p>
 function that takes a single argument and returns the desired Diofant
 object, e.g. <code class="docutils literal notranslate"><span class="pre">converter[MyList]</span> <span class="pre">=</span> <span class="pre">lambda</span> <span class="pre">x:</span> <span class="pre">Matrix(x)</span></code>.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">MyList2</span><span class="p">:</span>   <span class="c1"># XXX Do not do this if you control the class!</span>
-<span class="gp">... </span>    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1">#     Use _diofant_!</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1">#     Use _diofant_!</span>
 <span class="gp">... </span>        <span class="k">yield</span> <span class="mi">1</span>
 <span class="gp">... </span>        <span class="k">yield</span> <span class="mi">2</span>
 <span class="gp">... </span>        <span class="k">return</span>
-<span class="gp">... </span>    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span> <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="p">)[</span><span class="n">i</span><span class="p">]</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span> <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="p">)[</span><span class="n">i</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">converter</span><span class="p">[</span><span class="n">MyList2</span><span class="p">]</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sympify</span><span class="p">(</span><span class="n">MyList2</span><span class="p">())</span>
 <span class="go">Matrix([</span>
@@ -717,7 +717,7 @@ is type <code class="docutils literal notranslate"><span class="pre">Integer</sp
 <p>Finally, arguments to atoms() can select more than atomic atoms: any
 diofant type can be listed as an argument and those types of “atoms”
 as found in scanning the arguments of the expression recursively:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.core.function</span> <span class="k">import</span> <span class="n">AppliedUndef</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.core.function</span> <span class="kn">import</span> <span class="n">AppliedUndef</span>
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">y</span> <span class="o">+</span> <span class="n">I</span><span class="o">*</span><span class="n">pi</span><span class="p">))</span><span class="o">.</span><span class="n">atoms</span><span class="p">(</span><span class="n">Mul</span><span class="p">)</span>
@@ -1123,7 +1123,7 @@ to affect those already made:</p>
 sorted by count_op length, number of arguments and by the
 default_sort_key to break any ties. All other iterables are left
 unsorted.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.abc</span> <span class="k">import</span> <span class="n">e</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.abc</span> <span class="kn">import</span> <span class="n">e</span>
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">))</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
@@ -1396,7 +1396,7 @@ expressions.</p>
 <h2>Expr<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="diofant.core.expr.Expr">
-<em class="property">class </em><code class="sig-prename descclassname">diofant.core.expr.</code><code class="sig-name descname">Expr</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L16-L3157"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diofant.core.expr.</code><code class="sig-name descname">Expr</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L16-L3161"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr" title="Permalink to this definition">¶</a></dt>
 <dd><p>Base class for algebraic expressions.</p>
 <p>Everything that requires arithmetic operations to be defined
 should subclass this class, instead of Basic (which should be
@@ -1418,7 +1418,7 @@ pattern matching, substitutions, etc).</p>
 
 <dl class="method">
 <dt id="diofant.core.expr.Expr.apart">
-<code class="sig-name descname">apart</code><span class="sig-paren">(</span><em class="sig-param">x=None</em>, <em class="sig-param">**args</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L3013-L3016"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.apart" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">apart</code><span class="sig-paren">(</span><em class="sig-param">x=None</em>, <em class="sig-param">**args</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L3017-L3020"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.apart" title="Permalink to this definition">¶</a></dt>
 <dd><p>See the apart function in diofant.polys.</p>
 </dd></dl>
 
@@ -1466,13 +1466,13 @@ setting <code class="docutils literal notranslate"><span class="pre">warn</span>
 
 <dl class="method">
 <dt id="diofant.core.expr.Expr.as_coeff_Add">
-<code class="sig-name descname">as_coeff_Add</code><span class="sig-paren">(</span><em class="sig-param">rational=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L2811-L2813"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.as_coeff_Add" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">as_coeff_Add</code><span class="sig-paren">(</span><em class="sig-param">rational=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L2815-L2817"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.as_coeff_Add" title="Permalink to this definition">¶</a></dt>
 <dd><p>Efficiently extract the coefficient of a summation.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="diofant.core.expr.Expr.as_coeff_Mul">
-<code class="sig-name descname">as_coeff_Mul</code><span class="sig-paren">(</span><em class="sig-param">rational=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L2807-L2809"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.as_coeff_Mul" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">as_coeff_Mul</code><span class="sig-paren">(</span><em class="sig-param">rational=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L2811-L2813"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.as_coeff_Mul" title="Permalink to this definition">¶</a></dt>
 <dd><p>Efficiently extract the coefficient of a product.</p>
 </dd></dl>
 
@@ -1508,7 +1508,7 @@ use <code class="docutils literal notranslate"><span class="pre">self.as_indepen
 
 <dl class="method">
 <dt id="diofant.core.expr.Expr.as_coeff_exponent">
-<code class="sig-name descname">as_coeff_exponent</code><span class="sig-paren">(</span><em class="sig-param">x</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L2794-L2805"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.as_coeff_exponent" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">as_coeff_exponent</code><span class="sig-paren">(</span><em class="sig-param">x</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L2798-L2809"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.as_coeff_exponent" title="Permalink to this definition">¶</a></dt>
 <dd><p><code class="docutils literal notranslate"><span class="pre">c*x**e</span> <span class="pre">-&gt;</span> <span class="pre">c,e</span></code> where x can be any symbolic expression.</p>
 </dd></dl>
 
@@ -1809,7 +1809,7 @@ the returned values</p>
 
 <dl class="method">
 <dt id="diofant.core.expr.Expr.as_leading_term">
-<code class="sig-name descname">as_leading_term</code><span class="sig-paren">(</span><em class="sig-param">*symbols</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L2756-L2789"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.as_leading_term" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">as_leading_term</code><span class="sig-paren">(</span><em class="sig-param">*symbols</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L2760-L2793"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.as_leading_term" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the leading (nonzero) term of the series expansion of self.</p>
 <p>The _eval_as_leading_term routines are used to do this, and they must
 always return a non-zero value.</p>
@@ -1915,7 +1915,7 @@ a single call to this function.</p>
 
 <dl class="method">
 <dt id="diofant.core.expr.Expr.aseries">
-<code class="sig-name descname">aseries</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">n=6</em>, <em class="sig-param">bound=0</em>, <em class="sig-param">hir=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L2622-L2723"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.aseries" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">aseries</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">n=6</em>, <em class="sig-param">bound=0</em>, <em class="sig-param">hir=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L2626-L2727"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.aseries" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns asymptotic expansion for “self”.</p>
 <p>This is equivalent to <code class="docutils literal notranslate"><span class="pre">self.series(x,</span> <span class="pre">oo,</span> <span class="pre">n)</span></code></p>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">hir</span></code> parameter to produce hierarchical series. It stops the recursion
@@ -1956,7 +1956,7 @@ till we get constant coefficients.</p>
 
 <dl class="method">
 <dt id="diofant.core.expr.Expr.cancel">
-<code class="sig-name descname">cancel</code><span class="sig-paren">(</span><em class="sig-param">*gens</em>, <em class="sig-param">**args</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L3048-L3051"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.cancel" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cancel</code><span class="sig-paren">(</span><em class="sig-param">*gens</em>, <em class="sig-param">**args</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L3052-L3055"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.cancel" title="Permalink to this definition">¶</a></dt>
 <dd><p>See the cancel function in diofant.polys.</p>
 </dd></dl>
 
@@ -2075,19 +2075,19 @@ from the following:</p>
 
 <dl class="method">
 <dt id="diofant.core.expr.Expr.collect">
-<code class="sig-name descname">collect</code><span class="sig-paren">(</span><em class="sig-param">syms</em>, <em class="sig-param">func=None</em>, <em class="sig-param">evaluate=True</em>, <em class="sig-param">exact=False</em>, <em class="sig-param">distribute_order_term=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L3003-L3006"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.collect" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">collect</code><span class="sig-paren">(</span><em class="sig-param">syms</em>, <em class="sig-param">func=None</em>, <em class="sig-param">evaluate=True</em>, <em class="sig-param">exact=False</em>, <em class="sig-param">distribute_order_term=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L3007-L3010"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.collect" title="Permalink to this definition">¶</a></dt>
 <dd><p>See the collect function in diofant.simplify.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="diofant.core.expr.Expr.combsimp">
-<code class="sig-name descname">combsimp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L3038-L3041"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.combsimp" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">combsimp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L3042-L3045"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.combsimp" title="Permalink to this definition">¶</a></dt>
 <dd><p>See the combsimp function in diofant.simplify.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="diofant.core.expr.Expr.compute_leading_term">
-<code class="sig-name descname">compute_leading_term</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">logx=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L2730-L2754"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.compute_leading_term" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">compute_leading_term</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">logx=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L2734-L2758"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.compute_leading_term" title="Permalink to this definition">¶</a></dt>
 <dd><p>as_leading_term is only allowed for results of .series()
 This is a wrapper to compute a series first.</p>
 </dd></dl>
@@ -2125,7 +2125,7 @@ e.could_extract_minus_sign() == False.</p>
 
 <dl class="method">
 <dt id="diofant.core.expr.Expr.diff">
-<code class="sig-name descname">diff</code><span class="sig-paren">(</span><em class="sig-param">*symbols</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L2845-L2848"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.diff" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">diff</code><span class="sig-paren">(</span><em class="sig-param">*symbols</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L2849-L2852"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.diff" title="Permalink to this definition">¶</a></dt>
 <dd><p>Alias for <a class="reference internal" href="#diofant.core.function.diff" title="diofant.core.function.diff"><code class="xref py py-func docutils literal notranslate"><span class="pre">diff()</span></code></a>.</p>
 </dd></dl>
 
@@ -2146,7 +2146,7 @@ used to return True or False.</p>
 
 <dl class="method">
 <dt id="diofant.core.expr.Expr.expand">
-<code class="sig-name descname">expand</code><span class="sig-paren">(</span><em class="sig-param">deep=True</em>, <em class="sig-param">modulus=None</em>, <em class="sig-param">power_base=True</em>, <em class="sig-param">power_exp=True</em>, <em class="sig-param">mul=True</em>, <em class="sig-param">log=True</em>, <em class="sig-param">multinomial=True</em>, <em class="sig-param">basic=True</em>, <em class="sig-param">**hints</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L2891-L2980"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.expand" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">expand</code><span class="sig-paren">(</span><em class="sig-param">deep=True</em>, <em class="sig-param">modulus=None</em>, <em class="sig-param">power_base=True</em>, <em class="sig-param">power_exp=True</em>, <em class="sig-param">mul=True</em>, <em class="sig-param">log=True</em>, <em class="sig-param">multinomial=True</em>, <em class="sig-param">basic=True</em>, <em class="sig-param">**hints</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L2895-L2984"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.expand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Expand an expression using hints.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
@@ -2247,7 +2247,7 @@ of arguments of self.</p>
 
 <dl class="method">
 <dt id="diofant.core.expr.Expr.factor">
-<code class="sig-name descname">factor</code><span class="sig-paren">(</span><em class="sig-param">*gens</em>, <em class="sig-param">**args</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L3043-L3046"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.factor" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">factor</code><span class="sig-paren">(</span><em class="sig-param">*gens</em>, <em class="sig-param">**args</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L3047-L3050"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.factor" title="Permalink to this definition">¶</a></dt>
 <dd><p>See the factor() function in diofant.polys.polytools.</p>
 </dd></dl>
 
@@ -2273,13 +2273,13 @@ is no O(…) term, it returns None.</p>
 
 <dl class="method">
 <dt id="diofant.core.expr.Expr.integrate">
-<code class="sig-name descname">integrate</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L2986-L2989"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.integrate" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">integrate</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L2990-L2993"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.integrate" title="Permalink to this definition">¶</a></dt>
 <dd><p>See the integrate function in diofant.integrals.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="diofant.core.expr.Expr.invert">
-<code class="sig-name descname">invert</code><span class="sig-paren">(</span><em class="sig-param">g</em>, <em class="sig-param">*gens</em>, <em class="sig-param">**args</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L3053-L3068"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.invert" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">invert</code><span class="sig-paren">(</span><em class="sig-param">g</em>, <em class="sig-param">*gens</em>, <em class="sig-param">**args</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L3057-L3072"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.invert" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the multiplicative inverse of <code class="docutils literal notranslate"><span class="pre">self</span></code> mod <code class="docutils literal notranslate"><span class="pre">g</span></code>
 where <code class="docutils literal notranslate"><span class="pre">self</span></code> (and <code class="docutils literal notranslate"><span class="pre">g</span></code>) may be symbolic expressions).</p>
 <div class="admonition seealso">
@@ -2479,8 +2479,11 @@ the default is True since self should be simplified before testing.</p>
 
 <dl class="method">
 <dt id="diofant.core.expr.Expr.is_hypergeometric">
-<code class="sig-name descname">is_hypergeometric</code><span class="sig-paren">(</span><em class="sig-param">k</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L2277-L2287"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.is_hypergeometric" title="Permalink to this definition">¶</a></dt>
-<dd><p>Test if self is a hypergeometric term in k.</p>
+<code class="sig-name descname">is_hypergeometric</code><span class="sig-paren">(</span><em class="sig-param">n</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L2277-L2291"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.is_hypergeometric" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test if self is a hypergeometric term in <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
+<p>Term <span class="math notranslate nohighlight">\(a(n)\)</span> is hypergeometric if it is annihilated by first order
+linear difference equations with polynomial coefficients or, in
+simpler words, if consecutive term ratio is a rational function.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p><a class="reference internal" href="simplify/simplify.html#diofant.simplify.simplify.hypersimp" title="diofant.simplify.simplify.hypersimp"><code class="xref py py-meth docutils literal notranslate"><span class="pre">diofant.simplify.simplify.hypersimp()</span></code></a></p>
@@ -2782,13 +2785,13 @@ to become one.</p>
 
 <dl class="method">
 <dt id="diofant.core.expr.Expr.limit">
-<code class="sig-name descname">limit</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">xlim</em>, <em class="sig-param">dir='+'</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L2725-L2728"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.limit" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">limit</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">xlim</em>, <em class="sig-param">dir='+'</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L2729-L2732"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.limit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute limit x-&gt;xlim.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="diofant.core.expr.Expr.lseries">
-<code class="sig-name descname">lseries</code><span class="sig-paren">(</span><em class="sig-param">x=None</em>, <em class="sig-param">x0=0</em>, <em class="sig-param">dir='+'</em>, <em class="sig-param">logx=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L2488-L2509"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.lseries" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">lseries</code><span class="sig-paren">(</span><em class="sig-param">x=None</em>, <em class="sig-param">x0=0</em>, <em class="sig-param">dir='+'</em>, <em class="sig-param">logx=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L2492-L2513"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.lseries" title="Permalink to this definition">¶</a></dt>
 <dd><p>Wrapper for series yielding an iterator of the terms of the series.</p>
 <p>Note: an infinite series will yield an infinite iterator. The following,
 for exaxmple, will never terminate. It will just keep printing terms
@@ -2815,7 +2818,7 @@ using the “n” parameter.</p>
 
 <dl class="method">
 <dt id="diofant.core.expr.Expr.nseries">
-<code class="sig-name descname">nseries</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">n=6</em>, <em class="sig-param">logx=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L2540-L2620"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.nseries" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">nseries</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">n=6</em>, <em class="sig-param">logx=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L2544-L2624"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.nseries" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate “n” terms of series in x around 0</p>
 <p>This calculates n terms of series in the innermost expressions
 and then builds up the final series just by “cross-multiplying”
@@ -2876,13 +2879,13 @@ log(x) + log(1 + p) if p.is_positive.)</p>
 
 <dl class="method">
 <dt id="diofant.core.expr.Expr.nsimplify">
-<code class="sig-name descname">nsimplify</code><span class="sig-paren">(</span><em class="sig-param">constants=[]</em>, <em class="sig-param">tolerance=None</em>, <em class="sig-param">full=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L2998-L3001"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.nsimplify" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">nsimplify</code><span class="sig-paren">(</span><em class="sig-param">constants=[]</em>, <em class="sig-param">tolerance=None</em>, <em class="sig-param">full=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L3002-L3005"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.nsimplify" title="Permalink to this definition">¶</a></dt>
 <dd><p>See the nsimplify function in diofant.simplify.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="diofant.core.expr.Expr.powsimp">
-<code class="sig-name descname">powsimp</code><span class="sig-paren">(</span><em class="sig-param">**args</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L3033-L3036"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.powsimp" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">powsimp</code><span class="sig-paren">(</span><em class="sig-param">**args</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L3037-L3040"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.powsimp" title="Permalink to this definition">¶</a></dt>
 <dd><p>See the powsimp function in diofant.simplify.</p>
 </dd></dl>
 
@@ -2908,13 +2911,13 @@ Rational (never a negative or a Float).</p>
 
 <dl class="method">
 <dt id="diofant.core.expr.Expr.radsimp">
-<code class="sig-name descname">radsimp</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L3028-L3031"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.radsimp" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">radsimp</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L3032-L3035"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.radsimp" title="Permalink to this definition">¶</a></dt>
 <dd><p>See the radsimp function in diofant.simplify.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="diofant.core.expr.Expr.ratsimp">
-<code class="sig-name descname">ratsimp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L3018-L3021"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.ratsimp" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">ratsimp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L3022-L3025"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.ratsimp" title="Permalink to this definition">¶</a></dt>
 <dd><p>See the ratsimp function in diofant.simplify.</p>
 </dd></dl>
 
@@ -2926,7 +2929,7 @@ Rational (never a negative or a Float).</p>
 
 <dl class="method">
 <dt id="diofant.core.expr.Expr.round">
-<code class="sig-name descname">round</code><span class="sig-paren">(</span><em class="sig-param">p=0</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L3070-L3157"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.round" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">round</code><span class="sig-paren">(</span><em class="sig-param">p=0</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L3074-L3161"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.round" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return x rounded to the given decimal place.</p>
 <p>If a complex number would results, apply round to the real
 and imaginary components of the number.</p>
@@ -2969,7 +2972,7 @@ latter returns either a Number or a complex number:</p>
 
 <dl class="method">
 <dt id="diofant.core.expr.Expr.series">
-<code class="sig-name descname">series</code><span class="sig-paren">(</span><em class="sig-param">x=None</em>, <em class="sig-param">x0=0</em>, <em class="sig-param">n=6</em>, <em class="sig-param">dir='+'</em>, <em class="sig-param">logx=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L2322-L2473"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.series" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">series</code><span class="sig-paren">(</span><em class="sig-param">x=None</em>, <em class="sig-param">x0=0</em>, <em class="sig-param">n=6</em>, <em class="sig-param">dir='+'</em>, <em class="sig-param">logx=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L2326-L2477"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.series" title="Permalink to this definition">¶</a></dt>
 <dd><p>Series expansion of “self” around <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">x0</span></code> yielding either terms of
 the series one by one (the lazy series given when n=None), else
 all the terms at once when n != None.</p>
@@ -3014,7 +3017,7 @@ flag will not alter the results.</p>
 
 <dl class="method">
 <dt id="diofant.core.expr.Expr.simplify">
-<code class="sig-name descname">simplify</code><span class="sig-paren">(</span><em class="sig-param">ratio=1.7</em>, <em class="sig-param">measure=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L2991-L2996"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.simplify" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">simplify</code><span class="sig-paren">(</span><em class="sig-param">ratio=1.7</em>, <em class="sig-param">measure=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L2995-L3000"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.simplify" title="Permalink to this definition">¶</a></dt>
 <dd><p>See the simplify function in diofant.simplify.</p>
 </dd></dl>
 
@@ -3026,7 +3029,7 @@ flag will not alter the results.</p>
 
 <dl class="method">
 <dt id="diofant.core.expr.Expr.taylor_term">
-<code class="sig-name descname">taylor_term</code><span class="sig-paren">(</span><em class="sig-param">n</em>, <em class="sig-param">x</em>, <em class="sig-param">*previous_terms</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L2475-L2486"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.taylor_term" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">taylor_term</code><span class="sig-paren">(</span><em class="sig-param">n</em>, <em class="sig-param">x</em>, <em class="sig-param">*previous_terms</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L2479-L2490"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.taylor_term" title="Permalink to this definition">¶</a></dt>
 <dd><p>General method for the taylor term.</p>
 <p>This method is slow, because it differentiates n-times. Subclasses can
 redefine it to make it faster by using the “previous_terms”.</p>
@@ -3034,7 +3037,7 @@ redefine it to make it faster by using the “previous_terms”.</p>
 
 <dl class="method">
 <dt id="diofant.core.expr.Expr.together">
-<code class="sig-name descname">together</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L3008-L3011"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.together" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">together</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L3012-L3015"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.together" title="Permalink to this definition">¶</a></dt>
 <dd><p>See the together function in diofant.polys.</p>
 </dd></dl>
 
@@ -3050,7 +3053,7 @@ redefine it to make it faster by using the “previous_terms”.</p>
 
 <dl class="method">
 <dt id="diofant.core.expr.Expr.trigsimp">
-<code class="sig-name descname">trigsimp</code><span class="sig-paren">(</span><em class="sig-param">**args</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L3023-L3026"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.trigsimp" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">trigsimp</code><span class="sig-paren">(</span><em class="sig-param">**args</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L3027-L3030"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.Expr.trigsimp" title="Permalink to this definition">¶</a></dt>
 <dd><p>See the trigsimp function in diofant.simplify.</p>
 </dd></dl>
 
@@ -3061,7 +3064,7 @@ redefine it to make it faster by using the “previous_terms”.</p>
 <h2>AtomicExpr<a class="headerlink" href="#atomicexpr" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="diofant.core.expr.AtomicExpr">
-<em class="property">class </em><code class="sig-prename descclassname">diofant.core.expr.</code><code class="sig-name descname">AtomicExpr</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L3160-L3186"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.AtomicExpr" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diofant.core.expr.</code><code class="sig-name descname">AtomicExpr</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/expr.py#L3164-L3190"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.expr.AtomicExpr" title="Permalink to this definition">¶</a></dt>
 <dd><p>A parent class for object which are both atoms and Exprs.</p>
 <p>For example: Symbol, Number, Rational, Integer, …
 But not: Add, Mul, Pow, …</p>
@@ -3562,7 +3565,7 @@ is used:</p>
 <p>Although you can increase the precision of an existing Float using Float
 it will not increase the accuracy – the underlying value is not changed:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">show</span><span class="p">(</span><span class="n">f</span><span class="p">):</span> <span class="c1"># binary rep of Float</span>
-<span class="gp">... </span>    <span class="kn">from</span> <span class="nn">diofant</span> <span class="k">import</span> <span class="n">Mul</span><span class="p">,</span> <span class="n">Pow</span>
+<span class="gp">... </span>    <span class="kn">from</span> <span class="nn">diofant</span> <span class="kn">import</span> <span class="n">Mul</span><span class="p">,</span> <span class="n">Pow</span>
 <span class="gp">... </span>    <span class="n">s</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">_mpf_</span>
 <span class="gp">... </span>    <span class="n">v</span> <span class="o">=</span> <span class="n">Mul</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">m</span><span class="p">),</span> <span class="n">Pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">e</span><span class="p">),</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> at prec=</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">_prec</span><span class="p">))</span>
@@ -6172,7 +6175,7 @@ mathematically inconsistent results.  For example:</p>
 <p>This appears wrong because in fact 2*cos(x) and 2*sqrt(1 - sin(x)**2) are
 identically equal.  However this is the wrong way to think of this.  Think
 of it instead as if we have something like this:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.abc</span> <span class="k">import</span> <span class="n">s</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.abc</span> <span class="kn">import</span> <span class="n">s</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">F</span><span class="p">(</span><span class="n">u</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="k">return</span> <span class="mi">2</span><span class="o">*</span><span class="n">u</span>
 <span class="gp">...</span>
@@ -6509,7 +6512,7 @@ the atoms method:</p>
 </div>
 <p>If you just want the function you defined, not Diofant functions, the
 thing to search for is AppliedUndef:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.core.function</span> <span class="k">import</span> <span class="n">AppliedUndef</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.core.function</span> <span class="kn">import</span> <span class="n">AppliedUndef</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e</span><span class="o">.</span><span class="n">atoms</span><span class="p">(</span><span class="n">AppliedUndef</span><span class="p">)</span>
 <span class="go">{f(x)}</span>
 </pre></div>
@@ -6844,7 +6847,7 @@ kind of ‘expansion’.  For hints that simply rewrite an expression, use the
 </ul>
 <p class="rubric">Examples</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">MyClass</span><span class="p">(</span><span class="n">Expr</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
 <span class="gp">... </span>        <span class="n">args</span> <span class="o">=</span> <span class="n">sympify</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
 <span class="gp">... </span>        <span class="k">return</span> <span class="n">Expr</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
 <span class="gp">...</span>
@@ -7402,7 +7405,7 @@ used to determine how the terms <em>within</em> an expression are ordered.
 and reversed values of the same (e.g. ‘rev-lex’). The default order
 value is None (which translates to ‘lex’).</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.core.function</span> <span class="k">import</span> <span class="n">UndefinedFunction</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.core.function</span> <span class="kn">import</span> <span class="n">UndefinedFunction</span>
 </pre></div>
 </div>
 <p>The following are equivalent ways of getting the key for an object:</p>
@@ -7506,7 +7509,7 @@ sequence.</p>
 <p><a class="reference internal" href="#diofant.core.compatibility.iterable" title="diofant.core.compatibility.iterable"><code class="xref py py-func docutils literal notranslate"><span class="pre">iterable()</span></code></a></p>
 </div>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">types</span> <span class="k">import</span> <span class="n">GeneratorType</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">types</span> <span class="kn">import</span> <span class="n">GeneratorType</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">is_sequence</span><span class="p">([])</span>
 <span class="go">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">is_sequence</span><span class="p">(</span><span class="nb">set</span><span class="p">())</span>
@@ -7686,7 +7689,7 @@ sequence.</p>
 <p><a class="reference internal" href="#diofant.core.compatibility.iterable" title="diofant.core.compatibility.iterable"><code class="xref py py-func docutils literal notranslate"><span class="pre">iterable()</span></code></a></p>
 </div>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">types</span> <span class="k">import</span> <span class="n">GeneratorType</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">types</span> <span class="kn">import</span> <span class="n">GeneratorType</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">is_sequence</span><span class="p">([])</span>
 <span class="go">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">is_sequence</span><span class="p">(</span><span class="nb">set</span><span class="p">())</span>
