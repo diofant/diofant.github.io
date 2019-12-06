@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Mathematical Functions &mdash; Diofant 0.11.0a14.dev146+gd05850cdf documentation</title>
+  <title>Mathematical Functions &mdash; Diofant 0.11.0a14.dev149+g10921efa2 documentation</title>
   
 
   
@@ -231,12 +231,12 @@ function classes:</p>
 </pre></div>
 </div>
 <p>In the following example Function is used as a base class for
-<code class="docutils literal notranslate"><span class="pre">my_func</span></code> that represents a mathematical function <em>my_func</em>. Suppose
-that it is well known, that <em>my_func(0)</em> is <em>1</em> and <em>my_func</em> at infinity
+<code class="docutils literal notranslate"><span class="pre">MyFunc</span></code> that represents a mathematical function <em>MyFunc</em>. Suppose
+that it is well known, that <em>MyFunc(0)</em> is <em>1</em> and <em>MyFunc</em> at infinity
 goes to <em>0</em>, so we want those two simplifications to occur automatically.
-Suppose also that <em>my_func(x)</em> is real exactly when <em>x</em> is real. Here is
+Suppose also that <em>MyFunc(x)</em> is real exactly when <em>x</em> is real. Here is
 an implementation that honours those requirements:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">my_func</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">MyFunc</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
 <span class="gp">...</span>
 <span class="gp">... </span>    <span class="nd">@classmethod</span>
 <span class="gp">... </span>    <span class="k">def</span> <span class="nf">eval</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
@@ -249,23 +249,23 @@ an implementation that honours those requirements:</p>
 <span class="gp">... </span>    <span class="k">def</span> <span class="nf">_eval_is_real</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="gp">... </span>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">is_real</span>
 <span class="gp">...</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">my_func</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">sin</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MyFunc</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">sin</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="go">1</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">my_func</span><span class="p">(</span><span class="n">oo</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MyFunc</span><span class="p">(</span><span class="n">oo</span><span class="p">)</span>
 <span class="go">0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">my_func</span><span class="p">(</span><span class="mf">3.54</span><span class="p">)</span><span class="o">.</span><span class="n">evalf</span><span class="p">()</span> <span class="c1"># Not yet implemented for my_func.</span>
-<span class="go">my_func(3.54)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">my_func</span><span class="p">(</span><span class="n">I</span><span class="p">)</span><span class="o">.</span><span class="n">is_real</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MyFunc</span><span class="p">(</span><span class="mf">3.54</span><span class="p">)</span><span class="o">.</span><span class="n">evalf</span><span class="p">()</span>  <span class="c1"># Not yet implemented for MyFunc.</span>
+<span class="go">MyFunc(3.54)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MyFunc</span><span class="p">(</span><span class="n">I</span><span class="p">)</span><span class="o">.</span><span class="n">is_real</span>
 <span class="go">False</span>
 </pre></div>
 </div>
-<p>In order for <code class="docutils literal notranslate"><span class="pre">my_func</span></code> to become useful, several other methods would
+<p>In order for <code class="docutils literal notranslate"><span class="pre">MyFunc</span></code> to become useful, several other methods would
 need to be implemented. See source code of some of the already
 implemented functions for more complete examples.</p>
 <p>Also, if the function can take more than one argument, then <code class="docutils literal notranslate"><span class="pre">nargs</span></code>
-must be defined, e.g. if <code class="docutils literal notranslate"><span class="pre">my_func</span></code> can take one or two arguments
+must be defined, e.g. if <code class="docutils literal notranslate"><span class="pre">MyFunc</span></code> can take one or two arguments
 then,</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">my_func</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">MyFunc</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="n">nargs</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 <span class="gp">...</span>
 <span class="go">&gt;&gt;&gt;</span>

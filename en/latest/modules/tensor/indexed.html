@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Indexed Objects &mdash; Diofant 0.11.0a14.dev146+gd05850cdf documentation</title>
+  <title>Indexed Objects &mdash; Diofant 0.11.0a14.dev149+g10921efa2 documentation</title>
   
 
   
@@ -278,7 +278,7 @@ get_indices() and get_contraction_structure():</p>
 <p>See the appropriate docstrings for a detailed explanation of the output.</p>
 <dl class="class">
 <dt id="diofant.tensor.indexed.Idx">
-<em class="property">class </em><code class="sig-prename descclassname">diofant.tensor.indexed.</code><code class="sig-name descname">Idx</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/tensor/indexed.py#L404-L562"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.tensor.indexed.Idx" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diofant.tensor.indexed.</code><code class="sig-name descname">Idx</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/tensor/indexed.py#L405-L569"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.tensor.indexed.Idx" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents an integer index as an Integer or integer expression.</p>
 <p>There are a number of ways to create an Idx object.  The constructor
 takes two arguments:</p>
@@ -308,14 +308,16 @@ range or dimension arguments.)</p>
 </div>
 <p>If a string is given for the label an integer Symbol is created and the
 bounds are both None:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">idx</span> <span class="o">=</span> <span class="n">Idx</span><span class="p">(</span><span class="s1">&#39;qwerty&#39;</span><span class="p">);</span> <span class="n">idx</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">idx</span> <span class="o">=</span> <span class="n">Idx</span><span class="p">(</span><span class="s1">&#39;qwerty&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">idx</span>
 <span class="go">qwerty</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">idx</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="n">idx</span><span class="o">.</span><span class="n">upper</span>
 <span class="go">(None, None)</span>
 </pre></div>
 </div>
 <p>Both upper and lower bounds can be specified:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">idx</span> <span class="o">=</span> <span class="n">Idx</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">U</span><span class="p">));</span> <span class="n">idx</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">idx</span> <span class="o">=</span> <span class="n">Idx</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">U</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">idx</span>
 <span class="go">i</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">idx</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="n">idx</span><span class="o">.</span><span class="n">upper</span>
 <span class="go">(L, U)</span>
@@ -323,16 +325,20 @@ bounds are both None:</p>
 </div>
 <p>When only a single bound is given it is interpreted as the dimension
 and the lower bound defaults to 0:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">idx</span> <span class="o">=</span> <span class="n">Idx</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span> <span class="n">idx</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="n">idx</span><span class="o">.</span><span class="n">upper</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">idx</span> <span class="o">=</span> <span class="n">Idx</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">idx</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="n">idx</span><span class="o">.</span><span class="n">upper</span>
 <span class="go">(0, n - 1)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">idx</span> <span class="o">=</span> <span class="n">Idx</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span> <span class="n">idx</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="n">idx</span><span class="o">.</span><span class="n">upper</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">idx</span> <span class="o">=</span> <span class="n">Idx</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">idx</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="n">idx</span><span class="o">.</span><span class="n">upper</span>
 <span class="go">(0, 3)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">idx</span> <span class="o">=</span> <span class="n">Idx</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">oo</span><span class="p">);</span> <span class="n">idx</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="n">idx</span><span class="o">.</span><span class="n">upper</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">idx</span> <span class="o">=</span> <span class="n">Idx</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">oo</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">idx</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="n">idx</span><span class="o">.</span><span class="n">upper</span>
 <span class="go">(0, oo)</span>
 </pre></div>
 </div>
 <p>The label can be a literal integer instead of a string/Symbol:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">idx</span> <span class="o">=</span> <span class="n">Idx</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span> <span class="n">idx</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="n">idx</span><span class="o">.</span><span class="n">upper</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">idx</span> <span class="o">=</span> <span class="n">Idx</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">idx</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="n">idx</span><span class="o">.</span><span class="n">upper</span>
 <span class="go">(0, n - 1)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">idx</span><span class="o">.</span><span class="n">label</span>
 <span class="go">2</span>
@@ -487,7 +493,7 @@ the ranges of the indices correspond to the shape of the array.</p>
 
 <dl class="class">
 <dt id="diofant.tensor.indexed.IndexedBase">
-<em class="property">class </em><code class="sig-prename descclassname">diofant.tensor.indexed.</code><code class="sig-name descname">IndexedBase</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/tensor/indexed.py#L265-L401"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.tensor.indexed.IndexedBase" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diofant.tensor.indexed.</code><code class="sig-name descname">IndexedBase</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/tensor/indexed.py#L265-L402"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.tensor.indexed.IndexedBase" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represent the base or stem of an indexed object</p>
 <p>The IndexedBase class represent an array that contains elements. The main purpose
 of this class is to allow the convenient creation of objects of the Indexed
@@ -509,7 +515,8 @@ to arrays, and is recognized as such for code generation and automatic
 compilation and wrapping.</p></li>
 </ul>
 </div></blockquote>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">);</span> <span class="n">A</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span>
 <span class="go">A</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 <span class="go">&lt;class &#39;diofant.tensor.indexed.IndexedBase&#39;&gt;</span>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Internals of the Polynomial Manipulation Module &mdash; Diofant 0.11.0a14.dev146+gd05850cdf documentation</title>
+  <title>Internals of the Polynomial Manipulation Module &mdash; Diofant 0.11.0a14.dev149+g10921efa2 documentation</title>
   
 
   
@@ -247,10 +247,11 @@ may be slightly more efficient.)</p>
 
 <dl class="function">
 <dt id="diofant.polys.densebasic.dmp_apply_pairs">
-<code class="sig-prename descclassname">diofant.polys.densebasic.</code><code class="sig-name descname">dmp_apply_pairs</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">g</em>, <em class="sig-param">h</em>, <em class="sig-param">args</em>, <em class="sig-param">u</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/densebasic.py#L856-L885"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densebasic.dmp_apply_pairs" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.polys.densebasic.</code><code class="sig-name descname">dmp_apply_pairs</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">g</em>, <em class="sig-param">h</em>, <em class="sig-param">args</em>, <em class="sig-param">u</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/densebasic.py#L856-L886"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densebasic.dmp_apply_pairs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Apply <code class="docutils literal notranslate"><span class="pre">h</span></code> to pairs of coefficients of <code class="docutils literal notranslate"><span class="pre">f</span></code> and <code class="docutils literal notranslate"><span class="pre">g</span></code>.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">h</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">:</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">-</span> <span class="n">z</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">h</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">-</span> <span class="n">z</span>
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dmp_apply_pairs</span><span class="p">([[</span><span class="n">ZZ</span><span class="p">(</span><span class="mi">1</span><span class="p">)],</span> <span class="p">[</span><span class="n">ZZ</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">3</span><span class="p">)]],</span>
@@ -513,7 +514,7 @@ may be slightly more efficient.)</p>
 
 <dl class="function">
 <dt id="diofant.polys.densebasic.dmp_slice_in">
-<code class="sig-prename descclassname">diofant.polys.densebasic.</code><code class="sig-name descname">dmp_slice_in</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">m</em>, <em class="sig-param">n</em>, <em class="sig-param">j</em>, <em class="sig-param">u</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/densebasic.py#L888-L913"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densebasic.dmp_slice_in" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.polys.densebasic.</code><code class="sig-name descname">dmp_slice_in</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">m</em>, <em class="sig-param">n</em>, <em class="sig-param">j</em>, <em class="sig-param">u</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/densebasic.py#L889-L914"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densebasic.dmp_slice_in" title="Permalink to this definition">¶</a></dt>
 <dd><p>Take a continuous subsequence of terms of <code class="docutils literal notranslate"><span class="pre">f</span></code> in <code class="docutils literal notranslate"><span class="pre">x_j</span></code> in <code class="docutils literal notranslate"><span class="pre">K[X]</span></code>.</p>
 </dd></dl>
 
@@ -638,12 +639,12 @@ may be slightly more efficient.)</p>
 
 <dl class="function">
 <dt id="diofant.polys.densebasic.dup_random">
-<code class="sig-prename descclassname">diofant.polys.densebasic.</code><code class="sig-name descname">dup_random</code><span class="sig-paren">(</span><em class="sig-param">n</em>, <em class="sig-param">a</em>, <em class="sig-param">b</em>, <em class="sig-param">K</em>, <em class="sig-param">percent=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/densebasic.py#L916-L947"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densebasic.dup_random" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.polys.densebasic.</code><code class="sig-name descname">dup_random</code><span class="sig-paren">(</span><em class="sig-param">n</em>, <em class="sig-param">a</em>, <em class="sig-param">b</em>, <em class="sig-param">K</em>, <em class="sig-param">percent=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/densebasic.py#L917-L948"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densebasic.dup_random" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a polynomial of degree <code class="docutils literal notranslate"><span class="pre">n</span></code> with coefficients in <code class="docutils literal notranslate"><span class="pre">[a,</span> <span class="pre">b]</span></code>.</p>
 <p>If <code class="docutils literal notranslate"><span class="pre">percent</span></code> is a natural number less than 100 then only approximately
 the given percentage of elements will be non-zero.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dup_random</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span> 
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dup_random</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>  
 <span class="go">[-2, -8, 9, -4]</span>
 </pre></div>
 </div>
@@ -2086,7 +2087,7 @@ where <code class="docutils literal notranslate"><span class="pre">n</span> <spa
 <code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">gf_irreducible</code><span class="sig-paren">(</span><em class="sig-param">n</em>, <em class="sig-param">p</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L512-L526"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_irreducible" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate random irreducible polynomial of degree <code class="docutils literal notranslate"><span class="pre">n</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code>.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_irreducible</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span> 
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_irreducible</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>  
 <span class="go">[1, 4, 2, 2, 3, 2, 4, 1, 4, 0, 4]</span>
 </pre></div>
 </div>
@@ -2185,7 +2186,7 @@ of <code class="docutils literal notranslate"><span class="pre">f**n</span></cod
 <code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">gf_random</code><span class="sig-paren">(</span><em class="sig-param">n</em>, <em class="sig-param">p</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L498-L509"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_random" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate a random polynomial in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code> of degree <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_random</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span> 
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_random</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>  
 <span class="go">[1, 2, 3, 2, 1, 1, 1, 2, 0, 4, 2]</span>
 </pre></div>
 </div>
@@ -3714,7 +3715,7 @@ w.r.t. <code class="docutils literal notranslate"><span class="pre">O_to</span><
 <h2>Algebraic number fields<a class="headerlink" href="#algebraic-number-fields" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="diofant.polys.numberfields.minpoly_groebner">
-<code class="sig-prename descclassname">diofant.polys.numberfields.</code><code class="sig-name descname">minpoly_groebner</code><span class="sig-paren">(</span><em class="sig-param">ex</em>, <em class="sig-param">x</em>, <em class="sig-param">domain</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/numberfields.py#L571-L649"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.numberfields.minpoly_groebner" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.polys.numberfields.</code><code class="sig-name descname">minpoly_groebner</code><span class="sig-paren">(</span><em class="sig-param">ex</em>, <em class="sig-param">x</em>, <em class="sig-param">domain</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/numberfields.py#L574-L652"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.numberfields.minpoly_groebner" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes the minimal polynomial of an algebraic number
 using Gröbner bases</p>
 <p class="rubric">Examples</p>

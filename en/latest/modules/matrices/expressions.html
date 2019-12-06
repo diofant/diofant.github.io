@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Matrix Expressions &mdash; Diofant 0.11.0a14.dev146+gd05850cdf documentation</title>
+  <title>Matrix Expressions &mdash; Diofant 0.11.0a14.dev149+g10921efa2 documentation</title>
   
 
   
@@ -316,8 +316,8 @@ types</p>
 <dd><p>Symbolic representation of a Matrix object</p>
 <p>Creates a Diofant Symbol to represent a Matrix. This matrix has a shape and
 can be included in Matrix Expressions</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">MatrixSymbol</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="c1"># A 3 by 4 Matrix</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">B</span> <span class="o">=</span> <span class="n">MatrixSymbol</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="c1"># A 4 by 3 Matrix</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">MatrixSymbol</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>  <span class="c1"># A 3 by 4 Matrix</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">B</span> <span class="o">=</span> <span class="n">MatrixSymbol</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>  <span class="c1"># A 4 by 3 Matrix</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">A</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(3, 4)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="mi">2</span><span class="o">*</span><span class="n">A</span><span class="o">*</span><span class="n">B</span> <span class="o">+</span> <span class="n">Identity</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
@@ -432,11 +432,11 @@ function, or the <code class="docutils literal notranslate"><span class="pre">.T
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span> <span class="o">=</span> <span class="n">FunctionMatrix</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">Lambda</span><span class="p">((</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span> <span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">))</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">isinstance</span><span class="p">(</span><span class="n">Y</span><span class="o">*</span><span class="n">Y</span><span class="p">,</span> <span class="n">MatMul</span><span class="p">)</span> <span class="c1"># this is an expression object</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">isinstance</span><span class="p">(</span><span class="n">Y</span><span class="o">*</span><span class="n">Y</span><span class="p">,</span> <span class="n">MatMul</span><span class="p">)</span>  <span class="c1"># this is an expression object</span>
 <span class="go">True</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">Y</span><span class="o">**</span><span class="mi">2</span><span class="p">)[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span> <span class="c1"># So this is evaluated lazily</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">Y</span><span class="o">**</span><span class="mi">2</span><span class="p">)[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>  <span class="c1"># So this is evaluated lazily</span>
 <span class="go">342923500</span>
 </pre></div>
 </div>
@@ -476,7 +476,7 @@ sub-blocks. They can work with <a class="reference internal" href="#diofant.matr
 <a class="reference internal" href="immutablematrices.html#diofant.matrices.immutable.ImmutableMatrix" title="diofant.matrices.immutable.ImmutableMatrix"><code class="xref py py-class docutils literal notranslate"><span class="pre">ImmutableMatrix</span></code></a> objects.</p>
 <span class="target" id="module-diofant.matrices.expressions.blockmatrix"></span><dl class="class">
 <dt id="diofant.matrices.expressions.blockmatrix.BlockMatrix">
-<em class="property">class </em><code class="sig-prename descclassname">diofant.matrices.expressions.blockmatrix.</code><code class="sig-name descname">BlockMatrix</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/matrices/expressions/blockmatrix.py#L19-L177"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.matrices.expressions.blockmatrix.BlockMatrix" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diofant.matrices.expressions.blockmatrix.</code><code class="sig-name descname">BlockMatrix</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/matrices/expressions/blockmatrix.py#L19-L176"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.matrices.expressions.blockmatrix.BlockMatrix" title="Permalink to this definition">¶</a></dt>
 <dd><p>A BlockMatrix is a Matrix composed of other smaller, submatrices</p>
 <p>The submatrices are stored in a Diofant Matrix object but accessed as part of
 a Matrix Expression</p>
@@ -502,11 +502,10 @@ a Matrix Expression</p>
 </div>
 <dl class="method">
 <dt id="diofant.matrices.expressions.blockmatrix.BlockMatrix.transpose">
-<code class="sig-name descname">transpose</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/matrices/expressions/blockmatrix.py#L119-L140"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.matrices.expressions.blockmatrix.BlockMatrix.transpose" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">transpose</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/matrices/expressions/blockmatrix.py#L119-L139"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.matrices.expressions.blockmatrix.BlockMatrix.transpose" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return transpose of matrix.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.abc</span> <span class="kn">import</span> <span class="n">l</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">MatrixSymbol</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">MatrixSymbol</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span> <span class="o">=</span> <span class="n">MatrixSymbol</span><span class="p">(</span><span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Z</span> <span class="o">=</span> <span class="n">MatrixSymbol</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">B</span> <span class="o">=</span> <span class="n">BlockMatrix</span><span class="p">([[</span><span class="n">X</span><span class="p">,</span> <span class="n">Z</span><span class="p">],</span> <span class="p">[</span><span class="n">ZeroMatrix</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="n">Y</span><span class="p">]])</span>
@@ -526,7 +525,7 @@ a Matrix Expression</p>
 
 <dl class="class">
 <dt id="diofant.matrices.expressions.blockmatrix.BlockDiagMatrix">
-<em class="property">class </em><code class="sig-prename descclassname">diofant.matrices.expressions.blockmatrix.</code><code class="sig-name descname">BlockDiagMatrix</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/matrices/expressions/blockmatrix.py#L180-L245"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.matrices.expressions.blockmatrix.BlockDiagMatrix" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diofant.matrices.expressions.blockmatrix.</code><code class="sig-name descname">BlockDiagMatrix</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/matrices/expressions/blockmatrix.py#L179-L244"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.matrices.expressions.blockmatrix.BlockDiagMatrix" title="Permalink to this definition">¶</a></dt>
 <dd><p>A BlockDiagMatrix is a BlockMatrix with matrices only along the diagonal</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">l</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;n m l&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">MatrixSymbol</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
@@ -541,7 +540,7 @@ a Matrix Expression</p>
 
 <dl class="function">
 <dt id="diofant.matrices.expressions.blockmatrix.block_collapse">
-<code class="sig-prename descclassname">diofant.matrices.expressions.blockmatrix.</code><code class="sig-name descname">block_collapse</code><span class="sig-paren">(</span><em class="sig-param">expr</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/matrices/expressions/blockmatrix.py#L248-L279"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.matrices.expressions.blockmatrix.block_collapse" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.matrices.expressions.blockmatrix.</code><code class="sig-name descname">block_collapse</code><span class="sig-paren">(</span><em class="sig-param">expr</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/matrices/expressions/blockmatrix.py#L247-L278"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.matrices.expressions.blockmatrix.block_collapse" title="Permalink to this definition">¶</a></dt>
 <dd><p>Evaluates a block matrix expression</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">l</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;n m l&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">MatrixSymbol</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>

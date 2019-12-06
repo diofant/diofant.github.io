@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Codegen &mdash; Diofant 0.11.0a14.dev146+gd05850cdf documentation</title>
+  <title>Codegen &mdash; Diofant 0.11.0a14.dev149+g10921efa2 documentation</title>
   
 
   
@@ -216,7 +216,7 @@ below for advanced users that may want to use the framework directly.</p>
 <p class="admonition-title">Note</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">codegen</span></code> callable is not in the diofant namespace automatically,
 to use it you must first execute</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.utilities.codegen</span> <span class="kn">import</span> <span class="n">codegen</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.utilities.codegen</span> <span class="kn">import</span> <span class="n">codegen</span>  <span class="c1"># noqa: F401</span>
 </pre></div>
 </div>
 </div>
@@ -610,7 +610,7 @@ files.  [default : True]</p></li>
 
 <dl class="function">
 <dt id="diofant.utilities.codegen.codegen">
-<code class="sig-prename descclassname">diofant.utilities.codegen.</code><code class="sig-name descname">codegen</code><span class="sig-paren">(</span><em class="sig-param">name_expr</em>, <em class="sig-param">language</em>, <em class="sig-param">prefix=None</em>, <em class="sig-param">project='project'</em>, <em class="sig-param">to_files=False</em>, <em class="sig-param">header=True</em>, <em class="sig-param">empty=True</em>, <em class="sig-param">argument_sequence=None</em>, <em class="sig-param">global_vars=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/utilities/codegen.py#L1430-L1562"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.utilities.codegen.codegen" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.utilities.codegen.</code><code class="sig-name descname">codegen</code><span class="sig-paren">(</span><em class="sig-param">name_expr</em>, <em class="sig-param">language</em>, <em class="sig-param">prefix=None</em>, <em class="sig-param">project='project'</em>, <em class="sig-param">to_files=False</em>, <em class="sig-param">header=True</em>, <em class="sig-param">empty=True</em>, <em class="sig-param">argument_sequence=None</em>, <em class="sig-param">global_vars=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/utilities/codegen.py#L1430-L1563"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.utilities.codegen.codegen" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate source code for expressions in a given language.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -670,9 +670,10 @@ listed here will not show up as function arguments.</p></li>
 <p>Another example using Equality objects to give named outputs.  Here the
 filename (prefix) is taken from the first (name, expr) pair.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.abc</span> <span class="kn">import</span> <span class="n">f</span><span class="p">,</span> <span class="n">g</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="p">[(</span><span class="n">c_name</span><span class="p">,</span> <span class="n">c_code</span><span class="p">),</span> <span class="p">(</span><span class="n">h_name</span><span class="p">,</span> <span class="n">c_header</span><span class="p">)]</span> <span class="o">=</span> <span class="n">codegen</span><span class="p">(</span>
-<span class="gp">... </span>     <span class="p">[(</span><span class="s2">&quot;myfcn&quot;</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;fcn2&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">Eq</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">),</span> <span class="n">Eq</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">y</span><span class="p">)])],</span>
-<span class="gp">... </span>     <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">empty</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[(</span><span class="n">c_name</span><span class="p">,</span> <span class="n">c_code</span><span class="p">),</span>
+<span class="gp">... </span> <span class="p">(</span><span class="n">h_name</span><span class="p">,</span> <span class="n">c_header</span><span class="p">)]</span> <span class="o">=</span> <span class="n">codegen</span><span class="p">([(</span><span class="s2">&quot;myfcn&quot;</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">),</span>
+<span class="gp">... </span>                                <span class="p">(</span><span class="s2">&quot;fcn2&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">Eq</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">),</span> <span class="n">Eq</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">y</span><span class="p">)])],</span>
+<span class="gp">... </span>                               <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">empty</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">c_name</span><span class="p">)</span>
 <span class="go">myfcn.c</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">c_code</span><span class="p">)</span>
@@ -708,7 +709,7 @@ to remove the specified variables from the function signature</p>
 
 <dl class="function">
 <dt id="diofant.utilities.codegen.make_routine">
-<code class="sig-prename descclassname">diofant.utilities.codegen.</code><code class="sig-name descname">make_routine</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">expr</em>, <em class="sig-param">argument_sequence=None</em>, <em class="sig-param">global_vars=None</em>, <em class="sig-param">language='F95'</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/utilities/codegen.py#L1565-L1646"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.utilities.codegen.make_routine" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.utilities.codegen.</code><code class="sig-name descname">make_routine</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">expr</em>, <em class="sig-param">argument_sequence=None</em>, <em class="sig-param">global_vars=None</em>, <em class="sig-param">language='F95'</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/utilities/codegen.py#L1566-L1647"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.utilities.codegen.make_routine" title="Permalink to this definition">¶</a></dt>
 <dd><p>A factory that makes an appropriate Routine from an expression.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

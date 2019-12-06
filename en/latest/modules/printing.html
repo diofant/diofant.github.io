@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Printing &mdash; Diofant 0.11.0a14.dev146+gd05850cdf documentation</title>
+  <title>Printing &mdash; Diofant 0.11.0a14.dev149+g10921efa2 documentation</title>
   
 
   
@@ -460,7 +460,7 @@ to strings of C code).</p>
 
 <dl class="function">
 <dt id="diofant.printing.ccode.ccode">
-<code class="sig-prename descclassname">diofant.printing.ccode.</code><code class="sig-name descname">ccode</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">assign_to=None</em>, <em class="sig-param">**settings</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/printing/ccode.py#L262-L380"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.printing.ccode.ccode" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.printing.ccode.</code><code class="sig-name descname">ccode</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">assign_to=None</em>, <em class="sig-param">**settings</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/printing/ccode.py#L262-L379"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.printing.ccode.ccode" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts an expr to a string of c code</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -505,21 +505,20 @@ responsible to provide values for the indices in the code.
 dictionary of {“type” : “function”} to the <code class="docutils literal notranslate"><span class="pre">user_functions</span></code> kwarg.
 Alternatively, the dictionary value can be a list of tuples i.e.
 [(argument_test, cfunction_string)].</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">custom_functions</span> <span class="o">=</span> <span class="p">{</span>
-<span class="gp">... </span>  <span class="s2">&quot;ceiling&quot;</span><span class="p">:</span> <span class="s2">&quot;CEIL&quot;</span><span class="p">,</span>
-<span class="gp">... </span>  <span class="s2">&quot;Abs&quot;</span><span class="p">:</span> <span class="p">[(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="ow">not</span> <span class="n">x</span><span class="o">.</span><span class="n">is_integer</span><span class="p">,</span> <span class="s2">&quot;fabs&quot;</span><span class="p">),</span>
-<span class="gp">... </span>          <span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">is_integer</span><span class="p">,</span> <span class="s2">&quot;ABS&quot;</span><span class="p">)],</span>
-<span class="gp">... </span>  <span class="s2">&quot;func&quot;</span><span class="p">:</span> <span class="s2">&quot;f&quot;</span>
-<span class="gp">... </span><span class="p">}</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">custom_functions</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;ceiling&quot;</span><span class="p">:</span> <span class="s2">&quot;CEIL&quot;</span><span class="p">,</span>
+<span class="gp">... </span>                    <span class="s2">&quot;Abs&quot;</span><span class="p">:</span> <span class="p">[(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="ow">not</span> <span class="n">x</span><span class="o">.</span><span class="n">is_integer</span><span class="p">,</span> <span class="s2">&quot;fabs&quot;</span><span class="p">),</span>
+<span class="gp">... </span>                            <span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">is_integer</span><span class="p">,</span> <span class="s2">&quot;ABS&quot;</span><span class="p">)],</span>
+<span class="gp">... </span>                    <span class="s2">&quot;func&quot;</span><span class="p">:</span> <span class="s2">&quot;f&quot;</span><span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">func</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="s1">&#39;func&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ccode</span><span class="p">(</span><span class="n">func</span><span class="p">(</span><span class="n">Abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">ceiling</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="n">user_functions</span><span class="o">=</span><span class="n">custom_functions</span><span class="p">)</span>
 <span class="go">&#39;f(fabs(x) + CEIL(x))&#39;</span>
 </pre></div>
 </div>
 <p>or if the C-function takes a subset of the original arguments:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ccode</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">x</span> <span class="o">+</span> <span class="mi">3</span><span class="o">**</span><span class="n">x</span><span class="p">,</span> <span class="n">user_functions</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Pow&#39;</span><span class="p">:</span> <span class="p">[</span>
-<span class="gp">... </span>  <span class="p">(</span><span class="k">lambda</span> <span class="n">b</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">b</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span> <span class="s1">&#39;exp2(</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="n">e</span><span class="p">),</span>
-<span class="gp">... </span>  <span class="p">(</span><span class="k">lambda</span> <span class="n">b</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span> <span class="n">b</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;pow&#39;</span><span class="p">)]})</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ccode</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">x</span> <span class="o">+</span> <span class="mi">3</span><span class="o">**</span><span class="n">x</span><span class="p">,</span>
+<span class="gp">... </span>      <span class="n">user_functions</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Pow&#39;</span><span class="p">:</span> <span class="p">[(</span><span class="k">lambda</span> <span class="n">b</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span>
+<span class="gp">... </span>                               <span class="k">lambda</span> <span class="n">b</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span> <span class="s1">&#39;exp2(</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="n">e</span><span class="p">),</span>
+<span class="gp">... </span>                              <span class="p">(</span><span class="k">lambda</span> <span class="n">b</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span> <span class="n">b</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;pow&#39;</span><span class="p">)]})</span>
 <span class="go">&#39;exp2(x) + pow(3, x)&#39;</span>
 </pre></div>
 </div>
@@ -582,7 +581,7 @@ of <code class="docutils literal notranslate"><span class="pre">fcode</span></co
 that manual changes in the result are no longer needed.</p>
 <span class="target" id="module-diofant.printing.fcode"></span><dl class="function">
 <dt id="diofant.printing.fcode.fcode">
-<code class="sig-prename descclassname">diofant.printing.fcode.</code><code class="sig-name descname">fcode</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">assign_to=None</em>, <em class="sig-param">**settings</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/printing/fcode.py#L403-L511"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.printing.fcode.fcode" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.printing.fcode.</code><code class="sig-name descname">fcode</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">assign_to=None</em>, <em class="sig-param">**settings</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/printing/fcode.py#L403-L509"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.printing.fcode.fcode" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts an expr to a string of fortran code</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -627,11 +626,9 @@ more features are added.</p></li>
 “type” : “function” to the <code class="docutils literal notranslate"><span class="pre">user_functions</span></code> kwarg. Alternatively, the
 dictionary value can be a list of tuples i.e. [(argument_test,
 cfunction_string)].</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">custom_functions</span> <span class="o">=</span> <span class="p">{</span>
-<span class="gp">... </span>  <span class="s2">&quot;ceiling&quot;</span><span class="p">:</span> <span class="s2">&quot;CEIL&quot;</span><span class="p">,</span>
-<span class="gp">... </span>  <span class="s2">&quot;floor&quot;</span><span class="p">:</span> <span class="p">[(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="ow">not</span> <span class="n">x</span><span class="o">.</span><span class="n">is_integer</span><span class="p">,</span> <span class="s2">&quot;FLOOR1&quot;</span><span class="p">),</span>
-<span class="gp">... </span>            <span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">is_integer</span><span class="p">,</span> <span class="s2">&quot;FLOOR2&quot;</span><span class="p">)]</span>
-<span class="gp">... </span><span class="p">}</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">custom_functions</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;ceiling&quot;</span><span class="p">:</span> <span class="s2">&quot;CEIL&quot;</span><span class="p">,</span>
+<span class="gp">... </span>                    <span class="s2">&quot;floor&quot;</span><span class="p">:</span> <span class="p">[(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="ow">not</span> <span class="n">x</span><span class="o">.</span><span class="n">is_integer</span><span class="p">,</span> <span class="s2">&quot;FLOOR1&quot;</span><span class="p">),</span>
+<span class="gp">... </span>                              <span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">is_integer</span><span class="p">,</span> <span class="s2">&quot;FLOOR2&quot;</span><span class="p">)]}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fcode</span><span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">ceiling</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">user_functions</span><span class="o">=</span><span class="n">custom_functions</span><span class="p">)</span>
 <span class="go">&#39;      CEIL(x) + FLOOR1(x)&#39;</span>
 </pre></div>
@@ -725,7 +722,7 @@ are wrapped properly when the assignment part is added.</p>
 </pre></div>
 </div>
 <p>For piecewise functions, the <code class="docutils literal notranslate"><span class="pre">assign_to</span></code> option is mandatory:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">fcode</span><span class="p">(</span><span class="n">Piecewise</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="kc">True</span><span class="p">)),</span> <span class="n">assign_to</span><span class="o">=</span><span class="s2">&quot;var&quot;</span><span class="p">))</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">fcode</span><span class="p">(</span><span class="n">Piecewise</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="kc">True</span><span class="p">)),</span> <span class="n">assign_to</span><span class="o">=</span><span class="s2">&quot;var&quot;</span><span class="p">))</span>
 <span class="go">      if (x &lt; 1) then</span>
 <span class="go">        var = x</span>
 <span class="go">      else</span>
@@ -737,7 +734,7 @@ are wrapped properly when the assignment part is added.</p>
 the lack of a conditional operator in Fortran 77. Inline conditionals can be
 supported using the <code class="docutils literal notranslate"><span class="pre">merge</span></code> function introduced in Fortran 95 by setting of
 the kwarg <code class="docutils literal notranslate"><span class="pre">standard=95</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">fcode</span><span class="p">(</span><span class="n">Piecewise</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="kc">True</span><span class="p">)),</span> <span class="n">standard</span><span class="o">=</span><span class="mi">95</span><span class="p">))</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">fcode</span><span class="p">(</span><span class="n">Piecewise</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="kc">True</span><span class="p">)),</span> <span class="n">standard</span><span class="o">=</span><span class="mi">95</span><span class="p">))</span>
 <span class="go">      merge(x, x**2, x &lt; 1)</span>
 </pre></div>
 </div>
