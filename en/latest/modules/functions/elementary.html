@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Elementary &mdash; Diofant 0.11.0a14.dev149+g10921efa2 documentation</title>
+  <title>Elementary &mdash; Diofant 0.11.0a14.dev159+g55db13457 documentation</title>
   
 
   
@@ -402,7 +402,7 @@ result (in general) will be <code class="docutils literal notranslate"><span cla
 <h2>Abs<a class="headerlink" href="#abs" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="diofant.functions.elementary.complexes.Abs">
-<em class="property">class </em><code class="sig-prename descclassname">diofant.functions.elementary.complexes.</code><code class="sig-name descname">Abs</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/functions/elementary/complexes.py#L351-L536"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.functions.elementary.complexes.Abs" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diofant.functions.elementary.complexes.</code><code class="sig-name descname">Abs</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/functions/elementary/complexes.py#L351-L534"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.functions.elementary.complexes.Abs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the absolute value of the argument.</p>
 <p>This is an extension of the built-in function abs() to accept symbolic
 values.  If you pass a Diofant expression to the built-in abs(), it will
@@ -411,12 +411,10 @@ pass it automatically to Abs().</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Abs</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 <span class="go">1</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Abs</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">)</span>
-<span class="go">Abs(x)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Abs</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-<span class="go">x**2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">abs</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># The Python built-in</span>
 <span class="go">Abs(x)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">x**2</span>
 </pre></div>
 </div>
 <p>Note that the Python built-in will return either an Expr or int depending on
@@ -434,10 +432,10 @@ the argument:</p>
 </div>
 <dl class="method">
 <dt id="diofant.functions.elementary.complexes.Abs.fdiff">
-<code class="sig-name descname">fdiff</code><span class="sig-paren">(</span><em class="sig-param">argindex=1</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/functions/elementary/complexes.py#L393-L407"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.functions.elementary.complexes.Abs.fdiff" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">fdiff</code><span class="sig-paren">(</span><em class="sig-param">argindex=1</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/functions/elementary/complexes.py#L391-L405"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.functions.elementary.complexes.Abs.fdiff" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the first derivative of the argument to Abs().</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Abs</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">fdiff</span><span class="p">()</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">abs</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">fdiff</span><span class="p">()</span>
 <span class="go">sign(x)</span>
 </pre></div>
 </div>
@@ -450,7 +448,7 @@ the argument:</p>
 <h2>adjoint<a class="headerlink" href="#adjoint" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="diofant.functions.elementary.complexes.adjoint">
-<em class="property">class </em><code class="sig-prename descclassname">diofant.functions.elementary.complexes.</code><code class="sig-name descname">adjoint</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/functions/elementary/complexes.py#L664-L683"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.functions.elementary.complexes.adjoint" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diofant.functions.elementary.complexes.</code><code class="sig-name descname">adjoint</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/functions/elementary/complexes.py#L662-L681"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.functions.elementary.complexes.adjoint" title="Permalink to this definition">¶</a></dt>
 <dd><p>Conjugate transpose or Hermite conjugation.</p>
 </dd></dl>
 
@@ -459,7 +457,7 @@ the argument:</p>
 <h2>arg<a class="headerlink" href="#arg" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="diofant.functions.elementary.complexes.arg">
-<em class="property">class </em><code class="sig-prename descclassname">diofant.functions.elementary.complexes.</code><code class="sig-name descname">arg</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/functions/elementary/complexes.py#L539-L584"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.functions.elementary.complexes.arg" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diofant.functions.elementary.complexes.</code><code class="sig-name descname">arg</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/functions/elementary/complexes.py#L537-L582"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.functions.elementary.complexes.arg" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the argument (in radians) of a complex number.</p>
 <p>For a real number, the argument is always 0.</p>
 <p class="rubric">Examples</p>
@@ -478,7 +476,7 @@ the argument:</p>
 <h2>conjugate<a class="headerlink" href="#conjugate" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="diofant.functions.elementary.complexes.conjugate">
-<em class="property">class </em><code class="sig-prename descclassname">diofant.functions.elementary.complexes.</code><code class="sig-name descname">conjugate</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/functions/elementary/complexes.py#L587-L642"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.functions.elementary.complexes.conjugate" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diofant.functions.elementary.complexes.</code><code class="sig-name descname">conjugate</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/functions/elementary/complexes.py#L585-L640"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.functions.elementary.complexes.conjugate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the complex conjugate of an argument.</p>
 <p>In mathematics, the complex conjugate of a complex number
 is given by changing the sign of the imaginary part.</p>
@@ -506,7 +504,7 @@ is given by changing the sign of the imaginary part.</p>
 <h2>polar_lift<a class="headerlink" href="#polar-lift" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="diofant.functions.elementary.complexes.polar_lift">
-<em class="property">class </em><code class="sig-prename descclassname">diofant.functions.elementary.complexes.</code><code class="sig-name descname">polar_lift</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/functions/elementary/complexes.py#L690-L761"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.functions.elementary.complexes.polar_lift" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diofant.functions.elementary.complexes.</code><code class="sig-name descname">polar_lift</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/functions/elementary/complexes.py#L688-L759"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.functions.elementary.complexes.polar_lift" title="Permalink to this definition">¶</a></dt>
 <dd><p>Lift argument to the Riemann surface of the logarithm, using the
 standard branch.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">,</span> <span class="n">polar</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -537,7 +535,7 @@ standard branch.</p>
 <h2>periodic_argument<a class="headerlink" href="#periodic-argument" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="diofant.functions.elementary.complexes.periodic_argument">
-<em class="property">class </em><code class="sig-prename descclassname">diofant.functions.elementary.complexes.</code><code class="sig-name descname">periodic_argument</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/functions/elementary/complexes.py#L764-L844"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.functions.elementary.complexes.periodic_argument" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diofant.functions.elementary.complexes.</code><code class="sig-name descname">periodic_argument</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/functions/elementary/complexes.py#L762-L842"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.functions.elementary.complexes.periodic_argument" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represent the argument on a quotient of the Riemann surface of the
 logarithm. That is, given a period P, always return a value in
 (-P/2, P/2], by using exp(P*I) == 1.</p>
@@ -569,7 +567,7 @@ logarithm. That is, given a period P, always return a value in
 <h2>principal_branch<a class="headerlink" href="#principal-branch" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="diofant.functions.elementary.complexes.principal_branch">
-<em class="property">class </em><code class="sig-prename descclassname">diofant.functions.elementary.complexes.</code><code class="sig-name descname">principal_branch</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/functions/elementary/complexes.py#L851-L931"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.functions.elementary.complexes.principal_branch" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diofant.functions.elementary.complexes.</code><code class="sig-name descname">principal_branch</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/functions/elementary/complexes.py#L849-L929"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.functions.elementary.complexes.principal_branch" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represent a polar number reduced to its principal branch on a quotient
 of the Riemann surface of the logarithm.</p>
 <p>This is a function of two arguments. The first argument is a polar
@@ -599,7 +597,7 @@ The result is “z mod exp_polar(I*p)”.</p>
 <h2>transpose<a class="headerlink" href="#transpose" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="diofant.functions.elementary.complexes.transpose">
-<em class="property">class </em><code class="sig-prename descclassname">diofant.functions.elementary.complexes.</code><code class="sig-name descname">transpose</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/functions/elementary/complexes.py#L645-L661"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.functions.elementary.complexes.transpose" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diofant.functions.elementary.complexes.</code><code class="sig-name descname">transpose</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/functions/elementary/complexes.py#L643-L659"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.functions.elementary.complexes.transpose" title="Permalink to this definition">¶</a></dt>
 <dd><p>Linear map transposition.</p>
 </dd></dl>
 
