@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Sparse Matrices &mdash; Diofant 0.11.0a14.dev159+g55db13457 documentation</title>
+  <title>Sparse Matrices &mdash; Diofant 0.11.0a14.dev164+g38b9df156 documentation</title>
   
 
   
@@ -207,7 +207,7 @@
 <em class="property">class </em><code class="sig-prename descclassname">diofant.matrices.sparse.</code><code class="sig-name descname">MutableSparseMatrix</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/matrices/sparse.py#L1064-L1533"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.matrices.sparse.MutableSparseMatrix" title="Permalink to this definition">¶</a></dt>
 <dd><p>A sparse matrix (a matrix with a large number of zero elements).</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SparseMatrix</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SparseMatrix</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
 <span class="go">Matrix([</span>
 <span class="go">[0, 1],</span>
 <span class="go">[2, 3]])</span>
@@ -230,7 +230,7 @@
 </pre></div>
 </div>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="p">(</span><span class="n">ones</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="p">(</span><span class="n">ones</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">A</span>
 <span class="go">Matrix([</span>
 <span class="go">[1, 1, 1],</span>
@@ -257,7 +257,7 @@
 </div>
 <p>Joining along columns is the same as appending rows at the end
 of the matrix:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">C</span> <span class="o">==</span> <span class="n">A</span><span class="o">.</span><span class="n">row_insert</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">rows</span><span class="p">,</span> <span class="n">Matrix</span><span class="p">(</span><span class="n">B</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">C</span> <span class="o">==</span> <span class="n">A</span><span class="o">.</span><span class="n">row_insert</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">rows</span><span class="p">,</span> <span class="n">Matrix</span><span class="p">(</span><span class="n">B</span><span class="p">))</span>
 <span class="go">True</span>
 </pre></div>
 </div>
@@ -269,7 +269,7 @@ of the matrix:</p>
 <dd><p>In-place operation on col j using two-arg functor whose args are
 interpreted as (self[i, j], i) for i in range(self.rows).</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M</span><span class="o">.</span><span class="n">col_op</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">v</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="n">v</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M</span>
@@ -286,7 +286,7 @@ interpreted as (self[i, j], i) for i in range(self.rows).</p>
 <code class="sig-name descname">col_swap</code><span class="sig-paren">(</span><em class="sig-param">i</em>, <em class="sig-param">j</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/matrices/sparse.py#L1237-L1267"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.matrices.sparse.MutableSparseMatrix.col_swap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Swap, in place, columns i and j.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">S</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">S</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">S</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">S</span><span class="o">.</span><span class="n">col_swap</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">S</span>
@@ -307,7 +307,7 @@ interpreted as (self[i, j], i) for i in range(self.rows).</p>
 this will create a matrix that is slower than a dense matrix in
 operations.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M</span>
 <span class="go">Matrix([</span>
 <span class="go">[0, 0, 0],</span>
@@ -331,7 +331,7 @@ operations.</p>
 </pre></div>
 </div>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="p">(((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="p">(((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">A</span>
 <span class="go">Matrix([</span>
 <span class="go">[1, 0, 1],</span>
@@ -355,7 +355,7 @@ operations.</p>
 </div>
 <p>Joining at row ends is the same as appending columns at the end
 of the matrix:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">C</span> <span class="o">==</span> <span class="n">A</span><span class="o">.</span><span class="n">col_insert</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">cols</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">C</span> <span class="o">==</span> <span class="n">A</span><span class="o">.</span><span class="n">col_insert</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">cols</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
 <span class="go">True</span>
 </pre></div>
 </div>
@@ -367,7 +367,7 @@ of the matrix:</p>
 <dd><p>In-place operation on row <code class="docutils literal notranslate"><span class="pre">i</span></code> using two-arg functor whose args are
 interpreted as <code class="docutils literal notranslate"><span class="pre">(self[i,</span> <span class="pre">j],</span> <span class="pre">j)</span></code>.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M</span><span class="o">.</span><span class="n">row_op</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">v</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="n">v</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">M</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">j</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M</span>
@@ -388,7 +388,7 @@ interpreted as <code class="docutils literal notranslate"><span class="pre">(sel
 <code class="sig-name descname">row_swap</code><span class="sig-paren">(</span><em class="sig-param">i</em>, <em class="sig-param">j</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/matrices/sparse.py#L1205-L1235"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.matrices.sparse.MutableSparseMatrix.row_swap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Swap, in place, columns i and j.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">S</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">S</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">S</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">S</span><span class="o">.</span><span class="n">row_swap</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">S</span>
@@ -406,7 +406,7 @@ interpreted as <code class="docutils literal notranslate"><span class="pre">(sel
 <dd><p>In-place operation on row <code class="docutils literal notranslate"><span class="pre">i</span></code> using two-arg functor whose args are
 interpreted as <code class="docutils literal notranslate"><span class="pre">(self[i,</span> <span class="pre">j],</span> <span class="pre">self[k,</span> <span class="pre">j])</span></code>.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M</span><span class="o">.</span><span class="n">zip_row_op</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">v</span><span class="p">,</span> <span class="n">u</span><span class="p">:</span> <span class="n">v</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">u</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M</span>
@@ -449,7 +449,7 @@ symmetric, positive-definite and non-singular.</p>
 <p>This method eliminates the use of square root and ensures that all
 the diagonal entries of L are 1.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="p">(((</span><span class="mi">25</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">11</span><span class="p">)))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="p">(((</span><span class="mi">25</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">11</span><span class="p">)))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">L</span><span class="p">,</span> <span class="n">D</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">LDLdecomposition</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">L</span>
 <span class="go">Matrix([</span>
@@ -478,7 +478,7 @@ the diagonal entries of L are 1.</p>
 <code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/matrices/sparse.py#L405-L446"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.matrices.sparse.SparseMatrixBase.add" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add two sparse matrices with dictionary representation.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SparseMatrix</span><span class="p">(</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">SparseMatrix</span><span class="p">(</span><span class="n">ones</span><span class="p">(</span><span class="mi">3</span><span class="p">)))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SparseMatrix</span><span class="p">(</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">SparseMatrix</span><span class="p">(</span><span class="n">ones</span><span class="p">(</span><span class="mi">3</span><span class="p">)))</span>
 <span class="go">Matrix([</span>
 <span class="go">[2, 1, 1],</span>
 <span class="go">[1, 2, 1],</span>
@@ -492,7 +492,7 @@ the diagonal entries of L are 1.</p>
 </div>
 <p>Only the non-zero elements are stored, so the resulting dictionary
 that is used to represent the sparse matrix is empty:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">_</span><span class="o">.</span><span class="n">_smat</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">_</span><span class="o">.</span><span class="n">_smat</span>
 <span class="go">{}</span>
 </pre></div>
 </div>
@@ -507,7 +507,7 @@ that is used to represent the sparse matrix is empty:</p>
 <code class="sig-name descname">applyfunc</code><span class="sig-paren">(</span><em class="sig-param">f</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/matrices/sparse.py#L560-L587"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.matrices.sparse.SparseMatrixBase.applyfunc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Apply a function to each element of the matrix.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="n">i</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="n">j</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="n">i</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="n">j</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">m</span>
 <span class="go">Matrix([</span>
 <span class="go">[0, 1],</span>
@@ -531,7 +531,7 @@ that is used to represent the sparse matrix is empty:</p>
 <code class="sig-name descname">as_mutable</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/matrices/sparse.py#L1023-L1038"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.matrices.sparse.SparseMatrixBase.as_mutable" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a mutable version of this matrix.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">ImmutableMatrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">ImmutableMatrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">as_mutable</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>  <span class="c1"># Can set values in Y</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span>
@@ -550,7 +550,7 @@ such that L * L.T = A</p>
 <p>A must be a square, symmetric, positive-definite
 and non-singular matrix</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="p">(((</span><span class="mi">25</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">11</span><span class="p">)))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="p">(((</span><span class="mi">25</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">11</span><span class="p">)))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">A</span><span class="o">.</span><span class="n">cholesky</span><span class="p">()</span>
 <span class="go">Matrix([</span>
 <span class="go">[ 5, 0, 0],</span>
@@ -567,7 +567,7 @@ and non-singular matrix</p>
 <code class="sig-name descname">col_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/matrices/sparse.py#L177-L197"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.matrices.sparse.SparseMatrixBase.col_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a column-sorted list of non-zero elements of the matrix.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SparseMatrix</span><span class="p">(((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SparseMatrix</span><span class="p">(((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)))</span>
 <span class="go">Matrix([</span>
 <span class="go">[1, 2],</span>
 <span class="go">[3, 4]])</span>
@@ -588,7 +588,7 @@ and non-singular matrix</p>
 Negative indices can be given. All indices must be in the range
 -n &lt;= i &lt; n where n is the number of rows or columns.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">m</span>
 <span class="go">Matrix([</span>
 <span class="go">[0,  1,  2],</span>
@@ -603,7 +603,7 @@ Negative indices can be given. All indices must be in the range
 </pre></div>
 </div>
 <p>Rows or columns can be repeated:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">extract</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">extract</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 <span class="go">Matrix([</span>
 <span class="go">[2],</span>
 <span class="go">[2],</span>
@@ -611,7 +611,7 @@ Negative indices can be given. All indices must be in the range
 </pre></div>
 </div>
 <p>Every other row can be taken by using range to provide the indices:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">rows</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">rows</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 <span class="go">Matrix([</span>
 <span class="go">[2],</span>
 <span class="go">[8]])</span>
@@ -630,7 +630,7 @@ Negative indices can be given. All indices must be in the range
 <code class="sig-name descname">has</code><span class="sig-paren">(</span><em class="sig-param">*patterns</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/matrices/sparse.py#L543-L558"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.matrices.sparse.SparseMatrixBase.has" title="Permalink to this definition">¶</a></dt>
 <dd><p>Test whether any subexpression matches any of the patterns.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="p">(((</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="p">(((</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">A</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="go">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">A</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
@@ -648,7 +648,7 @@ Negative indices can be given. All indices must be in the range
 <p>In a Hermitian matrix element i,j is the complex conjugate of
 element j,i.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="n">I</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="n">I</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="n">I</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="n">I</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
 <span class="go">Matrix([</span>
 <span class="go">[ 1, I],</span>
@@ -672,7 +672,7 @@ element j,i.</p>
 <code class="sig-name descname">is_symmetric</code><span class="sig-paren">(</span><em class="sig-param">simplify=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/matrices/sparse.py#L521-L541"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.matrices.sparse.SparseMatrixBase.is_symmetric" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return True if self is symmetric.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="p">(</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="p">(</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M</span><span class="o">.</span><span class="n">is_symmetric</span><span class="p">()</span>
 <span class="go">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
@@ -688,7 +688,7 @@ element j,i.</p>
 <dd><p>Liu’s algorithm, for pre-determination of the Elimination Tree of
 the given matrix, used in row-based symbolic Cholesky factorization.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">S</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">S</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
 <span class="gp">... </span>                  <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
 <span class="gp">... </span>                  <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
 <span class="gp">... </span>                  <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
@@ -706,7 +706,7 @@ Jeroen Van Grondelle (1999)</p>
 <code class="sig-name descname">multiply</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/matrices/sparse.py#L270-L299"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.matrices.sparse.SparseMatrixBase.multiply" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fast multiplication exploiting the sparsity of the matrix.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="p">(</span><span class="n">ones</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">)),</span> <span class="n">SparseMatrix</span><span class="p">(</span><span class="n">ones</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="p">(</span><span class="n">ones</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">)),</span> <span class="n">SparseMatrix</span><span class="p">(</span><span class="n">ones</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">A</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">B</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="o">*</span><span class="n">ones</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="go">True</span>
 </pre></div>
@@ -728,7 +728,7 @@ Jeroen Van Grondelle (1999)</p>
 <code class="sig-name descname">reshape</code><span class="sig-paren">(</span><em class="sig-param">rows</em>, <em class="sig-param">cols</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/matrices/sparse.py#L589-L610"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.matrices.sparse.SparseMatrixBase.reshape" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reshape matrix while retaining original size.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">S</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">S</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">S</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 <span class="go">Matrix([</span>
 <span class="go">[0, 1, 2, 3],</span>
@@ -742,7 +742,7 @@ Jeroen Van Grondelle (1999)</p>
 <code class="sig-name descname">row_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/matrices/sparse.py#L151-L173"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.matrices.sparse.SparseMatrixBase.row_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a row-sorted list of non-zero elements of the matrix.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="p">(((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="p">(((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
 <span class="go">Matrix([</span>
 <span class="go">[1, 2],</span>
@@ -763,7 +763,7 @@ Jeroen Van Grondelle (1999)</p>
 <dd><p>Symbolic cholesky factorization, for pre-determination of the
 non-zero structure of the Cholesky factororization.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">S</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">S</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
 <span class="gp">... </span>                  <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
 <span class="gp">... </span>                  <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
 <span class="gp">... </span>                  <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
@@ -799,7 +799,7 @@ Jeroen Van Grondelle (1999)</p>
 <p>By default the cholesky_solve routine is used (method=’CH’); other
 methods of matrix inversion can be used.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">B</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">S</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">row_join</span><span class="p">(</span><span class="n">B</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">S</span>
@@ -811,7 +811,7 @@ methods of matrix inversion can be used.</p>
 </div>
 <p>If each line of S represent coefficients of Ax + By
 and x and y are [2, 3] then S*xy is:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">S</span><span class="o">*</span><span class="n">Matrix</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">S</span><span class="o">*</span><span class="n">Matrix</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span>
 <span class="go">Matrix([</span>
 <span class="go">[ 8],</span>
@@ -821,7 +821,7 @@ and x and y are [2, 3] then S*xy is:</p>
 </div>
 <p>But let’s add 1 to the middle value and then solve for the
 least-squares value of xy:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">xy</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">solve_least_squares</span><span class="p">(</span><span class="n">Matrix</span><span class="p">([</span><span class="mi">8</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">18</span><span class="p">]))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">xy</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">solve_least_squares</span><span class="p">(</span><span class="n">Matrix</span><span class="p">([</span><span class="mi">8</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">18</span><span class="p">]))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">xy</span>
 <span class="go">Matrix([</span>
 <span class="go">[ 5/3],</span>
@@ -829,7 +829,7 @@ least-squares value of xy:</p>
 </pre></div>
 </div>
 <p>The error is given by S*xy - r:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">S</span><span class="o">*</span><span class="n">xy</span> <span class="o">-</span> <span class="n">r</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">S</span><span class="o">*</span><span class="n">xy</span> <span class="o">-</span> <span class="n">r</span>
 <span class="go">Matrix([</span>
 <span class="go">[1/3],</span>
 <span class="go">[1/3],</span>
@@ -839,7 +839,7 @@ least-squares value of xy:</p>
 </pre></div>
 </div>
 <p>If a different xy is used, the norm will be higher:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">xy</span> <span class="o">+=</span> <span class="n">ones</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">10</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">xy</span> <span class="o">+=</span> <span class="n">ones</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">10</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">S</span><span class="o">*</span><span class="n">xy</span> <span class="o">-</span> <span class="n">r</span><span class="p">)</span><span class="o">.</span><span class="n">norm</span><span class="p">()</span><span class="o">.</span><span class="n">evalf</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 <span class="go">1.5</span>
 </pre></div>
@@ -855,14 +855,14 @@ least-squares value of xy:</p>
 <code class="sig-name descname">tolist</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/matrices/sparse.py#L129-L149"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.matrices.sparse.SparseMatrixBase.tolist" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert this sparse matrix into a list of nested Python lists.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="p">(((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="p">(((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
 <span class="go">[[1, 2], [3, 4]]</span>
 </pre></div>
 </div>
 <p>When there are no rows then it will not be possible to tell how
 many columns were in the original matrix:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SparseMatrix</span><span class="p">(</span><span class="n">ones</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SparseMatrix</span><span class="p">(</span><span class="n">ones</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
 <span class="go">[]</span>
 </pre></div>
 </div>
@@ -880,10 +880,10 @@ many columns were in the original matrix:</p>
 <h2>ImmutableSparseMatrix Class Reference<a class="headerlink" href="#immutablesparsematrix-class-reference" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="diofant.matrices.immutable.ImmutableSparseMatrix">
-<em class="property">class </em><code class="sig-prename descclassname">diofant.matrices.immutable.</code><code class="sig-name descname">ImmutableSparseMatrix</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/matrices/immutable.py#L127-L176"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.matrices.immutable.ImmutableSparseMatrix" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diofant.matrices.immutable.</code><code class="sig-name descname">ImmutableSparseMatrix</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/matrices/immutable.py#L126-L175"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.matrices.immutable.ImmutableSparseMatrix" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create an immutable version of a sparse matrix.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ImmutableSparseMatrix</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">{})</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ImmutableSparseMatrix</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">{})</span>
 <span class="go">Matrix([[0]])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ImmutableSparseMatrix</span><span class="p">(</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
 <span class="go">Matrix([</span>
@@ -907,7 +907,7 @@ to be considered zero.  The empty matrix is zero by the principle of
 vacuous truth.  For a matrix that may or may not be zero (e.g.
 contains a symbol), this will be None</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">([])</span>
@@ -927,10 +927,10 @@ contains a symbol), this will be None</p>
 
 <dl class="method">
 <dt id="diofant.matrices.immutable.ImmutableSparseMatrix.subs">
-<code class="sig-name descname">subs</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/matrices/matrices.py#L1104-L1118"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.matrices.immutable.ImmutableSparseMatrix.subs" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">subs</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/matrices/matrices.py#L1103-L1117"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.matrices.immutable.ImmutableSparseMatrix.subs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a new matrix with subs applied to each entry.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SparseMatrix</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="n">x</span><span class="p">])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SparseMatrix</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="n">x</span><span class="p">])</span>
 <span class="go">Matrix([[x]])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">_</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span> <span class="n">y</span><span class="p">})</span>
 <span class="go">Matrix([[y]])</span>
@@ -942,10 +942,10 @@ contains a symbol), this will be None</p>
 
 <dl class="method">
 <dt id="diofant.matrices.immutable.ImmutableSparseMatrix.xreplace">
-<code class="sig-name descname">xreplace</code><span class="sig-paren">(</span><em class="sig-param">rule</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/matrices/matrices.py#L1120-L1134"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.matrices.immutable.ImmutableSparseMatrix.xreplace" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">xreplace</code><span class="sig-paren">(</span><em class="sig-param">rule</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/matrices/matrices.py#L1119-L1133"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.matrices.immutable.ImmutableSparseMatrix.xreplace" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a new matrix with xreplace applied to each entry.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SparseMatrix</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="n">x</span><span class="p">])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SparseMatrix</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="n">x</span><span class="p">])</span>
 <span class="go">Matrix([[x]])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">_</span><span class="o">.</span><span class="n">xreplace</span><span class="p">({</span><span class="n">x</span><span class="p">:</span> <span class="n">y</span><span class="p">})</span>
 <span class="go">Matrix([[y]])</span>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Indexed Objects &mdash; Diofant 0.11.0a14.dev159+g55db13457 documentation</title>
+  <title>Indexed Objects &mdash; Diofant 0.11.0a14.dev164+g38b9df156 documentation</title>
   
 
   
@@ -224,7 +224,7 @@ expressions as indices is limited.  (This should be improved in
 future releases.)</p>
 <p class="rubric">Examples</p>
 <p>To express the above matrix element example you would write:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;M&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;M&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;i j&#39;</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">Idx</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
 <span class="go">M[i, j]</span>
@@ -232,7 +232,7 @@ future releases.)</p>
 </div>
 <p>Repeated indices in a product implies a summation, so to express a
 matrix-vector product in terms of Indexed objects:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
 <span class="go">x[j]*M[i, j]</span>
 </pre></div>
@@ -241,7 +241,7 @@ matrix-vector product in terms of Indexed objects:</p>
 with the code printers or the autowrap framework, you also need to provide
 (symbolic or numerical) dimensions.  This can be done by passing an
 optional shape parameter to IndexedBase upon construction:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dim1</span><span class="p">,</span> <span class="n">dim2</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;dim1 dim2&#39;</span><span class="p">,</span> <span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dim1</span><span class="p">,</span> <span class="n">dim2</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;dim1 dim2&#39;</span><span class="p">,</span> <span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">dim1</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">dim1</span><span class="p">,</span> <span class="n">dim2</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">A</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(dim1, 2*dim1, dim2)</span>
@@ -251,7 +251,7 @@ optional shape parameter to IndexedBase upon construction:</p>
 </div>
 <p>If an IndexedBase object has no shape information, it is assumed that the
 array is as large as the ranges of its indices:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;n m&#39;</span><span class="p">,</span> <span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;n m&#39;</span><span class="p">,</span> <span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">i</span> <span class="o">=</span> <span class="n">Idx</span><span class="p">(</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">j</span> <span class="o">=</span> <span class="n">Idx</span><span class="p">(</span><span class="s1">&#39;j&#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
@@ -261,7 +261,7 @@ array is as large as the ranges of its indices:</p>
 </pre></div>
 </div>
 <p>The above can be compared with the following:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(dim1, 2*dim1, dim2)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">ranges</span>
 <span class="go">[(0, m - 1), None, (0, n - 1)]</span>
@@ -269,7 +269,7 @@ array is as large as the ranges of its indices:</p>
 </div>
 <p>To analyze the structure of indexed expressions, you can use the methods
 get_indices() and get_contraction_structure():</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_indices</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">j</span><span class="p">])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_indices</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">j</span><span class="p">])</span>
 <span class="go">({i}, {})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">get_contraction_structure</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">j</span><span class="p">])</span>
 <span class="go">{(j,): {A[i, j, j]}}</span>
@@ -303,12 +303,12 @@ n.is_integer must return True.</p>
 converted to an integer symbol.  (Note: this conversion is not done for
 range or dimension arguments.)</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">U</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;n i L U&#39;</span><span class="p">,</span> <span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">U</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;n i L U&#39;</span><span class="p">,</span> <span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>If a string is given for the label an integer Symbol is created and the
 bounds are both None:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">idx</span> <span class="o">=</span> <span class="n">Idx</span><span class="p">(</span><span class="s1">&#39;qwerty&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">idx</span> <span class="o">=</span> <span class="n">Idx</span><span class="p">(</span><span class="s1">&#39;qwerty&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">idx</span>
 <span class="go">qwerty</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">idx</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="n">idx</span><span class="o">.</span><span class="n">upper</span>
@@ -316,7 +316,7 @@ bounds are both None:</p>
 </pre></div>
 </div>
 <p>Both upper and lower bounds can be specified:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">idx</span> <span class="o">=</span> <span class="n">Idx</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">U</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">idx</span> <span class="o">=</span> <span class="n">Idx</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">U</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">idx</span>
 <span class="go">i</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">idx</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="n">idx</span><span class="o">.</span><span class="n">upper</span>
@@ -325,7 +325,7 @@ bounds are both None:</p>
 </div>
 <p>When only a single bound is given it is interpreted as the dimension
 and the lower bound defaults to 0:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">idx</span> <span class="o">=</span> <span class="n">Idx</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">idx</span> <span class="o">=</span> <span class="n">Idx</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">idx</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="n">idx</span><span class="o">.</span><span class="n">upper</span>
 <span class="go">(0, n - 1)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">idx</span> <span class="o">=</span> <span class="n">Idx</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
@@ -337,7 +337,7 @@ and the lower bound defaults to 0:</p>
 </pre></div>
 </div>
 <p>The label can be a literal integer instead of a string/Symbol:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">idx</span> <span class="o">=</span> <span class="n">Idx</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">idx</span> <span class="o">=</span> <span class="n">Idx</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">idx</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="n">idx</span><span class="o">.</span><span class="n">upper</span>
 <span class="go">(0, n - 1)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">idx</span><span class="o">.</span><span class="n">label</span>
@@ -349,7 +349,7 @@ and the lower bound defaults to 0:</p>
 <em class="property">property </em><code class="sig-name descname">label</code><a class="headerlink" href="#diofant.tensor.indexed.Idx.label" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the label (Integer or integer expression) of the Idx object.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Idx</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">label</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Idx</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">label</span>
 <span class="go">2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">j</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;j&#39;</span><span class="p">,</span> <span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Idx</span><span class="p">(</span><span class="n">j</span><span class="p">)</span><span class="o">.</span><span class="n">label</span>
@@ -365,7 +365,7 @@ and the lower bound defaults to 0:</p>
 <em class="property">property </em><code class="sig-name descname">lower</code><a class="headerlink" href="#diofant.tensor.indexed.Idx.lower" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the lower bound of the Index.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Idx</span><span class="p">(</span><span class="s1">&#39;j&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Idx</span><span class="p">(</span><span class="s1">&#39;j&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span>
 <span class="go">0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Idx</span><span class="p">(</span><span class="s1">&#39;j&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span>
 <span class="go">0</span>
@@ -380,7 +380,7 @@ and the lower bound defaults to 0:</p>
 <em class="property">property </em><code class="sig-name descname">upper</code><a class="headerlink" href="#diofant.tensor.indexed.Idx.upper" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the upper bound of the Index.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Idx</span><span class="p">(</span><span class="s1">&#39;j&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">upper</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Idx</span><span class="p">(</span><span class="s1">&#39;j&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">upper</span>
 <span class="go">1</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Idx</span><span class="p">(</span><span class="s1">&#39;j&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">upper</span>
 <span class="go">4</span>
@@ -396,13 +396,13 @@ and the lower bound defaults to 0:</p>
 <dt id="diofant.tensor.indexed.Indexed">
 <em class="property">class </em><code class="sig-prename descclassname">diofant.tensor.indexed.</code><code class="sig-name descname">Indexed</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/tensor/indexed.py#L113-L262"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.tensor.indexed.Indexed" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents a mathematical object with indices.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;i j&#39;</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">Idx</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;i j&#39;</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">Idx</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Indexed</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
 <span class="go">A[i, j]</span>
 </pre></div>
 </div>
 <p>It is recommended that Indexed objects are created via IndexedBase:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Indexed</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="o">==</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
 <span class="go">True</span>
 </pre></div>
@@ -412,7 +412,7 @@ and the lower bound defaults to 0:</p>
 <em class="property">property </em><code class="sig-name descname">base</code><a class="headerlink" href="#diofant.tensor.indexed.Indexed.base" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the IndexedBase of the Indexed object.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;i j&#39;</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">Idx</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;i j&#39;</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">Idx</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Indexed</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span><span class="o">.</span><span class="n">base</span>
 <span class="go">A</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">B</span> <span class="o">=</span> <span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">)</span>
@@ -427,7 +427,7 @@ and the lower bound defaults to 0:</p>
 <em class="property">property </em><code class="sig-name descname">indices</code><a class="headerlink" href="#diofant.tensor.indexed.Indexed.indices" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the indices of the Indexed object.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;i j&#39;</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">Idx</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;i j&#39;</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">Idx</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Indexed</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span><span class="o">.</span><span class="n">indices</span>
 <span class="go">(i, j)</span>
 </pre></div>
@@ -441,7 +441,7 @@ and the lower bound defaults to 0:</p>
 <p>If an index does not define the data members upper and lower, the
 corresponding slot in the list contains <code class="docutils literal notranslate"><span class="pre">None</span></code> instead of a tuple.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Indexed</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">Idx</span><span class="p">(</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">Idx</span><span class="p">(</span><span class="s1">&#39;j&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">Idx</span><span class="p">(</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span><span class="o">.</span><span class="n">ranges</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Indexed</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">Idx</span><span class="p">(</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">Idx</span><span class="p">(</span><span class="s1">&#39;j&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">Idx</span><span class="p">(</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span><span class="o">.</span><span class="n">ranges</span>
 <span class="go">[(0, 1), (0, 3), (0, 7)]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Indexed</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">Idx</span><span class="p">(</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">Idx</span><span class="p">(</span><span class="s1">&#39;j&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">Idx</span><span class="p">(</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span><span class="o">.</span><span class="n">ranges</span>
 <span class="go">[(0, 2), (0, 2), (0, 2)]</span>
@@ -457,7 +457,7 @@ corresponding slot in the list contains <code class="docutils literal notranslat
 <em class="property">property </em><code class="sig-name descname">rank</code><a class="headerlink" href="#diofant.tensor.indexed.Indexed.rank" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the rank of the Indexed object.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;i:m&#39;</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">Idx</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;i:m&#39;</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">Idx</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Indexed</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span><span class="o">.</span><span class="n">rank</span>
 <span class="go">2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">q</span> <span class="o">=</span> <span class="n">Indexed</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
@@ -476,7 +476,7 @@ corresponding slot in the list contains <code class="docutils literal notranslat
 <p>Dimensions is a property of the array, not of the indices.  Still, if
 the IndexedBase does not define a shape attribute, it is assumed that
 the ranges of the indices correspond to the shape of the array.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;n m&#39;</span><span class="p">,</span> <span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;n m&#39;</span><span class="p">,</span> <span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">i</span> <span class="o">=</span> <span class="n">Idx</span><span class="p">(</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">j</span> <span class="o">=</span> <span class="n">Idx</span><span class="p">(</span><span class="s1">&#39;j&#39;</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
@@ -515,7 +515,7 @@ to arrays, and is recognized as such for code generation and automatic
 compilation and wrapping.</p></li>
 </ul>
 </div></blockquote>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">A</span>
 <span class="go">A</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
@@ -524,7 +524,7 @@ compilation and wrapping.</p></li>
 </div>
 <p>When an IndexedBase object receives indices, it returns an array with named
 axes, represented by an Indexed object:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;i j&#39;</span><span class="p">,</span> <span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;i j&#39;</span><span class="p">,</span> <span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
 <span class="go">A[i, j, 2]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
@@ -534,7 +534,7 @@ axes, represented by an Indexed object:</p>
 <p>The IndexedBase constructor takes an optional shape argument.  If given,
 it overrides any shape information in the indices. (But not the index
 ranges!)</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">o</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;m n o p&#39;</span><span class="p">,</span> <span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">o</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;m n o p&#39;</span><span class="p">,</span> <span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">i</span> <span class="o">=</span> <span class="n">Idx</span><span class="p">(</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">j</span> <span class="o">=</span> <span class="n">Idx</span><span class="p">(</span><span class="s1">&#39;j&#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
@@ -549,7 +549,7 @@ ranges!)</p>
 <em class="property">property </em><code class="sig-name descname">args</code><a class="headerlink" href="#diofant.tensor.indexed.IndexedBase.args" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the arguments used to create this IndexedBase object.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span><span class="o">.</span><span class="n">args</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span><span class="o">.</span><span class="n">args</span>
 <span class="go">(A, (x, y))</span>
 </pre></div>
 </div>
@@ -560,7 +560,7 @@ ranges!)</p>
 <em class="property">property </em><code class="sig-name descname">label</code><a class="headerlink" href="#diofant.tensor.indexed.IndexedBase.label" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the label of the IndexedBase object.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span><span class="o">.</span><span class="n">label</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span><span class="o">.</span><span class="n">label</span>
 <span class="go">A</span>
 </pre></div>
 </div>
@@ -571,13 +571,13 @@ ranges!)</p>
 <em class="property">property </em><code class="sig-name descname">shape</code><a class="headerlink" href="#diofant.tensor.indexed.IndexedBase.shape" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the shape of the IndexedBase object.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span><span class="o">.</span><span class="n">shape</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(x, y)</span>
 </pre></div>
 </div>
 <p>Note: If the shape of the IndexedBase is specified, it will override
 any shape information given by the indices.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">B</span> <span class="o">=</span> <span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">i</span> <span class="o">=</span> <span class="n">Idx</span><span class="p">(</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">j</span> <span class="o">=</span> <span class="n">Idx</span><span class="p">(</span><span class="s1">&#39;j&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>

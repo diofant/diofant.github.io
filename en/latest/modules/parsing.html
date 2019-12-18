@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Parsing &mdash; Diofant 0.11.0a14.dev159+g55db13457 documentation</title>
+  <title>Parsing &mdash; Diofant 0.11.0a14.dev164+g38b9df156 documentation</title>
   
 
   
@@ -219,7 +219,7 @@ suppressed. (see examples)</p></li>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parse_expr</span><span class="p">(</span><span class="s2">&quot;1/2&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parse_expr</span><span class="p">(</span><span class="s2">&quot;1/2&quot;</span><span class="p">)</span>
 <span class="go">1/2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">_</span><span class="p">)</span>
 <span class="go">&lt;class &#39;diofant.core.numbers.Half&#39;&gt;</span>
@@ -230,13 +230,13 @@ suppressed. (see examples)</p></li>
 </pre></div>
 </div>
 <p>When evaluate=False, some automatic simplifications will not occur:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parse_expr</span><span class="p">(</span><span class="s2">&quot;2**3&quot;</span><span class="p">),</span> <span class="n">parse_expr</span><span class="p">(</span><span class="s2">&quot;2**3&quot;</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parse_expr</span><span class="p">(</span><span class="s2">&quot;2**3&quot;</span><span class="p">),</span> <span class="n">parse_expr</span><span class="p">(</span><span class="s2">&quot;2**3&quot;</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="go">(8, 2**3)</span>
 </pre></div>
 </div>
 <p>In addition the order of the arguments will not be made canonical.
 This feature allows one to tell exactly how the expression was entered:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">parse_expr</span><span class="p">(</span><span class="s1">&#39;1 + x&#39;</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">parse_expr</span><span class="p">(</span><span class="s1">&#39;1 + x&#39;</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">parse_expr</span><span class="p">(</span><span class="s1">&#39;x + 1&#39;</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">==</span> <span class="n">b</span>
 <span class="go">False</span>
@@ -308,7 +308,7 @@ split Greek character names, so <code class="docutils literal notranslate"><span
 <p><code class="docutils literal notranslate"><span class="pre">predicate</span></code> should return True if the symbol name is to be split.</p>
 <p>For instance, to retain the default behavior but avoid splitting certain
 symbol names, a predicate like this would work:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">can_split</span><span class="p">(</span><span class="n">symbol</span><span class="p">):</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">can_split</span><span class="p">(</span><span class="n">symbol</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="k">if</span> <span class="n">symbol</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;list&#39;</span><span class="p">,</span> <span class="s1">&#39;of&#39;</span><span class="p">,</span> <span class="s1">&#39;unsplittable&#39;</span><span class="p">,</span> <span class="s1">&#39;names&#39;</span><span class="p">):</span>
 <span class="gp">... </span>        <span class="k">return</span> <span class="n">_token_splittable</span><span class="p">(</span><span class="n">symbol</span><span class="p">)</span>
 <span class="gp">... </span>    <span class="k">return</span> <span class="kc">False</span>
@@ -328,7 +328,7 @@ symbol names, a predicate like this would work:</p>
 <p>Use this before <a class="reference internal" href="#diofant.parsing.sympy_parser.implicit_application" title="diofant.parsing.sympy_parser.implicit_application"><code class="xref py py-func docutils literal notranslate"><span class="pre">implicit_application()</span></code></a>, otherwise expressions like
 <code class="docutils literal notranslate"><span class="pre">sin</span> <span class="pre">2x</span></code> will be parsed as <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">*</span> <span class="pre">sin(2)</span></code> rather than <code class="docutils literal notranslate"><span class="pre">sin(2*x)</span></code>.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">transformations</span> <span class="o">=</span> <span class="n">standard_transformations</span> <span class="o">+</span> <span class="p">(</span><span class="n">implicit_multiplication</span><span class="p">,)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">transformations</span> <span class="o">=</span> <span class="n">standard_transformations</span> <span class="o">+</span> <span class="p">(</span><span class="n">implicit_multiplication</span><span class="p">,)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">parse_expr</span><span class="p">(</span><span class="s1">&#39;3 x y&#39;</span><span class="p">,</span> <span class="n">transformations</span><span class="o">=</span><span class="n">transformations</span><span class="p">)</span>
 <span class="go">3*x*y</span>
 </pre></div>
@@ -343,7 +343,7 @@ symbol names, a predicate like this would work:</p>
 like <code class="docutils literal notranslate"><span class="pre">sin</span> <span class="pre">2x</span></code> will be parsed as <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">*</span> <span class="pre">sin(2)</span></code> rather than
 <code class="docutils literal notranslate"><span class="pre">sin(2*x)</span></code>.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">transformations</span> <span class="o">=</span> <span class="n">standard_transformations</span> <span class="o">+</span> <span class="p">(</span><span class="n">implicit_application</span><span class="p">,)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">transformations</span> <span class="o">=</span> <span class="n">standard_transformations</span> <span class="o">+</span> <span class="p">(</span><span class="n">implicit_application</span><span class="p">,)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">parse_expr</span><span class="p">(</span><span class="s1">&#39;cot z + csc z&#39;</span><span class="p">,</span> <span class="n">transformations</span><span class="o">=</span><span class="n">transformations</span><span class="p">)</span>
 <span class="go">cot(z) + csc(z)</span>
 </pre></div>
@@ -355,7 +355,7 @@ like <code class="docutils literal notranslate"><span class="pre">sin</span> <sp
 <code class="sig-prename descclassname">diofant.parsing.sympy_parser.</code><code class="sig-name descname">function_exponentiation</code><span class="sig-paren">(</span><em class="sig-param">tokens</em>, <em class="sig-param">local_dict</em>, <em class="sig-param">global_dict</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/parsing/sympy_parser.py#L280-L326"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.parsing.sympy_parser.function_exponentiation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Allows functions to be exponentiated, e.g. <code class="docutils literal notranslate"><span class="pre">cos**2(x)</span></code>.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">transformations</span> <span class="o">=</span> <span class="n">standard_transformations</span> <span class="o">+</span> <span class="p">(</span><span class="n">function_exponentiation</span><span class="p">,)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">transformations</span> <span class="o">=</span> <span class="n">standard_transformations</span> <span class="o">+</span> <span class="p">(</span><span class="n">function_exponentiation</span><span class="p">,)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">parse_expr</span><span class="p">(</span><span class="s1">&#39;sin**4(x)&#39;</span><span class="p">,</span> <span class="n">transformations</span><span class="o">=</span><span class="n">transformations</span><span class="p">)</span>
 <span class="go">sin(x)**4</span>
 </pre></div>
@@ -374,7 +374,7 @@ symbols).</p></li>
 <li><p>Functions can be exponentiated.</p></li>
 </ul>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parse_expr</span><span class="p">(</span><span class="s2">&quot;10sin**2 x**2 + 3xyz + tan theta&quot;</span><span class="p">,</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parse_expr</span><span class="p">(</span><span class="s2">&quot;10sin**2 x**2 + 3xyz + tan theta&quot;</span><span class="p">,</span>
 <span class="gp">... </span>           <span class="n">transformations</span><span class="o">=</span><span class="p">(</span><span class="n">standard_transformations</span> <span class="o">+</span>
 <span class="gp">... </span>                            <span class="p">(</span><span class="n">implicit_multiplication_application</span><span class="p">,)))</span>
 <span class="go">3*x*y*z + 10*sin(x**2)**2 + tan(theta)</span>

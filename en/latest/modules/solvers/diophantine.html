@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Diophantine &mdash; Diofant 0.11.0a14.dev159+g55db13457 documentation</title>
+  <title>Diophantine &mdash; Diofant 0.11.0a14.dev164+g38b9df156 documentation</title>
   
 
   
@@ -281,11 +281,11 @@ and Internal functions.</p>
 <div class="section" id="tutorial">
 <h2>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h2>
 <p>First, let’s import the highest API of the Diophantine module.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.solvers.diophantine</span> <span class="kn">import</span> <span class="n">diophantine</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.solvers.diophantine</span> <span class="kn">import</span> <span class="n">diophantine</span>
 </pre></div>
 </div>
 <p>Before we start solving the equations, we need to define the variables.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;x, y, z, t, p, q&quot;</span><span class="p">,</span> <span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;x, y, z, t, p, q&quot;</span><span class="p">,</span> <span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">t3</span><span class="p">,</span> <span class="n">t4</span><span class="p">,</span> <span class="n">t5</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;t1:6&quot;</span><span class="p">,</span> <span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -293,13 +293,13 @@ and Internal functions.</p>
 Diophantine equations. Let’s solve <span class="math notranslate nohighlight">\(2x + 3y = 5\)</span>. Note that although we
 write the equation in the above form, when we input the equation to any of the
 functions in Diophantine module, it needs to be in the form <span class="math notranslate nohighlight">\(eq = 0\)</span>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">diophantine</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="mi">5</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">diophantine</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="mi">5</span><span class="p">)</span>
 <span class="go">{(3*t_0 - 5, -2*t_0 + 5)}</span>
 </pre></div>
 </div>
 <p>Note that stepping one more level below the highest API, we can solve the very
 same equation by calling <a class="reference internal" href="#diofant.solvers.diophantine.diop_solve" title="diofant.solvers.diophantine.diop_solve"><code class="xref py py-meth docutils literal notranslate"><span class="pre">diop_solve()</span></code></a>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.solvers.diophantine</span> <span class="kn">import</span> <span class="n">diop_solve</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.solvers.diophantine</span> <span class="kn">import</span> <span class="n">diop_solve</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">diop_solve</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="mi">5</span><span class="p">)</span>
 <span class="go">(3*t_0 - 5, -2*t_0 + 5)</span>
 </pre></div>
@@ -310,13 +310,13 @@ But <a class="reference internal" href="#diofant.solvers.diophantine.diop_solve"
 or a set of tuples depending on the type of the equation given.</p>
 <p>We can also solve this equation by calling <a class="reference internal" href="#diofant.solvers.diophantine.diop_linear" title="diofant.solvers.diophantine.diop_linear"><code class="xref py py-meth docutils literal notranslate"><span class="pre">diop_linear()</span></code></a>,
 which is what <a class="reference internal" href="#diofant.solvers.diophantine.diop_solve" title="diofant.solvers.diophantine.diop_solve"><code class="xref py py-meth docutils literal notranslate"><span class="pre">diop_solve()</span></code></a> calls internally.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.solvers.diophantine</span> <span class="kn">import</span> <span class="n">diop_linear</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.solvers.diophantine</span> <span class="kn">import</span> <span class="n">diop_linear</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">diop_linear</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="mi">5</span><span class="p">)</span>
 <span class="go">(3*t_0 - 5, -2*t_0 + 5)</span>
 </pre></div>
 </div>
 <p>If the given equation has no solutions then the outputs will look like below.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">diophantine</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="mi">3</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">diophantine</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="mi">3</span><span class="p">)</span>
 <span class="go">set()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">diop_solve</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="mi">3</span><span class="p">)</span>
 <span class="go">(None, None)</span>
@@ -328,14 +328,14 @@ which is what <a class="reference internal" href="#diofant.solvers.diophantine.d
 <span class="math notranslate nohighlight">\(None\)</span> are returned. Size of the tuple is the same as the number of variables.
 Also, one can specifically set the parameter to be used in the solutions by
 passing a customized parameter. Consider the following example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;m&quot;</span><span class="p">,</span> <span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;m&quot;</span><span class="p">,</span> <span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">diop_solve</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="mi">5</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
 <span class="go">(3*m_0 - 5, -2*m_0 + 5)</span>
 </pre></div>
 </div>
 <p>For linear Diophantine equations, the customized parameter is the prefix used
 for each free variable in the solution. Consider the following example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">diop_solve</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="mi">5</span><span class="o">*</span><span class="n">z</span> <span class="o">+</span> <span class="mi">7</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">diop_solve</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="mi">5</span><span class="o">*</span><span class="n">z</span> <span class="o">+</span> <span class="mi">7</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
 <span class="go">(m_0, m_0 + 5*m_1 - 14, m_0 + 3*m_1 - 7)</span>
 </pre></div>
 </div>
@@ -348,14 +348,14 @@ idea about various cases associated with the equation would help a lot.
 Let us define <span class="math notranslate nohighlight">\(\Delta = b^2 - 4ac\)</span> w.r.t. the binary quadratic
 <span class="math notranslate nohighlight">\(ax^2 + bxy + cy^2 + dx + ey + f = 0\)</span>.</p>
 <p>When <span class="math notranslate nohighlight">\(\Delta &lt; 0\)</span>, there are either no solutions or only a finite number of solutions.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">diophantine</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="mi">8</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">7</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="mi">5</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">diophantine</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="mi">8</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">7</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="mi">5</span><span class="p">)</span>
 <span class="go">{(2, 1), (5, 1)}</span>
 </pre></div>
 </div>
 <p>In the above equation <span class="math notranslate nohighlight">\(\Delta = (-4)^2 - 4*1*8 = -16\)</span> and hence only a finite
 number of solutions exist.</p>
 <p>When <span class="math notranslate nohighlight">\(\Delta = 0\)</span> we might have either no solutions or parameterized solutions.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">diophantine</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">6</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">7</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="mi">5</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">diophantine</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">6</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">7</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="mi">5</span><span class="p">)</span>
 <span class="go">set()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">diophantine</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">7</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="mi">5</span><span class="p">)</span>
 <span class="go">{(-2*t**2 - 7*t + 10, -t**2 - 3*t + 5)}</span>
@@ -366,7 +366,7 @@ number of solutions exist.</p>
 <p>The most interesting case is when <span class="math notranslate nohighlight">\(\Delta &gt; 0\)</span> and it is not a perfect square.
 In this case, the equation has either no solutions or an infinte number of
 solutions. Consider the below cases where <span class="math notranslate nohighlight">\(\Delta = 8\)</span>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">diophantine</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">7</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="mi">5</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">diophantine</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">7</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="mi">5</span><span class="p">)</span>
 <span class="go">set()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;n&quot;</span><span class="p">,</span> <span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">diophantine</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="mi">4</span><span class="o">*</span><span class="n">y</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
@@ -383,13 +383,13 @@ solutions. Consider the below cases where <span class="math notranslate nohighli
 <p>Here <span class="math notranslate nohighlight">\(n\)</span> is an integer. Although x_n and y_n may not look like
 integers, substituting in specific values for n (and simplifying) shows that they
 are. For example consider the following example where we set n equal to 9.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">simplify</span><span class="p">(</span><span class="n">x_n</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">n</span><span class="p">:</span> <span class="mi">9</span><span class="p">}))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">simplify</span><span class="p">(</span><span class="n">x_n</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">n</span><span class="p">:</span> <span class="mi">9</span><span class="p">}))</span>
 <span class="go">-9369318</span>
 </pre></div>
 </div>
 <p>Any binary quadratic of the form <span class="math notranslate nohighlight">\(ax^2 + bxy + cy^2 + dx + ey + f = 0\)</span> can be
 transformed to an equivalent form <span class="math notranslate nohighlight">\(X^2 - DY^2 = N\)</span>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.solvers.diophantine</span> <span class="kn">import</span> <span class="n">find_DN</span><span class="p">,</span> <span class="n">diop_DN</span><span class="p">,</span> <span class="n">transformation_to_DN</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.solvers.diophantine</span> <span class="kn">import</span> <span class="n">find_DN</span><span class="p">,</span> <span class="n">diop_DN</span><span class="p">,</span> <span class="n">transformation_to_DN</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">find_DN</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">7</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">5</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="mi">3</span><span class="p">)</span>
 <span class="go">(5, 920)</span>
 </pre></div>
@@ -397,14 +397,14 @@ transformed to an equivalent form <span class="math notranslate nohighlight">\(X
 <p>So, the above equation is equivalent to the equation <span class="math notranslate nohighlight">\(X^2 - 5Y^2 = 920\)</span> after
 a linear transformation. If we want to find the linear transformation, we can
 use <a class="reference internal" href="#diofant.solvers.diophantine.transformation_to_DN" title="diofant.solvers.diophantine.transformation_to_DN"><code class="xref py py-meth docutils literal notranslate"><span class="pre">transformation_to_DN()</span></code></a></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">transformation_to_DN</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">7</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">5</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="mi">3</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">transformation_to_DN</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">7</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">5</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Here A is a 2 X 2 matrix and B is a 2 X 1 matrix such that the transformation</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{bmatrix} X\\Y \end{bmatrix} = A \begin{bmatrix} x\\y \end{bmatrix} + B\end{split}\]</div>
 <p>gives the equation <span class="math notranslate nohighlight">\(X^2 -5Y^2 = 920\)</span>. Values of <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are as belows.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span>
 <span class="go">Matrix([</span>
 <span class="go">[1/10, 3/10],</span>
 <span class="go">[   0,  1/5]])</span>
@@ -416,7 +416,7 @@ use <a class="reference internal" href="#diofant.solvers.diophantine.transformat
 </div>
 <p>We can solve an equation of the form <span class="math notranslate nohighlight">\(X^2 - DY^2 = N\)</span> by passing <span class="math notranslate nohighlight">\(D\)</span> and <span class="math notranslate nohighlight">\(N\)</span> to
 <a class="reference internal" href="#diofant.solvers.diophantine.diop_DN" title="diofant.solvers.diophantine.diop_DN"><code class="xref py py-meth docutils literal notranslate"><span class="pre">diop_DN()</span></code></a></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">diop_DN</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">920</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">diop_DN</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">920</span><span class="p">)</span>
 <span class="go">[]</span>
 </pre></div>
 </div>
@@ -425,7 +425,7 @@ use <a class="reference internal" href="#diofant.solvers.diophantine.transformat
 of the form <span class="math notranslate nohighlight">\(ax^2 + by^2 + cz^2 + dxy + eyz + fzx = 0\)</span>. These type of equations
 either have infinitely many solutions or no solutions (except the obvious
 solution (0, 0, 0))</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">diophantine</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">5</span><span class="o">*</span><span class="n">z</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="mi">6</span><span class="o">*</span><span class="n">y</span><span class="o">*</span><span class="n">z</span> <span class="o">+</span> <span class="mi">7</span><span class="o">*</span><span class="n">z</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">diophantine</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">5</span><span class="o">*</span><span class="n">z</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="mi">6</span><span class="o">*</span><span class="n">y</span><span class="o">*</span><span class="n">z</span> <span class="o">+</span> <span class="mi">7</span><span class="o">*</span><span class="n">z</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
 <span class="go">{(0, 0, 0)}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">diophantine</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">5</span><span class="o">*</span><span class="n">z</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="mi">7</span><span class="o">*</span><span class="n">y</span><span class="o">*</span><span class="n">z</span> <span class="o">+</span> <span class="mi">7</span><span class="o">*</span><span class="n">z</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
 <span class="go">{(-16*p**2 + 28*p*q + 20*q**2, 3*p**2 + 38*p*q - 25*q**2, 4*p**2 - 24*p*q + 68*q**2)}</span>
@@ -434,7 +434,7 @@ solution (0, 0, 0))</p>
 <p>If you are only interested in a base solution rather than the parameterized
 general solution (to be more precise, one of the general solutions), you can
 use <a class="reference internal" href="#diofant.solvers.diophantine.diop_ternary_quadratic" title="diofant.solvers.diophantine.diop_ternary_quadratic"><code class="xref py py-meth docutils literal notranslate"><span class="pre">diop_ternary_quadratic()</span></code></a>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.solvers.diophantine</span> <span class="kn">import</span> <span class="n">diop_ternary_quadratic</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.solvers.diophantine</span> <span class="kn">import</span> <span class="n">diop_ternary_quadratic</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">diop_ternary_quadratic</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">5</span><span class="o">*</span><span class="n">z</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="mi">7</span><span class="o">*</span><span class="n">y</span><span class="o">*</span><span class="n">z</span> <span class="o">+</span> <span class="mi">7</span><span class="o">*</span><span class="n">z</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
 <span class="go">(-4, 5, 1)</span>
 </pre></div>
@@ -446,7 +446,7 @@ equation. You can refer to the docs of
 <a class="reference internal" href="#diofant.solvers.diophantine.transformation_to_normal" title="diofant.solvers.diophantine.transformation_to_normal"><code class="xref py py-meth docutils literal notranslate"><span class="pre">transformation_to_normal()</span></code></a> to find more on
 this. The equation <span class="math notranslate nohighlight">\(w^2 = AX^2 + BY^2\)</span> can be solved more easily by using the
 Aforementioned <a class="reference internal" href="#diofant.solvers.diophantine.descent" title="diofant.solvers.diophantine.descent"><code class="xref py py-meth docutils literal notranslate"><span class="pre">descent()</span></code></a>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.solvers.diophantine</span> <span class="kn">import</span> <span class="n">descent</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.solvers.diophantine</span> <span class="kn">import</span> <span class="n">descent</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">descent</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># solves the equation w**2 = 3*Y**2 + Z**2</span>
 <span class="go">(1, 0, 1)</span>
 </pre></div>
@@ -456,7 +456,7 @@ Aforementioned <a class="reference internal" href="#diofant.solvers.diophantine.
 <span class="math notranslate nohighlight">\(a_{1}x_{1}^2 + a_{2}x_{2}^2 + \ldots + a_{n}x_{n}^2 = a_{n+1}x_{n+1}^2\)</span> and the
 general sum of squares equation, <span class="math notranslate nohighlight">\(x_{1}^2 + x_{2}^2 + \ldots + x_{n}^2 = k\)</span> can
 also be solved using the Diophantine module.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.abc</span> <span class="kn">import</span> <span class="n">e</span><span class="p">,</span> <span class="n">f</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.abc</span> <span class="kn">import</span> <span class="n">e</span><span class="p">,</span> <span class="n">f</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">diophantine</span><span class="p">(</span><span class="mi">9</span><span class="o">*</span><span class="n">a</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">16</span><span class="o">*</span><span class="n">b</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">c</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">49</span><span class="o">*</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">e</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">25</span><span class="o">*</span><span class="n">f</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 <span class="go">{(70*t1**2 + 70*t2**2 + 70*t3**2 + 70*t4**2 - 70*t5**2, 105*t1*t5, 420*t2*t5, 60*t3*t5, 210*t4*t5, 42*t1**2 + 42*t2**2 + 42*t3**2 + 42*t4**2 + 42*t5**2)}</span>
 </pre></div>
@@ -467,7 +467,7 @@ also be called directly to solve the same equation. Either you can call
 level API. For the general sum of squares, this is also true, but one advantage
 of calling <a class="reference internal" href="#diofant.solvers.diophantine.diop_general_sum_of_squares" title="diofant.solvers.diophantine.diop_general_sum_of_squares"><code class="xref py py-meth docutils literal notranslate"><span class="pre">diop_general_sum_of_squares()</span></code></a> is that
 you can control how many solutions are returned.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.solvers.diophantine</span> <span class="kn">import</span> <span class="n">diop_general_sum_of_squares</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.solvers.diophantine</span> <span class="kn">import</span> <span class="n">diop_general_sum_of_squares</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">eq</span> <span class="o">=</span> <span class="n">a</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">b</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">c</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">d</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">18</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">diophantine</span><span class="p">(</span><span class="n">eq</span><span class="p">)</span>
 <span class="go">{(0, 0, 3, 3), (0, 1, 1, 4), (1, 2, 2, 3)}</span>
@@ -479,7 +479,7 @@ you can control how many solutions are returned.</p>
 providean iterator that returns solutions and one may control whether
 the solutions contain zeros or not (and the solutions not containing
 zeros are returned first):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.solvers.diophantine</span> <span class="kn">import</span> <span class="n">sum_of_squares</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.solvers.diophantine</span> <span class="kn">import</span> <span class="n">sum_of_squares</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sos</span> <span class="o">=</span> <span class="n">sum_of_squares</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">zeros</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span><span class="n">sos</span><span class="p">)</span>
 <span class="go">(1, 2, 2, 3)</span>
@@ -490,7 +490,7 @@ zeros are returned first):</p>
 <p>Simple Eqyptian fractions can be found with the Diophantine module, too.
 For example, here are the ways that one might represent 1/2 as a sum of two
 unit fractions:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">diophantine</span><span class="p">(</span><span class="n">Eq</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="n">y</span><span class="p">,</span> <span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">diophantine</span><span class="p">(</span><span class="n">Eq</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="n">y</span><span class="p">,</span> <span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
 <span class="go">{(-2, 1), (1, -2), (3, 6), (4, 4), (6, 3)}</span>
 </pre></div>
 </div>
@@ -540,11 +540,11 @@ element of the tuple is the solution for <span class="math notranslate nohighlig
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">diophantine</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">diophantine</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 <span class="go">{(t_0, -t_0), (t_0, t_0)}</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">diophantine</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="n">z</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">diophantine</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="n">z</span><span class="p">))</span>
 <span class="go">{(0, n1, n2), (t_0, t_1, 2*t_0 + 3*t_1)}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">diophantine</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
 <span class="go">{(0, n1), (3*t_0 - 4, -t_0)}</span>
@@ -570,7 +570,7 @@ element of the tuple is the solution for <span class="math notranslate nohighlig
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">classify_diop</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">6</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="mi">4</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">classify_diop</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">6</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="mi">4</span><span class="p">)</span>
 <span class="go">([x, y], {1: -4, x: 4, y: 6}, &#39;linear&#39;)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">classify_diop</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="mi">4</span><span class="o">*</span><span class="n">z</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span>
 <span class="go">([x, y, z], {1: 5, x: 1, y: 3, z: -4}, &#39;linear&#39;)</span>
@@ -630,7 +630,7 @@ the appropriate solver function.</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.abc</span> <span class="kn">import</span> <span class="n">w</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.abc</span> <span class="kn">import</span> <span class="n">w</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">diop_solve</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="mi">5</span><span class="p">)</span>
 <span class="go">(3*t_0 - 5, -2*t_0 + 5)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">diop_solve</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="mi">4</span><span class="o">*</span><span class="n">z</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span>
@@ -666,12 +666,12 @@ integer constants and <span class="math notranslate nohighlight">\(x_{1}, x_{2},
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">diop_linear</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="mi">5</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">diop_linear</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="mi">5</span><span class="p">)</span>
 <span class="go">(3*t_0 - 5, 2*t_0 - 5)</span>
 </pre></div>
 </div>
 <p>Here x = -3*t_0 - 5 and y = -2*t_0 - 5</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">diop_linear</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="mi">4</span><span class="o">*</span><span class="n">z</span> <span class="o">-</span> <span class="mi">3</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">diop_linear</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="mi">4</span><span class="o">*</span><span class="n">z</span> <span class="o">-</span> <span class="mi">3</span><span class="p">)</span>
 <span class="go">(t_0, 2*t_0 + 4*t_1 + 3, -t_0 - 3*t_1 - 3)</span>
 </pre></div>
 </div>
@@ -694,7 +694,7 @@ returned.</p>
 <p><code class="docutils literal notranslate"><span class="pre">base_solution_linear(c,</span> <span class="pre">a,</span> <span class="pre">b,</span> <span class="pre">t)</span></code>: <code class="docutils literal notranslate"><span class="pre">a</span></code>, <code class="docutils literal notranslate"><span class="pre">b</span></code>, <code class="docutils literal notranslate"><span class="pre">c</span></code> are coefficients
 in <span class="math notranslate nohighlight">\(ax + by = c\)</span> and <code class="docutils literal notranslate"><span class="pre">t</span></code> is the parameter to be used in the solution.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">base_solution_linear</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>  <span class="c1"># equation 2*x + 3*y = 5</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">base_solution_linear</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>  <span class="c1"># equation 2*x + 3*y = 5</span>
 <span class="go">(-5, 5)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">base_solution_linear</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>  <span class="c1"># equation 5*x + 7*y = 0</span>
 <span class="go">(0, 0)</span>
@@ -726,7 +726,7 @@ to be zero.</p></li>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">diop_quadratic</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">diop_quadratic</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
 <span class="go">{(-1, -1)}</span>
 </pre></div>
 </div>
@@ -770,7 +770,7 @@ algorithm is used to solve this equation.</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">diop_DN</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">)</span>  <span class="c1"># Solves equation x**2 - 13*y**2 = -4</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">diop_DN</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">)</span>  <span class="c1"># Solves equation x**2 - 13*y**2 = -4</span>
 <span class="go">[(3, 1), (393, 109), (36, 10)]</span>
 </pre></div>
 </div>
@@ -778,7 +778,7 @@ algorithm is used to solve this equation.</p>
 solutions to the equation <span class="math notranslate nohighlight">\(x^2 - 13y^2 = -4\)</span> given by (3, 1), (393, 109)
 and (36, 10). Each tuple is in the form (x, y), i.e. solution (3, 1) means
 that <span class="math notranslate nohighlight">\(x = 3\)</span> and <span class="math notranslate nohighlight">\(y = 1\)</span>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">diop_DN</span><span class="p">(</span><span class="mi">986</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Solves equation x**2 - 986*y**2 = 1</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">diop_DN</span><span class="p">(</span><span class="mi">986</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Solves equation x**2 - 986*y**2 = 1</span>
 <span class="go">[(49299, 1570)]</span>
 </pre></div>
 </div>
@@ -807,7 +807,7 @@ find the solutions of <span class="math notranslate nohighlight">\(x^2 + y^2 = 2
 <span class="math notranslate nohighlight">\((x, y) = (4, 2)\)</span> and it is not primitive. When <span class="math notranslate nohighlight">\(a = b\)</span>, only the
 solutions with <span class="math notranslate nohighlight">\(x \leq y\)</span> are found. For more details, see the References.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cornacchia</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">35</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cornacchia</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">35</span><span class="p">)</span>
 <span class="go">{(2, 3), (4, 1)}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cornacchia</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
 <span class="go">{(4, 3)}</span>
@@ -850,7 +850,7 @@ Let <span class="math notranslate nohighlight">\((t, u)\)</span> be the minimal 
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">diop_bf_DN</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">diop_bf_DN</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">)</span>
 <span class="go">[(3, 1), (-3, 1), (36, 10)]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">diop_bf_DN</span><span class="p">(</span><span class="mi">986</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="go">[(49299, 1570)]</span>
@@ -886,7 +886,7 @@ matrix and B is a 2 X 1 matrix such that,</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">transformation_to_DN</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">transformation_to_DN</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">A</span>
 <span class="go">Matrix([</span>
 <span class="go">[1/26, 3/26],</span>
@@ -900,7 +900,7 @@ matrix and B is a 2 X 1 matrix such that,</p>
 <p>A, B  returned are such that Transpose((x y)) =  A * Transpose((X Y)) + B.
 Substituting these values for <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> and a bit of simplifying work
 will give an equation of the form <span class="math notranslate nohighlight">\(x^2 - Dy^2 = N\)</span>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.abc</span> <span class="kn">import</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.abc</span> <span class="kn">import</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="p">(</span><span class="n">A</span><span class="o">*</span><span class="n">Matrix</span><span class="p">([</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">])</span> <span class="o">+</span> <span class="n">B</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># Transformation for x</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">u</span>
 <span class="go">X/26 + 3*Y/26 - 6/13</span>
@@ -911,14 +911,14 @@ will give an equation of the form <span class="math notranslate nohighlight">\(x
 </div>
 <p>Next we will substitute these formulas for <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> and do
 <code class="docutils literal notranslate"><span class="pre">simplify()</span></code>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eq</span> <span class="o">=</span> <span class="n">simplify</span><span class="p">((</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span> <span class="n">u</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">v</span><span class="p">}))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eq</span> <span class="o">=</span> <span class="n">simplify</span><span class="p">((</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span> <span class="n">u</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">v</span><span class="p">}))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">eq</span>
 <span class="go">X**2/676 - Y**2/52 + 17/13</span>
 </pre></div>
 </div>
 <p>By multiplying the denominator appropriately, we can get a Pell equation
 in the standard form.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eq</span> <span class="o">*</span> <span class="mi">676</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eq</span> <span class="o">*</span> <span class="mi">676</span>
 <span class="go">X**2 - 13*Y**2 + 884</span>
 </pre></div>
 </div>
@@ -953,7 +953,7 @@ matrices returned by <code class="docutils literal notranslate"><span class="pre
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">find_DN</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">find_DN</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 <span class="go">(13, -884)</span>
 </pre></div>
 </div>
@@ -991,7 +991,7 @@ and it is assumed to be zero.</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">diop_ternary_quadratic</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">z</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">diop_ternary_quadratic</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">z</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 <span class="go">(1, 0, 1)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">diop_ternary_quadratic</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">5</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">z</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 <span class="go">(1, 0, 2)</span>
@@ -1012,7 +1012,7 @@ and it is assumed to be zero.</p>
 <dd><p>Returns an integer <span class="math notranslate nohighlight">\(c\)</span> s.t. <span class="math notranslate nohighlight">\(a = c^2k, \ c,k \in Z\)</span>. Here <span class="math notranslate nohighlight">\(k\)</span> is square
 free. <span class="math notranslate nohighlight">\(a\)</span> can be given as an integer or a dictionary of factors.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">square_factor</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">square_factor</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span>
 <span class="go">2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">square_factor</span><span class="p">(</span><span class="o">-</span><span class="mi">36</span><span class="o">*</span><span class="mi">3</span><span class="p">)</span>
 <span class="go">6</span>
@@ -1040,12 +1040,12 @@ are assumed to be valid for such a solution to exist.</p>
 <p>This is faster than the normal Lagrange’s descent algorithm because
 the Gaussian reduction is used.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">descent</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># x**2 = 3*y**2 + z**2</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">descent</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># x**2 = 3*y**2 + z**2</span>
 <span class="go">(1, 0, 1)</span>
 </pre></div>
 </div>
 <p><span class="math notranslate nohighlight">\((x, y, z) = (1, 0, 1)\)</span> is a solution to the above equation.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">descent</span><span class="p">(</span><span class="mi">41</span><span class="p">,</span> <span class="o">-</span><span class="mi">113</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">descent</span><span class="p">(</span><span class="mi">41</span><span class="p">,</span> <span class="o">-</span><span class="mi">113</span><span class="p">)</span>
 <span class="go">(-16, -3, 1)</span>
 </pre></div>
 </div>
@@ -1075,7 +1075,7 @@ sorted in the same order as the input variables.</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.abc</span> <span class="kn">import</span> <span class="n">e</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.abc</span> <span class="kn">import</span> <span class="n">e</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">diop_general_pythagorean</span><span class="p">(</span><span class="n">a</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">b</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">c</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 <span class="go">(m1**2 + m2**2 - m3**2, 2*m1*m3, 2*m2*m3, m1**2 + m2**2 + m3**2)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">diop_general_pythagorean</span><span class="p">(</span><span class="mi">9</span><span class="o">*</span><span class="n">a</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">4</span><span class="o">*</span><span class="n">b</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">16</span><span class="o">*</span><span class="n">c</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">25</span><span class="o">*</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">e</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
@@ -1105,7 +1105,7 @@ sorted in the same order as the input variables.</p>
 <p>When <span class="math notranslate nohighlight">\(n = 3\)</span> if <span class="math notranslate nohighlight">\(k = 4^a(8m + 7)\)</span> for some <span class="math notranslate nohighlight">\(a, m \in Z\)</span> then there will be
 no solutions.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.abc</span> <span class="kn">import</span> <span class="n">e</span><span class="p">,</span> <span class="n">f</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.abc</span> <span class="kn">import</span> <span class="n">e</span><span class="p">,</span> <span class="n">f</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">diop_general_sum_of_squares</span><span class="p">(</span><span class="n">a</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">b</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">c</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">d</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">e</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">2345</span><span class="p">)</span>
 <span class="go">{(15, 22, 22, 24, 24)}</span>
 </pre></div>
@@ -1137,7 +1137,7 @@ be in the form, <span class="math notranslate nohighlight">\(x_{1}^e + x_{2}^e +
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">diop_general_sum_of_even_powers</span><span class="p">(</span><span class="n">a</span><span class="o">**</span><span class="mi">4</span> <span class="o">+</span> <span class="n">b</span><span class="o">**</span><span class="mi">4</span> <span class="o">-</span> <span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">4</span> <span class="o">+</span> <span class="mi">3</span><span class="o">**</span><span class="mi">4</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">diop_general_sum_of_even_powers</span><span class="p">(</span><span class="n">a</span><span class="o">**</span><span class="mi">4</span> <span class="o">+</span> <span class="n">b</span><span class="o">**</span><span class="mi">4</span> <span class="o">-</span> <span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">4</span> <span class="o">+</span> <span class="mi">3</span><span class="o">**</span><span class="mi">4</span><span class="p">))</span>
 <span class="go">{(2, 3)}</span>
 </pre></div>
 </div>
@@ -1176,7 +1176,7 @@ try - except block.</p></li>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">partition</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">partition</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 <span class="go">(1, 1, 1, 1, 1)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
@@ -1208,7 +1208,7 @@ try - except block.</p></li>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sum_of_three_squares</span><span class="p">(</span><span class="mi">44542</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sum_of_three_squares</span><span class="p">(</span><span class="mi">44542</span><span class="p">)</span>
 <span class="go">(18, 37, 207)</span>
 </pre></div>
 </div>
@@ -1237,7 +1237,7 @@ Available: <a class="reference external" href="https://schorn.ch/lagrange.html">
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sum_of_four_squares</span><span class="p">(</span><span class="mi">3456</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sum_of_four_squares</span><span class="p">(</span><span class="mi">3456</span><span class="p">)</span>
 <span class="go">(8, 8, 32, 48)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sum_of_four_squares</span><span class="p">(</span><span class="mi">1294585930293</span><span class="p">)</span>
 <span class="go">(0, 1234, 2161, 1137796)</span>
@@ -1276,7 +1276,7 @@ will contain zeros.</p></li>
 </dl>
 <p class="rubric">Examples</p>
 <p>Represent 1729 as a sum of two cubes:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">power_representation</span><span class="p">(</span><span class="mi">1729</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">power_representation</span><span class="p">(</span><span class="mi">1729</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 <span class="go">(9, 10)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
@@ -1286,19 +1286,19 @@ will contain zeros.</p></li>
 <p>If the flag <span class="math notranslate nohighlight">\(zeros\)</span> is True, the solution may contain tuples with
 zeros; any such solutions will be generated after the solutions
 without zeros:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">power_representation</span><span class="p">(</span><span class="mi">125</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">zeros</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">power_representation</span><span class="p">(</span><span class="mi">125</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">zeros</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
 <span class="go">[(5, 6, 8), (3, 4, 10), (0, 5, 10), (0, 2, 11)]</span>
 </pre></div>
 </div>
 <p>For even <span class="math notranslate nohighlight">\(p\)</span> the <span class="math notranslate nohighlight">\(permute_sign\)</span> function can be used to get all
 signed values:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.utilities.iterables</span> <span class="kn">import</span> <span class="n">permute_signs</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.utilities.iterables</span> <span class="kn">import</span> <span class="n">permute_signs</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">permute_signs</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">12</span><span class="p">)))</span>
 <span class="go">[(1, 12), (-1, 12), (1, -12), (-1, -12)]</span>
 </pre></div>
 </div>
 <p>All possible signed permutations can also be obtained:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.utilities.iterables</span> <span class="kn">import</span> <span class="n">signed_permutations</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.utilities.iterables</span> <span class="kn">import</span> <span class="n">signed_permutations</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">signed_permutations</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">12</span><span class="p">)))</span>
 <span class="go">[(1, 12), (-1, 12), (1, -12), (-1, -12), (12, 1), (-12, 1),</span>
 <span class="go"> (12, -1), (-12, -1)]</span>
@@ -1343,7 +1343,7 @@ done if the contition above for k = 2 can be met, so this will
 automatically reject certain partitions of n.</p></li>
 </ul>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">sum_of_squares</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">sum_of_squares</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
 <span class="go">[(3, 4)]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">sum_of_squares</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="kc">True</span><span class="p">))</span>
 <span class="go">[(3, 4), (0, 5)]</span>
@@ -1401,7 +1401,7 @@ that <span class="math notranslate nohighlight">\(P_{0}^2 == D mod(|Q_{0}|)\)</s
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pqa</span> <span class="o">=</span> <span class="n">PQa</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>  <span class="c1"># (13 + sqrt(5))/4</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pqa</span> <span class="o">=</span> <span class="n">PQa</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>  <span class="c1"># (13 + sqrt(5))/4</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span><span class="n">pqa</span><span class="p">)</span>  <span class="c1"># (P_0, Q_0, a_0, A_0, B_0, G_0)</span>
 <span class="go">(13, 4, 3, 3, 1, -1)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span><span class="n">pqa</span><span class="p">)</span>  <span class="c1"># (P_1, Q_1, a_1, A_1, B_1, G_1)</span>
@@ -1434,7 +1434,7 @@ this.</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">equivalent</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">18</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">equivalent</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">18</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 <span class="go">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">equivalent</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">18</span><span class="p">,</span> <span class="mi">393</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">)</span>
 <span class="go">False</span>
@@ -1457,12 +1457,12 @@ Robertson, July 31, 2004, Page 12. <a class="reference external" href="https://w
 equation <code class="docutils literal notranslate"><span class="pre">eq</span></code> which has the form
 <span class="math notranslate nohighlight">\(ax^2 + by^2 + cz^2 + fxy + gyz + hxz = 0\)</span>.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parametrize_ternary_quadratic</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">z</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parametrize_ternary_quadratic</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">z</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 <span class="go">(2*p*q, p**2 - q**2, p**2 + q**2)</span>
 </pre></div>
 </div>
 <p>Here <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(q\)</span> are two co-prime integers.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parametrize_ternary_quadratic</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">z</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="mi">5</span><span class="o">*</span><span class="n">y</span><span class="o">*</span><span class="n">z</span> <span class="o">-</span> <span class="mi">7</span><span class="o">*</span><span class="n">y</span><span class="o">*</span><span class="n">z</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parametrize_ternary_quadratic</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">z</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="mi">5</span><span class="o">*</span><span class="n">y</span><span class="o">*</span><span class="n">z</span> <span class="o">-</span> <span class="mi">7</span><span class="o">*</span><span class="n">y</span><span class="o">*</span><span class="n">z</span><span class="p">)</span>
 <span class="go">(2*p**2 - 2*p*q - q**2, 2*p**2 + 2*p*q - q**2, 2*p**2 - 2*p*q + 3*q**2)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">parametrize_ternary_quadratic</span><span class="p">(</span><span class="mi">124</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">30</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">7729</span><span class="o">*</span><span class="n">z</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 <span class="go">(-1410*p**2 - 363263*q**2, 2700*p**2 + 30916*p*q - 695610*q**2, -60*p**2 + 5400*p*q + 15458*q**2)</span>
@@ -1489,7 +1489,7 @@ equation will be a quadratic binary or univariate equation. If solvable,
 returns a tuple <span class="math notranslate nohighlight">\((x, y, z)\)</span> that satisifes the given equation. If the
 equation does not have integer solutions, <span class="math notranslate nohighlight">\((None, None, None)\)</span> is returned.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">diop_ternary_quadratic_normal</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">z</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">diop_ternary_quadratic_normal</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">z</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 <span class="go">(1, 0, 1)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">diop_ternary_quadratic_normal</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">5</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">z</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 <span class="go">(1, 0, 2)</span>
@@ -1510,7 +1510,7 @@ Lagrange’s method; return None if there is no such solution.</p>
 <p>Here, <span class="math notranslate nohighlight">\(A \neq 0\)</span> and <span class="math notranslate nohighlight">\(B \neq 0\)</span> and <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are square free. Output a
 tuple <span class="math notranslate nohighlight">\((w_0, x_0, y_0)\)</span> which is a solution to the above equation.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ldescent</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># w^2 = x^2 + y^2</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ldescent</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># w^2 = x^2 + y^2</span>
 <span class="go">(1, 1, 0)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ldescent</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">7</span><span class="p">)</span>  <span class="c1"># w^2 = 4x^2 - 7y^2</span>
 <span class="go">(2, -1, 0)</span>
@@ -1518,7 +1518,7 @@ tuple <span class="math notranslate nohighlight">\((w_0, x_0, y_0)\)</span> whic
 </div>
 <p>This means that <span class="math notranslate nohighlight">\(x = -1, y = 0\)</span> and <span class="math notranslate nohighlight">\(w = 2\)</span> is a solution to the equation
 <span class="math notranslate nohighlight">\(w^2 = 4x^2 - 7y^2\)</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ldescent</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># w^2 = 5x^2 - y^2</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ldescent</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># w^2 = 5x^2 - y^2</span>
 <span class="go">(2, 1, -1)</span>
 </pre></div>
 </div>
@@ -1577,7 +1577,7 @@ Mathematics of Computation, Volume 00, Number 0.</p></li>
 <dd><p>Represent a prime <span class="math notranslate nohighlight">\(p\)</span> as a unique sum of two squares; this can
 only be done if the prime is congruent to 1 mod 4.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">prime_as_sum_of_two_squares</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>  <span class="c1"># can&#39;t be done</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">prime_as_sum_of_two_squares</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>  <span class="c1"># can&#39;t be done</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">prime_as_sum_of_two_squares</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 <span class="go">(1, 2)</span>
 </pre></div>
@@ -1602,7 +1602,7 @@ Available: <a class="reference external" href="https://schorn.ch/lagrange.html">
 <dd><p>Returns an integer <span class="math notranslate nohighlight">\(c\)</span> s.t. <span class="math notranslate nohighlight">\(a = c^2k, \ c,k \in Z\)</span>. Here <span class="math notranslate nohighlight">\(k\)</span> is square
 free. <span class="math notranslate nohighlight">\(a\)</span> can be given as an integer or a dictionary of factors.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">square_factor</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">square_factor</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span>
 <span class="go">2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">square_factor</span><span class="p">(</span><span class="o">-</span><span class="mi">36</span><span class="o">*</span><span class="mi">3</span><span class="p">)</span>
 <span class="go">6</span>
@@ -1634,7 +1634,7 @@ both the <span class="math notranslate nohighlight">\(gcd(a, b, c)\)</span> and 
 <p>The solutions for <span class="math notranslate nohighlight">\(ax^2 + by^2 + cz^2 = 0\)</span> can be
 recovered from the solutions of <span class="math notranslate nohighlight">\(a'x^2 + b'y^2 + c'z^2 = 0\)</span>.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sqf_normal</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="mi">3</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">5</span> <span class="o">*</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">7</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="mi">11</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sqf_normal</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="mi">3</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">5</span> <span class="o">*</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">7</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="mi">11</span><span class="p">)</span>
 <span class="go">(11, 1, 5)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sqf_normal</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="mi">3</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">5</span> <span class="o">*</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">7</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="mi">11</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 <span class="go">((3, 1, 7), (5, 55, 11), (11, 1, 5))</span>

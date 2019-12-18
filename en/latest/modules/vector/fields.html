@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Scalar and Vector Field Functionality &mdash; Diofant 0.11.0a14.dev159+g55db13457 documentation</title>
+  <title>Scalar and Vector Field Functionality &mdash; Diofant 0.11.0a14.dev164+g38b9df156 documentation</title>
   
 
   
@@ -214,7 +214,7 @@ named <code class="docutils literal notranslate"><span class="pre">i</span></cod
 <span class="math notranslate nohighlight">\(\mathbf{v}\)</span> of the form
 <span class="math notranslate nohighlight">\(3\mathbf{\hat{i}} + 4\mathbf{\hat{j}} + 5\mathbf{\hat{k}}\)</span> with
 respect to a given frame <span class="math notranslate nohighlight">\(\mathbf{R}\)</span>, you would do</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.vector</span> <span class="kn">import</span> <span class="n">CoordSysCartesian</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.vector</span> <span class="kn">import</span> <span class="n">CoordSysCartesian</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">R</span> <span class="o">=</span> <span class="n">CoordSysCartesian</span><span class="p">(</span><span class="s1">&#39;R&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="mi">3</span><span class="o">*</span><span class="n">R</span><span class="o">.</span><span class="n">i</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">R</span><span class="o">.</span><span class="n">j</span> <span class="o">+</span> <span class="mi">5</span><span class="o">*</span><span class="n">R</span><span class="o">.</span><span class="n">k</span>
 </pre></div>
@@ -232,7 +232,7 @@ For a system <code class="docutils literal notranslate"><span class="pre">R</spa
 and <code class="docutils literal notranslate"><span class="pre">R.z</span></code> expressions respectively.</p>
 <p>Therefore, to generate the expression for the aforementioned electric
 potential field <span class="math notranslate nohighlight">\(2{x}^{2}y\)</span>, you would have to do</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.vector</span> <span class="kn">import</span> <span class="n">CoordSysCartesian</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.vector</span> <span class="kn">import</span> <span class="n">CoordSysCartesian</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">R</span> <span class="o">=</span> <span class="n">CoordSysCartesian</span><span class="p">(</span><span class="s1">&#39;R&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">electric_potential</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">R</span><span class="o">.</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">R</span><span class="o">.</span><span class="n">y</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">electric_potential</span>
@@ -246,7 +246,7 @@ about the coordinate system and axis they correspond to.</p>
 for any math/calculus functionality. Hence, to differentiate the above
 electric potential with respect to <span class="math notranslate nohighlight">\(x\)</span> (i.e. <code class="docutils literal notranslate"><span class="pre">R.x</span></code>), you would
 use the <code class="docutils literal notranslate"><span class="pre">diff</span></code> method.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.vector</span> <span class="kn">import</span> <span class="n">CoordSysCartesian</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.vector</span> <span class="kn">import</span> <span class="n">CoordSysCartesian</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">R</span> <span class="o">=</span> <span class="n">CoordSysCartesian</span><span class="p">(</span><span class="s1">&#39;R&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">electric_potential</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">R</span><span class="o">.</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">R</span><span class="o">.</span><span class="n">y</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">diff</span><span class="p">(</span><span class="n">electric_potential</span><span class="p">,</span> <span class="n">R</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
@@ -259,7 +259,7 @@ simple <code class="docutils literal notranslate"><span class="pre">Expr</span><
 constant.</p>
 <p>Like scalar fields, vector fields that vary with position can also be
 constructed using <code class="docutils literal notranslate"><span class="pre">BaseScalar</span></code> s in the measure-number expressions.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.vector</span> <span class="kn">import</span> <span class="n">CoordSysCartesian</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.vector</span> <span class="kn">import</span> <span class="n">CoordSysCartesian</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">R</span> <span class="o">=</span> <span class="n">CoordSysCartesian</span><span class="p">(</span><span class="s1">&#39;R&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">R</span><span class="o">.</span><span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">R</span><span class="o">.</span><span class="n">x</span><span class="o">*</span><span class="n">R</span><span class="o">.</span><span class="n">z</span><span class="o">*</span><span class="n">R</span><span class="o">.</span><span class="n">k</span>
 </pre></div>
@@ -282,7 +282,7 @@ Hence, assuming <code class="docutils literal notranslate"><span class="pre">C</
 differentials wrt <code class="docutils literal notranslate"><span class="pre">C</span></code>’s coordinate variables and basis vectors
 would be accessible as <code class="docutils literal notranslate"><span class="pre">C.delop</span></code>.</p>
 <p>Given below is an example of usage of the <code class="docutils literal notranslate"><span class="pre">delop</span></code> object.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.vector</span> <span class="kn">import</span> <span class="n">CoordSysCartesian</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.vector</span> <span class="kn">import</span> <span class="n">CoordSysCartesian</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">C</span> <span class="o">=</span> <span class="n">CoordSysCartesian</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">gradient_field</span> <span class="o">=</span> <span class="n">C</span><span class="o">.</span><span class="n">delop</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">x</span><span class="o">*</span><span class="n">C</span><span class="o">.</span><span class="n">y</span><span class="o">*</span><span class="n">C</span><span class="o">.</span><span class="n">z</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">gradient_field</span>
@@ -291,7 +291,7 @@ would be accessible as <code class="docutils literal notranslate"><span class="p
 </div>
 <p>The above expression can be evaluated using the Diofant <code class="docutils literal notranslate"><span class="pre">doit()</span></code>
 routine.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gradient_field</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gradient_field</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span>
 <span class="go">C.y*C.z*C.i + C.x*C.z*C.j + C.x*C.y*C.k</span>
 </pre></div>
 </div>
@@ -320,7 +320,7 @@ denoted by <span class="math notranslate nohighlight">\(\nabla \times \mathbf{F}
 <p>Computing the curl of a vector field in <a class="reference internal" href="basics.html#module-diofant.vector" title="diofant.vector"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diofant.vector</span></code></a> can be
 accomplished in two ways.</p>
 <p>One, by using the <code class="docutils literal notranslate"><span class="pre">delop</span></code> property</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.vector</span> <span class="kn">import</span> <span class="n">CoordSysCartesian</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.vector</span> <span class="kn">import</span> <span class="n">CoordSysCartesian</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">C</span> <span class="o">=</span> <span class="n">CoordSysCartesian</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">C</span><span class="o">.</span><span class="n">delop</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">x</span><span class="o">*</span><span class="n">C</span><span class="o">.</span><span class="n">y</span><span class="o">*</span><span class="n">C</span><span class="o">.</span><span class="n">z</span><span class="o">*</span><span class="n">C</span><span class="o">.</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span>
 <span class="go">C.x*C.y*C.j + (-C.x*C.z)*C.k</span>
@@ -329,7 +329,7 @@ accomplished in two ways.</p>
 </pre></div>
 </div>
 <p>Or by using the dedicated function</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.vector</span> <span class="kn">import</span> <span class="n">curl</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.vector</span> <span class="kn">import</span> <span class="n">curl</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">curl</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">x</span><span class="o">*</span><span class="n">C</span><span class="o">.</span><span class="n">y</span><span class="o">*</span><span class="n">C</span><span class="o">.</span><span class="n">z</span><span class="o">*</span><span class="n">C</span><span class="o">.</span><span class="n">i</span><span class="p">,</span> <span class="n">C</span><span class="p">)</span>
 <span class="go">C.x*C.y*C.j + (-C.x*C.z)*C.k</span>
 </pre></div>
@@ -351,7 +351,7 @@ denoted by <span class="math notranslate nohighlight">\(\nabla\cdot\mathbf{F}\)<
 <p>Computing the divergence of a vector field in <a class="reference internal" href="basics.html#module-diofant.vector" title="diofant.vector"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diofant.vector</span></code></a> can be
 accomplished in two ways.</p>
 <p>One, by using the <code class="docutils literal notranslate"><span class="pre">delop</span></code> property</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.vector</span> <span class="kn">import</span> <span class="n">CoordSysCartesian</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.vector</span> <span class="kn">import</span> <span class="n">CoordSysCartesian</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">C</span> <span class="o">=</span> <span class="n">CoordSysCartesian</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">C</span><span class="o">.</span><span class="n">delop</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">x</span><span class="o">*</span><span class="n">C</span><span class="o">.</span><span class="n">y</span><span class="o">*</span><span class="n">C</span><span class="o">.</span><span class="n">z</span><span class="o">*</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">i</span> <span class="o">+</span> <span class="n">C</span><span class="o">.</span><span class="n">j</span> <span class="o">+</span> <span class="n">C</span><span class="o">.</span><span class="n">k</span><span class="p">))</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span>
 <span class="go">C.x*C.y + C.x*C.z + C.y*C.z</span>
@@ -360,7 +360,7 @@ accomplished in two ways.</p>
 </pre></div>
 </div>
 <p>Or by using the dedicated function</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.vector</span> <span class="kn">import</span> <span class="n">divergence</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.vector</span> <span class="kn">import</span> <span class="n">divergence</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">divergence</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">x</span><span class="o">*</span><span class="n">C</span><span class="o">.</span><span class="n">y</span><span class="o">*</span><span class="n">C</span><span class="o">.</span><span class="n">z</span><span class="o">*</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">i</span> <span class="o">+</span> <span class="n">C</span><span class="o">.</span><span class="n">j</span> <span class="o">+</span> <span class="n">C</span><span class="o">.</span><span class="n">k</span><span class="p">),</span> <span class="n">C</span><span class="p">)</span>
 <span class="go">C.x*C.y + C.x*C.z + C.y*C.z</span>
 </pre></div>
@@ -380,7 +380,7 @@ denoted by <span class="math notranslate nohighlight">\(\nabla f\)</span> is giv
 <p>Computing the divergence of a vector field in <a class="reference internal" href="basics.html#module-diofant.vector" title="diofant.vector"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diofant.vector</span></code></a> can be
 accomplished in two ways.</p>
 <p>One, by using the <code class="docutils literal notranslate"><span class="pre">delop</span></code> property</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.vector</span> <span class="kn">import</span> <span class="n">CoordSysCartesian</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.vector</span> <span class="kn">import</span> <span class="n">CoordSysCartesian</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">C</span> <span class="o">=</span> <span class="n">CoordSysCartesian</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">C</span><span class="o">.</span><span class="n">delop</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">x</span><span class="o">*</span><span class="n">C</span><span class="o">.</span><span class="n">y</span><span class="o">*</span><span class="n">C</span><span class="o">.</span><span class="n">z</span><span class="p">)</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span>
 <span class="go">C.y*C.z*C.i + C.x*C.z*C.j + C.x*C.y*C.k</span>
@@ -389,7 +389,7 @@ accomplished in two ways.</p>
 </pre></div>
 </div>
 <p>Or by using the dedicated function</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.vector</span> <span class="kn">import</span> <span class="n">gradient</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.vector</span> <span class="kn">import</span> <span class="n">gradient</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">gradient</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">x</span><span class="o">*</span><span class="n">C</span><span class="o">.</span><span class="n">y</span><span class="o">*</span><span class="n">C</span><span class="o">.</span><span class="n">z</span><span class="p">,</span> <span class="n">C</span><span class="p">)</span>
 <span class="go">C.y*C.z*C.i + C.x*C.z*C.j + C.x*C.y*C.k</span>
 </pre></div>
@@ -408,7 +408,7 @@ velocity <span class="math notranslate nohighlight">\(v\)</span>. It is represen
 <p>Directional derivatives of vector and scalar fields can be computed in
 <a class="reference internal" href="basics.html#module-diofant.vector" title="diofant.vector"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diofant.vector</span></code></a> using the <code class="docutils literal notranslate"><span class="pre">delop</span></code> property of
 <code class="docutils literal notranslate"><span class="pre">CoordSysCartesian</span></code>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.vector</span> <span class="kn">import</span> <span class="n">CoordSysCartesian</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.vector</span> <span class="kn">import</span> <span class="n">CoordSysCartesian</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">C</span> <span class="o">=</span> <span class="n">CoordSysCartesian</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">vel</span> <span class="o">=</span> <span class="n">C</span><span class="o">.</span><span class="n">i</span> <span class="o">+</span> <span class="n">C</span><span class="o">.</span><span class="n">j</span> <span class="o">+</span> <span class="n">C</span><span class="o">.</span><span class="n">k</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">scalar_field</span> <span class="o">=</span> <span class="n">C</span><span class="o">.</span><span class="n">x</span><span class="o">*</span><span class="n">C</span><span class="o">.</span><span class="n">y</span><span class="o">*</span><span class="n">C</span><span class="o">.</span><span class="n">z</span>
@@ -433,7 +433,7 @@ curl of a conservative field is always zero.</p>
 energy is conserved.</p>
 <p>To check if a vector field is conservative in <a class="reference internal" href="basics.html#module-diofant.vector" title="diofant.vector"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diofant.vector</span></code></a>, the
 <code class="docutils literal notranslate"><span class="pre">is_conservative</span></code> function can be used.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.vector</span> <span class="kn">import</span> <span class="n">CoordSysCartesian</span><span class="p">,</span> <span class="n">is_conservative</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.vector</span> <span class="kn">import</span> <span class="n">CoordSysCartesian</span><span class="p">,</span> <span class="n">is_conservative</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">R</span> <span class="o">=</span> <span class="n">CoordSysCartesian</span><span class="p">(</span><span class="s1">&#39;R&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">field</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">y</span><span class="o">*</span><span class="n">R</span><span class="o">.</span><span class="n">z</span><span class="o">*</span><span class="n">R</span><span class="o">.</span><span class="n">i</span> <span class="o">+</span> <span class="n">R</span><span class="o">.</span><span class="n">x</span><span class="o">*</span><span class="n">R</span><span class="o">.</span><span class="n">z</span><span class="o">*</span><span class="n">R</span><span class="o">.</span><span class="n">j</span> <span class="o">+</span> <span class="n">R</span><span class="o">.</span><span class="n">x</span><span class="o">*</span><span class="n">R</span><span class="o">.</span><span class="n">y</span><span class="o">*</span><span class="n">R</span><span class="o">.</span><span class="n">k</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">is_conservative</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
@@ -446,7 +446,7 @@ energy is conserved.</p>
 is zero at all points in space.</p>
 <p>To check if a vector field is solenoidal in <a class="reference internal" href="basics.html#module-diofant.vector" title="diofant.vector"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diofant.vector</span></code></a>, the
 <code class="docutils literal notranslate"><span class="pre">is_solenoidal</span></code> function can be used.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.vector</span> <span class="kn">import</span> <span class="n">CoordSysCartesian</span><span class="p">,</span> <span class="n">is_solenoidal</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.vector</span> <span class="kn">import</span> <span class="n">CoordSysCartesian</span><span class="p">,</span> <span class="n">is_solenoidal</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">R</span> <span class="o">=</span> <span class="n">CoordSysCartesian</span><span class="p">(</span><span class="s1">&#39;R&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">field</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">y</span><span class="o">*</span><span class="n">R</span><span class="o">.</span><span class="n">z</span><span class="o">*</span><span class="n">R</span><span class="o">.</span><span class="n">i</span> <span class="o">+</span> <span class="n">R</span><span class="o">.</span><span class="n">x</span><span class="o">*</span><span class="n">R</span><span class="o">.</span><span class="n">z</span><span class="o">*</span><span class="n">R</span><span class="o">.</span><span class="n">j</span> <span class="o">+</span> <span class="n">R</span><span class="o">.</span><span class="n">x</span><span class="o">*</span><span class="n">R</span><span class="o">.</span><span class="n">y</span><span class="o">*</span><span class="n">R</span><span class="o">.</span><span class="n">k</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">is_solenoidal</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
@@ -465,7 +465,7 @@ potential field’ corresponding to the aforementioned conservative field.</p>
 scalar potential field corresponding to a given conservative vector field in
 3D space - minus the extra constant of integration, of course.</p>
 <p>Example of usage -</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.vector</span> <span class="kn">import</span> <span class="n">CoordSysCartesian</span><span class="p">,</span> <span class="n">scalar_potential</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.vector</span> <span class="kn">import</span> <span class="n">CoordSysCartesian</span><span class="p">,</span> <span class="n">scalar_potential</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">R</span> <span class="o">=</span> <span class="n">CoordSysCartesian</span><span class="p">(</span><span class="s1">&#39;R&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">conservative_field</span> <span class="o">=</span> <span class="mi">4</span><span class="o">*</span><span class="n">R</span><span class="o">.</span><span class="n">x</span><span class="o">*</span><span class="n">R</span><span class="o">.</span><span class="n">y</span><span class="o">*</span><span class="n">R</span><span class="o">.</span><span class="n">z</span><span class="o">*</span><span class="n">R</span><span class="o">.</span><span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">R</span><span class="o">.</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">R</span><span class="o">.</span><span class="n">z</span><span class="o">*</span><span class="n">R</span><span class="o">.</span><span class="n">j</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">R</span><span class="o">.</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">R</span><span class="o">.</span><span class="n">y</span><span class="o">*</span><span class="n">R</span><span class="o">.</span><span class="n">k</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">scalar_potential</span><span class="p">(</span><span class="n">conservative_field</span><span class="p">,</span> <span class="n">R</span><span class="p">)</span>
@@ -480,7 +480,7 @@ between the values of its scalar potential function at two points in space.
 This is useful in calculating a line integral with respect to a conservative
 function, since it depends only on the endpoints of the path.</p>
 <p>This computation is performed as follows in <a class="reference internal" href="basics.html#module-diofant.vector" title="diofant.vector"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diofant.vector</span></code></a>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.vector</span> <span class="kn">import</span> <span class="n">CoordSysCartesian</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.vector</span> <span class="kn">import</span> <span class="n">CoordSysCartesian</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.vector</span> <span class="kn">import</span> <span class="n">scalar_potential_difference</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">R</span> <span class="o">=</span> <span class="n">CoordSysCartesian</span><span class="p">(</span><span class="s1">&#39;R&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">P</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">origin</span><span class="o">.</span><span class="n">locate_new</span><span class="p">(</span><span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="o">*</span><span class="n">R</span><span class="o">.</span><span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">R</span><span class="o">.</span><span class="n">j</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">R</span><span class="o">.</span><span class="n">k</span><span class="p">)</span>

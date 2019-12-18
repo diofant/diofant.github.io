@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Codegen &mdash; Diofant 0.11.0a14.dev159+g55db13457 documentation</title>
+  <title>Codegen &mdash; Diofant 0.11.0a14.dev164+g38b9df156 documentation</title>
   
 
   
@@ -216,7 +216,7 @@ below for advanced users that may want to use the framework directly.</p>
 <p class="admonition-title">Note</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">codegen</span></code> callable is not in the diofant namespace automatically,
 to use it you must first execute</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.utilities.codegen</span> <span class="kn">import</span> <span class="n">codegen</span>  <span class="c1"># noqa: F401</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.utilities.codegen</span> <span class="kn">import</span> <span class="n">codegen</span>  <span class="c1"># noqa: F401</span>
 </pre></div>
 </div>
 </div>
@@ -646,7 +646,7 @@ listed here will not show up as function arguments.</p></li>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[(</span><span class="n">c_name</span><span class="p">,</span> <span class="n">c_code</span><span class="p">),</span> <span class="p">(</span><span class="n">h_name</span><span class="p">,</span> <span class="n">c_header</span><span class="p">)]</span> <span class="o">=</span> <span class="n">codegen</span><span class="p">(</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[(</span><span class="n">c_name</span><span class="p">,</span> <span class="n">c_code</span><span class="p">),</span> <span class="p">(</span><span class="n">h_name</span><span class="p">,</span> <span class="n">c_header</span><span class="p">)]</span> <span class="o">=</span> <span class="n">codegen</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="p">(</span><span class="s2">&quot;f&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="o">*</span><span class="n">z</span><span class="p">),</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;test&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">empty</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">c_name</span><span class="p">)</span>
 <span class="go">test.c</span>
@@ -669,7 +669,7 @@ listed here will not show up as function arguments.</p></li>
 </div>
 <p>Another example using Equality objects to give named outputs.  Here the
 filename (prefix) is taken from the first (name, expr) pair.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.abc</span> <span class="kn">import</span> <span class="n">f</span><span class="p">,</span> <span class="n">g</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.abc</span> <span class="kn">import</span> <span class="n">f</span><span class="p">,</span> <span class="n">g</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="p">[(</span><span class="n">c_name</span><span class="p">,</span> <span class="n">c_code</span><span class="p">),</span>
 <span class="gp">... </span> <span class="p">(</span><span class="n">h_name</span><span class="p">,</span> <span class="n">c_header</span><span class="p">)]</span> <span class="o">=</span> <span class="n">codegen</span><span class="p">([(</span><span class="s2">&quot;myfcn&quot;</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">),</span>
 <span class="gp">... </span>                                <span class="p">(</span><span class="s2">&quot;fcn2&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">Eq</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">),</span> <span class="n">Eq</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">y</span><span class="p">)])],</span>
@@ -693,7 +693,7 @@ filename (prefix) is taken from the first (name, expr) pair.</p>
 <p>If the generated function(s) will be part of a larger project where various
 global variables have been defined, the ‘global_vars’ option can be used
 to remove the specified variables from the function signature</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[(</span><span class="n">f_name</span><span class="p">,</span> <span class="n">f_code</span><span class="p">),</span> <span class="n">header</span><span class="p">]</span> <span class="o">=</span> <span class="n">codegen</span><span class="p">(</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[(</span><span class="n">f_name</span><span class="p">,</span> <span class="n">f_code</span><span class="p">),</span> <span class="n">header</span><span class="p">]</span> <span class="o">=</span> <span class="n">codegen</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="p">(</span><span class="s2">&quot;f&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="o">*</span><span class="n">z</span><span class="p">),</span> <span class="s2">&quot;F95&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">empty</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">argument_sequence</span><span class="o">=</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">global_vars</span><span class="o">=</span><span class="p">(</span><span class="n">z</span><span class="p">,))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">f_code</span><span class="p">)</span>
@@ -736,7 +736,7 @@ checking, etc depend on the language.  [default: “F95”].</p></li>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.abc</span> <span class="kn">import</span> <span class="n">f</span><span class="p">,</span> <span class="n">g</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.abc</span> <span class="kn">import</span> <span class="n">f</span><span class="p">,</span> <span class="n">g</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">make_routine</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">Eq</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">),</span> <span class="n">Eq</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">)])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">arg</span><span class="o">.</span><span class="n">result_var</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">results</span><span class="p">]</span>
 <span class="go">[]</span>
@@ -750,7 +750,7 @@ checking, etc depend on the language.  [default: “F95”].</p></li>
 </div>
 <p>Another more complicated example with a mixture of specified and
 automatically-assigned names.  Also has Matrix output.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">make_routine</span><span class="p">(</span><span class="s1">&#39;fcn&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">,</span> <span class="n">Eq</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">Eq</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">g</span><span class="p">),</span> <span class="n">Matrix</span><span class="p">([[</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">make_routine</span><span class="p">(</span><span class="s1">&#39;fcn&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">,</span> <span class="n">Eq</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">Eq</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">g</span><span class="p">),</span> <span class="n">Matrix</span><span class="p">([[</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">arg</span><span class="o">.</span><span class="n">result_var</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">results</span><span class="p">]</span>
 <span class="go">[result_...]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">arg</span><span class="o">.</span><span class="n">expr</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">results</span><span class="p">]</span>
@@ -760,17 +760,17 @@ automatically-assigned names.  Also has Matrix output.</p>
 </pre></div>
 </div>
 <p>We can examine the various arguments more closely:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">arguments</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">InputArgument</span><span class="p">)]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">arguments</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">InputArgument</span><span class="p">)]</span>
 <span class="go">[x, y]</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">arguments</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">OutputArgument</span><span class="p">)]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">arguments</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">OutputArgument</span><span class="p">)]</span>
 <span class="go">[f, out_...]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">expr</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">arguments</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">OutputArgument</span><span class="p">)]</span>
 <span class="go">[1, Matrix([[x, 2]])]</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">arguments</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">InOutArgument</span><span class="p">)]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">arguments</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">InOutArgument</span><span class="p">)]</span>
 <span class="go">[g]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">expr</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">arguments</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">InOutArgument</span><span class="p">)]</span>
 <span class="go">[g + x]</span>

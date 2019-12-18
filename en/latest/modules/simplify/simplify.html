@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Simplify &mdash; Diofant 0.11.0a14.dev159+g55db13457 documentation</title>
+  <title>Simplify &mdash; Diofant 0.11.0a14.dev164+g38b9df156 documentation</title>
   
 
   
@@ -257,7 +257,7 @@
 <h2>simplify<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="diofant.simplify.simplify.simplify">
-<code class="sig-prename descclassname">diofant.simplify.simplify.</code><code class="sig-name descname">simplify</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">ratio=1.7</em>, <em class="sig-param">measure=&lt;function count_ops&gt;</em>, <em class="sig-param">fu=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/simplify.py#L465-L686"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.simplify.simplify" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.simplify.simplify.</code><code class="sig-name descname">simplify</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">ratio=1.7</em>, <em class="sig-param">measure=&lt;function count_ops&gt;</em>, <em class="sig-param">fu=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/simplify.py#L463-L684"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.simplify.simplify" title="Permalink to this definition">¶</a></dt>
 <dd><p>Simplifies the given expression.</p>
 <p>Simplification is not a well defined term and the exact strategies
 this function tries can change in the future versions of Diofant. If
@@ -270,7 +270,7 @@ will be robust.</p>
 anything about the structure of the expression, simplify() tries to apply
 intelligent heuristics to make the input expression “simpler”.  For
 example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
 <span class="go">(x**2 + x)/(x*sin(y)**2 + x*cos(y)**2)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">simplify</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
@@ -279,7 +279,7 @@ example:</p>
 </div>
 <p>Note that we could have obtained the same result by using specific
 simplification functions:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">trigsimp</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">trigsimp</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 <span class="go">(x**2 + x)/x</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cancel</span><span class="p">(</span><span class="n">_</span><span class="p">)</span>
 <span class="go">x + 1</span>
@@ -323,7 +323,7 @@ may slow down simplify too much for very large expressions).  If you don’t
 know what a good metric would be, the default, <code class="docutils literal notranslate"><span class="pre">count_ops</span></code>, is a good
 one.</p>
 <p>For example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;a b&#39;</span><span class="p">,</span> <span class="n">positive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;a b&#39;</span><span class="p">,</span> <span class="n">positive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">log</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="n">log</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">+</span> <span class="n">log</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">b</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">h</span> <span class="o">=</span> <span class="n">simplify</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">h</span>
@@ -339,13 +339,13 @@ However, we may not like how <code class="docutils literal notranslate"><span cl
 <code class="docutils literal notranslate"><span class="pre">logcombine</span></code>) has created the <code class="docutils literal notranslate"><span class="pre">b**(log(1/a)</span> <span class="pre">+</span> <span class="pre">1)</span></code> term.  A simple way
 to reduce this would be to give more weight to powers as operations in
 <code class="docutils literal notranslate"><span class="pre">count_ops</span></code>.  We can do this by using the <code class="docutils literal notranslate"><span class="pre">visual=True</span></code> option:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">count_ops</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">visual</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">count_ops</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">visual</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
 <span class="go">2*ADD + DIV + 4*LOG + MUL</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">count_ops</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">visual</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
 <span class="go">2*LOG + MUL + POW + SUB</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">my_measure</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">my_measure</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="n">POW</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;POW&#39;</span><span class="p">)</span>
 <span class="gp">... </span>    <span class="c1"># Discourage powers by giving POW a weight of 10</span>
 <span class="gp">... </span>    <span class="n">count</span> <span class="o">=</span> <span class="n">count_ops</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">visual</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">POW</span><span class="p">:</span> <span class="mi">10</span><span class="p">})</span>
@@ -395,14 +395,14 @@ separated expressions may not necessarily be grouped together.</p>
 expressions, it is not necessary in all cases, so one should not
 count on the returned factors being factored.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.abc</span> <span class="kn">import</span> <span class="n">alpha</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.abc</span> <span class="kn">import</span> <span class="n">alpha</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">separatevars</span><span class="p">((</span><span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="n">y</span><span class="p">)</span>
 <span class="go">(x*y)**y</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">separatevars</span><span class="p">((</span><span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="n">y</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go">x**y*y**y</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">z</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">z</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">z</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">z</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">separatevars</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="go">2*x**2*z*(sin(y) + 1)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">separatevars</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">symbols</span><span class="o">=</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="nb">dict</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -414,13 +414,13 @@ count on the returned factors being factored.</p>
 <p>If the expression is not really separable, or is only partially
 separable, separatevars will do the best it can to separate it
 by using factoring.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">separatevars</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">separatevars</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 <span class="go">-x*(3*x - y - 1)</span>
 </pre></div>
 </div>
 <p>If the expression is not separable then expr is returned unchanged
 or (if dict=True) then None is returned.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eq</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eq</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">separatevars</span><span class="p">(</span><span class="n">eq</span><span class="p">)</span> <span class="o">==</span> <span class="n">eq</span>
 <span class="go">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">separatevars</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">symbols</span><span class="o">=</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="nb">dict</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span>
@@ -450,7 +450,7 @@ or (if dict=True) then None is returned.</p>
 root the minimal polynomial is computed; the answer is one of its
 roots.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nthroot</span><span class="p">(</span><span class="mi">90</span> <span class="o">+</span> <span class="mi">34</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nthroot</span><span class="p">(</span><span class="mi">90</span> <span class="o">+</span> <span class="mi">34</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span>
 <span class="go">sqrt(7) + 3</span>
 </pre></div>
 </div>
@@ -461,7 +461,7 @@ roots.</p>
 <h2>besselsimp<a class="headerlink" href="#besselsimp" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="diofant.simplify.simplify.besselsimp">
-<code class="sig-prename descclassname">diofant.simplify.simplify.</code><code class="sig-name descname">besselsimp</code><span class="sig-paren">(</span><em class="sig-param">expr</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/simplify.py#L1006-L1091"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.simplify.besselsimp" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.simplify.simplify.</code><code class="sig-name descname">besselsimp</code><span class="sig-paren">(</span><em class="sig-param">expr</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/simplify.py#L1004-L1089"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.simplify.besselsimp" title="Permalink to this definition">¶</a></dt>
 <dd><p>Simplify bessel-type functions.</p>
 <p>This routine tries to simplify bessel-type functions. Currently it only
 works on the Bessel J and I functions, however. It works by looking at all
@@ -471,7 +471,7 @@ half-integer order are rewritten using trigonometric functions and
 functions of integer order (&gt; 1) are rewritten using functions
 of low order.  Finally, if the expression was changed, compute
 factorization of the result with factor().</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.abc</span> <span class="kn">import</span> <span class="n">nu</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.abc</span> <span class="kn">import</span> <span class="n">nu</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">besselsimp</span><span class="p">(</span><span class="n">besselj</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="n">z</span><span class="o">*</span><span class="n">polar_lift</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)))</span>
 <span class="go">E**(I*pi*nu)*besselj(nu, z)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">besselsimp</span><span class="p">(</span><span class="n">besseli</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="n">z</span><span class="o">*</span><span class="n">polar_lift</span><span class="p">(</span><span class="o">-</span><span class="n">I</span><span class="p">)))</span>
@@ -489,7 +489,7 @@ factorization of the result with factor().</p>
 <h2>hypersimp<a class="headerlink" href="#hypersimp" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="diofant.simplify.simplify.hypersimp">
-<code class="sig-prename descclassname">diofant.simplify.simplify.</code><code class="sig-name descname">hypersimp</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">k</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/simplify.py#L335-L379"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.simplify.hypersimp" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.simplify.simplify.</code><code class="sig-name descname">hypersimp</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">k</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/simplify.py#L335-L377"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.simplify.hypersimp" title="Permalink to this definition">¶</a></dt>
 <dd><p>Given combinatorial term f(k) simplify its consecutive term ratio
 i.e. f(k+1)/f(k).  The input term can be composed of functions and
 integer sequences which have equivalent representation in terms
@@ -528,7 +528,7 @@ is returned.</p>
 <h2>hypersimilar<a class="headerlink" href="#hypersimilar" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="diofant.simplify.simplify.hypersimilar">
-<code class="sig-prename descclassname">diofant.simplify.simplify.</code><code class="sig-name descname">hypersimilar</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">g</em>, <em class="sig-param">k</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/simplify.py#L382-L400"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.simplify.hypersimilar" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.simplify.simplify.</code><code class="sig-name descname">hypersimilar</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">g</em>, <em class="sig-param">k</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/simplify.py#L380-L398"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.simplify.hypersimilar" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns True if ‘f’ and ‘g’ are hyper-similar.</p>
 <p>Similarity in hypergeometric sense means that a quotient of
 f(k) and g(k) is a rational function in k.  This procedure
@@ -544,7 +544,7 @@ is useful in solving recurrence relations.</p>
 <h2>nsimplify<a class="headerlink" href="#nsimplify" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="diofant.simplify.simplify.nsimplify">
-<code class="sig-prename descclassname">diofant.simplify.simplify.</code><code class="sig-name descname">nsimplify</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">constants=[]</em>, <em class="sig-param">tolerance=None</em>, <em class="sig-param">full=False</em>, <em class="sig-param">rational=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/simplify.py#L728-L848"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.simplify.nsimplify" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.simplify.simplify.</code><code class="sig-name descname">nsimplify</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">constants=[]</em>, <em class="sig-param">tolerance=None</em>, <em class="sig-param">full=False</em>, <em class="sig-param">rational=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/simplify.py#L726-L846"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.simplify.nsimplify" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find a simple representation for a number or, if there are free symbols or
 if rational=True, then replace Floats with their Rational equivalents. If
 no change is made and rational is not False then Floats will at least be
@@ -561,7 +561,7 @@ default to 15 digits of precision, so would be tolerance=10**-15).</p>
 (this is useful to find simpler numbers when the tolerance
 is set low).</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nsimplify</span><span class="p">(</span><span class="mi">4</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="p">)),</span> <span class="p">[</span><span class="n">GoldenRatio</span><span class="p">])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nsimplify</span><span class="p">(</span><span class="mi">4</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="p">)),</span> <span class="p">[</span><span class="n">GoldenRatio</span><span class="p">])</span>
 <span class="go">-2 + 2*GoldenRatio</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nsimplify</span><span class="p">((</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">I</span><span class="o">/</span><span class="mi">5</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)))</span>
 <span class="go">1/2 - I*sqrt(sqrt(5)/10 + 1/4)</span>
@@ -592,11 +592,11 @@ processing of expressions, especially those involving powers and
 logarithms.</p>
 <p>A dictionary that can be sent to subs to restore eq to its original
 symbols is also returned.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">posify</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">,</span> <span class="n">positive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">+</span> <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;n&#39;</span><span class="p">,</span> <span class="n">negative</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">posify</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">,</span> <span class="n">positive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">+</span> <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;n&#39;</span><span class="p">,</span> <span class="n">negative</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
 <span class="go">(n + p + _x, {_x: x})</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eq</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">x</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eq</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">x</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">log</span><span class="p">(</span><span class="n">eq</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">()</span>
 <span class="go">log(1/x)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">log</span><span class="p">(</span><span class="n">posify</span><span class="p">(</span><span class="n">eq</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">expand</span><span class="p">()</span>
@@ -608,7 +608,7 @@ symbols is also returned.</p>
 </div>
 <p>It is possible to apply the same transformations to an iterable
 of expressions:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eq</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">4</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eq</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">4</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">solve</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 <span class="go">[{x: -2}, {x: 2}]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">eq_x</span><span class="p">,</span> <span class="n">reps</span> <span class="o">=</span> <span class="n">posify</span><span class="p">([</span><span class="n">eq</span><span class="p">,</span> <span class="n">x</span><span class="p">])</span>
@@ -625,7 +625,7 @@ of expressions:</p>
 <h2>logcombine<a class="headerlink" href="#logcombine" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="diofant.simplify.simplify.logcombine">
-<code class="sig-prename descclassname">diofant.simplify.simplify.</code><code class="sig-name descname">logcombine</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">force=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/simplify.py#L851-L979"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.simplify.logcombine" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.simplify.simplify.</code><code class="sig-name descname">logcombine</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">force=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/simplify.py#L849-L977"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.simplify.logcombine" title="Permalink to this definition">¶</a></dt>
 <dd><p>Takes logarithms and combines them using the following rules:</p>
 <ul class="simple">
 <li><p>log(x) + log(y) == log(x*y) if both are not negative</p></li>
@@ -637,7 +637,7 @@ there is no assumption already in place on a quantity. For example, if
 combination but if <code class="docutils literal notranslate"><span class="pre">a</span></code> is a symbol with no assumptions the change will
 take place.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">logcombine</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">log</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">-</span> <span class="n">log</span><span class="p">(</span><span class="n">z</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">logcombine</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">log</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">-</span> <span class="n">log</span><span class="p">(</span><span class="n">z</span><span class="p">))</span>
 <span class="go">a*log(x) + log(y) - log(z)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">logcombine</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">log</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">-</span> <span class="n">log</span><span class="p">(</span><span class="n">z</span><span class="p">),</span> <span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go">log(x**a*y/z)</span>
@@ -650,7 +650,7 @@ take place.</p>
 <p>The transformation is limited to factors and/or terms that
 contain logs, so the result depends on the initial state of
 expansion:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eq</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">I</span><span class="p">)</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eq</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">I</span><span class="p">)</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">logcombine</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">==</span> <span class="n">eq</span>
 <span class="go">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">logcombine</span><span class="p">(</span><span class="n">eq</span><span class="o">.</span><span class="n">expand</span><span class="p">(),</span> <span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -673,7 +673,7 @@ expansion:</p>
 <h3>radsimp<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="diofant.simplify.radsimp.radsimp">
-<code class="sig-prename descclassname">diofant.simplify.radsimp.</code><code class="sig-name descname">radsimp</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">symbolic=True</em>, <em class="sig-param">max_terms=4</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/radsimp.py#L599-L843"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.radsimp.radsimp" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.simplify.radsimp.</code><code class="sig-name descname">radsimp</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">symbolic=True</em>, <em class="sig-param">max_terms=4</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/radsimp.py#L597-L841"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.radsimp.radsimp" title="Permalink to this definition">¶</a></dt>
 <dd><p>Rationalize the denominator by removing square roots.</p>
 <p>Note: the expression returned from radsimp must be used with caution
 since if the denominator contains symbols, it will be possible to make
@@ -686,7 +686,7 @@ you do not want the simplification to occur for symbolic denominators, set
 <p>If there are more than <code class="docutils literal notranslate"><span class="pre">max_terms</span></code> radical terms then the expression is
 returned unchanged.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">radsimp</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">I</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">radsimp</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">I</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
 <span class="go">(1 - I)/2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">radsimp</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)))</span>
 <span class="go">(-sqrt(2) + 2)/2</span>
@@ -698,7 +698,7 @@ returned unchanged.</p>
 <p>No simplification beyond removal of the gcd is done. One might
 want to polish the result a little, however, by collecting
 square root terms:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r2</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r2</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r5</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ans</span> <span class="o">=</span> <span class="n">radsimp</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">r2</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="n">r2</span> <span class="o">+</span> <span class="n">a</span><span class="o">*</span><span class="n">r5</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">r5</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pprint</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">use_unicode</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -709,7 +709,7 @@ square root terms:</p>
 <span class="go">5*a  + 10*a*b + 5*b  - 2*x  - 4*x*y - 2*y</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">fraction</span><span class="p">(</span><span class="n">ans</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">fraction</span><span class="p">(</span><span class="n">ans</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pprint</span><span class="p">(</span><span class="n">factor_terms</span><span class="p">(</span><span class="n">signsimp</span><span class="p">(</span><span class="n">collect_sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">))</span><span class="o">/</span><span class="n">d</span><span class="p">,</span> <span class="n">radical</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">use_unicode</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="go">        ___             ___</span>
 <span class="go">      \/ 5 *(a + b) - \/ 2 *(x + y)</span>
@@ -720,12 +720,12 @@ square root terms:</p>
 </div>
 <p>If radicals in the denominator cannot be removed or there is no denominator,
 the original expression will be returned.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">radsimp</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">radsimp</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
 <span class="go">sqrt(2)*x + sqrt(2)</span>
 </pre></div>
 </div>
 <p>Results with symbols will not always be valid for all substitutions:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eq</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eq</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">eq</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">a</span><span class="p">:</span> <span class="n">b</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="n">c</span><span class="p">)})</span>
 <span class="go">1/(2*b*sqrt(c))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">radsimp</span><span class="p">(</span><span class="n">eq</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">a</span><span class="p">:</span> <span class="n">b</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="n">c</span><span class="p">)})</span>
@@ -734,7 +734,7 @@ the original expression will be returned.</p>
 </div>
 <p>If symbolic=False, symbolic denominators will not be transformed (but
 numeric denominators will still be processed):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">radsimp</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">symbolic</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">radsimp</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">symbolic</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="go">1/(a + b*sqrt(c))</span>
 </pre></div>
 </div>
@@ -745,11 +745,11 @@ numeric denominators will still be processed):</p>
 <h3>rad_rationalize<a class="headerlink" href="#rad-rationalize" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="diofant.simplify.radsimp.rad_rationalize">
-<code class="sig-prename descclassname">diofant.simplify.radsimp.</code><code class="sig-name descname">rad_rationalize</code><span class="sig-paren">(</span><em class="sig-param">num</em>, <em class="sig-param">den</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/radsimp.py#L846-L864"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.radsimp.rad_rationalize" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.simplify.radsimp.</code><code class="sig-name descname">rad_rationalize</code><span class="sig-paren">(</span><em class="sig-param">num</em>, <em class="sig-param">den</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/radsimp.py#L844-L862"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.radsimp.rad_rationalize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Rationalize num/den by removing square roots in the denominator;
 num and den are sum of terms whose squares are rationals</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rad_rationalize</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rad_rationalize</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
 <span class="go">(-sqrt(3) + sqrt(6)/3, -7/9)</span>
 </pre></div>
 </div>
@@ -760,7 +760,7 @@ num and den are sum of terms whose squares are rationals</p>
 <h3>collect<a class="headerlink" href="#collect" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="diofant.simplify.radsimp.collect">
-<code class="sig-prename descclassname">diofant.simplify.radsimp.</code><code class="sig-name descname">collect</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">syms</em>, <em class="sig-param">func=None</em>, <em class="sig-param">evaluate=True</em>, <em class="sig-param">exact=False</em>, <em class="sig-param">distribute_order_term=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/radsimp.py#L15-L391"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.radsimp.collect" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.simplify.radsimp.</code><code class="sig-name descname">collect</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">syms</em>, <em class="sig-param">func=None</em>, <em class="sig-param">evaluate=True</em>, <em class="sig-param">exact=False</em>, <em class="sig-param">distribute_order_term=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/radsimp.py#L15-L389"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.radsimp.collect" title="Permalink to this definition">¶</a></dt>
 <dd><p>Collect additive terms of an expression.</p>
 <p>This function collects additive terms of an expression with respect
 to a list of expression up to powers with rational exponents. By the
@@ -790,12 +790,12 @@ collected coefficients as values.</p></li>
 <p>This function can collect symbolic coefficients in polynomials or
 rational expressions. It will manage to find all integer or rational
 powers of collection variable:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collect</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">a</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="n">b</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">c</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collect</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">a</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="n">b</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">c</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 <span class="go">c + x**2*(a + b) + x*(a - b)</span>
 </pre></div>
 </div>
 <p>The same result can be achieved in dictionary form:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">collect</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">a</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="n">b</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">c</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">collect</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">a</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="n">b</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">c</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="p">[</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">]</span>
 <span class="go">a + b</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
@@ -807,21 +807,21 @@ powers of collection variable:</p>
 <p>You can also work with multivariate polynomials. However, remember that
 this function is greedy so it will care only about a single symbol at time,
 in specification order:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collect</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="n">y</span> <span class="o">+</span> <span class="n">a</span><span class="o">*</span><span class="n">y</span><span class="p">,</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collect</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="n">y</span> <span class="o">+</span> <span class="n">a</span><span class="o">*</span><span class="n">y</span><span class="p">,</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">])</span>
 <span class="go">x**2*(y + 1) + x*y + y*(a + 1)</span>
 </pre></div>
 </div>
 <p>Also more complicated expressions can be used as patterns:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collect</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">),</span> <span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collect</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">),</span> <span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">))</span>
 <span class="go">(a + b)*sin(2*x)</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collect</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="n">x</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collect</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="n">x</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
 <span class="go">x*(a + b)*log(x)</span>
 </pre></div>
 </div>
 <p>You can use wildcards in the pattern:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">w</span> <span class="o">=</span> <span class="n">Wild</span><span class="p">(</span><span class="s1">&#39;w1&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">w</span> <span class="o">=</span> <span class="n">Wild</span><span class="p">(</span><span class="s1">&#39;w1&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">collect</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="n">y</span> <span class="o">-</span> <span class="n">b</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="n">y</span><span class="p">,</span> <span class="n">w</span><span class="o">**</span><span class="n">y</span><span class="p">)</span>
 <span class="go">x**y*(a - b)</span>
 </pre></div>
@@ -829,7 +829,7 @@ in specification order:</p>
 <p>It is also possible to work with symbolic powers, although it has more
 complicated behavior, because in this case power’s base and symbolic part
 of the exponent are treated as a single symbol:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collect</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="n">c</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="n">c</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collect</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="n">c</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="n">c</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 <span class="go">a*x**c + b*x**c</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">collect</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="n">c</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="n">c</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="n">c</span><span class="p">)</span>
 <span class="go">x**c*(a + b)</span>
@@ -837,19 +837,19 @@ of the exponent are treated as a single symbol:</p>
 </div>
 <p>However if you incorporate rationals to the exponents, then you will get
 well known behavior:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collect</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">c</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">c</span><span class="p">),</span> <span class="n">x</span><span class="o">**</span><span class="n">c</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collect</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">c</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">c</span><span class="p">),</span> <span class="n">x</span><span class="o">**</span><span class="n">c</span><span class="p">)</span>
 <span class="go">x**(2*c)*(a + b)</span>
 </pre></div>
 </div>
 <p>Note also that all previously stated facts about <a class="reference internal" href="#diofant.simplify.radsimp.collect" title="diofant.simplify.radsimp.collect"><code class="xref py py-func docutils literal notranslate"><span class="pre">collect()</span></code></a> function
 apply to the exponential function, so you can get:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collect</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">),</span> <span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collect</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">),</span> <span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
 <span class="go">E**(2*x)*(a + b)</span>
 </pre></div>
 </div>
 <p>If you are interested only in collecting specific powers of some symbols
 then set <code class="docutils literal notranslate"><span class="pre">exact</span></code> flag in arguments:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collect</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">7</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">7</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">exact</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collect</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">7</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">7</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">exact</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go">a*x**7 + b*x**7</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">collect</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">7</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">7</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">7</span><span class="p">,</span> <span class="n">exact</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go">x**7*(a + b)</span>
@@ -860,36 +860,36 @@ derivatives of arbitrary order can be collected. Note that if you
 collect with respect to a function or a derivative of a function, all
 derivatives of that function will also be collected. Use
 <code class="docutils literal notranslate"><span class="pre">exact=True</span></code> to prevent this from happening:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collect</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">Derivative</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">Derivative</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">),</span> <span class="n">Derivative</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collect</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">Derivative</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">Derivative</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">),</span> <span class="n">Derivative</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
 <span class="go">(a + b)*Derivative(f(x), x)</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collect</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">Derivative</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">Derivative</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">f</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collect</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">Derivative</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">Derivative</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">f</span><span class="p">)</span>
 <span class="go">(a + b)*Derivative(f(x), x, x)</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collect</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">Derivative</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">Derivative</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">Derivative</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">),</span> <span class="n">exact</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collect</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">Derivative</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">Derivative</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">Derivative</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">),</span> <span class="n">exact</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go">a*Derivative(f(x), x, x) + b*Derivative(f(x), x, x)</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collect</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">Derivative</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">Derivative</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">a</span><span class="o">*</span><span class="n">f</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">f</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collect</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">Derivative</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">Derivative</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">a</span><span class="o">*</span><span class="n">f</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">f</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
 <span class="go">f(x)*(a + b) + (a + b)*Derivative(f(x), x)</span>
 </pre></div>
 </div>
 <p>Or you can even match both derivative order and exponent at the same time:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collect</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">Derivative</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">Derivative</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">Derivative</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collect</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">Derivative</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">Derivative</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">Derivative</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
 <span class="go">(a + b)*Derivative(f(x), x, x)**2</span>
 </pre></div>
 </div>
 <p>Finally, you can apply a function to each of the collected coefficients.
 For example you can factorize symbolic coefficients of polynomial:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">expand</span><span class="p">((</span><span class="n">x</span> <span class="o">+</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">expand</span><span class="p">((</span><span class="n">x</span> <span class="o">+</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collect</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">factor</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collect</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">factor</span><span class="p">)</span>
 <span class="go">x**3 + 3*x**2*(a + 1) + 3*x*(a + 1)**2 + (a + 1)**3</span>
 </pre></div>
 </div>
@@ -901,13 +901,13 @@ For example you can factorize symbolic coefficients of polynomial:</p>
 
 <dl class="function">
 <dt id="diofant.simplify.radsimp.rcollect">
-<code class="sig-prename descclassname">diofant.simplify.radsimp.</code><code class="sig-name descname">rcollect</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">*vars</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/radsimp.py#L394-L419"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.radsimp.rcollect" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.simplify.radsimp.</code><code class="sig-name descname">rcollect</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">*vars</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/radsimp.py#L392-L417"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.radsimp.rcollect" title="Permalink to this definition">¶</a></dt>
 <dd><p>Recursively collect sums in an expression.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rcollect</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rcollect</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 <span class="go">(x + y*(x**2 + x + 1))/(x + y)</span>
 </pre></div>
 </div>
@@ -922,7 +922,7 @@ For example you can factorize symbolic coefficients of polynomial:</p>
 <h3>collect_sqrt<a class="headerlink" href="#collect-sqrt" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="diofant.simplify.radsimp.collect_sqrt">
-<code class="sig-prename descclassname">diofant.simplify.radsimp.</code><code class="sig-name descname">collect_sqrt</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">evaluate=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/radsimp.py#L422-L492"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.radsimp.collect_sqrt" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.simplify.radsimp.</code><code class="sig-name descname">collect_sqrt</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">evaluate=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/radsimp.py#L420-L490"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.radsimp.collect_sqrt" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return expr with terms having common square roots collected together.
 If <code class="docutils literal notranslate"><span class="pre">evaluate</span></code> is False a count indicating the number of sqrt-containing
 terms will be returned and, if non-zero, the terms of the Add will be
@@ -931,7 +931,7 @@ If <code class="docutils literal notranslate"><span class="pre">evaluate</span><
 returned.</p>
 <p>Note: since I = sqrt(-1), it is collected, too.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r2</span><span class="p">,</span> <span class="n">r3</span><span class="p">,</span> <span class="n">r5</span> <span class="o">=</span> <span class="p">[</span><span class="n">sqrt</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r2</span><span class="p">,</span> <span class="n">r3</span><span class="p">,</span> <span class="n">r5</span> <span class="o">=</span> <span class="p">[</span><span class="n">sqrt</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">collect_sqrt</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">r2</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">r2</span><span class="p">)</span>
 <span class="go">sqrt(2)*(a + b)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">collect_sqrt</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">r2</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">r2</span> <span class="o">+</span> <span class="n">a</span><span class="o">*</span><span class="n">r3</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">r3</span><span class="p">)</span>
@@ -943,7 +943,7 @@ returned.</p>
 <p>If evaluate is False then the arguments will be sorted and
 returned as a list and a count of the number of sqrt-containing
 terms will be returned:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collect_sqrt</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">r2</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">r2</span> <span class="o">+</span> <span class="n">a</span><span class="o">*</span><span class="n">r3</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">r5</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collect_sqrt</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">r2</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">r2</span> <span class="o">+</span> <span class="n">a</span><span class="o">*</span><span class="n">r3</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">r5</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="go">((sqrt(3)*a, sqrt(5)*b, sqrt(2)*(a + b)), 3)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">collect_sqrt</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="go">((b, sqrt(2)*a), 1)</span>
@@ -962,13 +962,13 @@ terms will be returned:</p>
 <h3>collect_const<a class="headerlink" href="#collect-const" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="diofant.simplify.radsimp.collect_const">
-<code class="sig-prename descclassname">diofant.simplify.radsimp.</code><code class="sig-name descname">collect_const</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">*vars</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/radsimp.py#L495-L596"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.radsimp.collect_const" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.simplify.radsimp.</code><code class="sig-name descname">collect_const</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">*vars</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/radsimp.py#L493-L594"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.radsimp.collect_const" title="Permalink to this definition">¶</a></dt>
 <dd><p>A non-greedy collection of terms with similar number coefficients in
 an Add expr. If <code class="docutils literal notranslate"><span class="pre">vars</span></code> is given then only those constants will be
 targeted. Although any Number can also be targeted, if this is not
 desired set <code class="docutils literal notranslate"><span class="pre">Numbers=False</span></code> and no Float or Rational will be collected.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.abc</span> <span class="kn">import</span> <span class="n">s</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.abc</span> <span class="kn">import</span> <span class="n">s</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">collect_const</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)))</span>
 <span class="go">sqrt(3)*(sqrt(2) + 2)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">collect_const</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="n">s</span> <span class="o">+</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span><span class="o">*</span><span class="n">s</span> <span class="o">+</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">7</span><span class="p">))</span>
@@ -982,7 +982,7 @@ desired set <code class="docutils literal notranslate"><span class="pre">Numbers
 </div>
 <p>The collection is sign-sensitive, giving higher precedence to the
 unsigned values:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collect_const</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">y</span> <span class="o">-</span> <span class="n">z</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collect_const</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">y</span> <span class="o">-</span> <span class="n">z</span><span class="p">)</span>
 <span class="go">x - (y + z)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">collect_const</span><span class="p">(</span><span class="o">-</span><span class="n">y</span> <span class="o">-</span> <span class="n">z</span><span class="p">)</span>
 <span class="go">-(y + z)</span>
@@ -1003,7 +1003,7 @@ unsigned values:</p>
 <h3>fraction<a class="headerlink" href="#fraction" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="diofant.simplify.radsimp.fraction">
-<code class="sig-prename descclassname">diofant.simplify.radsimp.</code><code class="sig-name descname">fraction</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">exact=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/radsimp.py#L867-L939"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.radsimp.fraction" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.simplify.radsimp.</code><code class="sig-name descname">fraction</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">exact=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/radsimp.py#L865-L937"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.radsimp.fraction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a pair with expression’s numerator and denominator.</p>
 <p>If the given expression is not a fraction then this function
 will return the tuple (expr, 1).</p>
@@ -1011,24 +1011,24 @@ will return the tuple (expr, 1).</p>
 fractions or to do any term rewriting at all.</p>
 <p>If only one of the numerator/denominator pair is needed then
 use numer(expr) or denom(expr) functions respectively.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span><span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="n">y</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span><span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="n">y</span><span class="p">)</span>
 <span class="go">(x, y)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="go">(x, 1)</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 <span class="go">(1, y**2)</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
 <span class="go">(x*y, 2)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span><span class="p">(</span><span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
 <span class="go">(1, 2)</span>
 </pre></div>
 </div>
 <p>This function will also work fine with assumptions:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">k</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">negative</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">k</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">negative</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">y</span><span class="o">**</span><span class="n">k</span><span class="p">)</span>
 <span class="go">(x, y**(-k))</span>
 </pre></div>
@@ -1036,15 +1036,15 @@ use numer(expr) or denom(expr) functions respectively.</p>
 <p>If we know nothing about sign of some exponent and ‘exact’
 flag is unset, then structure this exponent’s structure will
 be analyzed and pretty fraction will be returned:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">y</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">y</span><span class="p">))</span>
 <span class="go">(2, x**y)</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span>
 <span class="go">(1, E**x)</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">),</span> <span class="n">exact</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fraction</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">),</span> <span class="n">exact</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go">(E**(-x), 1)</span>
 </pre></div>
 </div>
@@ -1061,7 +1061,7 @@ be analyzed and pretty fraction will be returned:</p>
 <code class="sig-prename descclassname">diofant.simplify.ratsimp.</code><code class="sig-name descname">ratsimp</code><span class="sig-paren">(</span><em class="sig-param">expr</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/ratsimp.py#L10-L28"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.ratsimp.ratsimp" title="Permalink to this definition">¶</a></dt>
 <dd><p>Put an expression over a common denominator, cancel and reduce.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ratsimp</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="n">y</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ratsimp</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="n">y</span><span class="p">)</span>
 <span class="go">(x + y)/(x*y)</span>
 </pre></div>
 </div>
@@ -1088,20 +1088,20 @@ If ‘combined’, first run the groebner basis algorithm with small
 default parameters, then run the ‘matching’ algorithm. ‘fu’ runs the
 collection of trigonometric transformations described by Fu, et al.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">trigsimp</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="go">2</span>
 </pre></div>
 </div>
 <p>Simplification occurs wherever trigonometric functions are located.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">trigsimp</span><span class="p">(</span><span class="n">log</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">trigsimp</span><span class="p">(</span><span class="n">log</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
 <span class="go">log(2)</span>
 </pre></div>
 </div>
 <p>Using <span class="math notranslate nohighlight">\(method=&quot;groebner&quot;\)</span> (or <span class="math notranslate nohighlight">\(&quot;combined&quot;\)</span>) might lead to greater
 simplification.</p>
 <p>The old trigsimp routine can be accessed as with method ‘old’.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="mi">3</span><span class="o">*</span><span class="n">tanh</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">7</span> <span class="o">-</span> <span class="mi">2</span><span class="o">/</span><span class="n">coth</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">7</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="mi">3</span><span class="o">*</span><span class="n">tanh</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">7</span> <span class="o">-</span> <span class="mi">2</span><span class="o">/</span><span class="n">coth</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">7</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">trigsimp</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;old&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">t</span>
 <span class="go">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">trigsimp</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
@@ -1126,11 +1126,11 @@ from <code class="docutils literal notranslate"><span class="pre">trigsimp</span
 will be simplified, but this can be disabled by setting
 <code class="docutils literal notranslate"><span class="pre">hyper=False</span></code>.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">trigsimp</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">tan</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">trigsimp</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">tan</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 <span class="go">tan(x)**(-2)</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">futrig</span><span class="p">(</span><span class="n">sinh</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">tanh</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">futrig</span><span class="p">(</span><span class="n">sinh</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">tanh</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
 <span class="go">cosh(x)</span>
 </pre></div>
 </div>
@@ -1148,52 +1148,52 @@ in the algorithm by Fu et al.</p>
 By default this first minimizes the number of trig terms and then minimizes
 the number of total operations.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fu</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">cos</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">sin</span><span class="p">(</span><span class="n">pi</span><span class="o">/</span><span class="mi">6</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fu</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">cos</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">sin</span><span class="p">(</span><span class="n">pi</span><span class="o">/</span><span class="mi">6</span><span class="p">))</span>
 <span class="go">3/2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fu</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
 <span class="go">2*sqrt(2)*sin(x + pi/3)</span>
 </pre></div>
 </div>
 <p>CTR1 example</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eq</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">4</span> <span class="o">-</span> <span class="n">cos</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">sin</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eq</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">4</span> <span class="o">-</span> <span class="n">cos</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">sin</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fu</span><span class="p">(</span><span class="n">eq</span><span class="p">)</span>
 <span class="go">cos(x)**4 - 2*cos(y)**2 + 2</span>
 </pre></div>
 </div>
 <p>CTR2 example</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fu</span><span class="p">(</span><span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fu</span><span class="p">(</span><span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
 <span class="go">sin(x)**2</span>
 </pre></div>
 </div>
 <p>CTR3 example</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fu</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">cos</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">-</span> <span class="n">sin</span><span class="p">(</span><span class="n">b</span><span class="p">))</span> <span class="o">+</span> <span class="n">cos</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">+</span> <span class="n">cos</span><span class="p">(</span><span class="n">b</span><span class="p">)))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fu</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">cos</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">-</span> <span class="n">sin</span><span class="p">(</span><span class="n">b</span><span class="p">))</span> <span class="o">+</span> <span class="n">cos</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">+</span> <span class="n">cos</span><span class="p">(</span><span class="n">b</span><span class="p">)))</span>
 <span class="go">sqrt(2)*sin(a + b + pi/4)</span>
 </pre></div>
 </div>
 <p>CTR4 example</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fu</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fu</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
 <span class="go">sin(x + pi/3)</span>
 </pre></div>
 </div>
 <p>Example 1</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fu</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mi">4</span><span class="o">-</span><span class="n">sin</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">4</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fu</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mi">4</span><span class="o">-</span><span class="n">sin</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">4</span><span class="p">)</span>
 <span class="go">-cos(x)**2 + cos(y)**2</span>
 </pre></div>
 </div>
 <p>Example 2</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fu</span><span class="p">(</span><span class="n">cos</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">pi</span><span class="o">/</span><span class="mi">9</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fu</span><span class="p">(</span><span class="n">cos</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">pi</span><span class="o">/</span><span class="mi">9</span><span class="p">))</span>
 <span class="go">sin(pi/18)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fu</span><span class="p">(</span><span class="n">cos</span><span class="p">(</span><span class="n">pi</span><span class="o">/</span><span class="mi">9</span><span class="p">)</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="o">/</span><span class="mi">9</span><span class="p">)</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">pi</span><span class="o">/</span><span class="mi">9</span><span class="p">)</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">pi</span><span class="o">/</span><span class="mi">9</span><span class="p">))</span>
 <span class="go">1/16</span>
 </pre></div>
 </div>
 <p>Example 3</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fu</span><span class="p">(</span><span class="n">tan</span><span class="p">(</span><span class="mi">7</span><span class="o">*</span><span class="n">pi</span><span class="o">/</span><span class="mi">18</span><span class="p">)</span><span class="o">+</span><span class="n">tan</span><span class="p">(</span><span class="mi">5</span><span class="o">*</span><span class="n">pi</span><span class="o">/</span><span class="mi">18</span><span class="p">)</span><span class="o">-</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="n">tan</span><span class="p">(</span><span class="mi">5</span><span class="o">*</span><span class="n">pi</span><span class="o">/</span><span class="mi">18</span><span class="p">)</span><span class="o">*</span><span class="n">tan</span><span class="p">(</span><span class="mi">7</span><span class="o">*</span><span class="n">pi</span><span class="o">/</span><span class="mi">18</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fu</span><span class="p">(</span><span class="n">tan</span><span class="p">(</span><span class="mi">7</span><span class="o">*</span><span class="n">pi</span><span class="o">/</span><span class="mi">18</span><span class="p">)</span><span class="o">+</span><span class="n">tan</span><span class="p">(</span><span class="mi">5</span><span class="o">*</span><span class="n">pi</span><span class="o">/</span><span class="mi">18</span><span class="p">)</span><span class="o">-</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="n">tan</span><span class="p">(</span><span class="mi">5</span><span class="o">*</span><span class="n">pi</span><span class="o">/</span><span class="mi">18</span><span class="p">)</span><span class="o">*</span><span class="n">tan</span><span class="p">(</span><span class="mi">7</span><span class="o">*</span><span class="n">pi</span><span class="o">/</span><span class="mi">18</span><span class="p">))</span>
 <span class="go">-sqrt(3)</span>
 </pre></div>
 </div>
 <p>Objective function example</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fu</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>  <span class="c1"># default objective function</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fu</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>  <span class="c1"># default objective function</span>
 <span class="go">tan(x)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fu</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">measure</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="o">-</span><span class="n">x</span><span class="o">.</span><span class="n">count_ops</span><span class="p">())</span>  <span class="c1"># maximize op count</span>
 <span class="go">sin(x)/cos(x)</span>
@@ -1240,7 +1240,7 @@ This is done so things like the second example can be completely
 combined.  If you want ‘base’ combined first, do something like
 powsimp(powsimp(expr, combine=’base’), combine=’exp’).</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">powsimp</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="n">y</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="n">z</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="n">z</span><span class="p">,</span> <span class="n">combine</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">powsimp</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="n">y</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="n">z</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="n">z</span><span class="p">,</span> <span class="n">combine</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
 <span class="go">x**(y + z)*y**z</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">powsimp</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="n">y</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="n">z</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="n">z</span><span class="p">,</span> <span class="n">combine</span><span class="o">=</span><span class="s1">&#39;exp&#39;</span><span class="p">)</span>
 <span class="go">x**(y + z)*y**z</span>
@@ -1248,7 +1248,7 @@ powsimp(powsimp(expr, combine=’base’), combine=’exp’).</p>
 <span class="go">x**y*(x*y)**z</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">powsimp</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="n">z</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="n">y</span><span class="o">*</span><span class="n">n</span><span class="o">**</span><span class="n">z</span><span class="o">*</span><span class="n">n</span><span class="o">**</span><span class="n">y</span><span class="p">,</span> <span class="n">combine</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">powsimp</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="n">z</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="n">y</span><span class="o">*</span><span class="n">n</span><span class="o">**</span><span class="n">z</span><span class="o">*</span><span class="n">n</span><span class="o">**</span><span class="n">y</span><span class="p">,</span> <span class="n">combine</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go">(n*x)**(y + z)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">powsimp</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="n">z</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="n">y</span><span class="o">*</span><span class="n">n</span><span class="o">**</span><span class="n">z</span><span class="o">*</span><span class="n">n</span><span class="o">**</span><span class="n">y</span><span class="p">,</span> <span class="n">combine</span><span class="o">=</span><span class="s1">&#39;exp&#39;</span><span class="p">)</span>
 <span class="go">n**(y + z)*x**(y + z)</span>
@@ -1256,7 +1256,7 @@ powsimp(powsimp(expr, combine=’base’), combine=’exp’).</p>
 <span class="go">(n*x)**y*(n*x)**z</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x y&#39;</span><span class="p">,</span> <span class="n">positive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x y&#39;</span><span class="p">,</span> <span class="n">positive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">powsimp</span><span class="p">(</span><span class="n">log</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="n">y</span><span class="p">)))</span>
 <span class="go">log(E**x*E**y)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">powsimp</span><span class="p">(</span><span class="n">log</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="n">y</span><span class="p">)),</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -1264,18 +1264,18 @@ powsimp(powsimp(expr, combine=’base’), combine=’exp’).</p>
 </pre></div>
 </div>
 <p>Radicals with Mul bases will be combined if combine=’exp’</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x y&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x y&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Two radicals are automatically joined through Mul:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">*</span><span class="n">a</span><span class="o">**</span><span class="mi">3</span> <span class="o">==</span> <span class="n">a</span><span class="o">**</span><span class="mi">4</span>
 <span class="go">True</span>
 </pre></div>
 </div>
 <p>But if an integer power of that radical has been
 autoexpanded then Mul does not join the resulting factors:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">**</span><span class="mi">4</span>  <span class="c1"># auto expands to a Mul, no longer a Pow</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">**</span><span class="mi">4</span>  <span class="c1"># auto expands to a Mul, no longer a Pow</span>
 <span class="go">x**2*y</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">_</span><span class="o">*</span><span class="n">a</span>  <span class="c1"># so Mul doesn&#39;t combine them</span>
 <span class="go">x**2*y*sqrt(x*sqrt(y))</span>
@@ -1321,24 +1321,24 @@ the logarithm, also resulting in more denestings.</p>
 <p>When there are sums of logs in exp() then a product of powers may be
 obtained e.g. <code class="docutils literal notranslate"><span class="pre">exp(3*(log(a)</span> <span class="pre">+</span> <span class="pre">2*log(b)))</span></code> - &gt; <code class="docutils literal notranslate"><span class="pre">a**3*b**6</span></code>.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">powdenest</span><span class="p">((</span><span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">a</span><span class="o">/</span><span class="mi">3</span><span class="p">))</span><span class="o">**</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">powdenest</span><span class="p">((</span><span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">a</span><span class="o">/</span><span class="mi">3</span><span class="p">))</span><span class="o">**</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">))</span>
 <span class="go">(x**(2*a/3))**(3*x)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">powdenest</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)))</span>
 <span class="go">2**(3*x)</span>
 </pre></div>
 </div>
 <p>Assumptions may prevent expansion:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">powdenest</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">powdenest</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
 <span class="go">sqrt(x**2)</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">,</span> <span class="n">positive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">,</span> <span class="n">positive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">powdenest</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">p</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
 <span class="go">p</span>
 </pre></div>
 </div>
 <p>No other expansion is done.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;i j&#39;</span><span class="p">,</span> <span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;i j&#39;</span><span class="p">,</span> <span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">powdenest</span><span class="p">((</span><span class="n">x</span><span class="o">**</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">))</span>  <span class="c1"># -X-&gt; (x**x)**i*(x**x)**j</span>
 <span class="go">x**(x*(i + j))</span>
 </pre></div>
@@ -1346,7 +1346,7 @@ obtained e.g. <code class="docutils literal notranslate"><span class="pre">exp(3
 <p>But exp() will be denested by moving all non-log terms outside of
 the function; this may result in the collapsing of the exp to a power
 with a different base:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">powdenest</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">y</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">powdenest</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">y</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
 <span class="go">x**(3*y)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">powdenest</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="p">(</span><span class="n">log</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="n">log</span><span class="p">(</span><span class="n">b</span><span class="p">))))</span>
 <span class="go">(a*b)**y</span>
@@ -1355,23 +1355,23 @@ with a different base:</p>
 </pre></div>
 </div>
 <p>If assumptions allow, symbols can also be moved to the outermost exponent:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">i</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">i</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">powdenest</span><span class="p">(((</span><span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">))</span><span class="o">**</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">y</span><span class="p">))</span><span class="o">**</span><span class="n">x</span><span class="p">)</span>
 <span class="go">((x**(2*i))**(3*y))**x</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">powdenest</span><span class="p">(((</span><span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">))</span><span class="o">**</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">y</span><span class="p">))</span><span class="o">**</span><span class="n">x</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go">x**(6*i*x*y)</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">powdenest</span><span class="p">(((</span><span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">a</span><span class="o">/</span><span class="mi">3</span><span class="p">))</span><span class="o">**</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">y</span><span class="o">/</span><span class="n">i</span><span class="p">))</span><span class="o">**</span><span class="n">x</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">powdenest</span><span class="p">(((</span><span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">a</span><span class="o">/</span><span class="mi">3</span><span class="p">))</span><span class="o">**</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">y</span><span class="o">/</span><span class="n">i</span><span class="p">))</span><span class="o">**</span><span class="n">x</span><span class="p">)</span>
 <span class="go">((x**(2*a/3))**(3*y/i))**x</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">powdenest</span><span class="p">((</span><span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">)</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">i</span><span class="p">))</span><span class="o">**</span><span class="n">z</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go">(x*y**2)**(2*i*z)</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;n&#39;</span><span class="p">,</span> <span class="n">negative</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;n&#39;</span><span class="p">,</span> <span class="n">negative</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">powdenest</span><span class="p">((</span><span class="n">x</span><span class="o">**</span><span class="n">i</span><span class="p">)</span><span class="o">**</span><span class="n">y</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">powdenest</span><span class="p">((</span><span class="n">x</span><span class="o">**</span><span class="n">i</span><span class="p">)</span><span class="o">**</span><span class="n">y</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go">x**(i*y)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">powdenest</span><span class="p">((</span><span class="n">n</span><span class="o">**</span><span class="n">i</span><span class="p">)</span><span class="o">**</span><span class="n">x</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go">(n**i)**x</span>
@@ -1421,7 +1421,7 @@ possible.</p></li>
 <li><p><a class="reference external" href="http://functions.wolfram.com/GammaBetaErf/Pochhammer/27/01/0005/">http://functions.wolfram.com/GammaBetaErf/Pochhammer/27/01/0005/</a></p></li>
 </ol>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">combsimp</span><span class="p">(</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">/</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">3</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">combsimp</span><span class="p">(</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">/</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">3</span><span class="p">))</span>
 <span class="go">n*(n - 2)*(n - 1)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">combsimp</span><span class="p">(</span><span class="n">binomial</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">binomial</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">))</span>
 <span class="go">(n + 1)/(k + 1)</span>
@@ -1442,7 +1442,7 @@ possible.</p></li>
 if possible, otherwise returns the expr unchanged. This is based on the
 algorithms of [1].</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sqrtdenest</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">6</span><span class="p">)))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sqrtdenest</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">6</span><span class="p">)))</span>
 <span class="go">sqrt(2) + sqrt(3)</span>
 </pre></div>
 </div>
@@ -1463,7 +1463,7 @@ by Denesting’ (available at <a class="reference external" href="http://www.cyb
 <h3>unrad<a class="headerlink" href="#unrad" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="diofant.simplify.sqrtdenest.unrad">
-<code class="sig-prename descclassname">diofant.simplify.sqrtdenest.</code><code class="sig-name descname">unrad</code><span class="sig-paren">(</span><em class="sig-param">eq</em>, <em class="sig-param">*syms</em>, <em class="sig-param">**flags</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/sqrtdenest.py#L602-L964"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.sqrtdenest.unrad" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.simplify.sqrtdenest.</code><code class="sig-name descname">unrad</code><span class="sig-paren">(</span><em class="sig-param">eq</em>, <em class="sig-param">*syms</em>, <em class="sig-param">**flags</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/sqrtdenest.py#L601-L963"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.sqrtdenest.unrad" title="Permalink to this definition">¶</a></dt>
 <dd><p>Remove radicals with symbolic arguments and return (eq, cov),
 None or raise an error:</p>
 <p>None is returned if there are no radicals to remove.</p>
@@ -1508,7 +1508,7 @@ that returns True if a given Pow should be handled.
 </pre></div>
 </div>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">unrad</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">cbrt</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">unrad</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">cbrt</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>
 <span class="go">(x**5 - 64, [])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">unrad</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">root</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
 <span class="go">(x**3 - x**2 - 2*x - 1, [])</span>
@@ -1564,18 +1564,18 @@ list.</p></li>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.abc</span> <span class="kn">import</span> <span class="n">w</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.abc</span> <span class="kn">import</span> <span class="n">w</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cse</span><span class="p">(((</span><span class="n">w</span> <span class="o">+</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">w</span> <span class="o">+</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">w</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
 <span class="go">([(x0, y + z), (x1, w + x)], [(w + x0)*(x0 + x1)/x1**3])</span>
 </pre></div>
 </div>
 <p>Note that currently, y + z will not get substituted if -y - z is used.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cse</span><span class="p">(((</span><span class="n">w</span> <span class="o">+</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">w</span> <span class="o">-</span> <span class="n">y</span> <span class="o">-</span> <span class="n">z</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">w</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cse</span><span class="p">(((</span><span class="n">w</span> <span class="o">+</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">w</span> <span class="o">-</span> <span class="n">y</span> <span class="o">-</span> <span class="n">z</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">w</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
 <span class="go">([(x0, w + x)], [(w - y - z)*(x0 + y + z)/x0**3])</span>
 </pre></div>
 </div>
 <p>List of expressions with recursive substitutions:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="p">([</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span><span class="p">])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="p">([</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cse</span><span class="p">([(</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">z</span> <span class="o">+</span> <span class="n">y</span><span class="p">,</span> <span class="n">m</span><span class="p">])</span>
 <span class="go">([(x0, x + y), (x1, x0 + z)], [x0**2, x1, y + z, x1, Matrix([</span>
 <span class="go">[x0],</span>
@@ -1583,7 +1583,7 @@ list.</p></li>
 </pre></div>
 </div>
 <p>Note: the type and mutability of input matrices is retained.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">isinstance</span><span class="p">(</span><span class="n">_</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">SparseMatrix</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">isinstance</span><span class="p">(</span><span class="n">_</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">SparseMatrix</span><span class="p">)</span>
 <span class="go">True</span>
 </pre></div>
 </div>
@@ -1613,7 +1613,7 @@ expressions where speed is a concern, use the setting order=’none’.</p></li>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">opt_subs</span> <span class="o">=</span> <span class="n">opt_cse</span><span class="p">([</span><span class="n">x</span><span class="o">**-</span><span class="mi">2</span><span class="p">])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">opt_subs</span> <span class="o">=</span> <span class="n">opt_cse</span><span class="p">([</span><span class="n">x</span><span class="o">**-</span><span class="mi">2</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">opt_subs</span>
 <span class="go">{x**(-2): 1/(x**2)}</span>
 </pre></div>
@@ -1658,13 +1658,13 @@ but still containing hypergeometric functions).</p>
 <code class="docutils literal notranslate"><span class="pre">place</span></code> can be set to <code class="docutils literal notranslate"><span class="pre">0</span></code> or <code class="docutils literal notranslate"><span class="pre">zoo</span></code> to indicate the
 preferred choice.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hyperexpand</span><span class="p">(</span><span class="n">hyper</span><span class="p">([],</span> <span class="p">[],</span> <span class="n">z</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hyperexpand</span><span class="p">(</span><span class="n">hyper</span><span class="p">([],</span> <span class="p">[],</span> <span class="n">z</span><span class="p">))</span>
 <span class="go">E**z</span>
 </pre></div>
 </div>
 <p>Non-hyperegeometric parts of the expression and hypergeometric expressions
 that are not recognised are left unchanged:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hyperexpand</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">hyper</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[],</span> <span class="n">z</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hyperexpand</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">hyper</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[],</span> <span class="n">z</span><span class="p">))</span>
 <span class="go">hyper((1, 1, 1), (), z) + 1</span>
 </pre></div>
 </div>
@@ -1681,10 +1681,10 @@ that are not recognised are left unchanged:</p>
 <code class="sig-prename descclassname">diofant.simplify.traversaltools.</code><code class="sig-name descname">use</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">func</em>, <em class="sig-param">level=0</em>, <em class="sig-param">args=()</em>, <em class="sig-param">kwargs={}</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/traversaltools.py#L6-L36"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.traversaltools.use" title="Permalink to this definition">¶</a></dt>
 <dd><p>Use <code class="docutils literal notranslate"><span class="pre">func</span></code> to transform <code class="docutils literal notranslate"><span class="pre">expr</span></code> at the given level.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">use</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">expand</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">use</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">expand</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="go">x*(x**2 + 2*x*y + y**2) + 1</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">expand</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 <span class="go">x**3 + 2*x**2*y + x*y**2 + 1</span>
@@ -1724,19 +1724,19 @@ path      ::= &quot;/&quot; selector (&quot;/&quot; selector)*
 <code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">func</em>, <em class="sig-param">args=None</em>, <em class="sig-param">kwargs=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/epathtools.py#L155-L221"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.epathtools.EPath.apply" title="Permalink to this definition">¶</a></dt>
 <dd><p>Modify parts of an expression selected by a path.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">path</span> <span class="o">=</span> <span class="n">EPath</span><span class="p">(</span><span class="s2">&quot;/*/[0]/Symbol&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">path</span> <span class="o">=</span> <span class="n">EPath</span><span class="p">(</span><span class="s2">&quot;/*/[0]/Symbol&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span> <span class="o">=</span> <span class="p">[((</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">2</span><span class="p">),</span> <span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">z</span><span class="p">)]</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">path</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">expr</span><span class="p">:</span> <span class="n">expr</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">path</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">expr</span><span class="p">:</span> <span class="n">expr</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 <span class="go">[((x**2, 1), 2), ((3, y**2), z)]</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">path</span> <span class="o">=</span> <span class="n">EPath</span><span class="p">(</span><span class="s2">&quot;/*/*/Symbol&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">path</span> <span class="o">=</span> <span class="n">EPath</span><span class="p">(</span><span class="s2">&quot;/*/*/Symbol&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span> <span class="o">=</span> <span class="n">t</span> <span class="o">+</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">cos</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">+</span> <span class="n">E</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">path</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">expr</span><span class="p">:</span> <span class="mi">2</span><span class="o">*</span><span class="n">expr</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">path</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">expr</span><span class="p">:</span> <span class="mi">2</span><span class="o">*</span><span class="n">expr</span><span class="p">)</span>
 <span class="go">t + sin(2*x + 1) + cos(2*x + 2*y + E)</span>
 </pre></div>
 </div>
@@ -1747,19 +1747,19 @@ path      ::= &quot;/&quot; selector (&quot;/&quot; selector)*
 <code class="sig-name descname">select</code><span class="sig-paren">(</span><em class="sig-param">expr</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/epathtools.py#L223-L273"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.epathtools.EPath.select" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrieve parts of an expression selected by a path.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">path</span> <span class="o">=</span> <span class="n">EPath</span><span class="p">(</span><span class="s2">&quot;/*/[0]/Symbol&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">path</span> <span class="o">=</span> <span class="n">EPath</span><span class="p">(</span><span class="s2">&quot;/*/[0]/Symbol&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span> <span class="o">=</span> <span class="p">[((</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">2</span><span class="p">),</span> <span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">z</span><span class="p">)]</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">path</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">path</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
 <span class="go">[x, y]</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">path</span> <span class="o">=</span> <span class="n">EPath</span><span class="p">(</span><span class="s2">&quot;/*/*/Symbol&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">path</span> <span class="o">=</span> <span class="n">EPath</span><span class="p">(</span><span class="s2">&quot;/*/*/Symbol&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span> <span class="o">=</span> <span class="n">t</span> <span class="o">+</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">cos</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">+</span> <span class="n">E</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">path</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">path</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
 <span class="go">[x, x, y]</span>
 </pre></div>
 </div>
@@ -1818,21 +1818,21 @@ interactive use.</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;/*/[0]/Symbol&quot;</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;/*/[0]/Symbol&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span> <span class="o">=</span> <span class="p">[((</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">2</span><span class="p">),</span> <span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">z</span><span class="p">)]</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">epath</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">expr</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">epath</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">expr</span><span class="p">)</span>
 <span class="go">[x, y]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">epath</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">expr</span><span class="p">:</span> <span class="n">expr</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 <span class="go">[((x**2, 1), 2), ((3, y**2), z)]</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;/*/*/Symbol&quot;</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;/*/*/Symbol&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span> <span class="o">=</span> <span class="n">t</span> <span class="o">+</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">cos</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">+</span> <span class="n">E</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">epath</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">expr</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">epath</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">expr</span><span class="p">)</span>
 <span class="go">[x, x, y]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">epath</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">expr</span><span class="p">:</span> <span class="mi">2</span><span class="o">*</span><span class="n">expr</span><span class="p">)</span>
 <span class="go">t + sin(2*x + 1) + cos(2*x + 2*y + E)</span>

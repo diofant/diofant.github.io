@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Basics &mdash; Diofant 0.11.0a14.dev159+g55db13457 documentation</title>
+  <title>Basics &mdash; Diofant 0.11.0a14.dev164+g38b9df156 documentation</title>
   
 
   
@@ -188,7 +188,7 @@ manipulation in Diofant.</p>
 properties on symbols, such as being positive, imaginary or integer.</p>
 <p>By default, all symbols are complex valued.  This assumption makes it
 easier to treat mathematical problems in full generality.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 <span class="go">   ____</span>
 <span class="go">  ╱  2</span>
 <span class="go">╲╱  x</span>
@@ -200,18 +200,18 @@ assumptions system come into play.</p>
 <p>Assumptions are set on <a class="reference internal" href="../modules/core.html#diofant.core.symbol.Symbol" title="diofant.core.symbol.Symbol"><code class="xref py py-class docutils literal notranslate"><span class="pre">Symbol</span></code></a> objects
 when they are created. For instance, we can create a symbol that is
 assumed to be positive.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">,</span> <span class="n">positive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">,</span> <span class="n">positive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>And then, certain simplifications will be possible:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sqrt</span><span class="p">(</span><span class="n">p</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sqrt</span><span class="p">(</span><span class="n">p</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 <span class="go">p</span>
 </pre></div>
 </div>
 <p>The assumptions system additionally has deductive capabilities.  You
 might check assumptions on any expression with <code class="docutils literal notranslate"><span class="pre">is_assumption</span></code>
 attributes, like <a class="reference internal" href="../modules/core.html#diofant.core.expr.Expr.is_positive" title="diofant.core.expr.Expr.is_positive"><code class="xref py py-attr docutils literal notranslate"><span class="pre">is_positive</span></code></a>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">is_positive</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">is_positive</span>
 <span class="go">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">p</span><span class="p">)</span><span class="o">.</span><span class="n">is_positive</span>
 <span class="go">True</span>
@@ -226,7 +226,7 @@ for given object.</p>
 </div>
 <p>In a three-valued logic, used by system, <code class="docutils literal notranslate"><span class="pre">None</span></code> represents the
 “unknown” case.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">p</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">is_positive</span> <span class="ow">is</span> <span class="kc">None</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">p</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">is_positive</span> <span class="ow">is</span> <span class="kc">None</span>
 <span class="go">True</span>
 </pre></div>
 </div>
@@ -237,7 +237,7 @@ for given object.</p>
 expression is substitution with <a class="reference internal" href="../modules/core.html#diofant.core.basic.Basic.subs" title="diofant.core.basic.Basic.subs"><code class="xref py py-meth docutils literal notranslate"><span class="pre">subs()</span></code></a>
 method.  It replaces all instances of something in an expression with
 something else.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span> <span class="n">y</span><span class="p">})</span>
 <span class="go">cos(y) + 1</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span>
@@ -253,7 +253,7 @@ method) will change them in-place.</p>
 </div>
 <p>Use several method calls to perform a sequence of substitutions in
 same variable:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">**</span><span class="n">y</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">**</span><span class="n">y</span>
 <span class="go"> y</span>
 <span class="go">x</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">_</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">y</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="n">y</span><span class="p">})</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">y</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="n">x</span><span class="p">})</span>
@@ -264,7 +264,7 @@ same variable:</p>
 </pre></div>
 </div>
 <p>Use flag <code class="docutils literal notranslate"><span class="pre">simultaneous</span></code> to do all substitutions at once.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span> <span class="n">y</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span><span class="p">})</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span> <span class="n">y</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span><span class="p">})</span>
 <span class="go">0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span> <span class="n">y</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span><span class="p">},</span> <span class="n">simultaneous</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go">-x + y</span>
@@ -276,32 +276,32 @@ same variable:</p>
 <p>To evaluate a numerical expression into a floating point number with
 arbitrary precision, use <a class="reference internal" href="../modules/core.html#diofant.core.evalf.EvalfMixin.evalf" title="diofant.core.evalf.EvalfMixin.evalf"><code class="xref py py-meth docutils literal notranslate"><span class="pre">evalf()</span></code></a>.
 By default, 15 digits of precision are used.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span><span class="o">.</span><span class="n">evalf</span><span class="p">()</span>
 <span class="go">2.82842712474619</span>
 </pre></div>
 </div>
 <p>But you can change that.  Let’s compute the first 70 digits of <span class="math notranslate nohighlight">\(\pi\)</span>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pi</span><span class="o">.</span><span class="n">evalf</span><span class="p">(</span><span class="mi">70</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pi</span><span class="o">.</span><span class="n">evalf</span><span class="p">(</span><span class="mi">70</span><span class="p">)</span>
 <span class="go">3.141592653589793238462643383279502884197169399375105820974944592307816</span>
 </pre></div>
 </div>
 <p>Complex numbers are supported:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">pi</span> <span class="o">+</span> <span class="n">I</span><span class="p">))</span><span class="o">.</span><span class="n">evalf</span><span class="p">()</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">pi</span> <span class="o">+</span> <span class="n">I</span><span class="p">))</span><span class="o">.</span><span class="n">evalf</span><span class="p">()</span>
 <span class="go">0.289025482222236 - 0.0919996683503752⋅ⅈ</span>
 </pre></div>
 </div>
 <p>If the expression contains symbols or for some other reason cannot be evaluated
 numerically, calling <a class="reference internal" href="../modules/core.html#diofant.core.evalf.EvalfMixin.evalf" title="diofant.core.evalf.EvalfMixin.evalf"><code class="xref py py-meth docutils literal notranslate"><span class="pre">evalf()</span></code></a> returns the
 original expression or a partially evaluated expression.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">evalf</span><span class="p">()</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">evalf</span><span class="p">()</span>
 <span class="go">                  2</span>
 <span class="go">3.14159265358979⋅x  + 0.333333333333333⋅x</span>
 </pre></div>
 </div>
 <p>You can also use the standard Python functions <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> and
 <a class="reference external" href="https://docs.python.org/3/library/functions.html#complex" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">complex</span></code></a> to convert symbolic expressions to regular Python numbers:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">float</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">float</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span>
 <span class="go">3.141592653589793</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">complex</span><span class="p">(</span><span class="n">pi</span> <span class="o">+</span> <span class="n">E</span><span class="o">*</span><span class="n">I</span><span class="p">)</span>
 <span class="go">(3.141592653589793+2.718281828459045j)</span>
@@ -310,7 +310,7 @@ original expression or a partially evaluated expression.</p>
 <p>Sometimes there are roundoff errors smaller than the desired precision
 that remain after an expression is evaluated.  Such numbers can be
 removed by setting the <code class="docutils literal notranslate"><span class="pre">chop</span></code> flag.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">one</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">sin</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">one</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">sin</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">one</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">evalf</span><span class="p">(</span><span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="go">-0.e-146</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">one</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">evalf</span><span class="p">(</span><span class="n">chop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -322,7 +322,7 @@ evaluate an expression at many points, there are better ways,
 especially if you only care about machine precision.</p>
 <p>Substitution may be used to evaluate an expression for some floating point
 number</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">x</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">x</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">})</span>
 <span class="go">0.998334166468282</span>
 </pre></div>
@@ -331,14 +331,14 @@ number</p>
 <p>The easiest way to convert an expression to the form that can be numerically
 evaluated with libraries like <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/index.html#module-numpy" title="(in NumPy v1.17)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">numpy</span></code></a> or the standard library <a class="reference external" href="https://docs.python.org/3/library/math.html#module-math" title="(in Python v3.8)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">math</span></code></a>
 module — use the <a class="reference internal" href="../modules/utilities/lambdify.html#diofant.utilities.lambdify.lambdify" title="diofant.utilities.lambdify.lambdify"><code class="xref py py-func docutils literal notranslate"><span class="pre">lambdify()</span></code></a> function.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">lambdify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="s2">&quot;math&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">lambdify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="s2">&quot;math&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
 <span class="go">0.9983341664682815</span>
 </pre></div>
 </div>
 <p>Using the <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/index.html#module-numpy" title="(in NumPy v1.17)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">numpy</span></code></a> library gives the generated function access to powerful
 vectorized ufuncs that are backed by compiled C code.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">lambdify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="s2">&quot;numpy&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">lambdify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="s2">&quot;numpy&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 <span class="go">[ 0.84147098  0.45464871  0.04704    -0.18920062]</span>
 </pre></div>
