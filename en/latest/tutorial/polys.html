@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Polynomials &mdash; Diofant 0.11.0a14.dev187+g8c0ebb262 documentation</title>
+  <title>Polynomials &mdash; Diofant 0.11.0a14.dev196+gdd1d8c52d documentation</title>
   
 
   
@@ -196,10 +196,11 @@ division of polynomials with remainder.
 That is, for polynomials <code class="docutils literal notranslate"><span class="pre">f</span></code> and <code class="docutils literal notranslate"><span class="pre">g</span></code>, it computes <code class="docutils literal notranslate"><span class="pre">q</span></code> and <code class="docutils literal notranslate"><span class="pre">r</span></code>, such
 that <span class="math notranslate nohighlight">\(f = g \cdot q + r\)</span> and <span class="math notranslate nohighlight">\(\deg(r) &lt; q\)</span>. For polynomials in one variables
 with coefficients in a field, say, the rational numbers, <code class="docutils literal notranslate"><span class="pre">q</span></code> and <code class="docutils literal notranslate"><span class="pre">r</span></code> are
-uniquely defined this way:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="mi">5</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">10</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">2</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="n">div</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
+uniquely defined this way</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="mi">5</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">10</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">div</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
 <span class="go">⎛5⋅x   5    ⎞</span>
 <span class="go">⎜─── + ─, -2⎟</span>
 <span class="go">⎝ 2    2    ⎠</span>
@@ -210,26 +211,27 @@ uniquely defined this way:</p>
 </div>
 <p>As you can see, <code class="docutils literal notranslate"><span class="pre">q</span></code> has a non-integer coefficient. If you want to do division
 only in the ring of polynomials with integer coefficients, you can specify an
-additional parameter:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">div</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">field</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+additional parameter</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">div</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">field</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="go">⎛      2    ⎞</span>
 <span class="go">⎝5, 5⋅x  - 7⎠</span>
 </pre></div>
 </div>
 <p>But be warned, that this ring is no longer Euclidean and that the degree of the
 remainder doesn’t need to be smaller than that of <code class="docutils literal notranslate"><span class="pre">f</span></code>. Since 2 doesn’t divide 5,
-<span class="math notranslate nohighlight">\(2 x\)</span> doesn’t divide <span class="math notranslate nohighlight">\(5 x^2\)</span>, even if the degree is smaller. But:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="mi">5</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="n">div</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">field</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="math notranslate nohighlight">\(2 x\)</span> doesn’t divide <span class="math notranslate nohighlight">\(5 x^2\)</span>, even if the degree is smaller. But</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="mi">5</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">div</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">field</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="go">(x, 9⋅x + 3)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">expand</span><span class="p">(</span><span class="n">_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">g</span> <span class="o">+</span> <span class="n">_</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 <span class="go">   2</span>
 <span class="go">5⋅x  + 10⋅x + 3</span>
 </pre></div>
 </div>
-<p>This also works for polynomials with multiple variables:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">div</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="n">y</span><span class="o">*</span><span class="n">z</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">z</span><span class="p">)</span>
+<p>This also works for polynomials with multiple variables</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">div</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="n">y</span><span class="o">*</span><span class="n">z</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">z</span><span class="p">)</span>
 <span class="go">⎛y   ⎞</span>
 <span class="go">⎜─, 0⎟</span>
 <span class="go">⎝3   ⎠</span>
@@ -241,33 +243,34 @@ remainder doesn’t need to be smaller than that of <code class="docutils litera
 <p>With division, there is also the computation of the greatest common divisor and
 the least common multiple.</p>
 <p>When the polynomials have integer coefficients, the contents’ gcd is also
-considered:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="p">((</span><span class="mi">12</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">12</span><span class="p">)</span><span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="mi">16</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+considered</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="p">((</span><span class="mi">12</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">12</span><span class="p">)</span><span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="mi">16</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 <span class="go">4⋅x</span>
 </pre></div>
 </div>
 <p>But if the polynomials have rational coefficients, then the returned polynomial is
-monic:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">9</span><span class="o">*</span><span class="n">x</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span>
+monic</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">9</span><span class="o">*</span><span class="n">x</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span>
 <span class="go">x</span>
 </pre></div>
 </div>
-<p>Symbolic exponents are supported:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span> <span class="o">-</span> <span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">2</span><span class="p">),</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="n">n</span><span class="p">)</span>
+<p>Symbolic exponents are supported</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span> <span class="o">-</span> <span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">2</span><span class="p">),</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="n">n</span><span class="p">)</span>
 <span class="go"> n</span>
 <span class="go">x</span>
 </pre></div>
 </div>
 <p>It also works with multiple variables. In this case, the variables are ordered
-alphabetically, be default, which has influence on the leading coefficient:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">6</span><span class="o">*</span><span class="n">y</span><span class="p">)</span>
+alphabetically, be default, which has influence on the leading coefficient</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">6</span><span class="o">*</span><span class="n">y</span><span class="p">)</span>
 <span class="go">x + 2⋅y</span>
 </pre></div>
 </div>
-<p>The lcm is connected with the gcd and one can be computed using the other:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
+<p>The lcm is connected with the gcd and one can be computed using the other</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
 <span class="go">x⋅y</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lcm</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
 <span class="go"> 3  2    2  3</span>
@@ -284,8 +287,8 @@ alphabetically, be default, which has influence on the leading coefficient:</p>
 <div class="section" id="square-free-factorization">
 <h2>Square-free factorization<a class="headerlink" href="#square-free-factorization" title="Permalink to this headline">¶</a></h2>
 <p>The square-free factorization of a univariate polynomial is the product of all
-factors (not necessarily irreducible) of degree 1, 2 etc.:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sqf</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">5</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">4</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">5</span><span class="p">)</span>
+factors (not necessarily irreducible) of degree 1, 2 etc</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sqf</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">5</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">4</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">5</span><span class="p">)</span>
 <span class="go"> 2        2</span>
 <span class="go">x ⋅(x + 1) ⋅(x + 2)</span>
 </pre></div>
@@ -294,10 +297,11 @@ factors (not necessarily irreducible) of degree 1, 2 etc.:</p>
 <div class="section" id="factorization">
 <h2>Factorization<a class="headerlink" href="#factorization" title="Permalink to this headline">¶</a></h2>
 <p>Factorization supported over different domains, lets compute one for the finite
-field with characteristic 5, rational field or its algebraic extension:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">4</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="n">factor</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">modulus</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+field with characteristic 5, rational field or its algebraic extension</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">4</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">factor</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">modulus</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="go">       2        2</span>
 <span class="go">(x + 2) ⋅(x + 3)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">factor</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
@@ -308,8 +312,8 @@ field with characteristic 5, rational field or its algebraic extension:</p>
 </pre></div>
 </div>
 <p>You also may use <code class="docutils literal notranslate"><span class="pre">gaussian</span></code> keyword to obtain a factorization over
-Gaussian rationals:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">factor</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">4</span> <span class="o">+</span> <span class="mi">8</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">77</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">18</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">153</span><span class="p">,</span> <span class="n">gaussian</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+Gaussian rationals</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">factor</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">4</span> <span class="o">+</span> <span class="mi">8</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">77</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">18</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">153</span><span class="p">,</span> <span class="n">gaussian</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go">  ⎛    3⋅ⅈ⎞ ⎛    3⋅ⅈ⎞</span>
 <span class="go">4⋅⎜x - ───⎟⋅⎜x + ───⎟⋅(x + 1 - 4⋅ⅈ)⋅(x + 1 + 4⋅ⅈ)</span>
 <span class="go">  ⎝     2 ⎠ ⎝     2 ⎠</span>
@@ -330,13 +334,13 @@ univariate case.</p>
 </div>
 <div class="section" id="grobner-bases">
 <h2>Gröbner bases<a class="headerlink" href="#grobner-bases" title="Permalink to this headline">¶</a></h2>
-<p>Buchberger’s algorithm is implemented, supporting various monomial orders:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">groebner</span><span class="p">([</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="o">**</span><span class="mi">4</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span><span class="p">])</span>
+<p>Buchberger’s algorithm is implemented, supporting various monomial orders</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">groebner</span><span class="p">([</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="o">**</span><span class="mi">4</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span><span class="p">])</span>
 <span class="go">             ⎛⎡ 2       4    ⎤                           ⎞</span>
 <span class="go">GroebnerBasis⎝⎣x  + 1, y  - 1⎦, x, y, domain=ℤ, order=lex⎠</span>
-
-
-<span class="gp">&gt;&gt;&gt; </span><span class="n">groebner</span><span class="p">([</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="o">**</span><span class="mi">4</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="o">*</span><span class="n">z</span><span class="o">**</span><span class="mi">3</span><span class="p">],</span> <span class="n">order</span><span class="o">=</span><span class="n">grevlex</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">groebner</span><span class="p">([</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="o">**</span><span class="mi">4</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="o">*</span><span class="n">z</span><span class="o">**</span><span class="mi">3</span><span class="p">],</span> <span class="n">order</span><span class="o">=</span><span class="n">grevlex</span><span class="p">)</span>
 <span class="go">             ⎛⎡ 4       3   2    ⎤                                  ⎞</span>
 <span class="go">GroebnerBasis⎝⎣y  - 1, z , x  + 1⎦, x, y, z, domain=ℤ, order=grevlex⎠</span>
 </pre></div>

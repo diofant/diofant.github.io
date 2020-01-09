@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Solvers &mdash; Diofant 0.11.0a14.dev187+g8c0ebb262 documentation</title>
+  <title>Solvers &mdash; Diofant 0.11.0a14.dev196+gdd1d8c52d documentation</title>
   
 
   
@@ -191,32 +191,32 @@ be equal to 0 by the solving functions.</p>
 <p>The main function for solving algebraic equations is
 <a class="reference internal" href="../modules/solvers/solvers.html#diofant.solvers.solvers.solve" title="diofant.solvers.solvers.solve"><code class="xref py py-func docutils literal notranslate"><span class="pre">solve()</span></code></a>.</p>
 <p>When solving a single equation, the output is a list of the solutions.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">solve</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">solve</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span>
 <span class="go">[{x: 0}, {x: 1}]</span>
 </pre></div>
 </div>
 <p>If no solutions are found, an empty list is returned.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">solve</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">solve</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
 <span class="go">[]</span>
 </pre></div>
 </div>
 <p><a class="reference internal" href="../modules/solvers/solvers.html#diofant.solvers.solvers.solve" title="diofant.solvers.solvers.solve"><code class="xref py py-func docutils literal notranslate"><span class="pre">solve()</span></code></a> can also solve systems of equations.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">solve</span><span class="p">([</span><span class="n">x</span> <span class="o">-</span> <span class="n">y</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">-</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">solve</span><span class="p">([</span><span class="n">x</span> <span class="o">-</span> <span class="n">y</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">-</span> <span class="mi">3</span><span class="p">])</span>
 <span class="go">[{x: 1/2, y: 5/2}]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">solve</span><span class="p">([</span><span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="mi">7</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">-</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">solve</span><span class="p">([</span><span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="mi">7</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">-</span> <span class="mi">6</span><span class="p">])</span>
 <span class="go">⎡⎧       ___           ___    ⎫  ⎧     ___             ___    ⎫⎤</span>
 <span class="go">⎢⎨x: - ╲╱ 2  + 3, y: ╲╱ 2  + 3⎬, ⎨x: ╲╱ 2  + 3, y: - ╲╱ 2  + 3⎬⎥</span>
 <span class="go">⎣⎩                            ⎭  ⎩                            ⎭⎦</span>
 </pre></div>
 </div>
-<p><a class="reference internal" href="../modules/solvers/solvers.html#diofant.solvers.solvers.solve" title="diofant.solvers.solvers.solve"><code class="xref py py-func docutils literal notranslate"><span class="pre">solve()</span></code></a> reports each solution only once.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">solve</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">-</span> <span class="mi">6</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">9</span><span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<p>Each solution reported only once:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">solve</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">-</span> <span class="mi">6</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">9</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
 <span class="go">[{x: 0}, {x: 3}]</span>
 </pre></div>
 </div>
 <p>To get the solutions of a polynomial including multiplicity use
 <a class="reference internal" href="../modules/polys.html#diofant.polys.polyroots.roots" title="diofant.polys.polyroots.roots"><code class="xref py py-func docutils literal notranslate"><span class="pre">roots()</span></code></a>.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">roots</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">-</span> <span class="mi">6</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">9</span><span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">roots</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">-</span> <span class="mi">6</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">9</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
 <span class="go">{0: 1, 3: 2}</span>
 </pre></div>
 </div>
@@ -239,37 +239,19 @@ and it will represent an unknown function application.  Derivatives of
 <span class="go">dx</span>
 </pre></div>
 </div>
-<p>To represent the differential equation <span class="math notranslate nohighlight">\(f''(x) - 2f'(x) + f(x) =
+<p>To solve the differential equation <span class="math notranslate nohighlight">\(f''(x) - 2f'(x) + f(x) =
 \sin(x)\)</span>, we would thus use</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Eq</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
-<span class="go">                      2</span>
-<span class="go">         d           d</span>
-<span class="go">f(x) - 2⋅──(f(x)) + ───(f(x)) = sin(x)</span>
-<span class="go">         dx           2</span>
-<span class="go">                    dx</span>
-</pre></div>
-</div>
-<p>To solve the ODE, pass it and the function to solve for to
-<a class="reference internal" href="../modules/solvers/ode.html#diofant.solvers.ode.dsolve" title="diofant.solvers.ode.dsolve"><code class="xref py py-func docutils literal notranslate"><span class="pre">dsolve()</span></code></a>.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dsolve</span><span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dsolve</span><span class="p">(</span><span class="n">Eq</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
 <span class="go">        x               cos(x)</span>
 <span class="go">f(x) = ℯ ⋅(C₁ + C₂⋅x) + ──────</span>
 <span class="go">                          2</span>
-</pre></div>
-</div>
-<p><a class="reference internal" href="../modules/solvers/ode.html#diofant.solvers.ode.dsolve" title="diofant.solvers.ode.dsolve"><code class="xref py py-func docutils literal notranslate"><span class="pre">dsolve()</span></code></a> returns an instance of
-<a class="reference internal" href="../modules/core.html#diofant.core.relational.Eq" title="diofant.core.relational.Eq"><code class="xref py py-class docutils literal notranslate"><span class="pre">Eq</span></code></a>.  This is because in general,
-solutions to differential equations cannot be solved explicitly for
-the function.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dsolve</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">sin</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))),</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
-<span class="go">f(x) + cos(f(x)) = C₁</span>
 </pre></div>
 </div>
 <p>The arbitrary constants in the solutions from dsolve are symbols of
 the form <code class="docutils literal notranslate"><span class="pre">C1</span></code>, <code class="docutils literal notranslate"><span class="pre">C2</span></code>, <code class="docutils literal notranslate"><span class="pre">C3</span></code>, and so on.</p>
 <p><a class="reference internal" href="../modules/solvers/ode.html#diofant.solvers.ode.dsolve" title="diofant.solvers.ode.dsolve"><code class="xref py py-func docutils literal notranslate"><span class="pre">dsolve()</span></code></a> can also solve systems of
 equations, like <a class="reference internal" href="../modules/solvers/solvers.html#diofant.solvers.solvers.solve" title="diofant.solvers.solvers.solve"><code class="xref py py-func docutils literal notranslate"><span class="pre">solve()</span></code></a>.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dsolve</span><span class="p">([</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)],</span> <span class="p">[</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">)])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dsolve</span><span class="p">([</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)])</span>
 <span class="go">⎡        x       -x             x       -x   ⎤</span>
 <span class="go">⎣f(x) = ℯ ⋅C₂ - ℯ  ⋅C₁, g(x) = ℯ ⋅C₂ + ℯ  ⋅C₁⎦</span>
 </pre></div>

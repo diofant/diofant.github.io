@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Introduction &mdash; Diofant 0.11.0a14.dev187+g8c0ebb262 documentation</title>
+  <title>Introduction &mdash; Diofant 0.11.0a14.dev196+gdd1d8c52d documentation</title>
   
 
   
@@ -287,7 +287,7 @@ of symbolic power Diofant is capable of, to whet your appetite.</p>
 <p>From here on in this tutorial we assume that these statements were
 executed:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x y z&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;a:d t x:z&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">init_printing</span><span class="p">(</span><span class="n">pretty_print</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">use_unicode</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -299,13 +299,13 @@ production code, as they make it unclear which names are present in
 the namespace.</p>
 </div>
 <p>Take the derivative of <span class="math notranslate nohighlight">\(\sin{(x)}e^x\)</span>.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">diff</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">diff</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
 <span class="go"> x           x</span>
 <span class="go">ℯ ⋅sin(x) + ℯ ⋅cos(x)</span>
 </pre></div>
 </div>
 <p>Compute <span class="math notranslate nohighlight">\(\int(e^x\sin{(x)} + e^x\cos{(x)})\,dx\)</span>.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">integrate</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">integrate</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
 <span class="go"> x</span>
 <span class="go">ℯ ⋅sin(x)</span>
 </pre></div>
@@ -332,7 +332,7 @@ the namespace.</p>
 </div>
 <p>Solve the differential equation <span class="math notranslate nohighlight">\(f'' - f = e^x\)</span>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">Function</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dsolve</span><span class="p">(</span><span class="n">Eq</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dsolve</span><span class="p">(</span><span class="n">Eq</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
 <span class="go">        x ⎛     x⎞    -x</span>
 <span class="go">f(x) = ℯ ⋅⎜C₂ + ─⎟ + ℯ  ⋅C₁</span>
 <span class="go">          ⎝     2⎠</span>
@@ -348,12 +348,11 @@ the namespace.</p>
 <span class="go">⎩                              ⎭</span>
 </pre></div>
 </div>
-<p>Rewrite the Bessel function <span class="math notranslate nohighlight">\(J_{n}\left(z\right)\)</span> in terms of the
-spherical Bessel function <span class="math notranslate nohighlight">\(j_n(z)\)</span>.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;n&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">besselj</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span><span class="o">.</span><span class="n">rewrite</span><span class="p">(</span><span class="n">jn</span><span class="p">)</span>
+<p>Rewrite the Bessel function <span class="math notranslate nohighlight">\(J_y\left(z\right)\)</span> in terms of the
+spherical Bessel function <span class="math notranslate nohighlight">\(j_y(z)\)</span>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">besselj</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span><span class="o">.</span><span class="n">rewrite</span><span class="p">(</span><span class="n">jn</span><span class="p">)</span>
 <span class="go">  ___   ___</span>
-<span class="go">╲╱ 2 ⋅╲╱ z ⋅jn(n - 1/2, z)</span>
+<span class="go">╲╱ 2 ⋅╲╱ z ⋅jn(y - 1/2, z)</span>
 <span class="go">──────────────────────────</span>
 <span class="go">            ___</span>
 <span class="go">          ╲╱ π</span>
