@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Simplify &mdash; Diofant 0.11.0a14 documentation</title>
+  <title>Simplify &mdash; Diofant 0.11.0a15.dev11+g275152539 documentation</title>
   
 
   
@@ -257,7 +257,7 @@
 <h2>simplify<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="diofant.simplify.simplify.simplify">
-<code class="sig-prename descclassname">diofant.simplify.simplify.</code><code class="sig-name descname">simplify</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">ratio=1.7</em>, <em class="sig-param">measure=&lt;function count_ops&gt;</em>, <em class="sig-param">fu=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/v0.11.0a14/diofant/simplify/simplify.py#L463-L684"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.simplify.simplify" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.simplify.simplify.</code><code class="sig-name descname">simplify</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">ratio=1.7</em>, <em class="sig-param">measure=&lt;function count_ops&gt;</em>, <em class="sig-param">fu=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/simplify.py#L463-L683"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.simplify.simplify" title="Permalink to this definition">¶</a></dt>
 <dd><p>Simplifies the given expression.</p>
 <p>Simplification is not a well defined term and the exact strategies
 this function tries can change in the future versions of Diofant. If
@@ -346,9 +346,8 @@ to reduce this would be to give more weight to powers as operations in
 </pre></div>
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">my_measure</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="n">POW</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;POW&#39;</span><span class="p">)</span>
 <span class="gp">... </span>    <span class="c1"># Discourage powers by giving POW a weight of 10</span>
-<span class="gp">... </span>    <span class="n">count</span> <span class="o">=</span> <span class="n">count_ops</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">visual</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">POW</span><span class="p">:</span> <span class="mi">10</span><span class="p">})</span>
+<span class="gp">... </span>    <span class="n">count</span> <span class="o">=</span> <span class="n">count_ops</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">visual</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="s1">&#39;POW&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">})</span>
 <span class="gp">... </span>    <span class="c1"># Every other operation gets a weight of 1 (the default)</span>
 <span class="gp">... </span>    <span class="n">count</span> <span class="o">=</span> <span class="n">count</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">Symbol</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)))</span>
 <span class="gp">... </span>    <span class="k">return</span> <span class="n">count</span>
@@ -373,7 +372,7 @@ from the input expression by doing this.</p>
 <h2>separatevars<a class="headerlink" href="#separatevars" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="diofant.simplify.simplify.separatevars">
-<code class="sig-prename descclassname">diofant.simplify.simplify.</code><code class="sig-name descname">separatevars</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">symbols=[]</em>, <em class="sig-param">dict=False</em>, <em class="sig-param">force=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/v0.11.0a14/diofant/simplify/simplify.py#L29-L95"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.simplify.separatevars" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.simplify.simplify.</code><code class="sig-name descname">separatevars</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">symbols=[]</em>, <em class="sig-param">dict=False</em>, <em class="sig-param">force=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/simplify.py#L29-L95"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.simplify.separatevars" title="Permalink to this definition">¶</a></dt>
 <dd><p>Separates variables in an expression, if possible.  By
 default, it separates with respect to all symbols in an
 expression and collects constant coefficients that are
@@ -434,7 +433,7 @@ or (if dict=True) then None is returned.</p>
 <h2>nthroot<a class="headerlink" href="#nthroot" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="diofant.simplify.simplify.nthroot">
-<code class="sig-prename descclassname">diofant.simplify.simplify.</code><code class="sig-name descname">nthroot</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">n</em>, <em class="sig-param">max_len=4</em>, <em class="sig-param">prec=15</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/v0.11.0a14/diofant/simplify/simplify.py#L219-L274"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.simplify.nthroot" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.simplify.simplify.</code><code class="sig-name descname">nthroot</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">n</em>, <em class="sig-param">max_len=4</em>, <em class="sig-param">prec=15</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/simplify.py#L219-L274"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.simplify.nthroot" title="Permalink to this definition">¶</a></dt>
 <dd><p>compute a real nth-root of a sum of surds</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -461,7 +460,7 @@ roots.</p>
 <h2>besselsimp<a class="headerlink" href="#besselsimp" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="diofant.simplify.simplify.besselsimp">
-<code class="sig-prename descclassname">diofant.simplify.simplify.</code><code class="sig-name descname">besselsimp</code><span class="sig-paren">(</span><em class="sig-param">expr</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/v0.11.0a14/diofant/simplify/simplify.py#L1004-L1089"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.simplify.besselsimp" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.simplify.simplify.</code><code class="sig-name descname">besselsimp</code><span class="sig-paren">(</span><em class="sig-param">expr</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/simplify.py#L1003-L1088"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.simplify.besselsimp" title="Permalink to this definition">¶</a></dt>
 <dd><p>Simplify bessel-type functions.</p>
 <p>This routine tries to simplify bessel-type functions. Currently it only
 works on the Bessel J and I functions, however. It works by looking at all
@@ -489,7 +488,7 @@ factorization of the result with factor().</p>
 <h2>hypersimp<a class="headerlink" href="#hypersimp" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="diofant.simplify.simplify.hypersimp">
-<code class="sig-prename descclassname">diofant.simplify.simplify.</code><code class="sig-name descname">hypersimp</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">k</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/v0.11.0a14/diofant/simplify/simplify.py#L335-L377"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.simplify.hypersimp" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.simplify.simplify.</code><code class="sig-name descname">hypersimp</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">k</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/simplify.py#L335-L377"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.simplify.hypersimp" title="Permalink to this definition">¶</a></dt>
 <dd><p>Given combinatorial term f(k) simplify its consecutive term ratio
 i.e. f(k+1)/f(k).  The input term can be composed of functions and
 integer sequences which have equivalent representation in terms
@@ -528,7 +527,7 @@ is returned.</p>
 <h2>hypersimilar<a class="headerlink" href="#hypersimilar" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="diofant.simplify.simplify.hypersimilar">
-<code class="sig-prename descclassname">diofant.simplify.simplify.</code><code class="sig-name descname">hypersimilar</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">g</em>, <em class="sig-param">k</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/v0.11.0a14/diofant/simplify/simplify.py#L380-L398"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.simplify.hypersimilar" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.simplify.simplify.</code><code class="sig-name descname">hypersimilar</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">g</em>, <em class="sig-param">k</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/simplify.py#L380-L398"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.simplify.hypersimilar" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns True if ‘f’ and ‘g’ are hyper-similar.</p>
 <p>Similarity in hypergeometric sense means that a quotient of
 f(k) and g(k) is a rational function in k.  This procedure
@@ -544,7 +543,7 @@ is useful in solving recurrence relations.</p>
 <h2>nsimplify<a class="headerlink" href="#nsimplify" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="diofant.simplify.simplify.nsimplify">
-<code class="sig-prename descclassname">diofant.simplify.simplify.</code><code class="sig-name descname">nsimplify</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">constants=[]</em>, <em class="sig-param">tolerance=None</em>, <em class="sig-param">full=False</em>, <em class="sig-param">rational=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/v0.11.0a14/diofant/simplify/simplify.py#L726-L846"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.simplify.nsimplify" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.simplify.simplify.</code><code class="sig-name descname">nsimplify</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">constants=[]</em>, <em class="sig-param">tolerance=None</em>, <em class="sig-param">full=False</em>, <em class="sig-param">rational=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/simplify.py#L725-L845"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.simplify.nsimplify" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find a simple representation for a number or, if there are free symbols or
 if rational=True, then replace Floats with their Rational equivalents. If
 no change is made and rational is not False then Floats will at least be
@@ -582,7 +581,7 @@ is set low).</p>
 <h2>posify<a class="headerlink" href="#posify" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="diofant.simplify.simplify.posify">
-<code class="sig-prename descclassname">diofant.simplify.simplify.</code><code class="sig-name descname">posify</code><span class="sig-paren">(</span><em class="sig-param">eq</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/v0.11.0a14/diofant/simplify/simplify.py#L277-L332"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.simplify.posify" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.simplify.simplify.</code><code class="sig-name descname">posify</code><span class="sig-paren">(</span><em class="sig-param">eq</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/simplify.py#L277-L332"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.simplify.posify" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return eq (with generic symbols made positive) and a
 dictionary containing the mapping between the old and new
 symbols.</p>
@@ -625,7 +624,7 @@ of expressions:</p>
 <h2>logcombine<a class="headerlink" href="#logcombine" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="diofant.simplify.simplify.logcombine">
-<code class="sig-prename descclassname">diofant.simplify.simplify.</code><code class="sig-name descname">logcombine</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">force=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/v0.11.0a14/diofant/simplify/simplify.py#L849-L977"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.simplify.logcombine" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.simplify.simplify.</code><code class="sig-name descname">logcombine</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">force=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/simplify.py#L848-L976"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.simplify.logcombine" title="Permalink to this definition">¶</a></dt>
 <dd><p>Takes logarithms and combines them using the following rules:</p>
 <ul class="simple">
 <li><p>log(x) + log(y) == log(x*y) if both are not negative</p></li>
@@ -673,7 +672,7 @@ expansion:</p>
 <h3>radsimp<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="diofant.simplify.radsimp.radsimp">
-<code class="sig-prename descclassname">diofant.simplify.radsimp.</code><code class="sig-name descname">radsimp</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">symbolic=True</em>, <em class="sig-param">max_terms=4</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/v0.11.0a14/diofant/simplify/radsimp.py#L597-L841"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.radsimp.radsimp" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.simplify.radsimp.</code><code class="sig-name descname">radsimp</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">symbolic=True</em>, <em class="sig-param">max_terms=4</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/radsimp.py#L597-L841"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.radsimp.radsimp" title="Permalink to this definition">¶</a></dt>
 <dd><p>Rationalize the denominator by removing square roots.</p>
 <p>Note: the expression returned from radsimp must be used with caution
 since if the denominator contains symbols, it will be possible to make
@@ -745,7 +744,7 @@ numeric denominators will still be processed):</p>
 <h3>rad_rationalize<a class="headerlink" href="#rad-rationalize" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="diofant.simplify.radsimp.rad_rationalize">
-<code class="sig-prename descclassname">diofant.simplify.radsimp.</code><code class="sig-name descname">rad_rationalize</code><span class="sig-paren">(</span><em class="sig-param">num</em>, <em class="sig-param">den</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/v0.11.0a14/diofant/simplify/radsimp.py#L844-L862"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.radsimp.rad_rationalize" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.simplify.radsimp.</code><code class="sig-name descname">rad_rationalize</code><span class="sig-paren">(</span><em class="sig-param">num</em>, <em class="sig-param">den</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/radsimp.py#L844-L862"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.radsimp.rad_rationalize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Rationalize num/den by removing square roots in the denominator;
 num and den are sum of terms whose squares are rationals</p>
 <p class="rubric">Examples</p>
@@ -760,7 +759,7 @@ num and den are sum of terms whose squares are rationals</p>
 <h3>collect<a class="headerlink" href="#collect" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="diofant.simplify.radsimp.collect">
-<code class="sig-prename descclassname">diofant.simplify.radsimp.</code><code class="sig-name descname">collect</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">syms</em>, <em class="sig-param">func=None</em>, <em class="sig-param">evaluate=True</em>, <em class="sig-param">exact=False</em>, <em class="sig-param">distribute_order_term=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/v0.11.0a14/diofant/simplify/radsimp.py#L15-L389"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.radsimp.collect" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.simplify.radsimp.</code><code class="sig-name descname">collect</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">syms</em>, <em class="sig-param">func=None</em>, <em class="sig-param">evaluate=True</em>, <em class="sig-param">exact=False</em>, <em class="sig-param">distribute_order_term=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/radsimp.py#L15-L389"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.radsimp.collect" title="Permalink to this definition">¶</a></dt>
 <dd><p>Collect additive terms of an expression.</p>
 <p>This function collects additive terms of an expression with respect
 to a list of expression up to powers with rational exponents. By the
@@ -901,7 +900,7 @@ For example you can factorize symbolic coefficients of polynomial:</p>
 
 <dl class="function">
 <dt id="diofant.simplify.radsimp.rcollect">
-<code class="sig-prename descclassname">diofant.simplify.radsimp.</code><code class="sig-name descname">rcollect</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">*vars</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/v0.11.0a14/diofant/simplify/radsimp.py#L392-L417"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.radsimp.rcollect" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.simplify.radsimp.</code><code class="sig-name descname">rcollect</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">*vars</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/radsimp.py#L392-L417"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.radsimp.rcollect" title="Permalink to this definition">¶</a></dt>
 <dd><p>Recursively collect sums in an expression.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">)</span>
@@ -922,7 +921,7 @@ For example you can factorize symbolic coefficients of polynomial:</p>
 <h3>collect_sqrt<a class="headerlink" href="#collect-sqrt" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="diofant.simplify.radsimp.collect_sqrt">
-<code class="sig-prename descclassname">diofant.simplify.radsimp.</code><code class="sig-name descname">collect_sqrt</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">evaluate=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/v0.11.0a14/diofant/simplify/radsimp.py#L420-L490"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.radsimp.collect_sqrt" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.simplify.radsimp.</code><code class="sig-name descname">collect_sqrt</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">evaluate=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/radsimp.py#L420-L490"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.radsimp.collect_sqrt" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return expr with terms having common square roots collected together.
 If <code class="docutils literal notranslate"><span class="pre">evaluate</span></code> is False a count indicating the number of sqrt-containing
 terms will be returned and, if non-zero, the terms of the Add will be
@@ -962,7 +961,7 @@ terms will be returned:</p>
 <h3>collect_const<a class="headerlink" href="#collect-const" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="diofant.simplify.radsimp.collect_const">
-<code class="sig-prename descclassname">diofant.simplify.radsimp.</code><code class="sig-name descname">collect_const</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">*vars</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/v0.11.0a14/diofant/simplify/radsimp.py#L493-L594"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.radsimp.collect_const" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.simplify.radsimp.</code><code class="sig-name descname">collect_const</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">*vars</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/radsimp.py#L493-L594"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.radsimp.collect_const" title="Permalink to this definition">¶</a></dt>
 <dd><p>A non-greedy collection of terms with similar number coefficients in
 an Add expr. If <code class="docutils literal notranslate"><span class="pre">vars</span></code> is given then only those constants will be
 targeted. Although any Number can also be targeted, if this is not
@@ -1003,7 +1002,7 @@ unsigned values:</p>
 <h3>fraction<a class="headerlink" href="#fraction" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="diofant.simplify.radsimp.fraction">
-<code class="sig-prename descclassname">diofant.simplify.radsimp.</code><code class="sig-name descname">fraction</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">exact=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/v0.11.0a14/diofant/simplify/radsimp.py#L865-L937"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.radsimp.fraction" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.simplify.radsimp.</code><code class="sig-name descname">fraction</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">exact=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/radsimp.py#L865-L937"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.radsimp.fraction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a pair with expression’s numerator and denominator.</p>
 <p>If the given expression is not a fraction then this function
 will return the tuple (expr, 1).</p>
@@ -1058,7 +1057,7 @@ be analyzed and pretty fraction will be returned:</p>
 <h3>ratsimp<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="diofant.simplify.ratsimp.ratsimp">
-<code class="sig-prename descclassname">diofant.simplify.ratsimp.</code><code class="sig-name descname">ratsimp</code><span class="sig-paren">(</span><em class="sig-param">expr</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/v0.11.0a14/diofant/simplify/ratsimp.py#L10-L27"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.ratsimp.ratsimp" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.simplify.ratsimp.</code><code class="sig-name descname">ratsimp</code><span class="sig-paren">(</span><em class="sig-param">expr</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/ratsimp.py#L10-L27"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.ratsimp.ratsimp" title="Permalink to this definition">¶</a></dt>
 <dd><p>Put an expression over a common denominator, cancel and reduce.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ratsimp</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="n">y</span><span class="p">)</span>
@@ -1075,7 +1074,7 @@ be analyzed and pretty fraction will be returned:</p>
 <h3>trigsimp<a class="headerlink" href="#trigsimp" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="diofant.simplify.trigsimp.trigsimp">
-<code class="sig-prename descclassname">diofant.simplify.trigsimp.</code><code class="sig-name descname">trigsimp</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">**opts</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/v0.11.0a14/diofant/simplify/trigsimp.py#L420-L504"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.trigsimp.trigsimp" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.simplify.trigsimp.</code><code class="sig-name descname">trigsimp</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">**opts</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/trigsimp.py#L420-L504"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.trigsimp.trigsimp" title="Permalink to this definition">¶</a></dt>
 <dd><p>reduces expression by using known trig identities</p>
 <p class="rubric">Notes</p>
 <p>method:
@@ -1119,7 +1118,7 @@ simplification.</p>
 <h3>futrig<a class="headerlink" href="#futrig" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="diofant.simplify.trigsimp.futrig">
-<code class="sig-prename descclassname">diofant.simplify.trigsimp.</code><code class="sig-name descname">futrig</code><span class="sig-paren">(</span><em class="sig-param">e</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/v0.11.0a14/diofant/simplify/trigsimp.py#L1068-L1106"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.trigsimp.futrig" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.simplify.trigsimp.</code><code class="sig-name descname">futrig</code><span class="sig-paren">(</span><em class="sig-param">e</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/trigsimp.py#L1068-L1106"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.trigsimp.futrig" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return simplified <code class="docutils literal notranslate"><span class="pre">e</span></code> using Fu-like transformations.
 This is not the “Fu” algorithm. This is called by default
 from <code class="docutils literal notranslate"><span class="pre">trigsimp</span></code>. By default, hyperbolics subexpressions
@@ -1141,7 +1140,7 @@ will be simplified, but this can be disabled by setting
 <span id="fu"></span><h3>fu<a class="headerlink" href="#module-diofant.simplify.fu" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="diofant.simplify.fu.fu">
-<code class="sig-prename descclassname">diofant.simplify.fu.</code><code class="sig-name descname">fu</code><span class="sig-paren">(</span><em class="sig-param">rv</em>, <em class="sig-param">measure=&lt;function &lt;lambda&gt;&gt;</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/v0.11.0a14/diofant/simplify/fu.py#L1612-L1697"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.fu.fu" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.simplify.fu.</code><code class="sig-name descname">fu</code><span class="sig-paren">(</span><em class="sig-param">rv</em>, <em class="sig-param">measure=&lt;function &lt;lambda&gt;&gt;</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/fu.py#L1612-L1697"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.fu.fu" title="Permalink to this definition">¶</a></dt>
 <dd><p>Attempt to simplify expression by using transformation rules given
 in the algorithm by Fu et al.</p>
 <p><a class="reference internal" href="#diofant.simplify.fu.fu" title="diofant.simplify.fu.fu"><code class="xref py py-func docutils literal notranslate"><span class="pre">fu()</span></code></a> will try to minimize the objective function <code class="docutils literal notranslate"><span class="pre">measure</span></code>.
@@ -1212,7 +1211,7 @@ DESTIME2006/DES_contribs/Fu/simplification.pdf</p>
 <h3>powsimp<a class="headerlink" href="#powsimp" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="diofant.simplify.powsimp.powsimp">
-<code class="sig-prename descclassname">diofant.simplify.powsimp.</code><code class="sig-name descname">powsimp</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">deep=False</em>, <em class="sig-param">combine='all'</em>, <em class="sig-param">force=False</em>, <em class="sig-param">measure=&lt;function count_ops&gt;</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/v0.11.0a14/diofant/simplify/powsimp.py#L16-L475"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.powsimp.powsimp" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.simplify.powsimp.</code><code class="sig-name descname">powsimp</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">deep=False</em>, <em class="sig-param">combine='all'</em>, <em class="sig-param">force=False</em>, <em class="sig-param">measure=&lt;function count_ops&gt;</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/powsimp.py#L16-L475"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.powsimp.powsimp" title="Permalink to this definition">¶</a></dt>
 <dd><p>reduces expression by combining powers with similar bases and exponents.</p>
 <p class="rubric">Notes</p>
 <p>If deep is True then powsimp() will also simplify arguments of
@@ -1292,7 +1291,7 @@ autoexpanded then Mul does not join the resulting factors:</p>
 <h3>powdenest<a class="headerlink" href="#powdenest" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="diofant.simplify.powsimp.powdenest">
-<code class="sig-prename descclassname">diofant.simplify.powsimp.</code><code class="sig-name descname">powdenest</code><span class="sig-paren">(</span><em class="sig-param">eq</em>, <em class="sig-param">force=False</em>, <em class="sig-param">polar=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/v0.11.0a14/diofant/simplify/powsimp.py#L478-L574"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.powsimp.powdenest" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.simplify.powsimp.</code><code class="sig-name descname">powdenest</code><span class="sig-paren">(</span><em class="sig-param">eq</em>, <em class="sig-param">force=False</em>, <em class="sig-param">polar=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/powsimp.py#L478-L574"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.powsimp.powdenest" title="Permalink to this definition">¶</a></dt>
 <dd><p>Collect exponents on powers as assumptions allow.</p>
 <dl class="simple">
 <dt>Given <code class="docutils literal notranslate"><span class="pre">(bb**be)**e</span></code>, this can be simplified as follows:</dt><dd><ul class="simple">
@@ -1387,7 +1386,7 @@ with a different base:</p>
 <h3>combsimp<a class="headerlink" href="#combsimp" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="diofant.simplify.combsimp.combsimp">
-<code class="sig-prename descclassname">diofant.simplify.combsimp.</code><code class="sig-name descname">combsimp</code><span class="sig-paren">(</span><em class="sig-param">expr</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/v0.11.0a14/diofant/simplify/combsimp.py#L10-L462"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.combsimp.combsimp" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.simplify.combsimp.</code><code class="sig-name descname">combsimp</code><span class="sig-paren">(</span><em class="sig-param">expr</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/combsimp.py#L10-L462"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.combsimp.combsimp" title="Permalink to this definition">¶</a></dt>
 <dd><p>Simplify combinatorial expressions.</p>
 <p>This function takes as input an expression containing factorials,
 binomials, Pochhammer symbol and other “combinatorial” functions,
@@ -1437,7 +1436,7 @@ possible.</p></li>
 <h3>sqrtdenest<a class="headerlink" href="#sqrtdenest" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="diofant.simplify.sqrtdenest.sqrtdenest">
-<code class="sig-prename descclassname">diofant.simplify.sqrtdenest.</code><code class="sig-name descname">sqrtdenest</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">max_iter=3</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/v0.11.0a14/diofant/simplify/sqrtdenest.py#L95-L126"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.sqrtdenest.sqrtdenest" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.simplify.sqrtdenest.</code><code class="sig-name descname">sqrtdenest</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">max_iter=3</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/sqrtdenest.py#L95-L126"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.sqrtdenest.sqrtdenest" title="Permalink to this definition">¶</a></dt>
 <dd><p>Denests sqrts in an expression that contain other square roots
 if possible, otherwise returns the expr unchanged. This is based on the
 algorithms of [1].</p>
@@ -1463,7 +1462,7 @@ by Denesting’ (available at <a class="reference external" href="http://www.cyb
 <h3>unrad<a class="headerlink" href="#unrad" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="diofant.simplify.sqrtdenest.unrad">
-<code class="sig-prename descclassname">diofant.simplify.sqrtdenest.</code><code class="sig-name descname">unrad</code><span class="sig-paren">(</span><em class="sig-param">eq</em>, <em class="sig-param">*syms</em>, <em class="sig-param">**flags</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/v0.11.0a14/diofant/simplify/sqrtdenest.py#L597-L959"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.sqrtdenest.unrad" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.simplify.sqrtdenest.</code><code class="sig-name descname">unrad</code><span class="sig-paren">(</span><em class="sig-param">eq</em>, <em class="sig-param">*syms</em>, <em class="sig-param">**flags</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/sqrtdenest.py#L597-L959"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.sqrtdenest.unrad" title="Permalink to this definition">¶</a></dt>
 <dd><p>Remove radicals with symbolic arguments and return (eq, cov),
 None or raise an error:</p>
 <p>None is returned if there are no radicals to remove.</p>
@@ -1527,7 +1526,7 @@ that returns True if a given Pow should be handled.
 <h3>cse<a class="headerlink" href="#cse" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="diofant.simplify.cse_main.cse">
-<code class="sig-prename descclassname">diofant.simplify.cse_main.</code><code class="sig-name descname">cse</code><span class="sig-paren">(</span><em class="sig-param">exprs</em>, <em class="sig-param">symbols=None</em>, <em class="sig-param">optimizations=None</em>, <em class="sig-param">postprocess=None</em>, <em class="sig-param">order='canonical'</em>, <em class="sig-param">ignore=()</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/v0.11.0a14/diofant/simplify/cse_main.py#L373-L517"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.cse_main.cse" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.simplify.cse_main.</code><code class="sig-name descname">cse</code><span class="sig-paren">(</span><em class="sig-param">exprs</em>, <em class="sig-param">symbols=None</em>, <em class="sig-param">optimizations=None</em>, <em class="sig-param">postprocess=None</em>, <em class="sig-param">order='canonical'</em>, <em class="sig-param">ignore=()</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/cse_main.py#L373-L517"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.cse_main.cse" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform common subexpression elimination on an expression.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1597,7 +1596,7 @@ list.</p></li>
 <h3>opt_cse<a class="headerlink" href="#opt-cse" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="diofant.simplify.cse_main.opt_cse">
-<code class="sig-prename descclassname">diofant.simplify.cse_main.</code><code class="sig-name descname">opt_cse</code><span class="sig-paren">(</span><em class="sig-param">exprs</em>, <em class="sig-param">order='canonical'</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/v0.11.0a14/diofant/simplify/cse_main.py#L134-L254"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.cse_main.opt_cse" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.simplify.cse_main.</code><code class="sig-name descname">opt_cse</code><span class="sig-paren">(</span><em class="sig-param">exprs</em>, <em class="sig-param">order='canonical'</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/cse_main.py#L134-L254"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.cse_main.opt_cse" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find optimization opportunities in Adds, Muls, Pows and negative
 coefficient Muls</p>
 <dl class="field-list simple">
@@ -1625,7 +1624,7 @@ expressions where speed is a concern, use the setting order=’none’.</p></li>
 <h3>tree_cse<a class="headerlink" href="#tree-cse" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="diofant.simplify.cse_main.tree_cse">
-<code class="sig-prename descclassname">diofant.simplify.cse_main.</code><code class="sig-name descname">tree_cse</code><span class="sig-paren">(</span><em class="sig-param">exprs</em>, <em class="sig-param">symbols</em>, <em class="sig-param">opt_subs={}</em>, <em class="sig-param">order='canonical'</em>, <em class="sig-param">ignore=()</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/v0.11.0a14/diofant/simplify/cse_main.py#L257-L370"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.cse_main.tree_cse" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.simplify.cse_main.</code><code class="sig-name descname">tree_cse</code><span class="sig-paren">(</span><em class="sig-param">exprs</em>, <em class="sig-param">symbols</em>, <em class="sig-param">opt_subs={}</em>, <em class="sig-param">order='canonical'</em>, <em class="sig-param">ignore=()</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/cse_main.py#L257-L370"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.cse_main.tree_cse" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform raw CSE on expression tree, taking opt_subs into account.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1650,7 +1649,7 @@ expressions where speed is a concern, use the setting order=’none’.</p></li>
 <h3>hyperexpand<a class="headerlink" href="#hyperexpand" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="diofant.simplify.hyperexpand.hyperexpand">
-<code class="sig-prename descclassname">diofant.simplify.hyperexpand.</code><code class="sig-name descname">hyperexpand</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">allow_hyper=False</em>, <em class="sig-param">rewrite='default'</em>, <em class="sig-param">place=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/v0.11.0a14/diofant/simplify/hyperexpand.py#L2458-L2495"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.hyperexpand.hyperexpand" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.simplify.hyperexpand.</code><code class="sig-name descname">hyperexpand</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">allow_hyper=False</em>, <em class="sig-param">rewrite='default'</em>, <em class="sig-param">place=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/hyperexpand.py#L2458-L2495"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.hyperexpand.hyperexpand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Expand hypergeometric functions. If allow_hyper is True, allow partial
 simplification (that is a result different from input,
 but still containing hypergeometric functions).</p>
@@ -1678,7 +1677,7 @@ that are not recognised are left unchanged:</p>
 <h3>use<a class="headerlink" href="#use" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="diofant.simplify.traversaltools.use">
-<code class="sig-prename descclassname">diofant.simplify.traversaltools.</code><code class="sig-name descname">use</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">func</em>, <em class="sig-param">level=0</em>, <em class="sig-param">args=()</em>, <em class="sig-param">kwargs={}</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/v0.11.0a14/diofant/simplify/traversaltools.py#L6-L36"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.traversaltools.use" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.simplify.traversaltools.</code><code class="sig-name descname">use</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">func</em>, <em class="sig-param">level=0</em>, <em class="sig-param">args=()</em>, <em class="sig-param">kwargs={}</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/traversaltools.py#L6-L36"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.traversaltools.use" title="Permalink to this definition">¶</a></dt>
 <dd><p>Use <code class="docutils literal notranslate"><span class="pre">func</span></code> to transform <code class="docutils literal notranslate"><span class="pre">expr</span></code> at the given level.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
@@ -1700,7 +1699,7 @@ that are not recognised are left unchanged:</p>
 <h3>EPath class<a class="headerlink" href="#epath-class" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
 <dt id="diofant.simplify.epathtools.EPath">
-<em class="property">class </em><code class="sig-prename descclassname">diofant.simplify.epathtools.</code><code class="sig-name descname">EPath</code><a class="reference external" href="https://github.com/diofant/diofant/blob/v0.11.0a14/diofant/simplify/epathtools.py#L6-L273"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.epathtools.EPath" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diofant.simplify.epathtools.</code><code class="sig-name descname">EPath</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/epathtools.py#L6-L273"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.epathtools.EPath" title="Permalink to this definition">¶</a></dt>
 <dd><p>Manipulate expressions using paths.</p>
 <p>EPath grammar in EBNF notation:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>literal   ::= /[A-Za-z_][A-Za-z_0-9]*/
@@ -1721,7 +1720,7 @@ path      ::= &quot;/&quot; selector (&quot;/&quot; selector)*
 </div>
 <dl class="method">
 <dt id="diofant.simplify.epathtools.EPath.apply">
-<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">func</em>, <em class="sig-param">args=None</em>, <em class="sig-param">kwargs=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/v0.11.0a14/diofant/simplify/epathtools.py#L155-L221"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.epathtools.EPath.apply" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">func</em>, <em class="sig-param">args=None</em>, <em class="sig-param">kwargs=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/epathtools.py#L155-L221"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.epathtools.EPath.apply" title="Permalink to this definition">¶</a></dt>
 <dd><p>Modify parts of an expression selected by a path.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">path</span> <span class="o">=</span> <span class="n">EPath</span><span class="p">(</span><span class="s2">&quot;/*/[0]/Symbol&quot;</span><span class="p">)</span>
@@ -1744,7 +1743,7 @@ path      ::= &quot;/&quot; selector (&quot;/&quot; selector)*
 
 <dl class="method">
 <dt id="diofant.simplify.epathtools.EPath.select">
-<code class="sig-name descname">select</code><span class="sig-paren">(</span><em class="sig-param">expr</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/v0.11.0a14/diofant/simplify/epathtools.py#L223-L273"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.epathtools.EPath.select" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">select</code><span class="sig-paren">(</span><em class="sig-param">expr</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/epathtools.py#L223-L273"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.epathtools.EPath.select" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrieve parts of an expression selected by a path.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">path</span> <span class="o">=</span> <span class="n">EPath</span><span class="p">(</span><span class="s2">&quot;/*/[0]/Symbol&quot;</span><span class="p">)</span>
@@ -1772,7 +1771,7 @@ path      ::= &quot;/&quot; selector (&quot;/&quot; selector)*
 <h3>epath<a class="headerlink" href="#epath" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="diofant.simplify.epathtools.epath">
-<code class="sig-prename descclassname">diofant.simplify.epathtools.</code><code class="sig-name descname">epath</code><span class="sig-paren">(</span><em class="sig-param">path</em>, <em class="sig-param">expr=None</em>, <em class="sig-param">func=None</em>, <em class="sig-param">args=None</em>, <em class="sig-param">kwargs=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/v0.11.0a14/diofant/simplify/epathtools.py#L276-L344"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.epathtools.epath" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.simplify.epathtools.</code><code class="sig-name descname">epath</code><span class="sig-paren">(</span><em class="sig-param">path</em>, <em class="sig-param">expr=None</em>, <em class="sig-param">func=None</em>, <em class="sig-param">args=None</em>, <em class="sig-param">kwargs=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/epathtools.py#L276-L344"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.simplify.epathtools.epath" title="Permalink to this definition">¶</a></dt>
 <dd><p>Manipulate parts of an expression selected by a path.</p>
 <p>This function allows to manipulate large nested expressions in single
 line of code, utilizing techniques to those applied in XML processing
