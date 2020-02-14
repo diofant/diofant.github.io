@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Internals of the Polynomial Manipulation Module &mdash; Diofant 0.11.0a15.dev66+g2563d9735 documentation</title>
+  <title>Internals of the Polynomial Manipulation Module &mdash; Diofant 0.11.0a15.dev68+gcfdfce096 documentation</title>
   
 
   
@@ -1758,7 +1758,7 @@ is a square-free polynomial over K, where <code class="docutils literal notransl
 </div>
 <div class="section" id="manipulation-of-dense-univariate-polynomials-with-finite-field-coefficients">
 <h2>Manipulation of dense, univariate polynomials with finite field coefficients<a class="headerlink" href="#manipulation-of-dense-univariate-polynomials-with-finite-field-coefficients" title="Permalink to this headline">¶</a></h2>
-<p>Functions in this module carry the prefix <code class="docutils literal notranslate"><span class="pre">gf_</span></code>, referring to the classical
+<p>Functions in this module carry the suffix <code class="docutils literal notranslate"><span class="pre">gf_</span></code>, referring to the classical
 name “Galois Fields” for finite fields. Note that many polynomial
 factorization algorithms work by reduction to the finite field case, so having
 special implementations for this case is justified both by performance, and by
@@ -1766,86 +1766,77 @@ the necessity of certain methods which do not even make sense over general
 fields.</p>
 <span class="target" id="module-diofant.polys.galoistools"></span><p>Dense univariate polynomials with coefficients in Galois fields.</p>
 <dl class="function">
-<dt id="diofant.polys.galoistools.gf_Qbasis">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">gf_Qbasis</code><span class="sig-paren">(</span><em class="sig-param">Q</em>, <em class="sig-param">p</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L677-L733"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_Qbasis" title="Permalink to this definition">¶</a></dt>
+<dt id="diofant.polys.galoistools.dup_gf_Qbasis">
+<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_Qbasis</code><span class="sig-paren">(</span><em class="sig-param">Q</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L451-L511"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_Qbasis" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute a basis of the kernel of <code class="docutils literal notranslate"><span class="pre">Q</span></code>.</p>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_Qbasis</span><span class="p">(</span><span class="n">gf_Qmatrix</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">),</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">[[1, 0, 0, 0], [0, 0, 1, 0]]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">FF</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">to_dense</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">4</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dup_gf_Qbasis</span><span class="p">(</span><span class="n">dup_gf_Qmatrix</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">R</span><span class="o">.</span><span class="n">domain</span><span class="p">),</span> <span class="n">R</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
+<span class="go">[[1 mod 5, 0 mod 5, 0 mod 5, 0 mod 5],</span>
+<span class="go"> [0 mod 5, 0 mod 5, 1 mod 5, 0 mod 5]]</span>
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_Qbasis</span><span class="p">(</span><span class="n">gf_Qmatrix</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">),</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">[[1, 0]]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">to_dense</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dup_gf_Qbasis</span><span class="p">(</span><span class="n">dup_gf_Qmatrix</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">R</span><span class="o">.</span><span class="n">domain</span><span class="p">),</span> <span class="n">R</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
+<span class="go">[[1 mod 5, 0 mod 5]]</span>
 </pre></div>
 </div>
 </dd></dl>
 
 <dl class="function">
-<dt id="diofant.polys.galoistools.gf_Qmatrix">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">gf_Qmatrix</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">p</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L640-L674"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_Qmatrix" title="Permalink to this definition">¶</a></dt>
+<dt id="diofant.polys.galoistools.dup_gf_Qmatrix">
+<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_Qmatrix</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L410-L448"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_Qmatrix" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate Berlekamp’s <code class="docutils literal notranslate"><span class="pre">Q</span></code> matrix.</p>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_Qmatrix</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">[[1, 0],</span>
-<span class="go"> [3, 4]]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">FF</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">to_dense</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dup_gf_Qmatrix</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">R</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
+<span class="go">[[1 mod 5, 0 mod 5],</span>
+<span class="go"> [3 mod 5, 4 mod 5]]</span>
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_Qmatrix</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">[[1, 0, 0, 0],</span>
-<span class="go"> [0, 4, 0, 0],</span>
-<span class="go"> [0, 0, 1, 0],</span>
-<span class="go"> [0, 0, 0, 4]]</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.polys.galoistools.gf_add">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">gf_add</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">g</em>, <em class="sig-param">p</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L102-L113"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_add" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add polynomials in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code>.</p>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_add</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">[4, 1]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">to_dense</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">4</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dup_gf_Qmatrix</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">R</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
+<span class="go">[[1 mod 5, 0 mod 5, 0 mod 5, 0 mod 5],</span>
+<span class="go"> [0 mod 5, 4 mod 5, 0 mod 5, 0 mod 5],</span>
+<span class="go"> [0 mod 5, 0 mod 5, 1 mod 5, 0 mod 5],</span>
+<span class="go"> [0 mod 5, 0 mod 5, 0 mod 5, 4 mod 5]]</span>
 </pre></div>
 </div>
 </dd></dl>
 
 <dl class="function">
-<dt id="diofant.polys.galoistools.gf_add_ground">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">gf_add_ground</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">a</em>, <em class="sig-param">p</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L46-L57"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_add_ground" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">+</span> <span class="pre">a</span></code> where <code class="docutils literal notranslate"><span class="pre">f</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code> and <code class="docutils literal notranslate"><span class="pre">a</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(p)</span></code>.</p>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_add_ground</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">[3, 2, 1]</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.polys.galoistools.gf_berlekamp">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">gf_berlekamp</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">p</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L736-L774"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_berlekamp" title="Permalink to this definition">¶</a></dt>
+<dt id="diofant.polys.galoistools.dup_gf_berlekamp">
+<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_berlekamp</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L514-L557"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_berlekamp" title="Permalink to this definition">¶</a></dt>
 <dd><p>Factor a square-free <code class="docutils literal notranslate"><span class="pre">f</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code> for small <code class="docutils literal notranslate"><span class="pre">p</span></code>.</p>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_berlekamp</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">[[1, 0, 2], [1, 0, 3]]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">FF</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">to_dense</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">4</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dup_gf_berlekamp</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">R</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
+<span class="go">[[1 mod 5, 0 mod 5, 2 mod 5], [1 mod 5, 0 mod 5, 3 mod 5]]</span>
 </pre></div>
 </div>
 </dd></dl>
 
 <dl class="function">
-<dt id="diofant.polys.galoistools.gf_compose_mod">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">gf_compose_mod</code><span class="sig-paren">(</span><em class="sig-param">g</em>, <em class="sig-param">h</em>, <em class="sig-param">f</em>, <em class="sig-param">p</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L407-L428"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_compose_mod" title="Permalink to this definition">¶</a></dt>
+<dt id="diofant.polys.galoistools.dup_gf_compose_mod">
+<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_compose_mod</code><span class="sig-paren">(</span><em class="sig-param">g</em>, <em class="sig-param">h</em>, <em class="sig-param">f</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L153-L178"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_compose_mod" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute polynomial composition <code class="docutils literal notranslate"><span class="pre">g(h)</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]/(f)</span></code>.</p>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_compose_mod</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">[4]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">FF</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">to_dense</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">h</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">to_dense</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">to_dense</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dup_gf_compose_mod</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">R</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
+<span class="go">[4 mod 5]</span>
 </pre></div>
 </div>
 </dd></dl>
 
 <dl class="function">
-<dt id="diofant.polys.galoistools.gf_ddf_shoup">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">gf_ddf_shoup</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">p</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L880-L951"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_ddf_shoup" title="Permalink to this definition">¶</a></dt>
+<dt id="diofant.polys.galoistools.dup_gf_ddf_shoup">
+<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_ddf_shoup</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L668-L739"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_ddf_shoup" title="Permalink to this definition">¶</a></dt>
 <dd><p>Kaltofen-Shoup: Deterministic Distinct Degree Factorization</p>
 <p>Given a monic square-free polynomial <code class="docutils literal notranslate"><span class="pre">f</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code>, computes
 partial distinct degree factorization <code class="docutils literal notranslate"><span class="pre">f_1,...,f_d</span></code> of <code class="docutils literal notranslate"><span class="pre">f</span></code> where
@@ -1855,11 +1846,10 @@ is an argument to the equal degree factorization routine.</p>
 <p>This algorithm is an improved version of Zassenhaus algorithm for
 large <code class="docutils literal notranslate"><span class="pre">deg(f)</span></code> and modulus <code class="docutils literal notranslate"><span class="pre">p</span></code> (especially for <code class="docutils literal notranslate"><span class="pre">deg(f)</span> <span class="pre">~</span> <span class="pre">lg(p)</span></code>).</p>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">gf_from_dict</span><span class="p">({</span><span class="mi">6</span><span class="p">:</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="mi">5</span><span class="p">:</span> <span class="n">ZZ</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="mi">4</span><span class="p">:</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="mi">3</span><span class="p">:</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="mi">1</span><span class="p">:</span> <span class="n">ZZ</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)},</span> <span class="mi">3</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_ddf_shoup</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">[([1, 1, 0], 1), ([1, 1, 0, 1, 2], 2)]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">FF</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">to_dense</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">6</span> <span class="o">-</span> <span class="n">x</span><span class="o">**</span><span class="mi">5</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">4</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dup_gf_ddf_shoup</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">R</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
+<span class="go">[([1 mod 3, 1 mod 3, 0 mod 3], 1), ([1 mod 3, 1 mod 3, 0 mod 3, 1 mod 3, 2 mod 3], 2)]</span>
 </pre></div>
 </div>
 <p class="rubric">References</p>
@@ -1871,8 +1861,8 @@ large <code class="docutils literal notranslate"><span class="pre">deg(f)</span>
 </dd></dl>
 
 <dl class="function">
-<dt id="diofant.polys.galoistools.gf_ddf_zassenhaus">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">gf_ddf_zassenhaus</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">p</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L777-L824"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_ddf_zassenhaus" title="Permalink to this definition">¶</a></dt>
+<dt id="diofant.polys.galoistools.dup_gf_ddf_zassenhaus">
+<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_ddf_zassenhaus</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L560-L609"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_ddf_zassenhaus" title="Permalink to this definition">¶</a></dt>
 <dd><p>Cantor-Zassenhaus: Deterministic Distinct Degree Factorization</p>
 <p>Given a monic square-free polynomial <code class="docutils literal notranslate"><span class="pre">f</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code>, computes
 partial distinct degree factorization <code class="docutils literal notranslate"><span class="pre">f_1</span> <span class="pre">...</span> <span class="pre">f_d</span></code> of <code class="docutils literal notranslate"><span class="pre">f</span></code> where
@@ -1880,11 +1870,12 @@ partial distinct degree factorization <code class="docutils literal notranslate"
 list of pairs <code class="docutils literal notranslate"><span class="pre">(f_i,</span> <span class="pre">e_i)</span></code> where <code class="docutils literal notranslate"><span class="pre">deg(f_i)</span> <span class="pre">&gt;</span> <span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">e_i</span> <span class="pre">&gt;</span> <span class="pre">0</span></code>
 is an argument to the equal degree factorization routine.</p>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">gf_from_dict</span><span class="p">({</span><span class="mi">15</span><span class="p">:</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="mi">0</span><span class="p">:</span> <span class="n">ZZ</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)},</span> <span class="mi">11</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_ddf_zassenhaus</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">[([1, 0, 0, 0, 0, 10], 1), ([1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1], 2)]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">FF</span><span class="p">(</span><span class="mi">11</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">to_dense</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">15</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dup_gf_ddf_zassenhaus</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">R</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
+<span class="go">[([1 mod 11, 0 mod 11, 0 mod 11, 0 mod 11, 0 mod 11, 10 mod 11], 1),</span>
+<span class="go"> ([1 mod 11, 0 mod 11, 0 mod 11, 0 mod 11, 0 mod 11, 1 mod 11, 0 mod 11,</span>
+<span class="go">   0 mod 11, 0 mod 11, 0 mod 11, 1 mod 11], 2)]</span>
 </pre></div>
 </div>
 <p>To obtain factorization into irreducibles, use equal degree factorization
@@ -1897,27 +1888,8 @@ procedure (EDF) with each of the factors.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="diofant.polys.galoistools.gf_div">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">gf_div</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">g</em>, <em class="sig-param">p</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L158-L202"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_div" title="Permalink to this definition">¶</a></dt>
-<dd><p>Division with remainder in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code>.</p>
-<p>Given univariate polynomials <code class="docutils literal notranslate"><span class="pre">f</span></code> and <code class="docutils literal notranslate"><span class="pre">g</span></code> with coefficients in a
-finite field with <code class="docutils literal notranslate"><span class="pre">p</span></code> elements, returns polynomials <code class="docutils literal notranslate"><span class="pre">q</span></code> and <code class="docutils literal notranslate"><span class="pre">r</span></code>
-(quotient and remainder) such that <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">=</span> <span class="pre">q*g</span> <span class="pre">+</span> <span class="pre">r</span></code>.</p>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_div</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="mi">2</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">([1, 1], [1])</span>
-</pre></div>
-</div>
-<p class="rubric">References</p>
-<ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#monagan1993inplace" id="id14">[Mon93]</a></p></li>
-<li><p><a class="bibtex reference internal" href="../sources.html#gathen1999modern" id="id15">[vzGG99]</a></p></li>
-</ul>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.polys.galoistools.gf_edf_shoup">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">gf_edf_shoup</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">n</em>, <em class="sig-param">p</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L954-L1011"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_edf_shoup" title="Permalink to this definition">¶</a></dt>
+<dt id="diofant.polys.galoistools.dup_gf_edf_shoup">
+<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_edf_shoup</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">n</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L742-L801"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_edf_shoup" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gathen-Shoup: Probabilistic Equal Degree Factorization</p>
 <p>Given a monic square-free polynomial <code class="docutils literal notranslate"><span class="pre">f</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code> and integer
 <code class="docutils literal notranslate"><span class="pre">n</span></code> such that <code class="docutils literal notranslate"><span class="pre">n</span></code> divides <code class="docutils literal notranslate"><span class="pre">deg(f)</span></code>, returns all irreducible factors
@@ -1926,40 +1898,44 @@ factorization over Galois fields.</p>
 <p>This algorithm is an improved version of Zassenhaus algorithm for
 large <code class="docutils literal notranslate"><span class="pre">deg(f)</span></code> and modulus <code class="docutils literal notranslate"><span class="pre">p</span></code> (especially for <code class="docutils literal notranslate"><span class="pre">deg(f)</span> <span class="pre">~</span> <span class="pre">lg(p)</span></code>).</p>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_edf_shoup</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2837</span><span class="p">,</span> <span class="mi">2277</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2917</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">[[1, 852], [1, 1985]]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">FF</span><span class="p">(</span><span class="mi">2917</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">to_dense</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2837</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">2277</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dup_gf_edf_shoup</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">R</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
+<span class="go">[[1 mod 2917, 852 mod 2917], [1 mod 2917, 1985 mod 2917]]</span>
 </pre></div>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#shoup1991ffactor" id="id16">[Sho91]</a></p></li>
-<li><p><a class="bibtex reference internal" href="../sources.html#gathen1992frobenious" id="id17">[vzGS92]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#shoup1991ffactor" id="id14">[Sho91]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#gathen1992frobenious" id="id15">[vzGS92]</a></p></li>
 </ul>
 </dd></dl>
 
 <dl class="function">
-<dt id="diofant.polys.galoistools.gf_edf_zassenhaus">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">gf_edf_zassenhaus</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">n</em>, <em class="sig-param">p</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L827-L877"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_edf_zassenhaus" title="Permalink to this definition">¶</a></dt>
+<dt id="diofant.polys.galoistools.dup_gf_edf_zassenhaus">
+<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_edf_zassenhaus</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">n</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L612-L665"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_edf_zassenhaus" title="Permalink to this definition">¶</a></dt>
 <dd><p>Cantor-Zassenhaus: Probabilistic Equal Degree Factorization</p>
 <p>Given a monic square-free polynomial <code class="docutils literal notranslate"><span class="pre">f</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code> and
 an integer <code class="docutils literal notranslate"><span class="pre">n</span></code>, such that <code class="docutils literal notranslate"><span class="pre">n</span></code> divides <code class="docutils literal notranslate"><span class="pre">deg(f)</span></code>, returns all
 irreducible factors <code class="docutils literal notranslate"><span class="pre">f_1,...,f_d</span></code> of <code class="docutils literal notranslate"><span class="pre">f</span></code>, each of degree <code class="docutils literal notranslate"><span class="pre">n</span></code>.
 EDF procedure gives complete factorization over Galois fields.</p>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_edf_zassenhaus</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">[[1, 1], [1, 2], [1, 3]]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">FF</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">to_dense</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dup_gf_edf_zassenhaus</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">R</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
+<span class="go">[[1 mod 5, 1 mod 5], [1 mod 5, 2 mod 5], [1 mod 5, 3 mod 5]]</span>
 </pre></div>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#gathen1999modern" id="id18">[vzGG99]</a></p></li>
-<li><p><a class="bibtex reference internal" href="../sources.html#geddes1992algorithms" id="id19">[GCL92]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#gathen1999modern" id="id16">[vzGG99]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#geddes1992algorithms" id="id17">[GCL92]</a></p></li>
 </ul>
 </dd></dl>
 
 <dl class="function">
-<dt id="diofant.polys.galoistools.gf_factor_sqf">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">gf_factor_sqf</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">p</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L1059-L1100"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_factor_sqf" title="Permalink to this definition">¶</a></dt>
+<dt id="diofant.polys.galoistools.dup_gf_factor_sqf">
+<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_factor_sqf</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L853-L897"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_factor_sqf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Factor a square-free polynomial <code class="docutils literal notranslate"><span class="pre">f</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code>.</p>
 <p>Returns its complete factorization into irreducibles:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f_1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">f_2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">...</span> <span class="n">f_d</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
@@ -1982,8 +1958,137 @@ leading coefficient of <code class="docutils literal notranslate"><span class="p
 one, set <code class="docutils literal notranslate"><span class="pre">GF_FACTOR_METHOD</span></code> with one of <code class="docutils literal notranslate"><span class="pre">berlekamp</span></code>, <code class="docutils literal notranslate"><span class="pre">zassenhaus</span></code> or
 <code class="docutils literal notranslate"><span class="pre">shoup</span></code> values.</p>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_factor_sqf</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">(3, [[1, 1], [1, 3]])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">FF</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">to_dense</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dup_gf_factor_sqf</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">R</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
+<span class="go">(3 mod 5, [[1 mod 5, 1 mod 5], [1 mod 5, 3 mod 5]])</span>
+</pre></div>
+</div>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><p><a class="bibtex reference internal" href="../sources.html#gathen1999modern" id="id18">[vzGG99]</a></p></li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="diofant.polys.galoistools.dup_gf_frobenius_map">
+<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_frobenius_map</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">g</em>, <em class="sig-param">b</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L49-L81"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_frobenius_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute dup_gf_pow_mod(f, p, g, K) using the Frobenius map.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f, g</strong> (polynomials in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code>)</p></li>
+<li><p><strong>b</strong> (<em>frobenius monomial base</em>)</p></li>
+<li><p><strong>K</strong> (<em>domain</em>)</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">FF</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">to_dense</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">to_dense</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">dup_gf_frobenius_monomial_base</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">R</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dup_gf_frobenius_map</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">R</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
+<span class="go">[4 mod 5, 0 mod 5, 3 mod 5]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="diofant.polys.galoistools.dup_gf_frobenius_monomial_base">
+<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_frobenius_monomial_base</code><span class="sig-paren">(</span><em class="sig-param">g</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L16-L46"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_frobenius_monomial_base" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the list of <code class="docutils literal notranslate"><span class="pre">x**(i*p)</span> <span class="pre">mod</span> <span class="pre">g</span> <span class="pre">in</span> <span class="pre">Z_p</span></code> for <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">=</span> <span class="pre">0,</span> <span class="pre">..,</span> <span class="pre">n</span> <span class="pre">-</span> <span class="pre">1</span></code>
+where <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">dmp_degree_in(g,</span> <span class="pre">0,</span> <span class="pre">0)</span></code>.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">FF</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">to_dense</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dup_gf_frobenius_monomial_base</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">R</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
+<span class="go">[[1 mod 5], [4 mod 5, 4 mod 5, 2 mod 5], [1 mod 5, 2 mod 5]]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="diofant.polys.galoistools.dup_gf_irred_p_ben_or">
+<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_irred_p_ben_or</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L287-L336"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_irred_p_ben_or" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ben-Or’s polynomial irreducibility test over finite fields.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">FF</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">to_dense</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">10</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">9</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">8</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">7</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">6</span> <span class="o">+</span>
+<span class="gp">... </span>               <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">4</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dup_gf_irred_p_ben_or</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">R</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">to_dense</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dup_gf_irred_p_ben_or</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">R</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><p><a class="bibtex reference internal" href="../sources.html#ben-or1981ff" id="id19">[BO81]</a></p></li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="diofant.polys.galoistools.dup_gf_irred_p_rabin">
+<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_irred_p_rabin</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L339-L379"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_irred_p_rabin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rabin’s polynomial irreducibility test over finite fields.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">FF</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">to_dense</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">10</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">9</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">8</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">7</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">6</span> <span class="o">+</span>
+<span class="gp">... </span>               <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">4</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dup_gf_irred_p_rabin</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">R</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">to_dense</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dup_gf_irred_p_rabin</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">R</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="diofant.polys.galoistools.dup_gf_irreducible">
+<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_irreducible</code><span class="sig-paren">(</span><em class="sig-param">n</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L268-L284"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_irreducible" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate random irreducible polynomial of degree <code class="docutils literal notranslate"><span class="pre">n</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code>.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dup_gf_irreducible</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">FF</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>  
+<span class="go">[1 mod 5, 2 mod 5, 4 mod 5, 4 mod 5, 3 mod 5]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dup_gf_irreducible_p</span><span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">FF</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="diofant.polys.galoistools.dup_gf_irreducible_p">
+<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_irreducible_p</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L388-L407"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_irreducible_p" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test irreducibility of a polynomial <code class="docutils literal notranslate"><span class="pre">f</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code>.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">FF</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">to_dense</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">10</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">9</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">8</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">7</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">6</span> <span class="o">+</span>
+<span class="gp">... </span>               <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">4</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dup_gf_irreducible_p</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">R</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">to_dense</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dup_gf_irreducible_p</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">R</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="diofant.polys.galoistools.dup_gf_pow_mod">
+<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_pow_mod</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">n</em>, <em class="sig-param">g</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L104-L150"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_pow_mod" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute <code class="docutils literal notranslate"><span class="pre">f**n</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]/(g)</span></code> using repeated squaring.</p>
+<p>Given polynomials <code class="docutils literal notranslate"><span class="pre">f</span></code> and <code class="docutils literal notranslate"><span class="pre">g</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code> and a non-negative
+integer <code class="docutils literal notranslate"><span class="pre">n</span></code>, efficiently computes <code class="docutils literal notranslate"><span class="pre">f**n</span> <span class="pre">(mod</span> <span class="pre">g)</span></code> i.e. the remainder
+of <code class="docutils literal notranslate"><span class="pre">f**n</span></code> from division by <code class="docutils literal notranslate"><span class="pre">g</span></code>, using the repeated squaring algorithm.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">FF</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">to_dense</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">to_dense</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dup_gf_pow_mod</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">R</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
+<span class="go">[]</span>
 </pre></div>
 </div>
 <p class="rubric">References</p>
@@ -1993,263 +2098,32 @@ one, set <code class="docutils literal notranslate"><span class="pre">GF_FACTOR_
 </dd></dl>
 
 <dl class="function">
-<dt id="diofant.polys.galoistools.gf_frobenius_map">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">gf_frobenius_map</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">g</em>, <em class="sig-param">b</em>, <em class="sig-param">p</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L265-L299"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_frobenius_map" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute gf_pow_mod(f, p, g, p, K) using the Frobenius map.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>f, g</strong> (polynomials in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code>)</p></li>
-<li><p><strong>b</strong> (<em>frobenius monomial base</em>)</p></li>
-<li><p><strong>p</strong> (<em>prime number</em>)</p></li>
-<li><p><strong>K</strong> (<em>domain</em>)</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="mi">5</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">gf_frobenius_monomial_base</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">gf_frobenius_map</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">gf_frobenius_map</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">[4, 0, 3]</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.polys.galoistools.gf_frobenius_monomial_base">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">gf_frobenius_monomial_base</code><span class="sig-paren">(</span><em class="sig-param">g</em>, <em class="sig-param">p</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L235-L262"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_frobenius_monomial_base" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the list of <code class="docutils literal notranslate"><span class="pre">x**(i*p)</span> <span class="pre">mod</span> <span class="pre">g</span> <span class="pre">in</span> <span class="pre">Z_p</span></code> for <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">=</span> <span class="pre">0,</span> <span class="pre">..,</span> <span class="pre">n</span> <span class="pre">-</span> <span class="pre">1</span></code>
-where <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">dmp_degree_in(g,</span> <span class="pre">0,</span> <span class="pre">0)</span></code>.</p>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_frobenius_monomial_base</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">[[1], [4, 4, 2], [1, 2]]</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.polys.galoistools.gf_from_dict">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">gf_from_dict</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">p</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L15-L29"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_from_dict" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create a <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code> polynomial from a dict.</p>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_from_dict</span><span class="p">({</span><span class="mi">10</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">},</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">[4, 0, 0, 0, 0, 0, 3, 0, 0, 0, 4]</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.polys.galoistools.gf_gcd">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">gf_gcd</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">g</em>, <em class="sig-param">p</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L368-L382"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_gcd" title="Permalink to this definition">¶</a></dt>
-<dd><p>Euclidean Algorithm in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code>.</p>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_gcd</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">[1, 3]</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.polys.galoistools.gf_irred_p_ben_or">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">gf_irred_p_ben_or</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">p</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L530-L574"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_irred_p_ben_or" title="Permalink to this definition">¶</a></dt>
-<dd><p>Ben-Or’s polynomial irreducibility test over finite fields.</p>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_irred_p_ben_or</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">gf_irred_p_ben_or</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">False</span>
-</pre></div>
-</div>
-<p class="rubric">References</p>
-<ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#ben-or1981ff" id="id21">[BO81]</a></p></li>
-</ul>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.polys.galoistools.gf_irred_p_rabin">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">gf_irred_p_rabin</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">p</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L577-L613"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_irred_p_rabin" title="Permalink to this definition">¶</a></dt>
-<dd><p>Rabin’s polynomial irreducibility test over finite fields.</p>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_irred_p_rabin</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">gf_irred_p_rabin</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">False</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.polys.galoistools.gf_irreducible">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">gf_irreducible</code><span class="sig-paren">(</span><em class="sig-param">n</em>, <em class="sig-param">p</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L513-L527"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_irreducible" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate random irreducible polynomial of degree <code class="docutils literal notranslate"><span class="pre">n</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code>.</p>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_irreducible</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>  
-<span class="go">[1, 4, 2, 2, 3, 2, 4, 1, 4, 0, 4]</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.polys.galoistools.gf_irreducible_p">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">gf_irreducible_p</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">p</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L622-L637"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_irreducible_p" title="Permalink to this definition">¶</a></dt>
-<dd><p>Test irreducibility of a polynomial <code class="docutils literal notranslate"><span class="pre">f</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code>.</p>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_irreducible_p</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">gf_irreducible_p</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">False</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.polys.galoistools.gf_monic">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">gf_monic</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">p</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L385-L404"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_monic" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute LC and a monic polynomial in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code>.</p>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_monic</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">(3, [1, 4, 3])</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.polys.galoistools.gf_mul">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">gf_mul</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">g</em>, <em class="sig-param">p</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L130-L141"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_mul" title="Permalink to this definition">¶</a></dt>
-<dd><p>Multiply polynomials in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code>.</p>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_mul</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">[1, 0, 3, 2, 3]</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.polys.galoistools.gf_mul_ground">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">gf_mul_ground</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">a</em>, <em class="sig-param">p</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L74-L85"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_mul_ground" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">*</span> <span class="pre">a</span></code> where <code class="docutils literal notranslate"><span class="pre">f</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code> and <code class="docutils literal notranslate"><span class="pre">a</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(p)</span></code>.</p>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_mul_ground</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">[1, 4, 3]</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.polys.galoistools.gf_pow_mod">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">gf_pow_mod</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">n</em>, <em class="sig-param">g</em>, <em class="sig-param">p</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L322-L365"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_pow_mod" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute <code class="docutils literal notranslate"><span class="pre">f**n</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]/(g)</span></code> using repeated squaring.</p>
-<p>Given polynomials <code class="docutils literal notranslate"><span class="pre">f</span></code> and <code class="docutils literal notranslate"><span class="pre">g</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code> and a non-negative
-integer <code class="docutils literal notranslate"><span class="pre">n</span></code>, efficiently computes <code class="docutils literal notranslate"><span class="pre">f**n</span> <span class="pre">(mod</span> <span class="pre">g)</span></code> i.e. the remainder
-of <code class="docutils literal notranslate"><span class="pre">f**n</span></code> from division by <code class="docutils literal notranslate"><span class="pre">g</span></code>, using the repeated squaring algorithm.</p>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_pow_mod</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="mi">3</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">[]</span>
-</pre></div>
-</div>
-<p class="rubric">References</p>
-<ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#gathen1999modern" id="id22">[vzGG99]</a></p></li>
-</ul>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.polys.galoistools.gf_quo">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">gf_quo</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">g</em>, <em class="sig-param">p</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L219-L232"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_quo" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute exact quotient in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code>.</p>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_quo</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="mi">2</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">[1, 1]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">gf_quo</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">[3, 2, 4]</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.polys.galoistools.gf_quo_ground">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">gf_quo_ground</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">a</em>, <em class="sig-param">p</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L88-L99"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_quo_ground" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute <code class="docutils literal notranslate"><span class="pre">f/a</span></code> where <code class="docutils literal notranslate"><span class="pre">f</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code> and <code class="docutils literal notranslate"><span class="pre">a</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(p)</span></code>.</p>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_quo_ground</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">[4, 1, 2]</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.polys.galoistools.gf_random">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">gf_random</code><span class="sig-paren">(</span><em class="sig-param">n</em>, <em class="sig-param">p</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L499-L510"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_random" title="Permalink to this definition">¶</a></dt>
+<dt id="diofant.polys.galoistools.dup_gf_random">
+<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_random</code><span class="sig-paren">(</span><em class="sig-param">n</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L254-L265"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_random" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate a random polynomial in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code> of degree <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_random</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>  
-<span class="go">[1, 2, 3, 2, 1, 1, 1, 2, 0, 4, 2]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dup_gf_random</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">FF</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>  
+<span class="go">[1 mod 5, 4 mod 5, 4 mod 5, 2 mod 5, 1 mod 5]</span>
 </pre></div>
 </div>
 </dd></dl>
 
 <dl class="function">
-<dt id="diofant.polys.galoistools.gf_rem">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">gf_rem</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">g</em>, <em class="sig-param">p</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L205-L216"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_rem" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute polynomial remainder in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code>.</p>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_rem</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="mi">2</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">[1]</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.polys.galoistools.gf_shoup">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">gf_shoup</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">p</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L1033-L1049"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_shoup" title="Permalink to this definition">¶</a></dt>
+<dt id="diofant.polys.galoistools.dup_gf_shoup">
+<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_shoup</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L825-L843"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_shoup" title="Permalink to this definition">¶</a></dt>
 <dd><p>Factor a square-free <code class="docutils literal notranslate"><span class="pre">f</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code> for large <code class="docutils literal notranslate"><span class="pre">p</span></code>.</p>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_shoup</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">[[1, 1], [1, 3]]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">FF</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">to_dense</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dup_gf_shoup</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">R</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
+<span class="go">[[1 mod 5, 1 mod 5], [1 mod 5, 3 mod 5]]</span>
 </pre></div>
 </div>
 </dd></dl>
 
 <dl class="function">
-<dt id="diofant.polys.galoistools.gf_sqr">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">gf_sqr</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">p</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L144-L155"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_sqr" title="Permalink to this definition">¶</a></dt>
-<dd><p>Square polynomials in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code>.</p>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_sqr</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">[4, 2, 3, 1, 1]</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.polys.galoistools.gf_sub">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">gf_sub</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">g</em>, <em class="sig-param">p</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L116-L127"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_sub" title="Permalink to this definition">¶</a></dt>
-<dd><p>Subtract polynomials in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code>.</p>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_sub</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">[1, 0, 2]</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.polys.galoistools.gf_sub_ground">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">gf_sub_ground</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">a</em>, <em class="sig-param">p</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L60-L71"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_sub_ground" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">-</span> <span class="pre">a</span></code> where <code class="docutils literal notranslate"><span class="pre">f</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code> and <code class="docutils literal notranslate"><span class="pre">a</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(p)</span></code>.</p>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_sub_ground</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">[3, 2, 2]</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.polys.galoistools.gf_trace_map">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">gf_trace_map</code><span class="sig-paren">(</span><em class="sig-param">a</em>, <em class="sig-param">b</em>, <em class="sig-param">c</em>, <em class="sig-param">n</em>, <em class="sig-param">f</em>, <em class="sig-param">p</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L431-L481"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_trace_map" title="Permalink to this definition">¶</a></dt>
+<dt id="diofant.polys.galoistools.dup_gf_trace_map">
+<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_trace_map</code><span class="sig-paren">(</span><em class="sig-param">a</em>, <em class="sig-param">b</em>, <em class="sig-param">c</em>, <em class="sig-param">n</em>, <em class="sig-param">f</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L181-L236"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_trace_map" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute polynomial trace map in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]/(f)</span></code>.</p>
 <p>Given a polynomial <code class="docutils literal notranslate"><span class="pre">f</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code>, polynomials <code class="docutils literal notranslate"><span class="pre">a</span></code>, <code class="docutils literal notranslate"><span class="pre">b</span></code>,
 <code class="docutils literal notranslate"><span class="pre">c</span></code> in the quotient ring <code class="docutils literal notranslate"><span class="pre">GF(p)[x]/(f)</span></code> such that <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">=</span> <span class="pre">c**t</span>
@@ -2263,34 +2137,30 @@ This way we can efficiently compute trace polynomials in equal
 degree factorization routine, much faster than with other methods,
 like iterated Frobenius algorithm, for large degrees.</p>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_trace_map</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="mi">4</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">([1, 3], [1, 3])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">FF</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">to_dense</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">to_dense</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">to_dense</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">to_dense</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dup_gf_trace_map</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">R</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
+<span class="go">([1 mod 5, 3 mod 5], [1 mod 5, 3 mod 5])</span>
 </pre></div>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#gathen1992frobenious" id="id23">[vzGS92]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#gathen1992frobenious" id="id21">[vzGS92]</a></p></li>
 </ul>
 </dd></dl>
 
 <dl class="function">
-<dt id="diofant.polys.galoistools.gf_trunc">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">gf_trunc</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">p</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L32-L43"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_trunc" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reduce all coefficients modulo <code class="docutils literal notranslate"><span class="pre">p</span></code>.</p>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_trunc</span><span class="p">([</span><span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="mi">5</span><span class="p">)</span>
-<span class="go">[2, 3, 3]</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="diofant.polys.galoistools.gf_zassenhaus">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">gf_zassenhaus</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">p</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L1014-L1030"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.gf_zassenhaus" title="Permalink to this definition">¶</a></dt>
+<dt id="diofant.polys.galoistools.dup_gf_zassenhaus">
+<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_zassenhaus</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L804-L822"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_zassenhaus" title="Permalink to this definition">¶</a></dt>
 <dd><p>Factor a square-free <code class="docutils literal notranslate"><span class="pre">f</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(p)[x]</span></code> for medium <code class="docutils literal notranslate"><span class="pre">p</span></code>.</p>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gf_zassenhaus</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">[[1, 1], [1, 3]]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">FF</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">to_dense</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dup_gf_zassenhaus</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">R</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
+<span class="go">[[1 mod 5, 1 mod 5], [1 mod 5, 3 mod 5]]</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -2515,7 +2385,7 @@ can copy the polynomial. This method makes a shallow copy.</p>
 <dl class="method">
 <dt id="diofant.polys.rings.PolyElement.div">
 <code class="sig-name descname">div</code><span class="sig-paren">(</span><em class="sig-param">fv</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rings.py#L1175-L1233"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rings.PolyElement.div" title="Permalink to this definition">¶</a></dt>
-<dd><p>Division algorithm, see <a class="bibtex reference internal" href="../sources.html#cox2015ideals" id="id24">[CLOShea15]</a>, p. 64.</p>
+<dd><p>Division algorithm, see <a class="bibtex reference internal" href="../sources.html#cox2015ideals" id="id22">[CLOShea15]</a>, p. 64.</p>
 <dl class="simple">
 <dt>fv array of polynomials</dt><dd><p>return qv, r such that
 self = sum(fv[i]*qv[i]) + r</p>
@@ -2786,7 +2656,7 @@ exceedingly, but the computation of the primitive parts requires
 extra processing effort. Besides, the method only works with fraction fields
 of unique factorization domains, excluding, for example, the general number
 fields.</p>
-<p>Collins <a class="bibtex reference internal" href="../sources.html#collins1967subr" id="id25">[Col67]</a> realized that the so-called <em>subresultant polynomials</em>
+<p>Collins <a class="bibtex reference internal" href="../sources.html#collins1967subr" id="id23">[Col67]</a> realized that the so-called <em>subresultant polynomials</em>
 of a pair of polynomials also form a generalized remainder sequence.
 The coefficients of these polynomials
 are expressible as determinants in the coefficients of the given
@@ -2865,12 +2735,12 @@ formulas</p>
 \[\gamma_i f_i = \mathrm{rem}(f_{i-2},f_{i-1})\]</div>
 <p>in terms of the leading coefficients of <span class="math notranslate nohighlight">\(f_1,\ldots,f_{i-1}\)</span>, working
 in the field <span class="math notranslate nohighlight">\(K\)</span>.</p>
-<p>Brown and Traub <a class="bibtex reference internal" href="../sources.html#brown1971subres" id="id26">[BT71]</a> later developed a recursive procedure
+<p>Brown and Traub <a class="bibtex reference internal" href="../sources.html#brown1971subres" id="id24">[BT71]</a> later developed a recursive procedure
 for computing the coefficients <span class="math notranslate nohighlight">\(\gamma_i\)</span>. Their algorithm deals with elements
 of the domain <span class="math notranslate nohighlight">\(A\)</span> exclusively (assuming <span class="math notranslate nohighlight">\(f,g\in A[X]\)</span>). However, in the
 abnormal case there was a problem, a division in <span class="math notranslate nohighlight">\(A\)</span>
 which could only be conjectured to be exact.</p>
-<p>This was subsequently justified by Brown <a class="bibtex reference internal" href="../sources.html#brown1978prs" id="id27">[Bro78]</a> who showed that
+<p>This was subsequently justified by Brown <a class="bibtex reference internal" href="../sources.html#brown1978prs" id="id25">[Bro78]</a> who showed that
 the result of the division is, in fact, a scalar subresultant.
 More specifically, the constant appearing in the computation of <span class="math notranslate nohighlight">\(f_i\)</span> is
 <span class="math notranslate nohighlight">\(s_{n_{i-2}}(f,g)\)</span> (Theorem 3).
@@ -3063,7 +2933,7 @@ and <code class="docutils literal notranslate"><span class="pre">cfg</span> <spa
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#liao1995heuristic" id="id28">[LF95]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#liao1995heuristic" id="id26">[LF95]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -3163,13 +3033,13 @@ and <code class="docutils literal notranslate"><span class="pre">cfg</span> <spa
 
 <dl class="function">
 <dt id="diofant.polys.factortools.dmp_factor_list">
-<code class="sig-prename descclassname">diofant.polys.factortools.</code><code class="sig-name descname">dmp_factor_list</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">u</em>, <em class="sig-param">K0</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/factortools.py#L1044-L1103"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.factortools.dmp_factor_list" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.polys.factortools.</code><code class="sig-name descname">dmp_factor_list</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">u</em>, <em class="sig-param">K0</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/factortools.py#L1042-L1101"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.factortools.dmp_factor_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>Factor polynomials into irreducibles in <span class="math notranslate nohighlight">\(K[X]\)</span>.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="diofant.polys.factortools.dmp_gf_factor">
-<code class="sig-prename descclassname">diofant.polys.factortools.</code><code class="sig-name descname">dmp_gf_factor</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">u</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/factortools.py#L1022-L1038"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.factortools.dmp_gf_factor" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.polys.factortools.</code><code class="sig-name descname">dmp_gf_factor</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">u</em>, <em class="sig-param">K</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/factortools.py#L1022-L1036"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.factortools.dmp_gf_factor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Factor multivariate polynomials over finite fields.</p>
 </dd></dl>
 
@@ -3212,7 +3082,7 @@ is used to recover the multiplicities of factors.</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#gathen1999modern" id="id29">[vzGG99]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#gathen1999modern" id="id27">[vzGG99]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -3244,8 +3114,8 @@ factors. For this purpose a parallel Hensel lifting procedure is used.</p>
 (when an integer) or (for testing purposes) can be a sequence of numbers.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#wang1978improved" id="id30">[Wan78]</a></p></li>
-<li><p><a class="bibtex reference internal" href="../sources.html#geddes1992algorithms" id="id31">[GCL92]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#wang1978improved" id="id28">[Wan78]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#geddes1992algorithms" id="id29">[GCL92]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -3303,7 +3173,7 @@ which makes this method much faster that any other direct factorization
 approach (e.g. Zassenhaus’s).</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#mathworld-cyclotomic-poly" id="id32">[Mat]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#mathworld-cyclotomic-poly" id="id30">[Mat]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -3351,7 +3221,7 @@ using cyclotomic decomposition to speedup computations. To
 disable this behaviour set cyclotomic=False.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#gathen1999modern" id="id33">[vzGG99]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#gathen1999modern" id="id31">[vzGG99]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -3380,7 +3250,7 @@ over <span class="math notranslate nohighlight">\(Z[x]\)</span> satisfying:</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#gathen1999modern" id="id34">[vzGG99]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#gathen1999modern" id="id32">[vzGG99]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -3408,7 +3278,7 @@ and <span class="math notranslate nohighlight">\(t\)</span> such that:</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#gathen1999modern" id="id35">[vzGG99]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#gathen1999modern" id="id33">[vzGG99]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -3456,15 +3326,15 @@ variable at a time, provided that the ideal is zero-dimensional
 (finite number of solutions).</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#bose03" id="id36">[NKBG03]</a></p></li>
-<li><p><a class="bibtex reference internal" href="../sources.html#giovini1991sugar" id="id37">[GMN+91]</a></p></li>
-<li><p><a class="bibtex reference internal" href="../sources.html#ajwa95groebner" id="id38">[ALW95]</a></p></li>
-<li><p><a class="bibtex reference internal" href="../sources.html#cox2015ideals" id="id39">[CLOShea15]</a></p></li>
-<li><p><a class="bibtex reference internal" href="../sources.html#beckerweispfenning93" id="id40">[BW93]</a>, page 232</p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#bose03" id="id34">[NKBG03]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#giovini1991sugar" id="id35">[GMN+91]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#ajwa95groebner" id="id36">[ALW95]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#cox2015ideals" id="id37">[CLOShea15]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#beckerweispfenning93" id="id38">[BW93]</a>, page 232</p></li>
 </ul>
 <p class="rubric">Notes</p>
 <p>Used an improved version of Buchberger’s algorithm
-as presented in <a class="bibtex reference internal" href="../sources.html#beckerweispfenning93" id="id41">[BW93]</a>.</p>
+as presented in <a class="bibtex reference internal" href="../sources.html#beckerweispfenning93" id="id39">[BW93]</a>.</p>
 </dd></dl>
 
 <dl class="function">
@@ -3535,8 +3405,8 @@ the current basis.</p>
 <p>Once a Gröbner basis has been found, it gets reduced.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#sunwang2010f5" id="id42">[SW10]</a></p></li>
-<li><p><a class="bibtex reference internal" href="../sources.html#beckerweispfenning93" id="id43">[BW93]</a>, pp. 203, 216.</p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#sunwang2010f5" id="id40">[SW10]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#beckerweispfenning93" id="id41">[BW93]</a>, pp. 203, 216.</p></li>
 </ul>
 </dd></dl>
 
@@ -3567,7 +3437,7 @@ of <span class="math notranslate nohighlight">\(t*f\)</span> and <span class="ma
 then filtering out the solution that doesn’t contain <span class="math notranslate nohighlight">\(t\)</span>.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#cox2015ideals" id="id44">[CLOShea15]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#cox2015ideals" id="id42">[CLOShea15]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -3643,7 +3513,7 @@ and number of the maximum of f and g, w.r.t. lbp_cmp.</p>
 and computes a reduced Gröbner basis for them.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#beckerweispfenning93" id="id45">[BW93]</a>, page 216.</p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#beckerweispfenning93" id="id43">[BW93]</a>, page 216.</p></li>
 </ul>
 </dd></dl>
 
@@ -3704,7 +3574,7 @@ ideal w.r.t. <code class="docutils literal notranslate"><span class="pre">O_from
 w.r.t. <code class="docutils literal notranslate"><span class="pre">O_to</span></code>.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#faugere1993groebner" id="id46">[FaugereGLM93]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#faugere1993groebner" id="id44">[FaugereGLM93]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -3723,7 +3593,7 @@ using Gröbner bases</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#adams1994intro" id="id47">[AL94]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#adams1994intro" id="id45">[AL94]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -3776,8 +3646,8 @@ candidates which are very likely the desired GCD.</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#monagan2000brown" id="id48">[MW00]</a></p></li>
-<li><p><a class="bibtex reference internal" href="../sources.html#brown1971gcd" id="id49">[Bro71]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#monagan2000brown" id="id46">[MW00]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#brown1971gcd" id="id47">[Bro71]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -3848,7 +3718,7 @@ called recursively.</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#monagan2004algebraic" id="id50">[MvH04]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#monagan2004algebraic" id="id48">[MvH04]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -3876,7 +3746,7 @@ is given, <span class="math notranslate nohighlight">\(\mathbb Z_p\)</span> is c
 </dl>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#vanhoeij2002modgcd" id="id51">[vHM02]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#vanhoeij2002modgcd" id="id49">[vHM02]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -3914,7 +3784,7 @@ the input polynomials as a side effect.</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#liao1995heuristic" id="id52">[LF95]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#liao1995heuristic" id="id50">[LF95]</a></p></li>
 </ul>
 </dd></dl>
 
