@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Printing &mdash; Diofant 0.1.dev1+gf8b3b08 documentation</title>
+  <title>Printing &mdash; Diofant 0.1.dev1+g0adce08 documentation</title>
   
 
   
@@ -433,7 +433,7 @@ to strings of C code).</p>
 <p>Usage:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ccode</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
 <span class="go">pow(sin(x), 2) + pow(cos(x), 2)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ccode</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">assign_to</span><span class="o">=</span><span class="s2">&quot;result&quot;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ccode</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">assign_to</span><span class="o">=</span><span class="s1">&#39;result&#39;</span><span class="p">))</span>
 <span class="go">result = 2*x + cos(x);</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ccode</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)))</span>
 <span class="go">fabs(pow(x, 2))</span>
@@ -494,7 +494,7 @@ responsible to provide values for the indices in the code.
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ccode</span><span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="n">Rational</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
 <span class="go">&#39;8*sqrt(2)*pow(x, 7.0L/2.0L)&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ccode</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">assign_to</span><span class="o">=</span><span class="s2">&quot;s&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ccode</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">assign_to</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
 <span class="go">&#39;s = sin(x);&#39;</span>
 </pre></div>
 </div>
@@ -502,10 +502,10 @@ responsible to provide values for the indices in the code.
 dictionary of {“type” : “function”} to the <code class="docutils literal notranslate"><span class="pre">user_functions</span></code> kwarg.
 Alternatively, the dictionary value can be a list of tuples i.e.
 [(argument_test, cfunction_string)].</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">custom_functions</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;ceiling&quot;</span><span class="p">:</span> <span class="s2">&quot;CEIL&quot;</span><span class="p">,</span>
-<span class="gp">... </span>                    <span class="s2">&quot;Abs&quot;</span><span class="p">:</span> <span class="p">[(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="ow">not</span> <span class="n">x</span><span class="o">.</span><span class="n">is_integer</span><span class="p">,</span> <span class="s2">&quot;fabs&quot;</span><span class="p">),</span>
-<span class="gp">... </span>                            <span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">is_integer</span><span class="p">,</span> <span class="s2">&quot;ABS&quot;</span><span class="p">)],</span>
-<span class="gp">... </span>                    <span class="s2">&quot;func&quot;</span><span class="p">:</span> <span class="s2">&quot;f&quot;</span><span class="p">}</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">custom_functions</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;ceiling&#39;</span><span class="p">:</span> <span class="s1">&#39;CEIL&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                    <span class="s1">&#39;Abs&#39;</span><span class="p">:</span> <span class="p">[(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="ow">not</span> <span class="n">x</span><span class="o">.</span><span class="n">is_integer</span><span class="p">,</span> <span class="s1">&#39;fabs&#39;</span><span class="p">),</span>
+<span class="gp">... </span>                            <span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">is_integer</span><span class="p">,</span> <span class="s1">&#39;ABS&#39;</span><span class="p">)],</span>
+<span class="gp">... </span>                    <span class="s1">&#39;func&#39;</span><span class="p">:</span> <span class="s1">&#39;f&#39;</span><span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">func</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="s1">&#39;func&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ccode</span><span class="p">(</span><span class="n">func</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">ceiling</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="n">user_functions</span><span class="o">=</span><span class="n">custom_functions</span><span class="p">)</span>
 <span class="go">&#39;f(fabs(x) + CEIL(x))&#39;</span>
@@ -614,7 +614,7 @@ more features are added.</p></li>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fcode</span><span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="n">Rational</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
 <span class="go">&#39;      8*sqrt(2.0d0)*x**(7.0d0/2.0d0)&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">fcode</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">assign_to</span><span class="o">=</span><span class="s2">&quot;s&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fcode</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">assign_to</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
 <span class="go">&#39;      s = sin(x)&#39;</span>
 </pre></div>
 </div>
@@ -622,9 +622,9 @@ more features are added.</p></li>
 “type” : “function” to the <code class="docutils literal notranslate"><span class="pre">user_functions</span></code> kwarg. Alternatively, the
 dictionary value can be a list of tuples i.e. [(argument_test,
 cfunction_string)].</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">custom_functions</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;ceiling&quot;</span><span class="p">:</span> <span class="s2">&quot;CEIL&quot;</span><span class="p">,</span>
-<span class="gp">... </span>                    <span class="s2">&quot;floor&quot;</span><span class="p">:</span> <span class="p">[(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="ow">not</span> <span class="n">x</span><span class="o">.</span><span class="n">is_integer</span><span class="p">,</span> <span class="s2">&quot;FLOOR1&quot;</span><span class="p">),</span>
-<span class="gp">... </span>                              <span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">is_integer</span><span class="p">,</span> <span class="s2">&quot;FLOOR2&quot;</span><span class="p">)]}</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">custom_functions</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;ceiling&#39;</span><span class="p">:</span> <span class="s1">&#39;CEIL&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                    <span class="s1">&#39;floor&#39;</span><span class="p">:</span> <span class="p">[(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="ow">not</span> <span class="n">x</span><span class="o">.</span><span class="n">is_integer</span><span class="p">,</span> <span class="s1">&#39;FLOOR1&#39;</span><span class="p">),</span>
+<span class="gp">... </span>                              <span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">is_integer</span><span class="p">,</span> <span class="s1">&#39;FLOOR2&#39;</span><span class="p">)]}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fcode</span><span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">ceiling</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">user_functions</span><span class="o">=</span><span class="n">custom_functions</span><span class="p">)</span>
 <span class="go">&#39;      CEIL(x) + FLOOR1(x)&#39;</span>
 </pre></div>
@@ -710,7 +710,7 @@ generated normally can also exist inside a Matrix:</p>
 </div>
 <p>In case of line wrapping, it is handy to include the assignment so that lines
 are wrapped properly when the assignment part is added.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">fcode</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assign_to</span><span class="o">=</span><span class="s2">&quot;var&quot;</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">fcode</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assign_to</span><span class="o">=</span><span class="s1">&#39;var&#39;</span><span class="p">))</span>
 <span class="go">      var = -715.0d0/65536.0d0*x**18 - 429.0d0/32768.0d0*x**16 - 33.0d0/</span>
 <span class="go">     @ 2048.0d0*x**14 - 21.0d0/1024.0d0*x**12 - 7.0d0/256.0d0*x**10 -</span>
 <span class="go">     @ 5.0d0/128.0d0*x**8 - 1.0d0/16.0d0*x**6 - 1.0d0/8.0d0*x**4 - 1.0d0</span>
@@ -718,7 +718,7 @@ are wrapped properly when the assignment part is added.</p>
 </pre></div>
 </div>
 <p>For piecewise functions, the <code class="docutils literal notranslate"><span class="pre">assign_to</span></code> option is mandatory:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">fcode</span><span class="p">(</span><span class="n">Piecewise</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="kc">True</span><span class="p">)),</span> <span class="n">assign_to</span><span class="o">=</span><span class="s2">&quot;var&quot;</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">fcode</span><span class="p">(</span><span class="n">Piecewise</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="kc">True</span><span class="p">)),</span> <span class="n">assign_to</span><span class="o">=</span><span class="s1">&#39;var&#39;</span><span class="p">))</span>
 <span class="go">      if (x &lt; 1) then</span>
 <span class="go">        var = x</span>
 <span class="go">      else</span>
@@ -1301,7 +1301,7 @@ Baseline is baseline of top picture</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.printing.pretty.pretty_symbology</span> <span class="kn">import</span> <span class="n">pretty_use_unicode</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">pretty_use_unicode</span><span class="p">(</span><span class="n">flag</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">stringPict</span><span class="p">(</span><span class="s2">&quot;x+3&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">below</span><span class="p">(</span><span class="n">stringPict</span><span class="o">.</span><span class="n">LINE</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">stringPict</span><span class="p">(</span><span class="s1">&#39;x+3&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">below</span><span class="p">(</span><span class="n">stringPict</span><span class="o">.</span><span class="n">LINE</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
 <span class="go">x+3</span>
 <span class="go">---</span>
 <span class="go"> 3</span>
