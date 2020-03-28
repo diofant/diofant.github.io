@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Core &mdash; Diofant 0.1.dev1+g0adce08 documentation</title>
+  <title>Core &mdash; Diofant 0.1.dev1+g731594d documentation</title>
   
 
   
@@ -3100,10 +3100,10 @@ Symbol.  Default assumption is commutative=True.</p></li>
 </pre></div>
 </div>
 <p>You can override default assumptions:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;A B&#39;</span><span class="p">,</span> <span class="n">commutative</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;A B&#39;</span><span class="p">,</span> <span class="n">commutative</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">A</span><span class="o">*</span><span class="n">B</span> <span class="o">!=</span> <span class="n">B</span><span class="o">*</span><span class="n">A</span><span class="p">)</span>
 <span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">A</span><span class="o">*</span><span class="n">B</span><span class="o">*</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">2</span><span class="o">*</span><span class="n">A</span><span class="o">*</span><span class="n">B</span><span class="p">)</span> <span class="o">==</span> <span class="kc">True</span> <span class="c1"># multiplication by scalars is commutative</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">A</span><span class="o">*</span><span class="n">B</span><span class="o">*</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">2</span><span class="o">*</span><span class="n">A</span><span class="o">*</span><span class="n">B</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">True</span>  <span class="c1"># multiplication by scalars is commutative</span>
 <span class="go">True</span>
 </pre></div>
 </div>
@@ -5265,7 +5265,7 @@ littering the math with oddball function calls.  However there are certain
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e2</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">e2</span><span class="p">)</span>
 <span class="go">x &gt;= 2</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;e1: </span><span class="si">%s</span><span class="s2">,    e2: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">e1</span><span class="p">,</span> <span class="n">e2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;e1: </span><span class="si">%s</span><span class="s1">,    e2: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">e1</span><span class="p">,</span> <span class="n">e2</span><span class="p">))</span>
 <span class="go">e1: x &gt;= 2,    e2: x &gt;= 2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span> <span class="o">==</span> <span class="n">e2</span>
 <span class="go">True</span>
@@ -5288,7 +5288,7 @@ succinctly and less conveniently:</p>
 </pre></div>
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rels</span> <span class="o">=</span> <span class="n">Rel</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;&lt;=&#39;</span><span class="p">),</span> <span class="n">Relational</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;&lt;=&#39;</span><span class="p">),</span> <span class="n">LessThan</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="se">\n</span><span class="si">%s</span><span class="se">\n</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">rels</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="se">\n</span><span class="si">%s</span><span class="se">\n</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">rels</span><span class="p">)</span>
 <span class="go">x &lt;= 1</span>
 <span class="go">x &lt;= 1</span>
 <span class="go">x &lt;= 1</span>
@@ -5312,15 +5312,15 @@ native Python number does not know how to compare itself with a Diofant object
 Python will try the reflective operation, (x &gt; 1).  Unfortunately, there is
 no way available to Diofant to recognize this has happened, so the statement
 (1 &lt; x) will turn silently into (x &gt; 1).</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&gt;</span>  <span class="mi">1</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">1</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e2</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">1</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">e3</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&lt;</span>  <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e3</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">1</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e4</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">1</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">e5</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&gt;</span>  <span class="n">x</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e5</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&gt;</span> <span class="n">x</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e6</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&gt;=</span> <span class="n">x</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">e7</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;</span>  <span class="n">x</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e7</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">x</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e8</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">x</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">     </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">*</span><span class="mi">4</span> <span class="o">%</span> <span class="p">(</span><span class="n">e1</span><span class="p">,</span> <span class="n">e2</span><span class="p">,</span> <span class="n">e3</span><span class="p">,</span> <span class="n">e4</span><span class="p">,</span> <span class="n">e5</span><span class="p">,</span> <span class="n">e6</span><span class="p">,</span> <span class="n">e7</span><span class="p">,</span> <span class="n">e8</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">     </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">*</span><span class="mi">4</span> <span class="o">%</span> <span class="p">(</span><span class="n">e1</span><span class="p">,</span> <span class="n">e2</span><span class="p">,</span> <span class="n">e3</span><span class="p">,</span> <span class="n">e4</span><span class="p">,</span> <span class="n">e5</span><span class="p">,</span> <span class="n">e6</span><span class="p">,</span> <span class="n">e7</span><span class="p">,</span> <span class="n">e8</span><span class="p">))</span>
 <span class="go">x &gt; 1     x &gt;= 1</span>
 <span class="go">x &lt; 1     x &lt;= 1</span>
 <span class="go">x &lt; 1     x &lt;= 1</span>
@@ -5331,15 +5331,15 @@ no way available to Diofant to recognize this has happened, so the statement
 console, perhaps), one can work around this annoyance in a couple ways: (1)
 “sympify” the literal before comparison, (2) use one of the wrappers, or (3)
 use the less succinct methods described above:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&gt;</span>  <span class="n">x</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">x</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e2</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">x</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">e3</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span>  <span class="n">x</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e3</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">x</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e4</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">x</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e5</span> <span class="o">=</span> <span class="n">Gt</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e6</span> <span class="o">=</span> <span class="n">Ge</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e7</span> <span class="o">=</span> <span class="n">Lt</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e8</span> <span class="o">=</span> <span class="n">Le</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">     </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">*</span><span class="mi">4</span> <span class="o">%</span> <span class="p">(</span><span class="n">e1</span><span class="p">,</span> <span class="n">e2</span><span class="p">,</span> <span class="n">e3</span><span class="p">,</span> <span class="n">e4</span><span class="p">,</span> <span class="n">e5</span><span class="p">,</span> <span class="n">e6</span><span class="p">,</span> <span class="n">e7</span><span class="p">,</span> <span class="n">e8</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">     </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">*</span><span class="mi">4</span> <span class="o">%</span> <span class="p">(</span><span class="n">e1</span><span class="p">,</span> <span class="n">e2</span><span class="p">,</span> <span class="n">e3</span><span class="p">,</span> <span class="n">e4</span><span class="p">,</span> <span class="n">e5</span><span class="p">,</span> <span class="n">e6</span><span class="p">,</span> <span class="n">e7</span><span class="p">,</span> <span class="n">e8</span><span class="p">))</span>
 <span class="go">1 &gt; x     1 &gt;= x</span>
 <span class="go">1 &lt; x     1 &lt;= x</span>
 <span class="go">1 &gt; x     1 &gt;= x</span>
@@ -5466,7 +5466,7 @@ littering the math with oddball function calls.  However there are certain
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e2</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">e2</span><span class="p">)</span>
 <span class="go">x &gt;= 2</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;e1: </span><span class="si">%s</span><span class="s2">,    e2: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">e1</span><span class="p">,</span> <span class="n">e2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;e1: </span><span class="si">%s</span><span class="s1">,    e2: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">e1</span><span class="p">,</span> <span class="n">e2</span><span class="p">))</span>
 <span class="go">e1: x &gt;= 2,    e2: x &gt;= 2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span> <span class="o">==</span> <span class="n">e2</span>
 <span class="go">True</span>
@@ -5489,7 +5489,7 @@ succinctly and less conveniently:</p>
 </pre></div>
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rels</span> <span class="o">=</span> <span class="n">Rel</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;&lt;=&#39;</span><span class="p">),</span> <span class="n">Relational</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;&lt;=&#39;</span><span class="p">),</span> <span class="n">LessThan</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="se">\n</span><span class="si">%s</span><span class="se">\n</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">rels</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="se">\n</span><span class="si">%s</span><span class="se">\n</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">rels</span><span class="p">)</span>
 <span class="go">x &lt;= 1</span>
 <span class="go">x &lt;= 1</span>
 <span class="go">x &lt;= 1</span>
@@ -5513,15 +5513,15 @@ native Python number does not know how to compare itself with a Diofant object
 Python will try the reflective operation, (x &gt; 1).  Unfortunately, there is
 no way available to Diofant to recognize this has happened, so the statement
 (1 &lt; x) will turn silently into (x &gt; 1).</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&gt;</span>  <span class="mi">1</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">1</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e2</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">1</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">e3</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&lt;</span>  <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e3</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">1</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e4</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">1</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">e5</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&gt;</span>  <span class="n">x</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e5</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&gt;</span> <span class="n">x</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e6</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&gt;=</span> <span class="n">x</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">e7</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;</span>  <span class="n">x</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e7</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">x</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e8</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">x</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">     </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">*</span><span class="mi">4</span> <span class="o">%</span> <span class="p">(</span><span class="n">e1</span><span class="p">,</span> <span class="n">e2</span><span class="p">,</span> <span class="n">e3</span><span class="p">,</span> <span class="n">e4</span><span class="p">,</span> <span class="n">e5</span><span class="p">,</span> <span class="n">e6</span><span class="p">,</span> <span class="n">e7</span><span class="p">,</span> <span class="n">e8</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">     </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">*</span><span class="mi">4</span> <span class="o">%</span> <span class="p">(</span><span class="n">e1</span><span class="p">,</span> <span class="n">e2</span><span class="p">,</span> <span class="n">e3</span><span class="p">,</span> <span class="n">e4</span><span class="p">,</span> <span class="n">e5</span><span class="p">,</span> <span class="n">e6</span><span class="p">,</span> <span class="n">e7</span><span class="p">,</span> <span class="n">e8</span><span class="p">))</span>
 <span class="go">x &gt; 1     x &gt;= 1</span>
 <span class="go">x &lt; 1     x &lt;= 1</span>
 <span class="go">x &lt; 1     x &lt;= 1</span>
@@ -5532,15 +5532,15 @@ no way available to Diofant to recognize this has happened, so the statement
 console, perhaps), one can work around this annoyance in a couple ways: (1)
 “sympify” the literal before comparison, (2) use one of the wrappers, or (3)
 use the less succinct methods described above:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&gt;</span>  <span class="n">x</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">x</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e2</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">x</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">e3</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span>  <span class="n">x</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e3</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">x</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e4</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">x</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e5</span> <span class="o">=</span> <span class="n">Gt</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e6</span> <span class="o">=</span> <span class="n">Ge</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e7</span> <span class="o">=</span> <span class="n">Lt</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e8</span> <span class="o">=</span> <span class="n">Le</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">     </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">*</span><span class="mi">4</span> <span class="o">%</span> <span class="p">(</span><span class="n">e1</span><span class="p">,</span> <span class="n">e2</span><span class="p">,</span> <span class="n">e3</span><span class="p">,</span> <span class="n">e4</span><span class="p">,</span> <span class="n">e5</span><span class="p">,</span> <span class="n">e6</span><span class="p">,</span> <span class="n">e7</span><span class="p">,</span> <span class="n">e8</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">     </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">*</span><span class="mi">4</span> <span class="o">%</span> <span class="p">(</span><span class="n">e1</span><span class="p">,</span> <span class="n">e2</span><span class="p">,</span> <span class="n">e3</span><span class="p">,</span> <span class="n">e4</span><span class="p">,</span> <span class="n">e5</span><span class="p">,</span> <span class="n">e6</span><span class="p">,</span> <span class="n">e7</span><span class="p">,</span> <span class="n">e8</span><span class="p">))</span>
 <span class="go">1 &gt; x     1 &gt;= x</span>
 <span class="go">1 &lt; x     1 &lt;= x</span>
 <span class="go">1 &gt; x     1 &gt;= x</span>
@@ -5695,7 +5695,7 @@ littering the math with oddball function calls.  However there are certain
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e2</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">e2</span><span class="p">)</span>
 <span class="go">x &gt;= 2</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;e1: </span><span class="si">%s</span><span class="s2">,    e2: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">e1</span><span class="p">,</span> <span class="n">e2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;e1: </span><span class="si">%s</span><span class="s1">,    e2: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">e1</span><span class="p">,</span> <span class="n">e2</span><span class="p">))</span>
 <span class="go">e1: x &gt;= 2,    e2: x &gt;= 2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span> <span class="o">==</span> <span class="n">e2</span>
 <span class="go">True</span>
@@ -5718,7 +5718,7 @@ succinctly and less conveniently:</p>
 </pre></div>
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rels</span> <span class="o">=</span> <span class="n">Rel</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;&lt;=&#39;</span><span class="p">),</span> <span class="n">Relational</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;&lt;=&#39;</span><span class="p">),</span> <span class="n">LessThan</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="se">\n</span><span class="si">%s</span><span class="se">\n</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">rels</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="se">\n</span><span class="si">%s</span><span class="se">\n</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">rels</span><span class="p">)</span>
 <span class="go">x &lt;= 1</span>
 <span class="go">x &lt;= 1</span>
 <span class="go">x &lt;= 1</span>
@@ -5742,15 +5742,15 @@ native Python number does not know how to compare itself with a Diofant object
 Python will try the reflective operation, (x &gt; 1).  Unfortunately, there is
 no way available to Diofant to recognize this has happened, so the statement
 (1 &lt; x) will turn silently into (x &gt; 1).</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&gt;</span>  <span class="mi">1</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">1</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e2</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">1</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">e3</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&lt;</span>  <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e3</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">1</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e4</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">1</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">e5</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&gt;</span>  <span class="n">x</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e5</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&gt;</span> <span class="n">x</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e6</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&gt;=</span> <span class="n">x</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">e7</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;</span>  <span class="n">x</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e7</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">x</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e8</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">x</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">     </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">*</span><span class="mi">4</span> <span class="o">%</span> <span class="p">(</span><span class="n">e1</span><span class="p">,</span> <span class="n">e2</span><span class="p">,</span> <span class="n">e3</span><span class="p">,</span> <span class="n">e4</span><span class="p">,</span> <span class="n">e5</span><span class="p">,</span> <span class="n">e6</span><span class="p">,</span> <span class="n">e7</span><span class="p">,</span> <span class="n">e8</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">     </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">*</span><span class="mi">4</span> <span class="o">%</span> <span class="p">(</span><span class="n">e1</span><span class="p">,</span> <span class="n">e2</span><span class="p">,</span> <span class="n">e3</span><span class="p">,</span> <span class="n">e4</span><span class="p">,</span> <span class="n">e5</span><span class="p">,</span> <span class="n">e6</span><span class="p">,</span> <span class="n">e7</span><span class="p">,</span> <span class="n">e8</span><span class="p">))</span>
 <span class="go">x &gt; 1     x &gt;= 1</span>
 <span class="go">x &lt; 1     x &lt;= 1</span>
 <span class="go">x &lt; 1     x &lt;= 1</span>
@@ -5761,15 +5761,15 @@ no way available to Diofant to recognize this has happened, so the statement
 console, perhaps), one can work around this annoyance in a couple ways: (1)
 “sympify” the literal before comparison, (2) use one of the wrappers, or (3)
 use the less succinct methods described above:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&gt;</span>  <span class="n">x</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">x</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e2</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">x</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">e3</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span>  <span class="n">x</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e3</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">x</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e4</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">x</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e5</span> <span class="o">=</span> <span class="n">Gt</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e6</span> <span class="o">=</span> <span class="n">Ge</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e7</span> <span class="o">=</span> <span class="n">Lt</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e8</span> <span class="o">=</span> <span class="n">Le</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">     </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">*</span><span class="mi">4</span> <span class="o">%</span> <span class="p">(</span><span class="n">e1</span><span class="p">,</span> <span class="n">e2</span><span class="p">,</span> <span class="n">e3</span><span class="p">,</span> <span class="n">e4</span><span class="p">,</span> <span class="n">e5</span><span class="p">,</span> <span class="n">e6</span><span class="p">,</span> <span class="n">e7</span><span class="p">,</span> <span class="n">e8</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">     </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">*</span><span class="mi">4</span> <span class="o">%</span> <span class="p">(</span><span class="n">e1</span><span class="p">,</span> <span class="n">e2</span><span class="p">,</span> <span class="n">e3</span><span class="p">,</span> <span class="n">e4</span><span class="p">,</span> <span class="n">e5</span><span class="p">,</span> <span class="n">e6</span><span class="p">,</span> <span class="n">e7</span><span class="p">,</span> <span class="n">e8</span><span class="p">))</span>
 <span class="go">1 &gt; x     1 &gt;= x</span>
 <span class="go">1 &lt; x     1 &lt;= x</span>
 <span class="go">1 &gt; x     1 &gt;= x</span>
@@ -5896,7 +5896,7 @@ littering the math with oddball function calls.  However there are certain
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e2</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">e2</span><span class="p">)</span>
 <span class="go">x &gt;= 2</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;e1: </span><span class="si">%s</span><span class="s2">,    e2: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">e1</span><span class="p">,</span> <span class="n">e2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;e1: </span><span class="si">%s</span><span class="s1">,    e2: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">e1</span><span class="p">,</span> <span class="n">e2</span><span class="p">))</span>
 <span class="go">e1: x &gt;= 2,    e2: x &gt;= 2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span> <span class="o">==</span> <span class="n">e2</span>
 <span class="go">True</span>
@@ -5919,7 +5919,7 @@ succinctly and less conveniently:</p>
 </pre></div>
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rels</span> <span class="o">=</span> <span class="n">Rel</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;&lt;=&#39;</span><span class="p">),</span> <span class="n">Relational</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;&lt;=&#39;</span><span class="p">),</span> <span class="n">LessThan</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="se">\n</span><span class="si">%s</span><span class="se">\n</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">rels</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="se">\n</span><span class="si">%s</span><span class="se">\n</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">rels</span><span class="p">)</span>
 <span class="go">x &lt;= 1</span>
 <span class="go">x &lt;= 1</span>
 <span class="go">x &lt;= 1</span>
@@ -5943,15 +5943,15 @@ native Python number does not know how to compare itself with a Diofant object
 Python will try the reflective operation, (x &gt; 1).  Unfortunately, there is
 no way available to Diofant to recognize this has happened, so the statement
 (1 &lt; x) will turn silently into (x &gt; 1).</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&gt;</span>  <span class="mi">1</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">1</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e2</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">1</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">e3</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&lt;</span>  <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e3</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">1</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e4</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">1</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">e5</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&gt;</span>  <span class="n">x</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e5</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&gt;</span> <span class="n">x</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e6</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&gt;=</span> <span class="n">x</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">e7</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;</span>  <span class="n">x</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e7</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">x</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e8</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">x</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">     </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">*</span><span class="mi">4</span> <span class="o">%</span> <span class="p">(</span><span class="n">e1</span><span class="p">,</span> <span class="n">e2</span><span class="p">,</span> <span class="n">e3</span><span class="p">,</span> <span class="n">e4</span><span class="p">,</span> <span class="n">e5</span><span class="p">,</span> <span class="n">e6</span><span class="p">,</span> <span class="n">e7</span><span class="p">,</span> <span class="n">e8</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">     </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">*</span><span class="mi">4</span> <span class="o">%</span> <span class="p">(</span><span class="n">e1</span><span class="p">,</span> <span class="n">e2</span><span class="p">,</span> <span class="n">e3</span><span class="p">,</span> <span class="n">e4</span><span class="p">,</span> <span class="n">e5</span><span class="p">,</span> <span class="n">e6</span><span class="p">,</span> <span class="n">e7</span><span class="p">,</span> <span class="n">e8</span><span class="p">))</span>
 <span class="go">x &gt; 1     x &gt;= 1</span>
 <span class="go">x &lt; 1     x &lt;= 1</span>
 <span class="go">x &lt; 1     x &lt;= 1</span>
@@ -5962,15 +5962,15 @@ no way available to Diofant to recognize this has happened, so the statement
 console, perhaps), one can work around this annoyance in a couple ways: (1)
 “sympify” the literal before comparison, (2) use one of the wrappers, or (3)
 use the less succinct methods described above:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&gt;</span>  <span class="n">x</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">x</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e2</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">x</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">e3</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span>  <span class="n">x</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e3</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">x</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e4</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">x</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e5</span> <span class="o">=</span> <span class="n">Gt</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e6</span> <span class="o">=</span> <span class="n">Ge</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e7</span> <span class="o">=</span> <span class="n">Lt</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e8</span> <span class="o">=</span> <span class="n">Le</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">     </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">*</span><span class="mi">4</span> <span class="o">%</span> <span class="p">(</span><span class="n">e1</span><span class="p">,</span> <span class="n">e2</span><span class="p">,</span> <span class="n">e3</span><span class="p">,</span> <span class="n">e4</span><span class="p">,</span> <span class="n">e5</span><span class="p">,</span> <span class="n">e6</span><span class="p">,</span> <span class="n">e7</span><span class="p">,</span> <span class="n">e8</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">     </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">*</span><span class="mi">4</span> <span class="o">%</span> <span class="p">(</span><span class="n">e1</span><span class="p">,</span> <span class="n">e2</span><span class="p">,</span> <span class="n">e3</span><span class="p">,</span> <span class="n">e4</span><span class="p">,</span> <span class="n">e5</span><span class="p">,</span> <span class="n">e6</span><span class="p">,</span> <span class="n">e7</span><span class="p">,</span> <span class="n">e8</span><span class="p">))</span>
 <span class="go">1 &gt; x     1 &gt;= x</span>
 <span class="go">1 &lt; x     1 &lt;= x</span>
 <span class="go">1 &gt; x     1 &gt;= x</span>
@@ -6622,7 +6622,7 @@ Derivative()).</p>
 <h3>expand<a class="headerlink" href="#expand" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="diofant.core.function.expand">
-<code class="sig-prename descclassname">diofant.core.function.</code><code class="sig-name descname">expand</code><span class="sig-paren">(</span><em class="sig-param">e</em>, <em class="sig-param">deep=True</em>, <em class="sig-param">modulus=None</em>, <em class="sig-param">power_base=True</em>, <em class="sig-param">power_exp=True</em>, <em class="sig-param">mul=True</em>, <em class="sig-param">log=True</em>, <em class="sig-param">multinomial=True</em>, <em class="sig-param">basic=True</em>, <em class="sig-param">**hints</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/function.py#L1598-L1896"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.function.expand" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.core.function.</code><code class="sig-name descname">expand</code><span class="sig-paren">(</span><em class="sig-param">e</em>, <em class="sig-param">deep=True</em>, <em class="sig-param">modulus=None</em>, <em class="sig-param">power_base=True</em>, <em class="sig-param">power_exp=True</em>, <em class="sig-param">mul=True</em>, <em class="sig-param">log=True</em>, <em class="sig-param">multinomial=True</em>, <em class="sig-param">basic=True</em>, <em class="sig-param">**hints</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/function.py#L1598-L1893"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.function.expand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Expand an expression using methods given as hints.</p>
 <p>Hints evaluated unless explicitly set to False are:  <code class="docutils literal notranslate"><span class="pre">basic</span></code>, <code class="docutils literal notranslate"><span class="pre">log</span></code>,
 <code class="docutils literal notranslate"><span class="pre">multinomial</span></code>, <code class="docutils literal notranslate"><span class="pre">mul</span></code>, <code class="docutils literal notranslate"><span class="pre">power_base</span></code>, and <code class="docutils literal notranslate"><span class="pre">power_exp</span></code>.  The following
@@ -6861,12 +6861,9 @@ kind of ‘expansion’.  For hints that simply rewrite an expression, use the
 <span class="gp">... </span>        <span class="k">return</span> <span class="n">Expr</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
 <span class="gp">...</span>
 <span class="gp">... </span>    <span class="k">def</span> <span class="nf">_eval_expand_double</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">hints</span><span class="p">):</span>
-<span class="gp">... </span>        <span class="sd">&#39;&#39;&#39;</span>
-<span class="gp">... </span><span class="sd">        Doubles the args of MyClass.</span>
-<span class="gp">...</span><span class="sd"></span>
-<span class="gp">... </span><span class="sd">        If there more than four args, doubling is not performed,</span>
-<span class="gp">... </span><span class="sd">        unless force=True is also used (False by default).</span>
-<span class="gp">... </span><span class="sd">        &#39;&#39;&#39;</span>
+<span class="gp">... </span>        <span class="c1"># Doubles the args of MyClass.</span>
+<span class="gp">... </span>        <span class="c1"># If there more than four args, doubling is not performed,</span>
+<span class="gp">... </span>        <span class="c1"># unless force=True is also used (False by default).</span>
 <span class="gp">... </span>        <span class="n">force</span> <span class="o">=</span> <span class="n">hints</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;force&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 <span class="gp">... </span>        <span class="k">if</span> <span class="ow">not</span> <span class="n">force</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="p">:</span>
 <span class="gp">... </span>            <span class="k">return</span> <span class="bp">self</span>
@@ -6912,7 +6909,7 @@ kind of ‘expansion’.  For hints that simply rewrite an expression, use the
 <h3>count_ops<a class="headerlink" href="#count-ops" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="diofant.core.function.count_ops">
-<code class="sig-prename descclassname">diofant.core.function.</code><code class="sig-name descname">count_ops</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">visual=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/function.py#L2108-L2295"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.function.count_ops" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.core.function.</code><code class="sig-name descname">count_ops</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">visual=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/function.py#L2105-L2292"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.function.count_ops" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a representation (integer or expression) of the operations in expr.</p>
 <p>If <code class="docutils literal notranslate"><span class="pre">visual</span></code> is <code class="docutils literal notranslate"><span class="pre">False</span></code> (default) then the sum of the coefficients of the
 visual expression will be returned.</p>
@@ -6976,7 +6973,7 @@ representation is compared with the expanded form of a polynomial:</p>
 <h3>expand_mul<a class="headerlink" href="#expand-mul" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="diofant.core.function.expand_mul">
-<code class="sig-prename descclassname">diofant.core.function.</code><code class="sig-name descname">expand_mul</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/function.py#L1916-L1930"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.function.expand_mul" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.core.function.</code><code class="sig-name descname">expand_mul</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/function.py#L1913-L1927"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.function.expand_mul" title="Permalink to this definition">¶</a></dt>
 <dd><p>Wrapper around expand that only uses the mul hint.  See the expand
 docstring for more information.</p>
 <p class="rubric">Examples</p>
@@ -6992,7 +6989,7 @@ docstring for more information.</p>
 <h3>expand_log<a class="headerlink" href="#expand-log" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="diofant.core.function.expand_log">
-<code class="sig-prename descclassname">diofant.core.function.</code><code class="sig-name descname">expand_log</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">deep=True</em>, <em class="sig-param">force=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/function.py#L1950-L1965"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.function.expand_log" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.core.function.</code><code class="sig-name descname">expand_log</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">deep=True</em>, <em class="sig-param">force=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/function.py#L1947-L1962"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.function.expand_log" title="Permalink to this definition">¶</a></dt>
 <dd><p>Wrapper around expand that only uses the log hint.  See the expand
 docstring for more information.</p>
 <p class="rubric">Examples</p>
@@ -7008,7 +7005,7 @@ docstring for more information.</p>
 <h3>expand_func<a class="headerlink" href="#expand-func" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="diofant.core.function.expand_func">
-<code class="sig-prename descclassname">diofant.core.function.</code><code class="sig-name descname">expand_func</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/function.py#L1968-L1981"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.function.expand_func" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.core.function.</code><code class="sig-name descname">expand_func</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/function.py#L1965-L1978"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.function.expand_func" title="Permalink to this definition">¶</a></dt>
 <dd><p>Wrapper around expand that only uses the func hint.  See the expand
 docstring for more information.</p>
 <p class="rubric">Examples</p>
@@ -7023,7 +7020,7 @@ docstring for more information.</p>
 <h3>expand_trig<a class="headerlink" href="#expand-trig" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="diofant.core.function.expand_trig">
-<code class="sig-prename descclassname">diofant.core.function.</code><code class="sig-name descname">expand_trig</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/function.py#L1984-L1997"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.function.expand_trig" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.core.function.</code><code class="sig-name descname">expand_trig</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/function.py#L1981-L1994"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.function.expand_trig" title="Permalink to this definition">¶</a></dt>
 <dd><p>Wrapper around expand that only uses the trig hint.  See the expand
 docstring for more information.</p>
 <p class="rubric">Examples</p>
@@ -7038,7 +7035,7 @@ docstring for more information.</p>
 <h3>expand_complex<a class="headerlink" href="#expand-complex" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="diofant.core.function.expand_complex">
-<code class="sig-prename descclassname">diofant.core.function.</code><code class="sig-name descname">expand_complex</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/function.py#L2000-L2020"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.function.expand_complex" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.core.function.</code><code class="sig-name descname">expand_complex</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/function.py#L1997-L2017"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.function.expand_complex" title="Permalink to this definition">¶</a></dt>
 <dd><p>Wrapper around expand that only uses the complex hint.  See the expand
 docstring for more information.</p>
 <p class="rubric">Examples</p>
@@ -7059,7 +7056,7 @@ docstring for more information.</p>
 <h3>expand_multinomial<a class="headerlink" href="#expand-multinomial" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="diofant.core.function.expand_multinomial">
-<code class="sig-prename descclassname">diofant.core.function.</code><code class="sig-name descname">expand_multinomial</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/function.py#L1933-L1947"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.function.expand_multinomial" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.core.function.</code><code class="sig-name descname">expand_multinomial</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/function.py#L1930-L1944"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.function.expand_multinomial" title="Permalink to this definition">¶</a></dt>
 <dd><p>Wrapper around expand that only uses the multinomial hint.  See the expand
 docstring for more information.</p>
 <p class="rubric">Examples</p>
@@ -7075,7 +7072,7 @@ docstring for more information.</p>
 <h3>expand_power_exp<a class="headerlink" href="#expand-power-exp" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="diofant.core.function.expand_power_exp">
-<code class="sig-prename descclassname">diofant.core.function.</code><code class="sig-name descname">expand_power_exp</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/function.py#L2088-L2105"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.function.expand_power_exp" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.core.function.</code><code class="sig-name descname">expand_power_exp</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/function.py#L2085-L2102"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.function.expand_power_exp" title="Permalink to this definition">¶</a></dt>
 <dd><p>Wrapper around expand that only uses the power_exp hint.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">expand_power_exp</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="n">y</span> <span class="o">+</span> <span class="mi">2</span><span class="p">))</span>
@@ -7093,7 +7090,7 @@ docstring for more information.</p>
 <h3>expand_power_base<a class="headerlink" href="#expand-power-base" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="diofant.core.function.expand_power_base">
-<code class="sig-prename descclassname">diofant.core.function.</code><code class="sig-name descname">expand_power_base</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">deep=True</em>, <em class="sig-param">force=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/function.py#L2023-L2085"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.function.expand_power_base" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.core.function.</code><code class="sig-name descname">expand_power_base</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">deep=True</em>, <em class="sig-param">force=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/function.py#L2020-L2082"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.function.expand_power_base" title="Permalink to this definition">¶</a></dt>
 <dd><p>Wrapper around expand that only uses the power_base hint.</p>
 <p>A wrapper to expand(power_base=True) which separates a power with a base
 that is a Mul into a product of powers, without performing any other
@@ -7160,7 +7157,7 @@ apply full <code class="docutils literal notranslate"><span class="pre">expand()
 <h3>nfloat<a class="headerlink" href="#nfloat" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="diofant.core.function.nfloat">
-<code class="sig-prename descclassname">diofant.core.function.</code><code class="sig-name descname">nfloat</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">n=15</em>, <em class="sig-param">exponent=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/function.py#L2298-L2353"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.function.nfloat" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.core.function.</code><code class="sig-name descname">nfloat</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">n=15</em>, <em class="sig-param">exponent=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/core/function.py#L2295-L2350"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.core.function.nfloat" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make all Rationals in expr Floats except those in exponents
 (unless the exponents flag is set to True).</p>
 <p class="rubric">Examples</p>
