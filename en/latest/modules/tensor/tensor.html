@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Tensor &mdash; Diofant 0.11.1.dev156+gbf34fbdc4 documentation</title>
+  <title>Tensor &mdash; Diofant 0.11.1.dev160+ge9c45c2ef documentation</title>
   
 
   
@@ -27,7 +27,7 @@
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
         <script type="text/x-mathjax-config">MathJax.Hub.Config({"CommonHTML": {"linebreaks": {"automatic": true}}, "HTML-CSS": {"linebreaks": {"automatic": true}}, "SVG": {"linebreaks": {"automatic": true}}})</script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
@@ -297,7 +297,7 @@ each other; A is commuting.</p>
 
 <dl class="py class">
 <dt id="diofant.tensor.tensor.TensorIndexType">
-<em class="property">class </em><code class="sig-prename descclassname">diofant.tensor.tensor.</code><code class="sig-name descname">TensorIndexType</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/tensor/tensor.py#L1287-L1504"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.tensor.tensor.TensorIndexType" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diofant.tensor.tensor.</code><code class="sig-name descname">TensorIndexType</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">metric</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">dim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">eps_dim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dummy_fmt</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/tensor/tensor.py#L1287-L1504"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.tensor.tensor.TensorIndexType" title="Permalink to this definition">¶</a></dt>
 <dd><p>A TensorIndexType is characterized by its name and its metric.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -319,11 +319,6 @@ each other; A is commuting.</p>
 <dt>
 <code class="sig-name descname">``metric_name``</code></dt>
 <dd><p>it is ‘metric’ or metric.name</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py attribute">
@@ -335,32 +330,17 @@ each other; A is commuting.</p>
 <dt>
 <code class="sig-name descname">``metric``</code></dt>
 <dd><p>the metric tensor</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="#diofant.tensor.tensor.TensorType" title="diofant.tensor.tensor.TensorType">TensorType</a></p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt>
-<code class="sig-name descname">``delta``</code></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">Kronecker</span> <span class="pre">delta</span></code></p>
-</dd>
-</dl>
-</dd></dl>
+<code class="sig-name descname">``delta`` : ``Kronecker delta``</code></dt>
+<dd></dd></dl>
 
 <dl class="py attribute">
 <dt>
-<code class="sig-name descname">``epsilon``</code></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>the <code class="docutils literal notranslate"><span class="pre">Levi-Civita</span> <span class="pre">epsilon</span></code> tensor</p>
-</dd>
-</dl>
-</dd></dl>
+<code class="sig-name descname">``epsilon`` : the ``Levi-Civita epsilon`` tensor</code></dt>
+<dd></dd></dl>
 
 <dl class="py attribute">
 <dt>
@@ -379,13 +359,8 @@ each other; A is commuting.</p>
 
 <dl class="py attribute">
 <dt>
-<code class="sig-name descname">``data``</code></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>a property to add <code class="docutils literal notranslate"><span class="pre">ndarray</span></code> values, to work in a specified basis.</p>
-</dd>
-</dl>
-</dd></dl>
+<code class="sig-name descname">``data`` : a property to add ``ndarray`` values, to work in a specified basis.</code></dt>
+<dd></dd></dl>
 
 <p class="rubric">Notes</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">metric</span></code> parameter can be:
@@ -429,7 +404,7 @@ fixed basis:</p>
 
 <dl class="py class">
 <dt id="diofant.tensor.tensor.TensorIndex">
-<em class="property">class </em><code class="sig-prename descclassname">diofant.tensor.tensor.</code><code class="sig-name descname">TensorIndex</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/tensor/tensor.py#L1508-L1609"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.tensor.tensor.TensorIndex" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diofant.tensor.tensor.</code><code class="sig-name descname">TensorIndex</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">tensortype</span></em>, <em class="sig-param"><span class="n">is_up</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/tensor/tensor.py#L1508-L1609"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.tensor.tensor.TensorIndex" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents an abstract tensor index.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -511,7 +486,7 @@ existing indices:</p>
 
 <dl class="py class">
 <dt id="diofant.tensor.tensor.TensorSymmetry">
-<em class="property">class </em><code class="sig-prename descclassname">diofant.tensor.tensor.</code><code class="sig-name descname">TensorSymmetry</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/tensor/tensor.py#L1642-L1710"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.tensor.tensor.TensorSymmetry" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diofant.tensor.tensor.</code><code class="sig-name descname">TensorSymmetry</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kw_args</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/tensor/tensor.py#L1642-L1710"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.tensor.tensor.TensorSymmetry" title="Permalink to this definition">¶</a></dt>
 <dd><p>Monoterm symmetry of a tensor</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -522,33 +497,18 @@ existing indices:</p>
 <dt>
 <code class="sig-name descname">``base``</code></dt>
 <dd><p>base of the BSGS</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="../core.html#diofant.core.containers.Tuple" title="diofant.core.containers.Tuple">Tuple</a></p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt>
 <code class="sig-name descname">``generators``</code></dt>
 <dd><p>generators of the BSGS</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="../core.html#diofant.core.containers.Tuple" title="diofant.core.containers.Tuple">Tuple</a></p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt>
 <code class="sig-name descname">``rank``</code></dt>
 <dd><p>rank of the tensor</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="../core.html#diofant.core.containers.Tuple" title="diofant.core.containers.Tuple">Tuple</a></p>
-</dd>
-</dl>
 </dd></dl>
 
 <p class="rubric">Notes</p>
@@ -612,7 +572,7 @@ cyclic symmetry.</p>
 
 <dl class="py class">
 <dt id="diofant.tensor.tensor.TensorType">
-<em class="property">class </em><code class="sig-prename descclassname">diofant.tensor.tensor.</code><code class="sig-name descname">TensorType</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/tensor/tensor.py#L1793-L1879"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.tensor.tensor.TensorType" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diofant.tensor.tensor.</code><code class="sig-name descname">TensorType</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index_types</span></em>, <em class="sig-param"><span class="n">symmetry</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kw_args</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/tensor/tensor.py#L1793-L1879"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.tensor.tensor.TensorType" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class of tensor types.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -634,13 +594,8 @@ cyclic symmetry.</p>
 
 <dl class="py attribute">
 <dt>
-<code class="sig-name descname">``types``</code></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>list of <code class="docutils literal notranslate"><span class="pre">TensorIndexType</span></code> without repetitions</p>
-</dd>
-</dl>
-</dd></dl>
+<code class="sig-name descname">``types`` : list of ``TensorIndexType`` without repetitions</code></dt>
+<dd></dd></dl>
 
 <p class="rubric">Examples</p>
 <p>Define a symmetric tensor</p>
@@ -654,7 +609,7 @@ cyclic symmetry.</p>
 
 <dl class="py class">
 <dt id="diofant.tensor.tensor.TensorHead">
-<em class="property">class </em><code class="sig-prename descclassname">diofant.tensor.tensor.</code><code class="sig-name descname">TensorHead</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/tensor/tensor.py#L1916-L2307"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.tensor.tensor.TensorHead" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diofant.tensor.tensor.</code><code class="sig-name descname">TensorHead</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">typ</span></em>, <em class="sig-param"><span class="n">comm</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">matrix_behavior</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kw_args</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/tensor/tensor.py#L1916-L2307"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.tensor.tensor.TensorHead" title="Permalink to this definition">¶</a></dt>
 <dd><p>Tensor head of the tensor</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -682,33 +637,18 @@ cyclic symmetry.</p>
 
 <dl class="py attribute">
 <dt>
-<code class="sig-name descname">``types``</code></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>equal to <code class="docutils literal notranslate"><span class="pre">typ.types</span></code></p>
-</dd>
-</dl>
-</dd></dl>
+<code class="sig-name descname">``types``  :  equal to ``typ.types``</code></dt>
+<dd></dd></dl>
 
 <dl class="py attribute">
 <dt>
-<code class="sig-name descname">``symmetry``</code></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>equal to <code class="docutils literal notranslate"><span class="pre">typ.symmetry</span></code></p>
-</dd>
-</dl>
-</dd></dl>
+<code class="sig-name descname">``symmetry`` : equal to ``typ.symmetry``</code></dt>
+<dd></dd></dl>
 
 <dl class="py attribute">
 <dt>
 <code class="sig-name descname">``comm``</code></dt>
 <dd><p>commutation group</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></p>
-</dd>
-</dl>
 </dd></dl>
 
 <p class="rubric">Notes</p>
@@ -869,7 +809,7 @@ simply contract the <code class="docutils literal notranslate"><span class="pre"
 
 <dl class="py class">
 <dt id="diofant.tensor.tensor.TensExpr">
-<em class="property">class </em><code class="sig-prename descclassname">diofant.tensor.tensor.</code><code class="sig-name descname">TensExpr</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/tensor/tensor.py#L2311-L2451"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.tensor.tensor.TensExpr" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diofant.tensor.tensor.</code><code class="sig-name descname">TensExpr</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/tensor/tensor.py#L2311-L2451"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.tensor.tensor.TensExpr" title="Permalink to this definition">¶</a></dt>
 <dd><p>Abstract base class for tensor expressions</p>
 <p class="rubric">Notes</p>
 <p>A tensor expression is an expression formed by tensors;
@@ -931,7 +871,7 @@ matrix multiplication:</p>
 
 <dl class="py class">
 <dt id="diofant.tensor.tensor.TensAdd">
-<em class="property">class </em><code class="sig-prename descclassname">diofant.tensor.tensor.</code><code class="sig-name descname">TensAdd</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/tensor/tensor.py#L2455-L2915"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.tensor.tensor.TensAdd" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diofant.tensor.tensor.</code><code class="sig-name descname">TensAdd</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kw_args</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/tensor/tensor.py#L2455-L2915"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.tensor.tensor.TensAdd" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sum of tensors</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -942,33 +882,18 @@ matrix multiplication:</p>
 <dt>
 <code class="sig-name descname">``args``</code></dt>
 <dd><p>of addends</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.8)">tuple</a></p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt>
 <code class="sig-name descname">``rank``</code></dt>
 <dd><p>rank of the tensor</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.8)">tuple</a></p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt>
 <code class="sig-name descname">``free_args``</code></dt>
 <dd><p>of the free indices in sorted order</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)">list</a></p>
-</dd>
-</dl>
 </dd></dl>
 
 <p class="rubric">Notes</p>
@@ -1103,7 +1028,7 @@ as a coefficient on all <code class="docutils literal notranslate"><span class="
 
 <dl class="py class">
 <dt id="diofant.tensor.tensor.TensMul">
-<em class="property">class </em><code class="sig-prename descclassname">diofant.tensor.tensor.</code><code class="sig-name descname">TensMul</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/tensor/tensor.py#L3145-L3586"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.tensor.tensor.TensMul" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diofant.tensor.tensor.</code><code class="sig-name descname">TensMul</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kw_args</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/tensor/tensor.py#L3145-L3586"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.tensor.tensor.TensMul" title="Permalink to this definition">¶</a></dt>
 <dd><p>Product of tensors</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1115,97 +1040,52 @@ as a coefficient on all <code class="docutils literal notranslate"><span class="
 </dl>
 <dl class="py attribute">
 <dt>
-<code class="sig-name descname">``components``</code></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>list of <code class="docutils literal notranslate"><span class="pre">TensorHead</span></code> of the component tensors</p>
-</dd>
-</dl>
-</dd></dl>
+<code class="sig-name descname">``components`` : list of ``TensorHead`` of the component tensors</code></dt>
+<dd></dd></dl>
 
 <dl class="py attribute">
 <dt>
-<code class="sig-name descname">``types``</code></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>list of nonrepeated <code class="docutils literal notranslate"><span class="pre">TensorIndexType</span></code></p>
-</dd>
-</dl>
-</dd></dl>
+<code class="sig-name descname">``types`` : list of nonrepeated ``TensorIndexType``</code></dt>
+<dd></dd></dl>
 
 <dl class="py attribute">
 <dt>
-<code class="sig-name descname">``free``</code></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>list of <code class="docutils literal notranslate"><span class="pre">(ind,</span> <span class="pre">ipos,</span> <span class="pre">icomp)</span></code>, see Notes</p>
-</dd>
-</dl>
-</dd></dl>
+<code class="sig-name descname">``free`` : list of ``(ind, ipos, icomp)``, see Notes</code></dt>
+<dd></dd></dl>
 
 <dl class="py attribute">
 <dt>
-<code class="sig-name descname">``dum``</code></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>list of <code class="docutils literal notranslate"><span class="pre">(ipos1,</span> <span class="pre">ipos2,</span> <span class="pre">icomp1,</span> <span class="pre">icomp2)</span></code>, see Notes</p>
-</dd>
-</dl>
-</dd></dl>
+<code class="sig-name descname">``dum`` : list of ``(ipos1, ipos2, icomp1, icomp2)``, see Notes</code></dt>
+<dd></dd></dl>
 
 <dl class="py attribute">
 <dt>
 <code class="sig-name descname">``ext_rank``</code></dt>
 <dd><p>rank of the tensor counting the dummy indices</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.8)">tuple</a></p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt>
 <code class="sig-name descname">``rank``</code></dt>
 <dd><p>rank of the tensor</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.8)">tuple</a></p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt>
 <code class="sig-name descname">``coeff``</code></dt>
 <dd><p>Diofant coefficient of the tensor</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="../core.html#diofant.core.expr.Expr" title="diofant.core.expr.Expr">Expr</a></p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt>
 <code class="sig-name descname">``free_args``</code></dt>
 <dd><p>list of the free indices in sorted order</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)">list</a></p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt>
-<code class="sig-name descname">``is_canon_bp``</code></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the tensor in in canonical form</p>
-</dd>
-</dl>
-</dd></dl>
+<code class="sig-name descname">``is_canon_bp`` : ``True`` if the tensor in in canonical form</code></dt>
+<dd></dd></dl>
 
 <p class="rubric">Notes</p>
 <p><code class="docutils literal notranslate"><span class="pre">args[0]</span></code>   list of <code class="docutils literal notranslate"><span class="pre">TensorHead</span></code> of the component tensors.</p>

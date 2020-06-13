@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Algebraic equations &mdash; Diofant 0.11.1.dev156+gbf34fbdc4 documentation</title>
+  <title>Algebraic equations &mdash; Diofant 0.11.1.dev160+ge9c45c2ef documentation</title>
   
 
   
@@ -27,7 +27,7 @@
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
         <script type="text/x-mathjax-config">MathJax.Hub.Config({"CommonHTML": {"linebreaks": {"automatic": true}}, "HTML-CSS": {"linebreaks": {"automatic": true}}, "SVG": {"linebreaks": {"automatic": true}}})</script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
@@ -207,6 +207,29 @@
 <p>This module contain solvers for all kinds of equations,
 algebraic or transcendental.</p>
 <dl class="py function">
+<dt id="diofant.solvers.solvers.minsolve_linear_system">
+<code class="sig-prename descclassname">diofant.solvers.solvers.</code><code class="sig-name descname">minsolve_linear_system</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">system</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">symbols</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">flags</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/solvers/solvers.py#L929-L1021"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.solvers.solvers.minsolve_linear_system" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find a particular solution to a linear system.</p>
+<p>In particular, try to find a solution with the minimal possible number
+of non-zero variables. This is a very computationally hard problem.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul>
+<li><p><strong>system</strong> (<em>Matrix</em>) – Nx(M+1) matrix, which means it has to be in augmented form.</p></li>
+<li><p><strong>*symbols</strong> (<em>list</em>) – List of M Symbol’s.</p></li>
+<li><p><strong>**flags</strong> (<em>dict</em>) – A dictionary of following parameters:</p>
+<dl class="simple">
+<dt>quick<span class="classifier">boolean, optional</span></dt><dd><p>If True, a heuristic is used.  Otherwise (default) a naive
+algorithm with exponential complexity is used.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt id="diofant.solvers.solvers.solve">
 <code class="sig-prename descclassname">diofant.solvers.solvers.</code><code class="sig-name descname">solve</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">symbols</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">flags</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/solvers/solvers.py#L78-L422"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.solvers.solvers.solve" title="Permalink to this definition">¶</a></dt>
 <dd><p>Algebraically solves equation or system of equations.</p>
@@ -323,29 +346,6 @@ of <code class="docutils literal notranslate"><span class="pre">f</span></code>,
 <span class="go">(0, 0)</span>
 </pre></div>
 </div>
-</dd></dl>
-
-<dl class="py function">
-<dt id="diofant.solvers.solvers.minsolve_linear_system">
-<code class="sig-prename descclassname">diofant.solvers.solvers.</code><code class="sig-name descname">minsolve_linear_system</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">system</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">symbols</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">flags</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/solvers/solvers.py#L929-L1021"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.solvers.solvers.minsolve_linear_system" title="Permalink to this definition">¶</a></dt>
-<dd><p>Find a particular solution to a linear system.</p>
-<p>In particular, try to find a solution with the minimal possible number
-of non-zero variables. This is a very computationally hard problem.</p>
-<dl class="field-list">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul>
-<li><p><strong>system</strong> (<em>Matrix</em>) – Nx(M+1) matrix, which means it has to be in augmented form.</p></li>
-<li><p><strong>*symbols</strong> (<em>list</em>) – List of M Symbol’s.</p></li>
-<li><p><strong>**flags</strong> (<em>dict</em>) – A dictionary of following parameters:</p>
-<dl class="simple">
-<dt>quick<span class="classifier">boolean, optional</span></dt><dd><p>If True, a heuristic is used.  Otherwise (default) a naive
-algorithm with exponential complexity is used.</p>
-</dd>
-</dl>
-</li>
-</ul>
-</dd>
-</dl>
 </dd></dl>
 
 <div class="section" id="module-diofant.solvers.polysys">
