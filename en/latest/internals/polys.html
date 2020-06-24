@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Internals of the Polynomial Manipulation Module &mdash; Diofant 0.11.1.dev202+ga91409b88 documentation</title>
+  <title>Internals of the Polynomial Manipulation Module &mdash; Diofant 0.11.1.dev222+g344704e61 documentation</title>
   
 
   
@@ -222,7 +222,7 @@ may be slightly more efficient.)</p>
 <span class="target" id="module-diofant.polys.densebasic"></span><p>Basic tools for dense recursive polynomials in <code class="docutils literal notranslate"><span class="pre">K[x]</span></code> or <code class="docutils literal notranslate"><span class="pre">K[X]</span></code>.</p>
 <dl class="py function">
 <dt id="diofant.polys.densebasic.dmp_convert">
-<code class="sig-prename descclassname">diofant.polys.densebasic.</code><code class="sig-name descname">dmp_convert</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">u</span></em>, <em class="sig-param"><span class="n">K0</span></em>, <em class="sig-param"><span class="n">K1</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/densebasic.py#L85-L109"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densebasic.dmp_convert" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.polys.densebasic.</code><code class="sig-name descname">dmp_convert</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">u</span></em>, <em class="sig-param"><span class="n">K0</span></em>, <em class="sig-param"><span class="n">K1</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/densebasic.py#L62-L83"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densebasic.dmp_convert" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert the ground domain of <code class="docutils literal notranslate"><span class="pre">f</span></code> from <code class="docutils literal notranslate"><span class="pre">K0</span></code> to <code class="docutils literal notranslate"><span class="pre">K1</span></code>.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
@@ -252,7 +252,7 @@ may be slightly more efficient.)</p>
 
 <dl class="py function">
 <dt id="diofant.polys.densebasic.dmp_from_dict">
-<code class="sig-prename descclassname">diofant.polys.densebasic.</code><code class="sig-name descname">dmp_from_dict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">u</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/densebasic.py#L182-L227"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densebasic.dmp_from_dict" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.polys.densebasic.</code><code class="sig-name descname">dmp_from_dict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">u</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/densebasic.py#L156-L201"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densebasic.dmp_from_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a <code class="docutils literal notranslate"><span class="pre">K[X]</span></code> polynomial from a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dmp_from_dict</span><span class="p">({(</span><span class="mi">0</span><span class="p">,):</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,):</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,):</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">1</span><span class="p">)},</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
@@ -267,7 +267,7 @@ may be slightly more efficient.)</p>
 
 <dl class="py function">
 <dt id="diofant.polys.densebasic.dmp_ground">
-<code class="sig-prename descclassname">diofant.polys.densebasic.</code><code class="sig-name descname">dmp_ground</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">c</span></em>, <em class="sig-param"><span class="n">u</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/densebasic.py#L155-L179"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densebasic.dmp_ground" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.polys.densebasic.</code><code class="sig-name descname">dmp_ground</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">c</span></em>, <em class="sig-param"><span class="n">u</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/densebasic.py#L129-L153"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densebasic.dmp_ground" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a multivariate constant.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dmp_ground</span><span class="p">(</span><span class="n">ZZ</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="mi">5</span><span class="p">)</span>
@@ -280,22 +280,11 @@ may be slightly more efficient.)</p>
 
 <dl class="py function">
 <dt id="diofant.polys.densebasic.dmp_one_p">
-<code class="sig-prename descclassname">diofant.polys.densebasic.</code><code class="sig-name descname">dmp_one_p</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">u</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/densebasic.py#L135-L152"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densebasic.dmp_one_p" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.polys.densebasic.</code><code class="sig-name descname">dmp_one_p</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">u</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/densebasic.py#L109-L126"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densebasic.dmp_one_p" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return <code class="docutils literal notranslate"><span class="pre">True</span></code> if <code class="docutils literal notranslate"><span class="pre">f</span></code> is one in <code class="docutils literal notranslate"><span class="pre">K[X]</span></code>.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dmp_one_p</span><span class="p">([[[</span><span class="n">ZZ</span><span class="p">(</span><span class="mi">1</span><span class="p">)]]],</span> <span class="mi">2</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
 <span class="go">True</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py function">
-<dt id="diofant.polys.densebasic.dmp_permute">
-<code class="sig-prename descclassname">diofant.polys.densebasic.</code><code class="sig-name descname">dmp_permute</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">P</span></em>, <em class="sig-param"><span class="n">u</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/densebasic.py#L258-L279"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densebasic.dmp_permute" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a polynomial in <code class="docutils literal notranslate"><span class="pre">K[x_{P(1)},..,x_{P(n)}]</span></code>.</p>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dmp_permute</span><span class="p">([[[</span><span class="n">ZZ</span><span class="p">(</span><span class="mi">2</span><span class="p">)],</span> <span class="p">[</span><span class="n">ZZ</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">0</span><span class="p">)]],</span> <span class="p">[]],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="mi">2</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-<span class="go">[[[2], []], [[1, 0], []]]</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -312,14 +301,8 @@ may be slightly more efficient.)</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="diofant.polys.densebasic.dmp_terms_gcd">
-<code class="sig-prename descclassname">diofant.polys.densebasic.</code><code class="sig-name descname">dmp_terms_gcd</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">u</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/densebasic.py#L282-L287"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densebasic.dmp_terms_gcd" title="Permalink to this definition">¶</a></dt>
-<dd><p>Remove GCD of terms from <code class="docutils literal notranslate"><span class="pre">f</span></code> in <code class="docutils literal notranslate"><span class="pre">K[X]</span></code>.</p>
-</dd></dl>
-
-<dl class="py function">
 <dt id="diofant.polys.densebasic.dmp_to_dict">
-<code class="sig-prename descclassname">diofant.polys.densebasic.</code><code class="sig-name descname">dmp_to_dict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">u</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/densebasic.py#L230-L255"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densebasic.dmp_to_dict" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.polys.densebasic.</code><code class="sig-name descname">dmp_to_dict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">u</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/densebasic.py#L204-L229"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densebasic.dmp_to_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a <code class="docutils literal notranslate"><span class="pre">K[X]</span></code> polynomial to a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dmp_to_dict</span><span class="p">([[</span><span class="n">ZZ</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">0</span><span class="p">)],</span> <span class="p">[],</span> <span class="p">[</span><span class="n">ZZ</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">3</span><span class="p">)]],</span> <span class="mi">1</span><span class="p">)</span>
@@ -329,24 +312,8 @@ may be slightly more efficient.)</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="diofant.polys.densebasic.dmp_to_tuple">
-<code class="sig-prename descclassname">diofant.polys.densebasic.</code><code class="sig-name descname">dmp_to_tuple</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">u</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/densebasic.py#L62-L82"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densebasic.dmp_to_tuple" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convert <code class="docutils literal notranslate"><span class="pre">f</span></code> into a nested <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>.</p>
-<p>This is needed for hashing.</p>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dmp_to_tuple</span><span class="p">([</span><span class="n">ZZ</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">0</span><span class="p">)],</span> <span class="mi">0</span><span class="p">)</span>
-<span class="go">(1, 2, 3, 0)</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dmp_to_tuple</span><span class="p">([[</span><span class="n">ZZ</span><span class="p">(</span><span class="mi">1</span><span class="p">)],</span> <span class="p">[</span><span class="n">ZZ</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">ZZ</span><span class="p">(</span><span class="mi">2</span><span class="p">)]],</span> <span class="mi">1</span><span class="p">)</span>
-<span class="go">((1,), (1, 2))</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py function">
 <dt id="diofant.polys.densebasic.dmp_zero_p">
-<code class="sig-prename descclassname">diofant.polys.densebasic.</code><code class="sig-name descname">dmp_zero_p</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">u</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/densebasic.py#L112-L132"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densebasic.dmp_zero_p" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.polys.densebasic.</code><code class="sig-name descname">dmp_zero_p</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">u</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/densebasic.py#L86-L106"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densebasic.dmp_zero_p" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return <code class="docutils literal notranslate"><span class="pre">True</span></code> if <code class="docutils literal notranslate"><span class="pre">f</span></code> is zero in <code class="docutils literal notranslate"><span class="pre">K[X]</span></code>.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dmp_zero_p</span><span class="p">([[[[[]]]]],</span> <span class="mi">4</span><span class="p">)</span>
@@ -357,104 +324,17 @@ may be slightly more efficient.)</p>
 </div>
 </dd></dl>
 
-<p><strong>Arithmetic operations:</strong></p>
-<span class="target" id="module-diofant.polys.densearith"></span><p>Arithmetics for dense recursive polynomials in <code class="docutils literal notranslate"><span class="pre">K[x]</span></code> or <code class="docutils literal notranslate"><span class="pre">K[X]</span></code>.</p>
-<dl class="py function">
-<dt id="diofant.polys.densearith.dmp_add">
-<code class="sig-prename descclassname">diofant.polys.densearith.</code><code class="sig-name descname">dmp_add</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">g</span></em>, <em class="sig-param"><span class="n">u</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/densearith.py#L19-L23"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densearith.dmp_add" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add dense polynomials in <code class="docutils literal notranslate"><span class="pre">K[X]</span></code>.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="diofant.polys.densearith.dmp_div">
-<code class="sig-prename descclassname">diofant.polys.densearith.</code><code class="sig-name descname">dmp_div</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">g</span></em>, <em class="sig-param"><span class="n">u</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/densearith.py#L47-L51"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densearith.dmp_div" title="Permalink to this definition">¶</a></dt>
-<dd><p>Polynomial division with remainder in <code class="docutils literal notranslate"><span class="pre">K[X]</span></code>.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="diofant.polys.densearith.dmp_mul">
-<code class="sig-prename descclassname">diofant.polys.densearith.</code><code class="sig-name descname">dmp_mul</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">g</span></em>, <em class="sig-param"><span class="n">u</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/densearith.py#L33-L37"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densearith.dmp_mul" title="Permalink to this definition">¶</a></dt>
-<dd><p>Multiply dense polynomials in <code class="docutils literal notranslate"><span class="pre">K[X]</span></code>.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="diofant.polys.densearith.dmp_mul_ground">
-<code class="sig-prename descclassname">diofant.polys.densearith.</code><code class="sig-name descname">dmp_mul_ground</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">c</span></em>, <em class="sig-param"><span class="n">u</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/densearith.py#L4-L9"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densearith.dmp_mul_ground" title="Permalink to this definition">¶</a></dt>
-<dd><p>Multiply <code class="docutils literal notranslate"><span class="pre">f</span></code> by a constant value in <code class="docutils literal notranslate"><span class="pre">K[X]</span></code>.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="diofant.polys.densearith.dmp_neg">
-<code class="sig-prename descclassname">diofant.polys.densearith.</code><code class="sig-name descname">dmp_neg</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">u</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/densearith.py#L12-L16"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densearith.dmp_neg" title="Permalink to this definition">¶</a></dt>
-<dd><p>Negate a polynomial in <code class="docutils literal notranslate"><span class="pre">K[X]</span></code>.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="diofant.polys.densearith.dmp_pow">
-<code class="sig-prename descclassname">diofant.polys.densearith.</code><code class="sig-name descname">dmp_pow</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">n</span></em>, <em class="sig-param"><span class="n">u</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/densearith.py#L40-L44"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densearith.dmp_pow" title="Permalink to this definition">¶</a></dt>
-<dd><p>Raise <code class="docutils literal notranslate"><span class="pre">f</span></code> to the <code class="docutils literal notranslate"><span class="pre">n</span></code>-th power in <code class="docutils literal notranslate"><span class="pre">K[X]</span></code>.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="diofant.polys.densearith.dmp_quo">
-<code class="sig-prename descclassname">diofant.polys.densearith.</code><code class="sig-name descname">dmp_quo</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">g</span></em>, <em class="sig-param"><span class="n">u</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/densearith.py#L59-L61"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densearith.dmp_quo" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return exact polynomial quotient in <code class="docutils literal notranslate"><span class="pre">K[X]</span></code>.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="diofant.polys.densearith.dmp_rem">
-<code class="sig-prename descclassname">diofant.polys.densearith.</code><code class="sig-name descname">dmp_rem</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">g</span></em>, <em class="sig-param"><span class="n">u</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/densearith.py#L54-L56"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densearith.dmp_rem" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return polynomial remainder in <code class="docutils literal notranslate"><span class="pre">K[X]</span></code>.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="diofant.polys.densearith.dmp_sub">
-<code class="sig-prename descclassname">diofant.polys.densearith.</code><code class="sig-name descname">dmp_sub</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">g</span></em>, <em class="sig-param"><span class="n">u</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/densearith.py#L26-L30"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densearith.dmp_sub" title="Permalink to this definition">¶</a></dt>
-<dd><p>Subtract dense polynomials in <code class="docutils literal notranslate"><span class="pre">K[X]</span></code>.</p>
-</dd></dl>
-
 <p><strong>Further tools:</strong></p>
-<span class="target" id="module-diofant.polys.densetools"></span><p>Advanced tools for dense recursive polynomials in <code class="docutils literal notranslate"><span class="pre">K[x]</span></code> or <code class="docutils literal notranslate"><span class="pre">K[X]</span></code>.</p>
-<dl class="py function">
-<dt id="diofant.polys.densetools.dmp_clear_denoms">
-<code class="sig-prename descclassname">diofant.polys.densetools.</code><code class="sig-name descname">dmp_clear_denoms</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">u</span></em>, <em class="sig-param"><span class="n">K</span></em>, <em class="sig-param"><span class="n">convert</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/densetools.py#L38-L43"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densetools.dmp_clear_denoms" title="Permalink to this definition">¶</a></dt>
-<dd><p>Clear denominators.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="diofant.polys.densetools.dmp_compose">
-<code class="sig-prename descclassname">diofant.polys.densetools.</code><code class="sig-name descname">dmp_compose</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">g</span></em>, <em class="sig-param"><span class="n">u</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/densetools.py#L30-L35"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densetools.dmp_compose" title="Permalink to this definition">¶</a></dt>
-<dd><p>Evaluate functional composition <code class="docutils literal notranslate"><span class="pre">f(g)</span></code> in <code class="docutils literal notranslate"><span class="pre">K[X]</span></code>.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="diofant.polys.densetools.dmp_eval_in">
-<code class="sig-prename descclassname">diofant.polys.densetools.</code><code class="sig-name descname">dmp_eval_in</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">a</span></em>, <em class="sig-param"><span class="n">j</span></em>, <em class="sig-param"><span class="n">u</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/densetools.py#L4-L11"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densetools.dmp_eval_in" title="Permalink to this definition">¶</a></dt>
-<dd><p>Evaluate a polynomial at <code class="docutils literal notranslate"><span class="pre">x_j</span> <span class="pre">=</span> <span class="pre">a</span></code> in <code class="docutils literal notranslate"><span class="pre">K[X]</span></code>.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="diofant.polys.densetools.dmp_ground_monic">
-<code class="sig-prename descclassname">diofant.polys.densetools.</code><code class="sig-name descname">dmp_ground_monic</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">u</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/densetools.py#L14-L19"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densetools.dmp_ground_monic" title="Permalink to this definition">¶</a></dt>
-<dd><p>Divide all coefficients by <code class="docutils literal notranslate"><span class="pre">LC(f)</span></code> in <code class="docutils literal notranslate"><span class="pre">K[X]</span></code>.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="diofant.polys.densetools.dmp_ground_primitive">
-<code class="sig-prename descclassname">diofant.polys.densetools.</code><code class="sig-name descname">dmp_ground_primitive</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">u</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/densetools.py#L22-L27"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.densetools.dmp_ground_primitive" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute content and the primitive form of <code class="docutils literal notranslate"><span class="pre">f</span></code> in <code class="docutils literal notranslate"><span class="pre">K[X]</span></code>.</p>
-</dd></dl>
-
 <span class="target" id="module-diofant.polys.rootisolation"></span><p>Real and complex root isolation and refinement algorithms.</p>
 <dl class="py class">
 <dt id="diofant.polys.rootisolation.ComplexInterval">
-<em class="property">class </em><code class="sig-prename descclassname">diofant.polys.rootisolation.</code><code class="sig-name descname">ComplexInterval</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">a</span></em>, <em class="sig-param"><span class="n">b</span></em>, <em class="sig-param"><span class="n">I</span></em>, <em class="sig-param"><span class="n">Q</span></em>, <em class="sig-param"><span class="n">F1</span></em>, <em class="sig-param"><span class="n">F2</span></em>, <em class="sig-param"><span class="n">f1</span></em>, <em class="sig-param"><span class="n">f2</span></em>, <em class="sig-param"><span class="n">dom</span></em>, <em class="sig-param"><span class="n">conj</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rootisolation.py#L1332-L1475"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.ComplexInterval" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diofant.polys.rootisolation.</code><code class="sig-name descname">ComplexInterval</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">a</span></em>, <em class="sig-param"><span class="n">b</span></em>, <em class="sig-param"><span class="n">I</span></em>, <em class="sig-param"><span class="n">Q</span></em>, <em class="sig-param"><span class="n">F1</span></em>, <em class="sig-param"><span class="n">F2</span></em>, <em class="sig-param"><span class="n">f1</span></em>, <em class="sig-param"><span class="n">f2</span></em>, <em class="sig-param"><span class="n">dom</span></em>, <em class="sig-param"><span class="n">conj</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rootisolation.py#L1018-L1163"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.ComplexInterval" title="Permalink to this definition">¶</a></dt>
 <dd><p>A fully qualified representation of a complex isolation interval.
 The printed form is shown as (x1, y1) x (x2, y2): the southwest x northeast
 coordinates of the interval’s rectangle.</p>
 <dl class="py method">
 <dt id="diofant.polys.rootisolation.ComplexInterval.as_tuple">
-<code class="sig-name descname">as_tuple</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rootisolation.py#L1381-L1383"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.ComplexInterval.as_tuple" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">as_tuple</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rootisolation.py#L1067-L1069"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.ComplexInterval.as_tuple" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return tuple representation of complex isolating interval.</p>
 </dd></dl>
 
@@ -490,13 +370,13 @@ coordinates of the interval’s rectangle.</p>
 
 <dl class="py method">
 <dt id="diofant.polys.rootisolation.ComplexInterval.conjugate">
-<code class="sig-name descname">conjugate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rootisolation.py#L1385-L1389"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.ComplexInterval.conjugate" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">conjugate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rootisolation.py#L1071-L1075"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.ComplexInterval.conjugate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return conjugated isolating interval.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="diofant.polys.rootisolation.ComplexInterval.is_disjoint">
-<code class="sig-name descname">is_disjoint</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span></em>, <em class="sig-param"><span class="n">check_re_refinement</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">re_disjoint</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rootisolation.py#L1391-L1447"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.ComplexInterval.is_disjoint" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">is_disjoint</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span></em>, <em class="sig-param"><span class="n">check_re_refinement</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">re_disjoint</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rootisolation.py#L1077-L1135"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.ComplexInterval.is_disjoint" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return <code class="docutils literal notranslate"><span class="pre">True</span></code> if two isolation intervals are disjoint.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -512,7 +392,7 @@ intervals are disjoint.</p></li>
 
 <dl class="py method">
 <dt id="diofant.polys.rootisolation.ComplexInterval.refine">
-<code class="sig-name descname">refine</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">vertical</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rootisolation.py#L1449-L1475"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.ComplexInterval.refine" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">refine</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">vertical</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rootisolation.py#L1137-L1163"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.ComplexInterval.refine" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform one step of complex root refinement algorithm.</p>
 </dd></dl>
 
@@ -520,7 +400,7 @@ intervals are disjoint.</p></li>
 
 <dl class="py class">
 <dt id="diofant.polys.rootisolation.RealInterval">
-<em class="property">class </em><code class="sig-prename descclassname">diofant.polys.rootisolation.</code><code class="sig-name descname">RealInterval</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">dom</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rootisolation.py#L1260-L1329"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.RealInterval" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diofant.polys.rootisolation.</code><code class="sig-name descname">RealInterval</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="n">f</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rootisolation.py#L939-L1015"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.RealInterval" title="Permalink to this definition">¶</a></dt>
 <dd><p>A fully qualified representation of a real isolation interval.</p>
 <dl class="py method">
 <dt id="diofant.polys.rootisolation.RealInterval.a">
@@ -530,7 +410,7 @@ intervals are disjoint.</p></li>
 
 <dl class="py method">
 <dt id="diofant.polys.rootisolation.RealInterval.as_tuple">
-<code class="sig-name descname">as_tuple</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rootisolation.py#L1315-L1317"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.RealInterval.as_tuple" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">as_tuple</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rootisolation.py#L998-L1000"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.RealInterval.as_tuple" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return tuple representation of real isolating interval.</p>
 </dd></dl>
 
@@ -548,129 +428,49 @@ intervals are disjoint.</p></li>
 
 <dl class="py method">
 <dt id="diofant.polys.rootisolation.RealInterval.is_disjoint">
-<code class="sig-name descname">is_disjoint</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rootisolation.py#L1319-L1321"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.RealInterval.is_disjoint" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">is_disjoint</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rootisolation.py#L1002-L1004"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.RealInterval.is_disjoint" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return <code class="docutils literal notranslate"><span class="pre">True</span></code> if two isolation intervals are disjoint.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="diofant.polys.rootisolation.RealInterval.refine">
-<code class="sig-name descname">refine</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rootisolation.py#L1323-L1329"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.RealInterval.refine" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">refine</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rootisolation.py#L1006-L1015"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.RealInterval.refine" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform one step of real root refinement algorithm.</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="py function">
+<dt id="diofant.polys.rootisolation.dmp_eval_in">
+<code class="sig-prename descclassname">diofant.polys.rootisolation.</code><code class="sig-name descname">dmp_eval_in</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">a</span></em>, <em class="sig-param"><span class="n">j</span></em>, <em class="sig-param"><span class="n">u</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rootisolation.py#L1196-L1203"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.dmp_eval_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluate a polynomial at <code class="docutils literal notranslate"><span class="pre">x_j</span> <span class="pre">=</span> <span class="pre">a</span></code> in <code class="docutils literal notranslate"><span class="pre">K[X]</span></code>.</p>
+</dd></dl>
+
+<dl class="py function">
 <dt id="diofant.polys.rootisolation.dup_count_complex_roots">
-<code class="sig-prename descclassname">diofant.polys.rootisolation.</code><code class="sig-name descname">dup_count_complex_roots</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">K</span></em>, <em class="sig-param"><span class="n">inf</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">sup</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">exclude</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rootisolation.py#L850-L881"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.dup_count_complex_roots" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.polys.rootisolation.</code><code class="sig-name descname">dup_count_complex_roots</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">K</span></em>, <em class="sig-param"><span class="n">inf</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">sup</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">exclude</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rootisolation.py#L555-L586"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.dup_count_complex_roots" title="Permalink to this definition">¶</a></dt>
 <dd><p>Count all roots in [u + v*I, s + t*I] rectangle using Collins-Krandick algorithm.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="diofant.polys.rootisolation.dup_inner_isolate_negative_roots">
-<code class="sig-prename descclassname">diofant.polys.rootisolation.</code><code class="sig-name descname">dup_inner_isolate_negative_roots</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">K</span></em>, <em class="sig-param"><span class="n">inf</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">sup</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">eps</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">mobius</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rootisolation.py#L1505-L1512"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.dup_inner_isolate_negative_roots" title="Permalink to this definition">¶</a></dt>
-<dd><p>Iteratively compute disjoint negative root isolation intervals.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="diofant.polys.rootisolation.dup_inner_isolate_positive_roots">
-<code class="sig-prename descclassname">diofant.polys.rootisolation.</code><code class="sig-name descname">dup_inner_isolate_positive_roots</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">K</span></em>, <em class="sig-param"><span class="n">eps</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">inf</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">sup</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">mobius</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rootisolation.py#L1495-L1502"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.dup_inner_isolate_positive_roots" title="Permalink to this definition">¶</a></dt>
-<dd><p>Iteratively compute disjoint positive root isolation intervals.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="diofant.polys.rootisolation.dup_inner_refine_real_root">
-<code class="sig-prename descclassname">diofant.polys.rootisolation.</code><code class="sig-name descname">dup_inner_refine_real_root</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">M</span></em>, <em class="sig-param"><span class="n">K</span></em>, <em class="sig-param"><span class="n">eps</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">steps</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">disjoint</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">mobius</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rootisolation.py#L1478-L1485"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.dup_inner_refine_real_root" title="Permalink to this definition">¶</a></dt>
-<dd><p>Refine a positive root of <span class="math notranslate nohighlight">\(f\)</span> given a Mobius transform or an interval.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="diofant.polys.rootisolation.dup_isolate_all_roots">
-<code class="sig-prename descclassname">diofant.polys.rootisolation.</code><code class="sig-name descname">dup_isolate_all_roots</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">K</span></em>, <em class="sig-param"><span class="n">eps</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">inf</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">sup</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rootisolation.py#L1240-L1257"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.dup_isolate_all_roots" title="Permalink to this definition">¶</a></dt>
-<dd><p>Isolate real and complex roots of a non-square-free polynomial <code class="docutils literal notranslate"><span class="pre">f</span></code>.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="diofant.polys.rootisolation.dup_isolate_all_roots_sqf">
-<code class="sig-prename descclassname">diofant.polys.rootisolation.</code><code class="sig-name descname">dup_isolate_all_roots_sqf</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">K</span></em>, <em class="sig-param"><span class="n">eps</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">inf</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">sup</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">blackbox</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rootisolation.py#L1234-L1237"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.dup_isolate_all_roots_sqf" title="Permalink to this definition">¶</a></dt>
-<dd><p>Isolate real and complex roots of a square-free polynomial <code class="docutils literal notranslate"><span class="pre">f</span></code>.</p>
-</dd></dl>
-
-<dl class="py function">
 <dt id="diofant.polys.rootisolation.dup_isolate_complex_roots_sqf">
-<code class="sig-prename descclassname">diofant.polys.rootisolation.</code><code class="sig-name descname">dup_isolate_complex_roots_sqf</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">K</span></em>, <em class="sig-param"><span class="n">eps</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">inf</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">sup</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">blackbox</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rootisolation.py#L1121-L1231"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.dup_isolate_complex_roots_sqf" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.polys.rootisolation.</code><code class="sig-name descname">dup_isolate_complex_roots_sqf</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">K</span></em>, <em class="sig-param"><span class="n">eps</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">inf</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">sup</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">blackbox</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rootisolation.py#L826-L936"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.dup_isolate_complex_roots_sqf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Isolate complex roots of a square-free polynomial using Collins-Krandick algorithm.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="diofant.polys.rootisolation.dup_isolate_real_roots">
-<code class="sig-prename descclassname">diofant.polys.rootisolation.</code><code class="sig-name descname">dup_isolate_real_roots</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">K</span></em>, <em class="sig-param"><span class="n">eps</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">inf</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">sup</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rootisolation.py#L165-L197"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.dup_isolate_real_roots" title="Permalink to this definition">¶</a></dt>
-<dd><p>Isolate real roots.</p>
-<p class="rubric">Notes</p>
-<p>Implemented algorithms use Vincent-Akritas-Strzebonski (VAS) continued
-fractions approach <a class="bibtex reference internal" href="../sources.html#alkiviadis2005comp" id="id1">[SA05]</a>, <a class="bibtex reference internal" href="../sources.html#alkiviadis2008cf" id="id2">[ASV08]</a>.</p>
-</dd></dl>
-
-<dl class="py function">
 <dt id="diofant.polys.rootisolation.dup_isolate_real_roots_pair">
-<code class="sig-prename descclassname">diofant.polys.rootisolation.</code><code class="sig-name descname">dup_isolate_real_roots_pair</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">g</span></em>, <em class="sig-param"><span class="n">K</span></em>, <em class="sig-param"><span class="n">eps</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">inf</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">sup</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">strict</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">basis</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rootisolation.py#L200-L260"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.dup_isolate_real_roots_pair" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.polys.rootisolation.</code><code class="sig-name descname">dup_isolate_real_roots_pair</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">g</span></em>, <em class="sig-param"><span class="n">K</span></em>, <em class="sig-param"><span class="n">eps</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">inf</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">sup</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">strict</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">basis</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rootisolation.py#L1179-L1186"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.dup_isolate_real_roots_pair" title="Permalink to this definition">¶</a></dt>
 <dd><p>Isolate real roots of a list of polynomials.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="diofant.polys.rootisolation.dup_isolate_real_roots_sqf">
-<code class="sig-prename descclassname">diofant.polys.rootisolation.</code><code class="sig-name descname">dup_isolate_real_roots_sqf</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">K</span></em>, <em class="sig-param"><span class="n">eps</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">inf</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">sup</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">blackbox</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rootisolation.py#L138-L162"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.dup_isolate_real_roots_sqf" title="Permalink to this definition">¶</a></dt>
-<dd><p>Isolate real roots of a square-free polynomial.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="diofant.polys.rootisolation.dup_real_imag">
-<code class="sig-prename descclassname">diofant.polys.rootisolation.</code><code class="sig-name descname">dup_real_imag</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rootisolation.py#L19-L72"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.dup_real_imag" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return bivariate polynomials <code class="docutils literal notranslate"><span class="pre">f1</span></code> and <code class="docutils literal notranslate"><span class="pre">f2</span></code>, such that <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">=</span> <span class="pre">f1</span> <span class="pre">+</span> <span class="pre">f2*I</span></code>.</p>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s1">&#39;x y&#39;</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="o">.</span><span class="n">dup_real_imag</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-<span class="go">(x**3 + x**2 - 3*x*y**2 + x - y**2 + 1, 3*x**2*y + 2*x*y - y**3 + y)</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s1">&#39;x y&#39;</span><span class="p">,</span> <span class="n">QQ</span><span class="o">.</span><span class="n">algebraic_field</span><span class="p">(</span><span class="n">I</span><span class="p">))</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="o">.</span><span class="n">dup_real_imag</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">I</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-<span class="go">(x**2 - y**2 - y - 1, 2*x*y + x)</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py function">
 <dt id="diofant.polys.rootisolation.dup_refine_real_root">
-<code class="sig-prename descclassname">diofant.polys.rootisolation.</code><code class="sig-name descname">dup_refine_real_root</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">s</span></em>, <em class="sig-param"><span class="n">t</span></em>, <em class="sig-param"><span class="n">K</span></em>, <em class="sig-param"><span class="n">eps</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">steps</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">disjoint</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rootisolation.py#L1488-L1492"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.dup_refine_real_root" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.polys.rootisolation.</code><code class="sig-name descname">dup_refine_real_root</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">s</span></em>, <em class="sig-param"><span class="n">t</span></em>, <em class="sig-param"><span class="n">K</span></em>, <em class="sig-param"><span class="n">eps</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">steps</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">disjoint</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rootisolation.py#L1166-L1170"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.dup_refine_real_root" title="Permalink to this definition">¶</a></dt>
 <dd><p>Refine real root’s approximating interval to the given precision.</p>
 </dd></dl>
 
-<dl class="py function">
-<dt id="diofant.polys.rootisolation.dup_transform">
-<code class="sig-prename descclassname">diofant.polys.rootisolation.</code><code class="sig-name descname">dup_transform</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">p</span></em>, <em class="sig-param"><span class="n">q</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rootisolation.py#L75-L102"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rootisolation.dup_transform" title="Permalink to this definition">¶</a></dt>
-<dd><p>Evaluate functional transformation <code class="docutils literal notranslate"><span class="pre">q**n</span> <span class="pre">*</span> <span class="pre">f(p/q)</span></code> in <code class="docutils literal notranslate"><span class="pre">K[x]</span></code>.</p>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="o">.</span><span class="n">dup_transform</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-<span class="go">x**4 - 2*x**3 + 5*x**2 - 4*x + 4</span>
-</pre></div>
-</div>
-</dd></dl>
-
 <span class="target" id="module-diofant.polys.sqfreetools"></span><p>Square-free decomposition algorithms and related tools.</p>
-<dl class="py function">
-<dt id="diofant.polys.sqfreetools.dmp_sqf_list">
-<code class="sig-prename descclassname">diofant.polys.sqfreetools.</code><code class="sig-name descname">dmp_sqf_list</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">u</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/sqfreetools.py#L6-L11"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.sqfreetools.dmp_sqf_list" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return square-free decomposition of a polynomial in <code class="docutils literal notranslate"><span class="pre">K[X]</span></code>.</p>
-</dd></dl>
-
 </div>
 <div class="section" id="manipulation-of-dense-univariate-polynomials-with-finite-field-coefficients">
 <h2>Manipulation of dense, univariate polynomials with finite field coefficients<a class="headerlink" href="#manipulation-of-dense-univariate-polynomials-with-finite-field-coefficients" title="Permalink to this headline">¶</a></h2>
@@ -682,8 +482,62 @@ the necessity of certain methods which do not even make sense over general
 fields.</p>
 <span class="target" id="module-diofant.polys.galoistools"></span><p>Dense univariate polynomials with coefficients in Galois fields.</p>
 <dl class="py function">
+<dt id="diofant.polys.galoistools.dmp_add">
+<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dmp_add</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">g</span></em>, <em class="sig-param"><span class="n">u</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L771-L775"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dmp_add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add dense polynomials in <code class="docutils literal notranslate"><span class="pre">K[X]</span></code>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="diofant.polys.galoistools.dmp_div">
+<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dmp_div</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">g</span></em>, <em class="sig-param"><span class="n">u</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L799-L803"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dmp_div" title="Permalink to this definition">¶</a></dt>
+<dd><p>Polynomial division with remainder in <code class="docutils literal notranslate"><span class="pre">K[X]</span></code>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="diofant.polys.galoistools.dmp_gcd">
+<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dmp_gcd</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">g</span></em>, <em class="sig-param"><span class="n">u</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L816-L820"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dmp_gcd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes polynomial GCD of <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span> in <span class="math notranslate nohighlight">\(K[X]\)</span>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="diofant.polys.galoistools.dmp_ground_monic">
+<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dmp_ground_monic</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">u</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L763-L768"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dmp_ground_monic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Divide all coefficients by <code class="docutils literal notranslate"><span class="pre">LC(f)</span></code> in <code class="docutils literal notranslate"><span class="pre">K[X]</span></code>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="diofant.polys.galoistools.dmp_mul">
+<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dmp_mul</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">g</span></em>, <em class="sig-param"><span class="n">u</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L785-L789"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dmp_mul" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multiply dense polynomials in <code class="docutils literal notranslate"><span class="pre">K[X]</span></code>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="diofant.polys.galoistools.dmp_pow">
+<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dmp_pow</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">n</span></em>, <em class="sig-param"><span class="n">u</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L792-L796"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dmp_pow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raise <code class="docutils literal notranslate"><span class="pre">f</span></code> to the <code class="docutils literal notranslate"><span class="pre">n</span></code>-th power in <code class="docutils literal notranslate"><span class="pre">K[X]</span></code>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="diofant.polys.galoistools.dmp_quo">
+<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dmp_quo</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">g</span></em>, <em class="sig-param"><span class="n">u</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L811-L813"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dmp_quo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return exact polynomial quotient in <code class="docutils literal notranslate"><span class="pre">K[X]</span></code>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="diofant.polys.galoistools.dmp_rem">
+<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dmp_rem</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">g</span></em>, <em class="sig-param"><span class="n">u</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L806-L808"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dmp_rem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return polynomial remainder in <code class="docutils literal notranslate"><span class="pre">K[X]</span></code>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="diofant.polys.galoistools.dmp_sub">
+<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dmp_sub</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">g</span></em>, <em class="sig-param"><span class="n">u</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L778-L782"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dmp_sub" title="Permalink to this definition">¶</a></dt>
+<dd><p>Subtract dense polynomials in <code class="docutils literal notranslate"><span class="pre">K[X]</span></code>.</p>
+</dd></dl>
+
+<dl class="py function">
 <dt id="diofant.polys.galoistools.dup_gf_Qmatrix">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_Qmatrix</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L320-L359"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_Qmatrix" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_Qmatrix</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L317-L356"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_Qmatrix" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate Berlekamp’s <code class="docutils literal notranslate"><span class="pre">Q</span></code> matrix.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">FF</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
@@ -703,13 +557,13 @@ fields.</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#geddes1992algorithms" id="id3">[GCL92]</a>, algorithm 8.5</p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#geddes1992algorithms" id="id1">[GCL92]</a>, algorithm 8.5</p></li>
 </ul>
 </dd></dl>
 
 <dl class="py function">
 <dt id="diofant.polys.galoistools.dup_gf_berlekamp">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_berlekamp</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L362-L406"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_berlekamp" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_berlekamp</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L359-L403"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_berlekamp" title="Permalink to this definition">¶</a></dt>
 <dd><p>Factor a square-free polynomial over finite fields of small order.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">FF</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
@@ -720,14 +574,14 @@ fields.</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#geddes1992algorithms" id="id4">[GCL92]</a>, algorithm 8.4</p></li>
-<li><p><a class="bibtex reference internal" href="../sources.html#knuth1985seminumerical" id="id5">[Knu85]</a>, section 4.6.2</p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#geddes1992algorithms" id="id2">[GCL92]</a>, algorithm 8.4</p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#knuth1985seminumerical" id="id3">[Knu85]</a>, section 4.6.2</p></li>
 </ul>
 </dd></dl>
 
 <dl class="py function">
 <dt id="diofant.polys.galoistools.dup_gf_compose_mod">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_compose_mod</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">g</span></em>, <em class="sig-param"><span class="n">h</span></em>, <em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L64-L89"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_compose_mod" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_compose_mod</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">g</span></em>, <em class="sig-param"><span class="n">h</span></em>, <em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L61-L86"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_compose_mod" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute polynomial composition <code class="docutils literal notranslate"><span class="pre">g(h)</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(q)[x]/(f)</span></code>.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">FF</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
@@ -742,7 +596,7 @@ fields.</p>
 
 <dl class="py function">
 <dt id="diofant.polys.galoistools.dup_gf_ddf_shoup">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_ddf_shoup</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L521-L602"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_ddf_shoup" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_ddf_shoup</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L518-L599"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_ddf_shoup" title="Permalink to this definition">¶</a></dt>
 <dd><p>Kaltofen-Shoup: Deterministic Distinct Degree Factorization.</p>
 <p>Given a monic square-free polynomial <code class="docutils literal notranslate"><span class="pre">f</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(q)[x]</span></code>, computes
 partial distinct degree factorization <code class="docutils literal notranslate"><span class="pre">f_1</span> <span class="pre">...</span> <span class="pre">f_d</span></code> of <code class="docutils literal notranslate"><span class="pre">f</span></code> where
@@ -761,9 +615,9 @@ large <code class="docutils literal notranslate"><span class="pre">deg(f)</span>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#kaltofen1998subquadratic" id="id6">[KS98]</a>, algorithm D</p></li>
-<li><p><a class="bibtex reference internal" href="../sources.html#shoup1995factor" id="id7">[Sho95]</a></p></li>
-<li><p><a class="bibtex reference internal" href="../sources.html#gathen1992frobenious" id="id8">[vzGS92b]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#kaltofen1998subquadratic" id="id4">[KS98]</a>, algorithm D</p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#shoup1995factor" id="id5">[Sho95]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#gathen1992frobenious" id="id6">[vzGS92b]</a></p></li>
 </ul>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
@@ -773,7 +627,7 @@ large <code class="docutils literal notranslate"><span class="pre">deg(f)</span>
 
 <dl class="py function">
 <dt id="diofant.polys.galoistools.dup_gf_ddf_zassenhaus">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_ddf_zassenhaus</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L409-L460"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_ddf_zassenhaus" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_ddf_zassenhaus</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L406-L457"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_ddf_zassenhaus" title="Permalink to this definition">¶</a></dt>
 <dd><p>Cantor-Zassenhaus: Deterministic Distinct Degree Factorization.</p>
 <p>Given a monic square-free polynomial <code class="docutils literal notranslate"><span class="pre">f</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(q)[x]</span></code>, computes
 partial distinct degree factorization <code class="docutils literal notranslate"><span class="pre">f_1</span> <span class="pre">...</span> <span class="pre">f_d</span></code> of <code class="docutils literal notranslate"><span class="pre">f</span></code> where
@@ -793,8 +647,8 @@ is an argument to the equal degree factorization routine.</p>
 procedure (EDF) with each of the factors.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#gathen1999modern" id="id9">[vzGG99]</a>, algorithm 14.3</p></li>
-<li><p><a class="bibtex reference internal" href="../sources.html#geddes1992algorithms" id="id10">[GCL92]</a>, algorithm 8.8</p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#gathen1999modern" id="id7">[vzGG99]</a>, algorithm 14.3</p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#geddes1992algorithms" id="id8">[GCL92]</a>, algorithm 8.8</p></li>
 </ul>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
@@ -804,7 +658,7 @@ procedure (EDF) with each of the factors.</p>
 
 <dl class="py function">
 <dt id="diofant.polys.galoistools.dup_gf_edf_shoup">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_edf_shoup</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">n</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L605-L670"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_edf_shoup" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_edf_shoup</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">n</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L602-L667"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_edf_shoup" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gathen-Shoup: Probabilistic Equal Degree Factorization.</p>
 <p>Given a monic square-free polynomial <code class="docutils literal notranslate"><span class="pre">f</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(q)[x]</span></code> and
 an integer <code class="docutils literal notranslate"><span class="pre">n</span></code>, such that <code class="docutils literal notranslate"><span class="pre">n</span></code> divides <code class="docutils literal notranslate"><span class="pre">deg(f)</span></code>, returns all
@@ -822,8 +676,8 @@ large <code class="docutils literal notranslate"><span class="pre">deg(f)</span>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#shoup1991ffactor" id="id11">[Sho91]</a></p></li>
-<li><p><a class="bibtex reference internal" href="../sources.html#gathen1992computingfm" id="id12">[vzGS92a]</a>, algorithm 3.6</p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#shoup1991ffactor" id="id9">[Sho91]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#gathen1992computingfm" id="id10">[vzGS92a]</a>, algorithm 3.6</p></li>
 </ul>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
@@ -833,7 +687,7 @@ large <code class="docutils literal notranslate"><span class="pre">deg(f)</span>
 
 <dl class="py function">
 <dt id="diofant.polys.galoistools.dup_gf_edf_zassenhaus">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_edf_zassenhaus</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">n</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L463-L518"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_edf_zassenhaus" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_edf_zassenhaus</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">n</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L460-L515"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_edf_zassenhaus" title="Permalink to this definition">¶</a></dt>
 <dd><p>Cantor-Zassenhaus: Probabilistic Equal Degree Factorization.</p>
 <p>Given a monic square-free polynomial <code class="docutils literal notranslate"><span class="pre">f</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(q)[x]</span></code> and
 an integer <code class="docutils literal notranslate"><span class="pre">n</span></code>, such that <code class="docutils literal notranslate"><span class="pre">n</span></code> divides <code class="docutils literal notranslate"><span class="pre">deg(f)</span></code>, returns all
@@ -848,7 +702,7 @@ EDF procedure gives complete factorization over Galois fields.</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#geddes1992algorithms" id="id13">[GCL92]</a>, algorithm 8.9</p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#geddes1992algorithms" id="id11">[GCL92]</a>, algorithm 8.9</p></li>
 </ul>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
@@ -858,7 +712,7 @@ EDF procedure gives complete factorization over Galois fields.</p>
 
 <dl class="py function">
 <dt id="diofant.polys.galoistools.dup_gf_factor_sqf">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_factor_sqf</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L722-L763"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_factor_sqf" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_factor_sqf</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L719-L760"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_factor_sqf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Factor a square-free polynomial <code class="docutils literal notranslate"><span class="pre">f</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(q)[x]</span></code>.</p>
 <p>Returns its complete factorization into irreducibles:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f_1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">f_2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">...</span> <span class="n">f_d</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
@@ -888,13 +742,13 @@ finite fields using three very different methods:</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#gathen1999modern" id="id14">[vzGG99]</a>, chapter 14</p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#gathen1999modern" id="id12">[vzGG99]</a>, chapter 14</p></li>
 </ul>
 </dd></dl>
 
 <dl class="py function">
 <dt id="diofant.polys.galoistools.dup_gf_irred_p_ben_or">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_irred_p_ben_or</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L183-L223"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_irred_p_ben_or" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_irred_p_ben_or</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L180-L220"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_irred_p_ben_or" title="Permalink to this definition">¶</a></dt>
 <dd><p>Ben-Or’s polynomial irreducibility test over finite fields.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">FF</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
@@ -909,13 +763,13 @@ finite fields using three very different methods:</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#ben-or1981ff" id="id15">[BO81]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#ben-or1981ff" id="id13">[BO81]</a></p></li>
 </ul>
 </dd></dl>
 
 <dl class="py function">
 <dt id="diofant.polys.galoistools.dup_gf_irred_p_rabin">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_irred_p_rabin</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L226-L269"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_irred_p_rabin" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_irred_p_rabin</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L223-L266"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_irred_p_rabin" title="Permalink to this definition">¶</a></dt>
 <dd><p>Rabin’s polynomial irreducibility test over finite fields.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">FF</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
@@ -930,13 +784,13 @@ finite fields using three very different methods:</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#gathen1999modern" id="id16">[vzGG99]</a>, algorithm 14.36</p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#gathen1999modern" id="id14">[vzGG99]</a>, algorithm 14.36</p></li>
 </ul>
 </dd></dl>
 
 <dl class="py function">
 <dt id="diofant.polys.galoistools.dup_gf_irreducible">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_irreducible</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L164-L180"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_irreducible" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_irreducible</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L161-L177"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_irreducible" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate random irreducible polynomial of degree <code class="docutils literal notranslate"><span class="pre">n</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(q)[x]</span></code>.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dup_gf_irreducible</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">FF</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>  
@@ -949,7 +803,7 @@ finite fields using three very different methods:</p>
 
 <dl class="py function">
 <dt id="diofant.polys.galoistools.dup_gf_irreducible_p">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_irreducible_p</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L278-L297"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_irreducible_p" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_irreducible_p</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L275-L294"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_irreducible_p" title="Permalink to this definition">¶</a></dt>
 <dd><p>Test irreducibility of a polynomial <code class="docutils literal notranslate"><span class="pre">f</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(q)[x]</span></code>.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">FF</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
@@ -966,7 +820,7 @@ finite fields using three very different methods:</p>
 
 <dl class="py function">
 <dt id="diofant.polys.galoistools.dup_gf_pow_mod">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_pow_mod</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">n</span></em>, <em class="sig-param"><span class="n">g</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L15-L61"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_pow_mod" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_pow_mod</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">n</span></em>, <em class="sig-param"><span class="n">g</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L12-L58"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_pow_mod" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute <code class="docutils literal notranslate"><span class="pre">f**n</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(q)[x]/(g)</span></code> using repeated squaring.</p>
 <p>Given polynomials <code class="docutils literal notranslate"><span class="pre">f</span></code> and <code class="docutils literal notranslate"><span class="pre">g</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(q)[x]</span></code> and a non-negative
 integer <code class="docutils literal notranslate"><span class="pre">n</span></code>, efficiently computes <code class="docutils literal notranslate"><span class="pre">f**n</span> <span class="pre">(mod</span> <span class="pre">g)</span></code> i.e. the remainder
@@ -981,19 +835,19 @@ of <code class="docutils literal notranslate"><span class="pre">f**n</span></cod
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#gathen1999modern" id="id17">[vzGG99]</a>, algorithm 4.8</p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#gathen1999modern" id="id15">[vzGG99]</a>, algorithm 4.8</p></li>
 </ul>
 </dd></dl>
 
 <dl class="py function">
 <dt id="diofant.polys.galoistools.dup_gf_primitive_p">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_primitive_p</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L300-L317"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_primitive_p" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_primitive_p</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L297-L314"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_primitive_p" title="Permalink to this definition">¶</a></dt>
 <dd><p>Test if <code class="docutils literal notranslate"><span class="pre">f</span></code> is a primitive polynomial over <code class="docutils literal notranslate"><span class="pre">GF(p)</span></code>.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt id="diofant.polys.galoistools.dup_gf_random">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_random</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L150-L161"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_random" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_random</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L147-L158"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_random" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate a random polynomial in <code class="docutils literal notranslate"><span class="pre">GF(q)[x]</span></code> of degree <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dup_gf_random</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">FF</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>  
@@ -1004,7 +858,7 @@ of <code class="docutils literal notranslate"><span class="pre">f**n</span></cod
 
 <dl class="py function">
 <dt id="diofant.polys.galoistools.dup_gf_shoup">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_shoup</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L694-L712"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_shoup" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_shoup</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L691-L709"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_shoup" title="Permalink to this definition">¶</a></dt>
 <dd><p>Factor a square-free polynomial over finite fields of large order.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">FF</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
@@ -1017,7 +871,7 @@ of <code class="docutils literal notranslate"><span class="pre">f**n</span></cod
 
 <dl class="py function">
 <dt id="diofant.polys.galoistools.dup_gf_trace_map">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_trace_map</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">a</span></em>, <em class="sig-param"><span class="n">b</span></em>, <em class="sig-param"><span class="n">c</span></em>, <em class="sig-param"><span class="n">n</span></em>, <em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L92-L147"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_trace_map" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_trace_map</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">a</span></em>, <em class="sig-param"><span class="n">b</span></em>, <em class="sig-param"><span class="n">c</span></em>, <em class="sig-param"><span class="n">n</span></em>, <em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L89-L144"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_trace_map" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute polynomial trace map in <code class="docutils literal notranslate"><span class="pre">GF(q)[x]/(f)</span></code>.</p>
 <p>Given a polynomial <code class="docutils literal notranslate"><span class="pre">f</span></code> in <code class="docutils literal notranslate"><span class="pre">GF(q)[x]</span></code>, polynomials <code class="docutils literal notranslate"><span class="pre">a</span></code>, <code class="docutils literal notranslate"><span class="pre">b</span></code>,
 <code class="docutils literal notranslate"><span class="pre">c</span></code> in the quotient ring <code class="docutils literal notranslate"><span class="pre">GF(q)[x]/(f)</span></code> such that <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">=</span> <span class="pre">c**t</span>
@@ -1042,13 +896,13 @@ like iterated Frobenius algorithm, for large degrees.</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#gathen1992computingfm" id="id18">[vzGS92a]</a>, algorithm 5.2</p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#gathen1992computingfm" id="id16">[vzGS92a]</a>, algorithm 5.2</p></li>
 </ul>
 </dd></dl>
 
 <dl class="py function">
 <dt id="diofant.polys.galoistools.dup_gf_zassenhaus">
-<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_zassenhaus</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L673-L691"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_zassenhaus" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.polys.galoistools.</code><code class="sig-name descname">dup_gf_zassenhaus</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/galoistools.py#L670-L688"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.galoistools.dup_gf_zassenhaus" title="Permalink to this definition">¶</a></dt>
 <dd><p>Factor a square-free polynomial over finite fields of medium order.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">FF</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
@@ -1114,7 +968,7 @@ there is code to manipulate polynomials in a <em>sparse</em> representation.</p>
 
 <dl class="py class">
 <dt id="diofant.polys.rings.PolyElement">
-<em class="property">class </em><code class="sig-prename descclassname">diofant.polys.rings.</code><code class="sig-name descname">PolyElement</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rings.py#L454-L2024"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rings.PolyElement" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diofant.polys.rings.</code><code class="sig-name descname">PolyElement</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rings.py#L454-L2025"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rings.PolyElement" title="Permalink to this definition">¶</a></dt>
 <dd><p>Element of multivariate distributed polynomial ring.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
@@ -1270,7 +1124,7 @@ can copy the polynomial. This method makes a shallow copy.</p>
 <dl class="py method">
 <dt id="diofant.polys.rings.PolyElement.div">
 <code class="sig-name descname">div</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fv</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rings.py#L1076-L1134"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rings.PolyElement.div" title="Permalink to this definition">¶</a></dt>
-<dd><p>Division algorithm, see <a class="bibtex reference internal" href="../sources.html#cox2015ideals" id="id19">[CLOShea15]</a>, p. 64.</p>
+<dd><p>Division algorithm, see <a class="bibtex reference internal" href="../sources.html#cox2015ideals" id="id17">[CLOShea15]</a>, p. 64.</p>
 <dl class="simple">
 <dt>fv array of polynomials</dt><dd><p>return qv, r such that
 self = sum(fv[i]*qv[i]) + r</p>
@@ -1295,7 +1149,7 @@ self = sum(fv[i]*qv[i]) + r</p>
 
 <dl class="py method">
 <dt id="diofant.polys.rings.PolyElement.gcdex">
-<code class="sig-name descname">gcdex</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rings.py#L1986-L2008"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rings.PolyElement.gcdex" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">gcdex</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rings.py#L1987-L2009"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rings.PolyElement.gcdex" title="Permalink to this definition">¶</a></dt>
 <dd><p>Extended Euclidean algorithm in <span class="math notranslate nohighlight">\(F[x]\)</span>.</p>
 <p>Returns <code class="docutils literal notranslate"><span class="pre">(s,</span> <span class="pre">t,</span> <span class="pre">h)</span></code> such that <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">=</span> <span class="pre">gcd(self,</span> <span class="pre">other)</span></code> and
 <code class="docutils literal notranslate"><span class="pre">s*self</span> <span class="pre">+</span> <span class="pre">t*other</span> <span class="pre">=</span> <span class="pre">h</span></code>.</p>
@@ -1410,7 +1264,7 @@ self = sum(fv[i]*qv[i]) + r</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#knuth1985seminumerical" id="id20">[Knu85]</a>, p. 407.</p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#knuth1985seminumerical" id="id18">[Knu85]</a>, p. 407.</p></li>
 </ul>
 </dd></dl>
 
@@ -1422,7 +1276,7 @@ self = sum(fv[i]*qv[i]) + r</p>
 
 <dl class="py method">
 <dt id="diofant.polys.rings.PolyElement.resultant">
-<code class="sig-name descname">resultant</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span></em>, <em class="sig-param"><span class="n">includePRS</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rings.py#L1938-L1963"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rings.PolyElement.resultant" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">resultant</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rings.py#L1938-L1964"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rings.PolyElement.resultant" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes resultant of two polynomials in <span class="math notranslate nohighlight">\(K[X]\)</span>.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s1">&#39;x y&#39;</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
@@ -1440,7 +1294,7 @@ self = sum(fv[i]*qv[i]) + r</p>
 
 <dl class="py method">
 <dt id="diofant.polys.rings.PolyElement.subresultants">
-<code class="sig-name descname">subresultants</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rings.py#L1965-L1984"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rings.PolyElement.subresultants" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">subresultants</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rings.py#L1966-L1985"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.rings.PolyElement.subresultants" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes subresultant PRS of two polynomials in <span class="math notranslate nohighlight">\(K[X]\)</span>.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s1">&#39;x y&#39;</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
@@ -1537,7 +1391,7 @@ polynomials are not unique, consider examples:</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#kozen1989decomposition" id="id21">[KL89]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#kozen1989decomposition" id="id19">[KL89]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -1566,7 +1420,7 @@ and <code class="docutils literal notranslate"><span class="pre">s*self</span> <
 <code class="sig-name descname">sturm</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/univar.py#L174-L194"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.univar.UnivarPolyElement.sturm" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes the Sturm sequence of <code class="docutils literal notranslate"><span class="pre">f</span></code> in <code class="docutils literal notranslate"><span class="pre">F[x]</span></code>.</p>
 <p>Given a univariate, square-free polynomial <code class="docutils literal notranslate"><span class="pre">f(x)</span></code> returns the
-associated Sturm sequence (see e.g. <a class="bibtex reference internal" href="../sources.html#davenport1988systems" id="id22">[DST88]</a>)
+associated Sturm sequence (see e.g. <a class="bibtex reference internal" href="../sources.html#davenport1988systems" id="id20">[DST88]</a>)
 <code class="docutils literal notranslate"><span class="pre">f_0(x),</span> <span class="pre">...,</span> <span class="pre">f_n(x)</span></code> defined by:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f_0</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">f_1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="sa">f</span><span class="s1">&#39;(x)</span>
 <span class="n">f_n</span> <span class="o">=</span> <span class="o">-</span><span class="n">rem</span><span class="p">(</span><span class="n">f_</span><span class="p">{</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">}(</span><span class="n">x</span><span class="p">),</span> <span class="n">f_</span><span class="p">{</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">}(</span><span class="n">x</span><span class="p">))</span>
@@ -1673,7 +1527,7 @@ exceedingly, but the computation of the primitive parts requires
 extra processing effort. Besides, the method only works with fraction fields
 of unique factorization domains, excluding, for example, the general number
 fields.</p>
-<p>Collins <a class="bibtex reference internal" href="../sources.html#collins1967subr" id="id23">[Col67]</a> realized that the so-called <em>subresultant polynomials</em>
+<p>Collins <a class="bibtex reference internal" href="../sources.html#collins1967subr" id="id21">[Col67]</a> realized that the so-called <em>subresultant polynomials</em>
 of a pair of polynomials also form a generalized remainder sequence.
 The coefficients of these polynomials
 are expressible as determinants in the coefficients of the given
@@ -1752,12 +1606,12 @@ formulas</p>
 \[\gamma_i f_i = \mathrm{rem}(f_{i-2},f_{i-1})\]</div>
 <p>in terms of the leading coefficients of <span class="math notranslate nohighlight">\(f_1,\ldots,f_{i-1}\)</span>, working
 in the field <span class="math notranslate nohighlight">\(K\)</span>.</p>
-<p>Brown and Traub <a class="bibtex reference internal" href="../sources.html#brown1971subres" id="id24">[BT71]</a> later developed a recursive procedure
+<p>Brown and Traub <a class="bibtex reference internal" href="../sources.html#brown1971subres" id="id22">[BT71]</a> later developed a recursive procedure
 for computing the coefficients <span class="math notranslate nohighlight">\(\gamma_i\)</span>. Their algorithm deals with elements
 of the domain <span class="math notranslate nohighlight">\(A\)</span> exclusively (assuming <span class="math notranslate nohighlight">\(f,g\in A[X]\)</span>). However, in the
 abnormal case there was a problem, a division in <span class="math notranslate nohighlight">\(A\)</span>
 which could only be conjectured to be exact.</p>
-<p>This was subsequently justified by Brown <a class="bibtex reference internal" href="../sources.html#brown1978prs" id="id25">[Bro78]</a> who showed that
+<p>This was subsequently justified by Brown <a class="bibtex reference internal" href="../sources.html#brown1978prs" id="id23">[Bro78]</a> who showed that
 the result of the division is, in fact, a scalar subresultant.
 More specifically, the constant appearing in the computation of <span class="math notranslate nohighlight">\(f_i\)</span> is
 <span class="math notranslate nohighlight">\(s_{n_{i-2}}(f,g)\)</span> (Theorem 3).
@@ -1766,26 +1620,8 @@ are computed as by-products of the algorithm, all but <span class="math notransl
 which is not needed after finding <span class="math notranslate nohighlight">\(f_{k+1} = 0\)</span>.
 Completing the last step we obtain all non-zero scalar subresultants,
 including the last one which is the resultant if this does not vanish.</p>
-<dl class="py function">
-<dt id="diofant.polys.euclidtools.dmp_resultant">
-<code class="sig-prename descclassname">diofant.polys.euclidtools.</code><code class="sig-name descname">dmp_resultant</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/euclidtools.py#L10-L16"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.euclidtools.dmp_resultant" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes resultant of two polynomials in <span class="math notranslate nohighlight">\(K[X]\)</span>.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="diofant.polys.euclidtools.dmp_gcd">
-<code class="sig-prename descclassname">diofant.polys.euclidtools.</code><code class="sig-name descname">dmp_gcd</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">g</span></em>, <em class="sig-param"><span class="n">u</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/euclidtools.py#L19-L23"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.euclidtools.dmp_gcd" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes polynomial GCD of <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span> in <span class="math notranslate nohighlight">\(K[X]\)</span>.</p>
-</dd></dl>
-
 <p>Polynomial factorization in characteristic zero:</p>
 <span class="target" id="module-diofant.polys.factortools"></span><p>Polynomial factorization routines in characteristic zero.</p>
-<dl class="py function">
-<dt id="diofant.polys.factortools.dmp_trial_division">
-<code class="sig-prename descclassname">diofant.polys.factortools.</code><code class="sig-name descname">dmp_trial_division</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">factors</span></em>, <em class="sig-param"><span class="n">u</span></em>, <em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/factortools.py#L17-L23"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.factortools.dmp_trial_division" title="Permalink to this definition">¶</a></dt>
-<dd><p>Determine multiplicities of factors using trial division.</p>
-</dd></dl>
-
 </div>
 </div>
 <div class="section" id="grobner-basis-algorithms">
@@ -1818,15 +1654,15 @@ variable at a time, provided that the ideal is zero-dimensional
 (finite number of solutions).</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#bose03" id="id26">[NKBG03]</a></p></li>
-<li><p><a class="bibtex reference internal" href="../sources.html#giovini1991sugar" id="id27">[GMN+91]</a></p></li>
-<li><p><a class="bibtex reference internal" href="../sources.html#ajwa95groebner" id="id28">[ALW95]</a></p></li>
-<li><p><a class="bibtex reference internal" href="../sources.html#cox2015ideals" id="id29">[CLOShea15]</a></p></li>
-<li><p><a class="bibtex reference internal" href="../sources.html#beckerweispfenning93" id="id30">[BW93]</a>, page 232</p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#bose03" id="id24">[NKBG03]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#giovini1991sugar" id="id25">[GMN+91]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#ajwa95groebner" id="id26">[ALW95]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#cox2015ideals" id="id27">[CLOShea15]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#beckerweispfenning93" id="id28">[BW93]</a>, page 232</p></li>
 </ul>
 <p class="rubric">Notes</p>
 <p>Used an improved version of Buchberger’s algorithm
-as presented in <a class="bibtex reference internal" href="../sources.html#beckerweispfenning93" id="id31">[BW93]</a>.</p>
+as presented in <a class="bibtex reference internal" href="../sources.html#beckerweispfenning93" id="id29">[BW93]</a>.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -1897,8 +1733,8 @@ the current basis.</p>
 <p>Once a Gröbner basis has been found, it gets reduced.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#sunwang2010f5" id="id32">[SW10]</a></p></li>
-<li><p><a class="bibtex reference internal" href="../sources.html#beckerweispfenning93" id="id33">[BW93]</a>, pp. 203, 216.</p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#sunwang2010f5" id="id30">[SW10]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#beckerweispfenning93" id="id31">[BW93]</a>, pp. 203, 216.</p></li>
 </ul>
 </dd></dl>
 
@@ -1929,7 +1765,7 @@ of <span class="math notranslate nohighlight">\(t*f\)</span> and <span class="ma
 then filtering out the solution that doesn’t contain <span class="math notranslate nohighlight">\(t\)</span>.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#cox2015ideals" id="id34">[CLOShea15]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#cox2015ideals" id="id32">[CLOShea15]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -2005,7 +1841,7 @@ and number of the maximum of f and g, w.r.t. lbp_cmp.</p>
 and computes a reduced Gröbner basis for them.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#beckerweispfenning93" id="id35">[BW93]</a>, page 216.</p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#beckerweispfenning93" id="id33">[BW93]</a>, page 216.</p></li>
 </ul>
 </dd></dl>
 
@@ -2066,7 +1902,7 @@ ideal w.r.t. <code class="docutils literal notranslate"><span class="pre">O_from
 w.r.t. <code class="docutils literal notranslate"><span class="pre">O_to</span></code>.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#faugere1993groebner" id="id36">[FaugereGLM93]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#faugere1993groebner" id="id34">[FaugereGLM93]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -2085,7 +1921,7 @@ using Gröbner bases</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#adams1994intro" id="id37">[AL94]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#adams1994intro" id="id35">[AL94]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -2159,7 +1995,7 @@ called recursively.</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#monagan2004algebraic" id="id38">[MvH04]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#monagan2004algebraic" id="id36">[MvH04]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -2209,8 +2045,8 @@ candidates which are very likely the desired GCD.</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#monagan2000brown" id="id39">[MW00]</a></p></li>
-<li><p><a class="bibtex reference internal" href="../sources.html#brown1971gcd" id="id40">[Bro71]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#monagan2000brown" id="id37">[MW00]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#brown1971gcd" id="id38">[Bro71]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -2238,7 +2074,7 @@ is given, <span class="math notranslate nohighlight">\(\mathbb Z_p\)</span> is c
 </dl>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#vanhoeij2002modgcd" id="id41">[vHM02]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#vanhoeij2002modgcd" id="id39">[vHM02]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -2247,7 +2083,7 @@ is given, <span class="math notranslate nohighlight">\(\mathbb Z_p\)</span> is c
 <h2>Heuristic GCD<a class="headerlink" href="#heuristic-gcd" title="Permalink to this headline">¶</a></h2>
 <dl class="py method">
 <dt id="diofant.polys.euclidtools._GCD._zz_heu_gcd">
-<code class="sig-prename descclassname">_GCD.</code><code class="sig-name descname">_zz_heu_gcd</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">g</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/euclidtools.py#L125-L214"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.euclidtools._GCD._zz_heu_gcd" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">_GCD.</code><code class="sig-name descname">_zz_heu_gcd</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">g</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/euclidtools.py#L108-L197"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.euclidtools._GCD._zz_heu_gcd" title="Permalink to this definition">¶</a></dt>
 <dd><p>Heuristic polynomial GCD in <code class="docutils literal notranslate"><span class="pre">Z[X]</span></code>.</p>
 <p>Given univariate polynomials <code class="docutils literal notranslate"><span class="pre">f</span></code> and <code class="docutils literal notranslate"><span class="pre">g</span></code> in <code class="docutils literal notranslate"><span class="pre">Z[X]</span></code>, returns
 their GCD and cofactors, i.e. polynomials <code class="docutils literal notranslate"><span class="pre">h</span></code>, <code class="docutils literal notranslate"><span class="pre">cff</span></code> and <code class="docutils literal notranslate"><span class="pre">cfg</span></code>
@@ -2267,7 +2103,7 @@ interpolated polynomial is the correct GCD. This gives cofactors of
 the input polynomials as a side effect.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#liao1995heuristic" id="id42">[LF95]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#liao1995heuristic" id="id40">[LF95]</a></p></li>
 </ul>
 </dd></dl>
 
