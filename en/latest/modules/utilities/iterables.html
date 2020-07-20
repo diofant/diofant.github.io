@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Iterables &mdash; Diofant 0.11.1.dev296+g8a8efc2bf documentation</title>
+  <title>Iterables &mdash; Diofant 0.11.1.dev310+gf75f8956e documentation</title>
   
 
   
@@ -342,6 +342,111 @@ print statements.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt id="diofant.utilities.iterables.default_sort_key">
+<code class="sig-prename descclassname">diofant.utilities.iterables.</code><code class="sig-name descname">default_sort_key</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">item</span></em>, <em class="sig-param"><span class="n">order</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/utilities/iterables.py#L1902-L2057"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.utilities.iterables.default_sort_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a key that can be used for sorting.</p>
+<p>The key has the structure:</p>
+<p>(class_key, (len(args), args), exponent.sort_key(), coefficient)</p>
+<p>This key is supplied by the sort_key routine of Basic objects when
+<code class="docutils literal notranslate"><span class="pre">item</span></code> is a Basic object or an object (other than a string) that
+sympifies to a Basic object. Otherwise, this function produces the
+key.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">order</span></code> argument is passed along to the sort_key routine and is
+used to determine how the terms <em>within</em> an expression are ordered.
+(See examples below) <code class="docutils literal notranslate"><span class="pre">order</span></code> options are: ‘lex’, ‘grlex’, ‘grevlex’,
+and reversed values of the same (e.g. ‘rev-lex’). The default order
+value is None (which translates to ‘lex’).</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.core.function</span> <span class="kn">import</span> <span class="n">UndefinedFunction</span>
+</pre></div>
+</div>
+<p>The following are equivalent ways of getting the key for an object:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">sort_key</span><span class="p">()</span> <span class="o">==</span> <span class="n">default_sort_key</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>Here are some examples of the key that is produced:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">default_sort_key</span><span class="p">(</span><span class="n">UndefinedFunction</span><span class="p">(</span><span class="s1">&#39;f&#39;</span><span class="p">))</span>
+<span class="go">((0, 0, &#39;UndefinedFunction&#39;), (1, (&#39;f&#39;,)), ((1, 0, &#39;Number&#39;),</span>
+<span class="go">    (0, ()), (), 1), 1)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">default_sort_key</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">)</span>
+<span class="go">((0, 0, &#39;str&#39;), (1, (&#39;1&#39;,)), ((1, 0, &#39;Number&#39;), (0, ()), (), 1), 1)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">default_sort_key</span><span class="p">(</span><span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="go">((1, 0, &#39;Number&#39;), (0, ()), (), 1)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">default_sort_key</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">((1, 0, &#39;Number&#39;), (0, ()), (), 2)</span>
+</pre></div>
+</div>
+<p>While sort_key is a method only defined for Diofant objects,
+default_sort_key will accept anything as an argument so it is
+more robust as a sorting key. For the following, using key=
+lambda i: i.sort_key() would fail because 2 doesn’t have a sort_key
+method; that’s why default_sort_key is used. Note, that it also
+handles sympification of non-string items likes ints:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="o">-</span><span class="n">I</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">default_sort_key</span><span class="p">)</span>
+<span class="go">[2, -I, I]</span>
+</pre></div>
+</div>
+<p>The returned key can be used anywhere that a key can be specified for
+a function, e.g. sort, min, max, etc…:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">default_sort_key</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">min</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">default_sort_key</span><span class="p">)</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+<p class="rubric">Notes</p>
+<p>The key returned is useful for getting items into a canonical order
+that will be the same across platforms. It is not directly useful for
+sorting lists of expressions:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="n">x</span>
+</pre></div>
+</div>
+<p>Since <code class="docutils literal notranslate"><span class="pre">a</span></code> has only 1 term, its value of sort_key is unaffected by
+<code class="docutils literal notranslate"><span class="pre">order</span></code>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">sort_key</span><span class="p">()</span> <span class="o">==</span> <span class="n">a</span><span class="o">.</span><span class="n">sort_key</span><span class="p">(</span><span class="s1">&#39;rev-lex&#39;</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> are combined then the key will differ because there
+are terms that can be ordered:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eq</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eq</span><span class="o">.</span><span class="n">sort_key</span><span class="p">()</span> <span class="o">==</span> <span class="n">eq</span><span class="o">.</span><span class="n">sort_key</span><span class="p">(</span><span class="s1">&#39;rev-lex&#39;</span><span class="p">)</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eq</span><span class="o">.</span><span class="n">as_ordered_terms</span><span class="p">()</span>
+<span class="go">[x, 1/x]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eq</span><span class="o">.</span><span class="n">as_ordered_terms</span><span class="p">(</span><span class="s1">&#39;rev-lex&#39;</span><span class="p">)</span>
+<span class="go">[1/x, x]</span>
+</pre></div>
+</div>
+<p>But since the keys for each of these terms are independent of <code class="docutils literal notranslate"><span class="pre">order</span></code>’s
+value, they don’t sort differently when they appear separately in a list:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">eq</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">default_sort_key</span><span class="p">)</span>
+<span class="go">[1/x, x]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">eq</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">default_sort_key</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;rev-lex&#39;</span><span class="p">))</span>
+<span class="go">[1/x, x]</span>
+</pre></div>
+</div>
+<p>The order of terms obtained when using these keys is the order that would
+be obtained if those terms were <em>factors</em> in a product.</p>
+<p>Although it is useful for quickly putting expressions in canonical order,
+it does not sort expressions based on their complexity defined by the
+number of operations, power of variables and others:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">([</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)],</span> <span class="n">key</span><span class="o">=</span><span class="n">default_sort_key</span><span class="p">)</span>
+<span class="go">[sin(x)*cos(x), sin(x)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span><span class="p">],</span> <span class="n">key</span><span class="o">=</span><span class="n">default_sort_key</span><span class="p">)</span>
+<span class="go">[sqrt(x), x, x**2, x**3]</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#diofant.utilities.iterables.ordered" title="diofant.utilities.iterables.ordered"><code class="xref py py-func docutils literal notranslate"><span class="pre">ordered()</span></code></a>, <a class="reference internal" href="../core.html#diofant.core.expr.Expr.as_ordered_factors" title="diofant.core.expr.Expr.as_ordered_factors"><code class="xref py py-func docutils literal notranslate"><span class="pre">diofant.core.expr.Expr.as_ordered_factors()</span></code></a>, <a class="reference internal" href="../core.html#diofant.core.expr.Expr.as_ordered_terms" title="diofant.core.expr.Expr.as_ordered_terms"><code class="xref py py-func docutils literal notranslate"><span class="pre">diofant.core.expr.Expr.as_ordered_terms()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt id="diofant.utilities.iterables.filter_symbols">
 <code class="sig-prename descclassname">diofant.utilities.iterables.</code><code class="sig-name descname">filter_symbols</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">iterator</span></em>, <em class="sig-param"><span class="n">exclude</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/utilities/iterables.py#L300-L323"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.utilities.iterables.filter_symbols" title="Permalink to this definition">¶</a></dt>
 <dd><p>Only yield elements from <span class="math notranslate nohighlight">\(iterator\)</span> that do not occur in <span class="math notranslate nohighlight">\(exclude\)</span>.</p>
@@ -366,7 +471,7 @@ print statements.</p>
 
 <dl class="py function">
 <dt id="diofant.utilities.iterables.flatten">
-<code class="sig-prename descclassname">diofant.utilities.iterables.</code><code class="sig-name descname">flatten</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">iterable</span></em>, <em class="sig-param"><span class="n">levels</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">cls</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/utilities/iterables.py#L14-L74"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.utilities.iterables.flatten" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.utilities.iterables.</code><code class="sig-name descname">flatten</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">iterable</span></em>, <em class="sig-param"><span class="n">levels</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">cls</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/utilities/iterables.py#L12-L72"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.utilities.iterables.flatten" title="Permalink to this definition">¶</a></dt>
 <dd><p>Recursively denest iterable containers.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">flatten</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
 <span class="go">[1, 2, 3]</span>
@@ -450,7 +555,7 @@ a length that is greater than two.</p>
 
 <dl class="py function">
 <dt id="diofant.utilities.iterables.group">
-<code class="sig-prename descclassname">diofant.utilities.iterables.</code><code class="sig-name descname">group</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">seq</span></em>, <em class="sig-param"><span class="n">multiple</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/utilities/iterables.py#L87-L126"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.utilities.iterables.group" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.utilities.iterables.</code><code class="sig-name descname">group</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">seq</span></em>, <em class="sig-param"><span class="n">multiple</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/utilities/iterables.py#L85-L124"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.utilities.iterables.group" title="Permalink to this definition">¶</a></dt>
 <dd><p>Splits a sequence into a list of lists of equal, adjacent elements.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">group</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
@@ -524,7 +629,7 @@ passed and the calculation of the smallest element will be omitted.</p>
 
 <dl class="py function">
 <dt id="diofant.utilities.iterables.multiset">
-<code class="sig-prename descclassname">diofant.utilities.iterables.</code><code class="sig-name descname">multiset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">seq</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/utilities/iterables.py#L129-L148"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.utilities.iterables.multiset" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.utilities.iterables.</code><code class="sig-name descname">multiset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">seq</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/utilities/iterables.py#L127-L146"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.utilities.iterables.multiset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the hashable sequence in multiset form with values being the
 multiplicity of the item in the sequence.</p>
 <p class="rubric">Examples</p>
@@ -708,6 +813,71 @@ the form “x0”, “x1”, etc.</p></li>
 </dd></dl>
 
 <dl class="py function">
+<dt id="diofant.utilities.iterables.ordered">
+<code class="sig-prename descclassname">diofant.utilities.iterables.</code><code class="sig-name descname">ordered</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">seq</span></em>, <em class="sig-param"><span class="n">keys</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">default</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">warn</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/utilities/iterables.py#L1802-L1899"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.utilities.iterables.ordered" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an iterator of the seq where keys are used to break ties in
+a conservative fashion: if, after applying a key, there are no ties
+then no other keys will be computed.</p>
+<p>Two default keys will be applied if 1) keys are not provided or 2) the
+given keys don’t resolve all ties (but only if <span class="math notranslate nohighlight">\(default\)</span> is True). The
+two keys are <span class="math notranslate nohighlight">\(_nodes\)</span> (which places smaller expressions before large) and
+<span class="math notranslate nohighlight">\(default_sort_key\)</span> which (if the <span class="math notranslate nohighlight">\(sort_key\)</span> for an object is defined
+properly) should resolve any ties.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">warn</span></code> is True then an error will be raised if there were no
+keys remaining to break ties. This can be used if it was expected that
+there should be no ties between items that are not identical.</p>
+<p class="rubric">Examples</p>
+<p>The count_ops is not sufficient to break ties in this list and the first
+two items appear in their original order (i.e. the sorting is stable):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">ordered</span><span class="p">([</span><span class="n">y</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span> <span class="o">+</span> <span class="mi">3</span><span class="p">],</span>
+<span class="gp">... </span>             <span class="n">count_ops</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">warn</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="go">[y + 2, x + 2, x**2 + y + 3]</span>
+</pre></div>
+</div>
+<p>The default_sort_key allows the tie to be broken:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">ordered</span><span class="p">([</span><span class="n">y</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span> <span class="o">+</span> <span class="mi">3</span><span class="p">]))</span>
+<span class="go">[x + 2, y + 2, x**2 + y + 3]</span>
+</pre></div>
+</div>
+<p>Here, sequences are sorted by length, then sum:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">seq</span><span class="p">,</span> <span class="n">keys</span> <span class="o">=</span> <span class="p">[[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">]],</span>
+<span class="gp">... </span>             <span class="p">[</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">ordered</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span> <span class="n">keys</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">warn</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="go">[[1], [2], [1, 2, 1], [0, 3, 1], [1, 1, 3]]</span>
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">warn</span></code> is True, an error will be raised if there were not
+enough keys to break ties:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">ordered</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span> <span class="n">keys</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">warn</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="c">...</span>
+<span class="gr">ValueError</span>: <span class="n">not enough keys to break ties</span>
+</pre></div>
+</div>
+<p class="rubric">Notes</p>
+<p>The decorated sort is one of the fastest ways to sort a sequence for
+which special item comparison is desired: the sequence is decorated,
+sorted on the basis of the decoration (e.g. making all letters lower
+case) and then undecorated. If one wants to break ties for items that
+have the same decorated value, a second key can be used. But if the
+second key is expensive to compute then it is inefficient to decorate
+all items with both keys: only those items having identical first key
+values need to be decorated. This function applies keys successively
+only when needed to break ties. By yielding an iterator, use of the
+tie-breaker is delayed as long as possible.</p>
+<p>This function is best used in cases when use of the first key is
+expected to be a good hashing function; if there are no unique hashes
+from application of a key then that key should not have been used. The
+exception, however, is that even if there are many collisions, if the
+first group is small and one does not need to process all items in the
+list then time will not be wasted sorting what one was not interested
+in. For example, if one were looking for the minimum in a list and
+there were several criteria used to define the sort order, then this
+function would be good at returning that quickly if the first group
+of candidates is small relative to the number of items being processed.</p>
+</dd></dl>
+
+<dl class="py function">
 <dt id="diofant.utilities.iterables.ordered_partitions">
 <code class="sig-prename descclassname">diofant.utilities.iterables.</code><code class="sig-name descname">ordered_partitions</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n</span></em>, <em class="sig-param"><span class="n">m</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">sort</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/utilities/iterables.py#L1207-L1339"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.utilities.iterables.ordered_partitions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generates ordered partitions of integer <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
@@ -878,7 +1048,7 @@ of t are permuted.</p>
 
 <dl class="py function">
 <dt id="diofant.utilities.iterables.postorder_traversal">
-<code class="sig-prename descclassname">diofant.utilities.iterables.</code><code class="sig-name descname">postorder_traversal</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">node</span></em>, <em class="sig-param"><span class="n">keys</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/utilities/iterables.py#L151-L203"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.utilities.iterables.postorder_traversal" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.utilities.iterables.</code><code class="sig-name descname">postorder_traversal</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">node</span></em>, <em class="sig-param"><span class="n">keys</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/utilities/iterables.py#L149-L203"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.utilities.iterables.postorder_traversal" title="Permalink to this definition">¶</a></dt>
 <dd><p>Do a postorder traversal of a tree.</p>
 <p>This generator recursively yields nodes that it has visited in a postorder
 fashion. That is, it descends through the tree depth-first to yield all of
@@ -955,10 +1125,10 @@ in y.</p>
 all compare the same with the comparison operator, <code class="docutils literal notranslate"><span class="pre">op</span></code>:
 op(seq[i + 1], seq[i]) is True from all elements in a run.</p>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">ge</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">operator</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
 <span class="go">[[0, 1, 2], [2], [1, 4], [3], [2], [2]]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">op</span><span class="o">=</span><span class="n">ge</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">runs</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">op</span><span class="o">=</span><span class="n">operator</span><span class="o">.</span><span class="n">ge</span><span class="p">)</span>
 <span class="go">[[0, 1, 2, 2], [1, 4], [3], [2, 2]]</span>
 </pre></div>
 </div>
@@ -999,7 +1169,7 @@ give [].</p>
 to a squence while sorting.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p><a class="reference internal" href="../core.html#diofant.core.compatibility.ordered" title="diofant.core.compatibility.ordered"><code class="xref py py-func docutils literal notranslate"><span class="pre">diofant.core.compatibility.ordered()</span></code></a></p>
+<p><a class="reference internal" href="#diofant.utilities.iterables.ordered" title="diofant.utilities.iterables.ordered"><code class="xref py py-func docutils literal notranslate"><span class="pre">ordered()</span></code></a></p>
 </div>
 </dd></dl>
 
@@ -1126,7 +1296,7 @@ then ValueError will be raised:</p>
 
 <dl class="py function">
 <dt id="diofant.utilities.iterables.unflatten">
-<code class="sig-prename descclassname">diofant.utilities.iterables.</code><code class="sig-name descname">unflatten</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">iter</span></em>, <em class="sig-param"><span class="n">n</span><span class="o">=</span><span class="default_value">2</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/utilities/iterables.py#L77-L84"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.utilities.iterables.unflatten" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.utilities.iterables.</code><code class="sig-name descname">unflatten</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">iter</span></em>, <em class="sig-param"><span class="n">n</span><span class="o">=</span><span class="default_value">2</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/utilities/iterables.py#L75-L82"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.utilities.iterables.unflatten" title="Permalink to this definition">¶</a></dt>
 <dd><p>Group <code class="docutils literal notranslate"><span class="pre">iter</span></code> into tuples of length <code class="docutils literal notranslate"><span class="pre">n</span></code>. Raise an error if
 the length of <code class="docutils literal notranslate"><span class="pre">iter</span></code> is not a multiple of <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
 </dd></dl>
