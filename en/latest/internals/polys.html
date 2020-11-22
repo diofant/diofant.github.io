@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Internals of the Polynomial Manipulation Module &mdash; Diofant 0.12.0a4.dev15+ge45072727 documentation</title>
+  <title>Internals of the Polynomial Manipulation Module &mdash; Diofant 0.12.0a4.dev26+g99f122905 documentation</title>
   
 
   
@@ -103,6 +103,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#grobner-basis-algorithms">Gröbner basis algorithms</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#algebraic-number-fields">Algebraic number fields</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-diofant.polys.factorization_alg_field">Factorization over algebraic number fields</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-diofant.polys.modulargcd">Modular GCD</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#heuristic-gcd">Heuristic GCD</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-diofant.polys.rootisolation">Further tools</a></li>
@@ -1174,8 +1175,746 @@ using Gröbner bases</p>
 </dd></dl>
 
 </div>
+<div class="section" id="module-diofant.polys.factorization_alg_field">
+<span id="factorization-over-algebraic-number-fields"></span><h2>Factorization over algebraic number fields<a class="headerlink" href="#module-diofant.polys.factorization_alg_field" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="diofant.polys.factorization_alg_field._alpha_to_z">
+<code class="sig-prename descclassname">diofant.polys.factorization_alg_field.</code><code class="sig-name descname">_alpha_to_z</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">ring</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/factorization_alg_field.py#L25-L62"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.factorization_alg_field._alpha_to_z" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change the representation of a polynomial over
+<span class="math notranslate nohighlight">\(\mathbb Q(\alpha)\)</span> by replacing the algebraic element <span class="math notranslate nohighlight">\(\alpha\)</span> by a new
+variable <span class="math notranslate nohighlight">\(z\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> (<em>PolyElement</em>) – polynomial in <span class="math notranslate nohighlight">\(\mathbb Q(\alpha)[x_0, \ldots, x_n]\)</span></p></li>
+<li><p><strong>ring</strong> (<em>PolynomialRing</em>) – the polynomial ring <span class="math notranslate nohighlight">\(\mathbb Q[x_0, \ldots, x_n, z]\)</span></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>f_</strong> (<em>PolyElement</em>) – polynomial in <span class="math notranslate nohighlight">\(\mathbb Q[x_0, \ldots, x_n, z]\)</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="diofant.polys.factorization_alg_field._denominator">
+<code class="sig-prename descclassname">diofant.polys.factorization_alg_field.</code><code class="sig-name descname">_denominator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/factorization_alg_field.py#L142-L156"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.factorization_alg_field._denominator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the denominator <span class="math notranslate nohighlight">\(\mathrm{den}(f)\)</span> of a polynomial <span class="math notranslate nohighlight">\(f\)</span> over
+<span class="math notranslate nohighlight">\(\mathbb Q\)</span>, i.e. the smallest integer such that <span class="math notranslate nohighlight">\(\mathrm{den}(f) f\)</span> is
+a polynomial over <span class="math notranslate nohighlight">\(\mathbb Z\)</span>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="diofant.polys.factorization_alg_field._diophantine">
+<code class="sig-prename descclassname">diofant.polys.factorization_alg_field.</code><code class="sig-name descname">_diophantine</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">F</span></em>, <em class="sig-param"><span class="n">c</span></em>, <em class="sig-param"><span class="n">A</span></em>, <em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">minpoly</span></em>, <em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/factorization_alg_field.py#L614-L687"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.factorization_alg_field._diophantine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solve multivariate Diophantine equations over <span class="math notranslate nohighlight">\(\mathbb Z_p[z]/(\mu(z))\)</span>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="diofant.polys.factorization_alg_field._diophantine_univariate">
+<code class="sig-prename descclassname">diofant.polys.factorization_alg_field.</code><code class="sig-name descname">_diophantine_univariate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">F</span></em>, <em class="sig-param"><span class="n">m</span></em>, <em class="sig-param"><span class="n">minpoly</span></em>, <em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/factorization_alg_field.py#L555-L611"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.factorization_alg_field._diophantine_univariate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solve univariate Diophantine equations of the form</p>
+<div class="math notranslate nohighlight">
+\[\sum_{f \in F} \left( h_f(x) \cdot \prod_{g \in F \setminus \lbrace f \rbrace } g(x) \right) = x^m\]</div>
+<p>over <span class="math notranslate nohighlight">\(\mathbb Z_p[z]/(\mu(z))\)</span>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="diofant.polys.factorization_alg_field._distinct_prime_divisors">
+<code class="sig-prename descclassname">diofant.polys.factorization_alg_field.</code><code class="sig-name descname">_distinct_prime_divisors</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">S</span></em>, <em class="sig-param"><span class="n">domain</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/factorization_alg_field.py#L102-L139"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.factorization_alg_field._distinct_prime_divisors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Try to find pairwise coprime divisors of all elements of a given list
+<span class="math notranslate nohighlight">\(S\)</span> of integers.</p>
+<p>If this fails, <code class="docutils literal notranslate"><span class="pre">None</span></code> is returned.</p>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><p><a class="bibtex reference internal" href="../sources.html#javadi2009factor" id="id20">[JM09]</a></p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt id="diofant.polys.factorization_alg_field._div">
+<code class="sig-prename descclassname">diofant.polys.factorization_alg_field.</code><code class="sig-name descname">_div</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">g</span></em>, <em class="sig-param"><span class="n">minpoly</span></em>, <em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/factorization_alg_field.py#L492-L517"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.factorization_alg_field._div" title="Permalink to this definition">¶</a></dt>
+<dd><p>Division with remainder for univariate polynomials over
+<span class="math notranslate nohighlight">\(\mathbb Z_p[z]/(\mu(z))\)</span>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="diofant.polys.factorization_alg_field._extended_euclidean_algorithm">
+<code class="sig-prename descclassname">diofant.polys.factorization_alg_field.</code><code class="sig-name descname">_extended_euclidean_algorithm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">g</span></em>, <em class="sig-param"><span class="n">minpoly</span></em>, <em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/factorization_alg_field.py#L520-L552"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.factorization_alg_field._extended_euclidean_algorithm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extended Euclidean Algorithm for univariate polynomials over
+<span class="math notranslate nohighlight">\(\mathbb Z_p[z]/(\mu(z))\)</span>.</p>
+<p>Returns <span class="math notranslate nohighlight">\(s, t, h\)</span>, where <span class="math notranslate nohighlight">\(h\)</span> is the GCD of <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span> and
+<span class="math notranslate nohighlight">\(sf + tg = h\)</span>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="diofant.polys.factorization_alg_field._factor">
+<code class="sig-prename descclassname">diofant.polys.factorization_alg_field.</code><code class="sig-name descname">_factor</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">save</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/factorization_alg_field.py#L815-L946"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.factorization_alg_field._factor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Factor a multivariate polynomial <span class="math notranslate nohighlight">\(f\)</span>, which is squarefree and primitive
+in <span class="math notranslate nohighlight">\(x_0\)</span>, in <span class="math notranslate nohighlight">\(\mathbb Q(\alpha)[x_0, \ldots, x_n]\)</span>.</p>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><p><a class="bibtex reference internal" href="../sources.html#javadi2009factor" id="id21">[JM09]</a></p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt id="diofant.polys.factorization_alg_field._hensel_lift">
+<code class="sig-prename descclassname">diofant.polys.factorization_alg_field.</code><code class="sig-name descname">_hensel_lift</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">H</span></em>, <em class="sig-param"><span class="n">LC</span></em>, <em class="sig-param"><span class="n">A</span></em>, <em class="sig-param"><span class="n">minpoly</span></em>, <em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/factorization_alg_field.py#L690-L775"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.factorization_alg_field._hensel_lift" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parallel Hensel lifting algorithm over <span class="math notranslate nohighlight">\(\mathbb  Z_p[z]/(\mu(z))\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> (<em>PolyElement</em>) – squarefree polynomial in <span class="math notranslate nohighlight">\(\mathbb Z[x_0, \ldots, x_n, z]\)</span></p></li>
+<li><p><strong>H</strong> (<em>list of PolyElement objects</em>) – monic univariate factors of <span class="math notranslate nohighlight">\(f(x_0, A)\)</span> in
+<span class="math notranslate nohighlight">\(\mathbb Z[x_0, z]\)</span></p></li>
+<li><p><strong>LC</strong> (<em>list of PolyElement objects</em>) – true leading coefficients of the irreducible factors of <span class="math notranslate nohighlight">\(f\)</span></p></li>
+<li><p><strong>A</strong> (<em>list of Integer objects</em>) – the evaluation point <span class="math notranslate nohighlight">\([a_1, \ldots, a_n]\)</span></p></li>
+<li><p><strong>p</strong> (<em>Integer</em>) – prime number</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>pfactors</strong> (<em>list of PolyElement objects</em>) – irreducible factors of <span class="math notranslate nohighlight">\(f\)</span> modulo <span class="math notranslate nohighlight">\(p\)</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="diofant.polys.factorization_alg_field._leading_coeffs">
+<code class="sig-prename descclassname">diofant.polys.factorization_alg_field.</code><code class="sig-name descname">_leading_coeffs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">U</span></em>, <em class="sig-param"><span class="n">gamma</span></em>, <em class="sig-param"><span class="n">lcfactors</span></em>, <em class="sig-param"><span class="n">A</span></em>, <em class="sig-param"><span class="n">D</span></em>, <em class="sig-param"><span class="n">denoms</span></em>, <em class="sig-param"><span class="n">divisors</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/factorization_alg_field.py#L184-L296"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.factorization_alg_field._leading_coeffs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the true leading coefficients in <span class="math notranslate nohighlight">\(x_0\)</span> of the irreducible
+factors of a polynomial <span class="math notranslate nohighlight">\(f\)</span>.</p>
+<p>If this fails, <code class="docutils literal notranslate"><span class="pre">None</span></code> is returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> (<em>PolyElement</em>) – squarefree polynomial in <span class="math notranslate nohighlight">\(Z[x_0, \ldots, x_n, z]\)</span></p></li>
+<li><p><strong>U</strong> (<em>list of PolyElement objects</em>) – monic univariate factors of <span class="math notranslate nohighlight">\(f(x_0, A)\)</span> in <span class="math notranslate nohighlight">\(\mathbb Q(\alpha)[x_0]\)</span></p></li>
+<li><p><strong>gamma</strong> (<em>Integer</em>) – integer content of <span class="math notranslate nohighlight">\(\mathrm{lc}_{x_0}(f)\)</span></p></li>
+<li><p><strong>lcfactors</strong> (<em>list of (PolyElement, Integer) objects</em>) – factorization of <span class="math notranslate nohighlight">\(\mathrm{lc}_{x_0}(f)\)</span> in
+<span class="math notranslate nohighlight">\(\mathbb Z[x_1, \ldots, x_n, z]\)</span></p></li>
+<li><p><strong>A</strong> (<em>list of Integer objects</em>) – the evaluation point <span class="math notranslate nohighlight">\([a_1, \ldots, a_n]\)</span></p></li>
+<li><p><strong>D</strong> (<em>Integer</em>) – integral multiple of the defect of <span class="math notranslate nohighlight">\(\mathbb Q(\alpha)\)</span></p></li>
+<li><p><strong>denoms</strong> (<em>list of Integer objects</em>) – denominators of <span class="math notranslate nohighlight">\(\frac 1 {l(A)}\)</span> for <span class="math notranslate nohighlight">\(l\)</span> in <code class="docutils literal notranslate"><span class="pre">lcfactors</span></code></p></li>
+<li><p><strong>divisors</strong> (<em>list of Integer objects</em>) – pairwise coprime divisors of all elements of <code class="docutils literal notranslate"><span class="pre">denoms</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>f</strong> (<em>PolyElement</em>) – possibly updated polynomial <span class="math notranslate nohighlight">\(f\)</span></p></li>
+<li><p><strong>lcs</strong> (<em>list of PolyElement objects</em>) – true leading coefficients of the irreducible factors of <span class="math notranslate nohighlight">\(f\)</span></p></li>
+<li><p><strong>U_</strong> (<em>list of PolyElement objects</em>) – list of possibly updated monic associates of the univariate factors
+<span class="math notranslate nohighlight">\(U\)</span></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><p><a class="bibtex reference internal" href="../sources.html#javadi2009factor" id="id22">[JM09]</a></p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt id="diofant.polys.factorization_alg_field._monic_associate">
+<code class="sig-prename descclassname">diofant.polys.factorization_alg_field.</code><code class="sig-name descname">_monic_associate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">ring</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/factorization_alg_field.py#L159-L181"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.factorization_alg_field._monic_associate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the monic associate of a polynomial <span class="math notranslate nohighlight">\(f\)</span> over
+<span class="math notranslate nohighlight">\(\mathbb Q(\alpha)\)</span>, which is defined as</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{den}\left( \frac 1 {\mathrm{lc}(f)} f \right) \cdot \frac 1 {\mathrm{lc}(f)} f.\]</div>
+<p>The result is a polynomial in <span class="math notranslate nohighlight">\(\mathbb Z[x_0, \ldots, x_n, z]\)</span>.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#diofant.polys.factorization_alg_field._denominator" title="diofant.polys.factorization_alg_field._denominator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_denominator</span></code></a>, <a class="reference internal" href="#diofant.polys.factorization_alg_field._alpha_to_z" title="diofant.polys.factorization_alg_field._alpha_to_z"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_alpha_to_z</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="diofant.polys.factorization_alg_field._padic_lift">
+<code class="sig-prename descclassname">diofant.polys.factorization_alg_field.</code><code class="sig-name descname">_padic_lift</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">pfactors</span></em>, <em class="sig-param"><span class="n">lcs</span></em>, <em class="sig-param"><span class="n">B</span></em>, <em class="sig-param"><span class="n">minpoly</span></em>, <em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/factorization_alg_field.py#L386-L489"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.factorization_alg_field._padic_lift" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lift the factorization of a polynomial over <span class="math notranslate nohighlight">\(\mathbb Z_p[z]/(\mu(z))\)</span> to
+a factorization over <span class="math notranslate nohighlight">\(\mathbb Z_{p^m}[z]/(\mu(z))\)</span>, where <span class="math notranslate nohighlight">\(p^m \geq B\)</span>.</p>
+<p>If this fails, <code class="docutils literal notranslate"><span class="pre">None</span></code> is returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> (<em>PolyElement</em>) – squarefree polynomial in <span class="math notranslate nohighlight">\(\mathbb Z[x_0, \ldots, x_n, z]\)</span></p></li>
+<li><p><strong>pfactors</strong> (<em>list of PolyElement objects</em>) – irreducible factors of <span class="math notranslate nohighlight">\(f\)</span> modulo <span class="math notranslate nohighlight">\(p\)</span></p></li>
+<li><p><strong>lcs</strong> (<em>list of PolyElement objects</em>) – true leading coefficients in <span class="math notranslate nohighlight">\(x_0\)</span> of the irreducible factors of <span class="math notranslate nohighlight">\(f\)</span></p></li>
+<li><p><strong>B</strong> (<em>Integer</em>) – heuristic numerical bound on the size of the largest integer
+coefficient in the irreducible factors of <span class="math notranslate nohighlight">\(f\)</span></p></li>
+<li><p><strong>minpoly</strong> (<em>PolyElement</em>) – minimal polynomial <span class="math notranslate nohighlight">\(\mu\)</span> of <span class="math notranslate nohighlight">\(\alpha\)</span> over <span class="math notranslate nohighlight">\(\mathbb Q\)</span></p></li>
+<li><p><strong>p</strong> (<em>Integer</em>) – prime number</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>H</strong> (<em>list of PolyElement objects</em>) – factorization of <span class="math notranslate nohighlight">\(f\)</span> modulo <span class="math notranslate nohighlight">\(p^m\)</span>, where <span class="math notranslate nohighlight">\(p^m \geq B\)</span></p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><p><a class="bibtex reference internal" href="../sources.html#javadi2009factor" id="id23">[JM09]</a></p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt id="diofant.polys.factorization_alg_field._sqf_p">
+<code class="sig-prename descclassname">diofant.polys.factorization_alg_field.</code><code class="sig-name descname">_sqf_p</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">minpoly</span></em>, <em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/factorization_alg_field.py#L778-L791"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.factorization_alg_field._sqf_p" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return <code class="docutils literal notranslate"><span class="pre">True</span></code> if <span class="math notranslate nohighlight">\(f\)</span> is square-free in <span class="math notranslate nohighlight">\(\mathbb Z_p[z]/(\mu(z))[x]\)</span>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="diofant.polys.factorization_alg_field._subs_ground">
+<code class="sig-prename descclassname">diofant.polys.factorization_alg_field.</code><code class="sig-name descname">_subs_ground</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">A</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/factorization_alg_field.py#L371-L383"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.factorization_alg_field._subs_ground" title="Permalink to this definition">¶</a></dt>
+<dd><p>Substitute variables in the coefficients of a polynomial <span class="math notranslate nohighlight">\(f\)</span> over a
+<code class="docutils literal notranslate"><span class="pre">PolynomialRing</span></code>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="diofant.polys.factorization_alg_field._test_evaluation_points">
+<code class="sig-prename descclassname">diofant.polys.factorization_alg_field.</code><code class="sig-name descname">_test_evaluation_points</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">gamma</span></em>, <em class="sig-param"><span class="n">lcfactors</span></em>, <em class="sig-param"><span class="n">A</span></em>, <em class="sig-param"><span class="n">D</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/factorization_alg_field.py#L299-L368"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.factorization_alg_field._test_evaluation_points" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test if an evaluation point is suitable for _factor.</p>
+<p>If it is not, <code class="docutils literal notranslate"><span class="pre">None</span></code> is returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> (<em>PolyElement</em>) – squarefree polynomial in <span class="math notranslate nohighlight">\(\mathbb Z[x_0, \ldots, x_n, z]\)</span></p></li>
+<li><p><strong>gamma</strong> (<em>Integer</em>) – leading coefficient of <span class="math notranslate nohighlight">\(f\)</span> in <span class="math notranslate nohighlight">\(\mathbb Z\)</span></p></li>
+<li><p><strong>lcfactors</strong> (<em>list of (PolyElement, Integer) objects</em>) – factorization of <span class="math notranslate nohighlight">\(\mathrm{lc}_{x_0}(f)\)</span> in
+<span class="math notranslate nohighlight">\(\mathbb Z[x_1, \ldots, x_n, z]\)</span></p></li>
+<li><p><strong>A</strong> (<em>list of Integer objects</em>) – the evaluation point <span class="math notranslate nohighlight">\([a_1, \ldots, a_n]\)</span></p></li>
+<li><p><strong>D</strong> (<em>Integer</em>) – integral multiple of the defect of <span class="math notranslate nohighlight">\(\mathbb Q(\alpha)\)</span></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>fA</strong> (<em>PolyElement</em>) – <span class="math notranslate nohighlight">\(f\)</span> evaluated at <span class="math notranslate nohighlight">\(A\)</span>, i.e. <span class="math notranslate nohighlight">\(f(x_0, A)\)</span></p></li>
+<li><p><strong>denoms</strong> (<em>list of Integer objects</em>) – the denominators of <span class="math notranslate nohighlight">\(\frac 1 {l(A)}\)</span> for <span class="math notranslate nohighlight">\(l\)</span> in <code class="docutils literal notranslate"><span class="pre">lcfactors</span></code></p></li>
+<li><p><strong>divisors</strong> (<em>list of Integer objects</em>) – pairwise coprime divisors of all elements of <code class="docutils literal notranslate"><span class="pre">denoms</span></code></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><p><a class="bibtex reference internal" href="../sources.html#javadi2009factor" id="id24">[JM09]</a></p></li>
+</ul>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#diofant.polys.factorization_alg_field._factor" title="diofant.polys.factorization_alg_field._factor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_factor</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="diofant.polys.factorization_alg_field._test_prime">
+<code class="sig-prename descclassname">diofant.polys.factorization_alg_field.</code><code class="sig-name descname">_test_prime</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fA</span></em>, <em class="sig-param"><span class="n">D</span></em>, <em class="sig-param"><span class="n">minpoly</span></em>, <em class="sig-param"><span class="n">p</span></em>, <em class="sig-param"><span class="n">domain</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/factorization_alg_field.py#L794-L811"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.factorization_alg_field._test_prime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test if a prime number is suitable for _factor.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#diofant.polys.factorization_alg_field._factor" title="diofant.polys.factorization_alg_field._factor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_factor</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="diofant.polys.factorization_alg_field._z_to_alpha">
+<code class="sig-prename descclassname">diofant.polys.factorization_alg_field.</code><code class="sig-name descname">_z_to_alpha</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">ring</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/factorization_alg_field.py#L65-L99"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.factorization_alg_field._z_to_alpha" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change the representation of a polynomial in
+<span class="math notranslate nohighlight">\(\mathbb Q[x_0, \ldots, x_n, z]\)</span> by replacing the variable <span class="math notranslate nohighlight">\(z\)</span> by the
+algebraic element <span class="math notranslate nohighlight">\(\alpha\)</span> of the given ring
+<span class="math notranslate nohighlight">\(\mathbb Q(\alpha)[x_0, \ldots, x_n]\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> (<em>PolyElement</em>) – polynomial in <span class="math notranslate nohighlight">\(\mathbb Q[x_0, \ldots, x_n, z]\)</span></p></li>
+<li><p><strong>ring</strong> (<em>PolynomialRing</em>) – the polynomial ring <span class="math notranslate nohighlight">\(\mathbb Q(\alpha)[x_0, \ldots, x_n]\)</span></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>f_</strong> (<em>PolyElement</em>) – polynomial in <span class="math notranslate nohighlight">\(\mathbb Q(\alpha)[x_0, \ldots, x_n]\)</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="diofant.polys.factorization_alg_field.efactor">
+<code class="sig-prename descclassname">diofant.polys.factorization_alg_field.</code><code class="sig-name descname">efactor</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">save</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/factorization_alg_field.py#L950-L993"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.factorization_alg_field.efactor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Factor a multivariate polynomial <span class="math notranslate nohighlight">\(f\)</span> in <span class="math notranslate nohighlight">\(\mathbb Q(\alpha)[x_0, \ldots, x_n]\)</span>.</p>
+<p>By default, an estimate of the defect of the algebraic field is included
+in all computations. If <code class="docutils literal notranslate"><span class="pre">save</span></code> is set to <code class="docutils literal notranslate"><span class="pre">False</span></code>, the defect will be
+treated as one, thus computations are faster. However, if the defect of
+<span class="math notranslate nohighlight">\(\alpha\)</span> is larger than one, this may lead to wrong results.</p>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><p><a class="bibtex reference internal" href="../sources.html#javadi2009factor" id="id25">[JM09]</a></p></li>
+</ul>
+</dd></dl>
+
+</div>
 <div class="section" id="module-diofant.polys.modulargcd">
 <span id="modular-gcd"></span><h2>Modular GCD<a class="headerlink" href="#module-diofant.polys.modulargcd" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="diofant.polys.modulargcd._chinese_remainder_reconstruction">
+<code class="sig-prename descclassname">diofant.polys.modulargcd.</code><code class="sig-name descname">_chinese_remainder_reconstruction</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">hp</span></em>, <em class="sig-param"><span class="n">hq</span></em>, <em class="sig-param"><span class="n">p</span></em>, <em class="sig-param"><span class="n">q</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/modulargcd.py#L21-L113"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.modulargcd._chinese_remainder_reconstruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct a polynomial <span class="math notranslate nohighlight">\(h_{pq}\)</span> in
+<span class="math notranslate nohighlight">\(\mathbb{Z}_{p q}[x_0, \ldots, x_{k-1}]\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}h_{pq} = h_p \; \mathrm{mod} \, p\\h_{pq} = h_q \; \mathrm{mod} \, q\end{aligned}\end{align} \]</div>
+<p>for relatively prime integers <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(q\)</span> and polynomials
+<span class="math notranslate nohighlight">\(h_p\)</span> and <span class="math notranslate nohighlight">\(h_q\)</span> in <span class="math notranslate nohighlight">\(\mathbb{Z}_p[x_0, \ldots, x_{k-1}]\)</span> and
+<span class="math notranslate nohighlight">\(\mathbb{Z}_q[x_0, \ldots, x_{k-1}]\)</span> respectively.</p>
+<p>The coefficients of the polynomial <span class="math notranslate nohighlight">\(h_{pq}\)</span> are computed with the
+Chinese Remainder Theorem. The symmetric representation in
+<span class="math notranslate nohighlight">\(\mathbb{Z}_p[x_0, \ldots, x_{k-1}]\)</span>,
+<span class="math notranslate nohighlight">\(\mathbb{Z}_q[x_0, \ldots, x_{k-1}]\)</span> and
+<span class="math notranslate nohighlight">\(\mathbb{Z}_{p q}[x_0, \ldots, x_{k-1}]\)</span> is used.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hp</strong> (<em>PolyElement</em>) – multivariate integer polynomial with coefficients in <span class="math notranslate nohighlight">\(\mathbb{Z}_p\)</span></p></li>
+<li><p><strong>hq</strong> (<em>PolyElement</em>) – multivariate integer polynomial with coefficients in <span class="math notranslate nohighlight">\(\mathbb{Z}_q\)</span></p></li>
+<li><p><strong>p</strong> (<em>Integer</em>) – modulus of <span class="math notranslate nohighlight">\(h_p\)</span>, relatively prime to <span class="math notranslate nohighlight">\(q\)</span></p></li>
+<li><p><strong>q</strong> (<em>Integer</em>) – modulus of <span class="math notranslate nohighlight">\(h_q\)</span>, relatively prime to <span class="math notranslate nohighlight">\(p\)</span></p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s1">&#39;x y&#39;</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">q</span> <span class="o">=</span> <span class="mi">5</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hp</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hq</span> <span class="o">=</span> <span class="o">-</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hpq</span> <span class="o">=</span> <span class="n">_chinese_remainder_reconstruction</span><span class="p">(</span><span class="n">hp</span><span class="p">,</span> <span class="n">hq</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hpq</span>
+<span class="go">4*x**3*y + 5*x**2 + 3*x*y**2 + 2</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hpq</span><span class="o">.</span><span class="n">trunc_ground</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">==</span> <span class="n">hp</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hpq</span><span class="o">.</span><span class="n">trunc_ground</span><span class="p">(</span><span class="n">q</span><span class="p">)</span> <span class="o">==</span> <span class="n">hq</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s1">&#39;x y z&#39;</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">q</span> <span class="o">=</span> <span class="mi">5</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hp</span> <span class="o">=</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">4</span> <span class="o">-</span> <span class="n">y</span><span class="o">**</span><span class="mi">3</span><span class="o">*</span><span class="n">z</span> <span class="o">+</span> <span class="n">z</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hq</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">4</span> <span class="o">+</span> <span class="n">z</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hpq</span> <span class="o">=</span> <span class="n">_chinese_remainder_reconstruction</span><span class="p">(</span><span class="n">hp</span><span class="p">,</span> <span class="n">hq</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hpq</span>
+<span class="go">3*x**4 + 5*y**3*z + z</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hpq</span><span class="o">.</span><span class="n">trunc_ground</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">==</span> <span class="n">hp</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hpq</span><span class="o">.</span><span class="n">trunc_ground</span><span class="p">(</span><span class="n">q</span><span class="p">)</span> <span class="o">==</span> <span class="n">hq</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="diofant.polys.modulargcd._euclidean_algorithm">
+<code class="sig-prename descclassname">diofant.polys.modulargcd.</code><code class="sig-name descname">_euclidean_algorithm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">g</span></em>, <em class="sig-param"><span class="n">minpoly</span></em>, <em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/modulargcd.py#L650-L703"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.modulargcd._euclidean_algorithm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the monic GCD of two univariate polynomials in
+<span class="math notranslate nohighlight">\(\mathbb{Z}_p[z]/(\check m_{\alpha}(z))[x]\)</span> with the Euclidean
+Algorithm.</p>
+<p>In general, <span class="math notranslate nohighlight">\(\check m_{\alpha}(z)\)</span> is not irreducible, so it is possible
+that some leading coefficient is not invertible modulo
+<span class="math notranslate nohighlight">\(\check m_{\alpha}(z)\)</span>. In that case <code class="docutils literal notranslate"><span class="pre">None</span></code> is returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f, g</strong> (<em>PolyElement</em>) – polynomials in <span class="math notranslate nohighlight">\(\mathbb Z[x, z]\)</span></p></li>
+<li><p><strong>minpoly</strong> (<em>PolyElement</em>) – polynomial in <span class="math notranslate nohighlight">\(\mathbb Z[z]\)</span>, not necessarily irreducible</p></li>
+<li><p><strong>p</strong> (<em>Integer</em>) – prime number, modulus of <span class="math notranslate nohighlight">\(\mathbb Z_p\)</span></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>h</strong> (<em>PolyElement</em>) – GCD of <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span> in <span class="math notranslate nohighlight">\(\mathbb Z[z, x]\)</span> or <code class="docutils literal notranslate"><span class="pre">None</span></code>, coefficients
+are in <span class="math notranslate nohighlight">\(\left[ -\frac{p-1} 2, \frac{p-1} 2 \right]\)</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="diofant.polys.modulargcd._evaluate_ground">
+<code class="sig-prename descclassname">diofant.polys.modulargcd.</code><code class="sig-name descname">_evaluate_ground</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">i</span></em>, <em class="sig-param"><span class="n">a</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/modulargcd.py#L772-L784"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.modulargcd._evaluate_ground" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluate a polynomial <span class="math notranslate nohighlight">\(f\)</span> at <span class="math notranslate nohighlight">\(a\)</span> in the <span class="math notranslate nohighlight">\(i\)</span>-th variable of the ground
+domain.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="diofant.polys.modulargcd._func_field_modgcd_m">
+<code class="sig-prename descclassname">diofant.polys.modulargcd.</code><code class="sig-name descname">_func_field_modgcd_m</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">g</span></em>, <em class="sig-param"><span class="n">minpoly</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/modulargcd.py#L1019-L1162"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.modulargcd._func_field_modgcd_m" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the GCD of two polynomials in
+<span class="math notranslate nohighlight">\(\mathbb Q(t_1, \ldots, t_k)[z]/(m_{\alpha}(z))[x]\)</span> using a modular
+algorithm.</p>
+<p>The algorithm computes the GCD of two polynomials <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span> by
+calculating the GCD in
+<span class="math notranslate nohighlight">\(\mathbb Z_p(t_1, \ldots, t_k)[z] / (\check m_{\alpha}(z))[x]\)</span> for
+suitable primes <span class="math notranslate nohighlight">\(p\)</span> and the primitive associate <span class="math notranslate nohighlight">\(\check m_{\alpha}(z)\)</span>
+of <span class="math notranslate nohighlight">\(m_{\alpha}(z)\)</span>. Then the coefficients are reconstructed with the
+Chinese Remainder Theorem and Rational Reconstruction. To compute the
+GCD over <span class="math notranslate nohighlight">\(\mathbb Z_p(t_1, \ldots, t_k)[z] / (\check m_{\alpha})[x]\)</span>,
+the recursive subroutine <code class="docutils literal notranslate"><span class="pre">_func_field_modgcd_p</span></code> is used. To verify the
+result in <span class="math notranslate nohighlight">\(\mathbb Q(t_1, \ldots, t_k)[z] / (m_{\alpha}(z))[x]\)</span>, a
+fraction free trial division is used.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f, g</strong> (<em>PolyElement</em>) – polynomials in <span class="math notranslate nohighlight">\(\mathbb Z[t_1, \ldots, t_k][x, z]\)</span></p></li>
+<li><p><strong>minpoly</strong> (<em>PolyElement</em>) – irreducible polynomial in <span class="math notranslate nohighlight">\(\mathbb Z[t_1, \ldots, t_k][z]\)</span></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>h</strong> (<em>PolyElement</em>) – the primitive associate in <span class="math notranslate nohighlight">\(\mathbb Z[t_1, \ldots, t_k][x, z]\)</span> of
+the GCD of <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s1">&#39;x z&#39;</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">minpoly</span> <span class="o">=</span> <span class="p">(</span><span class="n">z</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">z</span> <span class="o">+</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">z</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_func_field_modgcd_m</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">minpoly</span><span class="p">)</span>
+<span class="go">x + z</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">D</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="n">ZZ</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">ring</span><span class="p">(</span><span class="s1">&#39;x z&#39;</span><span class="p">,</span> <span class="n">D</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">minpoly</span> <span class="o">=</span> <span class="p">(</span><span class="n">z</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">z</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">t</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="n">z</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">t</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_func_field_modgcd_m</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">minpoly</span><span class="p">)</span>
+<span class="go">x + t*z</span>
+</pre></div>
+</div>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><p><a class="bibtex reference internal" href="../sources.html#monagan2004algebraic" id="id26">[MvH04]</a></p></li>
+</ul>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#diofant.polys.modulargcd._func_field_modgcd_p" title="diofant.polys.modulargcd._func_field_modgcd_p"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_func_field_modgcd_p</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="diofant.polys.modulargcd._func_field_modgcd_p">
+<code class="sig-prename descclassname">diofant.polys.modulargcd.</code><code class="sig-name descname">_func_field_modgcd_p</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">g</span></em>, <em class="sig-param"><span class="n">minpoly</span></em>, <em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/modulargcd.py#L787-L955"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.modulargcd._func_field_modgcd_p" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the GCD of two polynomials <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span> in
+<span class="math notranslate nohighlight">\(\mathbb Z_p(t_1, \ldots, t_k)[z]/(\check m_\alpha(z))[x]\)</span>.</p>
+<p>The algorithm reduces the problem step by step by evaluating the
+polynomials <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span> at <span class="math notranslate nohighlight">\(t_k = a\)</span> for suitable <span class="math notranslate nohighlight">\(a \in \mathbb Z_p\)</span>
+and then calls itself recursively to compute the GCD in
+<span class="math notranslate nohighlight">\(\mathbb Z_p(t_1, \ldots, t_{k-1})[z]/(\check m_\alpha(z))[x]\)</span>. If these
+recursive calls are successful, the GCD over <span class="math notranslate nohighlight">\(k\)</span> variables is
+interpolated, otherwise the algorithm returns <code class="docutils literal notranslate"><span class="pre">None</span></code>. After
+interpolation, Rational Function Reconstruction is used to obtain the
+correct coefficients. If this fails, a new evaluation point has to be
+chosen, otherwise the desired polynomial is obtained by clearing
+denominators. The result is verified with a fraction free trial
+division.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f, g</strong> (<em>PolyElement</em>) – polynomials in <span class="math notranslate nohighlight">\(\mathbb Z[t_1, \ldots, t_k][x, z]\)</span></p></li>
+<li><p><strong>minpoly</strong> (<em>PolyElement</em>) – polynomial in <span class="math notranslate nohighlight">\(\mathbb Z[t_1, \ldots, t_k][z]\)</span>, not necessarily
+irreducible</p></li>
+<li><p><strong>p</strong> (<em>Integer</em>) – prime number, modulus of <span class="math notranslate nohighlight">\(\mathbb Z_p\)</span></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>h</strong> (<em>PolyElement</em>) – primitive associate in <span class="math notranslate nohighlight">\(\mathbb Z[t_1, \ldots, t_k][x, z]\)</span> of the
+GCD of the polynomials <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span>  or <code class="docutils literal notranslate"><span class="pre">None</span></code>, coefficients are
+in <span class="math notranslate nohighlight">\(\left[ -\frac{p-1} 2, \frac{p-1} 2 \right]\)</span></p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><p><a class="bibtex reference internal" href="../sources.html#monagan2004algebraic" id="id27">[MvH04]</a></p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt id="diofant.polys.modulargcd._gf_gcdex">
+<code class="sig-prename descclassname">diofant.polys.modulargcd.</code><code class="sig-name descname">_gf_gcdex</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">g</span></em>, <em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/modulargcd.py#L603-L616"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.modulargcd._gf_gcdex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extended Euclidean Algorithm for two univariate polynomials over
+<span class="math notranslate nohighlight">\(\mathbb Z_p\)</span>.</p>
+<p>Returns polynomials <span class="math notranslate nohighlight">\(s, t\)</span> and <span class="math notranslate nohighlight">\(h\)</span>, such that <span class="math notranslate nohighlight">\(h\)</span> is the GCD of <span class="math notranslate nohighlight">\(f\)</span> and
+<span class="math notranslate nohighlight">\(g\)</span> and <span class="math notranslate nohighlight">\(sf + tg = h \; \mathrm{mod} \, p\)</span>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="diofant.polys.modulargcd._interpolate">
+<code class="sig-prename descclassname">diofant.polys.modulargcd.</code><code class="sig-name descname">_interpolate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">evalpoints</span></em>, <em class="sig-param"><span class="n">hpeval</span></em>, <em class="sig-param"><span class="n">ring</span></em>, <em class="sig-param"><span class="n">i</span></em>, <em class="sig-param"><span class="n">p</span></em>, <em class="sig-param"><span class="n">ground</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/modulargcd.py#L116-L178"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.modulargcd._interpolate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reconstruct a polynomial <span class="math notranslate nohighlight">\(h_p\)</span> in <span class="math notranslate nohighlight">\(\mathbb{Z}_p[x_0, \ldots, x_{k-1}]\)</span>
+from a list of evaluation points in <span class="math notranslate nohighlight">\(\mathbb{Z}_p\)</span> and a list of
+polynomials in
+<span class="math notranslate nohighlight">\(\mathbb{Z}_p[x_0, \ldots, x_{i-1}, x_{i+1}, \ldots, x_{k-1}]\)</span>, which
+are the images of <span class="math notranslate nohighlight">\(h_p\)</span> evaluated in the variable <span class="math notranslate nohighlight">\(x_i\)</span>.</p>
+<p>It is also possible to reconstruct a parameter of the ground domain,
+i.e. if <span class="math notranslate nohighlight">\(h_p\)</span> is a polynomial over <span class="math notranslate nohighlight">\(\mathbb{Z}_p[x_0, \ldots, x_{k-1}]\)</span>.
+In this case, one has to set <code class="docutils literal notranslate"><span class="pre">ground=True</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>evalpoints</strong> (<em>list of Integer objects</em>) – list of evaluation points in <span class="math notranslate nohighlight">\(\mathbb{Z}_p\)</span></p></li>
+<li><p><strong>hpeval</strong> (<em>list of PolyElement objects</em>) – list of polynomials in (resp. over)
+<span class="math notranslate nohighlight">\(\mathbb{Z}_p[x_0, \ldots, x_{i-1}, x_{i+1}, \ldots, x_{k-1}]\)</span>,
+images of <span class="math notranslate nohighlight">\(h_p\)</span> evaluated in the variable <span class="math notranslate nohighlight">\(x_i\)</span></p></li>
+<li><p><strong>ring</strong> (<em>PolynomialRing</em>) – <span class="math notranslate nohighlight">\(h_p\)</span> will be an element of this ring</p></li>
+<li><p><strong>i</strong> (<em>Integer</em>) – index of the variable which has to be reconstructed</p></li>
+<li><p><strong>p</strong> (<em>Integer</em>) – prime number, modulus of <span class="math notranslate nohighlight">\(h_p\)</span></p></li>
+<li><p><strong>ground</strong> (<em>Boolean</em>) – indicates whether <span class="math notranslate nohighlight">\(x_i\)</span> is in the ground domain, default is
+<code class="docutils literal notranslate"><span class="pre">False</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>hp</strong> (<em>PolyElement</em>) – interpolated polynomial in (resp. over)
+<span class="math notranslate nohighlight">\(\mathbb{Z}_p[x_0, \ldots, x_{k-1}]\)</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="diofant.polys.modulargcd._minpoly_from_dense">
+<code class="sig-prename descclassname">diofant.polys.modulargcd.</code><code class="sig-name descname">_minpoly_from_dense</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">minpoly</span></em>, <em class="sig-param"><span class="n">ring</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/modulargcd.py#L1274-L1285"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.modulargcd._minpoly_from_dense" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change representation of the minimal polynomial from <code class="docutils literal notranslate"><span class="pre">Poly</span></code> to
+<code class="docutils literal notranslate"><span class="pre">PolyElement</span></code> for a given ring.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="diofant.polys.modulargcd._modgcd_p">
+<code class="sig-prename descclassname">diofant.polys.modulargcd.</code><code class="sig-name descname">_modgcd_p</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">g</span></em>, <em class="sig-param"><span class="n">p</span></em>, <em class="sig-param"><span class="n">degbound</span></em>, <em class="sig-param"><span class="n">contbound</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/modulargcd.py#L181-L346"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.modulargcd._modgcd_p" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the GCD of two polynomials in
+<span class="math notranslate nohighlight">\(\mathbb{Z}_p[x0, \ldots, x{k-1}]\)</span>.</p>
+<p>The algorithm reduces the problem step by step by evaluating the
+polynomials <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span> at <span class="math notranslate nohighlight">\(x_{k-1} = a\)</span> for suitable
+<span class="math notranslate nohighlight">\(a \in \mathbb{Z}_p\)</span> and then calls itself recursively to compute the GCD
+in <span class="math notranslate nohighlight">\(\mathbb{Z}_p[x_0, \ldots, x_{k-2}]\)</span>. If these recursive calls are
+successful for enough evaluation points, the GCD in <span class="math notranslate nohighlight">\(k\)</span> variables is
+interpolated, otherwise the algorithm returns <code class="docutils literal notranslate"><span class="pre">None</span></code>. Every time a GCD
+or a content is computed, their degrees are compared with the bounds. If
+a degree greater then the bound is encountered, then the current call
+returns <code class="docutils literal notranslate"><span class="pre">None</span></code> and a new evaluation point has to be chosen. If at some
+point the degree is smaller, the correspondent bound is updated and the
+algorithm fails.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> (<em>PolyElement</em>) – multivariate integer polynomial with coefficients in <span class="math notranslate nohighlight">\(\mathbb{Z}_p\)</span></p></li>
+<li><p><strong>g</strong> (<em>PolyElement</em>) – multivariate integer polynomial with coefficients in <span class="math notranslate nohighlight">\(\mathbb{Z}_p\)</span></p></li>
+<li><p><strong>p</strong> (<em>Integer</em>) – prime number, modulus of <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span></p></li>
+<li><p><strong>degbound</strong> (<em>list of Integer objects</em>) – <code class="docutils literal notranslate"><span class="pre">degbound[i]</span></code> is an upper bound for the degree of the GCD of <span class="math notranslate nohighlight">\(f\)</span>
+and <span class="math notranslate nohighlight">\(g\)</span> in the variable <span class="math notranslate nohighlight">\(x_i\)</span></p></li>
+<li><p><strong>contbound</strong> (<em>list of Integer objects</em>) – <code class="docutils literal notranslate"><span class="pre">contbound[i]</span></code> is an upper bound for the degree of the content of
+the GCD in <span class="math notranslate nohighlight">\(\mathbb{Z}_p[x_i][x_0, \ldots, x_{i-1}]\)</span>,
+<code class="docutils literal notranslate"><span class="pre">contbound[0]</span></code> is not used can therefore be chosen
+arbitrarily.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>h</strong> (<em>PolyElement</em>) – GCD of the polynomials <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span> or <code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><p><a class="bibtex reference internal" href="../sources.html#monagan2000brown" id="id28">[MW00]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#brown1971gcd" id="id29">[Bro71]</a></p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt id="diofant.polys.modulargcd._primitive_in_x0">
+<code class="sig-prename descclassname">diofant.polys.modulargcd.</code><code class="sig-name descname">_primitive_in_x0</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/modulargcd.py#L1288-L1305"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.modulargcd._primitive_in_x0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the content in <span class="math notranslate nohighlight">\(x_0\)</span> and the primitive part of a polynomial <span class="math notranslate nohighlight">\(f\)</span>
+in
+<span class="math notranslate nohighlight">\(\mathbb Q(\alpha)[x_0, x_1, \ldots, x_{n-1}] \cong \mathbb Q(\alpha)[x_1, \ldots, x_{n-1}][x_0]\)</span>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="diofant.polys.modulargcd._rational_function_reconstruction">
+<code class="sig-prename descclassname">diofant.polys.modulargcd.</code><code class="sig-name descname">_rational_function_reconstruction</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">c</span></em>, <em class="sig-param"><span class="n">p</span></em>, <em class="sig-param"><span class="n">m</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/modulargcd.py#L464-L530"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.modulargcd._rational_function_reconstruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reconstruct a rational function <span class="math notranslate nohighlight">\(\frac a b\)</span> in <span class="math notranslate nohighlight">\(\mathbb Z_p(t)\)</span> from</p>
+<div class="math notranslate nohighlight">
+\[c = \frac a b \; \mathrm{mod} \, m,\]</div>
+<p>where <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(m\)</span> are polynomials in <span class="math notranslate nohighlight">\(\mathbb Z_p[t]\)</span> and <span class="math notranslate nohighlight">\(m\)</span> has
+positive degree.</p>
+<p>The algorithm is based on the Euclidean Algorithm. In general, <span class="math notranslate nohighlight">\(m\)</span> is
+not irreducible, so it is possible that <span class="math notranslate nohighlight">\(b\)</span> is not invertible modulo
+<span class="math notranslate nohighlight">\(m\)</span>. In that case <code class="docutils literal notranslate"><span class="pre">None</span></code> is returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>c</strong> (<em>PolyElement</em>) – univariate polynomial in <span class="math notranslate nohighlight">\(\mathbb Z[t]\)</span></p></li>
+<li><p><strong>p</strong> (<em>Integer</em>) – prime number</p></li>
+<li><p><strong>m</strong> (<em>PolyElement</em>) – modulus, not necessarily irreducible</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>frac</strong> (<em>FracElement</em>) – either <span class="math notranslate nohighlight">\(\frac a b\)</span> in <span class="math notranslate nohighlight">\(\mathbb Z(t)\)</span> or <code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><p><a class="bibtex reference internal" href="../sources.html#monagan2004algebraic" id="id30">[MvH04]</a></p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt id="diofant.polys.modulargcd._rational_reconstruction_func_coeffs">
+<code class="sig-prename descclassname">diofant.polys.modulargcd.</code><code class="sig-name descname">_rational_reconstruction_func_coeffs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">hm</span></em>, <em class="sig-param"><span class="n">p</span></em>, <em class="sig-param"><span class="n">m</span></em>, <em class="sig-param"><span class="n">ring</span></em>, <em class="sig-param"><span class="n">k</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/modulargcd.py#L533-L600"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.modulargcd._rational_reconstruction_func_coeffs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reconstruct every coefficient <span class="math notranslate nohighlight">\(c_h\)</span> of a polynomial <span class="math notranslate nohighlight">\(h\)</span> in
+<span class="math notranslate nohighlight">\(\mathbb Z_p(t_k)[t_1, \ldots, t_{k-1}][x, z]\)</span> from the corresponding
+coefficient <span class="math notranslate nohighlight">\(c_{h_m}\)</span> of a polynomial <span class="math notranslate nohighlight">\(h_m\)</span> in
+<span class="math notranslate nohighlight">\(\mathbb Z_p[t_1, \ldots, t_k][x, z] \cong \mathbb Z_p[t_k][t_1, \ldots, t_{k-1}][x, z]\)</span>
+such that</p>
+<div class="math notranslate nohighlight">
+\[c_{h_m} = c_h \; \mathrm{mod} \, m,\]</div>
+<p>where <span class="math notranslate nohighlight">\(m \in \mathbb Z_p[t]\)</span>.</p>
+<p>The reconstruction is based on the Euclidean Algorithm. In general, <span class="math notranslate nohighlight">\(m\)</span>
+is not irreducible, so it is possible that this fails for some
+coefficient. In that case <code class="docutils literal notranslate"><span class="pre">None</span></code> is returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hm</strong> (<em>PolyElement</em>) – polynomial in <span class="math notranslate nohighlight">\(\mathbb Z[t_1, \ldots, t_k][x, z]\)</span></p></li>
+<li><p><strong>p</strong> (<em>Integer</em>) – prime number, modulus of <span class="math notranslate nohighlight">\(\mathbb Z_p\)</span></p></li>
+<li><p><strong>m</strong> (<em>PolyElement</em>) – modulus, polynomial in <span class="math notranslate nohighlight">\(\mathbb Z[t]\)</span>, not necessarily irreducible</p></li>
+<li><p><strong>ring</strong> (<em>PolynomialRing</em>) – <span class="math notranslate nohighlight">\(\mathbb Z(t_k)[t_1, \ldots, t_{k-1}][x, z]\)</span>, <span class="math notranslate nohighlight">\(h\)</span> will be an
+element of this ring</p></li>
+<li><p><strong>k</strong> (<em>Integer</em>) – index of the parameter <span class="math notranslate nohighlight">\(t_k\)</span> which will be reconstructed</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>h</strong> (<em>PolyElement</em>) – reconstructed polynomial in
+<span class="math notranslate nohighlight">\(\mathbb Z(t_k)[t_1, \ldots, t_{k-1}][x, z]\)</span> or <code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#diofant.polys.modulargcd._rational_function_reconstruction" title="diofant.polys.modulargcd._rational_function_reconstruction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_rational_function_reconstruction</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="diofant.polys.modulargcd._rational_reconstruction_int_coeffs">
+<code class="sig-prename descclassname">diofant.polys.modulargcd.</code><code class="sig-name descname">_rational_reconstruction_int_coeffs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">hm</span></em>, <em class="sig-param"><span class="n">m</span></em>, <em class="sig-param"><span class="n">ring</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/modulargcd.py#L958-L1016"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.modulargcd._rational_reconstruction_int_coeffs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reconstruct every rational coefficient <span class="math notranslate nohighlight">\(c_h\)</span> of a polynomial <span class="math notranslate nohighlight">\(h\)</span> in
+<span class="math notranslate nohighlight">\(\mathbb Q[t_1, \ldots, t_k][x, z]\)</span> from the corresponding integer
+coefficient <span class="math notranslate nohighlight">\(c_{h_m}\)</span> of a polynomial <span class="math notranslate nohighlight">\(h_m\)</span> in
+<span class="math notranslate nohighlight">\(\mathbb Z[t_1, \ldots, t_k][x, z]\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[c_{h_m} = c_h \; \mathrm{mod} \, m,\]</div>
+<p>where <span class="math notranslate nohighlight">\(m \in \mathbb Z\)</span>.</p>
+<p>The reconstruction is based on the Euclidean Algorithm. In general,
+<span class="math notranslate nohighlight">\(m\)</span> is not a prime number, so it is possible that this fails for some
+coefficient. In that case <code class="docutils literal notranslate"><span class="pre">None</span></code> is returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hm</strong> (<em>PolyElement</em>) – polynomial in <span class="math notranslate nohighlight">\(\mathbb Z[t_1, \ldots, t_k][x, z]\)</span></p></li>
+<li><p><strong>m</strong> (<em>Integer</em>) – modulus, not necessarily prime</p></li>
+<li><p><strong>ring</strong> (<em>PolynomialRing</em>) – <span class="math notranslate nohighlight">\(\mathbb Q[t_1, \ldots, t_k][x, z]\)</span>, <span class="math notranslate nohighlight">\(h\)</span> will be an element of this
+ring</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>h</strong> (<em>PolyElement</em>) – reconstructed polynomial in <span class="math notranslate nohighlight">\(\mathbb Q[t_1, \ldots, t_k][x, z]\)</span> or
+<code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="../modules/ntheory.html#diofant.ntheory.modular.integer_rational_reconstruction" title="diofant.ntheory.modular.integer_rational_reconstruction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">diofant.ntheory.modular.integer_rational_reconstruction</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="diofant.polys.modulargcd._swap">
+<code class="sig-prename descclassname">diofant.polys.modulargcd.</code><code class="sig-name descname">_swap</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">i</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/modulargcd.py#L11-L18"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.modulargcd._swap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make the variable <span class="math notranslate nohighlight">\(x_i\)</span> the leading one in a multivariate polynomial <span class="math notranslate nohighlight">\(f\)</span>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="diofant.polys.modulargcd._to_ANP_poly">
+<code class="sig-prename descclassname">diofant.polys.modulargcd.</code><code class="sig-name descname">_to_ANP_poly</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">ring</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/modulargcd.py#L1223-L1271"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.modulargcd._to_ANP_poly" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a polynomial
+<span class="math notranslate nohighlight">\(f \in \mathbb Z[x_1, \ldots, x_{n-1}][z]/(\check m_{\alpha}(z))[x_0]\)</span>
+to a polynomial in <span class="math notranslate nohighlight">\(\mathbb Q(\alpha)[x_0, \ldots, x_{n-1}]\)</span>,
+where <span class="math notranslate nohighlight">\(\check m_{\alpha}(z) \in \mathbb Z[z]\)</span> is the primitive associate
+of the minimal polynomial <span class="math notranslate nohighlight">\(m_{\alpha}(z)\)</span> of <span class="math notranslate nohighlight">\(\alpha\)</span> over
+<span class="math notranslate nohighlight">\(\mathbb Q\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> (<em>PolyElement</em>) – polynomial in <span class="math notranslate nohighlight">\(\mathbb Z[x_1, \ldots, x_{n-1}][x_0, z]\)</span></p></li>
+<li><p><strong>ring</strong> (<em>PolynomialRing</em>) – <span class="math notranslate nohighlight">\(\mathbb Q(\alpha)[x_0, \ldots, x_{n-1}]\)</span></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>f_</strong> (<em>PolyElement</em>) – polynomial in <span class="math notranslate nohighlight">\(\mathbb Q(\alpha)[x_0, \ldots, x_{n-1}]\)</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="diofant.polys.modulargcd._to_ZZ_poly">
+<code class="sig-prename descclassname">diofant.polys.modulargcd.</code><code class="sig-name descname">_to_ZZ_poly</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">ring</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/modulargcd.py#L1165-L1220"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.modulargcd._to_ZZ_poly" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute an associate of a polynomial
+<span class="math notranslate nohighlight">\(f \in \mathbb Q(\alpha)[x_0, \ldots, x_{n-1}]\)</span> in
+<span class="math notranslate nohighlight">\(\mathbb Z[x_1, \ldots, x_{n-1}][z] / (\check m_{\alpha}(z))[x_0]\)</span>,
+where <span class="math notranslate nohighlight">\(\check m_{\alpha}(z) \in \mathbb Z[z]\)</span> is the primitive associate
+of the minimal polynomial <span class="math notranslate nohighlight">\(m_{\alpha}(z)\)</span> of <span class="math notranslate nohighlight">\(\alpha\)</span> over
+<span class="math notranslate nohighlight">\(\mathbb Q\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> (<em>PolyElement</em>) – polynomial in <span class="math notranslate nohighlight">\(\mathbb Q(\alpha)[x_0, \ldots, x_{n-1}]\)</span></p></li>
+<li><p><strong>ring</strong> (<em>PolynomialRing</em>) – <span class="math notranslate nohighlight">\(\mathbb Z[x_1, \ldots, x_{n-1}][x_0, z]\)</span></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>f_</strong> (<em>PolyElement</em>) – associate of <span class="math notranslate nohighlight">\(f\)</span> in
+<span class="math notranslate nohighlight">\(\mathbb Z[x_1, \ldots, x_{n-1}][x_0, z]\)</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="diofant.polys.modulargcd._trunc">
+<code class="sig-prename descclassname">diofant.polys.modulargcd.</code><code class="sig-name descname">_trunc</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">minpoly</span></em>, <em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/modulargcd.py#L619-L647"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.modulargcd._trunc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the reduced representation of a polynomial <span class="math notranslate nohighlight">\(f\)</span> in
+<span class="math notranslate nohighlight">\(\mathbb Z_p[z] / (\check m_{\alpha}(z))[x]\)</span></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> (<em>PolyElement</em>) – polynomial in <span class="math notranslate nohighlight">\(\mathbb Z[x, z]\)</span></p></li>
+<li><p><strong>minpoly</strong> (<em>PolyElement</em>) – polynomial <span class="math notranslate nohighlight">\(\check m_{\alpha} \in \mathbb Z[z]\)</span>, not necessarily
+irreducible</p></li>
+<li><p><strong>p</strong> (<em>Integer</em>) – prime number, modulus of <span class="math notranslate nohighlight">\(\mathbb Z_p\)</span></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>ftrunc</strong> (<em>PolyElement</em>) – polynomial in <span class="math notranslate nohighlight">\(\mathbb Z[x, z]\)</span>, reduced modulo
+<span class="math notranslate nohighlight">\(\check m_{\alpha}(z)\)</span> and <span class="math notranslate nohighlight">\(p\)</span></p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py function">
 <dt id="diofant.polys.modulargcd.func_field_modgcd">
 <code class="sig-prename descclassname">diofant.polys.modulargcd.</code><code class="sig-name descname">func_field_modgcd</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">g</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/modulargcd.py#L1308-L1424"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.modulargcd.func_field_modgcd" title="Permalink to this definition">¶</a></dt>
@@ -1243,7 +1982,7 @@ called recursively.</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#monagan2004algebraic" id="id20">[MvH04]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#monagan2004algebraic" id="id31">[MvH04]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -1293,8 +2032,8 @@ candidates which are very likely the desired GCD.</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#monagan2000brown" id="id21">[MW00]</a></p></li>
-<li><p><a class="bibtex reference internal" href="../sources.html#brown1971gcd" id="id22">[Bro71]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#monagan2000brown" id="id32">[MW00]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#brown1971gcd" id="id33">[Bro71]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -1322,7 +2061,7 @@ is given, <span class="math notranslate nohighlight">\(\mathbb Z_p\)</span> is c
 </dl>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#vanhoeij2002modgcd" id="id23">[vHM02]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#vanhoeij2002modgcd" id="id34">[vHM02]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -1351,7 +2090,7 @@ interpolated polynomial is the correct GCD. This gives cofactors of
 the input polynomials as a side effect.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="bibtex reference internal" href="../sources.html#liao1995heuristic" id="id24">[LF95]</a></p></li>
+<li><p><a class="bibtex reference internal" href="../sources.html#liao1995heuristic" id="id35">[LF95]</a></p></li>
 </ul>
 </dd></dl>
 
@@ -1550,25 +2289,25 @@ documentation it is scarce. Please contribute!</p>
 
 <dl class="py exception">
 <dt id="diofant.polys.polyerrors.CoercionFailed">
-<em class="property">exception </em><code class="sig-prename descclassname">diofant.polys.polyerrors.</code><code class="sig-name descname">CoercionFailed</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/polyerrors.py#L96-L97"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyerrors.CoercionFailed" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-prename descclassname">diofant.polys.polyerrors.</code><code class="sig-name descname">CoercionFailed</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/polyerrors.py#L100-L101"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyerrors.CoercionFailed" title="Permalink to this definition">¶</a></dt>
 <dd><p>Raised when a coercion is failed.</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt id="diofant.polys.polyerrors.ComputationFailed">
-<em class="property">exception </em><code class="sig-prename descclassname">diofant.polys.polyerrors.</code><code class="sig-name descname">ComputationFailed</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">func</span></em>, <em class="sig-param"><span class="n">nargs</span></em>, <em class="sig-param"><span class="n">exc</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/polyerrors.py#L132-L141"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyerrors.ComputationFailed" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-prename descclassname">diofant.polys.polyerrors.</code><code class="sig-name descname">ComputationFailed</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">func</span></em>, <em class="sig-param"><span class="n">nargs</span></em>, <em class="sig-param"><span class="n">exc</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/polyerrors.py#L136-L145"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyerrors.ComputationFailed" title="Permalink to this definition">¶</a></dt>
 <dd><p>Raised when polynomial computation failed.</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt id="diofant.polys.polyerrors.DomainError">
-<em class="property">exception </em><code class="sig-prename descclassname">diofant.polys.polyerrors.</code><code class="sig-name descname">DomainError</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/polyerrors.py#L112-L113"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyerrors.DomainError" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-prename descclassname">diofant.polys.polyerrors.</code><code class="sig-name descname">DomainError</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/polyerrors.py#L116-L117"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyerrors.DomainError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generic domain error.</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt id="diofant.polys.polyerrors.EvaluationFailed">
-<em class="property">exception </em><code class="sig-prename descclassname">diofant.polys.polyerrors.</code><code class="sig-name descname">EvaluationFailed</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/polyerrors.py#L88-L89"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyerrors.EvaluationFailed" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-prename descclassname">diofant.polys.polyerrors.</code><code class="sig-name descname">EvaluationFailed</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/polyerrors.py#L92-L93"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyerrors.EvaluationFailed" title="Permalink to this definition">¶</a></dt>
 <dd><p>Raised when a polynomial evaluation is failed.</p>
 </dd></dl>
 
@@ -1580,25 +2319,25 @@ documentation it is scarce. Please contribute!</p>
 
 <dl class="py exception">
 <dt id="diofant.polys.polyerrors.ExtraneousFactors">
-<em class="property">exception </em><code class="sig-prename descclassname">diofant.polys.polyerrors.</code><code class="sig-name descname">ExtraneousFactors</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/polyerrors.py#L84-L85"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyerrors.ExtraneousFactors" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-prename descclassname">diofant.polys.polyerrors.</code><code class="sig-name descname">ExtraneousFactors</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/polyerrors.py#L88-L89"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyerrors.ExtraneousFactors" title="Permalink to this definition">¶</a></dt>
 <dd><p>Raised when there are extraneous factors.</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt id="diofant.polys.polyerrors.FlagError">
-<em class="property">exception </em><code class="sig-prename descclassname">diofant.polys.polyerrors.</code><code class="sig-name descname">FlagError</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/polyerrors.py#L179-L180"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyerrors.FlagError" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-prename descclassname">diofant.polys.polyerrors.</code><code class="sig-name descname">FlagError</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/polyerrors.py#L183-L184"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyerrors.FlagError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generic flag error.</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt id="diofant.polys.polyerrors.GeneratorsError">
-<em class="property">exception </em><code class="sig-prename descclassname">diofant.polys.polyerrors.</code><code class="sig-name descname">GeneratorsError</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/polyerrors.py#L124-L125"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyerrors.GeneratorsError" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-prename descclassname">diofant.polys.polyerrors.</code><code class="sig-name descname">GeneratorsError</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/polyerrors.py#L128-L129"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyerrors.GeneratorsError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Raised when polynomial generators are unsuitable.</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt id="diofant.polys.polyerrors.GeneratorsNeeded">
-<em class="property">exception </em><code class="sig-prename descclassname">diofant.polys.polyerrors.</code><code class="sig-name descname">GeneratorsNeeded</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/polyerrors.py#L128-L129"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyerrors.GeneratorsNeeded" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-prename descclassname">diofant.polys.polyerrors.</code><code class="sig-name descname">GeneratorsNeeded</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/polyerrors.py#L132-L133"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyerrors.GeneratorsNeeded" title="Permalink to this definition">¶</a></dt>
 <dd><p>Raised when more generators needed.</p>
 </dd></dl>
 
@@ -1610,13 +2349,13 @@ documentation it is scarce. Please contribute!</p>
 
 <dl class="py exception">
 <dt id="diofant.polys.polyerrors.HomomorphismFailed">
-<em class="property">exception </em><code class="sig-prename descclassname">diofant.polys.polyerrors.</code><code class="sig-name descname">HomomorphismFailed</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/polyerrors.py#L76-L77"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyerrors.HomomorphismFailed" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-prename descclassname">diofant.polys.polyerrors.</code><code class="sig-name descname">HomomorphismFailed</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/polyerrors.py#L80-L81"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyerrors.HomomorphismFailed" title="Permalink to this definition">¶</a></dt>
 <dd><p>Raised when a homomorphism is failed.</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt id="diofant.polys.polyerrors.IsomorphismFailed">
-<em class="property">exception </em><code class="sig-prename descclassname">diofant.polys.polyerrors.</code><code class="sig-name descname">IsomorphismFailed</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/polyerrors.py#L80-L81"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyerrors.IsomorphismFailed" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-prename descclassname">diofant.polys.polyerrors.</code><code class="sig-name descname">IsomorphismFailed</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/polyerrors.py#L84-L85"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyerrors.IsomorphismFailed" title="Permalink to this definition">¶</a></dt>
 <dd><p>Raised when an isomprphism is failed.</p>
 </dd></dl>
 
@@ -1628,25 +2367,25 @@ documentation it is scarce. Please contribute!</p>
 
 <dl class="py exception">
 <dt id="diofant.polys.polyerrors.MultivariatePolynomialError">
-<em class="property">exception </em><code class="sig-prename descclassname">diofant.polys.polyerrors.</code><code class="sig-name descname">MultivariatePolynomialError</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/polyerrors.py#L148-L149"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyerrors.MultivariatePolynomialError" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-prename descclassname">diofant.polys.polyerrors.</code><code class="sig-name descname">MultivariatePolynomialError</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/polyerrors.py#L152-L153"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyerrors.MultivariatePolynomialError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generic multivariate polynomial error.</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt id="diofant.polys.polyerrors.NotAlgebraic">
-<em class="property">exception </em><code class="sig-prename descclassname">diofant.polys.polyerrors.</code><code class="sig-name descname">NotAlgebraic</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/polyerrors.py#L108-L109"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyerrors.NotAlgebraic" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-prename descclassname">diofant.polys.polyerrors.</code><code class="sig-name descname">NotAlgebraic</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/polyerrors.py#L112-L113"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyerrors.NotAlgebraic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Raised when a non algebraic element occurred.</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt id="diofant.polys.polyerrors.NotInvertible">
-<em class="property">exception </em><code class="sig-prename descclassname">diofant.polys.polyerrors.</code><code class="sig-name descname">NotInvertible</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/polyerrors.py#L100-L101"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyerrors.NotInvertible" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-prename descclassname">diofant.polys.polyerrors.</code><code class="sig-name descname">NotInvertible</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/polyerrors.py#L104-L105"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyerrors.NotInvertible" title="Permalink to this definition">¶</a></dt>
 <dd><p>Raised when a element is not invertible.</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt id="diofant.polys.polyerrors.NotReversible">
-<em class="property">exception </em><code class="sig-prename descclassname">diofant.polys.polyerrors.</code><code class="sig-name descname">NotReversible</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/polyerrors.py#L104-L105"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyerrors.NotReversible" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-prename descclassname">diofant.polys.polyerrors.</code><code class="sig-name descname">NotReversible</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/polyerrors.py#L108-L109"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyerrors.NotReversible" title="Permalink to this definition">¶</a></dt>
 <dd><p>Raised when a element is not reversible.</p>
 </dd></dl>
 
@@ -1658,13 +2397,13 @@ documentation it is scarce. Please contribute!</p>
 
 <dl class="py exception">
 <dt id="diofant.polys.polyerrors.OptionError">
-<em class="property">exception </em><code class="sig-prename descclassname">diofant.polys.polyerrors.</code><code class="sig-name descname">OptionError</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/polyerrors.py#L175-L176"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyerrors.OptionError" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-prename descclassname">diofant.polys.polyerrors.</code><code class="sig-name descname">OptionError</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/polyerrors.py#L179-L180"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyerrors.OptionError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generic option error.</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt id="diofant.polys.polyerrors.PolificationFailed">
-<em class="property">exception </em><code class="sig-prename descclassname">diofant.polys.polyerrors.</code><code class="sig-name descname">PolificationFailed</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">opt</span></em>, <em class="sig-param"><span class="n">origs</span></em>, <em class="sig-param"><span class="n">exprs</span></em>, <em class="sig-param"><span class="n">seq</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/polyerrors.py#L152-L172"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyerrors.PolificationFailed" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-prename descclassname">diofant.polys.polyerrors.</code><code class="sig-name descname">PolificationFailed</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">opt</span></em>, <em class="sig-param"><span class="n">origs</span></em>, <em class="sig-param"><span class="n">exprs</span></em>, <em class="sig-param"><span class="n">seq</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/polyerrors.py#L156-L176"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyerrors.PolificationFailed" title="Permalink to this definition">¶</a></dt>
 <dd><p>Raised if polunomial construction is failed.</p>
 </dd></dl>
 
@@ -1676,26 +2415,32 @@ documentation it is scarce. Please contribute!</p>
 
 <dl class="py exception">
 <dt id="diofant.polys.polyerrors.PolynomialError">
-<em class="property">exception </em><code class="sig-prename descclassname">diofant.polys.polyerrors.</code><code class="sig-name descname">PolynomialError</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/polyerrors.py#L116-L117"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyerrors.PolynomialError" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-prename descclassname">diofant.polys.polyerrors.</code><code class="sig-name descname">PolynomialError</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/polyerrors.py#L120-L121"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyerrors.PolynomialError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generic polynomial error.</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt id="diofant.polys.polyerrors.RefinementFailed">
-<em class="property">exception </em><code class="sig-prename descclassname">diofant.polys.polyerrors.</code><code class="sig-name descname">RefinementFailed</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/polyerrors.py#L92-L93"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyerrors.RefinementFailed" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-prename descclassname">diofant.polys.polyerrors.</code><code class="sig-name descname">RefinementFailed</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/polyerrors.py#L96-L97"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyerrors.RefinementFailed" title="Permalink to this definition">¶</a></dt>
 <dd><p>Raised when a root refinement is failed.</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt id="diofant.polys.polyerrors.UnificationFailed">
-<em class="property">exception </em><code class="sig-prename descclassname">diofant.polys.polyerrors.</code><code class="sig-name descname">UnificationFailed</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/polyerrors.py#L120-L121"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyerrors.UnificationFailed" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-prename descclassname">diofant.polys.polyerrors.</code><code class="sig-name descname">UnificationFailed</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/polyerrors.py#L124-L125"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyerrors.UnificationFailed" title="Permalink to this definition">¶</a></dt>
 <dd><p>Raised when domains unification failed.</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt id="diofant.polys.polyerrors.UnivariatePolynomialError">
-<em class="property">exception </em><code class="sig-prename descclassname">diofant.polys.polyerrors.</code><code class="sig-name descname">UnivariatePolynomialError</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/polyerrors.py#L144-L145"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyerrors.UnivariatePolynomialError" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-prename descclassname">diofant.polys.polyerrors.</code><code class="sig-name descname">UnivariatePolynomialError</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/polyerrors.py#L148-L149"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyerrors.UnivariatePolynomialError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generic univariate polynomial error.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="diofant.polys.polyerrors.UnluckyLeadingCoefficient">
+<em class="property">exception </em><code class="sig-prename descclassname">diofant.polys.polyerrors.</code><code class="sig-name descname">UnluckyLeadingCoefficient</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/polyerrors.py#L76-L77"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.polys.polyerrors.UnluckyLeadingCoefficient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raised when there are unlucky LC.</p>
 </dd></dl>
 
 <dl class="py class">
