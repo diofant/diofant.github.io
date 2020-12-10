@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Polygons &mdash; Diofant 0.12.0a4.dev55+g9d137e729 documentation</title>
+  <title>Polygons &mdash; Diofant 0.12.0a4.dev63+g36c630988 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Plane" href="plane.html" />
+    <link rel="next" title="Integrals" href="../integrals.html" />
     <link rel="prev" title="Ellipses" href="ellipses.html" /> 
 </head>
 
@@ -211,7 +211,7 @@
 <span id="polygons"></span><h1>Polygons<a class="headerlink" href="#module-diofant.geometry.polygon" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="diofant.geometry.polygon.Polygon">
-<em class="property">class </em><code class="sig-prename descclassname">diofant.geometry.polygon.</code><code class="sig-name descname">Polygon</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/polygon.py#L19-L941"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.polygon.Polygon" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diofant.geometry.polygon.</code><code class="sig-name descname">Polygon</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/polygon.py#L19-L934"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.polygon.Polygon" title="Permalink to this definition">¶</a></dt>
 <dd><p>A two-dimensional polygon.</p>
 <p>A simple polygon in space. Can be constructed from a sequence of points
 or from a center, radius, number of sides and rotation angle.</p>
@@ -241,11 +241,11 @@ fewer points provided.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">p3</span><span class="p">,</span> <span class="n">p4</span><span class="p">,</span> <span class="n">p5</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Polygon</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">p3</span><span class="p">,</span> <span class="n">p4</span><span class="p">)</span>
-<span class="go">Polygon(Point2D(0, 0), Point2D(1, 0), Point2D(5, 1), Point2D(0, 1))</span>
+<span class="go">Polygon(Point(0, 0), Point(1, 0), Point(5, 1), Point(0, 1))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Polygon</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">)</span>
-<span class="go">Segment(Point2D(0, 0), Point2D(1, 0))</span>
+<span class="go">Segment(Point(0, 0), Point(1, 0))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Polygon</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">p5</span><span class="p">)</span>
-<span class="go">Segment(Point2D(0, 0), Point2D(3, 0))</span>
+<span class="go">Segment(Point(0, 0), Point(3, 0))</span>
 </pre></div>
 </div>
 <p>While the sides of a polygon are not allowed to cross implicitly, they
@@ -267,14 +267,14 @@ circle that circumscribes the RegularPolygon. Its method <span class="math notra
 used to increment that angle.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">Polygon</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">p</span>
-<span class="go">RegularPolygon(Point2D(0, 0), 1, 3, 0)</span>
+<span class="go">RegularPolygon(Point(0, 0), 1, 3, 0)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="go">Point2D(1, 0)</span>
+<span class="go">Point(1, 0)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="go">Point2D(0, 0)</span>
+<span class="go">Point(0, 0)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">spin</span><span class="p">(</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="go">Point2D(0, 1)</span>
+<span class="go">Point(0, 1)</span>
 </pre></div>
 </div>
 <dl class="py method">
@@ -305,7 +305,7 @@ Points.</p>
 
 <dl class="py method">
 <dt id="diofant.geometry.polygon.Polygon.arbitrary_point">
-<code class="sig-name descname">arbitrary_point</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parameter</span><span class="o">=</span><span class="default_value">'t'</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/polygon.py#L529-L584"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.polygon.Polygon.arbitrary_point" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">arbitrary_point</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parameter</span><span class="o">=</span><span class="default_value">'t'</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/polygon.py#L527-L582"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.polygon.Polygon.arbitrary_point" title="Permalink to this definition">¶</a></dt>
 <dd><p>A parameterized point on the polygon.</p>
 <p>The parameter, varying from 0 to 1, assigns points to the position on
 the perimeter that is that fraction of the total perimeter. So the
@@ -333,7 +333,7 @@ that is 1/2 way around the polygon.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">perimeter</span> <span class="o">=</span> <span class="n">tri</span><span class="o">.</span><span class="n">perimeter</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">length</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">tri</span><span class="o">.</span><span class="n">sides</span><span class="p">[:</span><span class="mi">2</span><span class="p">]]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">t</span><span class="p">:</span> <span class="p">(</span><span class="n">s1</span> <span class="o">+</span> <span class="n">s2</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">perimeter</span><span class="p">})</span>
-<span class="go">Point2D(1, 1/2)</span>
+<span class="go">Point(1, 1/2)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -375,14 +375,14 @@ orientation of the points.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">p3</span><span class="p">,</span> <span class="n">p4</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="n">Point</span><span class="p">,</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">poly</span> <span class="o">=</span> <span class="n">Polygon</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">p3</span><span class="p">,</span> <span class="n">p4</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">poly</span><span class="o">.</span><span class="n">centroid</span>
-<span class="go">Point2D(31/18, 11/18)</span>
+<span class="go">Point(31/18, 11/18)</span>
 </pre></div>
 </div>
 </dd></dl>
 
 <dl class="py method">
 <dt id="diofant.geometry.polygon.Polygon.distance">
-<code class="sig-name descname">distance</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">o</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/polygon.py#L652-L680"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.polygon.Polygon.distance" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">distance</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">o</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/polygon.py#L649-L677"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.polygon.Polygon.distance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the shortest distance between self and o.</p>
 <p>If o is a point, then self does not need to be convex.
 If o is another polygon self and o must be complex.</p>
@@ -397,7 +397,7 @@ If o is another polygon self and o must be complex.</p>
 
 <dl class="py method">
 <dt id="diofant.geometry.polygon.Polygon.encloses_point">
-<code class="sig-name descname">encloses_point</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/polygon.py#L443-L527"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.polygon.Polygon.encloses_point" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">encloses_point</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/polygon.py#L442-L525"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.polygon.Polygon.encloses_point" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return True if p is enclosed by (is inside of) self.</p>
 <p class="rubric">Notes</p>
 <p>Being on the border of self is considered False.</p>
@@ -431,7 +431,7 @@ If o is another polygon self and o must be complex.</p>
 
 <dl class="py method">
 <dt id="diofant.geometry.polygon.Polygon.intersection">
-<code class="sig-name descname">intersection</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">o</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/polygon.py#L612-L650"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.polygon.Polygon.intersection" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">intersection</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">o</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/polygon.py#L610-L647"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.polygon.Polygon.intersection" title="Permalink to this definition">¶</a></dt>
 <dd><p>The intersection of two polygons.</p>
 <p>The intersection may be empty and can contain individual Points and
 complete Line Segments.</p>
@@ -453,14 +453,14 @@ complete Line Segments.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">p5</span><span class="p">,</span> <span class="n">p6</span><span class="p">,</span> <span class="n">p7</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="n">Point</span><span class="p">,</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">poly2</span> <span class="o">=</span> <span class="n">Polygon</span><span class="p">(</span><span class="n">p5</span><span class="p">,</span> <span class="n">p6</span><span class="p">,</span> <span class="n">p7</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">poly1</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">poly2</span><span class="p">)</span>
-<span class="go">[Point2D(2/3, 0), Point2D(9/5, 1/5), Point2D(7/3, 1), Point2D(1/3, 1)]</span>
+<span class="go">[Point(2/3, 0), Point(9/5, 1/5), Point(7/3, 1), Point(1/3, 1)]</span>
 </pre></div>
 </div>
 </dd></dl>
 
 <dl class="py method">
 <dt id="diofant.geometry.polygon.Polygon.is_convex">
-<code class="sig-name descname">is_convex</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/polygon.py#L408-L441"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.polygon.Polygon.is_convex" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">is_convex</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/polygon.py#L407-L440"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.polygon.Polygon.is_convex" title="Permalink to this definition">¶</a></dt>
 <dd><p>Is the polygon convex?</p>
 <p>A polygon is convex if all its interior angles are less than 180
 degrees.</p>
@@ -506,7 +506,7 @@ degrees.</p>
 
 <dl class="py method">
 <dt id="diofant.geometry.polygon.Polygon.plot_interval">
-<code class="sig-name descname">plot_interval</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parameter</span><span class="o">=</span><span class="default_value">'t'</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/polygon.py#L586-L610"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.polygon.Polygon.plot_interval" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">plot_interval</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parameter</span><span class="o">=</span><span class="default_value">'t'</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/polygon.py#L584-L608"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.polygon.Polygon.plot_interval" title="Permalink to this definition">¶</a></dt>
 <dd><p>The plot interval for the default geometric plot of the polygon.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -545,9 +545,9 @@ the polygon.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">p3</span><span class="p">,</span> <span class="n">p4</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="n">Point</span><span class="p">,</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">poly</span> <span class="o">=</span> <span class="n">Polygon</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">p3</span><span class="p">,</span> <span class="n">p4</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">poly</span><span class="o">.</span><span class="n">sides</span>
-<span class="go">[Segment(Point2D(0, 0), Point2D(1, 0)),</span>
-<span class="go">Segment(Point2D(1, 0), Point2D(5, 1)),</span>
-<span class="go">Segment(Point2D(0, 1), Point2D(5, 1)), Segment(Point2D(0, 0), Point2D(0, 1))]</span>
+<span class="go">[Segment(Point(0, 0), Point(1, 0)),</span>
+<span class="go">Segment(Point(1, 0), Point(5, 1)),</span>
+<span class="go">Segment(Point(0, 1), Point(5, 1)), Segment(Point(0, 0), Point(0, 1))]</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -574,9 +574,9 @@ more important with RegularPolygons that calculate each vertex.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">p3</span><span class="p">,</span> <span class="n">p4</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="n">Point</span><span class="p">,</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">poly</span> <span class="o">=</span> <span class="n">Polygon</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">p3</span><span class="p">,</span> <span class="n">p4</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">poly</span><span class="o">.</span><span class="n">vertices</span>
-<span class="go">(Point2D(0, 0), Point2D(1, 0), Point2D(5, 1), Point2D(0, 1))</span>
+<span class="go">(Point(0, 0), Point(1, 0), Point(5, 1), Point(0, 1))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">poly</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="go">Point2D(0, 0)</span>
+<span class="go">Point(0, 0)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -585,7 +585,7 @@ more important with RegularPolygons that calculate each vertex.</p>
 
 <dl class="py class">
 <dt id="diofant.geometry.polygon.RegularPolygon">
-<em class="property">class </em><code class="sig-prename descclassname">diofant.geometry.polygon.</code><code class="sig-name descname">RegularPolygon</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">c</span></em>, <em class="sig-param"><span class="n">r</span></em>, <em class="sig-param"><span class="n">n</span></em>, <em class="sig-param"><span class="n">rot</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/polygon.py#L944-L1508"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.polygon.RegularPolygon" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diofant.geometry.polygon.</code><code class="sig-name descname">RegularPolygon</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">c</span></em>, <em class="sig-param"><span class="n">r</span></em>, <em class="sig-param"><span class="n">n</span></em>, <em class="sig-param"><span class="n">rot</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/polygon.py#L937-L1501"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.polygon.RegularPolygon" title="Permalink to this definition">¶</a></dt>
 <dd><p>A regular polygon.</p>
 <p>Such a polygon has all internal angles equal and all sides the same length.</p>
 <dl class="field-list simple">
@@ -613,9 +613,9 @@ vertices of the RegularPolygon must be obtained with the vertices method.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">RegularPolygon</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span>
-<span class="go">RegularPolygon(Point2D(0, 0), 5, 3, 0)</span>
+<span class="go">RegularPolygon(Point(0, 0), 5, 3, 0)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="go">Point2D(5, 0)</span>
+<span class="go">Point(5, 0)</span>
 </pre></div>
 </div>
 <dl class="py method">
@@ -624,11 +624,11 @@ vertices of the RegularPolygon must be obtained with the vertices method.</p>
 <dd><p>Returns a dictionary with keys, the vertices of the Polygon,
 and values, the interior angle at each vertex.</p>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">RegularPolygon</span><span class="p">(</span><span class="n">Point2D</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">RegularPolygon</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">angles</span>
-<span class="go">{Point2D(-5/2, -5*sqrt(3)/2): pi/3,</span>
-<span class="go"> Point2D(-5/2, 5*sqrt(3)/2): pi/3,</span>
-<span class="go"> Point2D(5, 0): pi/3}</span>
+<span class="go">{Point(-5/2, -5*sqrt(3)/2): pi/3,</span>
+<span class="go"> Point(-5/2, 5*sqrt(3)/2): pi/3,</span>
+<span class="go"> Point(5, 0): pi/3}</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -678,7 +678,7 @@ the number of sides, and the orientation angle.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">RegularPolygon</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">args</span>
-<span class="go">(Point2D(0, 0), 5, 3, 0)</span>
+<span class="go">(Point(0, 0), 5, 3, 0)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -700,7 +700,7 @@ the number of sides, and the orientation angle.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rp</span> <span class="o">=</span> <span class="n">RegularPolygon</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rp</span><span class="o">.</span><span class="n">center</span>
-<span class="go">Point2D(0, 0)</span>
+<span class="go">Point(0, 0)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -722,7 +722,7 @@ the number of sides, and the orientation angle.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rp</span> <span class="o">=</span> <span class="n">RegularPolygon</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rp</span><span class="o">.</span><span class="n">center</span>
-<span class="go">Point2D(0, 0)</span>
+<span class="go">Point(0, 0)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -734,7 +734,7 @@ the number of sides, and the orientation angle.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rp</span> <span class="o">=</span> <span class="n">RegularPolygon</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rp</span><span class="o">.</span><span class="n">circumcenter</span>
-<span class="go">Point2D(0, 0)</span>
+<span class="go">Point(0, 0)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -755,7 +755,7 @@ the number of sides, and the orientation angle.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rp</span> <span class="o">=</span> <span class="n">RegularPolygon</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rp</span><span class="o">.</span><span class="n">circumcircle</span>
-<span class="go">Circle(Point2D(0, 0), 4)</span>
+<span class="go">Circle(Point(0, 0), 4)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -775,7 +775,7 @@ the number of sides, and the orientation angle.</p>
 
 <dl class="py method">
 <dt id="diofant.geometry.polygon.RegularPolygon.encloses_point">
-<code class="sig-name descname">encloses_point</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/polygon.py#L1330-L1384"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.polygon.RegularPolygon.encloses_point" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">encloses_point</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/polygon.py#L1323-L1377"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.polygon.RegularPolygon.encloses_point" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return True if p is enclosed by (is inside of) self.</p>
 <p class="rubric">Notes</p>
 <p>Being on the border of self is considered False.</p>
@@ -849,7 +849,7 @@ respectively.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rp</span> <span class="o">=</span> <span class="n">RegularPolygon</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rp</span><span class="o">.</span><span class="n">incircle</span>
-<span class="go">Circle(Point2D(0, 0), 4*cos(pi/7))</span>
+<span class="go">Circle(Point(0, 0), 4*cos(pi/7))</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -930,25 +930,25 @@ regular polygon.</p>
 
 <dl class="py method">
 <dt id="diofant.geometry.polygon.RegularPolygon.reflect">
-<code class="sig-name descname">reflect</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">line</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/polygon.py#L1452-L1467"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.polygon.RegularPolygon.reflect" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">reflect</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">line</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/polygon.py#L1445-L1460"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.polygon.RegularPolygon.reflect" title="Permalink to this definition">¶</a></dt>
 <dd><p>Override GeometryEntity.reflect since this is not made of only
 points.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RegularPolygon</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">reflect</span><span class="p">(</span><span class="n">Line</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">slope</span><span class="o">=-</span><span class="mi">2</span><span class="p">))</span>
-<span class="go">RegularPolygon(Point2D(4/5, 2/5), -1, 4, acos(3/5))</span>
+<span class="go">RegularPolygon(Point(4/5, 2/5), -1, 4, acos(3/5))</span>
 </pre></div>
 </div>
 </dd></dl>
 
 <dl class="py method">
 <dt id="diofant.geometry.polygon.RegularPolygon.rotate">
-<code class="sig-name descname">rotate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">angle</span></em>, <em class="sig-param"><span class="n">pt</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/polygon.py#L1407-L1426"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.polygon.RegularPolygon.rotate" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">rotate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">angle</span></em>, <em class="sig-param"><span class="n">pt</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/polygon.py#L1400-L1419"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.polygon.RegularPolygon.rotate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Override GeometryEntity.rotate to first rotate the RegularPolygon
 about its center.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RegularPolygon</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># vertex on x-axis</span>
-<span class="go">Point2D(2, 0)</span>
+<span class="go">Point(2, 0)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># vertex on y axis now</span>
-<span class="go">Point2D(0, 2)</span>
+<span class="go">Point(0, 2)</span>
 </pre></div>
 </div>
 <div class="admonition seealso">
@@ -979,32 +979,32 @@ about its center.</p>
 
 <dl class="py method">
 <dt id="diofant.geometry.polygon.RegularPolygon.scale">
-<code class="sig-name descname">scale</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">y</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">pt</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/polygon.py#L1428-L1450"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.polygon.RegularPolygon.scale" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">scale</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">y</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">pt</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/polygon.py#L1421-L1443"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.polygon.RegularPolygon.scale" title="Permalink to this definition">¶</a></dt>
 <dd><p>Override GeometryEntity.scale since it is the radius that must be
 scaled (if x == y) or else a new Polygon must be returned.</p>
 <p>Symmetric scaling returns a RegularPolygon:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RegularPolygon</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="go">RegularPolygon(Point2D(0, 0), 2, 4, 0)</span>
+<span class="go">RegularPolygon(Point(0, 0), 2, 4, 0)</span>
 </pre></div>
 </div>
 <p>Asymmetric scaling returns a kite as a Polygon:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RegularPolygon</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="go">Polygon(Point2D(2, 0), Point2D(0, 1), Point2D(-2, 0), Point2D(0, -1))</span>
+<span class="go">Polygon(Point(2, 0), Point(0, 1), Point(-2, 0), Point(0, -1))</span>
 </pre></div>
 </div>
 </dd></dl>
 
 <dl class="py method">
 <dt id="diofant.geometry.polygon.RegularPolygon.spin">
-<code class="sig-name descname">spin</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">angle</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/polygon.py#L1386-L1405"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.polygon.RegularPolygon.spin" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">spin</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">angle</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/polygon.py#L1379-L1398"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.polygon.RegularPolygon.spin" title="Permalink to this definition">¶</a></dt>
 <dd><p>Increment <em>in place</em> the virtual Polygon’s rotation by ccw angle.</p>
 <p>See also: rotate method which moves the center.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">Polygon</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="go">Point2D(1, 0)</span>
+<span class="go">Point(1, 0)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">spin</span><span class="p">(</span><span class="n">pi</span><span class="o">/</span><span class="mi">6</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="go">Point2D(sqrt(3)/2, 1/2)</span>
+<span class="go">Point(sqrt(3)/2, 1/2)</span>
 </pre></div>
 </div>
 <div class="admonition seealso">
@@ -1033,7 +1033,7 @@ scaled (if x == y) or else a new Polygon must be returned.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rp</span> <span class="o">=</span> <span class="n">RegularPolygon</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rp</span><span class="o">.</span><span class="n">vertices</span>
-<span class="go">[Point2D(5, 0), Point2D(0, 5), Point2D(-5, 0), Point2D(0, -5)]</span>
+<span class="go">[Point(5, 0), Point(0, 5), Point(-5, 0), Point(0, -5)]</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1042,7 +1042,7 @@ scaled (if x == y) or else a new Polygon must be returned.</p>
 
 <dl class="py class">
 <dt id="diofant.geometry.polygon.Triangle">
-<em class="property">class </em><code class="sig-prename descclassname">diofant.geometry.polygon.</code><code class="sig-name descname">Triangle</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/polygon.py#L1511-L2099"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.polygon.Triangle" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diofant.geometry.polygon.</code><code class="sig-name descname">Triangle</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/polygon.py#L1504-L2092"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.polygon.Triangle" title="Permalink to this definition">¶</a></dt>
 <dd><p>A polygon with three vertices and three sides.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1062,18 +1062,18 @@ scaled (if x == y) or else a new Polygon must be returned.</p>
 </div>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Triangle</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
-<span class="go">Triangle(Point2D(0, 0), Point2D(4, 0), Point2D(4, 3))</span>
+<span class="go">Triangle(Point(0, 0), Point(4, 0), Point(4, 3))</span>
 </pre></div>
 </div>
 <p>Keywords sss, sas, or asa can be used to give the desired
 side lengths (in order) and interior angles (in degrees) that
 define the triangle:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Triangle</span><span class="p">(</span><span class="n">sss</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-<span class="go">Triangle(Point2D(0, 0), Point2D(3, 0), Point2D(3, 4))</span>
+<span class="go">Triangle(Point(0, 0), Point(3, 0), Point(3, 4))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Triangle</span><span class="p">(</span><span class="n">asa</span><span class="o">=</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">30</span><span class="p">))</span>
-<span class="go">Triangle(Point2D(0, 0), Point2D(1, 0), Point2D(1/2, sqrt(3)/6))</span>
+<span class="go">Triangle(Point(0, 0), Point(1, 0), Point(1/2, sqrt(3)/6))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Triangle</span><span class="p">(</span><span class="n">sas</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-<span class="go">Triangle(Point2D(0, 0), Point2D(2, 0), Point2D(sqrt(2)/2, sqrt(2)/2))</span>
+<span class="go">Triangle(Point(0, 0), Point(2, 0), Point(sqrt(2)/2, sqrt(2)/2))</span>
 </pre></div>
 </div>
 <dl class="py method">
@@ -1097,14 +1097,14 @@ which are Segments.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">p3</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">Triangle</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">p3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">altitudes</span><span class="p">[</span><span class="n">p1</span><span class="p">]</span>
-<span class="go">Segment(Point2D(0, 0), Point2D(1/2, 1/2))</span>
+<span class="go">Segment(Point(0, 0), Point(1/2, 1/2))</span>
 </pre></div>
 </div>
 </dd></dl>
 
 <dl class="py method">
 <dt id="diofant.geometry.polygon.Triangle.bisectors">
-<code class="sig-name descname">bisectors</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/polygon.py#L1916-L1949"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.polygon.Triangle.bisectors" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">bisectors</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/polygon.py#L1909-L1942"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.polygon.Triangle.bisectors" title="Permalink to this definition">¶</a></dt>
 <dd><p>The angle bisectors of the triangle.</p>
 <p>An angle bisector of a triangle is a straight line through a vertex
 which cuts the corresponding angle in half.</p>
@@ -1145,7 +1145,7 @@ bisector (Segment).</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">p3</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">Triangle</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">p3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">circumcenter</span>
-<span class="go">Point2D(1/2, 1/2)</span>
+<span class="go">Point(1/2, 1/2)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1167,7 +1167,7 @@ bisector (Segment).</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">p3</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">Triangle</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">p3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">circumcircle</span>
-<span class="go">Circle(Point2D(1/2, 1/2), sqrt(2)/2)</span>
+<span class="go">Circle(Point(1/2, 1/2), sqrt(2)/2)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1213,7 +1213,7 @@ all three sides.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">p3</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">Triangle</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">p3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">incenter</span>
-<span class="go">Point2D(-sqrt(2)/2 + 1, -sqrt(2)/2 + 1)</span>
+<span class="go">Point(-sqrt(2)/2 + 1, -sqrt(2)/2 + 1)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1237,7 +1237,7 @@ all three sides.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">p3</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">Triangle</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">p3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">incircle</span>
-<span class="go">Circle(Point2D(-sqrt(2) + 2, -sqrt(2) + 2), -sqrt(2) + 2)</span>
+<span class="go">Circle(Point(-sqrt(2) + 2, -sqrt(2) + 2), -sqrt(2) + 2)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1266,7 +1266,7 @@ all three sides.</p>
 
 <dl class="py method">
 <dt id="diofant.geometry.polygon.Triangle.is_equilateral">
-<code class="sig-name descname">is_equilateral</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/polygon.py#L1672-L1698"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.polygon.Triangle.is_equilateral" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">is_equilateral</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/polygon.py#L1665-L1691"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.polygon.Triangle.is_equilateral" title="Permalink to this definition">¶</a></dt>
 <dd><p>Are all the sides the same length?</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -1292,7 +1292,7 @@ all three sides.</p>
 
 <dl class="py method">
 <dt id="diofant.geometry.polygon.Triangle.is_isosceles">
-<code class="sig-name descname">is_isosceles</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/polygon.py#L1700-L1721"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.polygon.Triangle.is_isosceles" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">is_isosceles</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/polygon.py#L1693-L1714"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.polygon.Triangle.is_isosceles" title="Permalink to this definition">¶</a></dt>
 <dd><p>Are two or more of the sides the same length?</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -1313,7 +1313,7 @@ all three sides.</p>
 
 <dl class="py method">
 <dt id="diofant.geometry.polygon.Triangle.is_right">
-<code class="sig-name descname">is_right</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/polygon.py#L1746-L1771"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.polygon.Triangle.is_right" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">is_right</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/polygon.py#L1739-L1764"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.polygon.Triangle.is_right" title="Permalink to this definition">¶</a></dt>
 <dd><p>Is the triangle right-angled.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -1334,7 +1334,7 @@ all three sides.</p>
 
 <dl class="py method">
 <dt id="diofant.geometry.polygon.Triangle.is_scalene">
-<code class="sig-name descname">is_scalene</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/polygon.py#L1723-L1744"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.polygon.Triangle.is_scalene" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">is_scalene</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/polygon.py#L1716-L1737"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.polygon.Triangle.is_scalene" title="Permalink to this definition">¶</a></dt>
 <dd><p>Are all the sides of the triangle of different lengths?</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -1355,7 +1355,7 @@ all three sides.</p>
 
 <dl class="py method">
 <dt id="diofant.geometry.polygon.Triangle.is_similar">
-<code class="sig-name descname">is_similar</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/polygon.py#L1619-L1670"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.polygon.Triangle.is_similar" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">is_similar</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/polygon.py#L1612-L1663"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.polygon.Triangle.is_similar" title="Permalink to this definition">¶</a></dt>
 <dd><p>Is another triangle similar to this one.</p>
 <p>Two triangles are similar if one can be uniformly scaled to the other.</p>
 <dl class="field-list simple">
@@ -1402,7 +1402,7 @@ all three sides.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">p3</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">Triangle</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">p3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">medial</span>
-<span class="go">Triangle(Point2D(1/2, 0), Point2D(1/2, 1/2), Point2D(0, 1/2))</span>
+<span class="go">Triangle(Point(1/2, 0), Point(1/2, 1/2), Point(0, 1/2))</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1428,7 +1428,7 @@ at that point.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">p3</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">Triangle</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">p3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">medians</span><span class="p">[</span><span class="n">p1</span><span class="p">]</span>
-<span class="go">Segment(Point2D(0, 0), Point2D(1/2, 1/2))</span>
+<span class="go">Segment(Point(0, 0), Point(1/2, 1/2))</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1452,7 +1452,7 @@ It may lie inside, outside or on the triangle.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">p3</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">Triangle</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">p3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">orthocenter</span>
-<span class="go">Point2D(0, 0)</span>
+<span class="go">Point(0, 0)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1473,7 +1473,7 @@ It may lie inside, outside or on the triangle.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">Triangle</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">vertices</span>
-<span class="go">(Point2D(0, 0), Point2D(4, 0), Point2D(4, 3))</span>
+<span class="go">(Point(0, 0), Point(4, 0), Point(4, 3))</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1490,7 +1490,7 @@ It may lie inside, outside or on the triangle.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="plane.html" class="btn btn-neutral float-right" title="Plane" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../integrals.html" class="btn btn-neutral float-right" title="Integrals" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="ellipses.html" class="btn btn-neutral float-left" title="Ellipses" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

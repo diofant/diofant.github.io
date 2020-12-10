@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Points &mdash; Diofant 0.12.0a4.dev55+g9d137e729 documentation</title>
+  <title>Points &mdash; Diofant 0.12.0a4.dev63+g36c630988 documentation</title>
   
 
   
@@ -211,15 +211,11 @@
 <span id="points"></span><h1>Points<a class="headerlink" href="#module-diofant.geometry.point" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="diofant.geometry.point.Point">
-<em class="property">class </em><code class="sig-prename descclassname">diofant.geometry.point.</code><code class="sig-name descname">Point</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/point.py#L20-L404"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.point.Point" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diofant.geometry.point.</code><code class="sig-name descname">Point</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/point.py#L18-L584"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.point.Point" title="Permalink to this definition">¶</a></dt>
 <dd><p>A point in a n-dimensional Euclidean space.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>coords</strong> (<em>sequence of n-coordinate values. In the special</em>)</p></li>
-<li><p><strong>case where n=2 or 3, a Point2D or Point3D will be created</strong></p></li>
-<li><p><strong>as appropriate.</strong></p></li>
-</ul>
+<dd class="field-odd"><p><strong>coords</strong> (<em>sequence of n-coordinate values.</em>)</p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.9)"><strong>TypeError</strong></a> – When trying to add or subtract points with different dimensions.
@@ -234,20 +230,18 @@
 </dl>
 </div>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<span class="go">Point3D(1, 2, 3)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Point</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
-<span class="go">Point2D(1, 2)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Point</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="go">Point(1, 2)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
-<span class="go">Point2D(0, x)</span>
+<span class="go">Point(0, x)</span>
 </pre></div>
 </div>
 <p>Floats are automatically converted to Rational unless the
 evaluate flag is False:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Point</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">)</span>
-<span class="go">Point2D(1/2, 1/4)</span>
+<span class="go">Point(1/2, 1/4)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
-<span class="go">Point2D(0.5, 0.25)</span>
+<span class="go">Point(0.5, 0.25)</span>
 </pre></div>
 </div>
 <dl class="py method">
@@ -259,8 +253,15 @@ will be n</p>
 </dd></dl>
 
 <dl class="py method">
+<dt id="diofant.geometry.point.Point.bounds">
+<em class="property">property </em><code class="sig-name descname">bounds</code><a class="headerlink" href="#diofant.geometry.point.Point.bounds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a tuple (xmin, ymin, xmax, ymax) representing the bounding
+rectangle for the geometric figure.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt id="diofant.geometry.point.Point.distance">
-<code class="sig-name descname">distance</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/point.py#L216-L249"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.point.Point.distance" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">distance</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/point.py#L265-L298"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.point.Point.distance" title="Permalink to this definition">¶</a></dt>
 <dd><p>The Euclidean distance from self to point p.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -289,19 +290,13 @@ will be n</p>
 
 <dl class="py method">
 <dt id="diofant.geometry.point.Point.dot">
-<code class="sig-name descname">dot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p2</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/point.py#L344-L347"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.point.Point.dot" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">dot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p2</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/point.py#L391-L394"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.point.Point.dot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return dot product of self with another Point.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="diofant.geometry.point.Point.equals">
-<code class="sig-name descname">equals</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/point.py#L349-L354"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.point.Point.equals" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns whether the coordinates of self and other agree.</p>
-</dd></dl>
-
-<dl class="py method">
 <dt id="diofant.geometry.point.Point.evalf">
-<code class="sig-name descname">evalf</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dps</span><span class="o">=</span><span class="default_value">15</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">options</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/point.py#L279-L302"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.point.Point.evalf" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">evalf</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dps</span><span class="o">=</span><span class="default_value">15</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">options</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/point.py#L328-L351"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.point.Point.evalf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Evaluate the coordinates of the point.</p>
 <p>This method will, where possible, create and return a new Point
 where the coordinates are evaluated as floating point numbers to
@@ -314,16 +309,16 @@ the decimal precision dps.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">Rational</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span>
-<span class="go">Point2D(1/2, 3/2)</span>
+<span class="go">Point(1/2, 3/2)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">p1</span><span class="o">.</span><span class="n">evalf</span><span class="p">())</span>
-<span class="go">Point2D(0.5, 1.5)</span>
+<span class="go">Point(0.5, 1.5)</span>
 </pre></div>
 </div>
 </dd></dl>
 
 <dl class="py method">
 <dt id="diofant.geometry.point.Point.intersection">
-<code class="sig-name descname">intersection</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">o</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/point.py#L306-L342"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.point.Point.intersection" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">intersection</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">o</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/point.py#L355-L389"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.point.Point.intersection" title="Permalink to this definition">¶</a></dt>
 <dd><p>The intersection between this point and another point.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -341,14 +336,14 @@ intersection, otherwise it will contain this point.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span>
 <span class="go">[]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">p3</span><span class="p">)</span>
-<span class="go">[Point2D(0, 0)]</span>
+<span class="go">[Point(0, 0)]</span>
 </pre></div>
 </div>
 </dd></dl>
 
 <dl class="py method">
 <dt id="diofant.geometry.point.Point.is_collinear">
-<code class="sig-name descname">is_collinear</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/point.py#L99-L167"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.point.Point.is_collinear" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">is_collinear</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/point.py#L148-L216"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.point.Point.is_collinear" title="Permalink to this definition">¶</a></dt>
 <dd><p>Is a sequence of points collinear?</p>
 <p>Test whether or not a set of points are collinear. Returns True if
 the set of points are collinear, or False otherwise.</p>
@@ -396,133 +391,8 @@ point in the list, and if all pass then they are collinear.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="diofant.geometry.point.Point.is_scalar_multiple">
-<code class="sig-name descname">is_scalar_multiple</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/point.py#L169-L177"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.point.Point.is_scalar_multiple" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns whether <span class="math notranslate nohighlight">\(self\)</span> and <span class="math notranslate nohighlight">\(other\)</span> are scalar multiples
-of each other.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="diofant.geometry.point.Point.is_zero">
-<em class="property">property </em><code class="sig-name descname">is_zero</code><a class="headerlink" href="#diofant.geometry.point.Point.is_zero" title="Permalink to this definition">¶</a></dt>
-<dd><p>True if every coordinate is zero, otherwise False.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="diofant.geometry.point.Point.length">
-<em class="property">property </em><code class="sig-name descname">length</code><a class="headerlink" href="#diofant.geometry.point.Point.length" title="Permalink to this definition">¶</a></dt>
-<dd><p>Treating a Point as a Line, this returns 0 for the length of a Point.</p>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">length</span>
-<span class="go">0</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py method">
-<dt id="diofant.geometry.point.Point.midpoint">
-<code class="sig-name descname">midpoint</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/point.py#L251-L277"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.point.Point.midpoint" title="Permalink to this definition">¶</a></dt>
-<dd><p>The midpoint between self and point p.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>p</strong> (<em>Point</em>)</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>midpoint</strong> (<em>Point</em>)</p>
-</dd>
-</dl>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<p><a class="reference internal" href="lines.html#diofant.geometry.line.Segment.midpoint" title="diofant.geometry.line.Segment.midpoint"><code class="xref py py-obj docutils literal notranslate"><span class="pre">diofant.geometry.line.Segment.midpoint</span></code></a></p>
-</div>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="o">.</span><span class="n">midpoint</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span>
-<span class="go">Point2D(7, 3)</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py method">
-<dt id="diofant.geometry.point.Point.n">
-<code class="sig-name descname">n</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dps</span><span class="o">=</span><span class="default_value">15</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">options</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/point.py#L279-L302"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.point.Point.n" title="Permalink to this definition">¶</a></dt>
-<dd><p>Evaluate the coordinates of the point.</p>
-<p>This method will, where possible, create and return a new Point
-where the coordinates are evaluated as floating point numbers to
-the decimal precision dps.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p><strong>point</strong> (<em>Point</em>)</p>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">Rational</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span>
-<span class="go">Point2D(1/2, 3/2)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">p1</span><span class="o">.</span><span class="n">evalf</span><span class="p">())</span>
-<span class="go">Point2D(0.5, 1.5)</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py method">
-<dt id="diofant.geometry.point.Point.origin">
-<em class="property">property </em><code class="sig-name descname">origin</code><a class="headerlink" href="#diofant.geometry.point.Point.origin" title="Permalink to this definition">¶</a></dt>
-<dd><p>A point of all zeros of the same ambient dimension
-as the current point</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt id="diofant.geometry.point.Point2D">
-<em class="property">class </em><code class="sig-prename descclassname">diofant.geometry.point.</code><code class="sig-name descname">Point2D</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/point.py#L407-L664"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.point.Point2D" title="Permalink to this definition">¶</a></dt>
-<dd><p>A point in a 2-dimensional Euclidean space.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>coords</strong> (<em>sequence of 2 coordinate values.</em>)</p>
-</dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.9)"><strong>TypeError</strong></a> – When trying to add or subtract points with different dimensions.
-    When trying to create a point with more than two dimensions.
-    When <span class="math notranslate nohighlight">\(intersection\)</span> is called with object other than a Point.</p>
-</dd>
-</dl>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<dl class="simple">
-<dt><a class="reference internal" href="lines.html#diofant.geometry.line.Segment" title="diofant.geometry.line.Segment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">diofant.geometry.line.Segment</span></code></a></dt><dd><p>Connects two Points</p>
-</dd>
-</dl>
-</div>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Point2D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="go">Point2D(1, 2)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Point2D</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
-<span class="go">Point2D(1, 2)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Point2D</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
-<span class="go">Point2D(0, x)</span>
-</pre></div>
-</div>
-<p>Floats are automatically converted to Rational unless the
-evaluate flag is False:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Point2D</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">)</span>
-<span class="go">Point2D(1/2, 1/4)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">Point2D</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
-<span class="go">Point2D(0.5, 0.25)</span>
-</pre></div>
-</div>
-<dl class="py method">
-<dt id="diofant.geometry.point.Point2D.bounds">
-<em class="property">property </em><code class="sig-name descname">bounds</code><a class="headerlink" href="#diofant.geometry.point.Point2D.bounds" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a tuple (xmin, ymin, xmax, ymax) representing the bounding
-rectangle for the geometric figure.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="diofant.geometry.point.Point2D.is_concyclic">
-<code class="sig-name descname">is_concyclic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/point.py#L500-L559"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.point.Point2D.is_concyclic" title="Permalink to this definition">¶</a></dt>
+<dt id="diofant.geometry.point.Point.is_concyclic">
+<code class="sig-name descname">is_concyclic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/point.py#L82-L146"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.point.Point.is_concyclic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Is a sequence of points concyclic?</p>
 <p>Test whether or not a sequence of points are concyclic (i.e., they lie
 on a circle).</p>
@@ -559,47 +429,125 @@ in the circle.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="diofant.geometry.point.Point2D.rotate">
-<code class="sig-name descname">rotate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">angle</span></em>, <em class="sig-param"><span class="n">pt</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/point.py#L561-L592"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.point.Point2D.rotate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Rotate <code class="docutils literal notranslate"><span class="pre">angle</span></code> radians counterclockwise about Point <code class="docutils literal notranslate"><span class="pre">pt</span></code>.</p>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<p><a class="reference internal" href="#diofant.geometry.point.Point2D.rotate" title="diofant.geometry.point.Point2D.rotate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rotate</span></code></a>, <a class="reference internal" href="#diofant.geometry.point.Point2D.scale" title="diofant.geometry.point.Point2D.scale"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scale</span></code></a></p>
-</div>
+<dt id="diofant.geometry.point.Point.is_scalar_multiple">
+<code class="sig-name descname">is_scalar_multiple</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/point.py#L218-L226"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.point.Point.is_scalar_multiple" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether <span class="math notranslate nohighlight">\(self\)</span> and <span class="math notranslate nohighlight">\(other\)</span> are scalar multiples
+of each other.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="diofant.geometry.point.Point.is_zero">
+<em class="property">property </em><code class="sig-name descname">is_zero</code><a class="headerlink" href="#diofant.geometry.point.Point.is_zero" title="Permalink to this definition">¶</a></dt>
+<dd><p>True if every coordinate is zero, otherwise False.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="diofant.geometry.point.Point.length">
+<em class="property">property </em><code class="sig-name descname">length</code><a class="headerlink" href="#diofant.geometry.point.Point.length" title="Permalink to this definition">¶</a></dt>
+<dd><p>Treating a Point as a Line, this returns 0 for the length of a Point.</p>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">Point2D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
-<span class="go">Point2D(0, 1)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
-<span class="go">Point2D(2, -1)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">length</span>
+<span class="go">0</span>
 </pre></div>
 </div>
 </dd></dl>
 
 <dl class="py method">
-<dt id="diofant.geometry.point.Point2D.scale">
-<code class="sig-name descname">scale</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">y</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">pt</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/point.py#L594-L618"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.point.Point2D.scale" title="Permalink to this definition">¶</a></dt>
+<dt id="diofant.geometry.point.Point.midpoint">
+<code class="sig-name descname">midpoint</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/point.py#L300-L326"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.point.Point.midpoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>The midpoint between self and point p.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>p</strong> (<em>Point</em>)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>midpoint</strong> (<em>Point</em>)</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="lines.html#diofant.geometry.line.Segment.midpoint" title="diofant.geometry.line.Segment.midpoint"><code class="xref py py-obj docutils literal notranslate"><span class="pre">diofant.geometry.line.Segment.midpoint</span></code></a></p>
+</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="o">.</span><span class="n">midpoint</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span>
+<span class="go">Point(7, 3)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="diofant.geometry.point.Point.n">
+<code class="sig-name descname">n</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dps</span><span class="o">=</span><span class="default_value">15</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">options</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/point.py#L328-L351"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.point.Point.n" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluate the coordinates of the point.</p>
+<p>This method will, where possible, create and return a new Point
+where the coordinates are evaluated as floating point numbers to
+the decimal precision dps.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>point</strong> (<em>Point</em>)</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">Rational</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span>
+<span class="go">Point(1/2, 3/2)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">p1</span><span class="o">.</span><span class="n">evalf</span><span class="p">())</span>
+<span class="go">Point(0.5, 1.5)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="diofant.geometry.point.Point.origin">
+<em class="property">property </em><code class="sig-name descname">origin</code><a class="headerlink" href="#diofant.geometry.point.Point.origin" title="Permalink to this definition">¶</a></dt>
+<dd><p>A point of all zeros of the same ambient dimension
+as the current point</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="diofant.geometry.point.Point.rotate">
+<code class="sig-name descname">rotate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">angle</span></em>, <em class="sig-param"><span class="n">pt</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/point.py#L481-L512"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.point.Point.rotate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rotate <code class="docutils literal notranslate"><span class="pre">angle</span></code> radians counterclockwise about Point <code class="docutils literal notranslate"><span class="pre">pt</span></code>.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#diofant.geometry.point.Point.rotate" title="diofant.geometry.point.Point.rotate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rotate</span></code></a>, <a class="reference internal" href="#diofant.geometry.point.Point.scale" title="diofant.geometry.point.Point.scale"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scale</span></code></a></p>
+</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">Point(0, 1)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="go">Point(2, -1)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="diofant.geometry.point.Point.scale">
+<code class="sig-name descname">scale</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">y</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">pt</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/point.py#L514-L538"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.point.Point.scale" title="Permalink to this definition">¶</a></dt>
 <dd><p>Scale the coordinates of the Point by multiplying by
 <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> after subtracting <code class="docutils literal notranslate"><span class="pre">pt</span></code> – default is (0, 0) –
 and then adding <code class="docutils literal notranslate"><span class="pre">pt</span></code> back again (i.e. <code class="docutils literal notranslate"><span class="pre">pt</span></code> is the point of
 reference for the scaling).</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p><a class="reference internal" href="#diofant.geometry.point.Point2D.rotate" title="diofant.geometry.point.Point2D.rotate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rotate</span></code></a>, <a class="reference internal" href="#diofant.geometry.point.Point2D.translate" title="diofant.geometry.point.Point2D.translate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">translate</span></code></a></p>
+<p><a class="reference internal" href="#diofant.geometry.point.Point.rotate" title="diofant.geometry.point.Point.rotate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rotate</span></code></a>, <a class="reference internal" href="#diofant.geometry.point.Point.translate" title="diofant.geometry.point.Point.translate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">translate</span></code></a></p>
 </div>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">Point2D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="go">Point2D(2, 1)</span>
+<span class="go">Point(2, 1)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="go">Point2D(2, 2)</span>
+<span class="go">Point(2, 2)</span>
 </pre></div>
 </div>
 </dd></dl>
 
 <dl class="py method">
-<dt id="diofant.geometry.point.Point2D.transform">
-<code class="sig-name descname">transform</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">matrix</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/point.py#L642-L664"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.point.Point2D.transform" title="Permalink to this definition">¶</a></dt>
+<dt id="diofant.geometry.point.Point.transform">
+<code class="sig-name descname">transform</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">matrix</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/point.py#L562-L584"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.point.Point.transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the point after applying the transformation described
 by the 3x3 Matrix, <code class="docutils literal notranslate"><span class="pre">matrix</span></code>.</p>
 <div class="admonition seealso">
@@ -609,31 +557,31 @@ by the 3x3 Matrix, <code class="docutils literal notranslate"><span class="pre">
 </dd></dl>
 
 <dl class="py method">
-<dt id="diofant.geometry.point.Point2D.translate">
-<code class="sig-name descname">translate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">y</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/point.py#L620-L640"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.point.Point2D.translate" title="Permalink to this definition">¶</a></dt>
+<dt id="diofant.geometry.point.Point.translate">
+<code class="sig-name descname">translate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">y</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/point.py#L540-L560"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.point.Point.translate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Shift the Point by adding x and y to the coordinates of the Point.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p><a class="reference internal" href="#diofant.geometry.point.Point2D.rotate" title="diofant.geometry.point.Point2D.rotate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rotate</span></code></a>, <a class="reference internal" href="#diofant.geometry.point.Point2D.scale" title="diofant.geometry.point.Point2D.scale"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scale</span></code></a></p>
+<p><a class="reference internal" href="#diofant.geometry.point.Point.rotate" title="diofant.geometry.point.Point.rotate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rotate</span></code></a>, <a class="reference internal" href="#diofant.geometry.point.Point.scale" title="diofant.geometry.point.Point.scale"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scale</span></code></a></p>
 </div>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">Point2D</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="go">Point2D(2, 1)</span>
+<span class="go">Point(2, 1)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="go">Point2D(2, 3)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">+</span> <span class="n">Point2D</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="go">Point2D(2, 3)</span>
+<span class="go">Point(2, 3)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">+</span> <span class="n">Point</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">Point(2, 3)</span>
 </pre></div>
 </div>
 </dd></dl>
 
 <dl class="py method">
-<dt id="diofant.geometry.point.Point2D.x">
-<em class="property">property </em><code class="sig-name descname">x</code><a class="headerlink" href="#diofant.geometry.point.Point2D.x" title="Permalink to this definition">¶</a></dt>
+<dt id="diofant.geometry.point.Point.x">
+<em class="property">property </em><code class="sig-name descname">x</code><a class="headerlink" href="#diofant.geometry.point.Point.x" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the X coordinate of the Point.</p>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">Point2D</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">x</span>
 <span class="go">0</span>
 </pre></div>
@@ -641,257 +589,12 @@ by the 3x3 Matrix, <code class="docutils literal notranslate"><span class="pre">
 </dd></dl>
 
 <dl class="py method">
-<dt id="diofant.geometry.point.Point2D.y">
-<em class="property">property </em><code class="sig-name descname">y</code><a class="headerlink" href="#diofant.geometry.point.Point2D.y" title="Permalink to this definition">¶</a></dt>
+<dt id="diofant.geometry.point.Point.y">
+<em class="property">property </em><code class="sig-name descname">y</code><a class="headerlink" href="#diofant.geometry.point.Point.y" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the Y coordinate of the Point.</p>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">Point2D</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">y</span>
-<span class="go">1</span>
-</pre></div>
-</div>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt id="diofant.geometry.point.Point3D">
-<em class="property">class </em><code class="sig-prename descclassname">diofant.geometry.point.</code><code class="sig-name descname">Point3D</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/point.py#L667-L1015"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.point.Point3D" title="Permalink to this definition">¶</a></dt>
-<dd><p>A point in a 3-dimensional Euclidean space.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>coords</strong> (<em>sequence of 3 coordinate values.</em>)</p>
-</dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.9)"><strong>TypeError</strong></a> – When trying to add or subtract points with different dimensions.
-    When <span class="math notranslate nohighlight">\(intersection\)</span> is called with object other than a Point.</p>
-</dd>
-</dl>
-<p class="rubric">Notes</p>
-<p>Currently only 2-dimensional and 3-dimensional points are supported.</p>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Point3D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<span class="go">Point3D(1, 2, 3)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Point3D</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
-<span class="go">Point3D(1, 2, 3)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Point3D</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<span class="go">Point3D(0, x, 3)</span>
-</pre></div>
-</div>
-<p>Floats are automatically converted to Rational unless the
-evaluate flag is False:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Point3D</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="go">Point3D(1/2, 1/4, 2)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">Point3D</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
-<span class="go">Point3D(0.5, 0.25, 3)</span>
-</pre></div>
-</div>
-<dl class="py method">
-<dt id="diofant.geometry.point.Point3D.are_collinear">
-<em class="property">static </em><code class="sig-name descname">are_collinear</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">points</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/point.py#L823-L856"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.point.Point3D.are_collinear" title="Permalink to this definition">¶</a></dt>
-<dd><p>Is a sequence of points collinear?</p>
-<p>Test whether or not a set of points are collinear. Returns True if
-the set of points are collinear, or False otherwise.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>points</strong> (<em>sequence of Point</em>)</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>are_collinear</strong> (<em>boolean</em>)</p>
-</dd>
-</dl>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<p><a class="reference internal" href="line3d.html#diofant.geometry.line3d.Line3D" title="diofant.geometry.line3d.Line3D"><code class="xref py py-obj docutils literal notranslate"><span class="pre">diofant.geometry.line3d.Line3D</span></code></a></p>
-</div>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span> <span class="o">=</span> <span class="n">Point3D</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">Point3D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">p3</span><span class="p">,</span> <span class="n">p4</span><span class="p">,</span> <span class="n">p5</span> <span class="o">=</span> <span class="n">Point3D</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">Point3D</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">),</span> <span class="n">Point3D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Point3D</span><span class="o">.</span><span class="n">are_collinear</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">p3</span><span class="p">,</span> <span class="n">p4</span><span class="p">)</span>
-<span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Point3D</span><span class="o">.</span><span class="n">are_collinear</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">p3</span><span class="p">,</span> <span class="n">p5</span><span class="p">)</span>
-<span class="go">False</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py method">
-<dt id="diofant.geometry.point.Point3D.are_coplanar">
-<em class="property">static </em><code class="sig-name descname">are_coplanar</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">points</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/point.py#L858-L904"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.point.Point3D.are_coplanar" title="Permalink to this definition">¶</a></dt>
-<dd><p>This function tests whether passed points are coplanar or not.
-It uses the fact that the triple scalar product of three vectors
-vanishes if the vectors are coplanar. Which means that the volume
-of the solid described by them will have to be zero for coplanarity.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>A set of points 3D points</strong></p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><em>boolean</em></p>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span> <span class="o">=</span> <span class="n">Point3D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">p2</span> <span class="o">=</span> <span class="n">Point3D</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">p3</span> <span class="o">=</span> <span class="n">Point3D</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">p4</span> <span class="o">=</span> <span class="n">Point3D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Point3D</span><span class="o">.</span><span class="n">are_coplanar</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">p3</span><span class="p">,</span> <span class="n">p4</span><span class="p">)</span>
-<span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">p5</span> <span class="o">=</span> <span class="n">Point3D</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Point3D</span><span class="o">.</span><span class="n">are_coplanar</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">p3</span><span class="p">,</span> <span class="n">p5</span><span class="p">)</span>
-<span class="go">False</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py method">
-<dt id="diofant.geometry.point.Point3D.direction_cosine">
-<code class="sig-name descname">direction_cosine</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">point</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/point.py#L796-L821"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.point.Point3D.direction_cosine" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gives the direction cosine between 2 points</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>p</strong> (<em>Point3D</em>)</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><em>list</em></p>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span> <span class="o">=</span> <span class="n">Point3D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="o">.</span><span class="n">direction_cosine</span><span class="p">(</span><span class="n">Point3D</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-<span class="go">[sqrt(6)/6, sqrt(6)/6, sqrt(6)/3]</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py method">
-<dt id="diofant.geometry.point.Point3D.direction_ratio">
-<code class="sig-name descname">direction_ratio</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">point</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/point.py#L772-L794"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.point.Point3D.direction_ratio" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gives the direction ratio between 2 points</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>p</strong> (<em>Point3D</em>)</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><em>list</em></p>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span> <span class="o">=</span> <span class="n">Point3D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="o">.</span><span class="n">direction_ratio</span><span class="p">(</span><span class="n">Point3D</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-<span class="go">[1, 1, 2]</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py method">
-<dt id="diofant.geometry.point.Point3D.intersection">
-<code class="sig-name descname">intersection</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">o</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/point.py#L906-L940"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.point.Point3D.intersection" title="Permalink to this definition">¶</a></dt>
-<dd><p>The intersection between this point and another point.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>other</strong> (<em>Point</em>)</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>intersection</strong> (<em>list of Points</em>)</p>
-</dd>
-</dl>
-<p class="rubric">Notes</p>
-<p>The return value will either be an empty list if there is no
-intersection, otherwise it will contain this point.</p>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">p3</span> <span class="o">=</span> <span class="n">Point3D</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">Point3D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">Point3D</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span>
-<span class="go">[]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">p3</span><span class="p">)</span>
-<span class="go">[Point3D(0, 0, 0)]</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py method">
-<dt id="diofant.geometry.point.Point3D.scale">
-<code class="sig-name descname">scale</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">y</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">z</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">pt</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/point.py#L942-L966"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.point.Point3D.scale" title="Permalink to this definition">¶</a></dt>
-<dd><p>Scale the coordinates of the Point by multiplying by
-<code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> after subtracting <code class="docutils literal notranslate"><span class="pre">pt</span></code> – default is (0, 0) –
-and then adding <code class="docutils literal notranslate"><span class="pre">pt</span></code> back again (i.e. <code class="docutils literal notranslate"><span class="pre">pt</span></code> is the point of
-reference for the scaling).</p>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<p><a class="reference internal" href="#diofant.geometry.point.Point3D.translate" title="diofant.geometry.point.Point3D.translate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">translate</span></code></a></p>
-</div>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">Point3D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="go">Point3D(2, 1, 1)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="go">Point3D(2, 2, 1)</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py method">
-<dt id="diofant.geometry.point.Point3D.transform">
-<code class="sig-name descname">transform</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">matrix</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/point.py#L991-L1015"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.point.Point3D.transform" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the point after applying the transformation described
-by the 4x4 Matrix, <code class="docutils literal notranslate"><span class="pre">matrix</span></code>.</p>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<p><a class="reference internal" href="entities.html#diofant.geometry.entity.GeometryEntity.rotate" title="diofant.geometry.entity.GeometryEntity.rotate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">diofant.geometry.entity.GeometryEntity.rotate</span></code></a>, <a class="reference internal" href="entities.html#diofant.geometry.entity.GeometryEntity.scale" title="diofant.geometry.entity.GeometryEntity.scale"><code class="xref py py-obj docutils literal notranslate"><span class="pre">diofant.geometry.entity.GeometryEntity.scale</span></code></a>, <a class="reference internal" href="entities.html#diofant.geometry.entity.GeometryEntity.translate" title="diofant.geometry.entity.GeometryEntity.translate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">diofant.geometry.entity.GeometryEntity.translate</span></code></a></p>
-</div>
-</dd></dl>
-
-<dl class="py method">
-<dt id="diofant.geometry.point.Point3D.translate">
-<code class="sig-name descname">translate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">y</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">z</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/geometry/point.py#L968-L989"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.geometry.point.Point3D.translate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Shift the Point by adding x and y to the coordinates of the Point.</p>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<p><a class="reference internal" href="entities.html#diofant.geometry.entity.GeometryEntity.rotate" title="diofant.geometry.entity.GeometryEntity.rotate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">diofant.geometry.entity.GeometryEntity.rotate</span></code></a>, <a class="reference internal" href="entities.html#diofant.geometry.entity.GeometryEntity.scale" title="diofant.geometry.entity.GeometryEntity.scale"><code class="xref py py-obj docutils literal notranslate"><span class="pre">diofant.geometry.entity.GeometryEntity.scale</span></code></a></p>
-</div>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">Point3D</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="go">Point3D(2, 1, 1)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="go">Point3D(2, 3, 1)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">+</span> <span class="n">Point3D</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="go">Point3D(2, 3, 3)</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py method">
-<dt id="diofant.geometry.point.Point3D.x">
-<em class="property">property </em><code class="sig-name descname">x</code><a class="headerlink" href="#diofant.geometry.point.Point3D.x" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the X coordinate of the Point.</p>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">Point3D</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">x</span>
-<span class="go">0</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py method">
-<dt id="diofant.geometry.point.Point3D.y">
-<em class="property">property </em><code class="sig-name descname">y</code><a class="headerlink" href="#diofant.geometry.point.Point3D.y" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the Y coordinate of the Point.</p>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">Point3D</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">y</span>
-<span class="go">1</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py method">
-<dt id="diofant.geometry.point.Point3D.z">
-<em class="property">property </em><code class="sig-name descname">z</code><a class="headerlink" href="#diofant.geometry.point.Point3D.z" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the Z coordinate of the Point.</p>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">Point3D</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">z</span>
 <span class="go">1</span>
 </pre></div>
 </div>

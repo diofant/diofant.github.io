@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Geometry &mdash; Diofant 0.12.0a4.dev55+g9d137e729 documentation</title>
+  <title>Geometry &mdash; Diofant 0.12.0a4.dev63+g36c630988 documentation</title>
   
 
   
@@ -205,8 +205,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="geometry">
-<h1>Geometry<a class="headerlink" href="#geometry" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-diofant.geometry">
+<span id="geometry"></span><h1>Geometry<a class="headerlink" href="#module-diofant.geometry" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>The geometry module for Diofant allows one to create two-dimensional geometrical
@@ -251,12 +251,12 @@ geometry module.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">area</span>
 <span class="go">1/2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">medians</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
-<span class="go">Segment(Point2D(0, 0), Point2D(1, 1/2))</span>
+<span class="go">Segment(Point(0, 0), Point(1, 1/2))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Segment</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
-<span class="go">Segment(Point2D(0, 0), Point2D(1, 1/2))</span>
+<span class="go">Segment(Point(0, 0), Point(1, 1/2))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">medians</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">intersection</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="n">x</span><span class="p">],</span> <span class="n">m</span><span class="p">[</span><span class="n">y</span><span class="p">],</span> <span class="n">m</span><span class="p">[</span><span class="n">zp</span><span class="p">])</span>
-<span class="go">[Point2D(2/3, 1/3)]</span>
+<span class="go">[Point(2/3, 1/3)]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">Circle</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">l</span> <span class="o">=</span> <span class="n">Line</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">is_tangent</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>  <span class="c1"># is l tangent to c?</span>
@@ -265,7 +265,7 @@ geometry module.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">is_tangent</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>  <span class="c1"># is l tangent to c?</span>
 <span class="go">False</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">intersection</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span>
-<span class="go">[Point2D(-5*sqrt(2)/2, -5*sqrt(2)/2), Point2D(5*sqrt(2)/2, 5*sqrt(2)/2)]</span>
+<span class="go">[Point(-5*sqrt(2)/2, -5*sqrt(2)/2), Point(5*sqrt(2)/2, 5*sqrt(2)/2)]</span>
 </pre></div>
 </div>
 </div>
@@ -282,10 +282,10 @@ geometry module.</p>
 <span class="go">a*b/2</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">medians</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
-<span class="go">Segment(Point2D(0, 0), Point2D(3*a/2, b/2))</span>
+<span class="go">Segment(Point(0, 0), Point(3*a/2, b/2))</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">intersection</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">medians</span><span class="p">[</span><span class="n">x</span><span class="p">],</span> <span class="n">t</span><span class="o">.</span><span class="n">medians</span><span class="p">[</span><span class="n">y</span><span class="p">],</span> <span class="n">t</span><span class="o">.</span><span class="n">medians</span><span class="p">[</span><span class="n">z</span><span class="p">])</span>
-<span class="go">[Point2D(a, b/3)]</span>
+<span class="go">[Point(a, b/3)]</span>
 </pre></div>
 </div>
 </div>
@@ -382,17 +382,9 @@ dimensions.</p>
 <li class="toctree-l1"><a class="reference internal" href="utils.html">Utils</a></li>
 <li class="toctree-l1"><a class="reference internal" href="points.html">Points</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lines.html">Lines</a></li>
-<li class="toctree-l1"><a class="reference internal" href="line3d.html">3D Line</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="line3d.html#contains">Contains</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="curves.html">Curves</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ellipses.html">Ellipses</a></li>
 <li class="toctree-l1"><a class="reference internal" href="polygons.html">Polygons</a></li>
-<li class="toctree-l1"><a class="reference internal" href="plane.html">Plane</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="plane.html#contains">Contains</a></li>
-</ul>
-</li>
 </ul>
 </div>
 </div>
