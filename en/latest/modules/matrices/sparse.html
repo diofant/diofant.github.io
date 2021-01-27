@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Sparse Matrices &mdash; Diofant 0.12.1.dev1+g3e41b3e87 documentation</title>
+  <title>Sparse Matrices &mdash; Diofant 0.12.1.dev11+gf855dd2e9 documentation</title>
   
 
   
@@ -887,7 +887,7 @@ many columns were in the original matrix:</p>
 <h2>ImmutableSparseMatrix Class Reference<a class="headerlink" href="#immutablesparsematrix-class-reference" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="diofant.matrices.immutable.ImmutableSparseMatrix">
-<em class="property">class </em><code class="sig-prename descclassname">diofant.matrices.immutable.</code><code class="sig-name descname">ImmutableSparseMatrix</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/matrices/immutable.py#L126-L175"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.matrices.immutable.ImmutableSparseMatrix" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diofant.matrices.immutable.</code><code class="sig-name descname">ImmutableSparseMatrix</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/matrices/immutable.py#L120-L169"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.matrices.immutable.ImmutableSparseMatrix" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create an immutable version of a sparse matrix.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ImmutableSparseMatrix</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">{})</span>
@@ -906,35 +906,8 @@ many columns were in the original matrix:</p>
 </pre></div>
 </div>
 <dl class="py method">
-<dt id="diofant.matrices.immutable.ImmutableSparseMatrix.is_zero">
-<em class="property">property </em><code class="sig-name descname">is_zero</code><a class="headerlink" href="#diofant.matrices.immutable.ImmutableSparseMatrix.is_zero" title="Permalink to this definition">¶</a></dt>
-<dd><p>Checks if a matrix is a zero matrix.</p>
-<p>A matrix is zero if every element is zero.  A matrix need not be square
-to be considered zero.  The empty matrix is zero by the principle of
-vacuous truth.  For a matrix that may or may not be zero (e.g.
-contains a symbol), this will be None</p>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">([])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">e</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">([[</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">is_zero</span>
-<span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">.</span><span class="n">is_zero</span>
-<span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">is_zero</span>
-<span class="go">False</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">is_zero</span>
-<span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">e</span><span class="o">.</span><span class="n">is_zero</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py method">
 <dt id="diofant.matrices.immutable.ImmutableSparseMatrix.subs">
-<code class="sig-name descname">subs</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/matrices/matrices.py#L1096-L1110"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.matrices.immutable.ImmutableSparseMatrix.subs" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">subs</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/matrices/matrices.py#L1095-L1109"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.matrices.immutable.ImmutableSparseMatrix.subs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a new matrix with subs applied to each entry.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SparseMatrix</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="n">x</span><span class="p">])</span>
@@ -949,7 +922,7 @@ contains a symbol), this will be None</p>
 
 <dl class="py method">
 <dt id="diofant.matrices.immutable.ImmutableSparseMatrix.xreplace">
-<code class="sig-name descname">xreplace</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rule</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/matrices/matrices.py#L1112-L1126"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.matrices.immutable.ImmutableSparseMatrix.xreplace" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">xreplace</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rule</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/matrices/matrices.py#L1111-L1125"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.matrices.immutable.ImmutableSparseMatrix.xreplace" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a new matrix with xreplace applied to each entry.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SparseMatrix</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="n">x</span><span class="p">])</span>
