@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Interactive &mdash; Diofant 0.12.1.dev15+g9c17d93d0 documentation</title>
+  <title>Config &mdash; Diofant 0.12.1.dev15+g9c17d93d0 documentation</title>
   
 
   
@@ -44,8 +44,8 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Plotting" href="plotting.html" />
-    <link rel="prev" title="Printing" href="printing.html" /> 
+    <link rel="next" title="Core" href="core.html" />
+    <link rel="prev" title="Reference" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -94,7 +94,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Reference</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="config.html">Config</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Config</a></li>
 <li class="toctree-l2"><a class="reference internal" href="core.html">Core</a></li>
 <li class="toctree-l2"><a class="reference internal" href="combinatorics/index.html">Combinatorics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ntheory.html">Number Theory</a></li>
@@ -107,7 +107,7 @@
 <li class="toctree-l2"><a class="reference internal" href="matrices/index.html">Matrices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polys.html">Polynomials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="printing.html">Printing</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Interactive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactive.html">Interactive</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plotting.html">Plotting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="series.html">Series</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sets.html">Sets</a></li>
@@ -177,13 +177,13 @@
         
           <li><a href="index.html">Reference</a> &raquo;</li>
         
-      <li>Interactive</li>
+      <li>Config</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/modules/interactive.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/modules/config.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -196,67 +196,13 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-diofant.interactive">
-<span id="interactive"></span><h1>Interactive<a class="headerlink" href="#module-diofant.interactive" title="Permalink to this headline">¶</a></h1>
-<p>Helper module for setting up interactive Diofant sessions.</p>
-<p>AST transformations, provided here, <a class="reference external" href="https://ipython.readthedocs.io/en/stable/config/inputtransforms.html">could be used</a>
-in IPython to reduce boilerplate while interacting with Diofant
-due to the Python language syntax.</p>
-<span class="target" id="module-diofant.interactive.printing"></span><dl class="py function">
-<dt id="diofant.interactive.printing.init_printing">
-<code class="sig-prename descclassname">diofant.interactive.printing.</code><code class="sig-name descname">init_printing</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">no_global</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">pretty_print</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">settings</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/interactive/printing.py#L50-L121"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.interactive.printing.init_printing" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initializes pretty-printer depending on the environment.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>no_global</strong> (<em>boolean</em>) – If True, the settings become system wide;
-if False, use just for this console/session.</p></li>
-<li><p><strong>pretty_print</strong> (<em>boolean or None</em>) – Enable pretty printer (turned on by default for IPython, but
-disabled for plain Python console).</p></li>
-<li><p><strong>**settings</strong> (<em>dict</em>) – A dictionary of default settings for printers.</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Notes</p>
-<p>This function runs automatically for wildcard imports (e.g.
-for <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">diofant</span> <span class="pre">import</span> <span class="pre">*</span></code>) in interactive sessions.</p>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.abc</span> <span class="kn">import</span> <span class="n">theta</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-<span class="go">sqrt(5)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">init_printing</span><span class="p">(</span><span class="n">pretty_print</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">no_global</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-<span class="go">  ___</span>
-<span class="go">╲╱ 5</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">theta</span>
-<span class="go">θ</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">init_printing</span><span class="p">(</span><span class="n">pretty_print</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">use_unicode</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">no_global</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">theta</span>
-<span class="go">theta</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">init_printing</span><span class="p">(</span><span class="n">pretty_print</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;grevlex&#39;</span><span class="p">,</span> <span class="n">no_global</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">+</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
-<span class="go"> 2    2</span>
-<span class="go">x  + y  + x + y</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<span class="target" id="module-diofant.interactive.session"></span><dl class="py class">
-<dt id="diofant.interactive.session.AutomaticSymbols">
-<em class="property">class </em><code class="sig-prename descclassname">diofant.interactive.session.</code><code class="sig-name descname">AutomaticSymbols</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/interactive/session.py#L31-L66"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.interactive.session.AutomaticSymbols" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add missing Symbol definitions automatically.</p>
-</dd></dl>
-
-<dl class="py class">
-<dt id="diofant.interactive.session.FloatRationalizer">
-<em class="property">class </em><code class="sig-prename descclassname">diofant.interactive.session.</code><code class="sig-name descname">FloatRationalizer</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/interactive/session.py#L69-L82"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.interactive.session.FloatRationalizer" title="Permalink to this definition">¶</a></dt>
-<dd><p>Wraps all floats in a call to Rational.</p>
-</dd></dl>
-
-<dl class="py class">
-<dt id="diofant.interactive.session.IntegerDivisionWrapper">
-<em class="property">class </em><code class="sig-prename descclassname">diofant.interactive.session.</code><code class="sig-name descname">IntegerDivisionWrapper</code><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/interactive/session.py#L5-L28"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.interactive.session.IntegerDivisionWrapper" title="Permalink to this definition">¶</a></dt>
-<dd><p>Wrap all int divisions in a call to Rational.</p>
+  <div class="section" id="module-diofant.config">
+<span id="config"></span><h1>Config<a class="headerlink" href="#module-diofant.config" title="Permalink to this headline">¶</a></h1>
+<p>Configuration utilities.</p>
+<dl class="py function">
+<dt id="diofant.config.setup">
+<code class="sig-prename descclassname">diofant.config.</code><code class="sig-name descname">setup</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key</span></em>, <em class="sig-param"><span class="n">value</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/config.py#L52-L59"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.config.setup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign a value to (or reset) a configuration item.</p>
 </dd></dl>
 
 </div>
@@ -267,8 +213,8 @@ for <code class="docutils literal notranslate"><span class="pre">from</span> <sp
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="plotting.html" class="btn btn-neutral float-right" title="Plotting" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="printing.html" class="btn btn-neutral float-left" title="Printing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="core.html" class="btn btn-neutral float-right" title="Core" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

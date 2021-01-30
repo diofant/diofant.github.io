@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Integrals &mdash; Diofant 0.12.1.dev11+gf855dd2e9 documentation</title>
+  <title>Integrals &mdash; Diofant 0.12.1.dev15+g9c17d93d0 documentation</title>
   
 
   
@@ -94,6 +94,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="config.html">Config</a></li>
 <li class="toctree-l2"><a class="reference internal" href="core.html">Core</a></li>
 <li class="toctree-l2"><a class="reference internal" href="combinatorics/index.html">Combinatorics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ntheory.html">Number Theory</a></li>
@@ -615,7 +616,7 @@ Details are described <a class="reference internal" href="../internals/g-functio
 <h2>API reference<a class="headerlink" href="#api-reference" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt id="diofant.integrals.integrals.integrate">
-<code class="sig-prename descclassname">diofant.integrals.integrals.</code><code class="sig-name descname">integrate</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">var</em>, <em class="sig-param">...</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/integrals/integrals.py#L1057-L1206"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.integrals.integrals.integrate" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.integrals.integrals.</code><code class="sig-name descname">integrate</code><span class="sig-paren">(</span><em class="sig-param">f</em>, <em class="sig-param">var</em>, <em class="sig-param">...</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/integrals/integrals.py#L1054-L1203"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.integrals.integrals.integrate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute definite or indefinite integral of one or more variables
 using Risch-Norman algorithm and table lookup. This procedure is
 able to handle elementary algebraic and transcendental functions
@@ -749,7 +750,7 @@ in interactive sessions and should be avoided in library code.</p>
 
 <dl class="py function">
 <dt id="diofant.integrals.integrals.line_integrate">
-<code class="sig-prename descclassname">diofant.integrals.integrals.</code><code class="sig-name descname">line_integrate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">field</span></em>, <em class="sig-param"><span class="n">Curve</span></em>, <em class="sig-param"><span class="n">variables</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/integrals/integrals.py#L1209-L1256"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.integrals.integrals.line_integrate" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">diofant.integrals.integrals.</code><code class="sig-name descname">line_integrate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">field</span></em>, <em class="sig-param"><span class="n">Curve</span></em>, <em class="sig-param"><span class="n">variables</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/integrals/integrals.py#L1206-L1253"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.integrals.integrals.line_integrate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the line integral.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">C</span> <span class="o">=</span> <span class="n">Curve</span><span class="p">([</span><span class="n">E</span><span class="o">**</span><span class="n">t</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">E</span><span class="o">**</span><span class="n">t</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ln</span><span class="p">(</span><span class="mi">2</span><span class="p">)))</span>
@@ -995,7 +996,7 @@ the final integration result is given in terms of a Piecewise.</p>
 <p>The class <span class="math notranslate nohighlight">\(Integral\)</span> represents an unevaluated integral and has some methods that help in the integration of an expression.</p>
 <dl class="py class">
 <dt id="diofant.integrals.integrals.Integral">
-<em class="property">class </em><code class="sig-prename descclassname">diofant.integrals.integrals.</code><code class="sig-name descname">Integral</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">function</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">symbols</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">assumptions</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/integrals/integrals.py#L17-L1054"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.integrals.integrals.Integral" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">diofant.integrals.integrals.</code><code class="sig-name descname">Integral</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">function</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">symbols</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">assumptions</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/integrals/integrals.py#L17-L1051"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.integrals.integrals.Integral" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents unevaluated integral.</p>
 <dl class="py data">
 <dt id="diofant.integrals.integrals.Integral.is_commutative">
@@ -1005,7 +1006,7 @@ the final integration result is given in terms of a Piecewise.</p>
 
 <dl class="py method">
 <dt id="diofant.integrals.integrals.Integral.as_sum">
-<code class="sig-name descname">as_sum</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n</span></em>, <em class="sig-param"><span class="n">method</span><span class="o">=</span><span class="default_value">'midpoint'</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/integrals/integrals.py#L936-L1054"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.integrals.integrals.Integral.as_sum" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">as_sum</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n</span></em>, <em class="sig-param"><span class="n">method</span><span class="o">=</span><span class="default_value">'midpoint'</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/integrals/integrals.py#L933-L1051"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.integrals.integrals.Integral.as_sum" title="Permalink to this definition">¶</a></dt>
 <dd><p>Approximates the definite integral by a sum.</p>
 <p>method … one of: left, right, midpoint, trapezoid</p>
 <p>These are all basically the rectangle method [1], the only difference
@@ -1080,7 +1081,7 @@ return oo:</p>
 
 <dl class="py method">
 <dt id="diofant.integrals.integrals.Integral.doit">
-<code class="sig-name descname">doit</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">hints</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/integrals/integrals.py#L348-L572"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.integrals.integrals.Integral.doit" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">doit</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">hints</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/integrals/integrals.py#L348-L570"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#diofant.integrals.integrals.Integral.doit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform the integration using any hints given.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.abc</span> <span class="kn">import</span> <span class="n">i</span>
