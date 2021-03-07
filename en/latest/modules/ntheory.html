@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Number Theory &mdash; Diofant 0.13.0a2.dev16+g5542e9352 documentation</title>
+  <title>Number Theory &mdash; Diofant 0.13.0a2.dev28+g7bf0ec093 documentation</title>
   
 
   
@@ -984,7 +984,7 @@ of <code class="docutils literal notranslate"><span class="pre">n</span></code>.
 The default is 2.  If <code class="docutils literal notranslate"><span class="pre">retries</span></code> &gt; 0 then if no factor is found after the
 first attempt, a new <code class="docutils literal notranslate"><span class="pre">a</span></code> will be generated randomly (using the <code class="docutils literal notranslate"><span class="pre">seed</span></code>)
 and the process repeated.</p>
-<p>Note: the value of M is lcm(1..B) = reduce(ilcm, range(2, B + 1)).</p>
+<p>Note: the value of M is lcm(1..B) = reduce(lcm, range(2, B + 1)).</p>
 <p>A search is made for factors next to even numbers having a power smoothness
 less than <code class="docutils literal notranslate"><span class="pre">B</span></code>. Choosing a larger B increases the likelihood of finding a
 larger factor but takes longer. Whether a factor of n is found or not
@@ -1020,7 +1020,7 @@ work had a gcd value not equal to <code class="docutils literal notranslate"><sp
 factors:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">256</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="n">M</span> <span class="o">=</span> <span class="n">ilcm</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">M</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">lcm</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
 <span class="gp">...</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="p">{</span><span class="n">math</span><span class="o">.</span><span class="n">gcd</span><span class="p">(</span><span class="nb">pow</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">256</span><span class="p">)</span> <span class="k">if</span>
 <span class="gp">... </span> <span class="n">math</span><span class="o">.</span><span class="n">gcd</span><span class="p">(</span><span class="nb">pow</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">!=</span> <span class="n">n</span><span class="p">}</span>
@@ -1474,7 +1474,7 @@ not a prime number, so it is possible that <span class="math notranslate nohighl
 </dl>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><span id="id1">[<a class="reference internal" href="../sources.html#id120"><span>Wan81</span></a>]</span></p></li>
+<li><p><span id="id1">[<a class="reference internal" href="../sources.html#id120">Wan81</a>]</span></p></li>
 </ul>
 </dd></dl>
 
@@ -1711,7 +1711,7 @@ A Computational Perspective”, Springer, 2nd edition, 135-138</p></li>
 
 <span class="target" id="module-diofant.ntheory.residue_ntheory"></span><dl class="py function">
 <dt id="diofant.ntheory.residue_ntheory.discrete_log">
-<code class="sig-prename descclassname"><span class="pre">diofant.ntheory.residue_ntheory.</span></code><code class="sig-name descname"><span class="pre">discrete_log</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prime_order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/ntheory/residue_ntheory.py#L1052-L1094"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.ntheory.residue_ntheory.discrete_log" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">diofant.ntheory.residue_ntheory.</span></code><code class="sig-name descname"><span class="pre">discrete_log</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prime_order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/ntheory/residue_ntheory.py#L1051-L1093"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.ntheory.residue_ntheory.discrete_log" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the discrete logarithm of <code class="docutils literal notranslate"><span class="pre">a</span></code> to the base <code class="docutils literal notranslate"><span class="pre">b</span></code> modulo <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
 <p>This is a recursive function to reduce the discrete logarithm problem in
 cyclic groups of composite order to the problem in cyclic groups of
@@ -1727,7 +1727,7 @@ size, prime order or not):</p>
 <p class="rubric">References</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://mathworld.wolfram.com/DiscreteLogarithm.html">https://mathworld.wolfram.com/DiscreteLogarithm.html</a></p></li>
-<li><p><span id="id2">[<a class="reference internal" href="../sources.html#id231"><span>MVV97</span></a>]</span></p></li>
+<li><p><span id="id2">[<a class="reference internal" href="../sources.html#id231">MVV97</a>]</span></p></li>
 </ul>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">discrete_log</span><span class="p">(</span><span class="mi">41</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
@@ -1738,7 +1738,7 @@ size, prime order or not):</p>
 
 <dl class="py function">
 <dt id="diofant.ntheory.residue_ntheory.is_nthpow_residue">
-<code class="sig-prename descclassname"><span class="pre">diofant.ntheory.residue_ntheory.</span></code><code class="sig-name descname"><span class="pre">is_nthpow_residue</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">m</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/ntheory/residue_ntheory.py#L582-L606"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.ntheory.residue_ntheory.is_nthpow_residue" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">diofant.ntheory.residue_ntheory.</span></code><code class="sig-name descname"><span class="pre">is_nthpow_residue</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">m</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/ntheory/residue_ntheory.py#L581-L605"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.ntheory.residue_ntheory.is_nthpow_residue" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns True if <code class="docutils literal notranslate"><span class="pre">x**n</span> <span class="pre">==</span> <span class="pre">a</span> <span class="pre">(mod</span> <span class="pre">m)</span></code> has solutions.</p>
 <p class="rubric">References</p>
 <ul class="simple">
@@ -1751,7 +1751,7 @@ size, prime order or not):</p>
 
 <dl class="py function">
 <dt id="diofant.ntheory.residue_ntheory.is_primitive_root">
-<code class="sig-prename descclassname"><span class="pre">diofant.ntheory.residue_ntheory.</span></code><code class="sig-name descname"><span class="pre">is_primitive_root</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/ntheory/residue_ntheory.py#L148-L174"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.ntheory.residue_ntheory.is_primitive_root" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">diofant.ntheory.residue_ntheory.</span></code><code class="sig-name descname"><span class="pre">is_primitive_root</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/ntheory/residue_ntheory.py#L147-L173"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.ntheory.residue_ntheory.is_primitive_root" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns True if <code class="docutils literal notranslate"><span class="pre">a</span></code> is a primitive root of <code class="docutils literal notranslate"><span class="pre">p</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">a</span></code> is said to be the primitive root of <code class="docutils literal notranslate"><span class="pre">p</span></code> if gcd(a, p) == 1 and
 totient(p) is the smallest positive number s.t.:</p>
@@ -1773,7 +1773,7 @@ totient(p) is the smallest positive number s.t.:</p>
 
 <dl class="py function">
 <dt id="diofant.ntheory.residue_ntheory.is_quad_residue">
-<code class="sig-prename descclassname"><span class="pre">diofant.ntheory.residue_ntheory.</span></code><code class="sig-name descname"><span class="pre">is_quad_residue</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/ntheory/residue_ntheory.py#L546-L579"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.ntheory.residue_ntheory.is_quad_residue" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">diofant.ntheory.residue_ntheory.</span></code><code class="sig-name descname"><span class="pre">is_quad_residue</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/ntheory/residue_ntheory.py#L545-L578"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.ntheory.residue_ntheory.is_quad_residue" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns True if <code class="docutils literal notranslate"><span class="pre">a</span></code> (mod <code class="docutils literal notranslate"><span class="pre">p</span></code>) is in the set of squares mod <code class="docutils literal notranslate"><span class="pre">p</span></code>,
 i.e a % p in {i**2 % p for i in range(p)}. If <code class="docutils literal notranslate"><span class="pre">p</span></code> is an odd
 prime, an iterative method is used to make the determination:</p>
@@ -1791,7 +1791,7 @@ prime, an iterative method is used to make the determination:</p>
 
 <dl class="py function">
 <dt id="diofant.ntheory.residue_ntheory.jacobi_symbol">
-<code class="sig-prename descclassname"><span class="pre">diofant.ntheory.residue_ntheory.</span></code><code class="sig-name descname"><span class="pre">jacobi_symbol</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/ntheory/residue_ntheory.py#L828-L910"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.ntheory.residue_ntheory.jacobi_symbol" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">diofant.ntheory.residue_ntheory.</span></code><code class="sig-name descname"><span class="pre">jacobi_symbol</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/ntheory/residue_ntheory.py#L827-L909"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.ntheory.residue_ntheory.jacobi_symbol" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the Jacobi symbol <span class="math notranslate nohighlight">\((m / n)\)</span>.</p>
 <p>For any integer <code class="docutils literal notranslate"><span class="pre">m</span></code> and any positive odd integer <code class="docutils literal notranslate"><span class="pre">n</span></code> the Jacobi symbol
 is defined as the product of the Legendre symbols corresponding to the
@@ -1844,7 +1844,7 @@ be demonstrated as follows:</p>
 
 <dl class="py function">
 <dt id="diofant.ntheory.residue_ntheory.legendre_symbol">
-<code class="sig-prename descclassname"><span class="pre">diofant.ntheory.residue_ntheory.</span></code><code class="sig-name descname"><span class="pre">legendre_symbol</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/ntheory/residue_ntheory.py#L779-L825"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.ntheory.residue_ntheory.legendre_symbol" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">diofant.ntheory.residue_ntheory.</span></code><code class="sig-name descname"><span class="pre">legendre_symbol</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/ntheory/residue_ntheory.py#L778-L824"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.ntheory.residue_ntheory.legendre_symbol" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the Legendre symbol <span class="math notranslate nohighlight">\((a / p)\)</span>.</p>
 <p>For an integer <code class="docutils literal notranslate"><span class="pre">a</span></code> and an odd prime <code class="docutils literal notranslate"><span class="pre">p</span></code>, the Legendre symbol is
 defined as</p>
@@ -1881,7 +1881,7 @@ defined as</p>
 
 <dl class="py class">
 <dt id="diofant.ntheory.residue_ntheory.mobius">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">diofant.ntheory.residue_ntheory.</span></code><code class="sig-name descname"><span class="pre">mobius</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/ntheory/residue_ntheory.py#L913-L967"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.ntheory.residue_ntheory.mobius" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">diofant.ntheory.residue_ntheory.</span></code><code class="sig-name descname"><span class="pre">mobius</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/ntheory/residue_ntheory.py#L912-L966"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.ntheory.residue_ntheory.mobius" title="Permalink to this definition">¶</a></dt>
 <dd><p>Möbius function maps natural number to {-1, 0, 1}</p>
 <dl class="simple">
 <dt>It is defined as follows:</dt><dd><ol class="arabic simple">
@@ -1921,7 +1921,7 @@ concrete realization with Möbius Function model).</p>
 
 <dl class="py function">
 <dt id="diofant.ntheory.residue_ntheory.n_order">
-<code class="sig-prename descclassname"><span class="pre">diofant.ntheory.residue_ntheory.</span></code><code class="sig-name descname"><span class="pre">n_order</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/ntheory/residue_ntheory.py#L15-L54"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.ntheory.residue_ntheory.n_order" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">diofant.ntheory.residue_ntheory.</span></code><code class="sig-name descname"><span class="pre">n_order</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/ntheory/residue_ntheory.py#L14-L53"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.ntheory.residue_ntheory.n_order" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the order of <code class="docutils literal notranslate"><span class="pre">a</span></code> modulo <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
 <p>The order of <code class="docutils literal notranslate"><span class="pre">a</span></code> modulo <code class="docutils literal notranslate"><span class="pre">n</span></code> is the smallest integer
 <code class="docutils literal notranslate"><span class="pre">k</span></code> such that <code class="docutils literal notranslate"><span class="pre">a**k</span></code> leaves a remainder of 1 with <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
@@ -1936,7 +1936,7 @@ concrete realization with Möbius Function model).</p>
 
 <dl class="py function">
 <dt id="diofant.ntheory.residue_ntheory.nthroot_mod">
-<code class="sig-prename descclassname"><span class="pre">diofant.ntheory.residue_ntheory.</span></code><code class="sig-name descname"><span class="pre">nthroot_mod</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_roots</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/ntheory/residue_ntheory.py#L702-L760"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.ntheory.residue_ntheory.nthroot_mod" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">diofant.ntheory.residue_ntheory.</span></code><code class="sig-name descname"><span class="pre">nthroot_mod</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_roots</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/ntheory/residue_ntheory.py#L701-L759"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.ntheory.residue_ntheory.nthroot_mod" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find the solutions to <code class="docutils literal notranslate"><span class="pre">x**n</span> <span class="pre">=</span> <span class="pre">a</span> <span class="pre">mod</span> <span class="pre">p</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1961,7 +1961,7 @@ concrete realization with Möbius Function model).</p>
 
 <dl class="py function">
 <dt id="diofant.ntheory.residue_ntheory.primitive_root">
-<code class="sig-prename descclassname"><span class="pre">diofant.ntheory.residue_ntheory.</span></code><code class="sig-name descname"><span class="pre">primitive_root</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/ntheory/residue_ntheory.py#L84-L145"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.ntheory.residue_ntheory.primitive_root" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">diofant.ntheory.residue_ntheory.</span></code><code class="sig-name descname"><span class="pre">primitive_root</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/ntheory/residue_ntheory.py#L83-L144"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.ntheory.residue_ntheory.primitive_root" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the smallest primitive root or None.</p>
 <p class="rubric">References</p>
 <ul class="simple">
@@ -1988,7 +1988,7 @@ concrete realization with Möbius Function model).</p>
 
 <dl class="py function">
 <dt id="diofant.ntheory.residue_ntheory.quadratic_residues">
-<code class="sig-prename descclassname"><span class="pre">diofant.ntheory.residue_ntheory.</span></code><code class="sig-name descname"><span class="pre">quadratic_residues</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/ntheory/residue_ntheory.py#L763-L776"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.ntheory.residue_ntheory.quadratic_residues" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">diofant.ntheory.residue_ntheory.</span></code><code class="sig-name descname"><span class="pre">quadratic_residues</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/ntheory/residue_ntheory.py#L762-L775"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.ntheory.residue_ntheory.quadratic_residues" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the list of quadratic residues.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">quadratic_residues</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
@@ -1999,7 +1999,7 @@ concrete realization with Möbius Function model).</p>
 
 <dl class="py function">
 <dt id="diofant.ntheory.residue_ntheory.sqrt_mod">
-<code class="sig-prename descclassname"><span class="pre">diofant.ntheory.residue_ntheory.</span></code><code class="sig-name descname"><span class="pre">sqrt_mod</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_roots</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/ntheory/residue_ntheory.py#L208-L256"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.ntheory.residue_ntheory.sqrt_mod" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">diofant.ntheory.residue_ntheory.</span></code><code class="sig-name descname"><span class="pre">sqrt_mod</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_roots</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/ntheory/residue_ntheory.py#L207-L255"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.ntheory.residue_ntheory.sqrt_mod" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find a root of <code class="docutils literal notranslate"><span class="pre">x**2</span> <span class="pre">=</span> <span class="pre">a</span> <span class="pre">mod</span> <span class="pre">p</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -2027,7 +2027,7 @@ in memory; otherwise use <code class="docutils literal notranslate"><span class=
 
 <dl class="py function">
 <dt id="diofant.ntheory.residue_ntheory.sqrt_mod_iter">
-<code class="sig-prename descclassname"><span class="pre">diofant.ntheory.residue_ntheory.</span></code><code class="sig-name descname"><span class="pre">sqrt_mod_iter</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em>, <em class="sig-param"><span class="pre">p</span></em>, <em class="sig-param"><span class="pre">domain=&lt;class</span> <span class="pre">'int'&gt;</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/ntheory/residue_ntheory.py#L259-L314"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.ntheory.residue_ntheory.sqrt_mod_iter" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">diofant.ntheory.residue_ntheory.</span></code><code class="sig-name descname"><span class="pre">sqrt_mod_iter</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a</span></em>, <em class="sig-param"><span class="pre">p</span></em>, <em class="sig-param"><span class="pre">domain=&lt;class</span> <span class="pre">'int'&gt;</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/ntheory/residue_ntheory.py#L258-L313"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.ntheory.residue_ntheory.sqrt_mod_iter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Iterate over solutions to <code class="docutils literal notranslate"><span class="pre">x**2</span> <span class="pre">=</span> <span class="pre">a</span> <span class="pre">mod</span> <span class="pre">p</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

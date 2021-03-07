@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Internals of the Polynomial Manipulation Module &mdash; Diofant 0.13.0a2.dev16+g5542e9352 documentation</title>
+  <title>Internals of the Polynomial Manipulation Module &mdash; Diofant 0.13.0a2.dev28+g7bf0ec093 documentation</title>
   
 
   
@@ -355,7 +355,7 @@ determined, unless divisors form a Gröbner basis.</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><span id="id1">[<a class="reference internal" href="../sources.html#id156"><span>CLOShea15</span></a>]</span>, p. 64.</p></li>
+<li><p><span id="id1">[<a class="reference internal" href="../sources.html#id156">CLOShea15</a>]</span>, p. 64.</p></li>
 </ul>
 </dd></dl>
 
@@ -442,7 +442,7 @@ determined, unless divisors form a Gröbner basis.</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><span id="id2">[<a class="reference internal" href="../sources.html#id4"><span>Knu85</span></a>]</span>, p. 407.</p></li>
+<li><p><span id="id2">[<a class="reference internal" href="../sources.html#id4">Knu85</a>]</span>, p. 407.</p></li>
 </ul>
 </dd></dl>
 
@@ -540,7 +540,7 @@ polynomials are not unique, consider examples:</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><span id="id3">[<a class="reference internal" href="../sources.html#id160"><span>KL89</span></a>]</span></p></li>
+<li><p><span id="id3">[<a class="reference internal" href="../sources.html#id160">KL89</a>]</span></p></li>
 </ul>
 </dd></dl>
 
@@ -569,7 +569,7 @@ and <code class="docutils literal notranslate"><span class="pre">s*self</span> <
 <code class="sig-name descname"><span class="pre">sturm</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/univar.py#L334-L354"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.polys.univar.UnivarPolyElement.sturm" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes the Sturm sequence of <code class="docutils literal notranslate"><span class="pre">f</span></code> in <code class="docutils literal notranslate"><span class="pre">F[x]</span></code>.</p>
 <p>Given a univariate, square-free polynomial <code class="docutils literal notranslate"><span class="pre">f(x)</span></code> returns the
-associated Sturm sequence (see e.g. <span id="id4">[<a class="reference internal" href="../sources.html#id34"><span>DST88</span></a>]</span>)
+associated Sturm sequence (see e.g. <span id="id4">[<a class="reference internal" href="../sources.html#id34">DST88</a>]</span>)
 <code class="docutils literal notranslate"><span class="pre">f_0(x),</span> <span class="pre">...,</span> <span class="pre">f_n(x)</span></code> defined by:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f_0</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">f_1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="sa">f</span><span class="s1">&#39;(x)</span>
 <span class="n">f_n</span> <span class="o">=</span> <span class="o">-</span><span class="n">rem</span><span class="p">(</span><span class="n">f_</span><span class="p">{</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">}(</span><span class="n">x</span><span class="p">),</span> <span class="n">f_</span><span class="p">{</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">}(</span><span class="n">x</span><span class="p">))</span>
@@ -676,7 +676,7 @@ exceedingly, but the computation of the primitive parts requires
 extra processing effort. Besides, the method only works with fraction fields
 of unique factorization domains, excluding, for example, the general number
 fields.</p>
-<p>Collins <span id="id5">[<a class="reference internal" href="../sources.html#id212"><span>Col67</span></a>]</span> realized that the so-called <em>subresultant polynomials</em>
+<p>Collins <span id="id5">[<a class="reference internal" href="../sources.html#id212">Col67</a>]</span> realized that the so-called <em>subresultant polynomials</em>
 of a pair of polynomials also form a generalized remainder sequence.
 The coefficients of these polynomials
 are expressible as determinants in the coefficients of the given
@@ -755,12 +755,12 @@ formulas</p>
 \[\gamma_i f_i = \mathrm{rem}(f_{i-2},f_{i-1})\]</div>
 <p>in terms of the leading coefficients of <span class="math notranslate nohighlight">\(f_1,\ldots,f_{i-1}\)</span>, working
 in the field <span class="math notranslate nohighlight">\(K\)</span>.</p>
-<p>Brown and Traub <span id="id6">[<a class="reference internal" href="../sources.html#id140"><span>BT71</span></a>]</span> later developed a recursive procedure
+<p>Brown and Traub <span id="id6">[<a class="reference internal" href="../sources.html#id140">BT71</a>]</span> later developed a recursive procedure
 for computing the coefficients <span class="math notranslate nohighlight">\(\gamma_i\)</span>. Their algorithm deals with elements
 of the domain <span class="math notranslate nohighlight">\(A\)</span> exclusively (assuming <span class="math notranslate nohighlight">\(f,g\in A[X]\)</span>). However, in the
 abnormal case there was a problem, a division in <span class="math notranslate nohighlight">\(A\)</span>
 which could only be conjectured to be exact.</p>
-<p>This was subsequently justified by Brown <span id="id7">[<a class="reference internal" href="../sources.html#id229"><span>Bro78</span></a>]</span> who showed that
+<p>This was subsequently justified by Brown <span id="id7">[<a class="reference internal" href="../sources.html#id229">Bro78</a>]</span> who showed that
 the result of the division is, in fact, a scalar subresultant.
 More specifically, the constant appearing in the computation of <span class="math notranslate nohighlight">\(f_i\)</span> is
 <span class="math notranslate nohighlight">\(s_{n_{i-2}}(f,g)\)</span> (Theorem 3).
@@ -803,15 +803,15 @@ variable at a time, provided that the ideal is zero-dimensional
 (finite number of solutions).</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><span id="id8">[<a class="reference internal" href="../sources.html#id206"><span>NKBG03</span></a>]</span></p></li>
-<li><p><span id="id9">[<a class="reference internal" href="../sources.html#id35"><span>GMN+91</span></a>]</span></p></li>
-<li><p><span id="id10">[<a class="reference internal" href="../sources.html#id73"><span>ALW95</span></a>]</span></p></li>
-<li><p><span id="id11">[<a class="reference internal" href="../sources.html#id156"><span>CLOShea15</span></a>]</span></p></li>
-<li><p><span id="id12">[<a class="reference internal" href="../sources.html#id204"><span>BW93</span></a>]</span>, page 232</p></li>
+<li><p><span id="id8">[<a class="reference internal" href="../sources.html#id206">NKBG03</a>]</span></p></li>
+<li><p><span id="id9">[<a class="reference internal" href="../sources.html#id35">GMN+91</a>]</span></p></li>
+<li><p><span id="id10">[<a class="reference internal" href="../sources.html#id73">ALW95</a>]</span></p></li>
+<li><p><span id="id11">[<a class="reference internal" href="../sources.html#id156">CLOShea15</a>]</span></p></li>
+<li><p><span id="id12">[<a class="reference internal" href="../sources.html#id204">BW93</a>]</span>, page 232</p></li>
 </ul>
 <p class="rubric">Notes</p>
 <p>Used an improved version of Buchberger’s algorithm
-as presented in <span id="id13">[<a class="reference internal" href="../sources.html#id204"><span>BW93</span></a>]</span>.</p>
+as presented in <span id="id13">[<a class="reference internal" href="../sources.html#id204">BW93</a>]</span>.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -882,8 +882,8 @@ the current basis.</p>
 <p>Once a Gröbner basis has been found, it gets reduced.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><span id="id14">[<a class="reference internal" href="../sources.html#id222"><span>SW10</span></a>]</span></p></li>
-<li><p><span id="id15">[<a class="reference internal" href="../sources.html#id204"><span>BW93</span></a>]</span>, pp. 203, 216.</p></li>
+<li><p><span id="id14">[<a class="reference internal" href="../sources.html#id222">SW10</a>]</span></p></li>
+<li><p><span id="id15">[<a class="reference internal" href="../sources.html#id204">BW93</a>]</span>, pp. 203, 216.</p></li>
 </ul>
 </dd></dl>
 
@@ -914,7 +914,7 @@ of <span class="math notranslate nohighlight">\(t*f\)</span> and <span class="ma
 then filtering out the solution that doesn’t contain <span class="math notranslate nohighlight">\(t\)</span>.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><span id="id16">[<a class="reference internal" href="../sources.html#id156"><span>CLOShea15</span></a>]</span></p></li>
+<li><p><span id="id16">[<a class="reference internal" href="../sources.html#id156">CLOShea15</a>]</span></p></li>
 </ul>
 </dd></dl>
 
@@ -990,7 +990,7 @@ ideal w.r.t. <code class="docutils literal notranslate"><span class="pre">O_from
 w.r.t. <code class="docutils literal notranslate"><span class="pre">O_to</span></code>.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><span id="id17">[<a class="reference internal" href="../sources.html#id221"><span>FaugereGLM93</span></a>]</span></p></li>
+<li><p><span id="id17">[<a class="reference internal" href="../sources.html#id221">FaugereGLM93</a>]</span></p></li>
 </ul>
 </dd></dl>
 
@@ -1002,7 +1002,7 @@ w.r.t. <code class="docutils literal notranslate"><span class="pre">O_to</span><
 and computes a reduced Gröbner basis for them.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><span id="id18">[<a class="reference internal" href="../sources.html#id204"><span>BW93</span></a>]</span>, page 216.</p></li>
+<li><p><span id="id18">[<a class="reference internal" href="../sources.html#id204">BW93</a>]</span>, page 216.</p></li>
 </ul>
 </dd></dl>
 
@@ -1059,7 +1059,7 @@ s &gt; t otherwise</p>
 <h2>Algebraic number fields<a class="headerlink" href="#algebraic-number-fields" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt id="diofant.polys.numberfields.minpoly_groebner">
-<code class="sig-prename descclassname"><span class="pre">diofant.polys.numberfields.</span></code><code class="sig-name descname"><span class="pre">minpoly_groebner</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ex</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/numberfields.py#L576-L658"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.polys.numberfields.minpoly_groebner" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">diofant.polys.numberfields.</span></code><code class="sig-name descname"><span class="pre">minpoly_groebner</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ex</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/numberfields.py#L577-L659"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.polys.numberfields.minpoly_groebner" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes the minimal polynomial of an algebraic number
 using Gröbner bases</p>
 <p class="rubric">Examples</p>
@@ -1069,7 +1069,7 @@ using Gröbner bases</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><span id="id19">[<a class="reference internal" href="../sources.html#id151"><span>AL94</span></a>]</span></p></li>
+<li><p><span id="id19">[<a class="reference internal" href="../sources.html#id151">AL94</a>]</span></p></li>
 </ul>
 </dd></dl>
 
@@ -1126,7 +1126,7 @@ a polynomial over <span class="math notranslate nohighlight">\(\mathbb Z\)</span
 <p>If this fails, <code class="docutils literal notranslate"><span class="pre">None</span></code> is returned.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><span id="id20">[<a class="reference internal" href="../sources.html#id92"><span>JM09</span></a>]</span></p></li>
+<li><p><span id="id20">[<a class="reference internal" href="../sources.html#id92">JM09</a>]</span></p></li>
 </ul>
 </dd></dl>
 
@@ -1153,7 +1153,7 @@ a polynomial over <span class="math notranslate nohighlight">\(\mathbb Z\)</span
 in <span class="math notranslate nohighlight">\(x_0\)</span>, in <span class="math notranslate nohighlight">\(\mathbb Q(\alpha)[x_0, \ldots, x_n]\)</span>.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><span id="id21">[<a class="reference internal" href="../sources.html#id92"><span>JM09</span></a>]</span></p></li>
+<li><p><span id="id21">[<a class="reference internal" href="../sources.html#id92">JM09</a>]</span></p></li>
 </ul>
 </dd></dl>
 
@@ -1210,7 +1210,7 @@ factors of a polynomial <span class="math notranslate nohighlight">\(f\)</span>.
 </dl>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><span id="id22">[<a class="reference internal" href="../sources.html#id92"><span>JM09</span></a>]</span></p></li>
+<li><p><span id="id22">[<a class="reference internal" href="../sources.html#id92">JM09</a>]</span></p></li>
 </ul>
 </dd></dl>
 
@@ -1252,7 +1252,7 @@ coefficient in the irreducible factors of <span class="math notranslate nohighli
 </dl>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><span id="id23">[<a class="reference internal" href="../sources.html#id92"><span>JM09</span></a>]</span></p></li>
+<li><p><span id="id23">[<a class="reference internal" href="../sources.html#id92">JM09</a>]</span></p></li>
 </ul>
 </dd></dl>
 
@@ -1296,7 +1296,7 @@ coefficient in the irreducible factors of <span class="math notranslate nohighli
 </dl>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><span id="id24">[<a class="reference internal" href="../sources.html#id92"><span>JM09</span></a>]</span></p></li>
+<li><p><span id="id24">[<a class="reference internal" href="../sources.html#id92">JM09</a>]</span></p></li>
 </ul>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
@@ -1344,7 +1344,7 @@ treated as one, thus computations are faster. However, if the defect of
 <span class="math notranslate nohighlight">\(\alpha\)</span> is larger than one, this may lead to wrong results.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><span id="id25">[<a class="reference internal" href="../sources.html#id92"><span>JM09</span></a>]</span></p></li>
+<li><p><span id="id25">[<a class="reference internal" href="../sources.html#id92">JM09</a>]</span></p></li>
 </ul>
 </dd></dl>
 
@@ -1502,7 +1502,7 @@ the GCD of <span class="math notranslate nohighlight">\(f\)</span> and <span cla
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><span id="id26">[<a class="reference internal" href="../sources.html#id54"><span>MvH04</span></a>]</span></p></li>
+<li><p><span id="id26">[<a class="reference internal" href="../sources.html#id54">MvH04</a>]</span></p></li>
 </ul>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
@@ -1543,7 +1543,7 @@ in <span class="math notranslate nohighlight">\(\left[ -\frac{p-1} 2, \frac{p-1}
 </dl>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><span id="id27">[<a class="reference internal" href="../sources.html#id54"><span>MvH04</span></a>]</span></p></li>
+<li><p><span id="id27">[<a class="reference internal" href="../sources.html#id54">MvH04</a>]</span></p></li>
 </ul>
 </dd></dl>
 
@@ -1631,8 +1631,8 @@ arbitrarily.</p></li>
 </dl>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><span id="id28">[<a class="reference internal" href="../sources.html#id220"><span>MW00</span></a>]</span></p></li>
-<li><p><span id="id29">[<a class="reference internal" href="../sources.html#id141"><span>Bro71</span></a>]</span></p></li>
+<li><p><span id="id28">[<a class="reference internal" href="../sources.html#id220">MW00</a>]</span></p></li>
+<li><p><span id="id29">[<a class="reference internal" href="../sources.html#id141">Bro71</a>]</span></p></li>
 </ul>
 </dd></dl>
 
@@ -1669,7 +1669,7 @@ not irreducible, so it is possible that <span class="math notranslate nohighligh
 </dl>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><span id="id30">[<a class="reference internal" href="../sources.html#id54"><span>MvH04</span></a>]</span></p></li>
+<li><p><span id="id30">[<a class="reference internal" href="../sources.html#id54">MvH04</a>]</span></p></li>
 </ul>
 </dd></dl>
 
@@ -1881,7 +1881,7 @@ called recursively.</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><span id="id31">[<a class="reference internal" href="../sources.html#id54"><span>MvH04</span></a>]</span></p></li>
+<li><p><span id="id31">[<a class="reference internal" href="../sources.html#id54">MvH04</a>]</span></p></li>
 </ul>
 </dd></dl>
 
@@ -1931,8 +1931,8 @@ candidates which are very likely the desired GCD.</p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><span id="id32">[<a class="reference internal" href="../sources.html#id220"><span>MW00</span></a>]</span></p></li>
-<li><p><span id="id33">[<a class="reference internal" href="../sources.html#id141"><span>Bro71</span></a>]</span></p></li>
+<li><p><span id="id32">[<a class="reference internal" href="../sources.html#id220">MW00</a>]</span></p></li>
+<li><p><span id="id33">[<a class="reference internal" href="../sources.html#id141">Bro71</a>]</span></p></li>
 </ul>
 </dd></dl>
 
@@ -1960,7 +1960,7 @@ is given, <span class="math notranslate nohighlight">\(\mathbb Z_p\)</span> is c
 </dl>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><span id="id34">[<a class="reference internal" href="../sources.html#id67"><span>vHM02</span></a>]</span></p></li>
+<li><p><span id="id34">[<a class="reference internal" href="../sources.html#id67">vHM02</a>]</span></p></li>
 </ul>
 </dd></dl>
 
@@ -1989,7 +1989,7 @@ interpolated polynomial is the correct GCD. This gives cofactors of
 the input polynomials as a side effect.</p>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><span id="id35">[<a class="reference internal" href="../sources.html#id24"><span>LF95</span></a>]</span></p></li>
+<li><p><span id="id35">[<a class="reference internal" href="../sources.html#id24">LF95</a>]</span></p></li>
 </ul>
 </dd></dl>
 
