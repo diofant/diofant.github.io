@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Calculus &mdash; Diofant 0.13.0a2.dev38+g50d42411e documentation</title>
+  <title>Calculus &mdash; Diofant 0.13.0a2.dev41+gf609b9507 documentation</title>
   
 
   
@@ -205,11 +205,11 @@ function.</p>
 </div>
 <p><a class="reference internal" href="../modules/core.html#diofant.core.function.diff" title="diofant.core.function.diff"><code class="xref py py-func docutils literal notranslate"><span class="pre">diff()</span></code></a> can take multiple derivatives at
 once.  To take multiple derivatives, pass the variable as many times
-as you wish to differentiate, or pass a number after the variable.
+as you wish to differentiate, or pass a tuple (variable and order).
 For example, both of the following find the third derivative of <span class="math notranslate nohighlight">\(x^4\)</span>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">4</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 <span class="go">24⋅x</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">4</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">4</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
 <span class="go">24⋅x</span>
 </pre></div>
 </div>
@@ -221,10 +221,10 @@ derivatives.  For example, each of the following will compute
 <span class="gp">&gt;&gt;&gt; </span><span class="n">diff</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
 <span class="go"> x⋅y⋅z  3  2 ⎛ 3  3  3       2  2  2                ⎞</span>
 <span class="go">ℯ     ⋅x ⋅y ⋅⎝x ⋅y ⋅z  + 14⋅x ⋅y ⋅z  + 52⋅x⋅y⋅z + 48⎠</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">diff</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">diff</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 <span class="go"> x⋅y⋅z  3  2 ⎛ 3  3  3       2  2  2                ⎞</span>
 <span class="go">ℯ     ⋅x ⋅y ⋅⎝x ⋅y ⋅z  + 14⋅x ⋅y ⋅z  + 52⋅x⋅y⋅z + 48⎠</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">diff</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">diff</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 <span class="go"> x⋅y⋅z  3  2 ⎛ 3  3  3       2  2  2                ⎞</span>
 <span class="go">ℯ     ⋅x ⋅y ⋅⎝x ⋅y ⋅z  + 14⋅x ⋅y ⋅z  + 52⋅x⋅y⋅z + 48⎠</span>
 </pre></div>
@@ -233,7 +233,7 @@ derivatives.  For example, each of the following will compute
 <a class="reference internal" href="../modules/core.html#diofant.core.expr.Expr.diff" title="diofant.core.expr.Expr.diff"><code class="xref py py-meth docutils literal notranslate"><span class="pre">diff()</span></code></a>.  The two ways of calling
 <a class="reference internal" href="../modules/core.html#diofant.core.function.diff" title="diofant.core.function.diff"><code class="xref py py-func docutils literal notranslate"><span class="pre">diff()</span></code></a> are exactly the same, and are
 provided only for convenience.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 <span class="go"> x⋅y⋅z  3  2 ⎛ 3  3  3       2  2  2                ⎞</span>
 <span class="go">ℯ     ⋅x ⋅y ⋅⎝x ⋅y ⋅z  + 14⋅x ⋅y ⋅z  + 52⋅x⋅y⋅z + 48⎠</span>
 </pre></div>
@@ -241,7 +241,7 @@ provided only for convenience.</p>
 <p>To create an unevaluated derivative, use the
 <a class="reference internal" href="../modules/core.html#diofant.core.function.Derivative" title="diofant.core.function.Derivative"><code class="xref py py-class docutils literal notranslate"><span class="pre">Derivative</span></code></a> class.  It has the same
 syntax as <a class="reference internal" href="../modules/core.html#diofant.core.function.diff" title="diofant.core.function.diff"><code class="xref py py-func docutils literal notranslate"><span class="pre">diff()</span></code></a>.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Derivative</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Derivative</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 <span class="go">     7</span>
 <span class="go">    ∂     ⎛ x⋅y⋅z⎞</span>
 <span class="go">──────────⎝ℯ     ⎠</span>
