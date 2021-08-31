@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Core &mdash; Diofant 0.13.0a4.dev13+g8c5685115 documentation</title>
+  <title>Core &mdash; Diofant 0.13.0a4.dev26+g3a3033605 documentation</title>
   
 
   
@@ -1934,7 +1934,7 @@ Use the <code class="docutils literal notranslate"><span class="pre">bound</span
 where <code class="docutils literal notranslate"><span class="pre">w</span></code> belongs to the most rapidly varying expression of <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span> <span class="o">+</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span> <span class="o">-</span> <span class="n">sin</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">e</span><span class="o">.</span><span class="n">aseries</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e</span><span class="o">.</span><span class="n">series</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">oo</span><span class="p">)</span>
 <span class="go">E**(-x)*(1/(24*x**4) - 1/(2*x**2) + 1 + O(x**(-6), (x, oo)))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e</span><span class="o">.</span><span class="n">aseries</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">hir</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go">-E**(-2*x)*sin(1/x)/2 + E**(-x)*cos(1/x) + O(E**(-3*x), (x, oo))</span>
@@ -1943,7 +1943,7 @@ where <code class="docutils literal notranslate"><span class="pre">w</span></cod
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e</span> <span class="o">=</span> <span class="n">exp</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e</span><span class="o">.</span><span class="n">aseries</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="go">E**(E**x)*E**(E**x/x**2)*E**(E**x/x)*E**(-E**x + E**x/(1 - 1/x) - E**x/x - E**x/x**2)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">e</span><span class="o">.</span><span class="n">aseries</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e</span><span class="o">.</span><span class="n">series</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">oo</span><span class="p">)</span>
 <span class="go">E**(E**x/(1 - 1/x))</span>
 </pre></div>
 </div>

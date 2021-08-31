@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Concrete Mathematics &mdash; Diofant 0.13.0a4.dev13+g8c5685115 documentation</title>
+  <title>Concrete Mathematics &mdash; Diofant 0.13.0a4.dev26+g3a3033605 documentation</title>
   
 
   
@@ -285,112 +285,64 @@ hypergeometric:</p>
 <h2>Concrete Class Reference<a class="headerlink" href="#concrete-class-reference" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="diofant.concrete.summations.Sum">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">diofant.concrete.summations.</span></span><span class="sig-name descname"><span class="pre">Sum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">symbols</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">assumptions</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/concrete/summations.py#L11-L461"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.concrete.summations.Sum" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">diofant.concrete.summations.</span></span><span class="sig-name descname"><span class="pre">Sum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">symbols</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">assumptions</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/concrete/summations.py#L11-L407"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.concrete.summations.Sum" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents unevaluated summation.</p>
-<p><code class="docutils literal notranslate"><span class="pre">Sum</span></code> represents a finite or infinite series, with the first argument
-being the general form of terms in the series, and the second argument
-being <code class="docutils literal notranslate"><span class="pre">(dummy_variable,</span> <span class="pre">start,</span> <span class="pre">end)</span></code>, with <code class="docutils literal notranslate"><span class="pre">dummy_variable</span></code> taking
-all integer values from <code class="docutils literal notranslate"><span class="pre">start</span></code> through <code class="docutils literal notranslate"><span class="pre">end</span></code>. In accordance with
-long-standing mathematical convention, the end term is included in the
-summation.</p>
-<p>For finite sums (and sums with symbolic limits assumed to be finite) we
-follow the summation convention described by Karr <span id="id1">[<a class="reference internal" href="../sources.html#id137" title="Michael Karr. Summation in Finite Terms. Journal of the ACM, 28(2):305–350, 1981. doi:10.1145/322248.322255.">Kar81</a>]</span>, especially
-definition 3 of section 1.4. The sum:</p>
-<div class="math notranslate nohighlight">
-\[\sum_{m \leq i &lt; n} f(i)\]</div>
-<p>has <em>the obvious meaning</em> for <span class="math notranslate nohighlight">\(m &lt; n\)</span>, namely:</p>
-<div class="math notranslate nohighlight">
-\[\sum_{m \leq i &lt; n} f(i) = f(m) + f(m+1) + \ldots + f(n-2) + f(n-1)\]</div>
-<p>with the upper limit value <span class="math notranslate nohighlight">\(f(n)\)</span> excluded. The sum over an empty set is
-zero if and only if <span class="math notranslate nohighlight">\(m = n\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[\sum_{m \leq i &lt; n} f(i) = 0  \quad \mathrm{for} \quad  m = n\]</div>
-<p>Finally, for all other sums over empty sets we assume the following
-definition:</p>
-<div class="math notranslate nohighlight">
-\[\sum_{m \leq i &lt; n} f(i) = - \sum_{n \leq i &lt; m} f(i)  \quad \mathrm{for} \quad  m &gt; n\]</div>
-<p>It is important to note that Karr defines all sums with the upper
-limit being exclusive. This is in contrast to the usual mathematical notation,
-but does not affect the summation convention. Indeed we have:</p>
-<div class="math notranslate nohighlight">
-\[\sum_{m \leq i &lt; n} f(i) = \sum_{i = m}^{n - 1} f(i)\]</div>
-<p>where the difference in notation is intentional to emphasize the meaning,
-with limits typeset on the top being inclusive.</p>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.abc</span> <span class="kn">import</span> <span class="n">i</span>
+<p><code class="docutils literal notranslate"><span class="pre">Sum</span></code> represents a finite or infinite series, with the first
+argument being the general form of terms in the series (which
+usually depend on the bound variable <code class="docutils literal notranslate"><span class="pre">symbol</span></code>), and the second
+argument being <code class="docutils literal notranslate"><span class="pre">(symbol,</span> <span class="pre">start,</span> <span class="pre">end)</span></code>, with <code class="docutils literal notranslate"><span class="pre">symbol</span></code> taking
+all integer values from <code class="docutils literal notranslate"><span class="pre">start</span></code> through <code class="docutils literal notranslate"><span class="pre">end</span></code> (inclusive).</p>
+<p>For <code class="docutils literal notranslate"><span class="pre">start</span> <span class="pre">&lt;</span> <span class="pre">end</span></code> we adopt definition:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Sum</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">))</span> <span class="o">=</span> <span class="o">-</span><span class="n">Sum</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">end</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">start</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Sum</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">m</span><span class="p">))</span>
-<span class="go">Sum(k, (k, 1, m))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Sum</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">m</span><span class="p">))</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span>
-<span class="go">m**2/2 + m/2</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Sum</span><span class="p">(</span><span class="n">k</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">m</span><span class="p">))</span>
-<span class="go">Sum(k**2, (k, 1, m))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Sum</span><span class="p">(</span><span class="n">k</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">m</span><span class="p">))</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span>
+<p class="rubric">Notes</p>
+<p>The summation convention for <code class="docutils literal notranslate"><span class="pre">start</span> <span class="pre">&lt;</span> <span class="pre">end</span></code> described by Karr
+in <span id="id1">[<a class="reference internal" href="../sources.html#id137" title="Michael Karr. Summation in Finite Terms. Journal of the ACM, 28(2):305–350, 1981. doi:10.1145/322248.322255.">Kar81</a>]</span>, especially definition 3 of section 1.4.
+The only difference with the reference is that Karr defines all
+sums with the upper limit being exclusive.  This is in contrast to
+the usual mathematical notation, which we adopt, but does not
+affect the summation convention.  Indeed we have:</p>
+<div class="math notranslate nohighlight">
+\[\sum_{m \leq i &lt; n} f_i = \sum_{i = m}^{n - 1} f_i\]</div>
+<p>This convention allows us to preserve the splitting identity</p>
+<div class="math notranslate nohighlight">
+\[\sum\limits_{i=m}^n f_i = \sum\limits_{i=m}^l f_i +
+                          \sum\limits_{i=l+1}^n f_i\]</div>
+<p>regardless of the ordering of <span class="math notranslate nohighlight">\(m\)</span>, <span class="math notranslate nohighlight">\(l\)</span> and <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<p>Note that it also follows:</p>
+<div class="math notranslate nohighlight">
+\[\sum\limits_{i=m}^{m-1} f_i = 0\]</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Sum</span><span class="p">(</span><span class="n">k</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">m</span><span class="p">))</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span>
 <span class="go">m**3/3 + m**2/2 + m/6</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Sum</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="n">k</span><span class="p">,</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">oo</span><span class="p">))</span>
-<span class="go">Sum(x**k, (k, 0, oo))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Sum</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="n">k</span><span class="p">,</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">oo</span><span class="p">))</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span>
-<span class="go">Piecewise((1/(-x + 1), Abs(x) &lt; 1), (Sum(x**k, (k, 0, oo)), true))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Sum</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="n">k</span><span class="o">/</span><span class="n">factorial</span><span class="p">(</span><span class="n">k</span><span class="p">),</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">oo</span><span class="p">))</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span>
 <span class="go">E**x</span>
-</pre></div>
-</div>
-<p>Here are examples to do summation with symbolic indices.  You
-can use either Function of IndexedBase classes:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="s1">&#39;f&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Sum</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span>
-<span class="go">f(0) + f(1) + f(2) + f(3)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Sum</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">oo</span><span class="p">))</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span>
-<span class="go">Sum(f(n), (n, 0, oo))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;f&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Sum</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span>
-<span class="go">f[0]**2 + f[1]**2 + f[2]**2 + f[3]**2</span>
 </pre></div>
 </div>
 <p>An example showing that the symbolic result of a summation is still
 valid for seemingly nonsensical values of the limits. Then the Karr
 convention allows us to give a perfectly valid interpretation to
-those sums by interchanging the limits according to the above rules:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">Sum</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span>
+those sums by interchanging the limits according to the adopted rule:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Sum</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span>
 <span class="go">n**2/2 + n/2</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">n</span><span class="p">:</span> <span class="o">-</span><span class="mi">4</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">n</span><span class="p">:</span> <span class="o">-</span><span class="mi">4</span><span class="p">})</span>
 <span class="go">6</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Sum</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">))</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Sum</span><span class="p">(</span><span class="o">-</span><span class="n">n</span><span class="p">,</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span>
 <span class="go">6</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Sum</span><span class="p">(</span><span class="o">-</span><span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span>
-<span class="go">6</span>
-</pre></div>
-</div>
-<p>An explicit example of the Karr summation convention:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s1</span> <span class="o">=</span> <span class="n">Sum</span><span class="p">(</span><span class="n">i</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">m</span><span class="o">+</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">s1</span>
-<span class="go">m**2*n + m*n**2 - m*n + n**3/3 - n**2/2 + n/6</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">s2</span> <span class="o">=</span> <span class="n">Sum</span><span class="p">(</span><span class="n">i</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">m</span><span class="o">+</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">s2</span>
-<span class="go">-m**2*n - m*n**2 + m*n - n**3/3 + n**2/2 - n/6</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">s1</span> <span class="o">+</span> <span class="n">s2</span>
-<span class="go">0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">s3</span> <span class="o">=</span> <span class="n">Sum</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">s3</span>
-<span class="go">0</span>
 </pre></div>
 </div>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p><a class="reference internal" href="#diofant.concrete.summations.summation" title="diofant.concrete.summations.summation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">diofant.concrete.summations.summation</span></code></a>, <a class="reference internal" href="#diofant.concrete.products.Product" title="diofant.concrete.products.Product"><code class="xref py py-obj docutils literal notranslate"><span class="pre">diofant.concrete.products.Product</span></code></a>, <a class="reference internal" href="#diofant.concrete.products.product" title="diofant.concrete.products.product"><code class="xref py py-obj docutils literal notranslate"><span class="pre">diofant.concrete.products.product</span></code></a></p>
+<p><a class="reference internal" href="#diofant.concrete.summations.summation" title="diofant.concrete.summations.summation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">summation</span></code></a>, <a class="reference internal" href="#diofant.concrete.products.Product" title="diofant.concrete.products.Product"><code class="xref py py-obj docutils literal notranslate"><span class="pre">diofant.concrete.products.Product</span></code></a>, <a class="reference internal" href="#diofant.concrete.products.product" title="diofant.concrete.products.product"><code class="xref py py-obj docutils literal notranslate"><span class="pre">diofant.concrete.products.product</span></code></a></p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Summation#Capital-sigma_notation">https://en.wikipedia.org/wiki/Summation#Capital-sigma_notation</a></p></li>
-<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Empty_sum">https://en.wikipedia.org/wiki/Empty_sum</a></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Summation">https://en.wikipedia.org/wiki/Summation</a></p></li>
 </ul>
 <dl class="py method">
 <dt class="sig sig-object py" id="diofant.concrete.summations.Sum.euler_maclaurin">
-<span class="sig-name descname"><span class="pre">euler_maclaurin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eval_integral</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/concrete/summations.py#L210-L309"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.concrete.summations.Sum.euler_maclaurin" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">euler_maclaurin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eval_integral</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/concrete/summations.py#L156-L255"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.concrete.summations.Sum.euler_maclaurin" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return an Euler-Maclaurin approximation of self, where m is the
 number of leading terms to sum directly and n is the number of
 terms in the tail.</p>
@@ -430,7 +382,7 @@ as soon as the remainder term is less than the epsilon.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="diofant.concrete.summations.Sum.findrecur">
-<span class="sig-name descname"><span class="pre">findrecur</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">F</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Function('F')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/concrete/summations.py#L385-L461"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.concrete.summations.Sum.findrecur" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">findrecur</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">F</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Function('F')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/concrete/summations.py#L331-L407"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.concrete.summations.Sum.findrecur" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find a recurrence formula for the summand of the sum.</p>
 <p>Given a sum <span class="math notranslate nohighlight">\(f(n) = \sum_k F(n, k)\)</span>, where <span class="math notranslate nohighlight">\(F(n, k)\)</span> is
 doubly hypergeometric (that’s, both <span class="math notranslate nohighlight">\(F(n + 1, k)/F(n, k)\)</span>
@@ -452,7 +404,7 @@ we find a recurrence for the summand <span class="math notranslate nohighlight">
 
 <dl class="py method">
 <dt class="sig sig-object py" id="diofant.concrete.summations.Sum.reverse_order">
-<span class="sig-name descname"><span class="pre">reverse_order</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">indices</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/concrete/summations.py#L311-L383"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.concrete.summations.Sum.reverse_order" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">reverse_order</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">indices</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/concrete/summations.py#L257-L329"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.concrete.summations.Sum.reverse_order" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reverse the order of a limit in a Sum.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1024,7 +976,7 @@ variables of the two limits which are to be interchanged.</p>
 <h2>Concrete Functions Reference<a class="headerlink" href="#concrete-functions-reference" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="diofant.concrete.summations.summation">
-<span class="sig-prename descclassname"><span class="pre">diofant.concrete.summations.</span></span><span class="sig-name descname"><span class="pre">summation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">symbols</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/concrete/summations.py#L464-L505"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.concrete.summations.summation" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">diofant.concrete.summations.</span></span><span class="sig-name descname"><span class="pre">summation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">symbols</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/concrete/summations.py#L410-L451"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.concrete.summations.summation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the summation of f with respect to symbols.</p>
 <p>The notation for symbols is similar to the notation used in Integral.
 summation(f, (i, a, b)) computes the sum of f with respect to i from a to b,
@@ -1093,7 +1045,7 @@ Repeated products can be computed by introducing additional symbols tuples:</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="diofant.concrete.gosper.gosper_normal">
-<span class="sig-prename descclassname"><span class="pre">diofant.concrete.gosper.</span></span><span class="sig-name descname"><span class="pre">gosper_normal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/concrete/gosper.py#L10-L59"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.concrete.gosper.gosper_normal" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">diofant.concrete.gosper.</span></span><span class="sig-name descname"><span class="pre">gosper_normal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/concrete/gosper.py#L10-L59"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.concrete.gosper.gosper_normal" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the Gosper’s normal form of <code class="docutils literal notranslate"><span class="pre">f</span></code> and <code class="docutils literal notranslate"><span class="pre">g</span></code>.</p>
 <p>Given relatively prime univariate polynomials <code class="docutils literal notranslate"><span class="pre">f</span></code> and <code class="docutils literal notranslate"><span class="pre">g</span></code>,
 rewrite their quotient to a normal form defined as follows:</p>
@@ -1138,7 +1090,7 @@ term <span class="math notranslate nohighlight">\(g_n\)</span> such that <span c
 
 <dl class="py function">
 <dt class="sig sig-object py" id="diofant.concrete.gosper.gosper_sum">
-<span class="sig-prename descclassname"><span class="pre">diofant.concrete.gosper.</span></span><span class="sig-name descname"><span class="pre">gosper_sum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/concrete/gosper.py#L128-L172"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.concrete.gosper.gosper_sum" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">diofant.concrete.gosper.</span></span><span class="sig-name descname"><span class="pre">gosper_sum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/concrete/gosper.py#L128-L170"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.concrete.gosper.gosper_sum" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gosper’s hypergeometric summation algorithm.</p>
 <p>Given a hypergeometric term <code class="docutils literal notranslate"><span class="pre">f</span></code> such that:</p>
 <div class="math notranslate nohighlight">
