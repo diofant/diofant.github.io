@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SymPy 0.7.6 &mdash; Diofant 0.13.0a4.dev69+ge4d5c3509 documentation</title>
+  <title>SymPy 0.7.6 &mdash; Diofant 0.13.0a4.dev77+gf200b8877 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
@@ -125,10 +126,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="sympy-0-7-6">
+  <section id="sympy-0-7-6">
 <h1>SymPy 0.7.6<a class="headerlink" href="#sympy-0-7-6" title="Permalink to this headline"></a></h1>
 <p>21 Nov 2014</p>
-<div class="section" id="new-features">
+<section id="new-features">
 <h2>New features<a class="headerlink" href="#new-features" title="Permalink to this headline"></a></h2>
 <ul class="simple">
 <li><p>New module <code class="docutils literal notranslate"><span class="pre">calculus.finite_diff</span></code> for generating finite difference formulae approximating derivatives of arbitrary order on arbitrarily spaced grids.</p></li>
@@ -151,8 +152,8 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">CodeGen</span></code> now generates code for Octave and Matlab from SymPy expressions.  This is supported by a new CodePrinter with interface <code class="docutils literal notranslate"><span class="pre">octave_code</span></code>.  For example <code class="docutils literal notranslate"><span class="pre">octave_code(Matrix([[x**2,</span> <span class="pre">sin(pi*x*y),</span> <span class="pre">ceiling(x)]]))</span></code> gives the string <code class="docutils literal notranslate"><span class="pre">[x.^2</span> <span class="pre">sin(pi*x.*y)</span> <span class="pre">ceil(x)]</span></code>.</p></li>
 <li><p>New general 3D vector package at <code class="docutils literal notranslate"><span class="pre">sympy.vector</span></code>.  This package provides a 3D vector object with the Del, gradient, divergence, curl, and operators. It supports arbitrary rotations of Cartesian coordinate systems and arbitrary locations of points.</p></li>
 </ul>
-</div>
-<div class="section" id="compatibility-breaks">
+</section>
+<section id="compatibility-breaks">
 <h2>Compatibility breaks<a class="headerlink" href="#compatibility-breaks" title="Permalink to this headline"></a></h2>
 <ul class="simple">
 <li><p>All usage of inequalities (<code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code>) on SymPy objects will now return SymPy’s <code class="docutils literal notranslate"><span class="pre">S.true</span></code> or <code class="docutils literal notranslate"><span class="pre">S.false</span></code> singletons instead of Python’s <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code> singletons.  Code that checks for, e.g., <code class="docutils literal notranslate"><span class="pre">(a</span> <span class="pre">&lt;</span> <span class="pre">b)</span> <span class="pre">is</span> <span class="pre">True</span></code> should be changed to <code class="docutils literal notranslate"><span class="pre">(a</span> <span class="pre">&lt;</span> <span class="pre">b)</span> <span class="pre">==</span> <span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">(a</span> <span class="pre">&lt;</span> <span class="pre">b)</span> <span class="pre">==</span> <span class="pre">S.true</span></code>.  Use of <code class="docutils literal notranslate"><span class="pre">is</span></code> is not recommended here.</p></li>
@@ -171,8 +172,8 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">CodeGen</span></code> has been refactored to make it easier to add other languages.  The main high-level tool is still <code class="docutils literal notranslate"><span class="pre">utilities.codegen.codegen</span></code>.  But if you previously used the <code class="docutils literal notranslate"><span class="pre">Routine</span></code> class directly, note its <code class="docutils literal notranslate"><span class="pre">__init__</span></code> behaviour has changed; the new <code class="docutils literal notranslate"><span class="pre">utilities.codegen.make_routine</span></code> is recommended instead and by default retains the previous C/Fortran behaviour.  If needed, you can still instantiate <code class="docutils literal notranslate"><span class="pre">Routine</span></code> directly; it only does minimal sanity checking on its inputs.  See <a class="reference external" href="https://github.com/sympy/sympy/pull/8082">sympy/sympy#8082</a>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">FiniteSet([1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">4])</span></code> syntax not supported anymore, use <code class="docutils literal notranslate"><span class="pre">FiniteSet(1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">4)</span></code> instead.  See <a class="reference external" href="https://github.com/sympy/sympy/pull/7622">sympy/sympy#7622</a>.</p></li>
 </ul>
-</div>
-<div class="section" id="minor-changes">
+</section>
+<section id="minor-changes">
 <h2>Minor changes<a class="headerlink" href="#minor-changes" title="Permalink to this headline"></a></h2>
 <ul class="simple">
 <li><p>Updated the parsing module to allow sympification of lambda statements to their SymPy equivalent.</p></li>
@@ -204,8 +205,8 @@
 <li><p>The CCodePrinter gracefully handles Symbols which have string representations that match C reserved words, see <a class="reference external" href="https://github.com/sympy/sympy/pull/8199">sympy/sympy#8199</a>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">limit</span></code> function now returns an unevaluated <code class="docutils literal notranslate"><span class="pre">Limit</span></code> instance if it can’t compute given limit, see <a class="reference external" href="https://github.com/sympy/sympy/pull/8213">sympy/sympy#8213</a>.</p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
