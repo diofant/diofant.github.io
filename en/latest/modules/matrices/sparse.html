@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sparse Matrices &mdash; Diofant 0.13.0a4.dev78+g07437e0f2 documentation</title>
+  <title>Sparse Matrices &mdash; Diofant 0.13.0a4.dev86+g50dc4e06f documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
@@ -140,7 +140,7 @@
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="diofant.matrices.sparse.MutableSparseMatrix.col_join">
-<span class="sig-name descname"><span class="pre">col_join</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/matrices/sparse.py#L1320-L1379"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.matrices.sparse.MutableSparseMatrix.col_join" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">col_join</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bott</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/matrices/sparse.py#L1320-L1379"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.matrices.sparse.MutableSparseMatrix.col_join" title="Permalink to this definition"></a></dt>
 <dd><p>Returns B augmented beneath A (row-wise joining):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">A</span><span class="p">]</span>
 <span class="p">[</span><span class="n">B</span><span class="p">]</span>
@@ -242,7 +242,7 @@ operations.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="diofant.matrices.sparse.MutableSparseMatrix.row_join">
-<span class="sig-name descname"><span class="pre">row_join</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/matrices/sparse.py#L1263-L1318"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.matrices.sparse.MutableSparseMatrix.row_join" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">row_join</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rhs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/matrices/sparse.py#L1263-L1318"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.matrices.sparse.MutableSparseMatrix.row_join" title="Permalink to this definition"></a></dt>
 <dd><p>Returns B appended after A (column-wise augmenting):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">A</span> <span class="n">B</span><span class="p">]</span>
 </pre></div>
@@ -392,7 +392,7 @@ the diagonal entries of L are 1.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="diofant.matrices.sparse.SparseMatrixBase.add">
-<span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/matrices/sparse.py#L403-L443"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.matrices.sparse.SparseMatrixBase.add" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/matrices/sparse.py#L403-L443"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.matrices.sparse.SparseMatrixBase.add" title="Permalink to this definition"></a></dt>
 <dd><p>Add two sparse matrices with dictionary representation.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SparseMatrix</span><span class="p">(</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">SparseMatrix</span><span class="p">(</span><span class="n">ones</span><span class="p">(</span><span class="mi">3</span><span class="p">)))</span>
@@ -620,7 +620,7 @@ Jeroen Van Grondelle (1999)</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="diofant.matrices.sparse.SparseMatrixBase.multiply">
-<span class="sig-name descname"><span class="pre">multiply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/matrices/sparse.py#L269-L298"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.matrices.sparse.SparseMatrixBase.multiply" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">multiply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/matrices/sparse.py#L269-L298"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.matrices.sparse.SparseMatrixBase.multiply" title="Permalink to this definition"></a></dt>
 <dd><p>Fast multiplication exploiting the sparsity of the matrix.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="p">(</span><span class="n">ones</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">)),</span> <span class="n">SparseMatrix</span><span class="p">(</span><span class="n">ones</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
