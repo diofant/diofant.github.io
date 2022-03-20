@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Elementary &mdash; Diofant 0.13.1.dev180+g35689162d documentation</title>
+  <title>Elementary &mdash; Diofant 0.13.1.dev188+gb8f9a7d87 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
@@ -1535,7 +1535,7 @@ which is essentially short-hand for <code class="docutils literal notranslate"><
 <h2>Piecewise<a class="headerlink" href="#piecewise" title="Permalink to this headline"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="diofant.functions.elementary.piecewise.Piecewise">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">diofant.functions.elementary.piecewise.</span></span><span class="sig-name descname"><span class="pre">Piecewise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/functions/elementary/piecewise.py#L32-L509"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.functions.elementary.piecewise.Piecewise" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">diofant.functions.elementary.piecewise.</span></span><span class="sig-name descname"><span class="pre">Piecewise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/functions/elementary/piecewise.py#L32-L506"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.functions.elementary.piecewise.Piecewise" title="Permalink to this definition"></a></dt>
 <dd><p>Represents a piecewise function.</p>
 <p>Usage:</p>
 <blockquote>
@@ -1545,9 +1545,9 @@ which is essentially short-hand for <code class="docutils literal notranslate"><
 <li><p>The conds are evaluated in turn returning the first that is True.
 If any of the evaluated conds are not determined explicitly False,
 e.g. x &lt; 1, the function is returned in symbolic form.</p></li>
-<li><p>If the function is evaluated at a place where all conditions are False,
-a ValueError exception will be raised.</p></li>
 <li><p>Pairs where the cond is explicitly False, will be removed.</p></li>
+<li><p>The last condition is explicitely True.  It’s value is a default
+value for the function (nan if not specified othewise).</p></li>
 </ul>
 </dd>
 </dl>
@@ -1568,7 +1568,7 @@ a ValueError exception will be raised.</p></li>
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="diofant.functions.elementary.piecewise.Piecewise.doit">
-<span class="sig-name descname"><span class="pre">doit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">hints</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/functions/elementary/piecewise.py#L140-L148"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.functions.elementary.piecewise.Piecewise.doit" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">doit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">hints</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/functions/elementary/piecewise.py#L143-L151"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.functions.elementary.piecewise.Piecewise.doit" title="Permalink to this definition"></a></dt>
 <dd><p>Evaluate this piecewise function.</p>
 </dd></dl>
 
@@ -1576,13 +1576,13 @@ a ValueError exception will be raised.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="diofant.functions.elementary.piecewise.piecewise_fold">
-<span class="sig-prename descclassname"><span class="pre">diofant.functions.elementary.piecewise.</span></span><span class="sig-name descname"><span class="pre">piecewise_fold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/functions/elementary/piecewise.py#L512-L561"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.functions.elementary.piecewise.piecewise_fold" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">diofant.functions.elementary.piecewise.</span></span><span class="sig-name descname"><span class="pre">piecewise_fold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/functions/elementary/piecewise.py#L509-L558"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.functions.elementary.piecewise.piecewise_fold" title="Permalink to this definition"></a></dt>
 <dd><p>Takes an expression containing a piecewise function and returns the
 expression in piecewise form.</p>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">Piecewise</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">Piecewise</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="kc">True</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">piecewise_fold</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">p</span><span class="p">)</span>
-<span class="go">Piecewise((x**2, x &lt; 1), (x, x &gt;= 1))</span>
+<span class="go">Piecewise((x**2, x &lt; 1), (x, true))</span>
 </pre></div>
 </div>
 <div class="admonition seealso">
