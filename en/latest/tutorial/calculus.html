@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Calculus &mdash; Diofant 0.14.0a2.dev32+gc0346eecb documentation</title>
+  <title>Calculus &mdash; Diofant 0.14.0a2 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
@@ -381,7 +381,7 @@ rate of growth.  Also, things like <span class="math notranslate nohighlight">\(
 <section id="series-expansion">
 <h2>Series Expansion<a class="headerlink" href="#series-expansion" title="Permalink to this headline"></a></h2>
 <p>Diofant can compute asymptotic series expansions of functions around a point.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">series</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">exp</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">.</span><span class="n">series</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 <span class="go">         2</span>
 <span class="go">        x     ⎛ 4⎞</span>
 <span class="go">1 + x + ── + O⎝x ⎠</span>
@@ -392,7 +392,7 @@ rate of growth.  Also, things like <span class="math notranslate nohighlight">\(
 at the end represents the Landau order term at <span class="math notranslate nohighlight">\(x=0\)</span> (not to be confused with
 big O notation used in computer science, which generally represents the Landau
 order term at <span class="math notranslate nohighlight">\(x=\infty\)</span>).  Order terms can be created and manipulated outside
-of <a class="reference internal" href="../modules/series.html#diofant.series.series.series" title="diofant.series.series.series"><code class="xref py py-func docutils literal notranslate"><span class="pre">series()</span></code></a>.</p>
+of <a class="reference internal" href="../modules/core.html#diofant.core.expr.Expr.series" title="diofant.core.expr.Expr.series"><code class="xref py py-meth docutils literal notranslate"><span class="pre">series()</span></code></a>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">6</span> <span class="o">+</span> <span class="n">O</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">4</span><span class="p">)</span>
 <span class="go">     3    ⎛ 4⎞</span>
 <span class="go">x + x  + O⎝x ⎠</span>
@@ -402,7 +402,7 @@ of <a class="reference internal" href="../modules/series.html#diofant.series.ser
 </div>
 <p>If you do not want the order term, use the
 <a class="reference internal" href="../modules/core.html#diofant.core.expr.Expr.removeO" title="diofant.core.expr.Expr.removeO"><code class="xref py py-meth docutils literal notranslate"><span class="pre">removeO()</span></code></a> method.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">series</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">removeO</span><span class="p">()</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">series</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">removeO</span><span class="p">()</span>
 <span class="go"> 2</span>
 <span class="go">x</span>
 <span class="go">── + x + 1</span>
@@ -410,7 +410,7 @@ of <a class="reference internal" href="../modules/series.html#diofant.series.ser
 </pre></div>
 </div>
 <p>The <a class="reference internal" href="../modules/series.html#diofant.series.order.O" title="diofant.series.order.O"><code class="xref py py-class docutils literal notranslate"><span class="pre">O</span></code></a> notation supports arbitrary limit points:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">series</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">x</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">exp</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">series</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="go">       2          3          4          5</span>
 <span class="go">(x - 1)    (x - 1)    (x - 1)    (x - 1)         ⎛       6       ⎞</span>
 <span class="go">──────── + ──────── + ──────── + ──────── + x + O⎝(x - 1) ; x → 1⎠</span>
