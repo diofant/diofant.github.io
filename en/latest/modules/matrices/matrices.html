@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Matrices (linear algebra) &mdash; Diofant 0.14.0a3.dev7+g68defc434 documentation</title>
+  <title>Matrices (linear algebra) &mdash; Diofant 0.14.0a3.dev15+gcb89e045b documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
@@ -3192,38 +3192,43 @@ dependent solutions and return a basis:</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="diofant.matrices.dense.randMatrix">
-<span class="sig-prename descclassname"><span class="pre">diofant.matrices.dense.</span></span><span class="sig-name descname"><span class="pre">randMatrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">99</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symmetric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">percent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/matrices/dense.py#L1523-L1587"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.matrices.dense.randMatrix" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">diofant.matrices.dense.</span></span><span class="sig-name descname"><span class="pre">randMatrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">99</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symmetric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">percent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/matrices/dense.py#L1523-L1592"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.matrices.dense.randMatrix" title="Permalink to this definition"></a></dt>
 <dd><p>Create random matrix with dimensions <code class="docutils literal notranslate"><span class="pre">r</span></code> x <code class="docutils literal notranslate"><span class="pre">c</span></code>. If <code class="docutils literal notranslate"><span class="pre">c</span></code> is omitted
 the matrix will be square. If <code class="docutils literal notranslate"><span class="pre">symmetric</span></code> is True the matrix must be
 square. If <code class="docutils literal notranslate"><span class="pre">percent</span></code> is less than 100 then only approximately the given
 percentage of elements will be non-zero.</p>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">randMatrix</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>  
-<span class="go">[25, 45, 27]</span>
-<span class="go">[44, 54,  9]</span>
-<span class="go">[23, 96, 46]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">randMatrix</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  
-<span class="go">[87, 29]</span>
-<span class="go">[23, 37]</span>
-<span class="go">[90, 26]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">randMatrix</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  
-<span class="go">[0, 2, 0]</span>
-<span class="go">[2, 0, 1]</span>
-<span class="go">[0, 0, 1]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">randMatrix</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">symmetric</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  
-<span class="go">[85, 26, 29]</span>
-<span class="go">[26, 71, 43]</span>
-<span class="go">[29, 43, 57]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">randMatrix</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">Matrix([</span>
+<span class="go">[49, 97, 53],</span>
+<span class="go">[ 5, 33, 65],</span>
+<span class="go">[62, 51, 38]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">randMatrix</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">Matrix([</span>
+<span class="go">[49, 97],</span>
+<span class="go">[53,  5],</span>
+<span class="go">[33, 65]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">randMatrix</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">Matrix([</span>
+<span class="go">[1, 1, 0],</span>
+<span class="go">[1, 2, 1],</span>
+<span class="go">[1, 1, 1]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">randMatrix</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">symmetric</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">Matrix([</span>
+<span class="go">[49, 97, 53],</span>
+<span class="go">[97,  5, 33],</span>
+<span class="go">[53, 33, 65]])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">randMatrix</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">B</span> <span class="o">=</span> <span class="n">randMatrix</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">==</span> <span class="n">B</span>  
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">==</span> <span class="n">B</span>
 <span class="go">False</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">==</span> <span class="n">randMatrix</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">randMatrix</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">symmetric</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">percent</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>  
-<span class="go">[0, 68, 43]</span>
-<span class="go">[0, 68,  0]</span>
-<span class="go">[0, 91, 34]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">randMatrix</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">symmetric</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">percent</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">Matrix([</span>
+<span class="go">[ 0,  0,  5],</span>
+<span class="go">[33,  0,  0],</span>
+<span class="go">[65, 53, 33]])</span>
 </pre></div>
 </div>
 </dd></dl>

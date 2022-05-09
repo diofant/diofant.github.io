@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Gruntz Algorithm &mdash; Diofant 0.14.0a3.dev7+g68defc434 documentation</title>
+  <title>The Gruntz Algorithm &mdash; Diofant 0.14.0a3.dev15+gcb89e045b documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
@@ -142,7 +142,7 @@ computed recursively (steps 1 and 4).  Please address to the Gruntz thesis <span
 for proof of the termination (pp. 52-60).</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="diofant.series.gruntz.compare">
-<span class="sig-prename descclassname"><span class="pre">diofant.series.gruntz.</span></span><span class="sig-name descname"><span class="pre">compare</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/series/gruntz.py#L71-L101"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.series.gruntz.compare" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">diofant.series.gruntz.</span></span><span class="sig-name descname"><span class="pre">compare</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/series/gruntz.py#L71-L99"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.series.gruntz.compare" title="Permalink to this definition"></a></dt>
 <dd><p>Determine order relation between two functons.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -151,9 +151,6 @@ or <span class="math notranslate nohighlight">\(b(x) \succ a(x)\)</span>.</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">positive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">compare</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="o">**</span><span class="mi">5</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 <span class="go">1</span>
 </pre></div>
@@ -161,36 +158,8 @@ or <span class="math notranslate nohighlight">\(b(x) \succ a(x)\)</span>.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="diofant.series.gruntz.limitinf">
-<span class="sig-prename descclassname"><span class="pre">diofant.series.gruntz.</span></span><span class="sig-name descname"><span class="pre">limitinf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/series/gruntz.py#L184-L222"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.series.gruntz.limitinf" title="Permalink to this definition"></a></dt>
-<dd><p>Compute limit of the expression at the infinity.</p>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">positive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">limitinf</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span> <span class="o">-</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span> <span class="o">-</span> <span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="p">)),</span> <span class="n">x</span><span class="p">)</span>
-<span class="go">-1</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="diofant.series.gruntz.mrv">
-<span class="sig-prename descclassname"><span class="pre">diofant.series.gruntz.</span></span><span class="sig-name descname"><span class="pre">mrv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/series/gruntz.py#L104-L140"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.series.gruntz.mrv" title="Permalink to this definition"></a></dt>
-<dd><p>Calculate the MRV set of expression.</p>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">positive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mrv</span><span class="p">(</span><span class="n">log</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">/</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
-<span class="go">{x}</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="diofant.series.gruntz.mrv_leadterm">
-<span class="sig-prename descclassname"><span class="pre">diofant.series.gruntz.</span></span><span class="sig-name descname"><span class="pre">mrv_leadterm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/series/gruntz.py#L225-L268"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.series.gruntz.mrv_leadterm" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="diofant.series.gruntz.leadterm">
+<span class="sig-prename descclassname"><span class="pre">diofant.series.gruntz.</span></span><span class="sig-name descname"><span class="pre">leadterm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/series/gruntz.py#L211-L252"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.series.gruntz.leadterm" title="Permalink to this definition"></a></dt>
 <dd><p>Compute the leading term of the series.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -200,32 +169,45 @@ the pair <code class="docutils literal notranslate"><span class="pre">(c0,</span
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">positive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mrv_leadterm</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span> <span class="o">+</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span> <span class="o">-</span> <span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">leadterm</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span> <span class="o">+</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span> <span class="o">-</span> <span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
 <span class="go">(-1, 0)</span>
 </pre></div>
 </div>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="diofant.series.gruntz.mrv_max">
-<span class="sig-prename descclassname"><span class="pre">diofant.series.gruntz.</span></span><span class="sig-name descname"><span class="pre">mrv_max</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/series/gruntz.py#L143-L149"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.series.gruntz.mrv_max" title="Permalink to this definition"></a></dt>
-<dd><p>Computes the maximum of two MRV sets.</p>
+<dt class="sig sig-object py" id="diofant.series.gruntz.limitinf">
+<span class="sig-prename descclassname"><span class="pre">diofant.series.gruntz.</span></span><span class="sig-name descname"><span class="pre">limitinf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/series/gruntz.py#L175-L208"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.series.gruntz.limitinf" title="Permalink to this definition"></a></dt>
+<dd><p>Compute the limit of the expression at the infinity.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">limitinf</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span> <span class="o">-</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span> <span class="o">-</span> <span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="p">)),</span> <span class="n">x</span><span class="p">)</span>
+<span class="go">-1</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="diofant.series.gruntz.mrv">
+<span class="sig-prename descclassname"><span class="pre">diofant.series.gruntz.</span></span><span class="sig-name descname"><span class="pre">mrv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/series/gruntz.py#L102-L136"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.series.gruntz.mrv" title="Permalink to this definition"></a></dt>
+<dd><p>Calculate the MRV set of the expression.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mrv</span><span class="p">(</span><span class="n">log</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">/</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+<span class="go">{x}</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="diofant.series.gruntz.rewrite">
-<span class="sig-prename descclassname"><span class="pre">diofant.series.gruntz.</span></span><span class="sig-name descname"><span class="pre">rewrite</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">w</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/series/gruntz.py#L271-L331"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.series.gruntz.rewrite" title="Permalink to this definition"></a></dt>
-<dd><p>Rewrites expression in terms of the most rapidly varying subexpression.</p>
+<span class="sig-prename descclassname"><span class="pre">diofant.series.gruntz.</span></span><span class="sig-name descname"><span class="pre">rewrite</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">w</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/series/gruntz.py#L255-L312"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.series.gruntz.rewrite" title="Permalink to this definition"></a></dt>
+<dd><p>Rewrites the expression in terms of the MRV subexpression.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>e</strong> (<em>Expr</em>) – an expression</p></li>
 <li><p><strong>x</strong> (<em>Symbol</em>) – variable of the <span class="math notranslate nohighlight">\(e\)</span></p></li>
 <li><p><strong>w</strong> (<em>Symbol</em>) – The symbol which is going to be used for substitution in place
-of the most rapidly varying in <span class="math notranslate nohighlight">\(x\)</span> subexpression.</p></li>
+of the MRV in <span class="math notranslate nohighlight">\(x\)</span> subexpression.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -233,27 +215,20 @@ of the most rapidly varying in <span class="math notranslate nohighlight">\(x\)<
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">positive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">positive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rewrite</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="n">log</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">))),</span> <span class="n">x</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
-<span class="go">(log(x)/m, -x)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rewrite</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="go">(log(x)/y, -x)</span>
 </pre></div>
 </div>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="diofant.series.gruntz.signinf">
-<span class="sig-prename descclassname"><span class="pre">diofant.series.gruntz.</span></span><span class="sig-name descname"><span class="pre">signinf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/series/gruntz.py#L152-L181"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.series.gruntz.signinf" title="Permalink to this definition"></a></dt>
-<dd><p>Determine a sign of an expression at infinity.</p>
+<span class="sig-prename descclassname"><span class="pre">diofant.series.gruntz.</span></span><span class="sig-name descname"><span class="pre">signinf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/series/gruntz.py#L148-L172"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.series.gruntz.signinf" title="Permalink to this definition"></a></dt>
+<dd><p>Determine sign of the expression at the infinity.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p><p><em>{1, 0, -1}</em> – One or minus one, if <span class="math notranslate nohighlight">\(e &gt; 0\)</span> or <span class="math notranslate nohighlight">\(e &lt; 0\)</span> for <span class="math notranslate nohighlight">\(x\)</span> sufficiently
+<dd class="field-odd"><p><em>{1, 0, -1}</em> – One or minus one, if <span class="math notranslate nohighlight">\(e &gt; 0\)</span> or <span class="math notranslate nohighlight">\(e &lt; 0\)</span> for <span class="math notranslate nohighlight">\(x\)</span> sufficiently
 large and zero if <span class="math notranslate nohighlight">\(e\)</span> is <em>constantly</em> zero for <span class="math notranslate nohighlight">\(x\to\infty\)</span>.</p>
-<p>The result of this function is currently undefined if <span class="math notranslate nohighlight">\(e\)</span> changes
-sign arbitrarily often at infinity (e.g. <span class="math notranslate nohighlight">\(\sin(x)\)</span>).</p>
-</p>
 </dd>
 </dl>
 </dd></dl>
