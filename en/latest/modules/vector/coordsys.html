@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>More about Coordinate Systems &mdash; Diofant 0.14.0a3.dev28+g00910f7e0 documentation</title>
+  <title>More about Coordinate Systems &mdash; Diofant 0.14.0a3.dev29+g98990d25c documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
@@ -17,6 +17,7 @@
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script>window.MathJax = {"CommonHTML": {"linebreaks": {"automatic": true}}, "HTML-CSS": {"linebreaks": {"automatic": true}}, "SVG": {"linebreaks": {"automatic": true}}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -121,12 +122,12 @@
            <div itemprop="articleBody">
              
   <section id="more-about-coordinate-systems">
-<h1>More about Coordinate Systems<a class="headerlink" href="#more-about-coordinate-systems" title="Permalink to this headline"></a></h1>
+<h1>More about Coordinate Systems<a class="headerlink" href="#more-about-coordinate-systems" title="Permalink to this heading"></a></h1>
 <p>We will now look at how we can initialize new coordinate systems in
 <a class="reference internal" href="basics.html#module-diofant.vector" title="diofant.vector"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diofant.vector</span></code></a>, positioned and oriented in user-defined
 ways with respect to already-existing systems.</p>
 <section id="locating-new-systems">
-<h2>Locating new systems<a class="headerlink" href="#locating-new-systems" title="Permalink to this headline"></a></h2>
+<h2>Locating new systems<a class="headerlink" href="#locating-new-systems" title="Permalink to this heading"></a></h2>
 <p>We already know that the <code class="docutils literal notranslate"><span class="pre">origin</span></code> property of a
 <code class="docutils literal notranslate"><span class="pre">CoordSysCartesian</span></code> corresponds to the <code class="docutils literal notranslate"><span class="pre">Point</span></code> instance
 denoting its origin reference point.</p>
@@ -156,7 +157,7 @@ is only translated in space, not re-oriented, relative to the ‘parent’
 system.</p>
 </section>
 <section id="orienting-new-systems">
-<h2>Orienting new systems<a class="headerlink" href="#orienting-new-systems" title="Permalink to this headline"></a></h2>
+<h2>Orienting new systems<a class="headerlink" href="#orienting-new-systems" title="Permalink to this heading"></a></h2>
 <p>Similar to ‘locating’ new systems, <a class="reference internal" href="basics.html#module-diofant.vector" title="diofant.vector"><code class="xref py py-mod docutils literal notranslate"><span class="pre">diofant.vector</span></code></a> also allows for
 initialization of new <code class="docutils literal notranslate"><span class="pre">CoordSysCartesian</span></code> instances that are oriented
 in user-defined ways with respect to existing systems.</p>
@@ -174,7 +175,7 @@ respect to <span class="math notranslate nohighlight">\(A\)</span>’s Z-axis by
 <a class="reference internal image-reference" href="../../_images/coordsys_rot.svg"><img alt="../../_images/coordsys_rot.svg" class="align-center" height="250" src="../../_images/coordsys_rot.svg" width="250" /></a>
 <p>There are two ways to achieve this.</p>
 <section id="using-a-method-of-coordsyscartesian-directly">
-<h3>Using a method of CoordSysCartesian directly<a class="headerlink" href="#using-a-method-of-coordsyscartesian-directly" title="Permalink to this headline"></a></h3>
+<h3>Using a method of CoordSysCartesian directly<a class="headerlink" href="#using-a-method-of-coordsyscartesian-directly" title="Permalink to this heading"></a></h3>
 <p>This is the easiest, cleanest, and hence the recommended way of doing
 it.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">B</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">orient_new_axis</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">A</span><span class="o">.</span><span class="n">k</span><span class="p">)</span>
@@ -195,7 +196,7 @@ of this module, to know their functionality and required arguments
 in detail.</p>
 </section>
 <section id="using-orienter-s-and-the-orient-new-method">
-<h3>Using Orienter(s) and the orient_new method<a class="headerlink" href="#using-orienter-s-and-the-orient-new-method" title="Permalink to this headline"></a></h3>
+<h3>Using Orienter(s) and the orient_new method<a class="headerlink" href="#using-orienter-s-and-the-orient-new-method" title="Permalink to this heading"></a></h3>
 <p>You would first have to initialize an <code class="docutils literal notranslate"><span class="pre">AxisOrienter</span></code> instance for
 storing the rotation information.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.vector</span> <span class="kn">import</span> <span class="n">AxisOrienter</span>
@@ -249,7 +250,7 @@ to another one, use the <code class="docutils literal notranslate"><span class="
 </section>
 </section>
 <section id="orienting-and-locating-new-systems">
-<h2>Orienting AND Locating new systems<a class="headerlink" href="#orienting-and-locating-new-systems" title="Permalink to this headline"></a></h2>
+<h2>Orienting AND Locating new systems<a class="headerlink" href="#orienting-and-locating-new-systems" title="Permalink to this heading"></a></h2>
 <p>What if you want to initialize a new system that is not only oriented
 in a pre-defined way, but also translated with respect to the parent?</p>
 <p>Each of the <code class="docutils literal notranslate"><span class="pre">orient_new_&lt;method</span> <span class="pre">of</span> <span class="pre">orientation&gt;</span></code> methods, as well
@@ -271,9 +272,9 @@ location of the new systems.</p>
 <p>More on the <code class="docutils literal notranslate"><span class="pre">express</span></code> function in a bit.</p>
 </section>
 <section id="expression-of-quantities-in-different-coordinate-systems">
-<h2>Expression of quantities in different coordinate systems<a class="headerlink" href="#expression-of-quantities-in-different-coordinate-systems" title="Permalink to this headline"></a></h2>
+<h2>Expression of quantities in different coordinate systems<a class="headerlink" href="#expression-of-quantities-in-different-coordinate-systems" title="Permalink to this heading"></a></h2>
 <section id="vectors-and-dyadics">
-<h3>Vectors and Dyadics<a class="headerlink" href="#vectors-and-dyadics" title="Permalink to this headline"></a></h3>
+<h3>Vectors and Dyadics<a class="headerlink" href="#vectors-and-dyadics" title="Permalink to this heading"></a></h3>
 <p>As mentioned earlier, the same vector attains different expressions in
 different coordinate systems. In general, the same is true for scalar
 expressions and dyadic tensors.</p>
@@ -309,7 +310,7 @@ for re-expressing <code class="docutils literal notranslate"><span class="pre">D
 </div>
 </section>
 <section id="coordinate-variables">
-<h3>Coordinate Variables<a class="headerlink" href="#coordinate-variables" title="Permalink to this headline"></a></h3>
+<h3>Coordinate Variables<a class="headerlink" href="#coordinate-variables" title="Permalink to this heading"></a></h3>
 <p>The location of a coordinate system’s origin does not affect the
 re-expression of <code class="docutils literal notranslate"><span class="pre">BaseVector</span></code> instances. However, it does affect
 the way <code class="docutils literal notranslate"><span class="pre">BaseScalar</span></code> instances are expressed in different systems.</p>
@@ -339,7 +340,7 @@ this -</p>
 </div>
 </section>
 <section id="other-expression-dependent-methods">
-<h3>Other expression-dependent methods<a class="headerlink" href="#other-expression-dependent-methods" title="Permalink to this headline"></a></h3>
+<h3>Other expression-dependent methods<a class="headerlink" href="#other-expression-dependent-methods" title="Permalink to this heading"></a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">to_matrix</span></code> method of <code class="docutils literal notranslate"><span class="pre">Vector</span></code> and
 <code class="docutils literal notranslate"><span class="pre">express_coordinates</span></code> method of <code class="docutils literal notranslate"><span class="pre">Point</span></code> also return
 different results depending on the coordinate system being provided.</p>

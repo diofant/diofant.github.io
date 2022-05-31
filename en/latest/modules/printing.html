@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Printing &mdash; Diofant 0.14.0a3.dev28+g00910f7e0 documentation</title>
+  <title>Printing &mdash; Diofant 0.14.0a3.dev29+g98990d25c documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
@@ -17,6 +17,7 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
         <script>window.MathJax = {"CommonHTML": {"linebreaks": {"automatic": true}}, "HTML-CSS": {"linebreaks": {"automatic": true}}, "SVG": {"linebreaks": {"automatic": true}}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -129,13 +130,13 @@
            <div itemprop="articleBody">
              
   <section id="module-diofant.printing">
-<span id="printing"></span><h1>Printing<a class="headerlink" href="#module-diofant.printing" title="Permalink to this headline"></a></h1>
+<span id="printing"></span><h1>Printing<a class="headerlink" href="#module-diofant.printing" title="Permalink to this heading"></a></h1>
 <p>See the <a class="reference internal" href="../tutorial/printing.html#tutorial-printing"><span class="std std-ref">Printing</span></a> section in Tutorial for introduction into
 printing.</p>
 <p>This guide documents the printing system in Diofant and how it works
 internally.</p>
 <section id="module-diofant.printing.printer">
-<span id="printer-class"></span><h2>Printer Class<a class="headerlink" href="#module-diofant.printing.printer" title="Permalink to this headline"></a></h2>
+<span id="printer-class"></span><h2>Printer Class<a class="headerlink" href="#module-diofant.printing.printer" title="Permalink to this heading"></a></h2>
 <p>Printing subsystem driver</p>
 <p>Diofant’s printing system works the following way: Any expression can be
 passed to a designated Printer who then is responsible to return an
@@ -261,7 +262,7 @@ that is when no appropriate print method was found for an expression.</p>
 </div>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="diofant.printing.printer.Printer.printmethod">
-<span class="sig-name descname"><span class="pre">printmethod</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#diofant.printing.printer.Printer.printmethod" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">printmethod</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#diofant.printing.printer.Printer.printmethod" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -294,7 +295,7 @@ that is when no appropriate print method was found for an expression.</p>
 
 </section>
 <section id="prettyprinter-class">
-<h2>PrettyPrinter Class<a class="headerlink" href="#prettyprinter-class" title="Permalink to this headline"></a></h2>
+<h2>PrettyPrinter Class<a class="headerlink" href="#prettyprinter-class" title="Permalink to this heading"></a></h2>
 <p>The pretty printing subsystem is implemented in <code class="docutils literal notranslate"><span class="pre">diofant.printing.pretty.pretty</span></code>
 by the <code class="docutils literal notranslate"><span class="pre">PrettyPrinter</span></code> class deriving from <code class="docutils literal notranslate"><span class="pre">Printer</span></code>. It relies on
 the modules <code class="docutils literal notranslate"><span class="pre">diofant.printing.pretty.stringPict</span></code>, and
@@ -347,7 +348,7 @@ the string pi.</p></li>
 
 </section>
 <section id="module-diofant.printing.ccode">
-<span id="ccodeprinter"></span><h2>CCodePrinter<a class="headerlink" href="#module-diofant.printing.ccode" title="Permalink to this headline"></a></h2>
+<span id="ccodeprinter"></span><h2>CCodePrinter<a class="headerlink" href="#module-diofant.printing.ccode" title="Permalink to this heading"></a></h2>
 <p>This class implements C code printing (i.e. it converts Python expressions
 to strings of C code).</p>
 <p>Usage:</p>
@@ -365,7 +366,7 @@ to strings of C code).</p>
 <dd><p>A printer to convert python expressions to strings of c code.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="diofant.printing.ccode.CCodePrinter.printmethod">
-<span class="sig-name descname"><span class="pre">printmethod</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'_ccode'</span></em><a class="headerlink" href="#diofant.printing.ccode.CCodePrinter.printmethod" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">printmethod</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'_ccode'</span></em><a class="headerlink" href="#diofant.printing.ccode.CCodePrinter.printmethod" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -489,7 +490,7 @@ generated normally can also exist inside a Matrix:</p>
 
 </section>
 <section id="fortran-printing">
-<h2>Fortran Printing<a class="headerlink" href="#fortran-printing" title="Permalink to this headline"></a></h2>
+<h2>Fortran Printing<a class="headerlink" href="#fortran-printing" title="Permalink to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">fcode</span></code> function translates a diofant expression into Fortran code. The main
 purpose is to take away the burden of manually translating long mathematical
 expressions. Therefore the resulting expression should also require no (or
@@ -601,7 +602,7 @@ generated normally can also exist inside a Matrix:</p>
 <dd><p>A printer to convert diofant expressions to strings of Fortran code.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="diofant.printing.fcode.FCodePrinter.printmethod">
-<span class="sig-name descname"><span class="pre">printmethod</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'_fcode'</span></em><a class="headerlink" href="#diofant.printing.fcode.FCodePrinter.printmethod" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">printmethod</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'_fcode'</span></em><a class="headerlink" href="#diofant.printing.fcode.FCodePrinter.printmethod" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -721,7 +722,7 @@ translated in pure Fortran and (iii) a string of Fortran code. A few examples:</
 </div>
 </section>
 <section id="module-diofant.printing.mathematica">
-<span id="mathematica-code-printing"></span><h2>Mathematica code printing<a class="headerlink" href="#module-diofant.printing.mathematica" title="Permalink to this headline"></a></h2>
+<span id="mathematica-code-printing"></span><h2>Mathematica code printing<a class="headerlink" href="#module-diofant.printing.mathematica" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="diofant.printing.mathematica.MCodePrinter">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">diofant.printing.mathematica.</span></span><span class="sig-name descname"><span class="pre">MCodePrinter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/printing/mathematica.py#L64-L213"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.printing.mathematica.MCodePrinter" title="Permalink to this definition"></a></dt>
@@ -729,7 +730,7 @@ translated in pure Fortran and (iii) a string of Fortran code. A few examples:</
 strings of the Wolfram’s Mathematica code.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="diofant.printing.mathematica.MCodePrinter.printmethod">
-<span class="sig-name descname"><span class="pre">printmethod</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'_mcode'</span></em><a class="headerlink" href="#diofant.printing.mathematica.MCodePrinter.printmethod" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">printmethod</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'_mcode'</span></em><a class="headerlink" href="#diofant.printing.mathematica.MCodePrinter.printmethod" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -753,7 +754,7 @@ strings of the Wolfram’s Mathematica code.</p>
 
 </section>
 <section id="module-diofant.printing.lambdarepr">
-<span id="lambdaprinter"></span><h2>LambdaPrinter<a class="headerlink" href="#module-diofant.printing.lambdarepr" title="Permalink to this headline"></a></h2>
+<span id="lambdaprinter"></span><h2>LambdaPrinter<a class="headerlink" href="#module-diofant.printing.lambdarepr" title="Permalink to this heading"></a></h2>
 <p>This classes implements printing to strings that can be used by the
 <a class="reference internal" href="utilities/lambdify.html#diofant.utilities.lambdify.lambdify" title="diofant.utilities.lambdify.lambdify"><code class="xref py py-func docutils literal notranslate"><span class="pre">diofant.utilities.lambdify.lambdify()</span></code></a> function.</p>
 <dl class="py class">
@@ -776,7 +777,7 @@ lambdify.</p>
 
 </section>
 <section id="module-diofant.printing.latex">
-<span id="latexprinter"></span><h2>LatexPrinter<a class="headerlink" href="#module-diofant.printing.latex" title="Permalink to this headline"></a></h2>
+<span id="latexprinter"></span><h2>LatexPrinter<a class="headerlink" href="#module-diofant.printing.latex" title="Permalink to this heading"></a></h2>
 <p>This class implements LaTeX printing. See <code class="docutils literal notranslate"><span class="pre">diofant.printing.latex</span></code>.</p>
 <dl class="py data">
 <dt class="sig sig-object py" id="diofant.printing.latex.accepted_latex_functions">
@@ -792,7 +793,7 @@ The argument must be an iterable if specified.</p>
 <dd><p>LaTex printer.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="diofant.printing.latex.LatexPrinter.printmethod">
-<span class="sig-name descname"><span class="pre">printmethod</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'_latex'</span></em><a class="headerlink" href="#diofant.printing.latex.LatexPrinter.printmethod" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">printmethod</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'_latex'</span></em><a class="headerlink" href="#diofant.printing.latex.LatexPrinter.printmethod" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -927,7 +928,7 @@ dictionary.</p>
 
 </section>
 <section id="module-diofant.printing.mathml">
-<span id="mathmlprinter"></span><h2>MathMLPrinter<a class="headerlink" href="#module-diofant.printing.mathml" title="Permalink to this headline"></a></h2>
+<span id="mathmlprinter"></span><h2>MathMLPrinter<a class="headerlink" href="#module-diofant.printing.mathml" title="Permalink to this heading"></a></h2>
 <p>This class is responsible for MathML printing. See <code class="docutils literal notranslate"><span class="pre">diofant.printing.mathml</span></code>.</p>
 <p>More info on mathml content: <a class="reference external" href="http://www.w3.org/TR/MathML2/chapter4.html">http://www.w3.org/TR/MathML2/chapter4.html</a></p>
 <dl class="py class">
@@ -966,7 +967,7 @@ dictionary.</p>
 
 </section>
 <section id="module-diofant.printing.python">
-<span id="pythonprinter"></span><h2>PythonPrinter<a class="headerlink" href="#module-diofant.printing.python" title="Permalink to this headline"></a></h2>
+<span id="pythonprinter"></span><h2>PythonPrinter<a class="headerlink" href="#module-diofant.printing.python" title="Permalink to this heading"></a></h2>
 <p>This class implements Python printing. Usage:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">python</span><span class="p">(</span><span class="mi">5</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
 <span class="go">x = Symbol(&#39;x&#39;)</span>
@@ -975,7 +976,7 @@ dictionary.</p>
 </div>
 </section>
 <section id="module-diofant.printing.repr">
-<span id="reprprinter"></span><h2>ReprPrinter<a class="headerlink" href="#module-diofant.printing.repr" title="Permalink to this headline"></a></h2>
+<span id="reprprinter"></span><h2>ReprPrinter<a class="headerlink" href="#module-diofant.printing.repr" title="Permalink to this heading"></a></h2>
 <p>This printer generates executable code. This code satisfies the identity
 <code class="docutils literal notranslate"><span class="pre">eval(srepr(expr))</span> <span class="pre">==</span> <span class="pre">expr</span></code>.</p>
 <dl class="py class">
@@ -984,7 +985,7 @@ dictionary.</p>
 <dd><p>Repr printer.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="diofant.printing.repr.ReprPrinter.printmethod">
-<span class="sig-name descname"><span class="pre">printmethod</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'_diofantrepr'</span></em><a class="headerlink" href="#diofant.printing.repr.ReprPrinter.printmethod" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">printmethod</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'_diofantrepr'</span></em><a class="headerlink" href="#diofant.printing.repr.ReprPrinter.printmethod" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -1009,7 +1010,7 @@ dictionary.</p>
 
 </section>
 <section id="module-diofant.printing.str">
-<span id="strprinter"></span><h2>StrPrinter<a class="headerlink" href="#module-diofant.printing.str" title="Permalink to this headline"></a></h2>
+<span id="strprinter"></span><h2>StrPrinter<a class="headerlink" href="#module-diofant.printing.str" title="Permalink to this heading"></a></h2>
 <p>This module generates readable representations of Diofant expressions.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="diofant.printing.str.StrPrinter">
@@ -1017,7 +1018,7 @@ dictionary.</p>
 <dd><p>Str printer.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="diofant.printing.str.StrPrinter.printmethod">
-<span class="sig-name descname"><span class="pre">printmethod</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'_diofantstr'</span></em><a class="headerlink" href="#diofant.printing.str.StrPrinter.printmethod" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">printmethod</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'_diofantstr'</span></em><a class="headerlink" href="#diofant.printing.str.StrPrinter.printmethod" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -1046,7 +1047,7 @@ is returned in str form.</p>
 
 </section>
 <section id="module-diofant.printing.conventions">
-<span id="implementation-helper-classes-functions"></span><h2>Implementation - Helper Classes/Functions<a class="headerlink" href="#module-diofant.printing.conventions" title="Permalink to this headline"></a></h2>
+<span id="implementation-helper-classes-functions"></span><h2>Implementation - Helper Classes/Functions<a class="headerlink" href="#module-diofant.printing.conventions" title="Permalink to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="diofant.printing.conventions.split_super_sub">
 <span class="sig-prename descclassname"><span class="pre">diofant.printing.conventions.</span></span><span class="sig-name descname"><span class="pre">split_super_sub</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/printing/conventions.py#L12-L64"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.printing.conventions.split_super_sub" title="Permalink to this definition"></a></dt>
@@ -1065,7 +1066,7 @@ list with superscripts and a list with subscripts.</p>
 </dd></dl>
 
 <section id="module-diofant.printing.codeprinter">
-<span id="codeprinter"></span><h3>CodePrinter<a class="headerlink" href="#module-diofant.printing.codeprinter" title="Permalink to this headline"></a></h3>
+<span id="codeprinter"></span><h3>CodePrinter<a class="headerlink" href="#module-diofant.printing.codeprinter" title="Permalink to this heading"></a></h3>
 <p>This class is a base class for other classes that implement code-printing
 functionality, and additionally lists a number of functions that cannot be
 easily translated to C or Fortran.</p>
@@ -1075,7 +1076,7 @@ easily translated to C or Fortran.</p>
 <dd><p>The base class for code-printing subclasses.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="diofant.printing.codeprinter.CodePrinter.printmethod">
-<span class="sig-name descname"><span class="pre">printmethod</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'_diofantstr'</span></em><a class="headerlink" href="#diofant.printing.codeprinter.CodePrinter.printmethod" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">printmethod</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'_diofantstr'</span></em><a class="headerlink" href="#diofant.printing.codeprinter.CodePrinter.printmethod" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -1088,12 +1089,12 @@ easily translated to C or Fortran.</p>
 
 </section>
 <section id="module-diofant.printing.precedence">
-<span id="precedence"></span><h3>Precedence<a class="headerlink" href="#module-diofant.printing.precedence" title="Permalink to this headline"></a></h3>
+<span id="precedence"></span><h3>Precedence<a class="headerlink" href="#module-diofant.printing.precedence" title="Permalink to this heading"></a></h3>
 <p>A module providing information about the necessity of brackets</p>
 </section>
 </section>
 <section id="module-diofant.printing.pretty.pretty_symbology">
-<span id="pretty-printing-implementation-helpers"></span><h2>Pretty-Printing Implementation Helpers<a class="headerlink" href="#module-diofant.printing.pretty.pretty_symbology" title="Permalink to this headline"></a></h2>
+<span id="pretty-printing-implementation-helpers"></span><h2>Pretty-Printing Implementation Helpers<a class="headerlink" href="#module-diofant.printing.pretty.pretty_symbology" title="Permalink to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="diofant.printing.pretty.pretty_symbology.U">
 <span class="sig-prename descclassname"><span class="pre">diofant.printing.pretty.pretty_symbology.</span></span><span class="sig-name descname"><span class="pre">U</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/printing/pretty/pretty_symbology.py#L13-L20"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.printing.pretty.pretty_symbology.U" title="Permalink to this definition"></a></dt>
@@ -1333,7 +1334,7 @@ OPEN this is an open object: parenthesize if added, multiplied, or
 
 </section>
 <section id="dotprint">
-<h2>dotprint<a class="headerlink" href="#dotprint" title="Permalink to this headline"></a></h2>
+<h2>dotprint<a class="headerlink" href="#dotprint" title="Permalink to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="diofant.printing.dot.dotprint">
 <span class="sig-prename descclassname"><span class="pre">diofant.printing.dot.</span></span><span class="sig-name descname"><span class="pre">dotprint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">expr,</span> <span class="pre">styles=[(&lt;class</span> <span class="pre">'diofant.core.basic.Basic'&gt;,</span> <span class="pre">{'color':</span> <span class="pre">'blue',</span> <span class="pre">'shape':</span> <span class="pre">'ellipse'}),</span> <span class="pre">(&lt;class</span> <span class="pre">'diofant.core.expr.Expr'&gt;,</span> <span class="pre">{'color':</span> <span class="pre">'black'})],</span> <span class="pre">atom=&lt;function</span> <span class="pre">&lt;lambda&gt;&gt;,</span> <span class="pre">maxdepth=None,</span> <span class="pre">repeat=True,</span> <span class="pre">labelfunc=&lt;class</span> <span class="pre">'str'&gt;,</span> <span class="pre">**kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/printing/dot.py#L107-L190"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.printing.dot.dotprint" title="Permalink to this definition"></a></dt>

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Matrices &mdash; Diofant 0.14.0a3.dev28+g00910f7e0 documentation</title>
+  <title>Matrices &mdash; Diofant 0.14.0a3.dev29+g98990d25c documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
@@ -17,6 +17,7 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
         <script>window.MathJax = {"CommonHTML": {"linebreaks": {"automatic": true}}, "HTML-CSS": {"linebreaks": {"automatic": true}}, "SVG": {"linebreaks": {"automatic": true}}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -100,7 +101,7 @@
            <div itemprop="articleBody">
              
   <section id="matrices">
-<h1>Matrices<a class="headerlink" href="#matrices" title="Permalink to this headline"></a></h1>
+<h1>Matrices<a class="headerlink" href="#matrices" title="Permalink to this heading"></a></h1>
 <p>To make a matrix in Diofant, use the
 <a class="reference internal" href="../modules/matrices/index.html#diofant.matrices.Matrix" title="diofant.matrices.Matrix"><code class="xref py py-class docutils literal notranslate"><span class="pre">Matrix</span></code></a> object.  A matrix is
 constructed by providing a list of row vectors that make up the
@@ -129,7 +130,7 @@ can be modified in place, as we will see below.  Use
 require immutability, such as inside other Diofant expressions or as
 keys to dictionaries.</p>
 <section id="indexing">
-<h2>Indexing<a class="headerlink" href="#indexing" title="Permalink to this headline"></a></h2>
+<h2>Indexing<a class="headerlink" href="#indexing" title="Permalink to this heading"></a></h2>
 <p>Diofant matrices support subscription of matrix elements with pair of
 integers or <a class="reference external" href="https://docs.python.org/3/library/functions.html#slice" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">slice</span></code></a> instances.  In last case, new
 <a class="reference internal" href="../modules/matrices/index.html#diofant.matrices.Matrix" title="diofant.matrices.Matrix"><code class="xref py py-class docutils literal notranslate"><span class="pre">Matrix</span></code></a> instances will be returned.</p>
@@ -167,7 +168,7 @@ integers or <a class="reference external" href="https://docs.python.org/3/librar
 </div>
 </section>
 <section id="reshape-and-rearrange">
-<h2>Reshape and Rearrange<a class="headerlink" href="#reshape-and-rearrange" title="Permalink to this headline"></a></h2>
+<h2>Reshape and Rearrange<a class="headerlink" href="#reshape-and-rearrange" title="Permalink to this heading"></a></h2>
 <p>To get the shape of a matrix use
 <a class="reference internal" href="../modules/matrices/matrices.html#diofant.matrices.matrices.MatrixBase.shape" title="diofant.matrices.matrices.MatrixBase.shape"><code class="xref py py-attr docutils literal notranslate"><span class="pre">shape</span></code></a> property</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
@@ -239,7 +240,7 @@ place</strong>.  In general, as a rule, such methods will return <code class="do
 </div>
 </section>
 <section id="algebraic-operations">
-<h2>Algebraic Operations<a class="headerlink" href="#algebraic-operations" title="Permalink to this headline"></a></h2>
+<h2>Algebraic Operations<a class="headerlink" href="#algebraic-operations" title="Permalink to this heading"></a></h2>
 <p>Simple operations like addition and multiplication are done just by
 using <code class="docutils literal notranslate"><span class="pre">+</span></code>, <code class="docutils literal notranslate"><span class="pre">*</span></code>, and <code class="docutils literal notranslate"><span class="pre">**</span></code>.  To find the inverse of a matrix, just
 raise it to the <code class="docutils literal notranslate"><span class="pre">-1</span></code> power.</p>
@@ -272,7 +273,7 @@ raise it to the <code class="docutils literal notranslate"><span class="pre">-1<
 </div>
 </section>
 <section id="special-matrices">
-<h2>Special Matrices<a class="headerlink" href="#special-matrices" title="Permalink to this headline"></a></h2>
+<h2>Special Matrices<a class="headerlink" href="#special-matrices" title="Permalink to this heading"></a></h2>
 <p>Several constructors exist for creating common matrices.  To create an
 identity matrix, use <a class="reference internal" href="../modules/matrices/matrices.html#diofant.matrices.dense.eye" title="diofant.matrices.dense.eye"><code class="xref py py-func docutils literal notranslate"><span class="pre">eye()</span></code></a> function.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
@@ -335,7 +336,7 @@ matrix. The matrices are stacked diagonally.</p>
 </div>
 </section>
 <section id="advanced-methods">
-<h2>Advanced Methods<a class="headerlink" href="#advanced-methods" title="Permalink to this headline"></a></h2>
+<h2>Advanced Methods<a class="headerlink" href="#advanced-methods" title="Permalink to this heading"></a></h2>
 <p>To compute the determinant of a matrix, use
 <a class="reference internal" href="../modules/matrices/matrices.html#diofant.matrices.matrices.MatrixBase.det" title="diofant.matrices.matrices.MatrixBase.det"><code class="xref py py-meth docutils literal notranslate"><span class="pre">det()</span></code></a> method.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Matrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>

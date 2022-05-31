@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Integrals &mdash; Diofant 0.14.0a3.dev28+g00910f7e0 documentation</title>
+  <title>Integrals &mdash; Diofant 0.14.0a3.dev29+g98990d25c documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
@@ -17,6 +17,7 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
         <script>window.MathJax = {"CommonHTML": {"linebreaks": {"automatic": true}}, "HTML-CSS": {"linebreaks": {"automatic": true}}, "SVG": {"linebreaks": {"automatic": true}}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -116,7 +117,7 @@
            <div itemprop="articleBody">
              
   <section id="module-diofant.integrals">
-<span id="integrals"></span><h1>Integrals<a class="headerlink" href="#module-diofant.integrals" title="Permalink to this headline"></a></h1>
+<span id="integrals"></span><h1>Integrals<a class="headerlink" href="#module-diofant.integrals" title="Permalink to this heading"></a></h1>
 <p>The <code class="docutils literal notranslate"><span class="pre">integrals</span></code> module in Diofant implements methods to calculate definite and indefinite integrals of expressions.</p>
 <p>Principal method in this module is <a class="reference internal" href="#diofant.integrals.integrals.integrate" title="diofant.integrals.integrals.integrate"><code class="xref py py-func docutils literal notranslate"><span class="pre">integrate()</span></code></a></p>
 <blockquote>
@@ -126,7 +127,7 @@
 </ul>
 </div></blockquote>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
 <p>Diofant can integrate a vast array of functions. It can integrate polynomial functions:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">init_printing</span><span class="p">(</span><span class="n">pretty_print</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">use_unicode</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <span class="gp">... </span>              <span class="n">wrap_line</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">no_global</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -162,7 +163,7 @@
 </div>
 </section>
 <section id="module-diofant.integrals.transforms">
-<span id="integral-transforms"></span><h2>Integral Transforms<a class="headerlink" href="#module-diofant.integrals.transforms" title="Permalink to this headline"></a></h2>
+<span id="integral-transforms"></span><h2>Integral Transforms<a class="headerlink" href="#module-diofant.integrals.transforms" title="Permalink to this heading"></a></h2>
 <p>Diofant has special support for definite integrals, and integral transforms.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="diofant.integrals.transforms.mellin_transform">
@@ -518,14 +519,14 @@ Note that for this transform, by default <code class="docutils literal notransla
 
 </section>
 <section id="internals">
-<h2>Internals<a class="headerlink" href="#internals" title="Permalink to this headline"></a></h2>
+<h2>Internals<a class="headerlink" href="#internals" title="Permalink to this heading"></a></h2>
 <p>There is a general method for calculating antiderivatives of elementary functions, called the <em>Risch algorithm</em>. The Risch algorithm is a decision procedure that can determine whether an elementary solution exists, and in that case calculate it. It can be extended to handle many nonelementary functions in addition to the elementary ones.</p>
 <p>Diofant currently uses a simplified version of the Risch algorithm, called the <em>Risch-Norman algorithm</em>. This algorithm is much faster, but may fail to find an antiderivative, although it is still very powerful. Diofant also uses pattern matching and heuristics to speed up evaluation of some types of integrals, e.g. polynomials.</p>
 <p>For non-elementary definite integrals, Diofant uses so-called Meijer G-functions.
 Details are described <a class="reference internal" href="../internals/g-functions.html#meijerg-label"><span class="std std-ref">here</span></a>.</p>
 </section>
 <section id="api-reference">
-<h2>API reference<a class="headerlink" href="#api-reference" title="Permalink to this headline"></a></h2>
+<h2>API reference<a class="headerlink" href="#api-reference" title="Permalink to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="diofant.integrals.integrals.integrate">
 <span class="sig-prename descclassname"><span class="pre">diofant.integrals.integrals.</span></span><span class="sig-name descname"><span class="pre">integrate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">...</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/integrals/integrals.py#L1046-L1196"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.integrals.integrals.integrate" title="Permalink to this definition"></a></dt>
@@ -1312,7 +1313,7 @@ is evaluated.</p>
 
 </section>
 <section id="numeric-integrals">
-<h2>Numeric Integrals<a class="headerlink" href="#numeric-integrals" title="Permalink to this headline"></a></h2>
+<h2>Numeric Integrals<a class="headerlink" href="#numeric-integrals" title="Permalink to this heading"></a></h2>
 <p>Diofant has functions to calculate points and weights for Gaussian quadrature of
 any order and any precision:</p>
 <span class="target" id="module-diofant.integrals.quadrature"></span><dl class="py function">
