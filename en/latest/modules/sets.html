@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sets &mdash; Diofant 0.14.0a3.dev68+ga44464db1 documentation</title>
+  <title>Sets &mdash; Diofant 0.14.0a3.dev69+g57d205072 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
@@ -19,6 +19,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
         <script>window.MathJax = {"CommonHTML": {"linebreaks": {"automatic": true}}, "HTML-CSS": {"linebreaks": {"automatic": true}}, "SVG": {"linebreaks": {"automatic": true}}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/theme.js"></script>
@@ -66,10 +67,60 @@
 <li class="toctree-l2"><a class="reference internal" href="plotting.html">Plotting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="series.html">Series</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Sets</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#elementary-sets">Elementary Sets</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#compound-sets">Compound Sets</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#singleton-sets">Singleton Sets</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-diofant.sets.fancysets">Special Sets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#diofant.sets.sets.Set"><code class="docutils literal notranslate"><span class="pre">Set</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.sets.sets.Set.boundary"><code class="docutils literal notranslate"><span class="pre">Set.boundary</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.sets.sets.Set.closure"><code class="docutils literal notranslate"><span class="pre">Set.closure</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.sets.sets.Set.complement"><code class="docutils literal notranslate"><span class="pre">Set.complement()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.sets.sets.Set.contains"><code class="docutils literal notranslate"><span class="pre">Set.contains()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.sets.sets.Set.inf"><code class="docutils literal notranslate"><span class="pre">Set.inf</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.sets.sets.Set.interior"><code class="docutils literal notranslate"><span class="pre">Set.interior</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.sets.sets.Set.intersection"><code class="docutils literal notranslate"><span class="pre">Set.intersection()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.sets.sets.Set.is_closed"><code class="docutils literal notranslate"><span class="pre">Set.is_closed</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.sets.sets.Set.is_disjoint"><code class="docutils literal notranslate"><span class="pre">Set.is_disjoint()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.sets.sets.Set.is_open"><code class="docutils literal notranslate"><span class="pre">Set.is_open</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.sets.sets.Set.is_proper_subset"><code class="docutils literal notranslate"><span class="pre">Set.is_proper_subset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.sets.sets.Set.is_proper_superset"><code class="docutils literal notranslate"><span class="pre">Set.is_proper_superset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.sets.sets.Set.is_subset"><code class="docutils literal notranslate"><span class="pre">Set.is_subset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.sets.sets.Set.is_superset"><code class="docutils literal notranslate"><span class="pre">Set.is_superset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.sets.sets.Set.isdisjoint"><code class="docutils literal notranslate"><span class="pre">Set.isdisjoint()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.sets.sets.Set.issubset"><code class="docutils literal notranslate"><span class="pre">Set.issubset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.sets.sets.Set.issuperset"><code class="docutils literal notranslate"><span class="pre">Set.issuperset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.sets.sets.Set.measure"><code class="docutils literal notranslate"><span class="pre">Set.measure</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.sets.sets.Set.powerset"><code class="docutils literal notranslate"><span class="pre">Set.powerset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.sets.sets.Set.sup"><code class="docutils literal notranslate"><span class="pre">Set.sup</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.sets.sets.Set.symmetric_difference"><code class="docutils literal notranslate"><span class="pre">Set.symmetric_difference()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.sets.sets.Set.union"><code class="docutils literal notranslate"><span class="pre">Set.union()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#diofant.sets.sets.imageset"><code class="docutils literal notranslate"><span class="pre">imageset()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#elementary-sets">Elementary Sets</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.sets.sets.Interval"><code class="docutils literal notranslate"><span class="pre">Interval</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.sets.sets.FiniteSet"><code class="docutils literal notranslate"><span class="pre">FiniteSet</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#compound-sets">Compound Sets</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.sets.sets.Union"><code class="docutils literal notranslate"><span class="pre">Union</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.sets.sets.Intersection"><code class="docutils literal notranslate"><span class="pre">Intersection</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.sets.sets.ProductSet"><code class="docutils literal notranslate"><span class="pre">ProductSet</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.sets.sets.Complement"><code class="docutils literal notranslate"><span class="pre">Complement</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#singleton-sets">Singleton Sets</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.sets.sets.EmptySet"><code class="docutils literal notranslate"><span class="pre">EmptySet</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.sets.sets.UniversalSet"><code class="docutils literal notranslate"><span class="pre">UniversalSet</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-diofant.sets.fancysets">Special Sets</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.sets.fancysets.Naturals"><code class="docutils literal notranslate"><span class="pre">Naturals</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.sets.fancysets.Naturals0"><code class="docutils literal notranslate"><span class="pre">Naturals0</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.sets.fancysets.Integers"><code class="docutils literal notranslate"><span class="pre">Integers</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.sets.fancysets.Rationals"><code class="docutils literal notranslate"><span class="pre">Rationals</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.sets.fancysets.ImageSet"><code class="docutils literal notranslate"><span class="pre">ImageSet</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.sets.fancysets.Range"><code class="docutils literal notranslate"><span class="pre">Range</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.sets.fancysets.ExtendedReals"><code class="docutils literal notranslate"><span class="pre">ExtendedReals</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.sets.fancysets.Reals"><code class="docutils literal notranslate"><span class="pre">Reals</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="simplify/simplify.html">Simplify</a></li>

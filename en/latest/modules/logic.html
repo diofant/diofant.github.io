@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Logic &mdash; Diofant 0.14.0a3.dev68+ga44464db1 documentation</title>
+  <title>Logic &mdash; Diofant 0.14.0a3.dev69+g57d205072 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
@@ -19,6 +19,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
         <script>window.MathJax = {"CommonHTML": {"linebreaks": {"automatic": true}}, "HTML-CSS": {"linebreaks": {"automatic": true}}, "SVG": {"linebreaks": {"automatic": true}}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/theme.js"></script>
@@ -60,9 +61,34 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Logic</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#forming-logical-expressions">Forming logical expressions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#boolean-functions">Boolean functions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#simplification-and-equivalence-testing">Simplification and equivalence-testing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#inference">Inference</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#boolean-functions">Boolean functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.logic.boolalg.BooleanTrue"><code class="docutils literal notranslate"><span class="pre">BooleanTrue</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.logic.boolalg.BooleanFalse"><code class="docutils literal notranslate"><span class="pre">BooleanFalse</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.logic.boolalg.And"><code class="docutils literal notranslate"><span class="pre">And</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.logic.boolalg.Or"><code class="docutils literal notranslate"><span class="pre">Or</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.logic.boolalg.Not"><code class="docutils literal notranslate"><span class="pre">Not</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.logic.boolalg.Xor"><code class="docutils literal notranslate"><span class="pre">Xor</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.logic.boolalg.Nand"><code class="docutils literal notranslate"><span class="pre">Nand</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.logic.boolalg.Nor"><code class="docutils literal notranslate"><span class="pre">Nor</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.logic.boolalg.Implies"><code class="docutils literal notranslate"><span class="pre">Implies</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.logic.boolalg.Equivalent"><code class="docutils literal notranslate"><span class="pre">Equivalent</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.logic.boolalg.ITE"><code class="docutils literal notranslate"><span class="pre">ITE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.logic.boolalg.to_cnf"><code class="docutils literal notranslate"><span class="pre">to_cnf()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.logic.boolalg.to_dnf"><code class="docutils literal notranslate"><span class="pre">to_dnf()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.logic.boolalg.is_cnf"><code class="docutils literal notranslate"><span class="pre">is_cnf()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.logic.boolalg.is_dnf"><code class="docutils literal notranslate"><span class="pre">is_dnf()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.logic.boolalg.to_nnf"><code class="docutils literal notranslate"><span class="pre">to_nnf()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.logic.boolalg.is_nnf"><code class="docutils literal notranslate"><span class="pre">is_nnf()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#simplification-and-equivalence-testing">Simplification and equivalence-testing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.logic.boolalg.simplify_logic"><code class="docutils literal notranslate"><span class="pre">simplify_logic()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#inference">Inference</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.logic.inference.satisfiable"><code class="docutils literal notranslate"><span class="pre">satisfiable()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="domains.html">Domains</a></li>

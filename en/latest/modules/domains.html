@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Domains &mdash; Diofant 0.14.0a3.dev68+ga44464db1 documentation</title>
+  <title>Domains &mdash; Diofant 0.14.0a3.dev69+g57d205072 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
@@ -19,6 +19,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
         <script>window.MathJax = {"CommonHTML": {"linebreaks": {"automatic": true}}, "HTML-CSS": {"linebreaks": {"automatic": true}}, "SVG": {"linebreaks": {"automatic": true}}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/theme.js"></script>
@@ -59,10 +60,45 @@
 <li class="toctree-l2"><a class="reference internal" href="integrals.html">Integrals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="logic.html">Logic</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Domains</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#abstract-domains">Abstract Domains</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#concrete-domains">Concrete Domains</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#implementation-domains">Implementation Domains</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#domain-elements">Domain Elements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#abstract-domains">Abstract Domains</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.domains.domain.Domain"><code class="docutils literal notranslate"><span class="pre">Domain</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.domains.field.Field"><code class="docutils literal notranslate"><span class="pre">Field</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.domains.ring.CommutativeRing"><code class="docutils literal notranslate"><span class="pre">CommutativeRing</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.domains.simpledomain.SimpleDomain"><code class="docutils literal notranslate"><span class="pre">SimpleDomain</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.domains.compositedomain.CompositeDomain"><code class="docutils literal notranslate"><span class="pre">CompositeDomain</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.domains.characteristiczero.CharacteristicZero"><code class="docutils literal notranslate"><span class="pre">CharacteristicZero</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#concrete-domains">Concrete Domains</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.domains.IntegerModRing"><code class="docutils literal notranslate"><span class="pre">IntegerModRing</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.domains.FiniteField"><code class="docutils literal notranslate"><span class="pre">FiniteField</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.domains.IntegerRing"><code class="docutils literal notranslate"><span class="pre">IntegerRing</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.domains.RationalField"><code class="docutils literal notranslate"><span class="pre">RationalField</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.domains.AlgebraicField"><code class="docutils literal notranslate"><span class="pre">AlgebraicField</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.domains.RealAlgebraicField"><code class="docutils literal notranslate"><span class="pre">RealAlgebraicField</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.domains.ComplexAlgebraicField"><code class="docutils literal notranslate"><span class="pre">ComplexAlgebraicField</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.rings.PolynomialRing"><code class="docutils literal notranslate"><span class="pre">PolynomialRing</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.univar.UnivarPolynomialRing"><code class="docutils literal notranslate"><span class="pre">UnivarPolynomialRing</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.fields.FractionField"><code class="docutils literal notranslate"><span class="pre">FractionField</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.domains.RealField"><code class="docutils literal notranslate"><span class="pre">RealField</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.domains.ComplexField"><code class="docutils literal notranslate"><span class="pre">ComplexField</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.domains.ExpressionDomain"><code class="docutils literal notranslate"><span class="pre">ExpressionDomain</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#implementation-domains">Implementation Domains</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.domains.finitefield.PythonFiniteField"><code class="docutils literal notranslate"><span class="pre">PythonFiniteField</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.domains.finitefield.GMPYFiniteField"><code class="docutils literal notranslate"><span class="pre">GMPYFiniteField</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.domains.integerring.PythonIntegerRing"><code class="docutils literal notranslate"><span class="pre">PythonIntegerRing</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.domains.integerring.GMPYIntegerRing"><code class="docutils literal notranslate"><span class="pre">GMPYIntegerRing</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.domains.rationalfield.PythonRationalField"><code class="docutils literal notranslate"><span class="pre">PythonRationalField</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.domains.rationalfield.GMPYRationalField"><code class="docutils literal notranslate"><span class="pre">GMPYRationalField</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#domain-elements">Domain Elements</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.domains.finitefield.ModularInteger"><code class="docutils literal notranslate"><span class="pre">ModularInteger</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.domains.finitefield.GaloisFieldElement"><code class="docutils literal notranslate"><span class="pre">GaloisFieldElement</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="matrices/index.html">Matrices</a></li>

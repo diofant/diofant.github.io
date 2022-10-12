@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Internals of the Polynomial Manipulation Module &mdash; Diofant 0.14.0a3.dev68+ga44464db1 documentation</title>
+  <title>Internals of the Polynomial Manipulation Module &mdash; Diofant 0.14.0a3.dev69+g57d205072 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
@@ -19,6 +19,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
         <script>window.MathJax = {"CommonHTML": {"linebreaks": {"automatic": true}}, "HTML-CSS": {"linebreaks": {"automatic": true}}, "SVG": {"linebreaks": {"automatic": true}}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/theme.js"></script>
@@ -51,23 +52,141 @@
 <li class="toctree-l1"><a class="reference internal" href="../modules/index.html">Reference</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Internals</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Internals of the Polynomial Manipulation Module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#manipulation-of-sparse-distributed-polynomials">Manipulation of sparse, distributed polynomials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#manipulation-of-sparse-distributed-polynomials">Manipulation of sparse, distributed polynomials</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.rings.ring"><code class="docutils literal notranslate"><span class="pre">ring()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.rings.PolyElement"><code class="docutils literal notranslate"><span class="pre">PolyElement</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.univar.UnivarPolyElement"><code class="docutils literal notranslate"><span class="pre">UnivarPolyElement</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#polynomial-factorization-algorithms">Polynomial factorization algorithms</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#classical-remainder-sequence">Classical remainder sequence</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#simplified-remainder-sequences">Simplified remainder sequences</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#subresultant-sequence">Subresultant sequence</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#grobner-basis-algorithms">Gröbner basis algorithms</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#algebraic-number-fields">Algebraic number fields</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-diofant.polys.factorization_alg_field">Factorization over algebraic number fields</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-diofant.polys.modulargcd">Modular GCD</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#heuristic-gcd">Heuristic GCD</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-diofant.polys.rootisolation">Further tools</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#undocumented">Undocumented</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#grobner-basis-algorithms">Gröbner basis algorithms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.groebnertools.buchberger"><code class="docutils literal notranslate"><span class="pre">buchberger()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.groebnertools.cp_key"><code class="docutils literal notranslate"><span class="pre">cp_key()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.groebnertools.critical_pair"><code class="docutils literal notranslate"><span class="pre">critical_pair()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.groebnertools.f5_reduce"><code class="docutils literal notranslate"><span class="pre">f5_reduce()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.groebnertools.f5b"><code class="docutils literal notranslate"><span class="pre">f5b()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.groebnertools.groebner"><code class="docutils literal notranslate"><span class="pre">groebner()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.groebnertools.groebner_gcd"><code class="docutils literal notranslate"><span class="pre">groebner_gcd()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.groebnertools.groebner_lcm"><code class="docutils literal notranslate"><span class="pre">groebner_lcm()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.groebnertools.is_groebner"><code class="docutils literal notranslate"><span class="pre">is_groebner()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.groebnertools.is_minimal"><code class="docutils literal notranslate"><span class="pre">is_minimal()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.groebnertools.is_rewritable_or_comparable"><code class="docutils literal notranslate"><span class="pre">is_rewritable_or_comparable()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.groebnertools.lbp_cmp"><code class="docutils literal notranslate"><span class="pre">lbp_cmp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.groebnertools.lbp_key"><code class="docutils literal notranslate"><span class="pre">lbp_key()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.groebnertools.lbp_mul_term"><code class="docutils literal notranslate"><span class="pre">lbp_mul_term()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.groebnertools.lbp_sub"><code class="docutils literal notranslate"><span class="pre">lbp_sub()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.groebnertools.matrix_fglm"><code class="docutils literal notranslate"><span class="pre">matrix_fglm()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.groebnertools.red_groebner"><code class="docutils literal notranslate"><span class="pre">red_groebner()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.groebnertools.s_poly"><code class="docutils literal notranslate"><span class="pre">s_poly()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.groebnertools.sig_cmp"><code class="docutils literal notranslate"><span class="pre">sig_cmp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.groebnertools.sig_key"><code class="docutils literal notranslate"><span class="pre">sig_key()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.groebnertools.sig_mult"><code class="docutils literal notranslate"><span class="pre">sig_mult()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.groebnertools.spoly"><code class="docutils literal notranslate"><span class="pre">spoly()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#algebraic-number-fields">Algebraic number fields</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.numberfields.minpoly_groebner"><code class="docutils literal notranslate"><span class="pre">minpoly_groebner()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-diofant.polys.factorization_alg_field">Factorization over algebraic number fields</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.factorization_alg_field._alpha_to_z"><code class="docutils literal notranslate"><span class="pre">_alpha_to_z()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.factorization_alg_field._denominator"><code class="docutils literal notranslate"><span class="pre">_denominator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.factorization_alg_field._diophantine"><code class="docutils literal notranslate"><span class="pre">_diophantine()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.factorization_alg_field._diophantine_univariate"><code class="docutils literal notranslate"><span class="pre">_diophantine_univariate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.factorization_alg_field._distinct_prime_divisors"><code class="docutils literal notranslate"><span class="pre">_distinct_prime_divisors()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.factorization_alg_field._div"><code class="docutils literal notranslate"><span class="pre">_div()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.factorization_alg_field._extended_euclidean_algorithm"><code class="docutils literal notranslate"><span class="pre">_extended_euclidean_algorithm()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.factorization_alg_field._factor"><code class="docutils literal notranslate"><span class="pre">_factor()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.factorization_alg_field._hensel_lift"><code class="docutils literal notranslate"><span class="pre">_hensel_lift()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.factorization_alg_field._leading_coeffs"><code class="docutils literal notranslate"><span class="pre">_leading_coeffs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.factorization_alg_field._monic_associate"><code class="docutils literal notranslate"><span class="pre">_monic_associate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.factorization_alg_field._padic_lift"><code class="docutils literal notranslate"><span class="pre">_padic_lift()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.factorization_alg_field._sqf_p"><code class="docutils literal notranslate"><span class="pre">_sqf_p()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.factorization_alg_field._subs_ground"><code class="docutils literal notranslate"><span class="pre">_subs_ground()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.factorization_alg_field._test_evaluation_points"><code class="docutils literal notranslate"><span class="pre">_test_evaluation_points()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.factorization_alg_field._test_prime"><code class="docutils literal notranslate"><span class="pre">_test_prime()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.factorization_alg_field._z_to_alpha"><code class="docutils literal notranslate"><span class="pre">_z_to_alpha()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.factorization_alg_field.efactor"><code class="docutils literal notranslate"><span class="pre">efactor()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-diofant.polys.modulargcd">Modular GCD</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.modulargcd._chinese_remainder_reconstruction"><code class="docutils literal notranslate"><span class="pre">_chinese_remainder_reconstruction()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.modulargcd._euclidean_algorithm"><code class="docutils literal notranslate"><span class="pre">_euclidean_algorithm()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.modulargcd._evaluate_ground"><code class="docutils literal notranslate"><span class="pre">_evaluate_ground()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.modulargcd._func_field_modgcd_m"><code class="docutils literal notranslate"><span class="pre">_func_field_modgcd_m()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.modulargcd._func_field_modgcd_p"><code class="docutils literal notranslate"><span class="pre">_func_field_modgcd_p()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.modulargcd._gf_gcdex"><code class="docutils literal notranslate"><span class="pre">_gf_gcdex()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.modulargcd._interpolate"><code class="docutils literal notranslate"><span class="pre">_interpolate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.modulargcd._minpoly_from_dense"><code class="docutils literal notranslate"><span class="pre">_minpoly_from_dense()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.modulargcd._modgcd_p"><code class="docutils literal notranslate"><span class="pre">_modgcd_p()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.modulargcd._primitive_in_x0"><code class="docutils literal notranslate"><span class="pre">_primitive_in_x0()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.modulargcd._rational_function_reconstruction"><code class="docutils literal notranslate"><span class="pre">_rational_function_reconstruction()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.modulargcd._rational_reconstruction_func_coeffs"><code class="docutils literal notranslate"><span class="pre">_rational_reconstruction_func_coeffs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.modulargcd._rational_reconstruction_int_coeffs"><code class="docutils literal notranslate"><span class="pre">_rational_reconstruction_int_coeffs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.modulargcd._to_ANP_poly"><code class="docutils literal notranslate"><span class="pre">_to_ANP_poly()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.modulargcd._to_ZZ_poly"><code class="docutils literal notranslate"><span class="pre">_to_ZZ_poly()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.modulargcd._trunc"><code class="docutils literal notranslate"><span class="pre">_trunc()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.modulargcd.func_field_modgcd"><code class="docutils literal notranslate"><span class="pre">func_field_modgcd()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.modulargcd.modgcd"><code class="docutils literal notranslate"><span class="pre">modgcd()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.modulargcd.trial_division"><code class="docutils literal notranslate"><span class="pre">trial_division()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#heuristic-gcd">Heuristic GCD</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.euclidtools._GCD._zz_heu_gcd"><code class="docutils literal notranslate"><span class="pre">_GCD._zz_heu_gcd()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-diofant.polys.rootisolation">Further tools</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.rootisolation.ComplexInterval"><code class="docutils literal notranslate"><span class="pre">ComplexInterval</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.rootisolation.RealInterval"><code class="docutils literal notranslate"><span class="pre">RealInterval</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#undocumented">Undocumented</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.polyoptions.Options"><code class="docutils literal notranslate"><span class="pre">Options</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.polyoptions.Order"><code class="docutils literal notranslate"><span class="pre">Order</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.polyerrors.BasePolynomialError"><code class="docutils literal notranslate"><span class="pre">BasePolynomialError</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.polyerrors.CoercionFailed"><code class="docutils literal notranslate"><span class="pre">CoercionFailed</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.polyerrors.ComputationFailed"><code class="docutils literal notranslate"><span class="pre">ComputationFailed</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.polyerrors.DomainError"><code class="docutils literal notranslate"><span class="pre">DomainError</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.polyerrors.EvaluationFailed"><code class="docutils literal notranslate"><span class="pre">EvaluationFailed</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.polyerrors.ExactQuotientFailed"><code class="docutils literal notranslate"><span class="pre">ExactQuotientFailed</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.polyerrors.ExtraneousFactors"><code class="docutils literal notranslate"><span class="pre">ExtraneousFactors</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.polyerrors.FlagError"><code class="docutils literal notranslate"><span class="pre">FlagError</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.polyerrors.GeneratorsError"><code class="docutils literal notranslate"><span class="pre">GeneratorsError</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.polyerrors.GeneratorsNeeded"><code class="docutils literal notranslate"><span class="pre">GeneratorsNeeded</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.polyerrors.HeuristicGCDFailed"><code class="docutils literal notranslate"><span class="pre">HeuristicGCDFailed</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.polyerrors.HomomorphismFailed"><code class="docutils literal notranslate"><span class="pre">HomomorphismFailed</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.polyerrors.IsomorphismFailed"><code class="docutils literal notranslate"><span class="pre">IsomorphismFailed</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.polyerrors.ModularGCDFailed"><code class="docutils literal notranslate"><span class="pre">ModularGCDFailed</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.polyerrors.MultivariatePolynomialError"><code class="docutils literal notranslate"><span class="pre">MultivariatePolynomialError</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.polyerrors.NotAlgebraic"><code class="docutils literal notranslate"><span class="pre">NotAlgebraic</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.polyerrors.NotInvertible"><code class="docutils literal notranslate"><span class="pre">NotInvertible</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.polyerrors.NotReversible"><code class="docutils literal notranslate"><span class="pre">NotReversible</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.polyerrors.OperationNotSupported"><code class="docutils literal notranslate"><span class="pre">OperationNotSupported</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.polyerrors.OptionError"><code class="docutils literal notranslate"><span class="pre">OptionError</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.polyerrors.PolificationFailed"><code class="docutils literal notranslate"><span class="pre">PolificationFailed</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.polyerrors.PolynomialDivisionFailed"><code class="docutils literal notranslate"><span class="pre">PolynomialDivisionFailed</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.polyerrors.PolynomialError"><code class="docutils literal notranslate"><span class="pre">PolynomialError</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.polyerrors.RefinementFailed"><code class="docutils literal notranslate"><span class="pre">RefinementFailed</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.polyerrors.UnificationFailed"><code class="docutils literal notranslate"><span class="pre">UnificationFailed</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.polyerrors.UnivariatePolynomialError"><code class="docutils literal notranslate"><span class="pre">UnivariatePolynomialError</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.polyerrors.UnluckyLeadingCoefficient"><code class="docutils literal notranslate"><span class="pre">UnluckyLeadingCoefficient</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.polys.fields.FracElement"><code class="docutils literal notranslate"><span class="pre">FracElement</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="gruntz.html">The Gruntz Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gruntz.html#diofant.series.gruntz.compare"><code class="docutils literal notranslate"><span class="pre">compare()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gruntz.html#diofant.series.gruntz.leadterm"><code class="docutils literal notranslate"><span class="pre">leadterm()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gruntz.html#diofant.series.gruntz.limitinf"><code class="docutils literal notranslate"><span class="pre">limitinf()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gruntz.html#diofant.series.gruntz.mrv"><code class="docutils literal notranslate"><span class="pre">mrv()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gruntz.html#diofant.series.gruntz.rewrite"><code class="docutils literal notranslate"><span class="pre">rewrite()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gruntz.html#diofant.series.gruntz.signinf"><code class="docutils literal notranslate"><span class="pre">signinf()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="hyperexpand.html">Details on the Hypergeometric Function Expansion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="g-functions.html">Computing Integrals using Meijer G-Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="evalf.html">Numerical evaluation</a></li>

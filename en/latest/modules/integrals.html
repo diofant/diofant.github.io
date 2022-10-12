@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Integrals &mdash; Diofant 0.14.0a3.dev68+ga44464db1 documentation</title>
+  <title>Integrals &mdash; Diofant 0.14.0a3.dev69+g57d205072 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
@@ -19,6 +19,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
         <script>window.MathJax = {"CommonHTML": {"linebreaks": {"automatic": true}}, "HTML-CSS": {"linebreaks": {"automatic": true}}, "SVG": {"linebreaks": {"automatic": true}}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/theme.js"></script>
@@ -58,10 +59,59 @@
 <li class="toctree-l2"><a class="reference internal" href="geometry/index.html">Geometry</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Integrals</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-diofant.integrals.transforms">Integral Transforms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-diofant.integrals.transforms">Integral Transforms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.integrals.transforms.mellin_transform"><code class="docutils literal notranslate"><span class="pre">mellin_transform()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.integrals.transforms.inverse_mellin_transform"><code class="docutils literal notranslate"><span class="pre">inverse_mellin_transform()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.integrals.transforms.laplace_transform"><code class="docutils literal notranslate"><span class="pre">laplace_transform()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.integrals.transforms.inverse_laplace_transform"><code class="docutils literal notranslate"><span class="pre">inverse_laplace_transform()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.integrals.transforms.fourier_transform"><code class="docutils literal notranslate"><span class="pre">fourier_transform()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.integrals.transforms.inverse_fourier_transform"><code class="docutils literal notranslate"><span class="pre">inverse_fourier_transform()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.integrals.transforms.sine_transform"><code class="docutils literal notranslate"><span class="pre">sine_transform()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.integrals.transforms.inverse_sine_transform"><code class="docutils literal notranslate"><span class="pre">inverse_sine_transform()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.integrals.transforms.cosine_transform"><code class="docutils literal notranslate"><span class="pre">cosine_transform()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.integrals.transforms.inverse_cosine_transform"><code class="docutils literal notranslate"><span class="pre">inverse_cosine_transform()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.integrals.transforms.hankel_transform"><code class="docutils literal notranslate"><span class="pre">hankel_transform()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.integrals.transforms.inverse_hankel_transform"><code class="docutils literal notranslate"><span class="pre">inverse_hankel_transform()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#internals">Internals</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#api-reference">API reference</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#numeric-integrals">Numeric Integrals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#api-reference">API reference</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.integrals.integrals.integrate"><code class="docutils literal notranslate"><span class="pre">integrate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.integrals.integrals.line_integrate"><code class="docutils literal notranslate"><span class="pre">line_integrate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.integrals.deltafunctions.deltaintegrate"><code class="docutils literal notranslate"><span class="pre">deltaintegrate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.integrals.rationaltools.ratint"><code class="docutils literal notranslate"><span class="pre">ratint()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.integrals.rationaltools.ratint_logpart"><code class="docutils literal notranslate"><span class="pre">ratint_logpart()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.integrals.rationaltools.ratint_ratpart"><code class="docutils literal notranslate"><span class="pre">ratint_ratpart()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.integrals.heurisch.components"><code class="docutils literal notranslate"><span class="pre">components()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.integrals.heurisch.heurisch"><code class="docutils literal notranslate"><span class="pre">heurisch()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.integrals.heurisch.heurisch_wrapper"><code class="docutils literal notranslate"><span class="pre">heurisch_wrapper()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.integrals.trigonometry.trigintegrate"><code class="docutils literal notranslate"><span class="pre">trigintegrate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.integrals.integrals.Integral"><code class="docutils literal notranslate"><span class="pre">Integral</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.integrals.transforms.IntegralTransform"><code class="docutils literal notranslate"><span class="pre">IntegralTransform</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.integrals.transforms.MellinTransform"><code class="docutils literal notranslate"><span class="pre">MellinTransform</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.integrals.transforms.InverseMellinTransform"><code class="docutils literal notranslate"><span class="pre">InverseMellinTransform</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.integrals.transforms.LaplaceTransform"><code class="docutils literal notranslate"><span class="pre">LaplaceTransform</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.integrals.transforms.InverseLaplaceTransform"><code class="docutils literal notranslate"><span class="pre">InverseLaplaceTransform</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.integrals.transforms.FourierTransform"><code class="docutils literal notranslate"><span class="pre">FourierTransform</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.integrals.transforms.InverseFourierTransform"><code class="docutils literal notranslate"><span class="pre">InverseFourierTransform</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.integrals.transforms.SineTransform"><code class="docutils literal notranslate"><span class="pre">SineTransform</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.integrals.transforms.InverseSineTransform"><code class="docutils literal notranslate"><span class="pre">InverseSineTransform</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.integrals.transforms.CosineTransform"><code class="docutils literal notranslate"><span class="pre">CosineTransform</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.integrals.transforms.InverseCosineTransform"><code class="docutils literal notranslate"><span class="pre">InverseCosineTransform</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.integrals.transforms.HankelTransform"><code class="docutils literal notranslate"><span class="pre">HankelTransform</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.integrals.transforms.InverseHankelTransform"><code class="docutils literal notranslate"><span class="pre">InverseHankelTransform</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#numeric-integrals">Numeric Integrals</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.integrals.quadrature.gauss_legendre"><code class="docutils literal notranslate"><span class="pre">gauss_legendre()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.integrals.quadrature.gauss_laguerre"><code class="docutils literal notranslate"><span class="pre">gauss_laguerre()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.integrals.quadrature.gauss_hermite"><code class="docutils literal notranslate"><span class="pre">gauss_hermite()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.integrals.quadrature.gauss_gen_laguerre"><code class="docutils literal notranslate"><span class="pre">gauss_gen_laguerre()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.integrals.quadrature.gauss_chebyshev_t"><code class="docutils literal notranslate"><span class="pre">gauss_chebyshev_t()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.integrals.quadrature.gauss_chebyshev_u"><code class="docutils literal notranslate"><span class="pre">gauss_chebyshev_u()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diofant.integrals.quadrature.gauss_jacobi"><code class="docutils literal notranslate"><span class="pre">gauss_jacobi()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="logic.html">Logic</a></li>
