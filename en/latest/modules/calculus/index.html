@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Calculus &mdash; Diofant 0.14.0a4 documentation</title>
+  <title>Calculus &mdash; Diofant 0.14.0a5.dev6+g5e91487ba documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
@@ -65,7 +65,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../printing.html">Printing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../interactive.html">Interactive</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../plotting.html">Plotting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../series.html">Series</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../sets.html">Sets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../simplify/simplify.html">Simplify</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stats.html">Stats</a></li>
@@ -73,10 +72,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../tensor/index.html">Tensors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../utilities/index.html">Utilities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../parsing.html">Parsing</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Calculus</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#finite-difference-weights">Finite difference weights</a></li>
-</ul>
-</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Calculus</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../diffgeom.html">Differential Geometry</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../vector/index.html">Vectors</a></li>
 </ul>
@@ -117,55 +113,9 @@
 <span id="calculus"></span><h1>Calculus<a class="headerlink" href="#module-diofant.calculus" title="Permalink to this heading"></a></h1>
 <p>Some calculus-related methods waiting to find a better place in the
 Diofant modules tree.</p>
-<span class="target" id="module-diofant.calculus.euler"></span><dl class="py function">
-<dt class="sig sig-object py" id="diofant.calculus.euler.euler_equations">
-<span class="sig-prename descclassname"><span class="pre">diofant.calculus.euler.</span></span><span class="sig-name descname"><span class="pre">euler_equations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">L</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">funcs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/v0.14.0a4/diofant/calculus/euler.py#L7-L94"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.calculus.euler.euler_equations" title="Permalink to this definition"></a></dt>
-<dd><p>Find the Euler-Lagrange equations for a given Lagrangian.</p>
-<dl class="field-list">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul>
-<li><p><strong>L</strong> (<em>Expr</em>) – The Lagrangian that should be a function of the functions listed
-in the second argument and their derivatives.</p>
-<p>For example, in the case of two functions <span class="math notranslate nohighlight">\(f(x,y)\)</span>, <span class="math notranslate nohighlight">\(g(x,y)\)</span> and
-two independent variables <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span> the Lagrangian would have the form:</p>
-<blockquote>
-<div><div class="math notranslate nohighlight">
-\[L\left(f(x,y),g(x,y),\frac{\partial f(x,y)}{\partial x},
-\frac{\partial f(x,y)}{\partial y},
-\frac{\partial g(x,y)}{\partial x},
-\frac{\partial g(x,y)}{\partial y},x,y\right)\]</div>
-</div></blockquote>
-<p>In many cases it is not necessary to provide anything, except the
-Lagrangian, it will be auto-detected (and an error raised if this
-couldn’t be done).</p>
-</li>
-<li><p><strong>funcs</strong> (<em>Function or an iterable of Functions</em>) – The functions that the Lagrangian depends on. The Euler equations
-are differential equations for each of these functions.</p></li>
-<li><p><strong>vars</strong> (<em>Symbol or an iterable of Symbols</em>) – The Symbols that are the independent variables of the functions.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>eqns</strong> (<em>list of Eq</em>) – The list of differential equations, one for each function.</p>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">L</span> <span class="o">=</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">t</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mi">2</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mi">2</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">euler_equations</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">t</span><span class="p">)</span>
-<span class="go">[Eq(-f(t) - Derivative(f(t), t, t), 0)]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">L</span> <span class="o">=</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">t</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mi">2</span> <span class="o">-</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mi">2</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">euler_equations</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">),</span> <span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">])</span>
-<span class="go">[Eq(-Derivative(f(t, x), t, t) + Derivative(f(t, x), x, x), 0)]</span>
-</pre></div>
-</div>
-<p class="rubric">References</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Euler%E2%80%93Lagrange_equation">https://en.wikipedia.org/wiki/Euler%E2%80%93Lagrange_equation</a></p></li>
-</ul>
-</dd></dl>
-
 <span class="target" id="module-diofant.calculus.singularities"></span><dl class="py function">
 <dt class="sig sig-object py" id="diofant.calculus.singularities.singularities">
-<span class="sig-prename descclassname"><span class="pre">diofant.calculus.singularities.</span></span><span class="sig-name descname"><span class="pre">singularities</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/v0.14.0a4/diofant/calculus/singularities.py#L8-L66"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.calculus.singularities.singularities" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">diofant.calculus.singularities.</span></span><span class="sig-name descname"><span class="pre">singularities</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/calculus/singularities.py#L5-L67"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.calculus.singularities.singularities" title="Permalink to this definition"></a></dt>
 <dd><p>Find singularities of real-valued function <span class="math notranslate nohighlight">\(f\)</span> with respect to <span class="math notranslate nohighlight">\(x\)</span>.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">singularities</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
@@ -188,9 +138,69 @@ are differential equations for each of these functions.</p></li>
 </ul>
 </dd></dl>
 
+<span class="target" id="module-diofant.calculus.limits"></span><dl class="py class">
+<dt class="sig sig-object py" id="diofant.calculus.limits.Limit">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">diofant.calculus.limits.</span></span><span class="sig-name descname"><span class="pre">Limit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/calculus/limits.py#L50-L192"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.calculus.limits.Limit" title="Permalink to this definition"></a></dt>
+<dd><p>Represents an unevaluated directional limit of <code class="docutils literal notranslate"><span class="pre">expr</span></code> at the point <code class="docutils literal notranslate"><span class="pre">z0</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>expr</strong> (<em>Expr</em>) – algebraic expression</p></li>
+<li><p><strong>z</strong> (<em>Symbol</em>) – variable of the <code class="docutils literal notranslate"><span class="pre">expr</span></code></p></li>
+<li><p><strong>z0</strong> (<em>Expr</em>) – limit point, <span class="math notranslate nohighlight">\(z_0\)</span></p></li>
+<li><p><strong>dir</strong> (<em>Expr or Reals, optional</em>) – selects the direction (as <code class="docutils literal notranslate"><span class="pre">sign(dir)</span></code>) to approach the limit point
+if the <code class="docutils literal notranslate"><span class="pre">dir</span></code> is an Expr.  For infinite <code class="docutils literal notranslate"><span class="pre">z0</span></code>, the default value
+is determined from the direction of the infinity (e.g., the limit
+from the left, <code class="docutils literal notranslate"><span class="pre">dir=1</span></code>, for <code class="docutils literal notranslate"><span class="pre">oo</span></code>).  Otherwise, the default is
+the limit from the right, <code class="docutils literal notranslate"><span class="pre">dir=-1</span></code>.   If <code class="docutils literal notranslate"><span class="pre">dir=Reals</span></code>, the limit
+is the bidirectional real limit.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Limit</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">Limit(1/x, x, 0, dir=1)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span>
+<span class="go">-oo</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#diofant.calculus.limits.limit" title="diofant.calculus.limits.limit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">limit</span></code></a></p>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="diofant.calculus.limits.Limit.doit">
+<span class="sig-name descname"><span class="pre">doit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">hints</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/calculus/limits.py#L113-L192"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.calculus.limits.Limit.doit" title="Permalink to this definition"></a></dt>
+<dd><p>Evaluates limit.</p>
+<p class="rubric">Notes</p>
+<p>First we handle some trivial cases (i.e. constant), then try
+Gruntz algorithm (see the <a class="reference internal" href="../../internals/gruntz.html#module-diofant.calculus.gruntz" title="diofant.calculus.gruntz"><code class="xref py py-mod docutils literal notranslate"><span class="pre">gruntz</span></code></a> module).</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="diofant.calculus.limits.limit">
+<span class="sig-prename descclassname"><span class="pre">diofant.calculus.limits.</span></span><span class="sig-name descname"><span class="pre">limit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/calculus/limits.py#L8-L28"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.calculus.limits.limit" title="Permalink to this definition"></a></dt>
+<dd><p>Compute the directional limit of <code class="docutils literal notranslate"><span class="pre">expr</span></code> at the point <code class="docutils literal notranslate"><span class="pre">z0</span></code>.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">limit</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="go">oo</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">limit</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">-oo</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">limit</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">oo</span><span class="p">)</span>
+<span class="go">0</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#diofant.calculus.limits.Limit" title="diofant.calculus.limits.Limit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Limit</span></code></a></p>
+</div>
+</dd></dl>
+
 <span class="target" id="module-diofant.calculus.optimization"></span><dl class="py function">
 <dt class="sig sig-object py" id="diofant.calculus.optimization.maximize">
-<span class="sig-prename descclassname"><span class="pre">diofant.calculus.optimization.</span></span><span class="sig-name descname"><span class="pre">maximize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/v0.14.0a4/diofant/calculus/optimization.py#L93-L106"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.calculus.optimization.maximize" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">diofant.calculus.optimization.</span></span><span class="sig-name descname"><span class="pre">maximize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/calculus/optimization.py#L91-L104"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.calculus.optimization.maximize" title="Permalink to this definition"></a></dt>
 <dd><p>Maximizes <span class="math notranslate nohighlight">\(f\)</span> with respect to given variables <span class="math notranslate nohighlight">\(v\)</span>.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
@@ -200,7 +210,7 @@ are differential equations for each of these functions.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="diofant.calculus.optimization.minimize">
-<span class="sig-prename descclassname"><span class="pre">diofant.calculus.optimization.</span></span><span class="sig-name descname"><span class="pre">minimize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/v0.14.0a4/diofant/calculus/optimization.py#L16-L90"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.calculus.optimization.minimize" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">diofant.calculus.optimization.</span></span><span class="sig-name descname"><span class="pre">minimize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/calculus/optimization.py#L11-L88"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.calculus.optimization.minimize" title="Permalink to this definition"></a></dt>
 <dd><p>Minimizes <span class="math notranslate nohighlight">\(f\)</span> with respect to given variables <span class="math notranslate nohighlight">\(v\)</span>.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">minimize</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
@@ -219,274 +229,124 @@ are differential equations for each of these functions.</p></li>
 </div>
 </dd></dl>
 
-<span class="target" id="module-diofant.calculus.finite_diff"></span><section id="finite-difference-weights">
-<h2>Finite difference weights<a class="headerlink" href="#finite-difference-weights" title="Permalink to this heading"></a></h2>
-<p>This module implements an algorithm for efficient generation of finite
-difference weights for ordinary differentials of functions for
-derivatives from 0 (interpolation) up to arbitrary order.</p>
-<p>The core algorithm is provided in the finite difference weight generating
-function (finite_diff_weights), and two convenience functions are provided
-for:</p>
-<ul class="simple">
-<li><dl class="simple">
-<dt>estimating a derivative (or interpolate) directly from a series of points</dt><dd><p>is also provided (<code class="docutils literal notranslate"><span class="pre">apply_finite_diff</span></code>).</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>making a finite difference approximation of a Derivative instance</dt><dd><p>(<code class="docutils literal notranslate"><span class="pre">as_finite_diff</span></code>).</p>
-</dd>
-</dl>
-</li>
-</ul>
-</section>
-<dl class="py function">
-<dt class="sig sig-object py" id="diofant.calculus.finite_diff.apply_finite_diff">
-<span class="sig-prename descclassname"><span class="pre">diofant.calculus.finite_diff.</span></span><span class="sig-name descname"><span class="pre">apply_finite_diff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">order</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Integer(0)</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/v0.14.0a4/diofant/calculus/finite_diff.py#L193-L275"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.calculus.finite_diff.apply_finite_diff" title="Permalink to this definition"></a></dt>
-<dd><p>Calculates the finite difference approximation of
-the derivative of requested order at x0 from points
-provided in x_list and y_list.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>order</strong> (<em>int</em>) – order of derivative to approximate. 0 corresponds to interpolation.</p></li>
-<li><p><strong>x_list</strong> (<em>sequence</em>) – Sequence of (unique) values for the independent variable.</p></li>
-<li><p><strong>y_list</strong> (<em>sequence</em>) – The function value at corresponding values for the independent
-variable in x_list.</p></li>
-<li><p><strong>x0</strong> (<em>Number or Symbol</em>) – At what value of the independent variable the derivative should be
-evaluated. Defaults to Integer(0).</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><em>diofant.core.add.Add or diofant.core.numbers.Number</em> – The finite difference expression approximating the requested
-derivative order at x0.</p>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">cube</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="k">return</span> <span class="p">(</span><span class="mf">1.0</span><span class="o">*</span><span class="n">arg</span><span class="p">)</span><span class="o">**</span><span class="mi">3</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">xlist</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">apply_finite_diff</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">xlist</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">cube</span><span class="p">,</span> <span class="n">xlist</span><span class="p">)),</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="mi">12</span>
-<span class="go">-3.55271367880050e-15</span>
-</pre></div>
-</div>
-<p>we see that the example above only contain rounding errors.
-apply_finite_diff can also be used on more abstract objects:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="n">IndexedBase</span><span class="p">,</span> <span class="s1">&#39;xy&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">i</span> <span class="o">=</span> <span class="n">Idx</span><span class="p">(</span><span class="s1">&#39;i&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">x_list</span><span class="p">,</span> <span class="n">y_list</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="p">[(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">])</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">apply_finite_diff</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">x_list</span><span class="p">,</span> <span class="n">y_list</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-<span class="go">(-1 + (x[i + 1] - x[i])/(-x[i - 1] + x[i]))*y[i]/(x[i + 1] - x[i]) +</span>
-<span class="go">(-x[i - 1] + x[i])*y[i + 1]/((-x[i - 1] + x[i + 1])*(x[i + 1] - x[i])) -</span>
-<span class="go">(x[i + 1] - x[i])*y[i - 1]/((-x[i - 1] + x[i + 1])*(-x[i - 1] + x[i]))</span>
-</pre></div>
-</div>
-<p class="rubric">Notes</p>
-<p>Order = 0 corresponds to interpolation.
-Only supply so many points you think makes sense
-to around x0 when extracting the derivative (the function
-need to be well behaved within that region). Also beware
-of Runge’s phenomenon.</p>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<p><a class="reference internal" href="#diofant.calculus.finite_diff.finite_diff_weights" title="diofant.calculus.finite_diff.finite_diff_weights"><code class="xref py py-obj docutils literal notranslate"><span class="pre">diofant.calculus.finite_diff.finite_diff_weights</span></code></a></p>
-</div>
-<p class="rubric">References</p>
-<p>Fortran 90 implementation with Python interface for numerics: <a class="reference external" href="https://github.com/bjodah/finitediff">finitediff</a></p>
+<span class="target" id="module-diofant.calculus.order"></span><dl class="py attribute">
+<dt class="sig sig-object py" id="diofant.calculus.order.O">
+<span class="sig-prename descclassname"><span class="pre">diofant.calculus.order.</span></span><span class="sig-name descname"><span class="pre">O</span></span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/calculus/order.py#L8-L406"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.calculus.order.O" title="Permalink to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="#diofant.calculus.order.Order" title="diofant.calculus.order.Order"><code class="xref py py-class docutils literal notranslate"><span class="pre">Order</span></code></a></p>
 </dd></dl>
 
-<dl class="py function">
-<dt class="sig sig-object py" id="diofant.calculus.finite_diff.as_finite_diff">
-<span class="sig-prename descclassname"><span class="pre">diofant.calculus.finite_diff.</span></span><span class="sig-name descname"><span class="pre">as_finite_diff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">derivative</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">points</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wrt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/v0.14.0a4/diofant/calculus/finite_diff.py#L278-L380"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.calculus.finite_diff.as_finite_diff" title="Permalink to this definition"></a></dt>
-<dd><p>Returns an approximation of a derivative of a function in
-the form of a finite difference formula. The expression is a
-weighted sum of the function at a number of discrete values of
-(one of) the independent variable(s).</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="diofant.calculus.order.Order">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">diofant.calculus.order.</span></span><span class="sig-name descname"><span class="pre">Order</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/calculus/order.py#L8-L406"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.calculus.order.Order" title="Permalink to this definition"></a></dt>
+<dd><p>Represents the limiting behavior of function.</p>
+<p>The formal definition for order symbol <span class="math notranslate nohighlight">\(O(f(x))\)</span> (Big O) is
+that <span class="math notranslate nohighlight">\(g(x) \in O(f(x))\)</span> as <span class="math notranslate nohighlight">\(x\to a\)</span> iff</p>
+<div class="math notranslate nohighlight">
+\[\lim\limits_{x \rightarrow a} \sup
+\left|\frac{g(x)}{f(x)}\right| &lt; \infty\]</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>derivative</strong> (<em>a Derivative instance (needs to have an variables</em>) – and expr attribute).</p></li>
-<li><p><strong>points</strong> (<em>sequence or coefficient, optional</em>) – If sequence: discrete values (length &gt;= order+1) of the
-independent variable used for generating the finite
-difference weights.
-If it is a coefficient, it will be used as the step-size
-for generating an equidistant sequence of length order+1
-centered around x0. default: 1 (step-size 1)</p></li>
-<li><p><strong>x0</strong> (<em>number or Symbol, optional</em>) – the value of the independent variable (wrt) at which the
-derivative is to be approximated. default: same as wrt</p></li>
-<li><p><strong>wrt</strong> (<em>Symbol, optional</em>) – “with respect to” the variable for which the (partial)
-derivative is to be approximated for. If not provided it
-is required that the Derivative is ordinary. default: None</p></li>
+<li><p><strong>expr</strong> (<em>Expr</em>) – an expression</p></li>
+<li><p><strong>args</strong> (<em>sequence of Symbol’s or pairs (Symbol, Expr), optional</em>) – If only symbols are provided, i.e. no limit point are
+passed, then the limit point is assumed to be zero.  If no
+symbols are passed then all symbols in the expression are used.</p></li>
 </ul>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">h</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;h&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">as_finite_diff</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
-<span class="go">-f(x - 1/2) + f(x + 1/2)</span>
+<p>The order of a function can be intuitively thought of representing all
+terms of powers greater than the one specified.  For example, <span class="math notranslate nohighlight">\(O(x^3)\)</span>
+corresponds to any terms proportional to <span class="math notranslate nohighlight">\(x^3, x^4,\ldots\)</span> and any
+higher power.  For a polynomial, this leaves terms proportional
+to <span class="math notranslate nohighlight">\(x^2\)</span>, <span class="math notranslate nohighlight">\(x\)</span> and constants.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="mi">1</span> <span class="o">+</span> <span class="n">x</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">4</span> <span class="o">+</span> <span class="n">O</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">1 + x + x**2 + O(x**3)</span>
 </pre></div>
 </div>
-<p>The default step size and number of points are 1 and <code class="docutils literal notranslate"><span class="pre">order</span> <span class="pre">+</span> <span class="pre">1</span></code>
-respectively. We can change the step size by passing a symbol
-as a parameter:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">as_finite_diff</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">h</span><span class="p">)</span>
-<span class="go">-f(-h/2 + x)/h + f(h/2 + x)/h</span>
+<p><code class="docutils literal notranslate"><span class="pre">O(f(x))</span></code> is automatically transformed to <code class="docutils literal notranslate"><span class="pre">O(f(x).as_leading_term(x))</span></code>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">O</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">O(x)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">O</span><span class="p">(</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="go">O(1)</span>
 </pre></div>
 </div>
-<p>We can also specify the discretized values to be used in a sequence:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">as_finite_diff</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">+</span><span class="n">h</span><span class="p">,</span> <span class="n">x</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">h</span><span class="p">])</span>
-<span class="go">-3*f(x)/(2*h) + 2*f(h + x)/h - f(2*h + x)/(2*h)</span>
+<p>Some arithmetic operations:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">O</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">x</span>
+<span class="go">O(x**2)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">O</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">O</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">O(x)</span>
 </pre></div>
 </div>
-<p>The algorithm is not restricted to use equidistant spacing, nor
-do we need to make the approximation around x0, but we can get
-an expression estimating the derivative at an offset:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e</span><span class="p">,</span> <span class="n">sq2</span> <span class="o">=</span> <span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">xl</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="n">x</span><span class="o">+</span><span class="n">h</span><span class="p">,</span> <span class="n">x</span><span class="o">+</span><span class="n">e</span><span class="o">*</span><span class="n">h</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">as_finite_diff</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span> <span class="n">xl</span><span class="p">,</span> <span class="n">x</span><span class="o">+</span><span class="n">h</span><span class="o">*</span><span class="n">sq2</span><span class="p">)</span>
-<span class="go">2*h*f(E*h + x)*((h + sqrt(2)*h)/(2*h) -</span>
-<span class="go">(-sqrt(2)*h + h)/(2*h))/((-h + E*h)*(h + E*h)) +</span>
-<span class="go">f(-h + x)*(-(-sqrt(2)*h + h)/(2*h) - (-sqrt(2)*h + E*h)/(2*h))/(h +</span>
-<span class="go">E*h) + f(h + x)*(-(h + sqrt(2)*h)/(2*h) + (-sqrt(2)*h +</span>
-<span class="go">E*h)/(2*h))/(-h + E*h)</span>
+<p>The Big O symbol is a set, so we support membership test:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="ow">in</span> <span class="n">O</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">O</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="ow">in</span> <span class="n">O</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">O</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="ow">in</span> <span class="n">O</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">O</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="ow">in</span> <span class="n">O</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">O</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="ow">in</span> <span class="n">O</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">True</span>
 </pre></div>
 </div>
-<p>Partial derivatives are also supported:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d2fdxdy</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">as_finite_diff</span><span class="p">(</span><span class="n">d2fdxdy</span><span class="p">,</span> <span class="n">wrt</span><span class="o">=</span><span class="n">x</span><span class="p">)</span>
-<span class="go">-f(x - 1/2, y) + f(x + 1/2, y)</span>
+<p>Limit points other then zero and multivariate Big O are also supported:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">O</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="n">O</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">O</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">oo</span><span class="p">))</span>
+<span class="go">O(x**2, (x, oo))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">O</span><span class="p">(</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
+<span class="go">O(x - pi/2, (x, pi/2))</span>
 </pre></div>
 </div>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<p><a class="reference internal" href="#diofant.calculus.finite_diff.apply_finite_diff" title="diofant.calculus.finite_diff.apply_finite_diff"><code class="xref py py-obj docutils literal notranslate"><span class="pre">diofant.calculus.finite_diff.apply_finite_diff</span></code></a>, <a class="reference internal" href="#diofant.calculus.finite_diff.finite_diff_weights" title="diofant.calculus.finite_diff.finite_diff_weights"><code class="xref py py-obj docutils literal notranslate"><span class="pre">diofant.calculus.finite_diff.finite_diff_weights</span></code></a></p>
-</div>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="diofant.calculus.finite_diff.finite_diff_weights">
-<span class="sig-prename descclassname"><span class="pre">diofant.calculus.finite_diff.</span></span><span class="sig-name descname"><span class="pre">finite_diff_weights</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">order</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Integer(0)</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/v0.14.0a4/diofant/calculus/finite_diff.py#L24-L190"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.calculus.finite_diff.finite_diff_weights" title="Permalink to this definition"></a></dt>
-<dd><p>Calculates the finite difference weights for an arbitrarily
-spaced one-dimensional grid (x_list) for derivatives at ‘x0’
-of order 0, 1, …, up to ‘order’ using a recursive formula.
-Order of accuracy is at least len(x_list) - order, if x_list
-is defined accurately.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>order</strong> (<em>int</em>) – Up to what derivative order weights should be calculated.
-0 corresponds to interpolation.</p></li>
-<li><p><strong>x_list</strong> (<em>sequence</em>) – Sequence of (unique) values for the independent variable.
-It is useful (but not necessary) to order x_list from
-nearest to furthest from x0; see examples below.</p></li>
-<li><p><strong>x0</strong> (<em>Number or Symbol</em>) – Root or value of the independent variable for which the finite
-difference weights should be generated. Defaults to Integer(0).</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><em>list</em> – A list of sublists, each corresponding to coefficients for
-increasing derivative order, and each containing lists of
-coefficients for increasing subsets of x_list.</p>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">res</span> <span class="o">=</span> <span class="n">finite_diff_weights</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
-<span class="gp">... </span>                              <span class="n">Rational</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">Rational</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">)],</span> <span class="mi">0</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">res</span>
-<span class="go">[[[1, 0, 0, 0],</span>
-<span class="go">  [1/2, 1/2, 0, 0],</span>
-<span class="go">  [3/8, 3/4, -1/8, 0],</span>
-<span class="go">  [5/16, 15/16, -5/16, 1/16]],</span>
-<span class="go"> [[0, 0, 0, 0],</span>
-<span class="go">  [-1, 1, 0, 0],</span>
-<span class="go">  [-1, 1, 0, 0],</span>
-<span class="go">  [-23/24, 7/8, 1/8, -1/24]]]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># FD weights for 0th derivative, using full x_list</span>
-<span class="go">[5/16, 15/16, -5/16, 1/16]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">res</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># FD weights for 1st derivative</span>
-<span class="go">[-23/24, 7/8, 1/8, -1/24]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">res</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>  <span class="c1"># FD weights for 1st derivative, using x_list[:-1]</span>
-<span class="go">[-1, 1, 0, 0]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">res</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># FD weight for 1st deriv. for x_list[0]</span>
-<span class="go">-23/24</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">res</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># FD weight for 1st deriv. for x_list[1], etc.</span>
-<span class="go">7/8</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">O</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">)</span>
+<span class="go">O(1, x, y)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">O</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="go">O(1, x, y)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">O</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">oo</span><span class="p">),</span> <span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">oo</span><span class="p">))</span>
+<span class="go">O(x*y, (x, oo), (y, oo))</span>
 </pre></div>
-</div>
-<p>Each sublist contains the most accurate formula at the end.
-Note, that in the above example res[1][1] is the same as res[1][2].
-Since res[1][2] has an order of accuracy of
-len(x_list[:3]) - order = 3 - 1 = 2, the same is true for res[1][1]!</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">res</span> <span class="o">=</span> <span class="n">finite_diff_weights</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="o">-</span><span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
-<span class="gp">... </span>                              <span class="n">Integer</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="o">-</span><span class="n">Integer</span><span class="p">(</span><span class="mi">2</span><span class="p">)],</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">res</span>
-<span class="go">[[0, 0, 0, 0, 0],</span>
-<span class="go"> [-1, 1, 0, 0, 0],</span>
-<span class="go"> [0, 1/2, -1/2, 0, 0],</span>
-<span class="go"> [-1/2, 1, -1/3, -1/6, 0],</span>
-<span class="go"> [0, 2/3, -2/3, -1/12, 1/12]]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># no approximation possible, using x_list[0] only</span>
-<span class="go">[0, 0, 0, 0, 0]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">res</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># classic forward step approximation</span>
-<span class="go">[-1, 1, 0, 0, 0]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">res</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>  <span class="c1"># classic centered approximation</span>
-<span class="go">[0, 1/2, -1/2, 0, 0]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">res</span><span class="p">[</span><span class="mi">3</span><span class="p">:]</span>  <span class="c1"># higher order approximations</span>
-<span class="go">[[-1/2, 1, -1/3, -1/6, 0], [0, 2/3, -2/3, -1/12, 1/12]]</span>
-</pre></div>
-</div>
-<p>Let us compare this to a differently defined x_list. Pay attention to
-foo[i][k] corresponding to the gridpoint defined by x_list[k].</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">foo</span> <span class="o">=</span> <span class="n">finite_diff_weights</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="n">Integer</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="o">-</span><span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
-<span class="gp">... </span>                              <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">2</span><span class="p">)],</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">foo</span>
-<span class="go">[[0, 0, 0, 0, 0],</span>
-<span class="go"> [-1, 1, 0, 0, 0],</span>
-<span class="go"> [1/2, -2, 3/2, 0, 0],</span>
-<span class="go"> [1/6, -1, 1/2, 1/3, 0],</span>
-<span class="go"> [1/12, -2/3, 0, 2/3, -1/12]]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">foo</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># not the same and of lower accuracy as res[1]!</span>
-<span class="go">[-1, 1, 0, 0, 0]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">foo</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>  <span class="c1"># classic double backward step approximation</span>
-<span class="go">[1/2, -2, 3/2, 0, 0]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">foo</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>  <span class="c1"># the same as res[4]</span>
-<span class="go">[1/12, -2/3, 0, 2/3, -1/12]</span>
-</pre></div>
-</div>
-<p>Note that, unless you plan on using approximations based on subsets of
-x_list, the order of gridpoints does not matter.</p>
-<p>The capability to generate weights at arbitrary points can be
-used e.g. to minimize Runge’s phenomenon by using Chebyshev nodes:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">N</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;h&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">x_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">+</span> <span class="n">h</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">pi</span><span class="o">/</span><span class="p">(</span><span class="n">N</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)]</span>  <span class="c1"># chebyshev nodes</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">x_list</span>
-<span class="go">[-h + x, -sqrt(2)*h/2 + x, x, sqrt(2)*h/2 + x, h + x]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">mycoeffs</span> <span class="o">=</span> <span class="n">finite_diff_weights</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">x_list</span><span class="p">,</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">1</span><span class="p">][</span><span class="mi">4</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">simplify</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">mycoeffs</span><span class="p">]</span>
-<span class="go">[(h**3/2 + h**2*x - 3*h*x**2 - 4*x**3)/h**4,</span>
-<span class="go">(-sqrt(2)*h**3 - 4*h**2*x + 3*sqrt(2)*h*x**2 + 8*x**3)/h**4,</span>
-<span class="go">6*x/h**2 - 8*x**3/h**4,</span>
-<span class="go">(sqrt(2)*h**3 - 4*h**2*x - 3*sqrt(2)*h*x**2 + 8*x**3)/h**4,</span>
-<span class="go">(-h**3/2 + h**2*x + 3*h*x**2 - 4*x**3)/h**4]</span>
-</pre></div>
-</div>
-<p class="rubric">Notes</p>
-<p>If weights for a finite difference approximation of 3rd order
-derivative is wanted, weights for 0th, 1st and 2nd order are
-calculated “for free”, so are formulae using subsets of x_list.
-This is something one can take advantage of to save computational cost.
-Be aware that one should define x_list from nearest to farest from
-x_list. If not, subsets of x_list will yield poorer approximations,
-which might not grand an order of accuracy of len(x_list) - order.</p>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<p><a class="reference internal" href="#diofant.calculus.finite_diff.apply_finite_diff" title="diofant.calculus.finite_diff.apply_finite_diff"><code class="xref py py-obj docutils literal notranslate"><span class="pre">diofant.calculus.finite_diff.apply_finite_diff</span></code></a></p>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><p>Generation of Finite Difference Formulas on Arbitrarily Spaced
-Grids, Bengt Fornberg; Mathematics of computation; 51; 184;
-(1988); 699-706; doi:10.1090/S0025-5718-1988-0935077-0</p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Big_O_notation">https://en.wikipedia.org/wiki/Big_O_notation</a></p></li>
+</ul>
+<dl class="py method">
+<dt class="sig sig-object py" id="diofant.calculus.order.Order.contains">
+<span class="sig-name descname"><span class="pre">contains</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/calculus/order.py#L288-L354"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.calculus.order.Order.contains" title="Permalink to this definition"></a></dt>
+<dd><p>Membership test.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><em>Boolean or None</em> – Return True if <code class="docutils literal notranslate"><span class="pre">expr</span></code> belongs to <code class="docutils literal notranslate"><span class="pre">self</span></code>.  Return False if
+<code class="docutils literal notranslate"><span class="pre">self</span></code> belongs to <code class="docutils literal notranslate"><span class="pre">expr</span></code>.  Return None if the inclusion
+relation cannot be determined.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-diofant.calculus.residues"></span><dl class="py function">
+<dt class="sig sig-object py" id="diofant.calculus.residues.residue">
+<span class="sig-prename descclassname"><span class="pre">diofant.calculus.residues.</span></span><span class="sig-name descname"><span class="pre">residue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/calculus/residues.py#L5-L64"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.calculus.residues.residue" title="Permalink to this definition"></a></dt>
+<dd><p>Finds the residue of <code class="docutils literal notranslate"><span class="pre">expr</span></code> at the point <code class="docutils literal notranslate"><span class="pre">x=x0</span></code>.</p>
+<p>The residue is defined as the coefficient of <span class="math notranslate nohighlight">\(1/(x - x_0)\)</span>
+in the power series expansion around <span class="math notranslate nohighlight">\(x=x_0\)</span>.</p>
+<p>This notion is essential for the Residue Theorem.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">residue</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">residue</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">residue</span><span class="p">(</span><span class="mi">2</span><span class="o">/</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Residue_%28complex_analysis%29">https://en.wikipedia.org/wiki/Residue_%28complex_analysis%29</a></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Residue_theorem">https://en.wikipedia.org/wiki/Residue_theorem</a></p></li>
 </ul>
 </dd></dl>
 
