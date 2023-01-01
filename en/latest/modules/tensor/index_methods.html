@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Methods &mdash; Diofant 0.14.0a5.dev19+g20039c530 documentation</title>
+  <title>Methods &mdash; Diofant 0.14.0a5.dev21+ga9a82a52c documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
@@ -125,8 +125,8 @@
 objects instead.  When things stabilize this could be a useful
 refactoring.</p>
 <dl class="py exception">
-<dt class="sig sig-object py" id="diofant.tensor.index_methods.IndexConformanceException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">diofant.tensor.index_methods.</span></span><span class="sig-name descname"><span class="pre">IndexConformanceException</span></span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/tensor/index_methods.py#L19-L20"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.tensor.index_methods.IndexConformanceException" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="diofant.tensor.index_methods.IndexConformanceExceptionError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">diofant.tensor.index_methods.</span></span><span class="sig-name descname"><span class="pre">IndexConformanceExceptionError</span></span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/tensor/index_methods.py#L19-L20"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.tensor.index_methods.IndexConformanceExceptionError" title="Permalink to this definition"></a></dt>
 <dd><p>Raised if indexes are not consistent.</p>
 </dd></dl>
 
@@ -245,7 +245,7 @@ summation, for instance the trace of a matrix A:</p>
 </pre></div>
 </div>
 <p>In the case of many terms, the terms are required to have identical
-outer indices.  Else an IndexConformanceException is raised.</p>
+outer indices.  Else an IndexConformanceExceptionError is raised.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_indices</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">y</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
 <span class="go">({i}, {})</span>
 </pre></div>
@@ -254,11 +254,11 @@ outer indices.  Else an IndexConformanceException is raised.</p>
 <dt class="field-odd">Exceptions</dt>
 <dd class="field-odd"><p></p></dd>
 </dl>
-<p>An IndexConformanceException means that the terms are not compatible, e.g.</p>
+<p>An IndexConformanceExceptionError means that the terms are not compatible, e.g.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_indices</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">y</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
 <span class="gt">Traceback (most recent call last):</span>
 <span class="c">...</span>
-<span class="gr">IndexConformanceException</span>: <span class="n">Indices are not consistent: x(i) + y(j)</span>
+<span class="gr">IndexConformanceExceptionError</span>: <span class="n">Indices are not consistent: x(i) + y(j)</span>
 </pre></div>
 </div>
 <div class="admonition warning">
