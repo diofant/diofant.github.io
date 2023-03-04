@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Calculus &mdash; Diofant 0.14.0a8.dev16+g9289ae072 documentation</title>
+  <title>Calculus &mdash; Diofant 0.14.0a8.dev20+g24e5ab3fb documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
@@ -228,13 +228,13 @@ Gruntz algorithm (see the <a class="reference internal" href="../../internals/gr
 
 <span class="target" id="module-diofant.calculus.order"></span><dl class="py attribute">
 <dt class="sig sig-object py" id="diofant.calculus.order.O">
-<span class="sig-prename descclassname"><span class="pre">diofant.calculus.order.</span></span><span class="sig-name descname"><span class="pre">O</span></span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/calculus/order.py#L8-L403"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.calculus.order.O" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">diofant.calculus.order.</span></span><span class="sig-name descname"><span class="pre">O</span></span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/calculus/order.py#L5-L296"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.calculus.order.O" title="Permalink to this definition"></a></dt>
 <dd><p>alias of <a class="reference internal" href="#diofant.calculus.order.Order" title="diofant.calculus.order.Order"><code class="xref py py-class docutils literal notranslate"><span class="pre">Order</span></code></a></p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="diofant.calculus.order.Order">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">diofant.calculus.order.</span></span><span class="sig-name descname"><span class="pre">Order</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/calculus/order.py#L8-L403"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.calculus.order.Order" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">diofant.calculus.order.</span></span><span class="sig-name descname"><span class="pre">Order</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">point</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/calculus/order.py#L5-L296"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.calculus.order.Order" title="Permalink to this definition"></a></dt>
 <dd><p>Represents the limiting behavior of function.</p>
 <p>The formal definition for order symbol <span class="math notranslate nohighlight">\(O(f(x))\)</span> (Big O) is
 that <span class="math notranslate nohighlight">\(g(x) \in O(f(x))\)</span> as <span class="math notranslate nohighlight">\(x\to a\)</span> iff</p>
@@ -245,9 +245,9 @@ that <span class="math notranslate nohighlight">\(g(x) \in O(f(x))\)</span> as <
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>expr</strong> (<em>Expr</em>) – an expression</p></li>
-<li><p><strong>args</strong> (<em>sequence of Symbol’s or pairs (Symbol, Expr), optional</em>) – If only symbols are provided, i.e. no limit point are
-passed, then the limit point is assumed to be zero.  If no
-symbols are passed then all symbols in the expression are used.</p></li>
+<li><p><strong>var</strong> (<em>Symbol, optional</em>) – a variable of the expr.  If not privided, the expression is assumed
+to be univariate and it’s variable is used.</p></li>
+<li><p><strong>point</strong> (<em>Expr, optional</em>) – a limit point, default is zero.</p></li>
 </ul>
 </dd>
 </dl>
@@ -255,8 +255,7 @@ symbols are passed then all symbols in the expression are used.</p></li>
 <p>The order of a function can be intuitively thought of representing all
 terms of powers greater than the one specified.  For example, <span class="math notranslate nohighlight">\(O(x^3)\)</span>
 corresponds to any terms proportional to <span class="math notranslate nohighlight">\(x^3, x^4,\ldots\)</span> and any
-higher power.  For a polynomial, this leaves terms proportional
-to <span class="math notranslate nohighlight">\(x^2\)</span>, <span class="math notranslate nohighlight">\(x\)</span> and constants.</p>
+higher power:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="mi">1</span> <span class="o">+</span> <span class="n">x</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">4</span> <span class="o">+</span> <span class="n">O</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
 <span class="go">1 + x + x**2 + O(x**3)</span>
 </pre></div>
@@ -265,7 +264,7 @@ to <span class="math notranslate nohighlight">\(x^2\)</span>, <span class="math 
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">O</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 <span class="go">O(x)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">O</span><span class="p">(</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
-<span class="go">O(1)</span>
+<span class="go">O(1, x)</span>
 </pre></div>
 </div>
 <p>Some arithmetic operations:</p>
@@ -278,31 +277,19 @@ to <span class="math notranslate nohighlight">\(x^2\)</span>, <span class="math 
 <p>The Big O symbol is a set, so we support membership test:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="ow">in</span> <span class="n">O</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">O</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="ow">in</span> <span class="n">O</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
-<span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">O</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="ow">in</span> <span class="n">O</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="go">False</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">O</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="ow">in</span> <span class="n">O</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 <span class="go">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">O</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="ow">in</span> <span class="n">O</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="go">True</span>
 </pre></div>
 </div>
-<p>Limit points other then zero and multivariate Big O are also supported:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">O</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="n">O</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<p>Limit points other then zero are also supported:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">O</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="n">O</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 <span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">O</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">oo</span><span class="p">))</span>
-<span class="go">O(x**2, (x, oo))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">O</span><span class="p">(</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
-<span class="go">O(x - pi/2, (x, pi/2))</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">O</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">)</span>
-<span class="go">O(1, x, y)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">O</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
-<span class="go">O(1, x, y)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">O</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">oo</span><span class="p">),</span> <span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">oo</span><span class="p">))</span>
-<span class="go">O(x*y, (x, oo), (y, oo))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">O</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">oo</span><span class="p">)</span>
+<span class="go">O(x**2, x, oo)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">O</span><span class="p">(</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">,</span> <span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">O(x - pi/2, x, pi/2)</span>
 </pre></div>
 </div>
 <p class="rubric">References</p>
@@ -311,7 +298,7 @@ to <span class="math notranslate nohighlight">\(x^2\)</span>, <span class="math 
 </ul>
 <dl class="py method">
 <dt class="sig sig-object py" id="diofant.calculus.order.Order.contains">
-<span class="sig-name descname"><span class="pre">contains</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/calculus/order.py#L285-L351"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.calculus.order.Order.contains" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">contains</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/calculus/order.py#L209-L246"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.calculus.order.Order.contains" title="Permalink to this definition"></a></dt>
 <dd><p>Membership test.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
