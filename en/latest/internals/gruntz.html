@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Gruntz Algorithm &mdash; Diofant 0.14.0a8.dev50+ge76bc1ae9 documentation</title>
+  <title>The Gruntz Algorithm &mdash; Diofant 0.14.0a8.dev52+g67caaf2b5 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
@@ -15,6 +15,9 @@
   <![endif]-->
   
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/sphinx_highlight.js"></script>
         <script>window.MathJax = {"CommonHTML": {"linebreaks": {"automatic": true}}, "HTML-CSS": {"linebreaks": {"automatic": true}}, "SVG": {"linebreaks": {"automatic": true}}}</script>
@@ -31,16 +34,12 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-
-          
-          
-          <a href="../index.html">
-            
-              <img src="../_static/logo.svg" class="logo" alt="Logo"/>
+            <a href="../index.html">
+            <img src="../_static/logo.svg" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -78,7 +77,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li><a href="../index.html" class="icon icon-home"></a></li>
           <li class="breadcrumb-item"><a href="index.html">Internals</a></li>
       <li class="breadcrumb-item active">The Gruntz Algorithm</li>
       <li class="wy-breadcrumbs-aside">
@@ -149,7 +148,7 @@ for proof of the termination (pp. 52-60).</p>
 <span class="sig-prename descclassname"><span class="pre">diofant.calculus.gruntz.</span></span><span class="sig-name descname"><span class="pre">compare</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/calculus/gruntz.py#L70-L99"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.calculus.gruntz.compare" title="Permalink to this definition"></a></dt>
 <dd><p>Determine order relation between two functons.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p><em>{1, 0, -1}</em> – Respectively, if <span class="math notranslate nohighlight">\(a(x) \succ b(x)\)</span>, <span class="math notranslate nohighlight">\(a(x) \asymp b(x)\)</span>
 or <span class="math notranslate nohighlight">\(b(x) \succ a(x)\)</span>.</p>
 </dd>
@@ -166,7 +165,7 @@ or <span class="math notranslate nohighlight">\(b(x) \succ a(x)\)</span>.</p>
 <span class="sig-prename descclassname"><span class="pre">diofant.calculus.gruntz.</span></span><span class="sig-name descname"><span class="pre">leadterm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/calculus/gruntz.py#L209-L252"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.calculus.gruntz.leadterm" title="Permalink to this definition"></a></dt>
 <dd><p>Compute the leading term of the series.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p><em>tuple</em> – The leading term <span class="math notranslate nohighlight">\(c_0 w^{e_0}\)</span> of the series of <span class="math notranslate nohighlight">\(e\)</span> in terms
 of the most rapidly varying subexpression <span class="math notranslate nohighlight">\(w\)</span> in form of
 the pair <code class="docutils literal notranslate"><span class="pre">(c0,</span> <span class="pre">e0)</span></code> of Expr.</p>
@@ -206,7 +205,7 @@ the pair <code class="docutils literal notranslate"><span class="pre">(c0,</span
 <span class="sig-prename descclassname"><span class="pre">diofant.calculus.gruntz.</span></span><span class="sig-name descname"><span class="pre">rewrite</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">w</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/calculus/gruntz.py#L255-L312"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.calculus.gruntz.rewrite" title="Permalink to this definition"></a></dt>
 <dd><p>Rewrites the expression in terms of the MRV subexpression.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>e</strong> (<em>Expr</em>) – an expression</p></li>
 <li><p><strong>x</strong> (<em>Symbol</em>) – variable of the <span class="math notranslate nohighlight">\(e\)</span></p></li>
@@ -214,7 +213,7 @@ the pair <code class="docutils literal notranslate"><span class="pre">(c0,</span
 of the MRV in <span class="math notranslate nohighlight">\(x\)</span> subexpression.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p><em>tuple</em> – A pair: rewritten (in <span class="math notranslate nohighlight">\(w\)</span>) expression and <span class="math notranslate nohighlight">\(\log(w)\)</span>.</p>
 </dd>
 </dl>
@@ -230,7 +229,7 @@ of the MRV in <span class="math notranslate nohighlight">\(x\)</span> subexpress
 <span class="sig-prename descclassname"><span class="pre">diofant.calculus.gruntz.</span></span><span class="sig-name descname"><span class="pre">signinf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/calculus/gruntz.py#L147-L173"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.calculus.gruntz.signinf" title="Permalink to this definition"></a></dt>
 <dd><p>Determine sign of the expression at the infinity.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p><em>{1, 0, -1}</em> – One or minus one, if <span class="math notranslate nohighlight">\(e &gt; 0\)</span> or <span class="math notranslate nohighlight">\(e &lt; 0\)</span> for <span class="math notranslate nohighlight">\(x\)</span> sufficiently
 large and zero if <span class="math notranslate nohighlight">\(e\)</span> is <em>constantly</em> zero for <span class="math notranslate nohighlight">\(x\to\infty\)</span>.</p>
 </dd>

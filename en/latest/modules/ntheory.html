@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Number Theory &mdash; Diofant 0.14.0a8.dev50+ge76bc1ae9 documentation</title>
+  <title>Number Theory &mdash; Diofant 0.14.0a8.dev52+g67caaf2b5 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
@@ -15,6 +15,9 @@
   <![endif]-->
   
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/sphinx_highlight.js"></script>
         <script>window.MathJax = {"CommonHTML": {"linebreaks": {"automatic": true}}, "HTML-CSS": {"linebreaks": {"automatic": true}}, "SVG": {"linebreaks": {"automatic": true}}}</script>
@@ -31,16 +34,12 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-
-          
-          
-          <a href="../index.html">
-            
-              <img src="../_static/logo.svg" class="logo" alt="Logo"/>
+            <a href="../index.html">
+            <img src="../_static/logo.svg" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -93,7 +92,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li><a href="../index.html" class="icon icon-home"></a></li>
           <li class="breadcrumb-item"><a href="index.html">Reference</a></li>
       <li class="breadcrumb-item active">Number Theory</li>
       <li class="wy-breadcrumbs-aside">
@@ -544,7 +543,7 @@ possible margin.  If generator is True an unordered generator is returned.</p>
 <div class="math notranslate nohighlight">
 \[core_t(n) = \prod_{i=1}^\omega p_i^{m_i \mod t}.\]</div>
 <dl class="field-list">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>t</strong> (<em>core(n,t) calculates the t-th power free part of n</em>) – <code class="docutils literal notranslate"><span class="pre">core(n,</span> <span class="pre">2)</span></code> is the squarefree part of <code class="docutils literal notranslate"><span class="pre">n</span></code>
 <code class="docutils literal notranslate"><span class="pre">core(n,</span> <span class="pre">3)</span></code> is the cubefree part of <code class="docutils literal notranslate"><span class="pre">n</span></code></p>
 <p>Default for t is 2.</p>
@@ -606,7 +605,7 @@ possible margin.  If generator is True an unordered generator is returned.</p>
 \[\sigma_k(n) = \prod_{i=1}^\omega (1+p_i^k+p_i^{2k}+\cdots
 + p_i^{m_ik}).\]</div>
 <dl class="field-list">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>k</strong> (<em>power of divisors in the sum</em>) – for k = 0, 1:
 <code class="docutils literal notranslate"><span class="pre">divisor_sigma(n,</span> <span class="pre">0)</span></code> is equal to <code class="docutils literal notranslate"><span class="pre">divisor_count(n)</span></code>
 <code class="docutils literal notranslate"><span class="pre">divisor_sigma(n,</span> <span class="pre">1)</span></code> is equal to <code class="docutils literal notranslate"><span class="pre">sum(divisors(n))</span></code></p>
@@ -752,6 +751,12 @@ you can do so with a dictionary or unevaluated expression:</p>
 <p>The table of the output logic is:</p>
 <blockquote>
 <div><table class="docutils align-default">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 23%" />
+<col style="width: 27%" />
+<col style="width: 27%" />
+</colgroup>
 <thead>
 <tr class="row-odd"><th class="head"></th>
 <th class="head" colspan="3"></th>
@@ -1177,6 +1182,12 @@ and vice versa:</p>
 <p>The table of the output logic is:</p>
 <blockquote>
 <div><table class="docutils align-default">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 23%" />
+<col style="width: 27%" />
+<col style="width: 27%" />
+</colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><div class="line-block">
 <div class="line"><br /></div>
@@ -1359,14 +1370,14 @@ indicated residuals is performed – an O(n) operation.</p>
 not a prime number, so it is possible that <span class="math notranslate nohighlight">\(b\)</span> is not invertible modulo
 <span class="math notranslate nohighlight">\(m\)</span>. In that case <code class="docutils literal notranslate"><span class="pre">None</span></code> is returned.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>c</strong> (<em>Integer</em>) – <span class="math notranslate nohighlight">\(c = \frac a b \; \mathrm{mod} \, m\)</span></p></li>
 <li><p><strong>m</strong> (<em>Integer</em>) – modulus, not necessarily prime</p></li>
 <li><p><strong>domain</strong> (<em>IntegerRing</em>) – <span class="math notranslate nohighlight">\(a, b, c\)</span> are elements of <code class="docutils literal notranslate"><span class="pre">domain</span></code></p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p><strong>frac</strong> (<em>Rational</em>) – either <span class="math notranslate nohighlight">\(\frac a b\)</span> in <span class="math notranslate nohighlight">\(\mathbb Q\)</span> or <code class="docutils literal notranslate"><span class="pre">None</span></code></p>
 </dd>
 </dl>
@@ -1711,7 +1722,7 @@ then <code class="docutils literal notranslate"><span class="pre">m</span></code
 <span class="math notranslate nohighlight">\(\genfrac(){}{}{m}{n} = 1\)</span> then <code class="docutils literal notranslate"><span class="pre">m</span></code> may or may not be a quadratic residue
 modulo <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>m</strong> (<em>integer</em>)</p></li>
 <li><p><strong>n</strong> (<em>odd positive integer</em>)</p></li>
@@ -1753,7 +1764,7 @@ defined as</p>
     -1 &amp; \text{if } a \text{ is a quadratic nonresidue modulo } p
 \end{cases}\end{split}\]</div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>a</strong> (<em>integer</em>)</p></li>
 <li><p><strong>p</strong> (<em>odd prime</em>)</p></li>
@@ -1795,7 +1806,7 @@ and combinatorics.  It has applications in mathematical series,
 algebraic number theory and also physics (Fermion operator has very
 concrete realization with Möbius Function model).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>n</strong> (<em>positive integer</em>)</p>
 </dd>
 </dl>
@@ -1837,7 +1848,7 @@ concrete realization with Möbius Function model).</p>
 <span class="sig-prename descclassname"><span class="pre">diofant.ntheory.residue_ntheory.</span></span><span class="sig-name descname"><span class="pre">nthroot_mod</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_roots</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/ntheory/residue_ntheory.py#L700-L758"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.ntheory.residue_ntheory.nthroot_mod" title="Permalink to this definition"></a></dt>
 <dd><p>Find the solutions to <code class="docutils literal notranslate"><span class="pre">x**n</span> <span class="pre">=</span> <span class="pre">a</span> <span class="pre">mod</span> <span class="pre">p</span></code>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>a</strong> (<em>integer</em>)</p></li>
 <li><p><strong>n</strong> (<em>positive integer</em>)</p></li>
@@ -1873,7 +1884,7 @@ concrete realization with Möbius Function model).</p>
 </li>
 </ul>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>p</strong> (<em>positive integer</em>)</p>
 </dd>
 </dl>
@@ -1900,7 +1911,7 @@ concrete realization with Möbius Function model).</p>
 <span class="sig-prename descclassname"><span class="pre">diofant.ntheory.residue_ntheory.</span></span><span class="sig-name descname"><span class="pre">sqrt_mod</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_roots</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/ntheory/residue_ntheory.py#L206-L253"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.ntheory.residue_ntheory.sqrt_mod" title="Permalink to this definition"></a></dt>
 <dd><p>Find a root of <code class="docutils literal notranslate"><span class="pre">x**2</span> <span class="pre">=</span> <span class="pre">a</span> <span class="pre">mod</span> <span class="pre">p</span></code>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>a</strong> (<em>integer</em>)</p></li>
 <li><p><strong>p</strong> (<em>positive integer</em>)</p></li>
@@ -1928,7 +1939,7 @@ in memory; otherwise use <code class="docutils literal notranslate"><span class=
 <span class="sig-prename descclassname"><span class="pre">diofant.ntheory.residue_ntheory.</span></span><span class="sig-name descname"><span class="pre">sqrt_mod_iter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain=&lt;class</span> <span class="pre">'int'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/ntheory/residue_ntheory.py#L256-L311"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.ntheory.residue_ntheory.sqrt_mod_iter" title="Permalink to this definition"></a></dt>
 <dd><p>Iterate over solutions to <code class="docutils literal notranslate"><span class="pre">x**2</span> <span class="pre">=</span> <span class="pre">a</span> <span class="pre">mod</span> <span class="pre">p</span></code>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>a</strong> (<em>integer</em>)</p></li>
 <li><p><strong>p</strong> (<em>positive integer</em>)</p></li>
@@ -2019,12 +2030,12 @@ Rational and negative elements may be present in the expansion.</p>
 quadratic surd, i.e. <span class="math notranslate nohighlight">\(\frac{p + \sqrt{d}}{q}\)</span>, where <span class="math notranslate nohighlight">\(p\)</span>, <span class="math notranslate nohighlight">\(q\)</span>
 and <span class="math notranslate nohighlight">\(d \ge 0\)</span> are integers.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p><em>list</em> – the continued fraction representation (canonical form) as a list of
 integers, optionally ending (for quadratic irrationals) with
 repeating block as the last term of this list.</p>
 </dd>
-<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dt class="field-even">Parameters</dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>p</strong> (<em>int</em>) – the rational part of the number’s numerator</p></li>
 <li><p><strong>q</strong> (<em>int</em>) – the denominator of the number</p></li>
@@ -2105,11 +2116,11 @@ form (all terms positive except possibly the first).</p>
 <span class="sig-prename descclassname"><span class="pre">diofant.ntheory.egyptian_fraction.</span></span><span class="sig-name descname"><span class="pre">egyptian_fraction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Greedy'</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/ntheory/egyptian_fraction.py#L6-L122"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.ntheory.egyptian_fraction.egyptian_fraction" title="Permalink to this definition"></a></dt>
 <dd><p>Compute an Egyptian fraction of the rational <span class="math notranslate nohighlight">\(r\)</span>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p><em>list</em> – The list of denominators of an Egyptian
 fraction expansion.</p>
 </dd>
-<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dt class="field-even">Parameters</dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>r</strong> (<em>Rational</em>) – a positive rational number.</p></li>
 <li><p><strong>algorithm</strong> (<em>{ “Greedy”, “Graham Jewett”, “Takenouchi”, “Golomb” }, optional</em>) – Denotes the algorithm to be used (the default is “Greedy”).</p></li>

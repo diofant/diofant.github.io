@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Internals of the Polynomial Manipulation Module &mdash; Diofant 0.14.0a8.dev50+ge76bc1ae9 documentation</title>
+  <title>Internals of the Polynomial Manipulation Module &mdash; Diofant 0.14.0a8.dev52+g67caaf2b5 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
@@ -15,6 +15,9 @@
   <![endif]-->
   
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/sphinx_highlight.js"></script>
         <script>window.MathJax = {"CommonHTML": {"linebreaks": {"automatic": true}}, "HTML-CSS": {"linebreaks": {"automatic": true}}, "SVG": {"linebreaks": {"automatic": true}}}</script>
@@ -31,16 +34,12 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-
-          
-          
-          <a href="../index.html">
-            
-              <img src="../_static/logo.svg" class="logo" alt="Logo"/>
+            <a href="../index.html">
+            <img src="../_static/logo.svg" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -94,7 +93,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li><a href="../index.html" class="icon icon-home"></a></li>
           <li class="breadcrumb-item"><a href="index.html">Internals</a></li>
       <li class="breadcrumb-item active">Internals of the Polynomial Manipulation Module</li>
       <li class="wy-breadcrumbs-aside">
@@ -137,7 +136,7 @@ there is code to manipulate polynomials in a <em>sparse</em> representation.</p>
 <span class="sig-prename descclassname"><span class="pre">diofant.polys.rings.</span></span><span class="sig-name descname"><span class="pre">ring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbols</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order=&lt;diofant.polys.orderings.LexOrder</span> <span class="pre">object&gt;</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rings.py#L32-L53"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.polys.rings.ring" title="Permalink to this definition"></a></dt>
 <dd><p>Construct a polynomial ring returning <code class="docutils literal notranslate"><span class="pre">(ring,</span> <span class="pre">x_1,</span> <span class="pre">...,</span> <span class="pre">x_n)</span></code>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>symbols</strong> (<em>str, Symbol/Expr or sequence of str, Symbol/Expr (non-empty)</em>)</p></li>
 <li><p><strong>domain</strong> (<a class="reference internal" href="../modules/domains.html#diofant.domains.domain.Domain" title="diofant.domains.domain.Domain"><code class="xref py py-class docutils literal notranslate"><span class="pre">Domain</span></code></a> or coercible)</p></li>
@@ -216,7 +215,7 @@ to use inplace operations, one can copy the polynomial first.</p>
 <span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">element</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rings.py#L1035-L1068"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.polys.rings.PolyElement.__getitem__" title="Permalink to this definition"></a></dt>
 <dd><p>Returns the coefficient that stands next to the given monomial.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>element</strong> (PolyElement (with <code class="docutils literal notranslate"><span class="pre">is_monomial</span> <span class="pre">=</span> <span class="pre">True</span></code>) or 1)</p>
 </dd>
 </dl>
@@ -334,10 +333,10 @@ to use inplace operations, one can copy the polynomial first.</p>
 <span class="sig-name descname"><span class="pre">div</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fv</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rings.py#L874-L949"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.polys.rings.PolyElement.div" title="Permalink to this definition"></a></dt>
 <dd><p>Division algorithm for multivariate polynomials.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>fv</strong> (<em>sequence of PolyElement’s</em>) – List of divsors.</p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p><strong>(qv, r)</strong> (<em>tuple</em>) – Where qv is the sequence of quotients and r is the remainder.</p>
 </dd>
 </dl>
@@ -1077,13 +1076,13 @@ using Gröbner bases</p>
 <span class="math notranslate nohighlight">\(\mathbb Q(\alpha)\)</span> by replacing the algebraic element <span class="math notranslate nohighlight">\(\alpha\)</span> by a new
 variable <span class="math notranslate nohighlight">\(z\)</span>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>f</strong> (<em>PolyElement</em>) – polynomial in <span class="math notranslate nohighlight">\(\mathbb Q(\alpha)[x_0, \ldots, x_n]\)</span></p></li>
 <li><p><strong>ring</strong> (<em>PolynomialRing</em>) – the polynomial ring <span class="math notranslate nohighlight">\(\mathbb Q[x_0, \ldots, x_n, z]\)</span></p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p><strong>f_</strong> (<em>PolyElement</em>) – polynomial in <span class="math notranslate nohighlight">\(\mathbb Q[x_0, \ldots, x_n, z]\)</span></p>
 </dd>
 </dl>
@@ -1156,7 +1155,7 @@ in <span class="math notranslate nohighlight">\(x_0\)</span>, in <span class="ma
 <span class="sig-prename descclassname"><span class="pre">diofant.polys.factorization_alg_field.</span></span><span class="sig-name descname"><span class="pre">_hensel_lift</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">H</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">LC</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minpoly</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/factorization_alg_field.py#L684-L767"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.polys.factorization_alg_field._hensel_lift" title="Permalink to this definition"></a></dt>
 <dd><p>Parallel Hensel lifting algorithm over <span class="math notranslate nohighlight">\(\mathbb  Z_p[z]/(\mu(z))\)</span>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>f</strong> (<em>PolyElement</em>) – squarefree polynomial in <span class="math notranslate nohighlight">\(\mathbb Z[x_0, \ldots, x_n, z]\)</span></p></li>
 <li><p><strong>H</strong> (<em>list of PolyElement objects</em>) – monic univariate factors of <span class="math notranslate nohighlight">\(f(x_0, A)\)</span> in
@@ -1166,7 +1165,7 @@ in <span class="math notranslate nohighlight">\(x_0\)</span>, in <span class="ma
 <li><p><strong>p</strong> (<em>Integer</em>) – prime number</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p><strong>pfactors</strong> (<em>list of PolyElement objects</em>) – irreducible factors of <span class="math notranslate nohighlight">\(f\)</span> modulo <span class="math notranslate nohighlight">\(p\)</span></p>
 </dd>
 </dl>
@@ -1179,7 +1178,7 @@ in <span class="math notranslate nohighlight">\(x_0\)</span>, in <span class="ma
 factors of a polynomial <span class="math notranslate nohighlight">\(f\)</span>.</p>
 <p>If this fails, <code class="docutils literal notranslate"><span class="pre">None</span></code> is returned.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>f</strong> (<em>PolyElement</em>) – squarefree polynomial in <span class="math notranslate nohighlight">\(Z[x_0, \ldots, x_n, z]\)</span></p></li>
 <li><p><strong>U</strong> (<em>list of PolyElement objects</em>) – monic univariate factors of <span class="math notranslate nohighlight">\(f(x_0, A)\)</span> in <span class="math notranslate nohighlight">\(\mathbb Q(\alpha)[x_0]\)</span></p></li>
@@ -1192,7 +1191,7 @@ factors of a polynomial <span class="math notranslate nohighlight">\(f\)</span>.
 <li><p><strong>divisors</strong> (<em>list of Integer objects</em>) – pairwise coprime divisors of all elements of <code class="docutils literal notranslate"><span class="pre">denoms</span></code></p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p><strong>f</strong> (<em>PolyElement</em>) – possibly updated polynomial <span class="math notranslate nohighlight">\(f\)</span></p></li>
 <li><p><strong>lcs</strong> (<em>list of PolyElement objects</em>) – true leading coefficients of the irreducible factors of <span class="math notranslate nohighlight">\(f\)</span></p></li>
@@ -1229,7 +1228,7 @@ factors of a polynomial <span class="math notranslate nohighlight">\(f\)</span>.
 a factorization over <span class="math notranslate nohighlight">\(\mathbb Z_{p^m}[z]/(\mu(z))\)</span>, where <span class="math notranslate nohighlight">\(p^m \geq B\)</span>.</p>
 <p>If this fails, <code class="docutils literal notranslate"><span class="pre">None</span></code> is returned.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>f</strong> (<em>PolyElement</em>) – squarefree polynomial in <span class="math notranslate nohighlight">\(\mathbb Z[x_0, \ldots, x_n, z]\)</span></p></li>
 <li><p><strong>pfactors</strong> (<em>list of PolyElement objects</em>) – irreducible factors of <span class="math notranslate nohighlight">\(f\)</span> modulo <span class="math notranslate nohighlight">\(p\)</span></p></li>
@@ -1240,7 +1239,7 @@ coefficient in the irreducible factors of <span class="math notranslate nohighli
 <li><p><strong>p</strong> (<em>Integer</em>) – prime number</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p><strong>H</strong> (<em>list of PolyElement objects</em>) – factorization of <span class="math notranslate nohighlight">\(f\)</span> modulo <span class="math notranslate nohighlight">\(p^m\)</span>, where <span class="math notranslate nohighlight">\(p^m \geq B\)</span></p>
 </dd>
 </dl>
@@ -1269,7 +1268,7 @@ coefficient in the irreducible factors of <span class="math notranslate nohighli
 <dd><p>Test if an evaluation point is suitable for _factor.</p>
 <p>If it is not, <code class="docutils literal notranslate"><span class="pre">None</span></code> is returned.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>f</strong> (<em>PolyElement</em>) – squarefree polynomial in <span class="math notranslate nohighlight">\(\mathbb Z[x_0, \ldots, x_n, z]\)</span></p></li>
 <li><p><strong>gamma</strong> (<em>Integer</em>) – leading coefficient of <span class="math notranslate nohighlight">\(f\)</span> in <span class="math notranslate nohighlight">\(\mathbb Z\)</span></p></li>
@@ -1279,7 +1278,7 @@ coefficient in the irreducible factors of <span class="math notranslate nohighli
 <li><p><strong>D</strong> (<em>Integer</em>) – integral multiple of the defect of <span class="math notranslate nohighlight">\(\mathbb Q(\alpha)\)</span></p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p><strong>fA</strong> (<em>PolyElement</em>) – <span class="math notranslate nohighlight">\(f\)</span> evaluated at <span class="math notranslate nohighlight">\(A\)</span>, i.e. <span class="math notranslate nohighlight">\(f(x_0, A)\)</span></p></li>
 <li><p><strong>denoms</strong> (<em>list of Integer objects</em>) – the denominators of <span class="math notranslate nohighlight">\(\frac 1 {l(A)}\)</span> for <span class="math notranslate nohighlight">\(l\)</span> in <code class="docutils literal notranslate"><span class="pre">lcfactors</span></code></p></li>
@@ -1316,13 +1315,13 @@ coefficient in the irreducible factors of <span class="math notranslate nohighli
 algebraic element <span class="math notranslate nohighlight">\(\alpha\)</span> of the given ring
 <span class="math notranslate nohighlight">\(\mathbb Q(\alpha)[x_0, \ldots, x_n]\)</span>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>f</strong> (<em>PolyElement</em>) – polynomial in <span class="math notranslate nohighlight">\(\mathbb Q[x_0, \ldots, x_n, z]\)</span></p></li>
 <li><p><strong>ring</strong> (<em>PolynomialRing</em>) – the polynomial ring <span class="math notranslate nohighlight">\(\mathbb Q(\alpha)[x_0, \ldots, x_n]\)</span></p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p><strong>f_</strong> (<em>PolyElement</em>) – polynomial in <span class="math notranslate nohighlight">\(\mathbb Q(\alpha)[x_0, \ldots, x_n]\)</span></p>
 </dd>
 </dl>
@@ -1361,7 +1360,7 @@ Chinese Remainder Theorem. The symmetric representation in
 <span class="math notranslate nohighlight">\(\mathbb{Z}_q[x_0, \ldots, x_{k-1}]\)</span> and
 <span class="math notranslate nohighlight">\(\mathbb{Z}_{p q}[x_0, \ldots, x_{k-1}]\)</span> is used.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>hp</strong> (<em>PolyElement</em>) – multivariate integer polynomial with coefficients in <span class="math notranslate nohighlight">\(\mathbb{Z}_p\)</span></p></li>
 <li><p><strong>hq</strong> (<em>PolyElement</em>) – multivariate integer polynomial with coefficients in <span class="math notranslate nohighlight">\(\mathbb{Z}_q\)</span></p></li>
@@ -1423,14 +1422,14 @@ Algorithm.</p>
 that some leading coefficient is not invertible modulo
 <span class="math notranslate nohighlight">\(\check m_{\alpha}(z)\)</span>. In that case <code class="docutils literal notranslate"><span class="pre">None</span></code> is returned.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>f, g</strong> (<em>PolyElement</em>) – polynomials in <span class="math notranslate nohighlight">\(\mathbb Z[x, z]\)</span></p></li>
 <li><p><strong>minpoly</strong> (<em>PolyElement</em>) – polynomial in <span class="math notranslate nohighlight">\(\mathbb Z[z]\)</span>, not necessarily irreducible</p></li>
 <li><p><strong>p</strong> (<em>Integer</em>) – prime number, modulus of <span class="math notranslate nohighlight">\(\mathbb Z_p\)</span></p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p><strong>h</strong> (<em>PolyElement</em>) – GCD of <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span> in <span class="math notranslate nohighlight">\(\mathbb Z[z, x]\)</span> or <code class="docutils literal notranslate"><span class="pre">None</span></code>, coefficients
 are in <span class="math notranslate nohighlight">\(\left[ -\frac{p-1} 2, \frac{p-1} 2 \right]\)</span></p>
 </dd>
@@ -1461,13 +1460,13 @@ the recursive subroutine <code class="docutils literal notranslate"><span class=
 result in <span class="math notranslate nohighlight">\(\mathbb Q(t_1, \ldots, t_k)[z] / (m_{\alpha}(z))[x]\)</span>, a
 fraction free trial division is used.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>f, g</strong> (<em>PolyElement</em>) – polynomials in <span class="math notranslate nohighlight">\(\mathbb Z[t_1, \ldots, t_k][x, z]\)</span></p></li>
 <li><p><strong>minpoly</strong> (<em>PolyElement</em>) – irreducible polynomial in <span class="math notranslate nohighlight">\(\mathbb Z[t_1, \ldots, t_k][z]\)</span></p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p><strong>h</strong> (<em>PolyElement</em>) – the primitive associate in <span class="math notranslate nohighlight">\(\mathbb Z[t_1, \ldots, t_k][x, z]\)</span> of
 the GCD of <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span></p>
 </dd>
@@ -1521,7 +1520,7 @@ chosen, otherwise the desired polynomial is obtained by clearing
 denominators. The result is verified with a fraction free trial
 division.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>f, g</strong> (<em>PolyElement</em>) – polynomials in <span class="math notranslate nohighlight">\(\mathbb Z[t_1, \ldots, t_k][x, z]\)</span></p></li>
 <li><p><strong>minpoly</strong> (<em>PolyElement</em>) – polynomial in <span class="math notranslate nohighlight">\(\mathbb Z[t_1, \ldots, t_k][z]\)</span>, not necessarily
@@ -1529,7 +1528,7 @@ irreducible</p></li>
 <li><p><strong>p</strong> (<em>Integer</em>) – prime number, modulus of <span class="math notranslate nohighlight">\(\mathbb Z_p\)</span></p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p><strong>h</strong> (<em>PolyElement</em>) – primitive associate in <span class="math notranslate nohighlight">\(\mathbb Z[t_1, \ldots, t_k][x, z]\)</span> of the
 GCD of the polynomials <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span>  or <code class="docutils literal notranslate"><span class="pre">None</span></code>, coefficients are
 in <span class="math notranslate nohighlight">\(\left[ -\frac{p-1} 2, \frac{p-1} 2 \right]\)</span></p>
@@ -1562,7 +1561,7 @@ are the images of <span class="math notranslate nohighlight">\(h_p\)</span> eval
 i.e. if <span class="math notranslate nohighlight">\(h_p\)</span> is a polynomial over <span class="math notranslate nohighlight">\(\mathbb{Z}_p[x_0, \ldots, x_{k-1}]\)</span>.
 In this case, one has to set <code class="docutils literal notranslate"><span class="pre">ground=True</span></code>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>evalpoints</strong> (<em>list of Integer objects</em>) – list of evaluation points in <span class="math notranslate nohighlight">\(\mathbb{Z}_p\)</span></p></li>
 <li><p><strong>hpeval</strong> (<em>list of PolyElement objects</em>) – list of polynomials in (resp. over)
@@ -1575,7 +1574,7 @@ images of <span class="math notranslate nohighlight">\(h_p\)</span> evaluated in
 <code class="docutils literal notranslate"><span class="pre">False</span></code></p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p><strong>hp</strong> (<em>PolyElement</em>) – interpolated polynomial in (resp. over)
 <span class="math notranslate nohighlight">\(\mathbb{Z}_p[x_0, \ldots, x_{k-1}]\)</span></p>
 </dd>
@@ -1605,7 +1604,7 @@ returns <code class="docutils literal notranslate"><span class="pre">None</span>
 point the degree is smaller, the correspondent bound is updated and the
 algorithm fails.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>f</strong> (<em>PolyElement</em>) – multivariate polynomial with coefficients in <span class="math notranslate nohighlight">\(\mathbb{Z}_p\)</span></p></li>
 <li><p><strong>g</strong> (<em>PolyElement</em>) – multivariate polynomial with coefficients in <span class="math notranslate nohighlight">\(\mathbb{Z}_p\)</span></p></li>
@@ -1616,7 +1615,7 @@ the GCD in <span class="math notranslate nohighlight">\(\mathbb{Z}_p[x_i][x_0, \
 is not used can therefore be chosen arbitrarily.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p><strong>h</strong> (<em>PolyElement</em>) – GCD of the polynomials <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span> or <code class="docutils literal notranslate"><span class="pre">None</span></code></p>
 </dd>
 </dl>
@@ -1647,14 +1646,14 @@ positive degree.</p>
 not irreducible, so it is possible that <span class="math notranslate nohighlight">\(b\)</span> is not invertible modulo
 <span class="math notranslate nohighlight">\(m\)</span>. In that case <code class="docutils literal notranslate"><span class="pre">None</span></code> is returned.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>c</strong> (<em>PolyElement</em>) – univariate polynomial in <span class="math notranslate nohighlight">\(\mathbb Z[t]\)</span></p></li>
 <li><p><strong>p</strong> (<em>Integer</em>) – prime number</p></li>
 <li><p><strong>m</strong> (<em>PolyElement</em>) – modulus, not necessarily irreducible</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p><strong>frac</strong> (<em>FracElement</em>) – either <span class="math notranslate nohighlight">\(\frac a b\)</span> in <span class="math notranslate nohighlight">\(\mathbb Z(t)\)</span> or <code class="docutils literal notranslate"><span class="pre">None</span></code></p>
 </dd>
 </dl>
@@ -1679,7 +1678,7 @@ such that</p>
 is not irreducible, so it is possible that this fails for some
 coefficient. In that case <code class="docutils literal notranslate"><span class="pre">None</span></code> is returned.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>hm</strong> (<em>PolyElement</em>) – polynomial in <span class="math notranslate nohighlight">\(\mathbb Z[t_1, \ldots, t_k][x, z]\)</span></p></li>
 <li><p><strong>p</strong> (<em>Integer</em>) – prime number, modulus of <span class="math notranslate nohighlight">\(\mathbb Z_p\)</span></p></li>
@@ -1689,7 +1688,7 @@ element of this ring</p></li>
 <li><p><strong>k</strong> (<em>Integer</em>) – index of the parameter <span class="math notranslate nohighlight">\(t_k\)</span> which will be reconstructed</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p><strong>h</strong> (<em>PolyElement</em>) – reconstructed polynomial in
 <span class="math notranslate nohighlight">\(\mathbb Z(t_k)[t_1, \ldots, t_{k-1}][x, z]\)</span> or <code class="docutils literal notranslate"><span class="pre">None</span></code></p>
 </dd>
@@ -1714,7 +1713,7 @@ coefficient <span class="math notranslate nohighlight">\(c_{h_m}\)</span> of a p
 <span class="math notranslate nohighlight">\(m\)</span> is not a prime number, so it is possible that this fails for some
 coefficient. In that case <code class="docutils literal notranslate"><span class="pre">None</span></code> is returned.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>hm</strong> (<em>PolyElement</em>) – polynomial in <span class="math notranslate nohighlight">\(\mathbb Z[t_1, \ldots, t_k][x, z]\)</span></p></li>
 <li><p><strong>m</strong> (<em>Integer</em>) – modulus, not necessarily prime</p></li>
@@ -1722,7 +1721,7 @@ coefficient. In that case <code class="docutils literal notranslate"><span class
 ring</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p><strong>h</strong> (<em>PolyElement</em>) – reconstructed polynomial in <span class="math notranslate nohighlight">\(\mathbb Q[t_1, \ldots, t_k][x, z]\)</span> or
 <code class="docutils literal notranslate"><span class="pre">None</span></code></p>
 </dd>
@@ -1743,13 +1742,13 @@ where <span class="math notranslate nohighlight">\(\check m_{\alpha}(z) \in \mat
 of the minimal polynomial <span class="math notranslate nohighlight">\(m_{\alpha}(z)\)</span> of <span class="math notranslate nohighlight">\(\alpha\)</span> over
 <span class="math notranslate nohighlight">\(\mathbb Q\)</span>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>f</strong> (<em>PolyElement</em>) – polynomial in <span class="math notranslate nohighlight">\(\mathbb Z[x_1, \ldots, x_{n-1}][x_0, z]\)</span></p></li>
 <li><p><strong>ring</strong> (<em>PolynomialRing</em>) – <span class="math notranslate nohighlight">\(\mathbb Q(\alpha)[x_0, \ldots, x_{n-1}]\)</span></p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p><strong>f_</strong> (<em>PolyElement</em>) – polynomial in <span class="math notranslate nohighlight">\(\mathbb Q(\alpha)[x_0, \ldots, x_{n-1}]\)</span></p>
 </dd>
 </dl>
@@ -1765,13 +1764,13 @@ where <span class="math notranslate nohighlight">\(\check m_{\alpha}(z) \in \mat
 of the minimal polynomial <span class="math notranslate nohighlight">\(m_{\alpha}(z)\)</span> of <span class="math notranslate nohighlight">\(\alpha\)</span> over
 <span class="math notranslate nohighlight">\(\mathbb Q\)</span>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>f</strong> (<em>PolyElement</em>) – polynomial in <span class="math notranslate nohighlight">\(\mathbb Q(\alpha)[x_0, \ldots, x_{n-1}]\)</span></p></li>
 <li><p><strong>ring</strong> (<em>PolynomialRing</em>) – <span class="math notranslate nohighlight">\(\mathbb Z[x_1, \ldots, x_{n-1}][x_0, z]\)</span></p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p><strong>f_</strong> (<em>PolyElement</em>) – associate of <span class="math notranslate nohighlight">\(f\)</span> in
 <span class="math notranslate nohighlight">\(\mathbb Z[x_1, \ldots, x_{n-1}][x_0, z]\)</span></p>
 </dd>
@@ -1784,7 +1783,7 @@ of the minimal polynomial <span class="math notranslate nohighlight">\(m_{\alpha
 <dd><p>Compute the reduced representation of a polynomial <span class="math notranslate nohighlight">\(f\)</span> in
 <span class="math notranslate nohighlight">\(\mathbb Z_p[z] / (\check m_{\alpha}(z))[x]\)</span></p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>f</strong> (<em>PolyElement</em>) – polynomial in <span class="math notranslate nohighlight">\(\mathbb Z[x, z]\)</span></p></li>
 <li><p><strong>minpoly</strong> (<em>PolyElement</em>) – polynomial <span class="math notranslate nohighlight">\(\check m_{\alpha} \in \mathbb Z[z]\)</span>, not necessarily
@@ -1792,7 +1791,7 @@ irreducible</p></li>
 <li><p><strong>p</strong> (<em>Integer</em>) – prime number, modulus of <span class="math notranslate nohighlight">\(\mathbb Z_p\)</span></p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p><strong>ftrunc</strong> (<em>PolyElement</em>) – polynomial in <span class="math notranslate nohighlight">\(\mathbb Z[x, z]\)</span>, reduced modulo
 <span class="math notranslate nohighlight">\(\check m_{\alpha}(z)\)</span> and <span class="math notranslate nohighlight">\(p\)</span></p>
 </dd>
@@ -1832,10 +1831,10 @@ because treating the polynomials as univariate ones can result in
 a spurious content of the GCD. For this <code class="docutils literal notranslate"><span class="pre">func_field_modgcd</span></code> is
 called recursively.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>f, g</strong> (<em>PolyElement</em>) – polynomials in <span class="math notranslate nohighlight">\(\mathbb Q(\alpha)[x_0, \ldots, x_{n-1}]\)</span></p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p><strong>h</strong> (<em>PolyElement</em>) – monic GCD of the polynomials <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span></p>
 </dd>
 </dl>
@@ -1879,13 +1878,13 @@ subroutine <code class="docutils literal notranslate"><span class="pre">_modgcd_
 <span class="math notranslate nohighlight">\(\mathbb{Z}[x_0, \ldots, x_{k-1}]\)</span>, trial division is done, but only for
 candidates which are very likely the desired GCD.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>f</strong> (<em>PolyElement</em>) – multivariate integer polynomial</p></li>
 <li><p><strong>g</strong> (<em>PolyElement</em>) – multivariate integer polynomial</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p><strong>h</strong> (<em>PolyElement</em>) – GCD of the polynomials <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span></p>
 </dd>
 </dl>
@@ -1921,7 +1920,7 @@ either <span class="math notranslate nohighlight">\(\mathbb Q\)</span> or <span 
 fractions. By default <span class="math notranslate nohighlight">\(\mathbb K\)</span> is <span class="math notranslate nohighlight">\(\mathbb Q\)</span>, if a prime number <span class="math notranslate nohighlight">\(p\)</span>
 is given, <span class="math notranslate nohighlight">\(\mathbb Z_p\)</span> is chosen instead.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>f, h</strong> (<em>PolyElement</em>) – polynomials in <span class="math notranslate nohighlight">\(\mathbb Z[t_1, \ldots, t_k][x, z]\)</span></p></li>
 <li><p><strong>minpoly</strong> (<em>PolyElement</em>) – polynomial <span class="math notranslate nohighlight">\(m_{\alpha}(z)\)</span> in <span class="math notranslate nohighlight">\(\mathbb Z[t_1, \ldots, t_k][z]\)</span></p></li>
@@ -1929,7 +1928,7 @@ is given, <span class="math notranslate nohighlight">\(\mathbb Z_p\)</span> is c
 <span class="math notranslate nohighlight">\(\mathbb Q\)</span>, default is <code class="docutils literal notranslate"><span class="pre">None</span></code></p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p><strong>rem</strong> (<em>PolyElement</em>) – remainder of <span class="math notranslate nohighlight">\(\frac f h\)</span></p>
 </dd>
 </dl>
@@ -2023,7 +2022,7 @@ coordinates of the interval’s rectangle.</p>
 <span class="sig-name descname"><span class="pre">is_disjoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_re_refinement</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">re_disjoint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rootisolation.py#L923-L979"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.polys.rootisolation.ComplexInterval.is_disjoint" title="Permalink to this definition"></a></dt>
 <dd><p>Return <code class="docutils literal notranslate"><span class="pre">True</span></code> if two isolation intervals are disjoint.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>check_re_refinement</strong> (<em>bool, optional</em>) – If enabled, test that either real projections of isolation
 intervals are disjoint or roots share common real part.</p></li>
