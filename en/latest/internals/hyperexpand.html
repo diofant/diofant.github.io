@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Details on the Hypergeometric Function Expansion &mdash; Diofant 0.14.1.dev31+gcff92dce7 documentation</title>
+  <title>Details on the Hypergeometric Function Expansion &mdash; Diofant 0.14.1.dev37+g1891364a6 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
@@ -538,9 +538,9 @@ directly use Diofant!</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">B0</span> <span class="o">=</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">I</span><span class="o">*</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span> <span class="o">*</span>
 <span class="gp">... </span>      <span class="n">fresnelc</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">root</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="n">I</span><span class="o">*</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span><span class="o">/</span><span class="n">sqrt</span><span class="p">(</span><span class="n">pi</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">root</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="mi">4</span><span class="p">)))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">z</span> <span class="o">*</span> <span class="n">diff</span><span class="p">(</span><span class="n">B0</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
-<span class="go">z*(cosh(2*sqrt(z))/(4*z) - E**(-I*pi/4)*sqrt(pi)*fresnelc(2*E**(I*pi/4)*z**(1/4)/sqrt(pi))/(8*z**(5/4)))</span>
+<span class="go">z*(cosh(2*sqrt(z))/(4*z) - E**(-I*pi/4)*sqrt(pi)*fresnelc(2*E**(I*pi/4)*root(z, 4)/sqrt(pi))/(8*root(z, 4)**5))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">expand</span><span class="p">(</span><span class="n">_</span><span class="p">)</span>
-<span class="go">cosh(2*sqrt(z))/4 - E**(-I*pi/4)*sqrt(pi)*fresnelc(2*E**(I*pi/4)*z**(1/4)/sqrt(pi))/(8*z**(1/4))</span>
+<span class="go">cosh(2*sqrt(z))/4 - E**(-I*pi/4)*sqrt(pi)*fresnelc(2*E**(I*pi/4)*root(z, 4)/sqrt(pi))/(8*root(z, 4))</span>
 </pre></div>
 </div>
 <p>Formatting this result nicely we obtain</p>
@@ -557,9 +557,9 @@ directly use Diofant!</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">B1prime</span> <span class="o">=</span> <span class="n">cosh</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="n">z</span><span class="p">))</span><span class="o">/</span><span class="mi">4</span> <span class="o">-</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">I</span><span class="o">*</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span> <span class="o">*</span> \
 <span class="gp">... </span>    <span class="n">fresnelc</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">root</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="n">I</span><span class="o">*</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span><span class="o">/</span><span class="n">sqrt</span><span class="p">(</span><span class="n">pi</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mi">8</span><span class="o">*</span><span class="n">root</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">z</span> <span class="o">*</span> <span class="n">diff</span><span class="p">(</span><span class="n">B1prime</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
-<span class="go">z*(-cosh(2*sqrt(z))/(16*z) + sinh(2*sqrt(z))/(4*sqrt(z)) + E**(-I*pi/4)*sqrt(pi)*fresnelc(2*E**(I*pi/4)*z**(1/4)/sqrt(pi))/(32*z**(5/4)))</span>
+<span class="go">z*(-cosh(2*sqrt(z))/(16*z) + sinh(2*sqrt(z))/(4*sqrt(z)) + E**(-I*pi/4)*sqrt(pi)*fresnelc(2*E**(I*pi/4)*root(z, 4)/sqrt(pi))/(32*root(z, 4)**5))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">expand</span><span class="p">(</span><span class="n">_</span><span class="p">)</span>
-<span class="go">sqrt(z)*sinh(2*sqrt(z))/4 - cosh(2*sqrt(z))/16 + E**(-I*pi/4)*sqrt(pi)*fresnelc(2*E**(I*pi/4)*z**(1/4)/sqrt(pi))/(32*z**(1/4))</span>
+<span class="go">sqrt(z)*sinh(2*sqrt(z))/4 - cosh(2*sqrt(z))/16 + E**(-I*pi/4)*sqrt(pi)*fresnelc(2*E**(I*pi/4)*root(z, 4)/sqrt(pi))/(32*root(z, 4))</span>
 </pre></div>
 </div>
 <p>which can be printed as</p>
