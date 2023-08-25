@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Simplification &mdash; Diofant 0.14.1.dev104+g38420ac9a documentation</title>
+  <title>Simplification &mdash; Diofant 0.14.1.dev108+g9bdb6fdb0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
@@ -14,11 +14,11 @@
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=d3b30640"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script>window.MathJax = {"CommonHTML": {"linebreaks": {"automatic": true}}, "HTML-CSS": {"linebreaks": {"automatic": true}}, "SVG": {"linebreaks": {"automatic": true}}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/theme.js"></script>
@@ -105,7 +105,7 @@
            <div itemprop="articleBody">
              
   <section id="simplification">
-<h1>Simplification<a class="headerlink" href="#simplification" title="Permalink to this heading"></a></h1>
+<h1>Simplification<a class="headerlink" href="#simplification" title="Link to this heading"></a></h1>
 <p>The generic way to do <em>nontrivial</em> simplifications of expressions is
 calling <a class="reference internal" href="../modules/simplify/simplify.html#diofant.simplify.simplify.simplify" title="diofant.simplify.simplify.simplify"><code class="xref py py-func docutils literal notranslate"><span class="pre">simplify()</span></code></a> function.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">simplify</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
@@ -156,7 +156,7 @@ to get a more precise result.  It is also useful when you have no idea
 what form an expression will take, and you need a catchall function to
 simplify it.</p>
 <section id="rational-functions">
-<h2>Rational Functions<a class="headerlink" href="#rational-functions" title="Permalink to this heading"></a></h2>
+<h2>Rational Functions<a class="headerlink" href="#rational-functions" title="Link to this heading"></a></h2>
 <p><a class="reference internal" href="../modules/core.html#diofant.core.function.expand" title="diofant.core.function.expand"><code class="xref py py-func docutils literal notranslate"><span class="pre">expand()</span></code></a> is one of the most common
 simplification functions in Diofant.  Although it has a lot of scopes,
 for now, we will consider its function in expanding polynomial
@@ -293,7 +293,7 @@ rational function.</p>
 </div>
 </section>
 <section id="trigonometric-functions">
-<h2>Trigonometric Functions<a class="headerlink" href="#trigonometric-functions" title="Permalink to this heading"></a></h2>
+<h2>Trigonometric Functions<a class="headerlink" href="#trigonometric-functions" title="Link to this heading"></a></h2>
 <p>To simplify expressions using trigonometric identities, use
 <a class="reference internal" href="../modules/simplify/simplify.html#diofant.simplify.trigsimp.trigsimp" title="diofant.simplify.trigsimp.trigsimp"><code class="xref py py-func docutils literal notranslate"><span class="pre">trigsimp()</span></code></a> function.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">trigsimp</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
@@ -332,7 +332,7 @@ function.</p>
 </div>
 </section>
 <section id="powers-and-logarithms">
-<h2>Powers and Logarithms<a class="headerlink" href="#powers-and-logarithms" title="Permalink to this heading"></a></h2>
+<h2>Powers and Logarithms<a class="headerlink" href="#powers-and-logarithms" title="Link to this heading"></a></h2>
 <p><a class="reference internal" href="../modules/simplify/simplify.html#diofant.simplify.powsimp.powdenest" title="diofant.simplify.powsimp.powdenest"><code class="xref py py-func docutils literal notranslate"><span class="pre">powdenest()</span></code></a> function applies identity
 <span class="math notranslate nohighlight">\((x^a)^b = x^{a b}\)</span>, from left to right, if assumptions allow.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;a b&#39;</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -409,7 +409,7 @@ assumptions for symbols.</p>
 </div>
 </section>
 <section id="special-functions">
-<h2>Special Functions<a class="headerlink" href="#special-functions" title="Permalink to this heading"></a></h2>
+<h2>Special Functions<a class="headerlink" href="#special-functions" title="Link to this heading"></a></h2>
 <p>Diofant implements dozens of <a class="reference internal" href="../modules/functions/special.html#special-functions"><span class="std std-ref">special functions</span></a>, ranging from functions in combinatorics to
 mathematical physics.</p>
 <p>To expand special functions in terms of some identities, use
@@ -472,7 +472,7 @@ desired normal form.</p>
 </div>
 </section>
 <section id="cse">
-<h2>CSE<a class="headerlink" href="#cse" title="Permalink to this heading"></a></h2>
+<h2>CSE<a class="headerlink" href="#cse" title="Link to this heading"></a></h2>
 <p>Before evaluating a large expression, it is often useful to identify common
 subexpressions, collect them and evaluate them at once. This is called common
 subexpression elimination (CSE) and implemented in the
