@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Polynomials &mdash; Diofant 0.14.1.dev112+g1ff5e9ec3 documentation</title>
+  <title>Polynomials &mdash; Diofant 0.14.1.dev116+gc5221fa86 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
@@ -16,7 +16,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=eb15b733"></script>
+        <script src="../_static/documentation_options.js?v=adf20df4"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script>window.MathJax = {"CommonHTML": {"linebreaks": {"automatic": true}}, "HTML-CSS": {"linebreaks": {"automatic": true}}, "SVG": {"linebreaks": {"automatic": true}}}</script>
@@ -64,18 +64,18 @@
 <li class="toctree-l2"><a class="reference internal" href="domains.html">Domains</a></li>
 <li class="toctree-l2"><a class="reference internal" href="matrices/index.html">Matrices</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Polynomials</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#basic-polynomial-manipulation-functions">Basic polynomial manipulation functions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#extra-polynomial-manipulation-functions">Extra polynomial manipulation functions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#domain-constructors">Domain constructors</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#algebraic-number-fields">Algebraic number fields</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#monomials-encoded-as-tuples">Monomials encoded as tuples</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#orderings-of-monomials">Orderings of monomials</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#formal-manipulation-of-roots-of-polynomials">Formal manipulation of roots of polynomials</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#symbolic-root-finding-algorithms">Symbolic root-finding algorithms</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#special-polynomials">Special polynomials</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#orthogonal-polynomials">Orthogonal polynomials</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#manipulation-of-rational-functions">Manipulation of rational functions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#partial-fraction-decomposition">Partial fraction decomposition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-diofant.polys.polytools">Basic polynomial manipulation functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-diofant.polys.polyfuncs">Extra polynomial manipulation functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-diofant.polys.constructor">Domain constructors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-diofant.polys.numberfields">Algebraic number fields</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-diofant.polys.monomials">Monomials encoded as tuples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-diofant.polys.orderings">Orderings of monomials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-diofant.polys.rootoftools">Formal manipulation of roots of polynomials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-diofant.polys.polyroots">Symbolic root-finding algorithms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-diofant.polys.specialpolys">Special polynomials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-diofant.polys.orthopolys">Orthogonal polynomials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-diofant.polys.rationaltools">Manipulation of rational functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-diofant.polys.partfrac">Partial fraction decomposition</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="printing.html">Printing</a></li>
@@ -121,9 +121,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="polynomials">
-<span id="polys-reference"></span><h1>Polynomials<a class="headerlink" href="#polynomials" title="Link to this heading"></a></h1>
-<p id="module-diofant.polys">Polynomial manipulation algorithms and algebraic objects.</p>
+  <section id="module-diofant.polys">
+<span id="polynomials"></span><span id="polys-reference"></span><h1>Polynomials<a class="headerlink" href="#module-diofant.polys" title="Link to this heading"></a></h1>
+<p>Polynomial manipulation algorithms and algebraic objects.</p>
 <p>Computations with polynomials are at the core of computer algebra and
 having a fast and robust polynomials manipulation module is a key for
 building a powerful symbolic manipulation system. Here we document
@@ -132,9 +132,9 @@ various coefficient domains.</p>
 <p>There is a vast number of methods implemented, ranging from simple tools
 like polynomial division, to advanced concepts including Gröbner bases
 and multivariate factorization over algebraic number domains.</p>
-<section id="basic-polynomial-manipulation-functions">
-<h2>Basic polynomial manipulation functions<a class="headerlink" href="#basic-polynomial-manipulation-functions" title="Link to this heading"></a></h2>
-<p id="module-diofant.polys.polytools">User-friendly public interface to polynomial functions.</p>
+<section id="module-diofant.polys.polytools">
+<span id="basic-polynomial-manipulation-functions"></span><h2>Basic polynomial manipulation functions<a class="headerlink" href="#module-diofant.polys.polytools" title="Link to this heading"></a></h2>
+<p>User-friendly public interface to polynomial functions.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="diofant.polys.polytools.GroebnerBasis">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">diofant.polys.polytools.</span></span><span class="sig-name descname"><span class="pre">GroebnerBasis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">F</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">gens</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/polytools.py#L4068-L4319"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.polys.polytools.GroebnerBasis" title="Link to this definition"></a></dt>
@@ -2190,9 +2190,9 @@ flag <code class="docutils literal notranslate"><span class="pre">clear</span></
 </dd></dl>
 
 </section>
-<section id="extra-polynomial-manipulation-functions">
-<h2>Extra polynomial manipulation functions<a class="headerlink" href="#extra-polynomial-manipulation-functions" title="Link to this heading"></a></h2>
-<p id="module-diofant.polys.polyfuncs">High-level polynomials manipulation functions.</p>
+<section id="module-diofant.polys.polyfuncs">
+<span id="extra-polynomial-manipulation-functions"></span><h2>Extra polynomial manipulation functions<a class="headerlink" href="#module-diofant.polys.polyfuncs" title="Link to this heading"></a></h2>
+<p>High-level polynomials manipulation functions.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="diofant.polys.polyfuncs.horner">
 <span class="sig-prename descclassname"><span class="pre">diofant.polys.polyfuncs.</span></span><span class="sig-name descname"><span class="pre">horner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">gens</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/polyfuncs.py#L137-L187"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.polys.polyfuncs.horner" title="Link to this definition"></a></dt>
@@ -2296,9 +2296,9 @@ element of the group <code class="docutils literal notranslate"><span class="pre
 </dd></dl>
 
 </section>
-<section id="domain-constructors">
-<h2>Domain constructors<a class="headerlink" href="#domain-constructors" title="Link to this heading"></a></h2>
-<p id="module-diofant.polys.constructor">Tools for constructing domains for expressions.</p>
+<section id="module-diofant.polys.constructor">
+<span id="domain-constructors"></span><h2>Domain constructors<a class="headerlink" href="#module-diofant.polys.constructor" title="Link to this heading"></a></h2>
+<p>Tools for constructing domains for expressions.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="diofant.polys.constructor.construct_domain">
 <span class="sig-prename descclassname"><span class="pre">diofant.polys.constructor.</span></span><span class="sig-name descname"><span class="pre">construct_domain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/constructor.py#L228-L266"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.polys.constructor.construct_domain" title="Link to this definition"></a></dt>
@@ -2306,9 +2306,9 @@ element of the group <code class="docutils literal notranslate"><span class="pre
 </dd></dl>
 
 </section>
-<section id="algebraic-number-fields">
-<h2>Algebraic number fields<a class="headerlink" href="#algebraic-number-fields" title="Link to this heading"></a></h2>
-<p id="module-diofant.polys.numberfields">Computational algebraic field theory.</p>
+<section id="module-diofant.polys.numberfields">
+<span id="algebraic-number-fields"></span><h2>Algebraic number fields<a class="headerlink" href="#module-diofant.polys.numberfields" title="Link to this heading"></a></h2>
+<p>Computational algebraic field theory.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="diofant.polys.numberfields.field_isomorphism">
 <span class="sig-prename descclassname"><span class="pre">diofant.polys.numberfields.</span></span><span class="sig-name descname"><span class="pre">field_isomorphism</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/numberfields.py#L795-L828"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.polys.numberfields.field_isomorphism" title="Link to this definition"></a></dt>
@@ -2360,9 +2360,9 @@ from the expression.</p></li>
 </dd></dl>
 
 </section>
-<section id="monomials-encoded-as-tuples">
-<h2>Monomials encoded as tuples<a class="headerlink" href="#monomials-encoded-as-tuples" title="Link to this heading"></a></h2>
-<p id="module-diofant.polys.monomials">Tools and arithmetics for monomials of distributed polynomials.</p>
+<section id="module-diofant.polys.monomials">
+<span id="monomials-encoded-as-tuples"></span><h2>Monomials encoded as tuples<a class="headerlink" href="#module-diofant.polys.monomials" title="Link to this heading"></a></h2>
+<p>Tools and arithmetics for monomials of distributed polynomials.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="diofant.polys.monomials.Monomial">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">diofant.polys.monomials.</span></span><span class="sig-name descname"><span class="pre">Monomial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">monom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gens</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/monomials.py#L11-L61"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.polys.monomials.Monomial" title="Link to this definition"></a></dt>
@@ -2394,9 +2394,9 @@ from the expression.</p></li>
 </dd></dl>
 
 </section>
-<section id="orderings-of-monomials">
-<h2>Orderings of monomials<a class="headerlink" href="#orderings-of-monomials" title="Link to this heading"></a></h2>
-<p id="module-diofant.polys.orderings">Definitions of monomial orderings.</p>
+<section id="module-diofant.polys.orderings">
+<span id="orderings-of-monomials"></span><h2>Orderings of monomials<a class="headerlink" href="#module-diofant.polys.orderings" title="Link to this heading"></a></h2>
+<p>Definitions of monomial orderings.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="diofant.polys.orderings.GradedLexOrder">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">diofant.polys.orderings.</span></span><span class="sig-name descname"><span class="pre">GradedLexOrder</span></span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/orderings.py#L42-L49"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.polys.orderings.GradedLexOrder" title="Link to this definition"></a></dt>
@@ -2416,9 +2416,9 @@ from the expression.</p></li>
 </dd></dl>
 
 </section>
-<section id="formal-manipulation-of-roots-of-polynomials">
-<h2>Formal manipulation of roots of polynomials<a class="headerlink" href="#formal-manipulation-of-roots-of-polynomials" title="Link to this heading"></a></h2>
-<p id="module-diofant.polys.rootoftools">Implementation of RootOf class and related tools.</p>
+<section id="module-diofant.polys.rootoftools">
+<span id="formal-manipulation-of-roots-of-polynomials"></span><h2>Formal manipulation of roots of polynomials<a class="headerlink" href="#module-diofant.polys.rootoftools" title="Link to this heading"></a></h2>
+<p>Implementation of RootOf class and related tools.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="diofant.polys.rootoftools.RootOf">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">diofant.polys.rootoftools.</span></span><span class="sig-name descname"><span class="pre">RootOf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radicals</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expand</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">evaluate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modulus</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rootoftools.py#L33-L676"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.polys.rootoftools.RootOf" title="Link to this definition"></a></dt>
@@ -2502,9 +2502,9 @@ including rounding):</p>
 </dd></dl>
 
 </section>
-<section id="symbolic-root-finding-algorithms">
-<h2>Symbolic root-finding algorithms<a class="headerlink" href="#symbolic-root-finding-algorithms" title="Link to this heading"></a></h2>
-<p id="module-diofant.polys.polyroots">Algorithms for computing symbolic roots of polynomials.</p>
+<section id="module-diofant.polys.polyroots">
+<span id="symbolic-root-finding-algorithms"></span><h2>Symbolic root-finding algorithms<a class="headerlink" href="#module-diofant.polys.polyroots" title="Link to this heading"></a></h2>
+<p>Algorithms for computing symbolic roots of polynomials.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="diofant.polys.polyroots.roots">
 <span class="sig-prename descclassname"><span class="pre">diofant.polys.polyroots.</span></span><span class="sig-name descname"><span class="pre">roots</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">gens</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">flags</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/polyroots.py#L732-L972"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.polys.polyroots.roots" title="Link to this definition"></a></dt>
@@ -2562,9 +2562,9 @@ sorted numerical order.)</p>
 </dd></dl>
 
 </section>
-<section id="special-polynomials">
-<h2>Special polynomials<a class="headerlink" href="#special-polynomials" title="Link to this heading"></a></h2>
-<p id="module-diofant.polys.specialpolys">Functions for generating interesting polynomials, e.g. for benchmarking.</p>
+<section id="module-diofant.polys.specialpolys">
+<span id="special-polynomials"></span><h2>Special polynomials<a class="headerlink" href="#module-diofant.polys.specialpolys" title="Link to this heading"></a></h2>
+<p>Functions for generating interesting polynomials, e.g. for benchmarking.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="diofant.polys.specialpolys.cyclotomic_poly">
 <span class="sig-prename descclassname"><span class="pre">diofant.polys.specialpolys.</span></span><span class="sig-name descname"><span class="pre">cyclotomic_poly</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/specialpolys.py#L48-L64"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.polys.specialpolys.cyclotomic_poly" title="Link to this definition"></a></dt>
@@ -2596,9 +2596,9 @@ sorted numerical order.)</p>
 </dd></dl>
 
 </section>
-<section id="orthogonal-polynomials">
-<h2>Orthogonal polynomials<a class="headerlink" href="#orthogonal-polynomials" title="Link to this heading"></a></h2>
-<p id="module-diofant.polys.orthopolys">Efficient functions for generating orthogonal polynomials.</p>
+<section id="module-diofant.polys.orthopolys">
+<span id="orthogonal-polynomials"></span><h2>Orthogonal polynomials<a class="headerlink" href="#module-diofant.polys.orthopolys" title="Link to this heading"></a></h2>
+<p>Efficient functions for generating orthogonal polynomials.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="diofant.polys.orthopolys.chebyshevt_poly">
 <span class="sig-prename descclassname"><span class="pre">diofant.polys.orthopolys.</span></span><span class="sig-name descname"><span class="pre">chebyshevt_poly</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/orthopolys.py#L101-L116"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.polys.orthopolys.chebyshevt_poly" title="Link to this definition"></a></dt>
@@ -2664,9 +2664,9 @@ fn(n-1, z) + fn(n+1, z) == (2*n+1)/z * fn(n, z)</p>
 </dd></dl>
 
 </section>
-<section id="manipulation-of-rational-functions">
-<h2>Manipulation of rational functions<a class="headerlink" href="#manipulation-of-rational-functions" title="Link to this heading"></a></h2>
-<p id="module-diofant.polys.rationaltools">Tools for manipulation of rational expressions.</p>
+<section id="module-diofant.polys.rationaltools">
+<span id="manipulation-of-rational-functions"></span><h2>Manipulation of rational functions<a class="headerlink" href="#module-diofant.polys.rationaltools" title="Link to this heading"></a></h2>
+<p>Tools for manipulation of rational expressions.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="diofant.polys.rationaltools.together">
 <span class="sig-prename descclassname"><span class="pre">diofant.polys.rationaltools.</span></span><span class="sig-name descname"><span class="pre">together</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/rationaltools.py#L6-L71"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.polys.rationaltools.together" title="Link to this definition"></a></dt>
@@ -2719,9 +2719,9 @@ simplification and minimise degree of the numerator and denominator.</p>
 </dd></dl>
 
 </section>
-<section id="partial-fraction-decomposition">
-<h2>Partial fraction decomposition<a class="headerlink" href="#partial-fraction-decomposition" title="Link to this heading"></a></h2>
-<p id="module-diofant.polys.partfrac">Algorithms for partial fraction decomposition of rational functions.</p>
+<section id="module-diofant.polys.partfrac">
+<span id="partial-fraction-decomposition"></span><h2>Partial fraction decomposition<a class="headerlink" href="#module-diofant.polys.partfrac" title="Link to this heading"></a></h2>
+<p>Algorithms for partial fraction decomposition of rational functions.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="diofant.polys.partfrac.apart">
 <span class="sig-prename descclassname"><span class="pre">diofant.polys.partfrac.</span></span><span class="sig-name descname"><span class="pre">apart</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">full</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">options</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/polys/partfrac.py#L17-L137"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.polys.partfrac.apart" title="Link to this definition"></a></dt>
