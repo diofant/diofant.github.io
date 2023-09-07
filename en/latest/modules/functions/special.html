@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Special &mdash; Diofant 0.14.1.dev137+gcc7dc8da9 documentation</title>
+  <title>Special &mdash; Diofant 0.14.1.dev127+g060e01f38 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
@@ -16,7 +16,7 @@
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=e5eaf511"></script>
+        <script src="../../_static/documentation_options.js?v=e98d8c7c"></script>
         <script src="../../_static/doctools.js?v=888ff710"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script>window.MathJax = {"CommonHTML": {"linebreaks": {"automatic": true}}, "HTML-CSS": {"linebreaks": {"automatic": true}}, "SVG": {"linebreaks": {"automatic": true}}}</script>
@@ -2254,19 +2254,9 @@ linearly independent from <span class="math notranslate nohighlight">\(j_n\)</sp
 
 <dl class="py function">
 <dt class="sig sig-object py" id="diofant.functions.special.bessel.jn_zeros">
-<span class="sig-prename descclassname"><span class="pre">diofant.functions.special.bessel.</span></span><span class="sig-name descname"><span class="pre">jn_zeros</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'diofant'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">15</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/functions/special/bessel.py#L661-L720"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.functions.special.bessel.jn_zeros" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">diofant.functions.special.bessel.</span></span><span class="sig-name descname"><span class="pre">jn_zeros</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">15</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/functions/special/bessel.py#L661-L682"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.functions.special.bessel.jn_zeros" title="Link to this definition"></a></dt>
 <dd><p>Zeros of the spherical Bessel function of the first kind.</p>
 <p>This returns an array of zeros of jn up to the k-th zero.</p>
-<ul class="simple">
-<li><p>method = “diofant”: uses mpmath’s function <code class="docutils literal notranslate"><span class="pre">besseljzero</span></code></p></li>
-<li><p>method = “scipy”: uses <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.spherical_jn.html#scipy.special.spherical_jn" title="(in SciPy v1.11.2)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.special.spherical_jn()</span></code></a>.
-and <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.newton.html#scipy.optimize.newton" title="(in SciPy v1.11.2)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.optimize.newton()</span></code></a> to find all
-roots, which is faster than computing the zeros using a general
-numerical solver, but it requires SciPy and only works with low
-precision floating point numbers.  [The function used with
-method=”diofant” is a recent addition to mpmath, before that a general
-solver was used.]</p></li>
-</ul>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">jn_zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">dps</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="go">[5.7635, 9.095, 12.323, 15.515]</span>
@@ -2283,14 +2273,14 @@ solver was used.]</p></li>
 <h2>Airy Functions<a class="headerlink" href="#airy-functions" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="diofant.functions.special.bessel.AiryBase">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">diofant.functions.special.bessel.</span></span><span class="sig-name descname"><span class="pre">AiryBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/functions/special/bessel.py#L723-L752"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.functions.special.bessel.AiryBase" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">diofant.functions.special.bessel.</span></span><span class="sig-name descname"><span class="pre">AiryBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/functions/special/bessel.py#L685-L714"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.functions.special.bessel.AiryBase" title="Link to this definition"></a></dt>
 <dd><p>Abstract base class for Airy functions.</p>
 <p>This class is meant to reduce code duplication.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="diofant.functions.special.bessel.airyai">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">diofant.functions.special.bessel.</span></span><span class="sig-name descname"><span class="pre">airyai</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/functions/special/bessel.py#L755-L901"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.functions.special.bessel.airyai" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">diofant.functions.special.bessel.</span></span><span class="sig-name descname"><span class="pre">airyai</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/functions/special/bessel.py#L717-L863"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.functions.special.bessel.airyai" title="Link to this definition"></a></dt>
 <dd><p>The Airy function <span class="math notranslate nohighlight">\(\operatorname{Ai}\)</span> of the first kind.</p>
 <p>The Airy function <span class="math notranslate nohighlight">\(\operatorname{Ai}(z)\)</span> is defined to be the function
 satisfying Airy’s differential equation</p>
@@ -2365,7 +2355,7 @@ on the whole complex plane:</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="diofant.functions.special.bessel.airybi">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">diofant.functions.special.bessel.</span></span><span class="sig-name descname"><span class="pre">airybi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/functions/special/bessel.py#L904-L1056"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.functions.special.bessel.airybi" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">diofant.functions.special.bessel.</span></span><span class="sig-name descname"><span class="pre">airybi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/functions/special/bessel.py#L866-L1018"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.functions.special.bessel.airybi" title="Link to this definition"></a></dt>
 <dd><p>The Airy function <span class="math notranslate nohighlight">\(\operatorname{Bi}\)</span> of the second kind.</p>
 <p>The Airy function <span class="math notranslate nohighlight">\(\operatorname{Bi}(z)\)</span> is defined to be the function
 satisfying Airy’s differential equation</p>
@@ -2442,7 +2432,7 @@ on the whole complex plane:</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="diofant.functions.special.bessel.airyaiprime">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">diofant.functions.special.bessel.</span></span><span class="sig-name descname"><span class="pre">airyaiprime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/functions/special/bessel.py#L1115-L1251"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.functions.special.bessel.airyaiprime" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">diofant.functions.special.bessel.</span></span><span class="sig-name descname"><span class="pre">airyaiprime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/functions/special/bessel.py#L1077-L1213"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.functions.special.bessel.airyaiprime" title="Link to this definition"></a></dt>
 <dd><p>The derivative <span class="math notranslate nohighlight">\(\operatorname{Ai}^\prime\)</span> of the Airy function of the first kind.</p>
 <p>The Airy function <span class="math notranslate nohighlight">\(\operatorname{Ai}^\prime(z)\)</span> is defined to be the function</p>
 <div class="math notranslate nohighlight">
@@ -2510,7 +2500,7 @@ on the whole complex plane:</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="diofant.functions.special.bessel.airybiprime">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">diofant.functions.special.bessel.</span></span><span class="sig-name descname"><span class="pre">airybiprime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/functions/special/bessel.py#L1254-L1394"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.functions.special.bessel.airybiprime" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">diofant.functions.special.bessel.</span></span><span class="sig-name descname"><span class="pre">airybiprime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/functions/special/bessel.py#L1216-L1356"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.functions.special.bessel.airybiprime" title="Link to this definition"></a></dt>
 <dd><p>The derivative <span class="math notranslate nohighlight">\(\operatorname{Bi}^\prime\)</span> of the Airy function of the first kind.</p>
 <p>The Airy function <span class="math notranslate nohighlight">\(\operatorname{Bi}^\prime(z)\)</span> is defined to be the function</p>
 <div class="math notranslate nohighlight">
