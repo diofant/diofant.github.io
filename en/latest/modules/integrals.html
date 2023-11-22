@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Integrals &mdash; Diofant 0.14.1.dev192+gb5199bdb0 documentation</title>
+  <title>Integrals &mdash; Diofant 0.14.1.dev194+g49a8f0bb9 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
@@ -16,7 +16,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=7d3c7cd0"></script>
+        <script src="../_static/documentation_options.js?v=9b1e6ccb"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script>window.MathJax = {"CommonHTML": {"linebreaks": {"automatic": true}}, "HTML-CSS": {"linebreaks": {"automatic": true}}, "SVG": {"linebreaks": {"automatic": true}}}</script>
@@ -116,8 +116,10 @@
              
   <section id="module-diofant.integrals">
 <span id="integrals"></span><h1>Integrals<a class="headerlink" href="#module-diofant.integrals" title="Link to this heading"></a></h1>
-<p>The <code class="docutils literal notranslate"><span class="pre">integrals</span></code> module in Diofant implements methods to calculate definite and indefinite integrals of expressions.</p>
-<p>Principal method in this module is <a class="reference internal" href="#diofant.integrals.integrals.integrate" title="diofant.integrals.integrals.integrate"><code class="xref py py-func docutils literal notranslate"><span class="pre">integrate()</span></code></a></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">integrals</span></code> module in Diofant implements methods to calculate definite
+and indefinite integrals of expressions.</p>
+<p>Principal method in this module is
+<a class="reference internal" href="#diofant.integrals.integrals.integrate" title="diofant.integrals.integrals.integrate"><code class="xref py py-func docutils literal notranslate"><span class="pre">integrate()</span></code></a></p>
 <blockquote>
 <div><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">integrate(f,</span> <span class="pre">x)</span></code> returns the indefinite integral <span class="math notranslate nohighlight">\(\int f\,dx\)</span></p></li>
@@ -126,36 +128,40 @@
 </div></blockquote>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
-<p>Diofant can integrate a vast array of functions. It can integrate polynomial functions:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">init_printing</span><span class="p">(</span><span class="n">pretty_print</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">use_unicode</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<span class="gp">... </span>              <span class="n">wrap_line</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">no_global</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<p>Diofant can integrate a vast array of functions.  It can integrate polynomial
+functions:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">init_printing</span><span class="p">(</span><span class="n">pretty_print</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">wrap_line</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">no_global</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">integrate</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 <span class="go"> 3    2</span>
 <span class="go">x    x</span>
-<span class="go">-- + -- + x</span>
+<span class="go">── + ── + x</span>
 <span class="go">3    2</span>
 </pre></div>
 </div>
 <p>Rational functions:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">integrate</span><span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
 <span class="go">               1</span>
-<span class="go">log(x + 1) + -----</span>
+<span class="go">log(x + 1) + ─────</span>
 <span class="go">             x + 1</span>
 </pre></div>
 </div>
-<p>Exponential-polynomial functions. These multiplicative combinations of polynomials and the functions <code class="docutils literal notranslate"><span class="pre">exp</span></code>, <code class="docutils literal notranslate"><span class="pre">cos</span></code> and <code class="docutils literal notranslate"><span class="pre">sin</span></code> can be integrated by hand using repeated integration by parts, which is an extremely tedious process. Happily, Diofant will deal with these integrals.</p>
+<p>Exponential-polynomial functions. These multiplicative combinations of
+polynomials and the functions <code class="docutils literal notranslate"><span class="pre">exp</span></code>, <code class="docutils literal notranslate"><span class="pre">cos</span></code> and <code class="docutils literal notranslate"><span class="pre">sin</span></code> can be integrated by
+hand using repeated integration by parts, which is an extremely tedious
+process.  Happily, Diofant will deal with these integrals.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">integrate</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
 <span class="go"> x  2           x  2                         x           x</span>
-<span class="go">E *x *sin(x)   E *x *cos(x)    x            E *sin(x)   E *cos(x)</span>
-<span class="go">------------ + ------------ - E *x*sin(x) + --------- - ---------</span>
+<span class="go">ℯ ⋅x ⋅sin(x)   ℯ ⋅x ⋅cos(x)    x            ℯ ⋅sin(x)   ℯ ⋅cos(x)</span>
+<span class="go">──────────── + ──────────── - ℯ ⋅x⋅sin(x) + ───────── - ─────────</span>
 <span class="go">     2              2                           2           2</span>
 </pre></div>
 </div>
-<p>even a few nonelementary integrals (in particular, some integrals involving the error function) can be evaluated:</p>
+<p>even a few nonelementary integrals (in particular, some integrals involving the
+error function) can be evaluated:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">integrate</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">erf</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
-<span class="go">  ____    2</span>
-<span class="go">\/ pi *erf (x)</span>
-<span class="go">--------------</span>
+<span class="go">  ___    2</span>
+<span class="go">╲╱ π ⋅erf (x)</span>
+<span class="go">─────────────</span>
 <span class="go">      4</span>
 </pre></div>
 </div>
@@ -518,10 +524,18 @@ Note that for this transform, by default <code class="docutils literal notransla
 </section>
 <section id="internals">
 <h2>Internals<a class="headerlink" href="#internals" title="Link to this heading"></a></h2>
-<p>There is a general method for calculating antiderivatives of elementary functions, called the <em>Risch algorithm</em>. The Risch algorithm is a decision procedure that can determine whether an elementary solution exists, and in that case calculate it. It can be extended to handle many nonelementary functions in addition to the elementary ones.</p>
-<p>Diofant currently uses a simplified version of the Risch algorithm, called the <em>Risch-Norman algorithm</em>. This algorithm is much faster, but may fail to find an antiderivative, although it is still very powerful. Diofant also uses pattern matching and heuristics to speed up evaluation of some types of integrals, e.g. polynomials.</p>
-<p>For non-elementary definite integrals, Diofant uses so-called Meijer G-functions.
-Details are described <a class="reference internal" href="../internals/g-functions.html#meijerg-label"><span class="std std-ref">here</span></a>.</p>
+<p>There is a general method for calculating antiderivatives of elementary
+functions, called the <em>Risch algorithm</em>.  The Risch algorithm is a decision
+procedure that can determine whether an elementary solution exists, and in that
+case calculate it.  It can be extended to handle many nonelementary functions in
+addition to the elementary ones.</p>
+<p>Diofant currently uses a simplified version of the Risch algorithm, called the
+<em>Risch-Norman algorithm</em>.  This algorithm is much faster, but may fail to find
+an antiderivative, although it is still very powerful.  Diofant also uses
+pattern matching and heuristics to speed up evaluation of some types of
+integrals, e.g. polynomials.</p>
+<p>For non-elementary definite integrals, Diofant uses so-called Meijer
+G-functions.  Details are described <a class="reference internal" href="../internals/g-functions.html#meijerg-label"><span class="std std-ref">here</span></a>.</p>
 </section>
 <section id="api-reference">
 <h2>API reference<a class="headerlink" href="#api-reference" title="Link to this heading"></a></h2>
@@ -888,7 +902,8 @@ the final integration result is given in terms of a Piecewise.</p>
 </div>
 </dd></dl>
 
-<p>The class <span class="math notranslate nohighlight">\(Integral\)</span> represents an unevaluated integral and has some methods that help in the integration of an expression.</p>
+<p>The class <span class="math notranslate nohighlight">\(Integral\)</span> represents an unevaluated integral and has some methods
+that help in the integration of an expression.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="diofant.integrals.integrals.Integral">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">diofant.integrals.integrals.</span></span><span class="sig-name descname"><span class="pre">Integral</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">symbols</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">assumptions</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/integrals/integrals.py#L16-L1044"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.integrals.integrals.Integral" title="Link to this definition"></a></dt>
@@ -1296,8 +1311,8 @@ is evaluated.</p>
 </section>
 <section id="numeric-integrals">
 <h2>Numeric Integrals<a class="headerlink" href="#numeric-integrals" title="Link to this heading"></a></h2>
-<p>Diofant has functions to calculate points and weights for Gaussian quadrature of
-any order and any precision:</p>
+<p>Diofant has functions to calculate points and weights for Gaussian quadrature
+of any order and any precision:</p>
 <dl class="py function" id="module-diofant.integrals.quadrature">
 <dt class="sig sig-object py" id="diofant.integrals.quadrature.gauss_legendre">
 <span class="sig-prename descclassname"><span class="pre">diofant.integrals.quadrature.</span></span><span class="sig-name descname"><span class="pre">gauss_legendre</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_digits</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/integrals/quadrature.py#L8-L78"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.integrals.quadrature.gauss_legendre" title="Link to this definition"></a></dt>

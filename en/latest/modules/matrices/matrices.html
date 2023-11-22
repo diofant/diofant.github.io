@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Matrices (linear algebra) &mdash; Diofant 0.14.1.dev192+gb5199bdb0 documentation</title>
+  <title>Matrices (linear algebra) &mdash; Diofant 0.14.1.dev194+g49a8f0bb9 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
@@ -16,7 +16,7 @@
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=7d3c7cd0"></script>
+        <script src="../../_static/documentation_options.js?v=9b1e6ccb"></script>
         <script src="../../_static/doctools.js?v=888ff710"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script>window.MathJax = {"CommonHTML": {"linebreaks": {"automatic": true}}, "HTML-CSS": {"linebreaks": {"automatic": true}}, "SVG": {"linebreaks": {"automatic": true}}}</script>
@@ -129,42 +129,41 @@
 <span id="matrices-linear-algebra"></span><h1>Matrices (linear algebra)<a class="headerlink" href="#module-diofant.matrices.matrices" title="Link to this heading"></a></h1>
 <section id="creating-matrices">
 <h2>Creating Matrices<a class="headerlink" href="#creating-matrices" title="Link to this heading"></a></h2>
-<p>The linear algebra module is designed to be as simple as possible. First, we
+<p>The linear algebra module is designed to be as simple as possible.  First, we
 import and declare our first <code class="docutils literal notranslate"><span class="pre">Matrix</span></code> object:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">init_printing</span><span class="p">(</span><span class="n">pretty_print</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">use_unicode</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<span class="gp">... </span>              <span class="n">wrap_line</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">no_global</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">init_printing</span><span class="p">(</span><span class="n">pretty_print</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">wrap_line</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">no_global</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M</span>
-<span class="go">[1  0  0]</span>
-<span class="go">[       ]</span>
-<span class="go">[0  0  0]</span>
+<span class="go">⎡1  0  0⎤</span>
+<span class="go">⎢       ⎥</span>
+<span class="go">⎣0  0  0⎦</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Matrix</span><span class="p">([</span><span class="n">M</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)])</span>
-<span class="go">[1  0  0 ]</span>
-<span class="go">[        ]</span>
-<span class="go">[0  0  0 ]</span>
-<span class="go">[        ]</span>
-<span class="go">[0  0  -1]</span>
+<span class="go">⎡1  0  0 ⎤</span>
+<span class="go">⎢        ⎥</span>
+<span class="go">⎢0  0  0 ⎥</span>
+<span class="go">⎢        ⎥</span>
+<span class="go">⎣0  0  -1⎦</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Matrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
 <span class="go">[1 2 3]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Matrix</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
-<span class="go">[1]</span>
-<span class="go">[ ]</span>
-<span class="go">[2]</span>
-<span class="go">[ ]</span>
-<span class="go">[3]</span>
+<span class="go">⎡1⎤</span>
+<span class="go">⎢ ⎥</span>
+<span class="go">⎢2⎥</span>
+<span class="go">⎢ ⎥</span>
+<span class="go">⎣3⎦</span>
 </pre></div>
 </div>
 <p>In addition to creating a matrix from a list of appropriately-sized lists
 and/or matrices, Diofant also supports more advanced methods of matrix creation
 including a single list of values and dimension inputs:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Matrix</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
-<span class="go">[1  2  3]</span>
-<span class="go">[       ]</span>
-<span class="go">[4  5  6]</span>
+<span class="go">⎡1  2  3⎤</span>
+<span class="go">⎢       ⎥</span>
+<span class="go">⎣4  5  6⎦</span>
 </pre></div>
 </div>
 <p>More interesting (and useful), is the ability to use a 2-variable function
-(or <code class="docutils literal notranslate"><span class="pre">lambda</span></code>) to create a matrix. Here we create an indicator function which
+(or <code class="docutils literal notranslate"><span class="pre">lambda</span></code>) to create a matrix.  Here we create an indicator function which
 is 1 on the diagonal and then use it to make the identity matrix:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">:</span>
@@ -173,23 +172,23 @@ is 1 on the diagonal and then use it to make the identity matrix:</p>
 <span class="gp">... </span>        <span class="k">return</span> <span class="mi">0</span>
 <span class="gp">...</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Matrix</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
-<span class="go">[1  0  0  0]</span>
-<span class="go">[          ]</span>
-<span class="go">[0  1  0  0]</span>
-<span class="go">[          ]</span>
-<span class="go">[0  0  1  0]</span>
-<span class="go">[          ]</span>
-<span class="go">[0  0  0  1]</span>
+<span class="go">⎡1  0  0  0⎤</span>
+<span class="go">⎢          ⎥</span>
+<span class="go">⎢0  1  0  0⎥</span>
+<span class="go">⎢          ⎥</span>
+<span class="go">⎢0  0  1  0⎥</span>
+<span class="go">⎢          ⎥</span>
+<span class="go">⎣0  0  0  1⎦</span>
 </pre></div>
 </div>
 <p>Finally let’s use <code class="docutils literal notranslate"><span class="pre">lambda</span></code> to create a 1-line matrix with 1’s in the even
 permutation entries:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Matrix</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span>
-<span class="go">[1  0  1  0]</span>
-<span class="go">[          ]</span>
-<span class="go">[0  1  0  1]</span>
-<span class="go">[          ]</span>
-<span class="go">[1  0  1  0]</span>
+<span class="go">⎡1  0  1  0⎤</span>
+<span class="go">⎢          ⎥</span>
+<span class="go">⎢0  1  0  1⎥</span>
+<span class="go">⎢          ⎥</span>
+<span class="go">⎣1  0  1  0⎦</span>
 </pre></div>
 </div>
 <p>There are also a couple of special constructors for quick matrix construction:
@@ -197,42 +196,42 @@ permutation entries:</p>
 zeros and ones, respectively, and <code class="docutils literal notranslate"><span class="pre">diag</span></code> to put matrices or elements along
 the diagonal:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eye</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-<span class="go">[1  0  0  0]</span>
-<span class="go">[          ]</span>
-<span class="go">[0  1  0  0]</span>
-<span class="go">[          ]</span>
-<span class="go">[0  0  1  0]</span>
-<span class="go">[          ]</span>
-<span class="go">[0  0  0  1]</span>
+<span class="go">⎡1  0  0  0⎤</span>
+<span class="go">⎢          ⎥</span>
+<span class="go">⎢0  1  0  0⎥</span>
+<span class="go">⎢          ⎥</span>
+<span class="go">⎢0  0  1  0⎥</span>
+<span class="go">⎢          ⎥</span>
+<span class="go">⎣0  0  0  1⎦</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="go">[0  0]</span>
-<span class="go">[    ]</span>
-<span class="go">[0  0]</span>
+<span class="go">⎡0  0⎤</span>
+<span class="go">⎢    ⎥</span>
+<span class="go">⎣0  0⎦</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-<span class="go">[0  0  0  0  0]</span>
-<span class="go">[             ]</span>
-<span class="go">[0  0  0  0  0]</span>
+<span class="go">⎡0  0  0  0  0⎤</span>
+<span class="go">⎢             ⎥</span>
+<span class="go">⎣0  0  0  0  0⎦</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ones</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="go">[1  1  1]</span>
-<span class="go">[       ]</span>
-<span class="go">[1  1  1]</span>
-<span class="go">[       ]</span>
-<span class="go">[1  1  1]</span>
+<span class="go">⎡1  1  1⎤</span>
+<span class="go">⎢       ⎥</span>
+<span class="go">⎢1  1  1⎥</span>
+<span class="go">⎢       ⎥</span>
+<span class="go">⎣1  1  1⎦</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ones</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 <span class="go">[1  1  1]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">diag</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">Matrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]]))</span>
-<span class="go">[1  0  0]</span>
-<span class="go">[       ]</span>
-<span class="go">[0  1  2]</span>
-<span class="go">[       ]</span>
-<span class="go">[0  3  4]</span>
+<span class="go">⎡1  0  0⎤</span>
+<span class="go">⎢       ⎥</span>
+<span class="go">⎢0  1  2⎥</span>
+<span class="go">⎢       ⎥</span>
+<span class="go">⎣0  3  4⎦</span>
 </pre></div>
 </div>
 </section>
 <section id="basic-manipulation">
 <h2>Basic Manipulation<a class="headerlink" href="#basic-manipulation" title="Link to this heading"></a></h2>
 <p>While learning to work with matrices, let’s choose one where the entries are
-readily identifiable. One useful thing to know is that while matrices are
+readily identifiable.  One useful thing to know is that while matrices are
 2-dimensional, the storage is not and so it is allowable - though one should be
 careful - to access the entries as if they were a 1-d list.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
@@ -253,15 +252,15 @@ return the value at the corresponding row and column of the matrix:</p>
 <p>Since this is Python we’re also able to slice submatrices; slices always
 give a matrix in return, even if the dimension is 1 x 1:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">M</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
-<span class="go">[1  2]</span>
-<span class="go">[    ]</span>
-<span class="go">[4  5]</span>
+<span class="go">⎡1  2⎤</span>
+<span class="go">⎢    ⎥</span>
+<span class="go">⎣4  5⎦</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
 <span class="go">[]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span>
-<span class="go">[3]</span>
-<span class="go">[ ]</span>
-<span class="go">[6]</span>
+<span class="go">⎡3⎤</span>
+<span class="go">⎢ ⎥</span>
+<span class="go">⎣6⎦</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M</span><span class="p">[:</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
 <span class="go">[3]</span>
 </pre></div>
@@ -277,9 +276,9 @@ are in a slice:</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M</span><span class="p">[:,</span> <span class="mi">10</span><span class="p">:</span><span class="mi">11</span><span class="p">]</span>  <span class="c1"># the 10-th column (if there)</span>
 <span class="go">[]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">10</span><span class="p">]</span>  <span class="c1"># all columns up to the 10-th</span>
-<span class="go">[1  2  3]</span>
-<span class="go">[       ]</span>
-<span class="go">[4  5  6]</span>
+<span class="go">⎡1  2  3⎤</span>
+<span class="go">⎢       ⎥</span>
+<span class="go">⎣4  5  6⎦</span>
 </pre></div>
 </div>
 <p>Slicing an empty matrix works as long as you use a slice for the coordinate
@@ -296,87 +295,87 @@ do not affect the other:</p>
 <span class="go">False</span>
 </pre></div>
 </div>
-<p>Notice that changing <code class="docutils literal notranslate"><span class="pre">M2</span></code> didn’t change <code class="docutils literal notranslate"><span class="pre">M</span></code>. Since we can slice, we can also assign
-entries:</p>
+<p>Notice that changing <code class="docutils literal notranslate"><span class="pre">M2</span></code> didn’t change <code class="docutils literal notranslate"><span class="pre">M</span></code>.  Since we can slice, we can
+also assign entries:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">(([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">],</span> <span class="p">[</span><span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">16</span><span class="p">]))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M</span>
-<span class="go">[1   2   3   4 ]</span>
-<span class="go">[              ]</span>
-<span class="go">[5   6   7   8 ]</span>
-<span class="go">[              ]</span>
-<span class="go">[9   10  11  12]</span>
-<span class="go">[              ]</span>
-<span class="go">[13  14  15  16]</span>
+<span class="go">⎡1   2   3   4 ⎤</span>
+<span class="go">⎢              ⎥</span>
+<span class="go">⎢5   6   7   8 ⎥</span>
+<span class="go">⎢              ⎥</span>
+<span class="go">⎢9   10  11  12⎥</span>
+<span class="go">⎢              ⎥</span>
+<span class="go">⎣13  14  15  16⎦</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M</span>
-<span class="go">[1   2   3   0 ]</span>
-<span class="go">[              ]</span>
-<span class="go">[5   6   7   8 ]</span>
-<span class="go">[              ]</span>
-<span class="go">[9   10  0   12]</span>
-<span class="go">[              ]</span>
-<span class="go">[13  14  15  16]</span>
+<span class="go">⎡1   2   3   0 ⎤</span>
+<span class="go">⎢              ⎥</span>
+<span class="go">⎢5   6   7   8 ⎥</span>
+<span class="go">⎢              ⎥</span>
+<span class="go">⎢9   10  0   12⎥</span>
+<span class="go">⎢              ⎥</span>
+<span class="go">⎣13  14  15  16⎦</span>
 </pre></div>
 </div>
 <p>as well as assign slices:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">(([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">],</span> <span class="p">[</span><span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">16</span><span class="p">]))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M</span><span class="p">[</span><span class="mi">2</span><span class="p">:,</span> <span class="mi">2</span><span class="p">:]</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M</span>
-<span class="go">[1   2   3  4]</span>
-<span class="go">[            ]</span>
-<span class="go">[5   6   7  8]</span>
-<span class="go">[            ]</span>
-<span class="go">[9   10  0  0]</span>
-<span class="go">[            ]</span>
-<span class="go">[13  14  0  0]</span>
+<span class="go">⎡1   2   3  4⎤</span>
+<span class="go">⎢            ⎥</span>
+<span class="go">⎢5   6   7  8⎥</span>
+<span class="go">⎢            ⎥</span>
+<span class="go">⎢9   10  0  0⎥</span>
+<span class="go">⎢            ⎥</span>
+<span class="go">⎣13  14  0  0⎦</span>
 </pre></div>
 </div>
 <p>All the standard arithmetic operations are supported:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">(([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">-</span> <span class="n">M</span>
-<span class="go">[0  0  0]</span>
-<span class="go">[       ]</span>
-<span class="go">[0  0  0]</span>
-<span class="go">[       ]</span>
-<span class="go">[0  0  0]</span>
+<span class="go">⎡0  0  0⎤</span>
+<span class="go">⎢       ⎥</span>
+<span class="go">⎢0  0  0⎥</span>
+<span class="go">⎢       ⎥</span>
+<span class="go">⎣0  0  0⎦</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">+</span> <span class="n">M</span>
-<span class="go">[2   4   6 ]</span>
-<span class="go">[          ]</span>
-<span class="go">[8   10  12]</span>
-<span class="go">[          ]</span>
-<span class="go">[14  16  18]</span>
+<span class="go">⎡2   4   6 ⎤</span>
+<span class="go">⎢          ⎥</span>
+<span class="go">⎢8   10  12⎥</span>
+<span class="go">⎢          ⎥</span>
+<span class="go">⎣14  16  18⎦</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">*</span> <span class="n">M</span>
-<span class="go">[30   36   42 ]</span>
-<span class="go">[             ]</span>
-<span class="go">[66   81   96 ]</span>
-<span class="go">[             ]</span>
-<span class="go">[102  126  150]</span>
+<span class="go">⎡30   36   42 ⎤</span>
+<span class="go">⎢             ⎥</span>
+<span class="go">⎢66   81   96 ⎥</span>
+<span class="go">⎢             ⎥</span>
+<span class="go">⎣102  126  150⎦</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M2</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M</span><span class="o">*</span><span class="n">M2</span>
-<span class="go">[11]</span>
-<span class="go">[  ]</span>
-<span class="go">[29]</span>
-<span class="go">[  ]</span>
-<span class="go">[47]</span>
+<span class="go">⎡11⎤</span>
+<span class="go">⎢  ⎥</span>
+<span class="go">⎢29⎥</span>
+<span class="go">⎢  ⎥</span>
+<span class="go">⎣47⎦</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M</span><span class="o">**</span><span class="mi">2</span>
-<span class="go">[30   36   42 ]</span>
-<span class="go">[             ]</span>
-<span class="go">[66   81   96 ]</span>
-<span class="go">[             ]</span>
-<span class="go">[102  126  150]</span>
+<span class="go">⎡30   36   42 ⎤</span>
+<span class="go">⎢             ⎥</span>
+<span class="go">⎢66   81   96 ⎥</span>
+<span class="go">⎢             ⎥</span>
+<span class="go">⎣102  126  150⎦</span>
 </pre></div>
 </div>
 <p>As well as some useful vector operations:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">del</span> <span class="n">M</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M</span>
-<span class="go">[4  5  6]</span>
-<span class="go">[       ]</span>
-<span class="go">[7  8  9]</span>
+<span class="go">⎡4  5  6⎤</span>
+<span class="go">⎢       ⎥</span>
+<span class="go">⎣7  8  9⎦</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">del</span> <span class="n">M</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M</span>
-<span class="go">[4  6]</span>
-<span class="go">[    ]</span>
-<span class="go">[7  9]</span>
+<span class="go">⎡4  6⎤</span>
+<span class="go">⎢    ⎥</span>
+<span class="go">⎣7  9⎦</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">v1</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">v2</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">v3</span> <span class="o">=</span> <span class="n">v1</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
@@ -392,26 +391,26 @@ entries:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">M1</span> <span class="o">=</span> <span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M2</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M1</span><span class="o">.</span><span class="n">row_join</span><span class="p">(</span><span class="n">M2</span><span class="p">)</span>
-<span class="go">[1  0  0  0  0  0  0]</span>
-<span class="go">[                   ]</span>
-<span class="go">[0  1  0  0  0  0  0]</span>
-<span class="go">[                   ]</span>
-<span class="go">[0  0  1  0  0  0  0]</span>
+<span class="go">⎡1  0  0  0  0  0  0⎤</span>
+<span class="go">⎢                   ⎥</span>
+<span class="go">⎢0  1  0  0  0  0  0⎥</span>
+<span class="go">⎢                   ⎥</span>
+<span class="go">⎣0  0  1  0  0  0  0⎦</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M3</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M1</span><span class="o">.</span><span class="n">col_join</span><span class="p">(</span><span class="n">M3</span><span class="p">)</span>
-<span class="go">[1  0  0]</span>
-<span class="go">[       ]</span>
-<span class="go">[0  1  0]</span>
-<span class="go">[       ]</span>
-<span class="go">[0  0  1]</span>
-<span class="go">[       ]</span>
-<span class="go">[0  0  0]</span>
-<span class="go">[       ]</span>
-<span class="go">[0  0  0]</span>
-<span class="go">[       ]</span>
-<span class="go">[0  0  0]</span>
-<span class="go">[       ]</span>
-<span class="go">[0  0  0]</span>
+<span class="go">⎡1  0  0⎤</span>
+<span class="go">⎢       ⎥</span>
+<span class="go">⎢0  1  0⎥</span>
+<span class="go">⎢       ⎥</span>
+<span class="go">⎢0  0  1⎥</span>
+<span class="go">⎢       ⎥</span>
+<span class="go">⎢0  0  0⎥</span>
+<span class="go">⎢       ⎥</span>
+<span class="go">⎢0  0  0⎥</span>
+<span class="go">⎢       ⎥</span>
+<span class="go">⎢0  0  0⎥</span>
+<span class="go">⎢       ⎥</span>
+<span class="go">⎣0  0  0⎦</span>
 </pre></div>
 </div>
 </section>
@@ -420,57 +419,61 @@ entries:</p>
 <p>We are not restricted to having multiplication between two matrices:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="mi">2</span><span class="o">*</span><span class="n">M</span>
-<span class="go">[2  0  0]</span>
-<span class="go">[       ]</span>
-<span class="go">[0  2  0]</span>
-<span class="go">[       ]</span>
-<span class="go">[0  0  2]</span>
+<span class="go">⎡2  0  0⎤</span>
+<span class="go">⎢       ⎥</span>
+<span class="go">⎢0  2  0⎥</span>
+<span class="go">⎢       ⎥</span>
+<span class="go">⎣0  0  2⎦</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="mi">3</span><span class="o">*</span><span class="n">M</span>
-<span class="go">[3  0  0]</span>
-<span class="go">[       ]</span>
-<span class="go">[0  3  0]</span>
-<span class="go">[       ]</span>
-<span class="go">[0  0  3]</span>
+<span class="go">⎡3  0  0⎤</span>
+<span class="go">⎢       ⎥</span>
+<span class="go">⎢0  3  0⎥</span>
+<span class="go">⎢       ⎥</span>
+<span class="go">⎣0  0  3⎦</span>
 </pre></div>
 </div>
-<p>but we can also apply functions to our matrix entries using <code class="docutils literal notranslate"><span class="pre">applyfunc()</span></code>. Here we’ll declare a function that double any input number. Then we apply it to the 3x3 identity matrix:</p>
+<p>but we can also apply functions to our matrix entries using <code class="docutils literal notranslate"><span class="pre">applyfunc()</span></code>.
+Here we’ll declare a function that double any input number.  Then we apply it
+to the 3x3 identity matrix:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="k">return</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">applyfunc</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-<span class="go">[2  0  0]</span>
-<span class="go">[       ]</span>
-<span class="go">[0  2  0]</span>
-<span class="go">[       ]</span>
-<span class="go">[0  0  2]</span>
+<span class="go">⎡2  0  0⎤</span>
+<span class="go">⎢       ⎥</span>
+<span class="go">⎢0  2  0⎥</span>
+<span class="go">⎢       ⎥</span>
+<span class="go">⎣0  0  2⎦</span>
 </pre></div>
 </div>
-<p>One more useful matrix-wide entry application function is the substitution function. Let’s declare a matrix with symbolic entries then substitute a value. Remember we can substitute anything - even another symbol!:</p>
+<p>One more useful matrix-wide entry application function is the substitution
+function.  Let’s declare a matrix with symbolic entries then substitute a
+value.  Remember we can substitute anything - even another symbol!:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="n">x</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M</span>
-<span class="go">[x  0  0]</span>
-<span class="go">[       ]</span>
-<span class="go">[0  x  0]</span>
-<span class="go">[       ]</span>
-<span class="go">[0  0  x]</span>
+<span class="go">⎡x  0  0⎤</span>
+<span class="go">⎢       ⎥</span>
+<span class="go">⎢0  x  0⎥</span>
+<span class="go">⎢       ⎥</span>
+<span class="go">⎣0  0  x⎦</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span> <span class="mi">4</span><span class="p">})</span>
-<span class="go">[4  0  0]</span>
-<span class="go">[       ]</span>
-<span class="go">[0  4  0]</span>
-<span class="go">[       ]</span>
-<span class="go">[0  0  4]</span>
+<span class="go">⎡4  0  0⎤</span>
+<span class="go">⎢       ⎥</span>
+<span class="go">⎢0  4  0⎥</span>
+<span class="go">⎢       ⎥</span>
+<span class="go">⎣0  0  4⎦</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span> <span class="n">y</span><span class="p">})</span>
-<span class="go">[y  0  0]</span>
-<span class="go">[       ]</span>
-<span class="go">[0  y  0]</span>
-<span class="go">[       ]</span>
-<span class="go">[0  0  y]</span>
+<span class="go">⎡y  0  0⎤</span>
+<span class="go">⎢       ⎥</span>
+<span class="go">⎢0  y  0⎥</span>
+<span class="go">⎢       ⎥</span>
+<span class="go">⎣0  0  y⎦</span>
 </pre></div>
 </div>
 </section>
 <section id="linear-algebra">
 <h2>Linear algebra<a class="headerlink" href="#linear-algebra" title="Link to this heading"></a></h2>
 <p>Now that we have the basics out of the way, let’s see what we can do with the
-actual matrices. Of course, one of the first things that comes to mind is the
+actual matrices.  Of course, one of the first things that comes to mind is the
 determinant:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">(([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M</span><span class="o">.</span><span class="n">det</span><span class="p">()</span>
@@ -487,90 +490,90 @@ determinant:</p>
 elimination by default (for dense matrices) but we can specify it be done by <span class="math notranslate nohighlight">\(LU\)</span>
 decomposition as well:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">M2</span><span class="o">.</span><span class="n">inv</span><span class="p">()</span>
-<span class="go">[1  0  0]</span>
-<span class="go">[       ]</span>
-<span class="go">[0  1  0]</span>
-<span class="go">[       ]</span>
-<span class="go">[0  0  1]</span>
+<span class="go">⎡1  0  0⎤</span>
+<span class="go">⎢       ⎥</span>
+<span class="go">⎢0  1  0⎥</span>
+<span class="go">⎢       ⎥</span>
+<span class="go">⎣0  0  1⎦</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M2</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;LU&#39;</span><span class="p">)</span>
-<span class="go">[1  0  0]</span>
-<span class="go">[       ]</span>
-<span class="go">[0  1  0]</span>
-<span class="go">[       ]</span>
-<span class="go">[0  0  1]</span>
+<span class="go">⎡1  0  0⎤</span>
+<span class="go">⎢       ⎥</span>
+<span class="go">⎢0  1  0⎥</span>
+<span class="go">⎢       ⎥</span>
+<span class="go">⎣0  0  1⎦</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;LU&#39;</span><span class="p">)</span>
-<span class="go">[-3/14  1/14  1/2 ]</span>
-<span class="go">[                 ]</span>
-<span class="go">[-1/28  5/28  -1/4]</span>
-<span class="go">[                 ]</span>
-<span class="go">[ 3/7   -1/7   0  ]</span>
+<span class="go">⎡-3/14  1/14  1/2 ⎤</span>
+<span class="go">⎢                 ⎥</span>
+<span class="go">⎢-1/28  5/28  -1/4⎥</span>
+<span class="go">⎢                 ⎥</span>
+<span class="go">⎣ 3/7   -1/7   0  ⎦</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">*</span> <span class="n">M</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;LU&#39;</span><span class="p">)</span>
-<span class="go">[1  0  0]</span>
-<span class="go">[       ]</span>
-<span class="go">[0  1  0]</span>
-<span class="go">[       ]</span>
-<span class="go">[0  0  1]</span>
+<span class="go">⎡1  0  0⎤</span>
+<span class="go">⎢       ⎥</span>
+<span class="go">⎢0  1  0⎥</span>
+<span class="go">⎢       ⎥</span>
+<span class="go">⎣0  0  1⎦</span>
 </pre></div>
 </div>
 <p>We can perform a <span class="math notranslate nohighlight">\(QR\)</span> factorization which is handy for solving systems:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Q</span><span class="p">,</span> <span class="n">R</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">QRdecomposition</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Q</span>
-<span class="go">[  ___     ___      ___ ]</span>
-<span class="go">[\/ 6   -\/ 3    -\/ 2  ]</span>
-<span class="go">[-----  -------  -------]</span>
-<span class="go">[  6       3        2   ]</span>
-<span class="go">[                       ]</span>
-<span class="go">[  ___     ___      ___ ]</span>
-<span class="go">[\/ 6   -\/ 3     \/ 2  ]</span>
-<span class="go">[-----  -------   ----- ]</span>
-<span class="go">[  6       3        2   ]</span>
-<span class="go">[                       ]</span>
-<span class="go">[  ___     ___          ]</span>
-<span class="go">[\/ 6    \/ 3           ]</span>
-<span class="go">[-----   -----      0   ]</span>
-<span class="go">[  3       3            ]</span>
+<span class="go">⎡  ___     ___      ___ ⎤</span>
+<span class="go">⎢╲╱ 6   -╲╱ 3    -╲╱ 2  ⎥</span>
+<span class="go">⎢─────  ───────  ───────⎥</span>
+<span class="go">⎢  6       3        2   ⎥</span>
+<span class="go">⎢                       ⎥</span>
+<span class="go">⎢  ___     ___      ___ ⎥</span>
+<span class="go">⎢╲╱ 6   -╲╱ 3     ╲╱ 2  ⎥</span>
+<span class="go">⎢─────  ───────   ───── ⎥</span>
+<span class="go">⎢  6       3        2   ⎥</span>
+<span class="go">⎢                       ⎥</span>
+<span class="go">⎢  ___     ___          ⎥</span>
+<span class="go">⎢╲╱ 6    ╲╱ 3           ⎥</span>
+<span class="go">⎢─────   ─────      0   ⎥</span>
+<span class="go">⎣  3       3            ⎦</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">R</span>
-<span class="go">[           ___         ]</span>
-<span class="go">[  ___  4*\/ 6       ___]</span>
-<span class="go">[\/ 6   -------  2*\/ 6 ]</span>
-<span class="go">[          3            ]</span>
-<span class="go">[                       ]</span>
-<span class="go">[          ___          ]</span>
-<span class="go">[        \/ 3           ]</span>
-<span class="go">[  0     -----      0   ]</span>
-<span class="go">[          3            ]</span>
-<span class="go">[                       ]</span>
-<span class="go">[                   ___ ]</span>
-<span class="go">[  0       0      \/ 2  ]</span>
+<span class="go">⎡           ___         ⎤</span>
+<span class="go">⎢  ___  4⋅╲╱ 6       ___⎥</span>
+<span class="go">⎢╲╱ 6   ───────  2⋅╲╱ 6 ⎥</span>
+<span class="go">⎢          3            ⎥</span>
+<span class="go">⎢                       ⎥</span>
+<span class="go">⎢          ___          ⎥</span>
+<span class="go">⎢        ╲╱ 3           ⎥</span>
+<span class="go">⎢  0     ─────      0   ⎥</span>
+<span class="go">⎢          3            ⎥</span>
+<span class="go">⎢                       ⎥</span>
+<span class="go">⎢                   ___ ⎥</span>
+<span class="go">⎣  0       0      ╲╱ 2  ⎦</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Q</span><span class="o">*</span><span class="n">R</span>
-<span class="go">[1  1  1]</span>
-<span class="go">[       ]</span>
-<span class="go">[1  1  3]</span>
-<span class="go">[       ]</span>
-<span class="go">[2  3  4]</span>
+<span class="go">⎡1  1  1⎤</span>
+<span class="go">⎢       ⎥</span>
+<span class="go">⎢1  1  3⎥</span>
+<span class="go">⎢       ⎥</span>
+<span class="go">⎣2  3  4⎦</span>
 </pre></div>
 </div>
 <p>In addition to the solvers in the <code class="docutils literal notranslate"><span class="pre">solver.py</span></code> file, we can solve the system Ax=b
-by passing the b vector to the matrix A’s LUsolve function. Here we’ll cheat a
-little choose A and x then multiply to get b. Then we can solve for x and check
+by passing the b vector to the matrix A’s LUsolve function.  Here we’ll cheat a
+little choose A and x then multiply to get b.  Then we can solve for x and check
 that it’s correct:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">]])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">A</span><span class="o">*</span><span class="n">x</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">soln</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">LUsolve</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">soln</span>
-<span class="go">[3]</span>
-<span class="go">[ ]</span>
-<span class="go">[7]</span>
-<span class="go">[ ]</span>
-<span class="go">[5]</span>
+<span class="go">⎡3⎤</span>
+<span class="go">⎢ ⎥</span>
+<span class="go">⎢7⎥</span>
+<span class="go">⎢ ⎥</span>
+<span class="go">⎣5⎦</span>
 </pre></div>
 </div>
 <p>There’s also a nice Gram-Schmidt orthogonalizer which will take a set of
-vectors and orthogonalize them with respect to another. There is an
+vectors and orthogonalize them with respect to another.  There is an
 optional argument which specifies whether or not the output should also be
-normalized, it defaults to <code class="docutils literal notranslate"><span class="pre">False</span></code>. Let’s take some vectors and orthogonalize
+normalized, it defaults to <code class="docutils literal notranslate"><span class="pre">False</span></code>.  Let’s take some vectors and orthogonalize
 them - one normalized and one not:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="n">Matrix</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]),</span> <span class="n">Matrix</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">]),</span> <span class="n">Matrix</span><span class="p">([</span><span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">])]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">out1</span> <span class="o">=</span> <span class="n">GramSchmidt</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
@@ -627,7 +630,7 @@ norm():</p>
 </pre></div>
 </div>
 <p>So there is quite a bit that can be done with the module including eigenvalues,
-eigenvectors, nullspace calculation, cofactor expansion tools, and so on. From
+eigenvectors, nullspace calculation, cofactor expansion tools, and so on.  From
 here one might want to look over the <code class="docutils literal notranslate"><span class="pre">matrices.py</span></code> file for all functionality.</p>
 </section>
 <section id="matrixbase-class-reference">
@@ -3096,24 +3099,24 @@ constraints may optionally be given.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="s1">&#39;f&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g1</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g2</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">y</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pprint</span><span class="p">(</span><span class="n">hessian</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="p">[</span><span class="n">g1</span><span class="p">,</span> <span class="n">g2</span><span class="p">]),</span> <span class="n">use_unicode</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="go">[                   d               d            ]</span>
-<span class="go">[     0        0    --(g(x, y))     --(g(x, y))  ]</span>
-<span class="go">[                   dx              dy           ]</span>
-<span class="go">[                                                ]</span>
-<span class="go">[     0        0        2*x              3       ]</span>
-<span class="go">[                                                ]</span>
-<span class="go">[                     2               2          ]</span>
-<span class="go">[d                   d               d           ]</span>
-<span class="go">[--(g(x, y))  2*x   ---(f(x, y))   -----(f(x, y))]</span>
-<span class="go">[dx                   2            dy dx         ]</span>
-<span class="go">[                   dx                           ]</span>
-<span class="go">[                                                ]</span>
-<span class="go">[                     2               2          ]</span>
-<span class="go">[d                   d               d           ]</span>
-<span class="go">[--(g(x, y))   3   -----(f(x, y))   ---(f(x, y)) ]</span>
-<span class="go">[dy                dy dx              2          ]</span>
-<span class="go">[                                   dy           ]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pprint</span><span class="p">(</span><span class="n">hessian</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="p">[</span><span class="n">g1</span><span class="p">,</span> <span class="n">g2</span><span class="p">]))</span>
+<span class="go">⎡                   ∂               ∂            ⎤</span>
+<span class="go">⎢     0        0    ──(g(x, y))     ──(g(x, y))  ⎥</span>
+<span class="go">⎢                   ∂x              ∂y           ⎥</span>
+<span class="go">⎢                                                ⎥</span>
+<span class="go">⎢     0        0        2⋅x              3       ⎥</span>
+<span class="go">⎢                                                ⎥</span>
+<span class="go">⎢                     2               2          ⎥</span>
+<span class="go">⎢∂                   ∂               ∂           ⎥</span>
+<span class="go">⎢──(g(x, y))  2⋅x   ───(f(x, y))   ─────(f(x, y))⎥</span>
+<span class="go">⎢∂x                   2            ∂y ∂x         ⎥</span>
+<span class="go">⎢                   ∂x                           ⎥</span>
+<span class="go">⎢                                                ⎥</span>
+<span class="go">⎢                     2               2          ⎥</span>
+<span class="go">⎢∂                   ∂               ∂           ⎥</span>
+<span class="go">⎢──(g(x, y))   3   ─────(f(x, y))   ───(f(x, y)) ⎥</span>
+<span class="go">⎢∂y                ∂y ∂x              2          ⎥</span>
+<span class="go">⎣                                   ∂y           ⎦</span>
 </pre></div>
 </div>
 <p class="rubric">References</p>

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Special &mdash; Diofant 0.14.1.dev192+gb5199bdb0 documentation</title>
+  <title>Special &mdash; Diofant 0.14.1.dev194+g49a8f0bb9 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
@@ -16,7 +16,7 @@
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=7d3c7cd0"></script>
+        <script src="../../_static/documentation_options.js?v=9b1e6ccb"></script>
         <script src="../../_static/doctools.js?v=888ff710"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script>window.MathJax = {"CommonHTML": {"linebreaks": {"automatic": true}}, "HTML-CSS": {"linebreaks": {"automatic": true}}, "SVG": {"linebreaks": {"automatic": true}}}</script>
@@ -2931,7 +2931,7 @@ closed form:</p>
 <h2>Hypergeometric Functions<a class="headerlink" href="#hypergeometric-functions" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="diofant.functions.special.hyper.hyper">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">diofant.functions.special.hyper.</span></span><span class="sig-name descname"><span class="pre">hyper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ap</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/functions/special/hyper.py#L76-L309"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.functions.special.hyper.hyper" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">diofant.functions.special.hyper.</span></span><span class="sig-name descname"><span class="pre">hyper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ap</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/functions/special/hyper.py#L76-L308"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.functions.special.hyper.hyper" title="Link to this definition"></a></dt>
 <dd><p>The (generalized) hypergeometric function is defined by a series where
 the ratios of successive terms are a rational function of the summation
 index. When convergent, it is continued analytically to the largest
@@ -2967,12 +2967,11 @@ iterables, for example:</p>
 <span class="go">hyper((1, 2, 3), (3, 4), x)</span>
 </pre></div>
 </div>
-<p>There is also pretty printing (it looks better using unicode):</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pprint</span><span class="p">(</span><span class="n">hyper</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">x</span><span class="p">),</span> <span class="n">use_unicode</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="go">  _</span>
-<span class="go"> |_  /1, 2, 3 |  \</span>
-<span class="go"> |   |        | x|</span>
-<span class="go">3  2 \  3, 4  |  /</span>
+<p>There is also pretty printing:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pprint</span><span class="p">(</span><span class="n">hyper</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">x</span><span class="p">))</span>
+<span class="go"> ┌─  ⎛1, 2, 3 │  ⎞</span>
+<span class="go"> ├─  ⎜        │ x⎟</span>
+<span class="go">3╵ 2 ⎝  3, 4  │  ⎠</span>
 </pre></div>
 </div>
 <p>The parameters must always be iterables, even if they are vectors of
@@ -3073,7 +3072,7 @@ this is zero, then the function is not actually defined anywhere else.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="diofant.functions.special.hyper.meijerg">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">diofant.functions.special.hyper.</span></span><span class="sig-name descname"><span class="pre">meijerg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/functions/special/hyper.py#L312-L689"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.functions.special.hyper.meijerg" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">diofant.functions.special.hyper.</span></span><span class="sig-name descname"><span class="pre">meijerg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/functions/special/hyper.py#L311-L688"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.functions.special.hyper.meijerg" title="Link to this definition"></a></dt>
 <dd><p>The Meijer G-function is defined by a Mellin-Barnes type integral that
 resembles an inverse Mellin transform. It generalizes the hypergeometric
 functions.</p>
@@ -3110,17 +3109,17 @@ are complicated and we do not state them here, see the references.</p>
 convergence conditions.</p>
 <p class="rubric">Examples</p>
 <p>You can pass the parameters either as four separate vectors:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pprint</span><span class="p">(</span><span class="n">meijerg</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="p">[],</span> <span class="n">x</span><span class="p">),</span> <span class="n">use_unicode</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="go"> __1, 2 /1, 2  a, 4 |  \</span>
-<span class="go">/__     |           | x|</span>
-<span class="go">\_|4, 1 \ 5         |  /</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pprint</span><span class="p">(</span><span class="n">meijerg</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="p">[],</span> <span class="n">x</span><span class="p">))</span>
+<span class="go">╭─╮1, 2 ⎛1, 2  a, 4 │  ⎞</span>
+<span class="go">│╶┐     ⎜           │ x⎟</span>
+<span class="go">╰─╯4, 1 ⎝ 5         │  ⎠</span>
 </pre></div>
 </div>
 <p>or as two nested vectors:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pprint</span><span class="p">(</span><span class="n">meijerg</span><span class="p">(([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]),</span> <span class="p">([</span><span class="mi">5</span><span class="p">],</span> <span class="p">[]),</span> <span class="n">x</span><span class="p">),</span> <span class="n">use_unicode</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="go"> __1, 2 /1, 2  3, 4 |  \</span>
-<span class="go">/__     |           | x|</span>
-<span class="go">\_|4, 1 \ 5         |  /</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pprint</span><span class="p">(</span><span class="n">meijerg</span><span class="p">(([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]),</span> <span class="p">([</span><span class="mi">5</span><span class="p">],</span> <span class="p">[]),</span> <span class="n">x</span><span class="p">))</span>
+<span class="go">╭─╮1, 2 ⎛1, 2  3, 4 │  ⎞</span>
+<span class="go">│╶┐     ⎜           │ x⎟</span>
+<span class="go">╰─╯4, 1 ⎝ 5         │  ⎠</span>
 </pre></div>
 </div>
 <p>As with the hypergeometric function, the parameters may be passed as
@@ -3130,10 +3129,10 @@ depend on the argument then not much implemented functionality should be
 expected.</p>
 <p>All the subvectors of parameters are available:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">meijerg</span><span class="p">([</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">x</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pprint</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">use_unicode</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="go"> __1, 1 /1  2 |  \</span>
-<span class="go">/__     |     | x|</span>
-<span class="go">\_|2, 2 \3  4 |  /</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pprint</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="go">╭─╮1, 1 ⎛1  2 │  ⎞</span>
+<span class="go">│╶┐     ⎜     │ x⎟</span>
+<span class="go">╰─╯2, 2 ⎝3  4 │  ⎠</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">an</span>
 <span class="go">(1,)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">ap</span>
@@ -3226,7 +3225,7 @@ c.f. references.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="diofant.functions.special.hyper.meijerg.get_period">
-<span class="sig-name descname"><span class="pre">get_period</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/functions/special/hyper.py#L558-L591"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.functions.special.hyper.meijerg.get_period" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_period</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/functions/special/hyper.py#L557-L590"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.functions.special.hyper.meijerg.get_period" title="Link to this definition"></a></dt>
 <dd><p>Return a number P such that G(x*exp(I*P)) == G(x).</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">meijerg</span><span class="p">([</span><span class="mi">1</span><span class="p">],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="n">z</span><span class="p">)</span><span class="o">.</span><span class="n">get_period</span><span class="p">()</span>
 <span class="go">2*pi</span>
@@ -3242,7 +3241,7 @@ c.f. references.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="diofant.functions.special.hyper.meijerg.integrand">
-<span class="sig-name descname"><span class="pre">integrand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/functions/special/hyper.py#L627-L634"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.functions.special.hyper.meijerg.integrand" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">integrand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/functions/special/hyper.py#L626-L633"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.functions.special.hyper.meijerg.integrand" title="Link to this definition"></a></dt>
 <dd><p>Get the defining integrand D(s).</p>
 </dd></dl>
 

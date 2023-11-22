@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Simplify &mdash; Diofant 0.14.1.dev192+gb5199bdb0 documentation</title>
+  <title>Simplify &mdash; Diofant 0.14.1.dev194+g49a8f0bb9 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
@@ -16,7 +16,7 @@
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=7d3c7cd0"></script>
+        <script src="../../_static/documentation_options.js?v=9b1e6ccb"></script>
         <script src="../../_static/doctools.js?v=888ff710"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script>window.MathJax = {"CommonHTML": {"linebreaks": {"automatic": true}}, "HTML-CSS": {"linebreaks": {"automatic": true}}, "SVG": {"linebreaks": {"automatic": true}}}</script>
@@ -591,7 +591,7 @@ expansion:</p>
 <h3>radsimp<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
 <dl class="py function">
 <dt class="sig sig-object py" id="diofant.simplify.radsimp.radsimp">
-<span class="sig-prename descclassname"><span class="pre">diofant.simplify.radsimp.</span></span><span class="sig-name descname"><span class="pre">radsimp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symbolic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_terms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/radsimp.py#L589-L833"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.simplify.radsimp.radsimp" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">diofant.simplify.radsimp.</span></span><span class="sig-name descname"><span class="pre">radsimp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symbolic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_terms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/radsimp.py#L589-L831"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.simplify.radsimp.radsimp" title="Link to this definition"></a></dt>
 <dd><p>Rationalize the denominator by removing square roots.</p>
 <p>Note: the expression returned from radsimp must be used with caution
 since if the denominator contains symbols, it will be possible to make
@@ -619,22 +619,19 @@ square root terms:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r2</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r5</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ans</span> <span class="o">=</span> <span class="n">radsimp</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">r2</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="n">r2</span> <span class="o">+</span> <span class="n">a</span><span class="o">*</span><span class="n">r5</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">r5</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pprint</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">use_unicode</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pprint</span><span class="p">(</span><span class="n">ans</span><span class="p">)</span>
 <span class="go">    ___       ___       ___       ___</span>
-<span class="go">  \/ 5 *a + \/ 5 *b - \/ 2 *x - \/ 2 *y</span>
-<span class="go">------------------------------------------</span>
+<span class="go">  ╲╱ 5 ⋅a + ╲╱ 5 ⋅b - ╲╱ 2 ⋅x - ╲╱ 2 ⋅y</span>
+<span class="go">──────────────────────────────────────────</span>
 <span class="go">   2               2      2              2</span>
-<span class="go">5*a  + 10*a*b + 5*b  - 2*x  - 4*x*y - 2*y</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">fraction</span><span class="p">(</span><span class="n">ans</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pprint</span><span class="p">(</span><span class="n">factor_terms</span><span class="p">(</span><span class="n">signsimp</span><span class="p">(</span><span class="n">collect_sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">))</span><span class="o">/</span><span class="n">d</span><span class="p">,</span> <span class="n">radical</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
-<span class="gp">... </span>       <span class="n">use_unicode</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">5⋅a  + 10⋅a⋅b + 5⋅b  - 2⋅x  - 4⋅x⋅y - 2⋅y</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">fraction</span><span class="p">(</span><span class="n">ans</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pprint</span><span class="p">(</span><span class="n">factor_terms</span><span class="p">(</span><span class="n">signsimp</span><span class="p">(</span><span class="n">collect_sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">))</span><span class="o">/</span><span class="n">d</span><span class="p">,</span> <span class="n">radical</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
 <span class="go">        ___             ___</span>
-<span class="go">      \/ 5 *(a + b) - \/ 2 *(x + y)</span>
-<span class="go">------------------------------------------</span>
+<span class="go">      ╲╱ 5 ⋅(a + b) - ╲╱ 2 ⋅(x + y)</span>
+<span class="go">──────────────────────────────────────────</span>
 <span class="go">   2               2      2              2</span>
-<span class="go">5*a  + 10*a*b + 5*b  - 2*x  - 4*x*y - 2*y</span>
+<span class="go">5⋅a  + 10⋅a⋅b + 5⋅b  - 2⋅x  - 4⋅x⋅y - 2⋅y</span>
 </pre></div>
 </div>
 <p>If radicals in the denominator cannot be removed or there is no denominator,
@@ -664,7 +661,7 @@ numeric denominators will still be processed):</p>
 <h3>rad_rationalize<a class="headerlink" href="#rad-rationalize" title="Link to this heading"></a></h3>
 <dl class="py function">
 <dt class="sig sig-object py" id="diofant.simplify.radsimp.rad_rationalize">
-<span class="sig-prename descclassname"><span class="pre">diofant.simplify.radsimp.</span></span><span class="sig-name descname"><span class="pre">rad_rationalize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">den</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/radsimp.py#L836-L854"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.simplify.radsimp.rad_rationalize" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">diofant.simplify.radsimp.</span></span><span class="sig-name descname"><span class="pre">rad_rationalize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">den</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/radsimp.py#L834-L852"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.simplify.radsimp.rad_rationalize" title="Link to this definition"></a></dt>
 <dd><p>Rationalize num/den by removing square roots in the denominator;
 num and den are sum of terms whose squares are rationals</p>
 <p class="rubric">Examples</p>
@@ -924,7 +921,7 @@ unsigned values:</p>
 <h3>fraction<a class="headerlink" href="#fraction" title="Link to this heading"></a></h3>
 <dl class="py function">
 <dt class="sig sig-object py" id="diofant.simplify.radsimp.fraction">
-<span class="sig-prename descclassname"><span class="pre">diofant.simplify.radsimp.</span></span><span class="sig-name descname"><span class="pre">fraction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exact</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/radsimp.py#L857-L929"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.simplify.radsimp.fraction" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">diofant.simplify.radsimp.</span></span><span class="sig-name descname"><span class="pre">fraction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exact</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/simplify/radsimp.py#L855-L927"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.simplify.radsimp.fraction" title="Link to this definition"></a></dt>
 <dd><p>Returns a pair with expression’s numerator and denominator.</p>
 <p>If the given expression is not a fraction then this function
 will return the tuple (expr, 1).</p>
