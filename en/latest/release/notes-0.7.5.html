@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SymPy 0.7.5 &mdash; Diofant 0.15.0a1.dev140+ga4c662bd4 documentation</title>
+  <title>SymPy 0.7.5 &mdash; Diofant 0.15.0a1.dev145+g30b18c936 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
@@ -18,7 +18,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=7e170d8d"></script>
+        <script src="../_static/documentation_options.js?v=6b1ab5db"></script>
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -155,13 +155,13 @@ partitions.  (See the new file <code class="docutils literal notranslate"><span 
 <li><p><code class="docutils literal notranslate"><span class="pre">inv_quick</span></code> and <code class="docutils literal notranslate"><span class="pre">det_quick</span></code> were added as functions in solvers.py to facilitate fast solution of small symbolic matrices; their use in solve has reduced greatly the time needed to solve such systems.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">solve_univariate_inequality</span></code> has been added to sympy.solvers.inequalities.py.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">as_set</span></code> attribute for Relationals and Booleans has been added.</p></li>
-<li><p>Several classes and functions strictly associated with vector calculus were moved from <code class="docutils literal notranslate"><span class="pre">sympy.physics.mechanics</span></code> to a new package <code class="docutils literal notranslate"><span class="pre">sympy.physics.vector</span></code>. (See <a class="reference external" href="https://github.com/sympy/sympy/pull/2732">sympy/sympy#2732</a>, <a class="reference external" href="https://github.com/sympy/sympy/pull/2862">sympy/sympy#2862</a> and <a class="reference external" href="https://github.com/sympy/sympy/pull/2894">sympy/sympy#2894</a>).</p></li>
+<li><p>Several classes and functions strictly associated with vector calculus were moved from <code class="docutils literal notranslate"><span class="pre">sympy.physics.mechanics</span></code> to a new package <code class="docutils literal notranslate"><span class="pre">sympy.physics.vector</span></code>. (See <a class="extlink-sympypull reference external" href="https://github.com/sympy/sympy/pull/2732">sympy/sympy#2732</a>, <a class="extlink-sympypull reference external" href="https://github.com/sympy/sympy/pull/2862">sympy/sympy#2862</a> and <a class="extlink-sympypull reference external" href="https://github.com/sympy/sympy/pull/2894">sympy/sympy#2894</a>).</p></li>
 <li><p>New implementation of the Airy functions <code class="docutils literal notranslate"><span class="pre">Ai</span></code> and <code class="docutils literal notranslate"><span class="pre">Bi</span></code> and their derivatives
 <code class="docutils literal notranslate"><span class="pre">Ai'</span></code> and <code class="docutils literal notranslate"><span class="pre">Bi'</span></code> (called <code class="docutils literal notranslate"><span class="pre">airyai</span></code>, <code class="docutils literal notranslate"><span class="pre">airybi</span></code>, <code class="docutils literal notranslate"><span class="pre">airyaiprime</span></code> and <code class="docutils literal notranslate"><span class="pre">airybiprime</span></code>,
 respectively). Most of the usual features of SymPy special function are
 present.  Notable exceptions are Gruntz limit computation helpers and
 meijerg special functions integration code.</p></li>
-<li><p>Euler-Lagrange equations (function <code class="docutils literal notranslate"><span class="pre">euler_equations</span></code>) in a new package <code class="docutils literal notranslate"><span class="pre">sympy.calculus</span></code> (<a class="reference external" href="https://github.com/sympy/sympy/pull/2431">sympy/sympy#2431</a>).</p></li>
+<li><p>Euler-Lagrange equations (function <code class="docutils literal notranslate"><span class="pre">euler_equations</span></code>) in a new package <code class="docutils literal notranslate"><span class="pre">sympy.calculus</span></code> (<a class="extlink-sympypull reference external" href="https://github.com/sympy/sympy/pull/2431">sympy/sympy#2431</a>).</p></li>
 </ul>
 </section>
 <section id="compatibility-breaks">
@@ -177,10 +177,10 @@ e.g. <code class="docutils literal notranslate"><span class="pre">A[:,</span> <s
 <li><p>the shape of the result from <code class="docutils literal notranslate"><span class="pre">M.cross(B)</span></code> now has the same shape as matrix M.</p></li>
 <li><p>The factorial of negative numbers is now <code class="docutils literal notranslate"><span class="pre">zoo</span></code> instead of <code class="docutils literal notranslate"><span class="pre">0</span></code>. This is
 consistent with the definition <code class="docutils literal notranslate"><span class="pre">factorial(n)</span> <span class="pre">=</span> <span class="pre">gamma(n</span> <span class="pre">+</span> <span class="pre">1)</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">1/0</span></code> returns <code class="docutils literal notranslate"><span class="pre">zoo</span></code>, not <code class="docutils literal notranslate"><span class="pre">oo</span></code> (<a class="reference external" href="https://github.com/sympy/sympy/pull/2813">sympy/sympy#2813</a>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">zoo.is_number</span> <span class="pre">is</span> <span class="pre">True</span></code> (<a class="reference external" href="https://github.com/sympy/sympy/pull/2823">sympy/sympy#2823</a>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">oo</span> <span class="pre">&lt;</span> <span class="pre">I</span></code> raises <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>, just as for finite numbers (<a class="reference external" href="https://github.com/sympy/sympy/pull/2734">sympy/sympy#2734</a>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">1**oo</span> <span class="pre">==</span> <span class="pre">nan</span></code> instead of <code class="docutils literal notranslate"><span class="pre">1</span></code>, better documentation for <code class="docutils literal notranslate"><span class="pre">Pow</span></code> class (<a class="reference external" href="https://github.com/sympy/sympy/pull/2606">sympy/sympy#2606</a>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1/0</span></code> returns <code class="docutils literal notranslate"><span class="pre">zoo</span></code>, not <code class="docutils literal notranslate"><span class="pre">oo</span></code> (<a class="extlink-sympypull reference external" href="https://github.com/sympy/sympy/pull/2813">sympy/sympy#2813</a>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">zoo.is_number</span> <span class="pre">is</span> <span class="pre">True</span></code> (<a class="extlink-sympypull reference external" href="https://github.com/sympy/sympy/pull/2823">sympy/sympy#2823</a>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">oo</span> <span class="pre">&lt;</span> <span class="pre">I</span></code> raises <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>, just as for finite numbers (<a class="extlink-sympypull reference external" href="https://github.com/sympy/sympy/pull/2734">sympy/sympy#2734</a>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1**oo</span> <span class="pre">==</span> <span class="pre">nan</span></code> instead of <code class="docutils literal notranslate"><span class="pre">1</span></code>, better documentation for <code class="docutils literal notranslate"><span class="pre">Pow</span></code> class (<a class="extlink-sympypull reference external" href="https://github.com/sympy/sympy/pull/2606">sympy/sympy#2606</a>).</p></li>
 </ul>
 </section>
 <section id="minor-changes">
@@ -195,14 +195,14 @@ the number of arguments will be inferred from its signature.)</p></li>
 <li><p>Some improvements to the intersection method of the Ellipse.</p></li>
 <li><p>solutions from solve of equations involving multiple log terms are more robust</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">idiff</span></code> can now return higher order derivatives</p></li>
-<li><p>Added <code class="docutils literal notranslate"><span class="pre">to_matrix()</span></code> method to <code class="docutils literal notranslate"><span class="pre">sympy.physics.vector.Vector</span></code> and <code class="docutils literal notranslate"><span class="pre">sympy.physics.dyadic.Dyadic</span></code>. (<a class="reference external" href="https://github.com/sympy/sympy/pull/2686">sympy/sympy#2686</a>).</p></li>
-<li><p>Printing improvements for <code class="docutils literal notranslate"><span class="pre">sympy.physics.vector</span></code> objects and mechanics printing. (See <a class="reference external" href="https://github.com/sympy/sympy/pull/2687">sympy/sympy#2687</a>, <a class="reference external" href="https://github.com/sympy/sympy/pull/2728">sympy/sympy#2728</a>, <a class="reference external" href="https://github.com/sympy/sympy/pull/2772">sympy/sympy#2772</a>, <a class="reference external" href="https://github.com/sympy/sympy/pull/2862">sympy/sympy#2862</a> and <a class="reference external" href="https://github.com/sympy/sympy/pull/2894">sympy/sympy#2894</a>).</p></li>
-<li><p>Functions with LaTeX symbols now print correct LaTeX. (<a class="reference external" href="https://github.com/sympy/sympy/pull/2772">sympy/sympy#2772</a>).</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">to_matrix()</span></code> method to <code class="docutils literal notranslate"><span class="pre">sympy.physics.vector.Vector</span></code> and <code class="docutils literal notranslate"><span class="pre">sympy.physics.dyadic.Dyadic</span></code>. (<a class="extlink-sympypull reference external" href="https://github.com/sympy/sympy/pull/2686">sympy/sympy#2686</a>).</p></li>
+<li><p>Printing improvements for <code class="docutils literal notranslate"><span class="pre">sympy.physics.vector</span></code> objects and mechanics printing. (See <a class="extlink-sympypull reference external" href="https://github.com/sympy/sympy/pull/2687">sympy/sympy#2687</a>, <a class="extlink-sympypull reference external" href="https://github.com/sympy/sympy/pull/2728">sympy/sympy#2728</a>, <a class="extlink-sympypull reference external" href="https://github.com/sympy/sympy/pull/2772">sympy/sympy#2772</a>, <a class="extlink-sympypull reference external" href="https://github.com/sympy/sympy/pull/2862">sympy/sympy#2862</a> and <a class="extlink-sympypull reference external" href="https://github.com/sympy/sympy/pull/2894">sympy/sympy#2894</a>).</p></li>
+<li><p>Functions with LaTeX symbols now print correct LaTeX. (<a class="extlink-sympypull reference external" href="https://github.com/sympy/sympy/pull/2772">sympy/sympy#2772</a>).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">init_printing</span></code> has several new options, including a flag <code class="docutils literal notranslate"><span class="pre">print_builtin</span></code> to prevent SymPy
-printing of basic Python types (<a class="reference external" href="https://github.com/sympy/sympy/pull/2683">sympy/sympy#2683</a>), and flags to let you supply custom
-printers (<a class="reference external" href="https://github.com/sympy/sympy/pull/2894">sympy/sympy#2894</a>).</p></li>
-<li><p>improvements in evaluation of <code class="docutils literal notranslate"><span class="pre">imageset</span></code> for Intervals (<a class="reference external" href="https://github.com/sympy/sympy/pull/2723">sympy/sympy#2723</a>).</p></li>
-<li><p>Set properties to determine boundary and interior (<a class="reference external" href="https://github.com/sympy/sympy/pull/2744">sympy/sympy#2744</a>).</p></li>
+printing of basic Python types (<a class="extlink-sympypull reference external" href="https://github.com/sympy/sympy/pull/2683">sympy/sympy#2683</a>), and flags to let you supply custom
+printers (<a class="extlink-sympypull reference external" href="https://github.com/sympy/sympy/pull/2894">sympy/sympy#2894</a>).</p></li>
+<li><p>improvements in evaluation of <code class="docutils literal notranslate"><span class="pre">imageset</span></code> for Intervals (<a class="extlink-sympypull reference external" href="https://github.com/sympy/sympy/pull/2723">sympy/sympy#2723</a>).</p></li>
+<li><p>Set properties to determine boundary and interior (<a class="extlink-sympypull reference external" href="https://github.com/sympy/sympy/pull/2744">sympy/sympy#2744</a>).</p></li>
 <li><p>input to a function created by lambdify no longer needs to be flattened.</p></li>
 </ul>
 </section>
