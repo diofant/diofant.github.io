@@ -6,8 +6,8 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Printing &mdash; Diofant 0.15.1.dev35+g7050ebe7f documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+  <title>Printing &mdash; Diofant 0.15.1.dev40+gb60c7ce89 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=0cc60c80" />
@@ -16,7 +16,7 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=3c634216"></script>
+      <script src="../_static/documentation_options.js?v=e48db7a1"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script>window.MathJax = {"CommonHTML": {"linebreaks": {"automatic": true}}, "HTML-CSS": {"linebreaks": {"automatic": true}}, "SVG": {"linebreaks": {"automatic": true}}}</script>
@@ -222,7 +222,7 @@ for printing.</p></li>
 <p>For each class you want to provide printing to, define an appropriate
 method how to do it. For example if you want a class FOO to be printed in
 its own way, define _print_FOO:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_print_FOO</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">_print_FOO</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
     <span class="o">...</span>
 </pre></div>
 </div>
@@ -246,13 +246,13 @@ that is when no appropriate print method was found for an expression.</p>
 </ol>
 <p class="rubric">Examples</p>
 <p>Here we will overload <code class="docutils literal notranslate"><span class="pre">StrPrinter</span></code>.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.printing.str</span> <span class="kn">import</span> <span class="n">StrPrinter</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">diofant.printing.str</span><span class="w"> </span><span class="kn">import</span> <span class="n">StrPrinter</span>
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">CustomStrPrinter</span><span class="p">(</span><span class="n">StrPrinter</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="k">def</span> <span class="nf">_print_Derivative</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>  <span class="c1"># noqa: N802</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span><span class="w"> </span><span class="nc">CustomStrPrinter</span><span class="p">(</span><span class="n">StrPrinter</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">def</span><span class="w"> </span><span class="nf">_print_Derivative</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>  <span class="c1"># noqa: N802</span>
 <span class="gp">... </span>        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">func</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">mystr</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">mystr</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="k">return</span> <span class="n">CustomStrPrinter</span><span class="p">()</span><span class="o">.</span><span class="n">doprint</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">mystr</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">((</span><span class="n">t</span><span class="p">,</span> <span class="mi">2</span><span class="p">))))</span>
 <span class="go">f&#39;&#39;</span>
@@ -720,7 +720,7 @@ translated in pure Fortran and (iii) a string of Fortran code. A few examples:</
 <span id="mathematica-code-printing"></span><h2>Mathematica code printing<a class="headerlink" href="#module-diofant.printing.mathematica" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="diofant.printing.mathematica.MCodePrinter">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">diofant.printing.mathematica.</span></span><span class="sig-name descname"><span class="pre">MCodePrinter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/printing/mathematica.py#L70-L231"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.printing.mathematica.MCodePrinter" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">diofant.printing.mathematica.</span></span><span class="sig-name descname"><span class="pre">MCodePrinter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/printing/mathematica.py#L74-L235"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.printing.mathematica.MCodePrinter" title="Link to this definition"></a></dt>
 <dd><p>A printer to convert python expressions to
 strings of the Wolfram’s Mathematica code.</p>
 <dl class="py attribute">
@@ -738,7 +738,7 @@ strings of the Wolfram’s Mathematica code.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="diofant.printing.mathematica.mathematica_code">
-<span class="sig-prename descclassname"><span class="pre">diofant.printing.mathematica.</span></span><span class="sig-name descname"><span class="pre">mathematica_code</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">settings</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/printing/mathematica.py#L234-L244"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.printing.mathematica.mathematica_code" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">diofant.printing.mathematica.</span></span><span class="sig-name descname"><span class="pre">mathematica_code</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">settings</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/printing/mathematica.py#L238-L248"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.printing.mathematica.mathematica_code" title="Link to this definition"></a></dt>
 <dd><p>Converts an expr to a string of the Wolfram Mathematica code</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mathematica_code</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">series</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">removeO</span><span class="p">())</span>
@@ -797,7 +797,7 @@ The argument must be an iterable if specified.</p>
 <dt class="sig sig-object py" id="diofant.printing.latex.latex">
 <span class="sig-prename descclassname"><span class="pre">diofant.printing.latex.</span></span><span class="sig-name descname"><span class="pre">latex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">settings</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/diofant/diofant/blob/master/diofant/printing/latex.py#L1651-L1773"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#diofant.printing.latex.latex" title="Link to this definition"></a></dt>
 <dd><p>Convert the given expression to LaTeX representation.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.abc</span> <span class="kn">import</span> <span class="n">mu</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">tau</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">diofant.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">mu</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">tau</span>
 </pre></div>
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">latex</span><span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">tau</span><span class="p">)</span><span class="o">**</span><span class="n">Rational</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
@@ -1383,7 +1383,7 @@ are labeled <code class="docutils literal notranslate"><span class="pre">Symbol(
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2006-2022 SymPy Development Team, 2013-2024 Sergey B Kirpichev.</p>
+    <p>&#169; Copyright 2006-2022 SymPy Development Team, 2013-2025 Sergey B Kirpichev.</p>
   </div>
 
    

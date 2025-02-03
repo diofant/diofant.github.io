@@ -6,8 +6,8 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Matrices (linear algebra) &mdash; Diofant 0.15.1.dev35+g7050ebe7f documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+  <title>Matrices (linear algebra) &mdash; Diofant 0.15.1.dev40+gb60c7ce89 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=0cc60c80" />
@@ -16,7 +16,7 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=3c634216"></script>
+      <script src="../../_static/documentation_options.js?v=e48db7a1"></script>
       <script src="../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script>window.MathJax = {"CommonHTML": {"linebreaks": {"automatic": true}}, "HTML-CSS": {"linebreaks": {"automatic": true}}, "SVG": {"linebreaks": {"automatic": true}}}</script>
@@ -165,7 +165,7 @@ including a single list of values and dimension inputs:</p>
 <p>More interesting (and useful), is the ability to use a 2-variable function
 (or <code class="docutils literal notranslate"><span class="pre">lambda</span></code>) to create a matrix.  Here we create an indicator function which
 is 1 on the diagonal and then use it to make the identity matrix:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">:</span>
 <span class="gp">... </span>        <span class="k">return</span> <span class="mi">1</span>
 <span class="gp">... </span>    <span class="k">else</span><span class="p">:</span>
@@ -435,7 +435,7 @@ also assign entries:</p>
 <p>but we can also apply functions to our matrix entries using <code class="docutils literal notranslate"><span class="pre">applyfunc()</span></code>.
 Here we’ll declare a function that double any input number.  Then we apply it
 to the 3x3 identity matrix:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="k">return</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">applyfunc</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 <span class="go">⎡2  0  0⎤</span>
@@ -2100,7 +2100,7 @@ contains a symbol), this will be None</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.abc</span> <span class="kn">import</span> <span class="n">phi</span><span class="p">,</span> <span class="n">rho</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">diofant.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">phi</span><span class="p">,</span> <span class="n">rho</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">([</span><span class="n">rho</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">phi</span><span class="p">),</span> <span class="n">rho</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">phi</span><span class="p">),</span> <span class="n">rho</span><span class="o">**</span><span class="mi">2</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">([</span><span class="n">rho</span><span class="p">,</span> <span class="n">phi</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="o">.</span><span class="n">jacobian</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
@@ -2770,7 +2770,7 @@ something like StrPrinter())</p>
 same thing, respectively.</p>
 <p>This is used by the string printer for Matrix.</p>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.printing.str</span> <span class="kn">import</span> <span class="n">StrPrinter</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">diofant.printing.str</span><span class="w"> </span><span class="kn">import</span> <span class="n">StrPrinter</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">33</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">printer</span> <span class="o">=</span> <span class="n">StrPrinter</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="n">printer</span><span class="p">)</span>
@@ -3372,7 +3372,7 @@ the 3-axis.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2006-2022 SymPy Development Team, 2013-2024 Sergey B Kirpichev.</p>
+    <p>&#169; Copyright 2006-2022 SymPy Development Team, 2013-2025 Sergey B Kirpichev.</p>
   </div>
 
    

@@ -6,8 +6,8 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Simplify &mdash; Diofant 0.15.1.dev35+g7050ebe7f documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+  <title>Simplify &mdash; Diofant 0.15.1.dev40+gb60c7ce89 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=0cc60c80" />
@@ -16,7 +16,7 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=3c634216"></script>
+      <script src="../../_static/documentation_options.js?v=e48db7a1"></script>
       <script src="../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script>window.MathJax = {"CommonHTML": {"linebreaks": {"automatic": true}}, "HTML-CSS": {"linebreaks": {"automatic": true}}, "SVG": {"linebreaks": {"automatic": true}}}</script>
@@ -264,7 +264,7 @@ to reduce this would be to give more weight to powers as operations in
 <span class="go">2*LOG + MUL + POW + SUB</span>
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">my_measure</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">my_measure</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="c1"># Discourage powers by giving POW a weight of 10</span>
 <span class="gp">... </span>    <span class="n">count</span> <span class="o">=</span> <span class="n">count_ops</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">visual</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="s1">&#39;POW&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">})</span>
 <span class="gp">... </span>    <span class="c1"># Every other operation gets a weight of 1 (the default)</span>
@@ -313,7 +313,7 @@ separated expressions may not necessarily be grouped together.</p>
 expressions, it is not necessary in all cases, so one should not
 count on the returned factors being factored.</p>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.abc</span> <span class="kn">import</span> <span class="n">alpha</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">diofant.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">alpha</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">separatevars</span><span class="p">((</span><span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="n">y</span><span class="p">)</span>
 <span class="go">(x*y)**y</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">separatevars</span><span class="p">((</span><span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="n">y</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -389,7 +389,7 @@ half-integer order are rewritten using trigonometric functions and
 functions of integer order (&gt; 1) are rewritten using functions
 of low order.  Finally, if the expression was changed, compute
 factorization of the result with factor().</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.abc</span> <span class="kn">import</span> <span class="n">nu</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">diofant.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">nu</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">besselsimp</span><span class="p">(</span><span class="n">besselj</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="n">z</span><span class="o">*</span><span class="n">polar_lift</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)))</span>
 <span class="go">E**(I*pi*nu)*besselj(nu, z)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">besselsimp</span><span class="p">(</span><span class="n">besseli</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="n">z</span><span class="o">*</span><span class="n">polar_lift</span><span class="p">(</span><span class="o">-</span><span class="n">I</span><span class="p">)))</span>
@@ -886,7 +886,7 @@ an Add expr. If <code class="docutils literal notranslate"><span class="pre">var
 targeted. Although any Number can also be targeted, if this is not
 desired set <code class="docutils literal notranslate"><span class="pre">Numbers=False</span></code> and no Float or Rational will be collected.</p>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.abc</span> <span class="kn">import</span> <span class="n">s</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">diofant.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">s</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">collect_const</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)))</span>
 <span class="go">sqrt(3)*(sqrt(2) + 2)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">collect_const</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="n">s</span> <span class="o">+</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span><span class="o">*</span><span class="n">s</span> <span class="o">+</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">7</span><span class="p">))</span>
@@ -1482,7 +1482,7 @@ list.</p></li>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diofant.abc</span> <span class="kn">import</span> <span class="n">w</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">diofant.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">w</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cse</span><span class="p">(((</span><span class="n">w</span> <span class="o">+</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">w</span> <span class="o">+</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">w</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
 <span class="go">([(x0, y + z), (x1, w + x)], [(w + x0)*(x0 + x1)/x1**3])</span>
 </pre></div>
@@ -1773,7 +1773,7 @@ interactive use.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2006-2022 SymPy Development Team, 2013-2024 Sergey B Kirpichev.</p>
+    <p>&#169; Copyright 2006-2022 SymPy Development Team, 2013-2025 Sergey B Kirpichev.</p>
   </div>
 
    
